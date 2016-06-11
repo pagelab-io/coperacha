@@ -1,0 +1,9 @@
+.idea
+.env
+Homestead.yaml
+Homestead.json
+
+/vendor
+/storage
+/node_modules
+/public/git-request.php
