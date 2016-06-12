@@ -38,7 +38,7 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Coperacha 2.0</div>
+                <div class="title">Coperacha</div>
             </div>
         </div>
     </body>
