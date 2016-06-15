@@ -14,3 +14,17 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+$router->group([
+    'as'         => 'auth.',
+    'namespace'  => 'Auth',
+    'prefix'     => 'auth'
+], function($router){
+
+    $router->post('login', [
+        'as' => 'login',
+        'middleware' => 'guest',
+        'uses'       => 'AuthController@login'
+    ]);
+
+});

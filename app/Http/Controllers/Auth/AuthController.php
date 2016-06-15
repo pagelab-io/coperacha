@@ -2,71 +2,53 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
-use Validator;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use App\Repositories\UserRepository;
 
 class AuthController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Registration & Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users, as well as the
-    | authentication of existing users. By default, this controller uses
-    | a simple trait to add these behaviors. Why don't you explore it?
-    |
-    */
 
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    //region attributes
 
     /**
-     * Where to redirect users after login / registration.
-     *
-     * @var string
+     * @var UserRepository
      */
-    protected $redirectTo = '/';
+    private $_userRepository = null;
 
-    /**
-     * Create a new authentication controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    private $_response = ['status' => 0,'description' => null,'data' => null];
+
+    //endregion
+
+    //region Static methods
+    //endregion
+
+    public function __construct(UserRepository $userRepository)
     {
-        $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
+        $this->_userRepository = $userRepository;
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
+    //region Methods
+
+    public function login()
     {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
-        ]);
+
+        if ($this->_userRepository->login()) {
+            $this->_response['status'] = 0;
+            $this->_response['description'] = 'login exitoso';
+            $this->_response['data'] = true;
+        } else{
+            $this->_response['status'] = -1;
+            $this->_response['description'] = 'Usuario y/o contraseña inválidos';
+            $this->_response['data'] = false;
+        }
+
+        return response()->json($this->_response);
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
-    }
+    //endregion
+
+    //region Private Methods
+    //endregion
+
+
 }

@@ -42,6 +42,11 @@ class UserRepository extends BaseRepository{
         return 'App\Models\User';
     }
 
+    public function login()
+    {
+        return false;
+    }
+
     //endregion
 
     //region Private Methods
