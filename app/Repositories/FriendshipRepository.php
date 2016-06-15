@@ -9,38 +9,38 @@
 namespace App\Repositories;
 
 
-use App\Models\PersonRelationship;
+use App\Models\Friendship;
 
-class PersonRelationshipRepository extends BaseRepository
+class FriendshipRepository extends BaseRepository
 {
 
     //region attributes
 
     /**
-     * @var PersonRelationship
+     * @var Friendship
      */
-    private $_personRelationship = null;
+    private $_friendship = null;
 
     //endregion
 
     //region Static
     //endregion
 
-    public function __construct(PersonRelationship $personRelationship)
+    public function __construct(Friendship $friendship)
     {
-        $this->_personRelationship = $personRelationship;
+        $this->_friendship = $friendship;
     }
 
     //region Methods
 
     /**
-     * return namespace for PersonRelationship model
+     * return namespace for Friendship model
      *
      * @return mixed
      */
     function model()
     {
-        return 'App\Models\PersonRelationship';
+        return 'App\Models\Friendship';
     }
 
     //endregion

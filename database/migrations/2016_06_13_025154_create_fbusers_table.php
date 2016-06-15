@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMoneyboxCategoriesTable extends Migration
+class CreateFbusersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,15 @@ class CreateMoneyboxCategoriesTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('moneyboxCategories'))
+        if (!Schema::hasTable('fbusers'))
         {
-            Schema::create('moneyboxCategories', function(Blueprint $table){
+            Schema::create('fbusers', function(Blueprint $table){
                 $table->engine = 'InnoDB';
                 $table->increments('id');
-                $table->string('name', 128);
-                $table->timestamps();
+                $table->integer('user_id')->unsigned();
+                $table->string('fb_uid', 128)->unique();
+
+                $table->foreign('user_id')->references('id')->on('users');
             });
         }
     }
@@ -30,6 +32,6 @@ class CreateMoneyboxCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExist('moneyboxCategories');
+        Schema::dropIfExists('fbusers');
     }
 }

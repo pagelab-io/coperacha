@@ -17,16 +17,17 @@ class CreateMoneyboxesTable extends Migration
             Schema::create('moneyboxes', function(Blueprint $table){
                 $table->engine = 'InnoDB';
                 $table->increments('id');
-                $table->integer('moneyboxcategory_id');
+                $table->integer('category_id')->unsigned();
                 $table->string('name', 128);
                 $table->decimal('goal_amount',10,2);
                 $table->decimal('collected_amount',10,2);
                 $table->integer('owner');
                 $table->date('end_date');
                 $table->text('description');
-                $table->text('img');
                 $table->integer('active');
                 $table->timestamps();
+
+                $table->foreign('category_id')->references('id')->on('categories');
             });
         }
     }

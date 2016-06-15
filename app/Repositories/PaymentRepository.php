@@ -9,22 +9,24 @@
 namespace App\Repositories;
 
 
-class MoneyboxPayment extends BaseRepository{
+use App\Models\Payment;
+
+class PaymentRepository extends BaseRepository{
 
     //region attributes
 
     /**
-     * @var MoneyboxPayment
+     * @var Payment
      */
-    private $_moneyboxPayment = null;
+    private $_payment = null;
 
     //endregion
 
     //region Static
     //endregion
 
-    public function __construct(MoneyboxPayment $moneyboxPayment){
-        $this->_moneyboxPayment = $moneyboxPayment;
+    public function __construct(Payment $payment){
+        $this->_payment = $payment;
     }
 
     //region Methods
@@ -36,7 +38,7 @@ class MoneyboxPayment extends BaseRepository{
      */
     function model()
     {
-        return 'App\Models\MoneyboxPayment';
+        return 'App\Models\Payment';
     }
 
     //endregion

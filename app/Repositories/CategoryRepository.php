@@ -9,35 +9,35 @@
 namespace App\Repositories;
 
 
-use App\Models\MoneyboxCategory;
+use App\Models\Category;
 
 class MoneyboxCategoryRepository extends BaseRepository{
 
     //region attributes
 
     /**
-     * @var MoneyboxCategory
+     * @var Category
      */
-    private $_moneyboxCategory = null;
+    private $_category = null;
 
     //endregion
 
     //region Static
     //endregion
 
-    public function __construct(MoneyboxCategory $moneyboxCategory){
-        $this->_moneyboxCategory = $moneyboxCategory;
+    public function __construct(Category $Category){
+        $this->_category = $Category;
     }
 
     //region Methods
 
     /**
-     * return namesapace for MoneyboxCategory Model
+     * return namesapace for Category Model
      * @return mixed
      */
     function model()
     {
-        return 'App\Models\MoneyboxCategory';
+        return 'App\Models\Category';
     }
 
     //endregion

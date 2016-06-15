@@ -17,7 +17,7 @@ class FbUser extends Model
      * These are the mass-assignable keys
      * @var array
      */
-    protected $fillable = ['person_id'];
+    protected $fillable = ['user_id','fb_uid'];
 
     //endregion
 
@@ -31,7 +31,7 @@ class FbUser extends Model
      */
     public function person()
     {
-        return $this->belongsTo('App\Models\Person');
+        return $this->belongsTo('App\Models\User');
     }
     //endregion
 

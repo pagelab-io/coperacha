@@ -11,7 +11,7 @@ class MoneyboxSetting extends Model
      * The database table used by the model
      * @var string
      */
-    protected $table = 'moneyboxsettings';
+    protected $table = 'moneybox_settings';
 
     /**
      * These are the mass-assignable keys

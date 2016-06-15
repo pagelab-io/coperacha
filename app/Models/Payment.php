@@ -4,26 +4,27 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PersonMoneybox extends Model
+class Payment extends Model
 {
     //region attributes
     /**
      * The database table used by the model
      * @var string
      */
-    protected $table = 'personmoneyboxes';
+    protected $table = 'payments';
 
     /**
      * These are the mass-assignable keys
      * @var array
      */
-    protected $fillable = ['person_id', 'moneybox_id'];
+    protected $fillable = ['person_id', 'moneybox_id', 'amount', 'method'];
     //endregion
 
     //region Static Methods
     //endregion
 
     //region Methods
+
     /**
      * Define the relation between MoneyboxPayment and Person
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -41,6 +42,7 @@ class PersonMoneybox extends Model
     {
         return $this->belongsTo('App\Models\Moneybox');
     }
+
     //endregion
 
     //region Private Methods

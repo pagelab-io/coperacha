@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFbusersTable extends Migration
+class CreateCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,13 @@ class CreateFbusersTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('fbusers'))
+        if (!Schema::hasTable('categories'))
         {
-            Schema::create('fbusers', function(Blueprint $table){
+            Schema::create('categories', function(Blueprint $table){
                 $table->engine = 'InnoDB';
                 $table->increments('id');
-                $table->integer('person_id')->unsigned();
-
-                $table->foreign('person_id')->references('id')->on('persons');
+                $table->string('name', 128);
+                $table->timestamps();
             });
         }
     }
@@ -31,6 +30,6 @@ class CreateFbusersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fbusers');
+        Schema::dropIfExist('categories');
     }
 }

@@ -17,7 +17,7 @@ class Moneybox extends Model
      * These are the mass-assignable keys
      * @var array
      */
-    protected $fillable = ['moneyboxcategory_id', 'name', 'goal_amount', 'collected_amount', 'owner', 'end_date', 'description', 'description'];
+    protected $fillable = ['category_id', 'name', 'goal_amount', 'collected_amount', 'owner', 'end_date', 'description', 'description'];
 
     //endregion
 
@@ -32,7 +32,7 @@ class Moneybox extends Model
      */
     public function payments()
     {
-        return $this->hasMany('App\Models\MoneyboxPayment');
+        return $this->hasMany('App\Models\Payment');
     }
 
     /**
@@ -41,7 +41,7 @@ class Moneybox extends Model
      */
     public function persons()
     {
-        return $this->hasMany('App\Models\PersonMoneybox');
+        return $this->hasMany('App\Models\Member');
     }
 
     /**
@@ -50,7 +50,7 @@ class Moneybox extends Model
      */
     public function category()
     {
-        return $this->belongsTo('App\Models\MoneyboxCategories');
+        return $this->belongsTo('App\Models\Category');
     }
 
     /**

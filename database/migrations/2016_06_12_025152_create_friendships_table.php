@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePersonsTable extends Migration
+class CreateFriendshipsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,18 +12,16 @@ class CreatePersonsTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('persons'))
+        if (!Schema::hasTable('friendships'))
         {
-            Schema::create('persons', function(Blueprint $table){
+            Schema::create('friendships', function(Blueprint $table){
                 $table->engine = 'InnoDB';
                 $table->increments('id');
-                $table->string('name', 128);
-                $table->string('lastname', 128);
-                $table->date('birthday');
-                $table->enum('gender', ['H','M']);
-                $table->string('city', 128);
-                $table->string('country', 128);
+                $table->integer('person_id')->unsigned(); //FK
+                $table->integer('friend_id');
                 $table->timestamps();
+
+                $table->foreign('person_id')->references('id')->on('persons');
             });
         }
     }
@@ -35,6 +33,6 @@ class CreatePersonsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('persons');
+        Schema::dropIfExist('friendships');
     }
 }

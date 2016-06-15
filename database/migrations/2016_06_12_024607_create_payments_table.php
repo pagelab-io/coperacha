@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePersonRelationshipsTable extends Migration
+class CreatePaymentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,16 +12,20 @@ class CreatePersonRelationshipsTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('personRelationships'))
+        if (!Schema::hasTable('payments'))
         {
-            Schema::create('personRelationships', function(Blueprint $table){
+            Schema::create('payments', function(Blueprint $table){
                 $table->engine = 'InnoDB';
                 $table->increments('id');
                 $table->integer('person_id')->unsigned(); //FK
-                $table->integer('friend_id');
+                $table->integer('moneybox_id')->unsigned(); //FK
+                $table->decimal('amount',10,2);
+                $table->enum('method', ['p','o','s']);
                 $table->timestamps();
 
                 $table->foreign('person_id')->references('id')->on('persons');
+                $table->foreign('moneybox_id')->references('id')->on('moneyboxes');
+
             });
         }
     }
@@ -33,6 +37,6 @@ class CreatePersonRelationshipsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExist('personRelationships');
+        Schema::dropIfExists('payments');
     }
 }

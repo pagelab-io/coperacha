@@ -9,36 +9,36 @@
 namespace App\Repositories;
 
 
-use App\Models\PersonMoneybox;
+use App\Models\Member;
 
-class PersonMoneyboxRepository extends BaseRepository{
+class MemberRepository extends BaseRepository{
 
     //region attributes
 
     /**
-     * @var PersonMoneybox
+     * @var Member
      */
-    private $_personMoneybox = null;
+    private $_member = null;
 
     //endregion
 
     //region Static
     //endregion
 
-    public function __construct(PersonMoneybox $personMoneybox){
-        $this->_personMoneybox = $personMoneybox;
+    public function __construct(Member $member){
+        $this->_member = $member;
     }
 
     //region Methods
 
     /**
-     * return namaspace for PersonMoneybox Model
+     * return namaspace for Member Model
      *
      * @return mixed
      */
     function model()
     {
-        return 'App\Models\PersonMoneybox';
+        return 'App\Models\Member';
     }
 
     //endregion

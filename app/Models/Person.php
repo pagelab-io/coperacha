@@ -17,7 +17,7 @@ class Person extends Model
      * These are the mass-assignable keys
      * @var array
      */
-    protected $fillable = ['name', 'lastname', 'birthday', 'gender'];
+    protected $fillable = ['name', 'lastname', 'birthday', 'gender', 'city', 'country'];
 
     //endregion
 
@@ -27,21 +27,21 @@ class Person extends Model
     //region Methods
 
     /**
-     * Define the relation between Person and MoneyBoxPayment
+     * Define the relation between Person and Payments
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function payments()
     {
-        return $this->hasMany('App\Models\MoneyboxPayment');
+        return $this->hasMany('App\Models\Payment');
     }
 
     /**
-     * Define the relation between Person and PersonRelationship
+     * Define the relation between Person and Member
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function personMoneyboxes()
     {
-        return $this->hasMany('App\Models\PersonMoneybox');
+        return $this->hasMany('App\Models\Member');
     }
 
     //endregion

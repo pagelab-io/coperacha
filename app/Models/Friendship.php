@@ -4,35 +4,26 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MoneyboxCategory extends Model
+class Friendship extends Model
 {
     //region attributes
     /**
      * The database table used by the model
      * @var string
      */
-    protected $table = 'moneyboxCategories';
+    protected $table = 'friendships';
 
     /**
      * These are the mass-assignable keys
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['person_id', 'friend_id'];
     //endregion
 
     //region Static Methods
     //endregion
 
     //region Methods
-
-    /**
-     * Define the relation between MoneyboxCategory and Moneybox
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function moneybox()
-    {
-        return $this->hasMany('App\Models\Moneybox');
-    }
     //endregion
 
     //region Private Methods

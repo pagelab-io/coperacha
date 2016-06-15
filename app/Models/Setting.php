@@ -11,7 +11,7 @@ class Setting extends Model
      * The database table used by the model
      * @var string
      */
-    protected $table = 'users';
+    protected $table = 'settings';
 
     /**
      * These are the mass-assignable keys
@@ -31,7 +31,7 @@ class Setting extends Model
      */
     public function moneyboxSettings()
     {
-        return $this->hasMany('App\Models\MoneyboxSettings');
+        return $this->hasMany('App\Models\MoneyboxSetting');
     }
 
     //endregion
