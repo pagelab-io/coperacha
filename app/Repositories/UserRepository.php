@@ -44,7 +44,7 @@ class UserRepository extends BaseRepository{
 
     public function login()
     {
-        return false;
+        return true;
     }
 
     //endregion
