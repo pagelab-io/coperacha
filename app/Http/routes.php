@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-$router->group([
+/*$router->group([
     'as'         => 'auth.',
     'namespace'  => 'Auth',
     'prefix'     => 'auth'
@@ -28,6 +28,21 @@ $router->group([
         'as' => 'login',
         'middleware' => 'guest',
         'uses'       => 'AuthController@login'
+    ]);
+
+});*/
+
+$router->group([
+    'as' => 'register',
+    'namespace' => 'Register',
+    'prefix' => 'register'
+], function($router){
+
+    // register
+    $router->post('/', [
+        'as' => '',
+        'middleware' => 'guest',
+        'uses' => 'RegisterController@register'
     ]);
 
 });

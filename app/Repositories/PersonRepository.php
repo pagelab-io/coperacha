@@ -40,6 +40,11 @@ class PersonRepository extends BaseRepository{
     }
     //endregion
 
+    function create()
+    {
+        return true;
+    }
+
     //region Private Methods
     //endregion
 }
