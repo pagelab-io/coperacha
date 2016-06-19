@@ -49,8 +49,7 @@ class RegisterController extends PLController{
             $this->printRequest($request);
 
             // step 1: check for user existence
-            // $this->_userRepository->userExist($request->get('email'))
-            if (false) {
+            if ($this->_userRepository->userExist($request->get('email'))) {
                 throw new \Exception ("User already exist", -2);
             } else {
 
@@ -59,11 +58,12 @@ class RegisterController extends PLController{
 
                 if ($person instanceof Person)
                 {
+
                     // step 2: create user
-                    if ($request->get('isFB') == 0) {
-                        $user = $this->_userRepository->create($request, $person);
-                    } else {
-                        \Log::info("creating FBUser");
+                    $user = $this->_userRepository->create($request, $person);
+
+                    if ($request->get('isFB') == 1) {
+                        \Log::info("FBUser");
                     }
 
                 }
@@ -87,7 +87,6 @@ class RegisterController extends PLController{
             $this->printResponse($this->_response, $request->getSession()->getId());
             return response()->json($this->_response);
         }
-
 
     }
 

@@ -64,11 +64,19 @@ class UserRepository extends BaseRepository{
         $this->_user->email = $request->get('email');
         $this->_user->password = md5($request->get('password'));
 
-        if (!$this->_user->save()) {
+        try{
 
+            $saved = $this->_user->save();
+            if(!$saved){
+                \Log::info(($person->delete()) ? "user deleted successfully" : "cannot delete user");
+                throw new \Exception("Unable to create User");
+            }
+
+        }catch (\Exception $ex){
             $person->delete();
-            throw new \Exception("Unable to create User", -1);
+            throw $ex;
         }
+
 
         \Log::info("=== User created successfully : ".$this->_user." ===");
         return $this->_user;
@@ -76,12 +84,22 @@ class UserRepository extends BaseRepository{
 
     public function userExist($email = "" , $username = "")
     {
-        if(trim($email) != "" && trim($username) != ""){
-            // search by email and username
-        } else if (trim($email) != "") {
-            // search by email
-        } else if (trim($username) != "") {
-            // search by username
+        $count = 0;
+
+        try{
+
+            if (trim($email) != "" && trim($username) != "") {
+                $count = User::where('email', $email)->orwhere('username', $username)->count();
+            } else if (trim($email) != "") {
+                $count = User::where('email', $email)->count();
+            } else if (trim($username) != "") {
+                $count = User::where('username', $username)->count();
+            }
+
+            return ($count >= 1) ? true : false;
+
+        }catch(\Exception $ex){
+            return $ex;
         }
     }
 
