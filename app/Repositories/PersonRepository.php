@@ -8,6 +8,7 @@
 
 namespace App\Repositories;
 
+use App\Http\PLRequest;
 use App\Models\Person;
 
 class PersonRepository extends BaseRepository{
@@ -40,9 +41,36 @@ class PersonRepository extends BaseRepository{
     }
     //endregion
 
-    function create()
+    /**
+     * Create a new person in DB
+     *
+     * @param PLRequest $request
+     * @return Person
+     * @throws \Exception
+     */
+    public function create(PLRequest $request)
     {
-        return true;
+        \Log::info("=== Person create ===");
+        $this->_person->name = $request->get('name');
+        $this->_person->lastname = $request->get('lastname');
+
+        if (!$this->_person->save()) throw new \Exception("Unable to create Person", -1);
+
+        \Log::info("=== Person created successfully : ".$this->_person." ===");
+        return $this->_person;
+    }
+
+    /**
+     * Set the default values for person
+     */
+    public function setDefault()
+    {
+        $this->_person->name = '';
+        $this->_person->lastname = '';
+        $this->_person->birthday = '0000-00-00';
+        $this->_person->gender = 'H';
+        $this->_person->city = '';
+        $this->_person->country = '';
     }
 
     //region Private Methods

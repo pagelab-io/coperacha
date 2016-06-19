@@ -50,11 +50,20 @@ class PLController extends Controller {
     {
         \Log::info(
             "\n=========== Request =========== \n".
-            $request->getUri()."\n".
-            $request->getClientIp()."\n".
-            $request->getSession()->getId()."\n".
-            $request->getContent().
+            "Uri: ".$request->getUri()."\n".
+            "ClientIp: ".$request->getClientIp()."\n".
+            "SessionId: ".$request->getSession()->getId()."\n".
+            "content: ".$request->getContent().
             "\n=========== end Request =========== \n"
+        );
+    }
+
+    public function printResponse($response, $sessionId){
+        \Log::info(
+            "\n=========== Response =========== \n".
+            "SessionId: ".$sessionId."\n".
+            "Response: ".response()->json($response)."\n".
+            "\n=========== end Response =========== \n"
         );
     }
     //endregion

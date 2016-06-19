@@ -43,6 +43,11 @@ abstract class BaseRepository implements IBaseRepository{
         return $this->model;
     }
 
+    protected function setDefault()
+    {
+        // your code
+    }
+
     /**
      * Return all records
      *
