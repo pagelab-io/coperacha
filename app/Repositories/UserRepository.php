@@ -8,7 +8,7 @@
 
 namespace App\Repositories;
 
-use App\Http\PLRequest;
+use App\Http\Requests\PLRequest;
 use App\Models\Person;
 use App\Models\User;
 
@@ -63,6 +63,7 @@ class UserRepository extends BaseRepository{
         $this->_user->person_id = $person->id;
         $this->_user->email = $request->get('email');
         $this->_user->password = md5($request->get('password'));
+        $this->_user->username = $request->get('email'); // for first time we add the email into the username
 
         try{
 
@@ -73,15 +74,22 @@ class UserRepository extends BaseRepository{
             }
 
         }catch (\Exception $ex){
-            $person->delete();
+            \Log::info(($person->delete()) ? "user deleted successfully" : "cannot delete user");
             throw $ex;
         }
-
 
         \Log::info("=== User created successfully : ".$this->_user." ===");
         return $this->_user;
     }
 
+    /**
+     * Search for user into the DB by email or username
+     *
+     * @param string $email
+     * @param string $username
+     * @return bool
+     * @throws \Exception
+     */
     public function userExist($email = "" , $username = "")
     {
         $count = 0;
@@ -96,11 +104,11 @@ class UserRepository extends BaseRepository{
                 $count = User::where('username', $username)->count();
             }
 
-            return ($count >= 1) ? true : false;
-
         }catch(\Exception $ex){
-            return $ex;
+            throw $ex;
         }
+
+        return ($count >= 1) ? true : false;
     }
 
     /**

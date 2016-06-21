@@ -8,7 +8,7 @@
 
 namespace App\Repositories;
 
-use App\Http\PLRequest;
+use App\Http\Requests\PLRequest;
 use App\Models\Person;
 
 class PersonRepository extends BaseRepository{
