@@ -8,6 +8,7 @@
 
 namespace App\Http\Requests;
 
+use App\Validations\LoginValidation;
 use App\Validations\RegisterValidation;
 use Illuminate\Http\Request;
 
@@ -35,6 +36,7 @@ class PLRequest extends Request{
         } else {
             switch($this->get('method')){
                 case "register": return RegisterValidation::rules();
+                case "login": return LoginValidation::rules();
                 default: return [];
             }
         }
@@ -49,6 +51,7 @@ class PLRequest extends Request{
     {
         switch($this->get('method')){
             case "register": return RegisterValidation::messages();
+            case "login": return RegisterValidation::messages();
             default: return [];
         }
 
