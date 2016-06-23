@@ -8,6 +8,7 @@
 
 namespace App\Http\Requests;
 
+use App\Validations\RegisterValidation;
 use Illuminate\Http\Request;
 
 class PLRequest extends Request{
@@ -19,25 +20,6 @@ class PLRequest extends Request{
     //endregion
 
     //region Private Methods
-    private function register()
-    {
-        return [
-            'name' => 'required',
-            'lastname' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-        ];
-    }
-
-    private function register_messages()
-    {
-        return [
-            'name.required' => 'El campo name es requerido',
-            'lastname.required' => 'El campo lastname es requerido',
-            'email.required' => 'El campo email es requerido',
-            'password.required' => 'EL campo password es requeridoa'
-        ];
-    }
     //endregion
 
     //region Methods
@@ -49,10 +31,10 @@ class PLRequest extends Request{
     public function rules()
     {
         if (!$this->get('method')){
-            return ['method'=>'required'];
+            return ['method'=>'required']; // method field required in any request
         } else {
             switch($this->get('method')){
-                case "register": return $this->register();
+                case "register": return RegisterValidation::rules();
                 default: return [];
             }
         }
@@ -65,13 +47,9 @@ class PLRequest extends Request{
      */
     public function messages()
     {
-        if (!$this->get('method')){
-            return ['method.required'=>'El campo method es requerido'];
-        } else {
-            switch($this->get('method')){
-                case "register": return $this->register_messages();
-                default: return [];;
-            }
+        switch($this->get('method')){
+            case "register": return RegisterValidation::messages();
+            default: return [];
         }
 
     }
