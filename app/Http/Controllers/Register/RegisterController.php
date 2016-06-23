@@ -70,7 +70,7 @@ class RegisterController extends PLController{
                 }
 
                 // return response
-                $this->_response['description'] = "Registro realizado correctamente";
+                $this->_response['description'] = "User registered successfully";
                 $this->_response['data'] = array(['Person' => $person, 'User' => $user, 'FBUser' => $fbUser]);
                 return response()->json($this->_response);
             }
