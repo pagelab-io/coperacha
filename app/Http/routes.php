@@ -18,30 +18,46 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//region Register
 $router->group([
     'as' => 'register',
     'namespace' => 'Register',
     'prefix' => 'register'
 ], function($router){
-
     // register
     $router->post('/', [
         'middleware' => 'guest',
         'uses' => 'RegisterController@register'
     ]);
-
 });
+//endregion
 
+//region Login
 $router->group([
     'as' => 'auth',
     'namespace' => 'Auth',
     'prefix' => 'auth'
 ], function($router){
-
-    // register
     $router->post('/login', [
         'middleware' => 'guest',
         'uses' => 'AuthController@login'
     ]);
-
 });
+//endregion
+
+//region Moneyboxes
+$router->group([ // 401
+    'as' => 'moneybox',
+    'namespace' => 'Moneybox',
+    'prefix' => 'moneybox'
+], function($router){
+    $router->post('/categories/create', [
+        'middleware' => 'guest',
+        'uses' => 'MoneyboxController@addCategory'
+    ]);
+    $router->post('/categories/list', [
+        'middleware' => 'guest',
+        'uses' => 'MoneyboxController@getAll'
+    ]);
+});
+//endregion

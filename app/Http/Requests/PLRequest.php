@@ -8,6 +8,7 @@
 
 namespace App\Http\Requests;
 
+use App\Validations\CategoryValidation;
 use App\Validations\LoginValidation;
 use App\Validations\RegisterValidation;
 use Illuminate\Http\Request;
@@ -37,6 +38,7 @@ class PLRequest extends Request{
             switch($this->get('method')){
                 case "register": return RegisterValidation::rules();
                 case "login": return LoginValidation::rules();
+                case "addCategory": return CategoryValidation::rules();
                 default: return [];
             }
         }
@@ -52,6 +54,7 @@ class PLRequest extends Request{
         switch($this->get('method')){
             case "register": return RegisterValidation::messages();
             case "login": return LoginValidation::messages();
+            case "addCategory": return CategoryValidation::messages();
             default: return [];
         }
 

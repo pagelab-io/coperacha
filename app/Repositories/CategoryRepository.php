@@ -9,9 +9,10 @@
 namespace App\Repositories;
 
 
+use App\Http\Requests\PLRequest;
 use App\Models\Category;
 
-class MoneyboxCategoryRepository extends BaseRepository{
+class CategoryRepository extends BaseRepository{
 
     //region attributes
 
@@ -38,6 +39,33 @@ class MoneyboxCategoryRepository extends BaseRepository{
     function model()
     {
         return 'App\Models\Category';
+    }
+
+    /**
+     * Create a new category
+     *
+     * @param PLRequest $request
+     * @return Category
+     * @throws \Exception
+     */
+    public function create(PLRequest $request)
+    {
+        \Log::info("=== Category create ===");
+        $this->_category->name = $request->get('name');
+        if (!$this->_category->save()) throw new \Exception("Unable to create Category", -1);
+        \Log::info("=== Category created successfully : ".$this->_category." ===");
+        return $this->_category;
+    }
+
+    /**
+     * Get all categories
+     *
+     * @return mixed
+     */
+    public function getALl()
+    {
+        \Log::info("=== get all categories ===");
+        return $this->_category->all();
     }
 
     //endregion

@@ -45,7 +45,7 @@ class RegisterController extends PLController{
     public function register(PLRequest $request)
     {
 
-        // validate the response
+        // validate the request
         $this->validate($request,$request->rules(),$request->messages());
 
         try {
