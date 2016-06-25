@@ -79,6 +79,7 @@ return [
     'timezone'             => 'El campo :attribute debe ser una zona válida',
     'unique'               => 'El campo :attribute ya esta registrado',
     'url'                  => 'El campo :attribute tiene un formato incorrecto',
+    'number_between'       => "The :attribute debe ser un número entre :min y :max",
 
     /*
     |--------------------------------------------------------------------------

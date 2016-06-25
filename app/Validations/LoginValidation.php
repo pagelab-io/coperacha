@@ -23,10 +23,9 @@ class LoginValidation {
      */
     static function rules()
     {
-        // TODO: - make a custom filter to check a value between v1 and v2, not length
         return [
             'email' => 'required|email',
-            'isFB' => 'required|digits:1',
+            'isFB' => 'required|digits:1|number_between:0,1',
             'password' => 'required_if:isFB,0',
             'facebook_uid' => 'required_if:isFB,1',
             'method' => 'required|string'

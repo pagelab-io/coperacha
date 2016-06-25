@@ -9,6 +9,7 @@
 namespace App\Repositories;
 
 
+use App\Http\Requests\PLRequest;
 use App\Models\FbUser;
 
 class FbUserRepository extends BaseRepository{
@@ -38,6 +39,17 @@ class FbUserRepository extends BaseRepository{
     function model()
     {
         return 'App\Models\FbUser';
+    }
+
+    /**
+     * Facebook login
+     *
+     * @param PLRequest $request
+     * @return bool
+     */
+    public function login(PLRequest $request)
+    {
+        return true;
     }
     //endregion
 

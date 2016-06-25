@@ -51,7 +51,7 @@ class PLRequest extends Request{
     {
         switch($this->get('method')){
             case "register": return RegisterValidation::messages();
-            case "login": return RegisterValidation::messages();
+            case "login": return LoginValidation::messages();
             default: return [];
         }
 

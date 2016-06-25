@@ -112,6 +112,19 @@ class UserRepository extends BaseRepository{
     }
 
     /**
+     * email login
+     *
+     * @param PLRequest $request
+     * @return bool
+     */
+    public function login(PLRequest $request)
+    {
+        $count = User::where(['email' => trim($request->get('email')), 'password' => md5(trim($request->get('password')))])->count();
+        return ($count == 1) ? true : false;
+    }
+
+
+    /**
      * Set the default values for user
      */
     public function setDefault()

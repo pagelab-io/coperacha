@@ -43,9 +43,31 @@ class AuthController extends PLController
      */
     public function login(PLRequest $request){
 
+        // validate request
         $this->validate($request, $request->rules(), $request->messages());
 
-        return response()->json();
+        try {
+
+            // get login response
+            $response = ($request->get('isFB') == 0) ? $this->_userRepository->login($request) : $this->_fbUserRepository->login($request);
+
+            if ($response) {
+                $this->_response['status'] = 200;
+                $this->_response['description'] = "Login successfully";
+            } else {
+                $this->_response['status'] = -1;
+                $this->_response['description'] = "Invalid Credentials";
+            }
+
+            $this->_response['data'] = $response;
+            return response()->json($this->_response);
+
+        } catch(\Exception $ex){
+            $this->_response['status'] = $ex->getCode();
+            $this->_response['description'] = $ex->getMessage();
+            $this->_response['data'] = $ex->getTraceAsString();
+            return response()->json($this->_response);
+        }
     }
 
     //endregion

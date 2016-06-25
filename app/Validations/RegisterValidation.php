@@ -23,10 +23,11 @@ class RegisterValidation{
     static function rules()
     {
         return [
-            'name' => 'required',
-            'lastname' => 'required',
-            'email' => 'required',
+            'name' => 'required|string',
+            'lastname' => 'required|string',
+            'email' => 'required|email',
             'password' => 'required',
+            'isFB' => 'required|digits:1|number_between:0,1'
         ];
     }
 
