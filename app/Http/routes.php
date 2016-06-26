@@ -46,18 +46,26 @@ $router->group([
 //endregion
 
 //region Moneyboxes
-$router->group([ // 401
+$router->group([
     'as' => 'moneybox',
     'namespace' => 'Moneybox',
     'prefix' => 'moneybox'
 ], function($router){
     $router->post('/categories/create', [
         'middleware' => 'guest',
-        'uses' => 'MoneyboxController@addCategory'
+        'uses' => 'CategoryController@createCategory'
     ]);
     $router->post('/categories/list', [
         'middleware' => 'guest',
-        'uses' => 'MoneyboxController@getAll'
+        'uses' => 'CategoryController@getAll'
+    ]);
+    $router->post('/settings/create', [
+        'middleware' => 'guest',
+        'uses' => 'SettingController@createSetting'
+    ]);
+    $router->post('/settings/list', [
+        'middleware' => 'guest',
+        'uses' => 'SettingController@getAll'
     ]);
     $router->post('/create', [
         'middleware' => 'guest',

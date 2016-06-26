@@ -11,33 +11,23 @@ namespace App\Http\Controllers\Moneybox;
 
 use App\Http\Controllers\PLController;
 use App\Http\Requests\PLRequest;
-use App\Models\Category;
 use App\Models\Moneybox;
-use App\Repositories\CategoryRepository;
 use App\Repositories\MoneyboxRepository;
 
 class MoneyboxController extends PLController{
 
     //region Attributes
-
-    /**
-     * @var CategoryRepository
-     */
-    private $_categoryRepository;
-
     /**
      * @var Moneybox
      */
     private $_moneyboxRepository;
-
     //endregion
 
     //region Static Methods
     //endregion
 
-    public function __construct(CategoryRepository $categoryRepository, MoneyboxRepository $moneyboxRepository)
+    public function __construct(MoneyboxRepository $moneyboxRepository)
     {
-        $this->_categoryRepository = $categoryRepository;
         $this->_moneyboxRepository = $moneyboxRepository;
     }
 
@@ -47,59 +37,22 @@ class MoneyboxController extends PLController{
     //region Methods
 
     /**
-     * Create a new category
+     * Create a new moneybox
      *
      * @param PLRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function addCategory(PLRequest $request)
-    {
-        // validate the request
-        $this->validate($request,$request->rules(),$request->messages());
-
-        try {
-            $category = $this->_categoryRepository->create($request);
-            if($category instanceof Category)
-            {
-                $this->_response['description'] = "category was added successfully";
-                $this->_response['data'] = $category;
-            }
-            return response()->json($this->_response);
-
-        } catch(\Exception $ex) {
-            $this->_response['status'] = $ex->getCode();
-            $this->_response['description'] = $ex->getMessage();
-            $this->_response['data'] = $ex->getTraceAsString();
-            return response()->json($this->_response);
-        }
-    }
-
-    /**
-     * Get all categories in the database
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function getAll()
-    {
-
-        try {
-            $this->_response['data'] = $this->_categoryRepository->getALl();
-            return response()->json($this->_response);
-        } catch(\Exception $ex) {
-            $this->_response['status'] = $ex->getCode();
-            $this->_response['description'] = $ex->getMessage();
-            $this->_response['data'] = $ex->getTraceAsString();
-            return response()->json($this->_response);
-        }
-
-    }
-
     public function createMoneybox(PLRequest $request)
     {
-        // validate request
+        // 1 : validate request
         $this->validate($request, $request->rules(), $request->messages());
         try {
+            // 2: create moneybox
             $moneybox = $this->_moneyboxRepository->createMoneybox($request);
             if ($moneybox instanceof Moneybox) {
+
+                // 3: create settings
+                // TODO - create settings
                 $this->_response['description'] = "Moneybox created successfully";
                 $this->_response['data'] = $moneybox;
             }

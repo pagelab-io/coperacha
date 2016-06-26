@@ -57,6 +57,13 @@ class MoneyboxRepository extends BaseRepository{
         return 'App\Models\Moneybox';
     }
 
+    /**
+     * Create a new moneybox
+     *
+     * @param PLRequest $request
+     * @return Moneybox
+     * @throws \Exception
+     */
     public function createMoneybox(PLRequest $request)
     {
 

@@ -29,6 +29,7 @@ class MoneyboxValidation {
             'goal_amount' => 'required', // TODO - hacer validacion para decimales
             'owner' => 'required|numeric',
             'end_date' => 'required',    // TODO - ver que formato tendra la fecha
+            'settings' => 'required|json', // TODO -  como validar los datos de mi objeto JSON
             'method' => 'required|string'
         ];
     }
