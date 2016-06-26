@@ -1,0 +1,435 @@
+/* Util */
+body {
+    color: #1F1F2E;
+    font-family: 'verbregular';
+    font-size: 13px;
+
+    -webkit-text-rendering: optimizeLegibility;
+    -moz-text-rendering: optimizeLegibility;
+    -ms-text-rendering: optimizeLegibility;
+    -o-text-rendering: optimizeLegibility;
+    text-rendering: optimizeLegibility;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+    -ms-font-smoothing: antialiased;
+    -o-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+.holder {
+    margin: 0 auto;
+    max-width: 1130px;
+    width: 100%;
+}
+
+.relative { position: relative; }
+
+.align-top,
+.align-middle,
+.align-bottom {
+    float: none;
+    display: inline-block;
+}
+
+.align-top { vertical-align: top; }
+.align-middle { vertical-align: middle; }
+.align-bottom { vertical-align: bottom; }
+
+
+/* Navigation */
+.navigation {
+    background-color: #FF5000;
+    height: 75px;
+    overflow: hidden;
+    padding: 1px 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.navigation .logo {
+    display: block;
+    float: left;
+    margin-left: 10px;
+}
+
+.navigation .list {
+    list-style: none;
+    margin: 13px 0 0;
+    padding: 0;
+    text-align: right;
+}
+
+.navigation .list li {
+    display: inline-block;
+    margin: 0 7px;
+    vertical-align: middle;
+}
+
+.navigation .list li a {
+    color: #FFFFFF;
+    display: block;
+    font-family: 'verbmedium';
+    font-size: 13px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.navigation .list li a.button {
+    background-color: #26C5E5;
+    border-radius: 5px;
+    font-family: 'verbregular';
+    font-size: 14px;
+    padding: 13px 22px;
+}
+
+.navigation .navigation-toggle{
+    border: none;
+    float: right;
+    padding: 10px;
+    width: 50px;
+}
+
+.navigation .navigation-toggle .bar{
+    background-color: #333;
+    display: block;
+    height: 3px;
+    margin-bottom: 3px;
+    width: 100%;
+}
+
+.navigation .navigation-toggle .bar:last-child{
+    margin-bottom: 0;
+}
+
+
+/* Outer wrapper */
+.outer-wrapper {
+    margin-top: 75px;
+    position: relative;
+}
+
+
+/* Block */
+.block { padding: 45px 0; }
+.block .header-block { margin-bottom: 55px; }
+.block .header-block .title {
+    color: #26B7D6;
+    font-family: 'verbmedium';
+    font-size: 30px;
+    margin-top: 0;
+    text-align: center;
+}
+
+
+/* Block Cover */
+.block.cover {
+    background-color: #51B7CD;
+    color: #fff;
+    padding: 105px 0 100px;
+}
+
+.block.cover .graphics {
+    position: relative;
+    z-index: 0;
+}
+
+.block.cover .graphics .graphic {
+    position: relative;
+}
+
+.block.cover .graphics .money {
+    position: absolute;
+}
+
+.block.cover .graphics .laptop {
+
+}
+
+.block.cover .graphics .wallet {
+    position: absolute;
+}
+
+.block.cover .header-block {
+    font-family: 'brandon_grotesquebold';
+    font-size: 30px;
+    line-height: 35px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.block.cover .content-block {
+    font-family: 'verbregular';
+    font-size: 16px;
+}
+
+.block.cover .content-block .html {
+    margin-bottom: 15px;
+}
+
+.block.cover .content-block .button {
+    background-color: #FF4F00;
+    border-radius: 5px;
+    color: #fff;
+    display: block;
+    font-family: 'brandon_grotesquebold';
+    font-size: 18px;
+    max-width: 225px;
+    padding: 20px 5px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+
+/* Block Intro */
+.block.intro {
+    background-color: #FF6516;
+    padding: 70px 0 85px;
+}
+
+.block.intro .header-block {
+    margin-bottom: 40px;
+}
+
+.block.intro .header-block .title {
+    color: #fff;
+    font-size: 25px;
+    max-width: 400px;
+    text-align: left;
+}
+
+.block.intro .video {
+    margin-left: auto;
+    max-width: 490px;
+}
+
+
+/* Block How it Works */
+.block.how-it-works {
+    padding: 45px 0 70px;
+}
+
+.block.how-it-works .card {
+    text-align: center;
+}
+
+.block.how-it-works .card .image {
+    margin-bottom: 30px;
+}
+
+.block.how-it-works .card .name {
+    color: #FF4C00;
+    font-family: 'brandon_grotesquebold';
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.block.how-it-works .card .name .button {
+
+}
+
+.block.how-it-works .card .desc {
+    color: #414151;
+    font-family: 'verbregular';
+    font-size: 13px;
+}
+
+
+/* Block Advantages */
+.block.advantages {
+    padding: 65px 0 5px;
+}
+
+.block.advantages .advantage {
+    margin-bottom: 60px;
+}
+
+.block.advantages .advantage .image,
+.block.advantages .advantage .info {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.block.advantages .advantage .image { width: 36.06%; }
+
+.block.advantages .advantage .image img {
+    display: block;
+    height: auto;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+.block.advantages .advantage .info {
+    margin-right: -4px;
+    padding-left: 15px;
+    width: 63.94%;
+}
+
+.block.advantages .advantage .name {
+    color: #FF6500;
+    font-family: 'brandon_grotesquebold';
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0 0 5px;
+    text-transform: uppercase;
+}
+
+.block.advantages .advantage .desc {
+    color: #1F1F2D;
+    font-size: 13px;
+}
+
+
+/* Block Payment Methods */
+.block.payment-methods {
+    padding: 60px 0 75px;
+}
+
+.block.payment-methods .method {
+    display: inline-block;
+    margin-right: -4px;
+    padding-left: 15px;
+    padding-right: 15px;
+    vertical-align: middle;
+    width: 20%;
+}
+
+.block.payment-methods .method img {
+    display: block;
+    height: auto;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+
+/* Block Create Moneybox */
+.block.create-moneybox {
+    background: #32B7D4 url(../../images/create-moneybox-bg.png) no-repeat center center;
+    background-size: cover;
+    color: #fff;
+    padding: 50px 0 110px;
+}
+
+/* Override */
+.block.create-moneybox .holder { max-width: 960px; }
+
+.block.create-moneybox .header-block {
+    font-size: 24px;
+    margin-bottom: 85px;
+    text-align: center;
+}
+
+.block.create-moneybox .header-block .title {
+    color: #fff;
+    font-family: 'brandon_grotesquemedium';
+    font-size: 34px;
+    text-transform: uppercase;
+}
+
+.block.create-moneybox .sign-in { }
+
+.block.create-moneybox .sign-in input[type=text],
+.block.create-moneybox .sign-in input[type=password] {
+    border: none;
+    border-radius: 4px;
+    color: #9797a6;
+    display: block;
+    font-size: 14px;
+    margin-bottom: 12px;
+    padding: 11px;
+    width: 100%;
+}
+
+.block.create-moneybox .sign-in input[type=submit] {
+    background-color: #FF4F00;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    font-family: 'brandon_grotesquebold';
+    font-size: 18px;
+    margin-left: auto;
+    max-width: 225px;
+    padding: 20px 10px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.block.create-moneybox .sign-in-fb {
+    background: #4671C7;
+    border-radius: 5px;
+    color: #fff;
+    display: block;
+    font-size: 19px;
+    margin-left: auto;
+    margin-top: 35px;
+    max-width: 355px;
+    padding: 19px 10px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.block.create-moneybox .sign-in-fb span,
+.block.create-moneybox .sign-in-fb img {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.block.create-moneybox .sign-in-fb span {
+    line-height: normal;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+
+/* Footer */
+.footer {
+    background-color: #FF5000;
+    color: #fff;
+    padding: 15px 0 25px;
+}
+
+.footer .align-middle {
+    margin-right: -4px;
+}
+
+.footer a { color: #fff; }
+
+/* Footer - Rights */
+.footer .rights .logo {
+    margin-bottom: 5px;
+    max-width: 190px;
+}
+
+.footer .rights .text {
+    font-size: 13px;
+    line-height: normal;
+}
+
+/* Footer - Navigation */
+.footer .footer-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.footer .footer-nav ul li a {
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+/* Footer - Contact Info */
+.footer .contact-info {
+    font-size: 11px;
+    text-align: right;
+}
+
+.footer .contact-info h5 { font-family: 'verbmedium'; font-size: 12px; margin: 0; }

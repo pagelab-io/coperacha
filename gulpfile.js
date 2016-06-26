@@ -11,6 +11,27 @@ var elixir = require('laravel-elixir');
  |
  */
 
+
+// Disable sourcemaps.
+elixir.config.sourcemaps = false;
+
+
 elixir(function(mix) {
-    mix.sass('app.scss');
+    mix.styles([
+        "fonts.css",
+        "styles.css",
+        "styles-responsive.css"
+    ], "public/build/css/styles.min.css");
 });
+
+
+elixir(function(mix) {
+    mix.scripts([
+        "scripts.js"
+    ], "public/build/js/scripts.min.js");
+});
+
+
+/* elixir(function(mix) {
+    mix.version(["public/stylesheets/styles.min.css", "public/scripts/scripts.min.js"]);
+}); */
