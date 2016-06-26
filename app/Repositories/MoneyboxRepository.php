@@ -8,13 +8,9 @@
 
 namespace App\Repositories;
 
-
-use App\Models\Person;
 use Illuminate\Container\Container as App;
 use App\Http\Requests\PLRequest;
-use App\Models\Category;
 use App\Models\Moneybox;
-use Mockery\CountValidator\Exception;
 
 class MoneyboxRepository extends BaseRepository{
 
@@ -23,7 +19,7 @@ class MoneyboxRepository extends BaseRepository{
     /**
      * @var Moneybox
      */
-    private $_moneybox = null;
+    private $_moneybox;
 
     /**
      * @var CategoryRepository
@@ -74,12 +70,14 @@ class MoneyboxRepository extends BaseRepository{
         // check for category
         try {$category = $this->_categoryRepository->byId($request->get('category_id'));}
         catch(\Exception $ex){ throw new \Exception("Category does not exist", -1, $ex);}
+        \Log::info("Category : ".$category);
 
         // check for person
         try{ $person = $this->_personRepository->byId($request->get('owner'));
         }catch(\Exception $ex){ throw new \Exception("Person does not exist", -1, $ex);}
+        \Log::info("Person : ".$person);
 
-        \Log::info("=== Moneybox create ===");
+        \Log::info("=== Creating moneybox ===");
         $this->_moneybox->category_id = $category->id;
         $this->_moneybox->name = $request->get('name');
         $this->_moneybox->goal_amount = $request->get('goal_amount');
@@ -87,7 +85,7 @@ class MoneyboxRepository extends BaseRepository{
         $this->_moneybox->end_date = $request->get('end_date');
         $this->_moneybox->description = ($request->exists('description')) ? $request->get('description') : '';
         if (!$this->_moneybox->save()) throw new \Exception("Unable to create Moneybox", -1);
-        \Log::info("=== Moneybox created successfully : ".$this->_moneybox." ===");
+        \Log::info("=== Moneybox created successfully : === \n".$this->_moneybox);
 
         return $this->_moneybox;
     }
@@ -101,6 +99,16 @@ class MoneyboxRepository extends BaseRepository{
         $this->_moneybox->description = '';
         $this->_moneybox->active =1;
     }
+
+    /**
+     * Delete the moneybox
+     * @throws \Exception
+     */
+    public function delete()
+    {
+        $this->_moneybox->delete();
+    }
+
     //endregion
 
     //region Private Methods
