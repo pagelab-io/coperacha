@@ -14,6 +14,7 @@ use Illuminate\Container\Container as App;
 use App\Http\Requests\PLRequest;
 use App\Models\Category;
 use App\Models\Moneybox;
+use Mockery\CountValidator\Exception;
 
 class MoneyboxRepository extends BaseRepository{
 
@@ -64,35 +65,29 @@ class MoneyboxRepository extends BaseRepository{
      * @return Moneybox
      * @throws \Exception
      */
-    public function createMoneybox(PLRequest $request)
+    public function create(PLRequest $request)
     {
 
         $category = null;
         $person   = null;
 
-        $category = $this->_categoryRepository->byId($request->get('category_id'));
-        if ($category instanceof Category) {
+        // check for category
+        try {$category = $this->_categoryRepository->byId($request->get('category_id'));}
+        catch(\Exception $ex){ throw new \Exception("Category does not exist", -1, $ex);}
 
-            $person = $this->_personRepository->byId($request->get('owner'));
-            if ($person instanceof Person) {
+        // check for person
+        try{ $person = $this->_personRepository->byId($request->get('owner'));
+        }catch(\Exception $ex){ throw new \Exception("Person does not exist", -1, $ex);}
 
-                \Log::info("=== Moneybox create ===");
-                $this->_moneybox->category_id = $request->get('category_id');
-                $this->_moneybox->name = $request->get('name');
-                $this->_moneybox->goal_amount = $request->get('goal_amount');
-                $this->_moneybox->owner = $request->get('owner');
-                $this->_moneybox->end_date = $request->get('end_date');
-                $this->_moneybox->description = ($request->exists('description')) ? $request->get('description') : '';
-                if (!$this->_moneybox->save()) throw new \Exception("Unable to create Moneybox", -1);
-                \Log::info("=== Moneybox created successfully : ".$this->_moneybox." ===");
-
-            } else {
-                throw new \Exception("Person does not exist", -1);
-            }
-
-        } else {
-            throw new \Exception("Category does not exist", -1);
-        }
+        \Log::info("=== Moneybox create ===");
+        $this->_moneybox->category_id = $category->id;
+        $this->_moneybox->name = $request->get('name');
+        $this->_moneybox->goal_amount = $request->get('goal_amount');
+        $this->_moneybox->owner = $person->id;
+        $this->_moneybox->end_date = $request->get('end_date');
+        $this->_moneybox->description = ($request->exists('description')) ? $request->get('description') : '';
+        if (!$this->_moneybox->save()) throw new \Exception("Unable to create Moneybox", -1);
+        \Log::info("=== Moneybox created successfully : ".$this->_moneybox." ===");
 
         return $this->_moneybox;
     }

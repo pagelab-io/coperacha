@@ -10,7 +10,7 @@ namespace App\Http\Controllers\Moneybox;
 
 
 use App\Http\Controllers\PLController;
-use App\Http\Requests\PLRequest;
+use App\Http\Requests\PLRequest;;
 use App\Models\Moneybox;
 use App\Repositories\MoneyboxRepository;
 
@@ -18,7 +18,7 @@ class MoneyboxController extends PLController{
 
     //region Attributes
     /**
-     * @var Moneybox
+     * @var MoneyboxRepository
      */
     private $_moneyboxRepository;
     //endregion
@@ -48,9 +48,8 @@ class MoneyboxController extends PLController{
         $this->validate($request, $request->rules(), $request->messages());
         try {
             // 2: create moneybox
-            $moneybox = $this->_moneyboxRepository->createMoneybox($request);
+            $moneybox = $this->_moneyboxRepository->create($request);
             if ($moneybox instanceof Moneybox) {
-
                 // 3: create settings
                 // TODO - create settings
                 $this->_response['description'] = "Moneybox created successfully";
