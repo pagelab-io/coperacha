@@ -10,6 +10,7 @@ namespace App\Repositories;
 
 use App\Http\Requests\PLRequest;
 use App\Models\Person;
+use Illuminate\Container\Container as App;
 
 class PersonRepository extends BaseRepository{
 
@@ -25,7 +26,8 @@ class PersonRepository extends BaseRepository{
     //region Static
     //endregion
 
-    public function __construct(Person $person){
+    public function __construct(Person $person, App $app){
+        parent::__construct($app);
         $this->_person = $person;
     }
 

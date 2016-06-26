@@ -12,8 +12,9 @@ namespace App\Http\Controllers\Moneybox;
 use App\Http\Controllers\PLController;
 use App\Http\Requests\PLRequest;
 use App\Models\Category;
+use App\Models\Moneybox;
 use App\Repositories\CategoryRepository;
-use Illuminate\Support\Facades\Validator;
+use App\Repositories\MoneyboxRepository;
 
 class MoneyboxController extends PLController{
 
@@ -24,14 +25,20 @@ class MoneyboxController extends PLController{
      */
     private $_categoryRepository;
 
+    /**
+     * @var Moneybox
+     */
+    private $_moneyboxRepository;
+
     //endregion
 
     //region Static Methods
     //endregion
 
-    public function __construct(CategoryRepository $categoryRepository)
+    public function __construct(CategoryRepository $categoryRepository, MoneyboxRepository $moneyboxRepository)
     {
         $this->_categoryRepository = $categoryRepository;
+        $this->_moneyboxRepository = $moneyboxRepository;
     }
 
     //region Private Methods
@@ -67,6 +74,10 @@ class MoneyboxController extends PLController{
         }
     }
 
+    /**
+     * Get all categories in the database
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getAll()
     {
 
@@ -80,6 +91,25 @@ class MoneyboxController extends PLController{
             return response()->json($this->_response);
         }
 
+    }
+
+    public function createMoneybox(PLRequest $request)
+    {
+        // validate request
+        $this->validate($request, $request->rules(), $request->messages());
+        try {
+            $moneybox = $this->_moneyboxRepository->createMoneybox($request);
+            if ($moneybox instanceof Moneybox) {
+                $this->_response['description'] = "Moneybox created successfully";
+                $this->_response['data'] = $moneybox;
+            }
+            return response()->json($this->_response);
+        } catch(\Exception $ex) {
+            $this->_response['status'] = $ex->getCode();
+            $this->_response['description'] = $ex->getMessage();
+            $this->_response['data'] = $ex->getTraceAsString();
+            return response()->json($this->_response);
+        }
     }
 
     //endregion

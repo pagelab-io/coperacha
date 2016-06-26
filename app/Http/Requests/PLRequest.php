@@ -10,6 +10,7 @@ namespace App\Http\Requests;
 
 use App\Validations\CategoryValidation;
 use App\Validations\LoginValidation;
+use App\Validations\MoneyboxValidation;
 use App\Validations\RegisterValidation;
 use Illuminate\Http\Request;
 
@@ -39,6 +40,7 @@ class PLRequest extends Request{
                 case "register": return RegisterValidation::rules();
                 case "login": return LoginValidation::rules();
                 case "addCategory": return CategoryValidation::rules();
+                case "createMoneybox": return MoneyboxValidation::rules();
                 default: return [];
             }
         }
@@ -55,6 +57,7 @@ class PLRequest extends Request{
             case "register": return RegisterValidation::messages();
             case "login": return LoginValidation::messages();
             case "addCategory": return CategoryValidation::messages();
+            case "createMoneybox": return MoneyboxValidation::rules();
             default: return [];
         }
 

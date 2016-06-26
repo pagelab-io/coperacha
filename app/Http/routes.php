@@ -59,5 +59,9 @@ $router->group([ // 401
         'middleware' => 'guest',
         'uses' => 'MoneyboxController@getAll'
     ]);
+    $router->post('/create', [
+        'middleware' => 'guest',
+        'uses' => 'MoneyboxController@createMoneybox'
+    ]);
 });
 //endregion

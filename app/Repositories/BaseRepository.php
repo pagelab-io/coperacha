@@ -67,14 +67,7 @@ abstract class BaseRepository implements IBaseRepository{
     public function byId($id)
     {
         $result = null;
-
-        try{
-            return $this->model->findOrFail($id);
-        }catch(Exception $ex){
-            \Log::info("== Error al buscar el registro ==");
-            \Log::info($ex->getTraceAsString());
-            return null;
-        }
+        return $this->model->findOrFail($id);
     }
 
 }

@@ -8,7 +8,7 @@
 
 namespace App\Repositories;
 
-
+use Illuminate\Container\Container as App;
 use App\Http\Requests\PLRequest;
 use App\Models\Category;
 
@@ -26,7 +26,8 @@ class CategoryRepository extends BaseRepository{
     //region Static
     //endregion
 
-    public function __construct(Category $Category){
+    public function __construct(Category $Category, App $app){
+        parent::__construct($app);
         $this->_category = $Category;
     }
 
@@ -65,7 +66,7 @@ class CategoryRepository extends BaseRepository{
     public function getALl()
     {
         \Log::info("=== get all categories ===");
-        return $this->_category->all();
+        return $this->all();
     }
 
     //endregion
