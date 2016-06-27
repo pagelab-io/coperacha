@@ -69,13 +69,14 @@
         <!-- Mobile navigation -->
         <nav class="mobile-navigation visible-xs">
             <div class="inner">
-                <!-- Logo -->
-                <a class="logo" href="/">Coperacha</a>
-
                 <!-- Navigation list -->
                 <ul class="list">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">¿Qué es Coperacha?</a></li>
+                    <li><a href="#">¿Cómo funciona?</a></li>
+                    <li><a href="#">FAQS</a></li>
+                    <li><a href="#">Contacto</a></li>
+                    <li><a class="button" href="#"><span>Crear mi Alcancía</span></a></li>
+                    <li><a href="#">Entrar</a></li>
                 </ul>
             </div>
         </nav>
@@ -89,7 +90,7 @@
                 </a>
 
                 <!-- List -->
-                <ul class="clearfix list">
+                <ul class="clearfix list hidden-xs">
                     <li><a href="#">¿Qué es Coperacha?</a></li>
                     <li><a href="#">¿Cómo funciona?</a></li>
                     <li><a href="#">FAQS</a></li>
@@ -109,14 +110,13 @@
         <!-- Outer wrapper -->
         <div class="outer-wrapper">
             <!-- Cover -->
-            <!-- TODO: Check graphics section -->
             <div class="block cover">
                 <div class="holder">
                     <div class="container-fluid">
-                        <div class="col-sm-5 col-xs-6 align-middle">
+                        <div class="col-sm-6 align-middle">
                             <div class="graphics">
                                 <!-- Money -->
-                                <div class="money graphic hidden">
+                                <div class="money graphic">
                                     <img src="images/cover-money.png" alt="">
                                 </div>
 
@@ -126,14 +126,14 @@
                                 </div>
 
                                 <!-- Wallet -->
-                                <div class="wallet graphic hidden">
+                                <div class="wallet graphic">
                                     <img src="images/cover-wallet.png" alt="">
                                 </div>
 
                             </div>
                         </div>
 
-                        <div class="col-sm-6 col-xs-6 align-middle">
+                        <div class="col-sm-6 align-middle">
                             <div class="header-block">
                                 <div>El servicio online para recaudar dinero entre amigos</div>
                             </div>
@@ -209,17 +209,39 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="header-block">
-                                    <h2 class="title">Arma tu Coperacha para fiestas, regalos o viajes</h2>
+                                    <h2 class="title">Arma tu Coperacha para fiestas, regalos o viajes</h2>
                                 </div>
                                 <div class="content-block">
-
+                                    <div class="row">
+                                        <div class="col-xs-4">
+                                            <div class="moneybox-type">
+                                                <img class="img-responsive" src="images/intro-moneybox-1.png" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <div class="moneybox-type">
+                                                <img class="img-responsive" src="images/intro-moneybox-2.png" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <div class="moneybox-type">
+                                                <img class="img-responsive" src="images/intro-moneybox-3.png" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+
                             <div class="col-sm-6">
                                 <div class="video">
                                     <div class="embed-responsive embed-responsive-16by9">
                                         <iframe class="embed-responsive-item" src="https://player.vimeo.com/video/142285041?title=0&byline=0&portrait=0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
                                     </div>
+
+                                    <a class="share-fb" href="javascript:void(0)">
+                                        <span>Compartir en</span>
+                                        <img src="images/facebook-logo.png" alt="">
+                                    </a>
                                 </div>
                             </div>
                         </div>

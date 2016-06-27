@@ -98,12 +98,14 @@ body {
     z-index: 1;
 }
 
+/* Navigation - Logo */
 .navigation .logo {
     display: block;
     float: left;
     margin-left: 10px;
 }
 
+/* Navigation - List */
 .navigation .list {
     list-style: none;
     margin: 13px 0 0;
@@ -116,6 +118,8 @@ body {
     margin: 0 7px;
     vertical-align: middle;
 }
+
+.navigation .list li:last-child { margin-right: 0; }
 
 .navigation .list li a {
     color: #FFFFFF;
@@ -134,7 +138,9 @@ body {
     padding: 13px 22px;
 }
 
+/* Navigation - Toggle Button */
 .navigation .navigation-toggle{
+    background-color: transparent;
     border: none;
     float: right;
     padding: 10px;
@@ -142,10 +148,11 @@ body {
 }
 
 .navigation .navigation-toggle .bar{
-    background-color: #333;
+    background-color: #fff;
+    border-radius: 5px;
     display: block;
-    height: 3px;
-    margin-bottom: 3px;
+    height: 4px;
+    margin-bottom: 4px;
     width: 100%;
 }
 
@@ -180,26 +187,30 @@ body {
     padding: 105px 0 100px;
 }
 
+.block.cover .align-middle { margin-left: -4px; }
+
 .block.cover .graphics {
     position: relative;
     z-index: 0;
 }
 
-.block.cover .graphics .graphic {
-    position: relative;
-}
-
-.block.cover .graphics .money {
-    position: absolute;
-}
-
 .block.cover .graphics .laptop {
-
+    margin: 0 auto;
+    max-width: 354px;
+    position: relative;
+    z-index: 0;
 }
 
+.block.cover .graphics .money,
 .block.cover .graphics .wallet {
+    margin-top: -85px;
     position: absolute;
+    top: 50%;
+    z-index: -1;
 }
+
+.block.cover .graphics .money { left: 0; }
+.block.cover .graphics .wallet { right: 0; }
 
 .block.cover .header-block {
     font-family: 'brandon_grotesquebold';
@@ -240,6 +251,9 @@ body {
     padding: 70px 0 85px;
 }
 
+/* Override */
+.block.intro .holder { max-width: 1060px; }
+
 .block.intro .header-block {
     margin-bottom: 40px;
 }
@@ -251,9 +265,43 @@ body {
     text-align: left;
 }
 
+.block.intro .content-block {
+    max-width: 390px;
+}
+
 .block.intro .video {
     margin-left: auto;
     max-width: 490px;
+}
+
+.block.intro .video .share-fb {
+    background: #4671C7;
+    border-radius: 5px;
+    color: #fff;
+    display: block;
+    font-size: 16px;
+    margin-left: auto;
+    margin-top: 10px;
+    max-width: 225px;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.block.intro .video .share-fb span,
+.block.intro .video .share-fb img {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.block.intro .video .share-fb span {
+    line-height: normal;
+    margin-right: 3px;
+    margin-top: 5px;
+}
+
+.block.intro .video .share-fb img {
+    width: 87px;
 }
 
 
@@ -278,9 +326,7 @@ body {
     text-transform: uppercase;
 }
 
-.block.how-it-works .card .name .button {
-
-}
+.block.how-it-works .card .name .button { }
 
 .block.how-it-works .card .desc {
     color: #414151;
@@ -385,7 +431,7 @@ body {
 .block.create-moneybox .sign-in input[type=text],
 .block.create-moneybox .sign-in input[type=password] {
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     color: #9797a6;
     display: block;
     font-size: 14px;
@@ -397,7 +443,7 @@ body {
 .block.create-moneybox .sign-in input[type=submit] {
     background-color: #FF4F00;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     color: #fff;
     cursor: pointer;
     display: block;
@@ -482,22 +528,57 @@ body {
 
 .footer .contact-info h5 { font-family: 'verbmedium'; font-size: 12px; margin: 0; }
 
+@media (max-width: 1010px) {
+
+    /* Navigation */
+    .navigation { height: 55px; }
+
+    /* Navigation - Logo */
+    .navigation .logo {
+        margin-left: auto;
+        max-width: 155px;
+    }
+
+    /* Navigation - List */
+    .navigation .list {
+        margin: 7px 0 0;
+    }
+
+    .navigation .list li {
+        margin: 0 5px;
+    }
+
+    .navigation .list li a.button {
+        font-size: 13px;
+        padding: 10px 5px;
+    }
+
+
+    /* Outer wrapper */
+    .outer-wrapper {
+        margin-top: 55px;
+    }
+
+}
+
 @media (max-width: 767px) {
 
     /* Body */
-    body.mobile-navigation-open{
+    body.mobile-navigation-open {
         overflow: hidden;
     }
 
 
     /* Mobile navigation */
-    .mobile-navigation{
+    .mobile-navigation {
+        background: #51B7CD;
+        color: #fff;
         height: 100%;
         overflow-y: scroll;
         position: fixed;
-        right: -250px;
+        right: -270px;
         top: 0;
-        width: 250px;
+        width: 270px;
 
         -webkit-transition: right 350ms;
         -moz-transition: right 350ms;
@@ -506,13 +587,52 @@ body {
         transition: right 350ms;
     }
 
-    .mobile-navigation.mobile-navigation-open{
+    .mobile-navigation .list {
+        list-style: none;
+        margin: 0;
+        padding: 0 10px;
+    }
+
+    .mobile-navigation .list li:after {
+        border-bottom: 1px solid #3C96AB;
+        border-top: 1px solid #53CBE9;
+        content: '';
+        display: block;
+        width: 100%;
+    }
+
+    .mobile-navigation .list li:last-child:after {
+        content: normal;
+    }
+
+    .mobile-navigation .list li a {
+        color: #fff;
+        display: block;
+        font-family: 'verbmedium';
+        font-size: 18px;
+        padding: 35px 10px;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+
+    .mobile-navigation .list li .button span {
+        background-color: #FF4C00;
+        border-radius: 5px;
+        display: block;
+        font-size: 14px;
+        padding: 14px 10px;
+        text-align: center;
+    }
+
+    .mobile-navigation.mobile-navigation-open {
         right: 0;
     }
 
 
     /* Navigation */
-    .navigation{
+    .navigation {
+        padding: 5px 0;
+
         -webkit-transition: right 350ms;
         -moz-transition: right 350ms;
         -ms-transition: right 350ms;
@@ -520,13 +640,22 @@ body {
         transition: right 350ms;
     }
 
-    .navigation.mobile-navigation-open{
-        right: 250px;
+    /* Navigation - Logo */
+    .navigation .logo {
+        max-width: 135px;
+    }
+
+    .navigation .navigation-toggle {
+        margin: 2px 0 0;
+    }
+
+    .navigation.mobile-navigation-open {
+        right: 270px;
     }
 
 
     /* Outer wrapper */
-    .outer-wrapper{
+    .outer-wrapper {
         right: 0;
 
         -webkit-transition: right 350ms;
@@ -536,8 +665,12 @@ body {
         transition: right 350ms;
     }
 
-    .outer-wrapper.mobile-navigation-open{
-        right: 250px;
+    .outer-wrapper.mobile-navigation-open {
+        right: 270px;
     }
+
+}
+
+@media (max-width: 480px) {
 
 }
