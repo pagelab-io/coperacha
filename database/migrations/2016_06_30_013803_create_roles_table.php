@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSettingsTable extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,12 @@ class CreateSettingsTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('settings'))
+        if (!Schema::hasTable('roles'))
         {
-            Schema::create('settings', function(Blueprint $table){
+            Schema::create('roles', function(Blueprint $table){
                 $table->engine = 'InnoDB';
                 $table->increments('id');
-                $table->string('name', 128);
-                $table->string('path', 128);
+                $table->integer('name')->unsigned();
                 $table->timestamps();
             });
         }
@@ -31,6 +30,6 @@ class CreateSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('settings');
+        Schema::dropIfExists('roles');
     }
 }

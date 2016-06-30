@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMembersTable extends Migration
+class CreateParticipantsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +12,9 @@ class CreateMembersTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('members'))
+        if (!Schema::hasTable('participants'))
         {
-            Schema::create('members', function(Blueprint $table){
+            Schema::create('participants', function(Blueprint $table){
                 $table->engine = "InnoDB";
                 $table->increments('id');
                 $table->integer('person_id')->unsigned(); //FK
@@ -35,6 +35,6 @@ class CreateMembersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('members');
+        Schema::dropIfExists('participants');
     }
 }

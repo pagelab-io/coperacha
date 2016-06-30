@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMoneyboxSettingsTable extends Migration
+class CreateMemberSettingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,18 +12,18 @@ class CreateMoneyboxSettingsTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('moneybox_settings'))
+        if (!Schema::hasTable('member_settings'))
         {
-            Schema::create('moneybox_settings', function(Blueprint $table){
+            Schema::create('member_settings', function(Blueprint $table){
                 $table->engine = 'InnoDB';
                 $table->increments('id');
                 $table->integer('setting_id')->unsigned(); //FK
-                $table->integer('moneybox_id')->unsigned(); //FK
+                $table->integer('owner_id')->unsigned(); //FK but is generic
+                $table->string('owner');
                 $table->string('value');
                 $table->timestamps();
 
                 $table->foreign('setting_id')->references('id')->on('settings');
-                $table->foreign('moneybox_id')->references('id')->on('moneyboxes');
             });
         }
     }
@@ -35,6 +35,6 @@ class CreateMoneyboxSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('moneybox_settings');
+        Schema::dropIfExists('member_settings');
     }
 }
