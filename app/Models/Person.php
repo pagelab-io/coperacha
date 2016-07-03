@@ -41,7 +41,7 @@ class Person extends Model
      */
     public function personMoneyboxes()
     {
-        return $this->hasMany('App\Models\Member');
+        return $this->hasMany('App\Models\Participant');
     }
 
     //endregion

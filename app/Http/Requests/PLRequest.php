@@ -12,6 +12,7 @@ use App\Validations\CategoryValidation;
 use App\Validations\LoginValidation;
 use App\Validations\MoneyboxValidation;
 use App\Validations\RegisterValidation;
+use App\Validations\SettingOptionValidation;
 use App\Validations\SettingValidation;
 use Illuminate\Http\Request;
 
@@ -40,9 +41,11 @@ class PLRequest extends Request{
             switch($this->get('method')){
                 case "register": return RegisterValidation::rules();
                 case "login": return LoginValidation::rules();
-                case "createCategory": return CategoryValidation::rules();     // TODO : change to createCategory
+                case "createCategory": return CategoryValidation::rules();
                 case "createSetting": return SettingValidation::rules();
+                case "createOption": return SettingOptionValidation::rules();
                 case "createMoneybox": return MoneyboxValidation::rules();
+                case "listSetting": return SettingValidation::list_rules();
                 default: return [];
             }
         }
@@ -60,7 +63,9 @@ class PLRequest extends Request{
             case "login": return LoginValidation::messages();
             case "createCategory": return CategoryValidation::messages();
             case "createSetting": return SettingValidation::messages();
+            case "createOption": return SettingOptionValidation::messages();
             case "createMoneybox": return MoneyboxValidation::messages();
+            case "listSetting": return SettingValidation::messages();
             default: return [];
         }
 

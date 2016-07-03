@@ -22,6 +22,11 @@ class SettingRepository extends BaseRepository{
     private $_setting = null;
 
     /**
+     * @var array
+     */
+    private $childrens = [];
+
+    /**
      * @var MoneyboxRepository
      */
     private $_moneyboxRepository = null;
@@ -34,6 +39,7 @@ class SettingRepository extends BaseRepository{
         parent::__construct($app);
         $this->_setting = $setting;
         $this->_moneyboxRepository = $moneyboxRepository;
+        $this->setDefault();
     }
 
     //region Methods
@@ -58,22 +64,39 @@ class SettingRepository extends BaseRepository{
     public function create(PLRequest $request){
         \Log::info("=== Setting create ===");
         $this->_setting->name = $request->get('name');
+        $this->_setting->path = ($request->get('path') != "") ? $request->get('path') : "/";
+        $this->_setting->type = ($request->get('type') != "") ? $request->get('type') : "text";
         if (!$this->_setting->save()) throw new \Exception("Unable to create Setting", -1);
         \Log::info("=== Setting created successfully : ".$this->_setting." ===");
         return $this->_setting;
     }
 
     /**
-     * Get all settings
+     * Get all settings with it's childrens
      *
+     * @param PLRequest $request
      * @return mixed
      */
-    public function getAll()
+    public function childsOf(PLRequest $request)
     {
-        \Log::info("=== get all settings ===");
-        return $this->all();
+        \Log::info("=== Get all settings with it's childrens ===");
+        $parents = Setting::where("path",$request->get("path"))->get();
+
+        if (count($parents) > 0)
+            foreach ($parents as $parent)
+                $parent->options;
+
+        return $parents;
     }
 
+    /**
+     * Set the default values for person
+     */
+    public function setDefault()
+    {
+        $this->_setting->path = '/';
+        $this->_setting->type = 'text';
+    }
     //endregion
 
     //region Private Methods

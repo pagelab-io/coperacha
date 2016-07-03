@@ -17,7 +17,7 @@ class Setting extends Model
      * These are the mass-assignable keys
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'path', 'type'];
     //endregion
 
     //region Static Methods
@@ -26,12 +26,12 @@ class Setting extends Model
     //region Methods
 
     /**
-     * Define the relation between Setting and MoneyboxSetting
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * Define the relation between Setting and SettingOptions
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function moneyboxSettings()
+    public function options()
     {
-        return $this->hasMany('App\Models\MoneyboxSetting');
+        return $this->hasMany('App\Models\SettingOption');
     }
 
     //endregion

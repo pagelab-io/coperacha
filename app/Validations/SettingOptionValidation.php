@@ -2,14 +2,14 @@
 /**
  * Created by PhpStorm.
  * User: Emmanuel
- * Date: 25/06/2016
- * Time: 05:18 PM
+ * Date: 02/07/2016
+ * Time: 11:35 PM
  */
 
 namespace App\Validations;
 
 
-class SettingValidation {
+class SettingOptionValidation {
 
     // region attributes
     //endregion
@@ -17,23 +17,15 @@ class SettingValidation {
     //region Static methods
 
     /**
-     * Rules for create setting
+     * Rules for create settingOptions
      *
      * @return array
      */
     static function rules()
     {
         return [
+            'setting_id' => 'required|numeric',
             'name' => 'required|string',
-            'path' => 'required|string',
-            'type' => 'required|string'
-        ];
-    }
-
-    static function list_rules()
-    {
-        return [
-            'path' => 'required|string',
         ];
     }
 
@@ -54,4 +46,4 @@ class SettingValidation {
     //region Methods
     //endregion
 
-}
+} 

@@ -18,11 +18,13 @@ class CreateMemberSettingsTable extends Migration
                 $table->engine = 'InnoDB';
                 $table->increments('id');
                 $table->integer('setting_id')->unsigned(); //FK
+                $table->integer('option_id')->unsigned(); //FK
                 $table->integer('owner_id')->unsigned(); //FK but is generic
                 $table->string('owner');
                 $table->string('value');
                 $table->timestamps();
 
+                $table->foreign('option_id')->references('id')->on('setting_options');
                 $table->foreign('setting_id')->references('id')->on('settings');
             });
         }

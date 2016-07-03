@@ -29,6 +29,7 @@ class PersonRepository extends BaseRepository{
     public function __construct(Person $person, App $app){
         parent::__construct($app);
         $this->_person = $person;
+        $this->setDefault();
     }
 
     //region Methods

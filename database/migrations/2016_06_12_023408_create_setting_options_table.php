@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSettingsTable extends Migration
+class CreateSettingOptionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,17 @@ class CreateSettingsTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('settings'))
+        if (!Schema::hasTable('setting_options'))
         {
-            Schema::create('settings', function(Blueprint $table){
+            Schema::create('setting_options', function(Blueprint $table){
                 $table->engine = 'InnoDB';
                 $table->increments('id');
+                $table->integer('setting_id')->unsigned(); //FK
                 $table->string('name', 128);
-                $table->string('path', 128);
-                $table->enum('type', ['text','radio','checkbox']);
+                $table->enum('subtype', ['','text','radio','checkbox']);
                 $table->timestamps();
+
+                $table->foreign('setting_id')->references('id')->on('settings');
             });
         }
     }
@@ -32,6 +34,6 @@ class CreateSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('settings');
+        Schema::dropIfExists('setting_options');
     }
 }
