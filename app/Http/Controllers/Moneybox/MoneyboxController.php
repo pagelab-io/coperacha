@@ -13,9 +13,9 @@ use App\Http\Controllers\PLController;
 use App\Http\Requests\PLRequest;;
 use App\Models\Moneybox;
 use App\Repositories\MoneyboxRepository;
-use App\Repositories\MoneyboxSettingRepository;
+use App\Repositories\MemberSettingRepository;
 
-class MoneyboxController extends PLController{
+class MoneyboxController extends PLController {
 
     //region Attributes
     /**
@@ -24,19 +24,19 @@ class MoneyboxController extends PLController{
     private $_moneyboxRepository;
 
     /**
-     * @var MoneyboxSettingRepository
+     * @var MemberSettingRepository
      */
-    private $_moneyboxSettingsRepository;
+    private $_memberSettingsRepository;
 
     //endregion
 
     //region Static Methods
     //endregion
 
-    public function __construct(MoneyboxRepository $moneyboxRepository, MoneyboxSettingRepository $moneyboxSettingRepository)
+    public function __construct(MoneyboxRepository $moneyboxRepository, MemberSettingRepository $memberSettingsRepository)
     {
         $this->_moneyboxRepository = $moneyboxRepository;
-        $this->_moneyboxSettingsRepository = $moneyboxSettingRepository;
+        $this->_memberSettingsRepository = $memberSettingsRepository;
     }
 
     //region Private Methods
@@ -61,8 +61,8 @@ class MoneyboxController extends PLController{
             // 2: create moneybox
             $moneybox = $this->_moneyboxRepository->create($request);
             if ($moneybox instanceof Moneybox) {
-                $this->_moneyboxSettingsRepository->setSettings($request, $moneybox);
-                $this->_response['description'] = "Moneybox created successfully";
+                $this->_memberSettingsRepository->setSettings($request, $moneybox);
+                $this->_response['description'] = "Moneybox was created successfully";
                 $this->_response['data'] = $moneybox;
             }
             return response()->json($this->_response);
@@ -72,7 +72,7 @@ class MoneyboxController extends PLController{
             if($moneybox instanceof Moneybox)
             {
                 // delete registers associated with the moneybox in moneybox_settings table
-                $this->_moneyboxSettingsRepository->deleteSettings($moneybox);
+                $this->_memberSettingsRepository->deleteSettings($request->get('owner'), $moneybox->id);
                 // delete moneybox
                 $this->_moneyboxRepository->delete();
             }

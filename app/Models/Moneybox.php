@@ -17,7 +17,7 @@ class Moneybox extends Model
      * These are the mass-assignable keys
      * @var array
      */
-    protected $fillable = ['category_id', 'name', 'goal_amount', 'collected_amount', 'owner', 'end_date', 'description'];
+    protected $fillable = ['category_id', 'name', 'goal_amount', 'collected_amount', 'owner_id', 'end_date', 'description'];
 
     //endregion
 
@@ -51,15 +51,6 @@ class Moneybox extends Model
     public function category()
     {
         return $this->belongsTo('App\Models\Category');
-    }
-
-    /**
-     * Define the relation between Moneybox and MoneyboxSetting
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function settings()
-    {
-        return $this->hasMany('App\Models\MoneyboxSetting');
     }
 
     //endregion

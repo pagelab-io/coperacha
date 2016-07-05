@@ -73,7 +73,7 @@ class MoneyboxRepository extends BaseRepository{
         \Log::info("Category : ".$category);
 
         // check for person
-        try{ $person = $this->_personRepository->byId($request->get('owner'));
+        try{ $person = $this->_personRepository->byId($request->get('owner_id'));
         }catch(\Exception $ex){ throw new \Exception("Person does not exist", -1, $ex);}
         \Log::info("Person : ".$person);
 

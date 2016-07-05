@@ -26,10 +26,10 @@ class MoneyboxValidation {
         return [
             'category_id' => 'required|numeric',
             'name' => 'required|string',
-            'goal_amount' => 'required', // TODO - hacer validacion para decimales
-            'owner' => 'required|numeric',
-            'end_date' => 'required',    // TODO - ver que formato tendra la fecha
-            'settings' => 'required|json', // TODO -  como validar los datos de mi objeto JSON
+            'goal_amount' => 'required|numeric',
+            'owner_id' => 'required|numeric',
+            'end_date' => 'required|date_format:"Y-m-d"',
+            'settings' => 'required|json',
             'method' => 'required|string'
         ];
     }
