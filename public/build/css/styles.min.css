@@ -185,6 +185,8 @@ body {
     background-color: #51B7CD;
     color: #fff;
     padding: 105px 0 100px;
+
+    overflow: hidden;
 }
 
 .block.cover .align-middle { margin-left: -4px; }
@@ -242,6 +244,36 @@ body {
     text-decoration: none;
     text-transform: uppercase;
     width: 100%;
+}
+
+
+/* Block How it Works */
+.block.how-it-works {
+    padding: 45px 0 70px;
+}
+
+.block.how-it-works .card {
+    text-align: center;
+}
+
+.block.how-it-works .card .image {
+    margin-bottom: 30px;
+}
+
+.block.how-it-works .card .name {
+    color: #FF4C00;
+    font-family: 'brandon_grotesquebold';
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.block.how-it-works .card .name .button { }
+
+.block.how-it-works .card .desc {
+    color: #414151;
+    font-family: 'verbregular';
+    font-size: 13px;
 }
 
 
@@ -305,39 +337,13 @@ body {
 }
 
 
-/* Block How it Works */
-.block.how-it-works {
-    padding: 45px 0 70px;
-}
-
-.block.how-it-works .card {
-    text-align: center;
-}
-
-.block.how-it-works .card .image {
-    margin-bottom: 30px;
-}
-
-.block.how-it-works .card .name {
-    color: #FF4C00;
-    font-family: 'brandon_grotesquebold';
-    font-size: 18px;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-}
-
-.block.how-it-works .card .name .button { }
-
-.block.how-it-works .card .desc {
-    color: #414151;
-    font-family: 'verbregular';
-    font-size: 13px;
-}
-
-
 /* Block Advantages */
 .block.advantages {
     padding: 65px 0 5px;
+}
+
+.block.advantages .align-top {
+    margin-right: -4px;
 }
 
 .block.advantages .advantage {
@@ -669,8 +675,190 @@ body {
         right: 270px;
     }
 
+
+    /* Block How it Works */
+
+
+    /* Block Intro */
+
+
+    /* Block Advantages */
+    .block.advantages {
+        padding: 40px 0 5px;
+    }
+
+    .block.advantages .header-block {
+        margin-bottom: 35px;
+    }
+
+    .block.advantages .header-block .title {
+        font-size: 28px;
+    }
+
+    .block.advantages .advantage {
+        margin-bottom: 40px;
+    }
+
+
+    /* Block Payment Methods */
+    .block.payment-methods {
+        padding: 40px 0 50px;
+    }
+
+    .block.payment-methods .header-block {
+        margin-bottom: 40px;
+    }
+
+    .block.payment-methods .header-block .title {
+        font-size: 28px;
+    }
+
+
+    /* Block Create Moneybox */
+    .block.create-moneybox {
+        padding: 40px 0 80px;
+    }
+
+    .block.create-moneybox .header-block {
+        font-size: 22px;
+        margin-bottom: 45px;
+    }
+
+    .block.create-moneybox .header-block .title {
+        font-size: 28px;
+        margin-bottom: 5px;
+    }
+
+    .block.create-moneybox .sign-in-fb {
+        margin: 35px auto 0;
+    }
+
+
+    /* Footer */
+    .footer {
+        padding: 10px 0 15px;
+    }
+
+    .footer .rights .logo {
+        max-width: 135px;
+    }
+
 }
 
 @media (max-width: 480px) {
+
+    /* Block How it Works */
+    .block.how-it-works {
+        padding: 20px 0 35px;
+    }
+
+    .block.how-it-works .header-block {
+        margin-bottom: 15px;
+    }
+
+    .block.how-it-works .header-block .title {
+        font-size: 22px;
+    }
+
+
+    /* Block Intro */
+
+
+    /* Block Advantages */
+    .block.advantages {
+        padding: 22px 0 5px;
+    }
+
+    .block.advantages .header-block {
+        margin-bottom: 15px;
+    }
+
+    .block.advantages .header-block .title {
+        font-size: 22px;
+    }
+
+    .block.advantages .align-top {
+        margin-right: 0;
+        width: 100%;
+    }
+
+    .block.advantages .advantage {
+        margin-bottom: 15px;
+    }
+
+    .block.advantages .advantage .image {
+        width: 21.98%;
+    }
+
+    .block.advantages .advantage .info {
+        width: 78.02%;
+    }
+
+
+    /* Block Payment Methods */
+    .block.payment-methods {
+        padding: 20px 0 45px;
+    }
+
+    .block.payment-methods .header-block {
+        margin-bottom: 20px;
+    }
+
+    .block.payment-methods .header-block .title {
+        font-size: 22px;
+    }
+
+    /* Override */
+    .block.payment-methods .row {
+        margin-left: -10px;
+        margin-right: -10px;
+    }
+
+    .block.payment-methods .method {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+
+    /* Block Create Moneybox */
+    .block.create-moneybox {
+        padding: 15px 0 50px;
+    }
+
+    .block.create-moneybox .header-block {
+        font-size: 17px;
+        margin-bottom: 25px;
+    }
+
+    .block.create-moneybox .header-block .title {
+        font-size: 22px;
+    }
+
+    .block.create-moneybox .sign-in input[type=submit] {
+        font-size: 14px;
+        padding: 12px 10px;
+    }
+
+    .block.create-moneybox .sign-in-fb {
+        font-size: 15px;
+    }
+
+    .block.create-moneybox .sign-in-fb img {
+        max-width: 107px;
+    }
+
+
+    /* Footer */
+    .footer {
+        padding: 5px 0;
+    }
+
+    .footer .rights .logo {
+        max-width: 110px;
+    }
+
+    .footer .rights .text {
+        font-size: 10px;
+    }
 
 }

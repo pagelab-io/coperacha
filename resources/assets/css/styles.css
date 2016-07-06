@@ -137,6 +137,8 @@ body {
     background-color: #51B7CD;
     color: #fff;
     padding: 105px 0 100px;
+
+    overflow: hidden;
 }
 
 .block.cover .align-middle { margin-left: -4px; }
@@ -194,6 +196,36 @@ body {
     text-decoration: none;
     text-transform: uppercase;
     width: 100%;
+}
+
+
+/* Block How it Works */
+.block.how-it-works {
+    padding: 45px 0 70px;
+}
+
+.block.how-it-works .card {
+    text-align: center;
+}
+
+.block.how-it-works .card .image {
+    margin-bottom: 30px;
+}
+
+.block.how-it-works .card .name {
+    color: #FF4C00;
+    font-family: 'brandon_grotesquebold';
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.block.how-it-works .card .name .button { }
+
+.block.how-it-works .card .desc {
+    color: #414151;
+    font-family: 'verbregular';
+    font-size: 13px;
 }
 
 
@@ -257,39 +289,13 @@ body {
 }
 
 
-/* Block How it Works */
-.block.how-it-works {
-    padding: 45px 0 70px;
-}
-
-.block.how-it-works .card {
-    text-align: center;
-}
-
-.block.how-it-works .card .image {
-    margin-bottom: 30px;
-}
-
-.block.how-it-works .card .name {
-    color: #FF4C00;
-    font-family: 'brandon_grotesquebold';
-    font-size: 18px;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-}
-
-.block.how-it-works .card .name .button { }
-
-.block.how-it-works .card .desc {
-    color: #414151;
-    font-family: 'verbregular';
-    font-size: 13px;
-}
-
-
 /* Block Advantages */
 .block.advantages {
     padding: 65px 0 5px;
+}
+
+.block.advantages .align-top {
+    margin-right: -4px;
 }
 
 .block.advantages .advantage {
