@@ -157,17 +157,17 @@
                         </div>
                         <div class="content-block">
                             <div class="row">
-                                <div class="col-sm-3">
+                                <div class="col-sm-3 col-xs-6 align-top">
                                     <div class="card">
                                         <div class="image">
                                             <img class="img-responsive center-block" src="images/how-it-works-card-1.png" alt="">
                                         </div>
-                                        <div class="name"><a href="">1. Crea tu Alcancía</a></div>
+                                        <div class="name"><a class="button" href="javascript:void(0)">1. Crea tu Alcancía</a></div>
                                         <div class="desc">Es gratis y te llevará un minuto crearla.. </div>
                                     </div>
                                 </div>
 
-                                <div class="col-sm-3">
+                                <div class="col-sm-3 col-xs-6 align-top">
                                     <div class="card">
                                         <div class="image">
                                             <img class="img-responsive center-block" src="images/how-it-works-card-2.png" alt="">
@@ -177,7 +177,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-3">
+                                <div class="col-sm-3 col-xs-6 align-top">
                                     <div class="card">
                                         <div class="image">
                                             <img class="img-responsive center-block" src="images/how-it-works-card-3.png" alt="">
@@ -187,7 +187,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-3">
+                                <div class="col-sm-3 col-xs-6 align-top">
                                     <div class="card">
                                         <div class="image">
                                             <img class="img-responsive center-block" src="images/how-it-works-card-4.png" alt="">
@@ -258,7 +258,7 @@
                         </div>
                         <div class="content-block">
                             <div class="row">
-                                <div class="col-sm-4">
+                                <div class="col-sm-4 col-xs-6 align-top">
                                     <div class="advantage">
                                         <div class="image">
                                             <img src="images/advantage-1.png" alt="Fácil de Usar">
@@ -270,7 +270,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-4">
+                                <div class="col-sm-4 col-xs-6 align-top">
                                     <div class="advantage">
                                         <div class="image">
                                             <img src="images/advantage-2.png" alt="Gratuito">
@@ -282,7 +282,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-4">
+                                <div class="col-sm-4 col-xs-6 align-top">
                                     <div class="advantage">
                                         <div class="image">
                                             <img src="images/advantage-3.png" alt="Seguro">
@@ -294,7 +294,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-4">
+                                <div class="col-sm-4 col-xs-6 align-top">
                                     <div class="advantage">
                                         <div class="image">
                                             <img src="images/advantage-4.png" alt="Personal">
@@ -306,7 +306,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-4">
+                                <div class="col-sm-4 col-xs-6 align-top">
                                     <div class="advantage">
                                         <div class="image">
                                             <img src="images/advantage-5.png" alt="Social">
@@ -318,7 +318,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-4">
+                                <div class="col-sm-4 col-xs-6 align-top">
                                     <div class="advantage">
                                         <div class="image">
                                             <img src="images/advantage-6.png" alt="Flexible">
@@ -403,7 +403,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-8 hidden-xs align-middle">
+
+                            <div class="col-sm-8 hidden-xs align-middle hidden-xs">
                                 <div class="row">
                                     <div class="col-sm-6 align-middle">
                                         <nav class="footer-nav">
