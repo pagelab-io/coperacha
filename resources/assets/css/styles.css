@@ -204,6 +204,10 @@ body {
     padding: 45px 0 70px;
 }
 
+.block.how-it-works .align-top {
+    margin-right: -4px;
+}
+
 .block.how-it-works .card {
     text-align: center;
 }
@@ -220,7 +224,13 @@ body {
     text-transform: uppercase;
 }
 
-.block.how-it-works .card .name .button { }
+.block.how-it-works .card .name .button {
+    background-color: #FF4F00;
+    border-radius: 5px;
+    color: #fff;
+    display: block;
+    padding: 12px 5px;
+}
 
 .block.how-it-works .card .desc {
     color: #414151;

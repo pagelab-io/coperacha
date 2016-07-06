@@ -252,6 +252,10 @@ body {
     padding: 45px 0 70px;
 }
 
+.block.how-it-works .align-top {
+    margin-right: -4px;
+}
+
 .block.how-it-works .card {
     text-align: center;
 }
@@ -268,7 +272,13 @@ body {
     text-transform: uppercase;
 }
 
-.block.how-it-works .card .name .button { }
+.block.how-it-works .card .name .button {
+    background-color: #FF4F00;
+    border-radius: 5px;
+    color: #fff;
+    display: block;
+    padding: 12px 5px;
+}
 
 .block.how-it-works .card .desc {
     color: #414151;
@@ -677,6 +687,21 @@ body {
 
 
     /* Block How it Works */
+    .block.how-it-works {
+        padding: 40px 0 55px;
+    }
+
+    .block.how-it-works .header-block {
+        margin-bottom: 35px;
+    }
+
+    .block.how-it-works .header-block .title {
+        font-size: 28px;
+    }
+
+    .block.how-it-works .card {
+        margin-bottom: 30px;
+    }
 
 
     /* Block Intro */
@@ -749,7 +774,12 @@ body {
 
     /* Block How it Works */
     .block.how-it-works {
-        padding: 20px 0 35px;
+        padding: 20px 0 25px;
+    }
+
+    .block.how-it-works .container-fluid {
+        padding-left: 8px;
+        padding-right: 8px;
     }
 
     .block.how-it-works .header-block {
@@ -758,6 +788,29 @@ body {
 
     .block.how-it-works .header-block .title {
         font-size: 22px;
+    }
+
+    /* Override */
+    .block.how-it-works .content-block .row {
+        margin-left: -8px;
+        margin-right: -8px;
+    }
+
+    .block.how-it-works .content-block .align-top {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .block.how-it-works .card {
+        margin-bottom: 30px;
+    }
+
+    .block.how-it-works .card .image {
+        margin-bottom: 20px;
+    }
+
+    .block.how-it-works .card .name {
+        font-size: 12px;
     }
 
 

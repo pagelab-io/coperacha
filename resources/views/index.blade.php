@@ -157,17 +157,17 @@
                         </div>
                         <div class="content-block">
                             <div class="row">
-                                <div class="col-sm-3 col-xs-6">
+                                <div class="col-sm-3 col-xs-6 align-top">
                                     <div class="card">
                                         <div class="image">
                                             <img class="img-responsive center-block" src="images/how-it-works-card-1.png" alt="">
                                         </div>
-                                        <div class="name"><a href="">1. Crea tu Alcancía</a></div>
+                                        <div class="name"><a class="button" href="javascript:void(0)">1. Crea tu Alcancía</a></div>
                                         <div class="desc">Es gratis y te llevará un minuto crearla.. </div>
                                     </div>
                                 </div>
 
-                                <div class="col-sm-3 col-xs-6">
+                                <div class="col-sm-3 col-xs-6 align-top">
                                     <div class="card">
                                         <div class="image">
                                             <img class="img-responsive center-block" src="images/how-it-works-card-2.png" alt="">
@@ -177,7 +177,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-3 col-xs-6">
+                                <div class="col-sm-3 col-xs-6 align-top">
                                     <div class="card">
                                         <div class="image">
                                             <img class="img-responsive center-block" src="images/how-it-works-card-3.png" alt="">
@@ -187,7 +187,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-3 col-xs-6">
+                                <div class="col-sm-3 col-xs-6 align-top">
                                     <div class="card">
                                         <div class="image">
                                             <img class="img-responsive center-block" src="images/how-it-works-card-4.png" alt="">
