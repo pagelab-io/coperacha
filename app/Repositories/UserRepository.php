@@ -8,6 +8,7 @@
 
 namespace App\Repositories;
 
+use Illuminate\Container\Container as App;
 use App\Http\Requests\PLRequest;
 use App\Models\Person;
 use App\Models\User;
@@ -27,8 +28,9 @@ class UserRepository extends BaseRepository{
     //region Static
     //endregion
 
-    public function __construct(User $user)
+    public function __construct(App $app, User $user)
     {
+        parent::__construct($app);
         $this->_user = $user;
     }
 
@@ -83,6 +85,26 @@ class UserRepository extends BaseRepository{
     }
 
     /**
+     * Update the specified user
+     *
+     * @param PLRequest $request
+     * @return User
+     * @throws \Exception
+     */
+    public function update(PLRequest $request)
+    {
+        try{
+            $this->_user = $this->byId($request->get('user_id'));
+            if ($request->exists('email')) $this->_user->email = $request->get('email');
+            if ($request->exists('username')) $this->_user->username = $request->get('username');
+            if (!$this->_user->save()) throw new \Exception("Unable to update User", -1);
+        } catch(\Exception $ex) {
+            throw new \Exception("User does not exist", -1, $ex);
+        }
+        return $this->_user;
+    }
+
+    /**
      * Search for user into the DB by email or username
      *
      * @param string $email
@@ -123,6 +145,23 @@ class UserRepository extends BaseRepository{
         return ($count == 1) ? true : false;
     }
 
+    /**
+     * Get the user profile
+     *
+     * @param PLRequest $request
+     * @throws \Exception
+     * @return mixed
+     */
+    public function getProfile(PLRequest $request)
+    {
+        try{
+            $user = $this->byId($request->get('user_id'));
+            $user->person;
+            return $user;
+        } catch(\Exception $ex){
+            throw new \Exception("User does not exist", -1, $ex);
+        }
+    }
 
     /**
      * Set the default values for user

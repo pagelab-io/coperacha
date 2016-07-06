@@ -20,25 +20,14 @@ class SettingRepository extends BaseRepository{
      * @var Setting
      */
     private $_setting = null;
-
-    /**
-     * @var array
-     */
-    private $childrens = [];
-
-    /**
-     * @var MoneyboxRepository
-     */
-    private $_moneyboxRepository = null;
     //endregion
 
     //region Static
     //endregion
 
-    public function __construct(Setting $setting, App $app, MoneyboxRepository $moneyboxRepository){
+    public function __construct(Setting $setting, App $app){
         parent::__construct($app);
         $this->_setting = $setting;
-        $this->_moneyboxRepository = $moneyboxRepository;
         $this->setDefault();
     }
 

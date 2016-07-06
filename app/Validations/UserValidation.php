@@ -3,13 +3,13 @@
  * Created by PhpStorm.
  * User: Emmanuel
  * Date: 25/06/2016
- * Time: 07:14 PM
+ * Time: 05:18 PM
  */
 
 namespace App\Validations;
 
 
-class MoneyboxValidation {
+class UserValidation {
 
     // region attributes
     //endregion
@@ -21,24 +21,25 @@ class MoneyboxValidation {
      *
      * @return array
      */
-    static function rules()
+    static function profile_rules()
     {
         return [
-            'category_id' => 'required|numeric',
-            'name' => 'required|string',
-            'goal_amount' => 'required|numeric',
-            'owner_id' => 'required|numeric',
-            'end_date' => 'required|date_format:"Y-m-d"',
-            'settings' => 'required|json',
-            'method' => 'required|string'
+            'user_id' => 'required|numeric',
         ];
     }
 
-    static function list_rules()
+    static function update_rules()
     {
         return [
+            'user_id' => 'required|numeric',
             'person_id' => 'required|numeric',
-            'method' => 'required|string'
+            'name' => 'required|string',
+            'lastname' => 'required|string',
+            'email' => 'required|email',
+            'birthday' => 'required|date_format:"Y-m-d"',
+            'gender' => 'required', // TODO -  verificar que sea un enum valido
+            'city' => 'required|string',
+            'country' => 'required|string',
         ];
     }
 
@@ -59,4 +60,4 @@ class MoneyboxValidation {
     //region Methods
     //endregion
 
-} 
+}

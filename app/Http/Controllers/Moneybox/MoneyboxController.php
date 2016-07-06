@@ -84,6 +84,36 @@ class MoneyboxController extends PLController {
         }
     }
 
+    /**
+     * Get all moneyboxes
+     *
+     * @param PLRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getAll(PLRequest $request)
+    {
+        $this->validate($request, $request->rules(), $request->messages());
+        $moneybox_list = [];
+
+        try {
+
+            $my_moneyboxes = $this->_moneyboxRepository->myMoneyboxes($request);
+            $third_moneyboxes = $this->_moneyboxRepository->moneyboxesParticipation($request);
+
+            $moneybox_list['my_moneyboxes'] = $my_moneyboxes;
+            $moneybox_list['moneyboxes_participation'] = $third_moneyboxes;
+
+            $this->_response['data'] = $moneybox_list;
+            return response()->json($this->_response);
+
+        } catch (\Exception $ex) {
+            $this->_response['status'] = $ex->getCode();
+            $this->_response['description'] = $ex->getMessage();
+            $this->_response['data'] = $ex->getTraceAsString();
+            return response()->json($this->_response);
+        }
+    }
+
     //endregion
 
 } 

@@ -8,6 +8,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Person;
 use Illuminate\Container\Container as App;
 use App\Http\Requests\PLRequest;
 use App\Models\Moneybox;
@@ -31,16 +32,36 @@ class MoneyboxRepository extends BaseRepository{
      */
     private $_personRepository;
 
+    /**
+     * @var MemberSettingRepository
+     */
+    private $_memberSettingRepository;
+
+    /**
+     * @var ParticipantRepository
+     */
+    private $_participantRepository;
+
     //endregion
 
     //region Static
     //endregion
 
-    public function __construct(Moneybox $moneybox, PersonRepository $personRepository, CategoryRepository $categoryRepository, App $app){
+    public function __construct(
+        App $app,
+        Moneybox $moneybox,
+        PersonRepository $personRepository,
+        CategoryRepository $categoryRepository,
+        MemberSettingRepository $memberSettingRepository,
+        ParticipantRepository $participantRepository)
+    {
         parent::__construct($app);
         $this->_moneybox = $moneybox;
         $this->_personRepository = $personRepository;
         $this->_categoryRepository = $categoryRepository;
+        $this->_memberSettingRepository = $memberSettingRepository;
+        $this->_participantRepository = $participantRepository;
+        $this->setDefault();
     }
 
     //region Methods
@@ -84,10 +105,22 @@ class MoneyboxRepository extends BaseRepository{
         $this->_moneybox->owner = $person->id;
         $this->_moneybox->end_date = $request->get('end_date');
         $this->_moneybox->description = ($request->exists('description')) ? $request->get('description') : '';
+        $this->_moneybox->url = $this->generateURL($request->get('name'));
         if (!$this->_moneybox->save()) throw new \Exception("Unable to create Moneybox", -1);
         \Log::info("=== Moneybox created successfully : === \n".$this->_moneybox);
 
         return $this->_moneybox;
+    }
+
+    /**
+     * Generate the public access URL
+     * @param $name
+     * @return string
+     */
+    public function generateURL($name)
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        return md5($name.substr(str_shuffle($characters), 0, 10));
     }
 
     /**
@@ -98,6 +131,51 @@ class MoneyboxRepository extends BaseRepository{
         $this->_moneybox->collected_amount = '0.0';
         $this->_moneybox->description = '';
         $this->_moneybox->active =1;
+    }
+
+    /**
+     * Get the moneyboxes created by person
+     * @param PLRequest $request
+     * @return mixed
+     */
+    public function myMoneyboxes(PLRequest $request)
+    {
+        $moneyboxes = Moneybox::where("owner", $request->get('person_id'))->get();
+
+        if (count($moneyboxes) > 0) {
+            foreach ($moneyboxes as $m) {
+                $m->settings = $this->_memberSettingRepository->getSettings('moneybox', $m->id);
+            }
+        }
+
+        return $moneyboxes;
+    }
+
+    /**
+     * Get the moneyboxes where a person has participated
+     * @param PLRequest $request
+     * @throws \Exception
+     * @return array
+     */
+    public function moneyboxesParticipation(PLRequest $request)
+    {
+        $moneyboxes = [];
+        try{
+            $person = $this->_personRepository->byId($request->get('person_id'));
+            if ($person instanceof Person) {
+
+                $personMoneyboxes = $person->personMoneyboxes;
+                if (count($personMoneyboxes) > 0) {
+                    foreach ($personMoneyboxes as $pm) {
+                        $moneybox = $this->byId($pm->moneybox_id);
+                        array_push($moneyboxes, $moneybox);
+                    }
+                }
+            }
+            return $moneyboxes;
+        }catch(\Exception $ex){
+            throw new \Exception("person does not exits", -1, $ex);
+        }
     }
 
     /**

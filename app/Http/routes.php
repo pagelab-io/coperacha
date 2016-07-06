@@ -55,6 +55,10 @@ $router->group([
         'middleware' => 'guest',
         'uses' => 'MoneyboxController@createMoneybox'
     ]);
+    $router->get('/list', [
+        'middleware' => 'guest',
+        'uses' => 'MoneyboxController@getAll'
+    ]);
     $router->post('/categories/create', [
         'middleware' => 'guest',
         'uses' => 'CategoryController@createCategory'
@@ -74,6 +78,24 @@ $router->group([
     $router->post('/options/create', [
         'middleware' => 'guest',
         'uses' => 'SettingController@createOptions'
+    ]);
+});
+//endregion
+
+//region User
+$router->group([
+    'as' => 'user',
+    'namespace' => 'User',
+    'prefix' => 'user'
+], function($router){
+    // register
+    $router->get('/profile', [
+        'middleware' => 'guest',
+        'uses' => 'UserController@getProfile'
+    ]);
+    $router->put('/profile', [
+        'middleware' => 'guest',
+        'uses' => 'UserController@updateProfile'
     ]);
 });
 //endregion
