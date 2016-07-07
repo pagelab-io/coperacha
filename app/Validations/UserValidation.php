@@ -33,13 +33,16 @@ class UserValidation {
         return [
             'user_id' => 'required|numeric',
             'person_id' => 'required|numeric',
-            'name' => 'required|string',
-            'lastname' => 'required|string',
-            'email' => 'required|email',
-            'birthday' => 'required|date_format:"Y-m-d"',
-            'gender' => 'required', // TODO -  verificar que sea un enum valido
-            'city' => 'required|string',
-            'country' => 'required|string',
+        ];
+    }
+
+    static function change_password_rules()
+    {
+        return [
+            'user_id' => 'required|numeric',
+            'currentPassword' => 'required',
+            'newPassword' => 'required',
+            'passwordConfirm' => 'required',
         ];
     }
 

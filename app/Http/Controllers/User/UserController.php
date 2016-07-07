@@ -63,6 +63,12 @@ class UserController extends PLController{
 
     }
 
+    /**
+     * Update the user attributes
+     *
+     * @param PLRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function updateProfile(PLRequest $request)
     {
         $this->validate($request, $request->rules(), $request->messages());
@@ -88,6 +94,31 @@ class UserController extends PLController{
             return response()->json($this->_response);
         }
 
+    }
+
+
+    public function changePassword(PLRequest $request)
+    {
+        $this->validate($request, $request->rules(), $request->messages());
+
+        try {
+
+            if ($this->_userRepository->changePassword($request)) {
+                $this->_response['data'] = true;
+                $this->_response['description'] = "password changed successfully";
+            } else {
+                $this->_response['data'] = false;
+                $this->_response['description'] = "password cannot be changed";
+            }
+
+            return response()->json($this->_response);
+
+        } catch(\Exception $ex) {
+            $this->_response['status'] = $ex->getCode();
+            $this->_response['description'] = $ex->getMessage();
+            $this->_response['data'] = $ex->getTraceAsString();
+            return response()->json($this->_response);
+        }
     }
 
     //endregion

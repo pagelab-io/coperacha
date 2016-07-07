@@ -42,6 +42,10 @@ $router->group([
         'middleware' => 'guest',
         'uses' => 'AuthController@login'
     ]);
+    $router->put('/passwordRecovery', [
+        'middleware' => 'guest',
+        'uses' => 'PasswordController@passwordRecovery'
+    ]);
 });
 //endregion
 
@@ -51,31 +55,31 @@ $router->group([
     'namespace' => 'Moneybox',
     'prefix' => 'moneybox'
 ], function($router){
-    $router->post('/create', [
+    $router->post('/', [
         'middleware' => 'guest',
         'uses' => 'MoneyboxController@createMoneybox'
     ]);
-    $router->get('/list', [
+    $router->get('/', [
         'middleware' => 'guest',
         'uses' => 'MoneyboxController@getAll'
     ]);
-    $router->post('/categories/create', [
+    $router->post('/categories', [
         'middleware' => 'guest',
         'uses' => 'CategoryController@createCategory'
     ]);
-    $router->post('/categories/list', [
+    $router->get('/categories', [
         'middleware' => 'guest',
         'uses' => 'CategoryController@getAll'
     ]);
-    $router->post('/settings/create', [
+    $router->post('/settings', [
         'middleware' => 'guest',
         'uses' => 'SettingController@createSetting'
     ]);
-    $router->post('/settings/list', [
+    $router->get('/settings', [
         'middleware' => 'guest',
         'uses' => 'SettingController@getAll'
     ]);
-    $router->post('/options/create', [
+    $router->post('/option', [
         'middleware' => 'guest',
         'uses' => 'SettingController@createOptions'
     ]);
@@ -96,6 +100,10 @@ $router->group([
     $router->put('/profile', [
         'middleware' => 'guest',
         'uses' => 'UserController@updateProfile'
+    ]);
+    $router->put('/changePassword', [
+        'middleware' => 'guest',
+        'uses' => 'UserController@changePassword'
     ]);
 });
 //endregion

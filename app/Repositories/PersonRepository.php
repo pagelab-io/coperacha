@@ -78,14 +78,15 @@ class PersonRepository extends BaseRepository
         try {
             $this->_person = $this->byId($request->get('person_id'));
             \Log::info("=== Person update ===");
-            $this->_person->name = $request->get('name');
-            $this->_person->lastname = $request->get('lastname');
-            $this->_person->birthday = $request->get('birthday');
-            $this->_person->gender = $request->get('gender');
-            $this->_person->city = $request->get('city');
-            $this->_person->country = $request->get('country');
 
+            if ($request->exists('name')) $this->_person->name = $request->get('name');
+            if ($request->exists('lastname')) $this->_person->lastname = $request->get('lastname');
+            if ($request->exists('birthday')) $this->_person->birthday = $request->get('birthday');
+            if ($request->exists('gender')) $this->_person->gender = $request->get('gender');
+            if ($request->exists('city')) $this->_person->city = $request->get('city');
+            if ($request->exists('country')) $this->_person->country = $request->get('country');
             if (!$this->_person->save()) throw new \Exception("Unable to update Person", -1);
+
             \Log::info("=== Person updated successfully : " . $this->_person . " ===");
 
         } catch(\Exception $ex) {

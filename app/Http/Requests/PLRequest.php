@@ -8,6 +8,7 @@
 
 namespace App\Http\Requests;
 
+use App\Validations\AuthValidation;
 use App\Validations\CategoryValidation;
 use App\Validations\LoginValidation;
 use App\Validations\MoneyboxValidation;
@@ -50,6 +51,8 @@ class PLRequest extends Request{
                 case "listSetting": return SettingValidation::list_rules();
                 case "getProfile": return UserValidation::profile_rules();
                 case "updateProfile": return UserValidation::update_rules();
+                case "changePassword": return UserValidation::change_password_rules();
+                case "recoveryPassword": return AuthValidation::password_recovery_rules();
                 default: return [];
             }
         }
@@ -73,6 +76,8 @@ class PLRequest extends Request{
             case "listSetting": return SettingValidation::messages();
             case "getProfile": return UserValidation::messages();
             case "updateProfile": return UserValidation::messages();
+            case "changePassword": return UserValidation::messages();
+            case "recoveryPassword": return AuthValidation::messages();
             default: return [];
         }
 
