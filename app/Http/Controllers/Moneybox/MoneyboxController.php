@@ -114,6 +114,36 @@ class MoneyboxController extends PLController {
         }
     }
 
+    /**
+     * Update the selected Moneybox
+     *
+     * @param PLRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateMoneybox(PLRequest $request)
+    {
+        $this->validate($request, $request->rules(), $request->messages());
+
+        $moneybox = null;
+
+        try {
+
+            $moneybox = $this->_moneyboxRepository->update($request);
+            if ($request->exists('settings')) {
+                $this->_memberSettingsRepository->updateSettings($request, $moneybox);
+            }
+            $this->_response['data'] = $moneybox;
+
+            return response()->json($this->_response);
+
+        } catch(\Exception $ex) {
+            $this->_response['status'] = $ex->getCode();
+            $this->_response['description'] = $ex->getMessage();
+            $this->_response['data'] = $ex->getTraceAsString();
+            return response()->json($this->_response);
+        }
+    }
+
     //endregion
 
 } 

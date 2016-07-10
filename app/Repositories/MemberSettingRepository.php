@@ -76,7 +76,7 @@ class MemberSettingRepository extends BaseRepository{
         $settings = json_decode($request->get('settings'),true);
         $memberSettings = [];
 
-        \Log::info("=== Build MoneyboxSettingsArray ===");
+        \Log::info("=== Build MemberSettingsArray ===");
         foreach($settings as $setting){
             try {
                 if ($this->_settingRepository->byId($setting['setting_id']) instanceof Setting) {
@@ -96,9 +96,49 @@ class MemberSettingRepository extends BaseRepository{
             }
         }
 
-        \Log::info("=== Iterating in MoneyboxSettingsArray for insert ===");
+        \Log::info("=== Iterating in MemberSettingsArray for insert ===");
         foreach ($memberSettings as $memberSetting) {
             if (!$memberSetting->save()) throw new \Exception("Unable to create MemberSetting", -1);
+        }
+    }
+
+    /**
+     * Update the member settings
+     *
+     * @param PLRequest $request
+     * @param $member
+     * @throws \Exception
+     */
+    public function updateSettings(PLRequest $request, $member)
+    {
+        \Log::info("=== Creating settings for moneybox ===");
+        $settings = json_decode($request->get('settings'),true);
+        $memberSettings = [];
+
+        \Log::info("=== Build MemberSettingsArray ===");
+        foreach($settings as $setting){
+            try {
+                if ($this->byId($setting['member_setting_id']) instanceof MemberSetting) {
+                    if ($this->_settingRepository->byId($setting['setting_id']) instanceof Setting) {
+                        if ($this->_optionRepository->byId($setting['option_id']) instanceof SettingOption) {
+                            $memberSetting = $this->byId($setting['member_setting_id']);
+                            $memberSetting->setting_id = $setting['setting_id'];
+                            $memberSetting->option_id = $setting['option_id'];
+                            $memberSetting->value = $setting['value'];
+                            array_push($memberSettings, $memberSetting);
+                        }
+                    }
+
+                }
+            }
+            catch(\Exception $ex){
+                throw new \Exception("MemberSetting does not exist", -1, $ex);
+            }
+        }
+
+        \Log::info("=== Iterating in MemberSettingsArray for update ===");
+        foreach ($memberSettings as $memberSetting) {
+            if (!$memberSetting->save()) throw new \Exception("Unable to update MemberSetting", -1);
         }
     }
 

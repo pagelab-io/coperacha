@@ -53,6 +53,7 @@ class PLRequest extends Request{
                 case "updateProfile": return UserValidation::update_rules();
                 case "changePassword": return UserValidation::change_password_rules();
                 case "recoveryPassword": return AuthValidation::password_recovery_rules();
+                case "updateMoneybox": return MoneyboxValidation::update_moneybox();
                 default: return [];
             }
         }
@@ -78,6 +79,7 @@ class PLRequest extends Request{
             case "updateProfile": return UserValidation::messages();
             case "changePassword": return UserValidation::messages();
             case "recoveryPassword": return AuthValidation::messages();
+            case "updateMoneybox": return MoneyboxValidation::messages();
             default: return [];
         }
 

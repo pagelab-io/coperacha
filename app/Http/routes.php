@@ -59,6 +59,10 @@ $router->group([
         'middleware' => 'guest',
         'uses' => 'MoneyboxController@createMoneybox'
     ]);
+    $router->put('/', [
+        'middleware' => 'guest',
+        'uses' => 'MoneyboxController@updateMoneybox'
+    ]);
     $router->get('/', [
         'middleware' => 'guest',
         'uses' => 'MoneyboxController@getAll'

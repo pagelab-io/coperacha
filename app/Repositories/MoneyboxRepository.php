@@ -8,6 +8,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Category;
 use App\Models\Person;
 use Illuminate\Container\Container as App;
 use App\Http\Requests\PLRequest;
@@ -185,6 +186,46 @@ class MoneyboxRepository extends BaseRepository{
     public function delete()
     {
         $this->_moneybox->delete();
+    }
+
+    /**
+     * Update the selected Moneybox
+     *
+     * @param PLRequest $request
+     * @return Moneybox|mixed
+     * @throws \Exception
+     */
+    public function update(PLRequest $request)
+    {
+
+        try {
+
+            $this->_moneybox = $this->byId($request->get('moneybox_id'));
+            \Log::info("=== Moneybox update ===");
+
+            // check for category existence
+            if ($request->exists('category_id')) {
+                try {
+                    $category = $this->_categoryRepository->byId($request->get('category_id'));
+                    if($category instanceof Category) $this->_moneybox->category_id = $request->get("category_id");
+                }
+                catch(\Exception $ex) {throw new \Exception("Category does not exist", -1, $ex);}
+            }
+
+            if ($request->exists('name')) $this->_moneybox->name = $request->get('name');
+            if ($request->exists('goal_amount')) $this->_moneybox->goal_amount = $request->get('goal_amount');
+            if ($request->exists('end_date')) $this->_moneybox->end_date = $request->get('end_date');
+            if ($request->exists('description')) $this->_moneybox->description = $request->get('description');
+            if (!$this->_moneybox->save()) throw new \Exception("Unable to update Moneybox", -1);
+
+            \Log::info("=== Moneybox updated successfully : " . $this->_moneybox . " ===");
+
+        } catch(\Exception $ex) {
+            throw new \Exception("Moneybox does not exist", -1, $ex);
+        }
+
+        return $this->_moneybox;
+
     }
 
     //endregion
