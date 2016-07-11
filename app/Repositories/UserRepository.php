@@ -8,6 +8,7 @@
 
 namespace App\Repositories;
 
+use Illuminate\Container\Container as App;
 use App\Http\Requests\PLRequest;
 use App\Models\Person;
 use App\Models\User;
@@ -27,8 +28,9 @@ class UserRepository extends BaseRepository{
     //region Static
     //endregion
 
-    public function __construct(User $user)
+    public function __construct(App $app, User $user)
     {
+        parent::__construct($app);
         $this->_user = $user;
     }
 
@@ -83,6 +85,94 @@ class UserRepository extends BaseRepository{
     }
 
     /**
+     * Update the specified user
+     *
+     * @param PLRequest $request
+     * @return User
+     * @throws \Exception
+     */
+    public function update(PLRequest $request)
+    {
+        try{
+            $this->_user = $this->byId($request->get('user_id'));
+            if ($request->exists('email')) $this->_user->email = $request->get('email');
+            if ($request->exists('username')) $this->_user->username = $request->get('username');
+
+            if ($request->exists('method') && ($request->get('method') == 'changePassword')) {
+                if ($request->exists('newPassword')) $this->_user->password = md5($request->get('newPassword'));
+            }
+
+            if (!$this->_user->save()) throw new \Exception("Unable to update User", -1);
+        } catch(\Exception $ex) {
+            throw new \Exception("User does not exist", -1, $ex);
+        }
+        return $this->_user;
+    }
+
+    /**
+     * Make a new random password for specific user
+     * // TODO - al hacer este proceso te deberia mandar a cambiar tu contraseña en el primer login que hagas.
+     *
+     * @param PLRequest $request
+     * @return bool
+     * @throws \Exception
+     */
+    public function passwordRecovery(PLRequest $request)
+    {
+        \Log::info("--- Password Recovery --- ");
+
+        // buscar por email
+        if ($this->userExist($request->get('email'))) {
+            \Log::info("--- generating new password  --- ");
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $newPassword = substr(str_shuffle($characters), 0, 6);
+            $this->_user = $this->byEmail(trim($request->get('email')));
+            \Log::info("--- freshPassword :: " .$newPassword." ---");
+            $this->_user->password = md5($newPassword);
+            if (!$this->_user->save()) throw new \Exception("Unable to update User", -1);
+
+        } else {
+            throw new \Exception("User does not exist", -1);
+        }
+
+        return true;
+    }
+
+    /**
+     * Get user by email
+     * @param $email
+     * @return mixed
+     */
+    public function byEmail($email)
+    {
+        return User::where("email", $email)->firstOrFail();
+    }
+
+    /**
+     * Change the password for specific user
+     *
+     * @param PLRequest $request
+     * @return bool|\Exception
+     * @throws \Exception
+     */
+    public function changePassword(PLRequest $request)
+    {
+        if (User::where(
+                [
+                    'password' => md5($request->get('currentPassword')),
+                    'id' => $request->get('user_id')
+                ])->count() <= 0) throw new \Exception("Incorrect password", -1);
+
+        $password = $request->get('newPassword');
+        $passwordConfirm = $request->get('passwordConfirm');
+
+        if ($password != $passwordConfirm) throw new \Exception("Passwords not are equals", -1);
+
+        return ($this->update($request) instanceof User) ? true:false;
+
+    }
+
+    /**
      * Search for user into the DB by email or username
      *
      * @param string $email
@@ -123,6 +213,23 @@ class UserRepository extends BaseRepository{
         return ($count == 1) ? true : false;
     }
 
+    /**
+     * Get the user profile
+     *
+     * @param PLRequest $request
+     * @throws \Exception
+     * @return mixed
+     */
+    public function getProfile(PLRequest $request)
+    {
+        try{
+            $user = $this->byId($request->get('user_id'));
+            $user->person;
+            return $user;
+        } catch(\Exception $ex){
+            throw new \Exception("User does not exist", -1, $ex);
+        }
+    }
 
     /**
      * Set the default values for user

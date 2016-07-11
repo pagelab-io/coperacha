@@ -10,6 +10,7 @@ namespace App\Repositories;
 
 use App\Http\Requests\PLRequest;
 use App\Models\Moneybox;
+use App\Models\Participant;
 use App\Models\Setting;
 use App\Models\SettingOption;
 use Illuminate\Container\Container as App;
@@ -30,11 +31,6 @@ class MemberSettingRepository extends BaseRepository{
     private $_settingRepository;
 
     /**
-     * @var MoneyboxRepository
-     */
-    private $_moneyboxRepository;
-
-    /**
      * @var SettingOptionRepository
      */
     private $_optionRepository;
@@ -47,13 +43,12 @@ class MemberSettingRepository extends BaseRepository{
     public function __construct(
         App $app,
         MemberSetting $memberSetting,
-        MoneyboxRepository $moneyboxRepository,
         SettingRepository $settingRepository,
         SettingOptionRepository $optionRepository){
+
         parent::__construct($app);
         $this->_memberSetting = $memberSetting;
         $this->_settingRepository = $settingRepository;
-        $this->_moneyboxRepository = $moneyboxRepository;
         $this->_optionRepository = $optionRepository;
     }
 
@@ -72,16 +67,16 @@ class MemberSettingRepository extends BaseRepository{
      * Create the relations between moneybox and settings
      *
      * @param PLRequest $request
-     * @param Moneybox $moneybox
+     * @param Moneybox|Participant $member
      * @throws \Exception
      */
-    public function setSettings(PLRequest $request, Moneybox $moneybox)
+    public function setSettings(PLRequest $request, $member)
     {
         \Log::info("=== Creating settings for moneybox ===");
         $settings = json_decode($request->get('settings'),true);
-        $moneyboxSettings = [];
+        $memberSettings = [];
 
-        \Log::info("=== Build MoneyboxSettingsArray ===");
+        \Log::info("=== Build MemberSettingsArray ===");
         foreach($settings as $setting){
             try {
                 if ($this->_settingRepository->byId($setting['setting_id']) instanceof Setting) {
@@ -89,10 +84,10 @@ class MemberSettingRepository extends BaseRepository{
                         $ms = new MemberSetting();
                         $ms->setting_id = $setting['setting_id'];
                         $ms->option_id = $setting['option_id'];
-                        $ms->owner_id = ($request->get('owner') == 'moneybox') ? $moneybox->id : 1;
+                        $ms->owner_id = $member->id;
                         $ms->owner = $request->get('owner');
                         $ms->value = $setting['value'];
-                        array_push($moneyboxSettings, $ms);
+                        array_push($memberSettings, $ms);
                     }
                 }
             }
@@ -101,9 +96,49 @@ class MemberSettingRepository extends BaseRepository{
             }
         }
 
-        \Log::info("=== Iterating in MoneyboxSettingsArray for insert ===");
-        foreach ($moneyboxSettings as $moneyboxSetting) {
-            if (!$moneyboxSetting->save()) throw new \Exception("Unable to create MemberSetting", -1);
+        \Log::info("=== Iterating in MemberSettingsArray for insert ===");
+        foreach ($memberSettings as $memberSetting) {
+            if (!$memberSetting->save()) throw new \Exception("Unable to create MemberSetting", -1);
+        }
+    }
+
+    /**
+     * Update the member settings
+     *
+     * @param PLRequest $request
+     * @param $member
+     * @throws \Exception
+     */
+    public function updateSettings(PLRequest $request, $member)
+    {
+        \Log::info("=== Creating settings for moneybox ===");
+        $settings = json_decode($request->get('settings'),true);
+        $memberSettings = [];
+
+        \Log::info("=== Build MemberSettingsArray ===");
+        foreach($settings as $setting){
+            try {
+                if ($this->byId($setting['member_setting_id']) instanceof MemberSetting) {
+                    if ($this->_settingRepository->byId($setting['setting_id']) instanceof Setting) {
+                        if ($this->_optionRepository->byId($setting['option_id']) instanceof SettingOption) {
+                            $memberSetting = $this->byId($setting['member_setting_id']);
+                            $memberSetting->setting_id = $setting['setting_id'];
+                            $memberSetting->option_id = $setting['option_id'];
+                            $memberSetting->value = $setting['value'];
+                            array_push($memberSettings, $memberSetting);
+                        }
+                    }
+
+                }
+            }
+            catch(\Exception $ex){
+                throw new \Exception("MemberSetting does not exist", -1, $ex);
+            }
+        }
+
+        \Log::info("=== Iterating in MemberSettingsArray for update ===");
+        foreach ($memberSettings as $memberSetting) {
+            if (!$memberSetting->save()) throw new \Exception("Unable to update MemberSetting", -1);
         }
     }
 
@@ -131,6 +166,11 @@ class MemberSettingRepository extends BaseRepository{
         }
 
         \Log::info("MemberSettings deleted");
+    }
+
+    public function getSettings($owner, $idowner)
+    {
+        return MemberSetting::where(['owner_id' => $idowner, 'owner' => $owner])->get();
     }
 
     //endregion

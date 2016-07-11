@@ -2,31 +2,55 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ResetsPasswords;
+use App\Http\Controllers\PLController;
+use App\Http\Requests\PLRequest;
+use App\Repositories\UserRepository;
 
-class PasswordController extends Controller
+class PasswordController extends PLController
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Password Reset Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller is responsible for handling password reset requests
-    | and uses a simple trait to include this behavior. You're free to
-    | explore this trait and override any methods you wish to tweak.
-    |
-    */
 
-    use ResetsPasswords;
+    //region attributes
 
     /**
-     * Create a new password controller instance.
-     *
-     * @return void
+     * @var UserRepository
      */
-    public function __construct()
+    private $_userRepository;
+    //endregion
+
+    //region Static methods
+    //endregion
+
+    public function __construct(UserRepository $userRepository)
     {
-        $this->middleware('guest');
+        $this->_userRepository = $userRepository;
     }
+
+    //region Methods
+
+    public function passwordRecovery(PLRequest $request)
+    {
+        $this->validate($request, $request->rules(), $request->messages());
+
+        try {
+
+            if ($this->_userRepository->passwordRecovery($request)) {
+                $this->_response['description'] = "Password recovered successfully";
+                $this->_response['data'] = true;
+            }
+            return response()->json($this->_response);
+
+        } catch(\Exception $ex) {
+            $this->_response['status'] = $ex->getCode();
+            $this->_response['description'] = $ex->getMessage();
+            $this->_response['data'] = $ex->getTraceAsString();
+            return response()->json($this->_response);
+        }
+
+    }
+
+    //endregion
+
+    //region Private Methods
+    //endregion
+
 }

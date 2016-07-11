@@ -17,7 +17,7 @@ class MoneyboxValidation {
     //region Static methods
 
     /**
-     * Rules for register fields
+     * Validation rules for moneybox creation
      *
      * @return array
      */
@@ -30,6 +30,32 @@ class MoneyboxValidation {
             'owner_id' => 'required|numeric',
             'end_date' => 'required|date_format:"Y-m-d"',
             'settings' => 'required|json',
+            'method' => 'required|string'
+        ];
+    }
+
+    /**
+     * Validation rules for moneybox listing
+     *
+     * @return array
+     */
+    static function list_rules()
+    {
+        return [
+            'person_id' => 'required|numeric',
+            'method' => 'required|string'
+        ];
+    }
+
+    /**
+     * Validation rules for moneybox update
+     *
+     * @return array
+     */
+    static function update_moneybox()
+    {
+        return [
+            'moneybox_id' => 'required|numeric',
             'method' => 'required|string'
         ];
     }

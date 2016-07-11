@@ -8,12 +8,14 @@
 
 namespace App\Http\Requests;
 
+use App\Validations\AuthValidation;
 use App\Validations\CategoryValidation;
 use App\Validations\LoginValidation;
 use App\Validations\MoneyboxValidation;
 use App\Validations\RegisterValidation;
 use App\Validations\SettingOptionValidation;
 use App\Validations\SettingValidation;
+use App\Validations\UserValidation;
 use Illuminate\Http\Request;
 
 class PLRequest extends Request{
@@ -45,7 +47,13 @@ class PLRequest extends Request{
                 case "createSetting": return SettingValidation::rules();
                 case "createOption": return SettingOptionValidation::rules();
                 case "createMoneybox": return MoneyboxValidation::rules();
+                case "listMoneybox": return MoneyboxValidation::list_rules();
                 case "listSetting": return SettingValidation::list_rules();
+                case "getProfile": return UserValidation::profile_rules();
+                case "updateProfile": return UserValidation::update_rules();
+                case "changePassword": return UserValidation::change_password_rules();
+                case "recoveryPassword": return AuthValidation::password_recovery_rules();
+                case "updateMoneybox": return MoneyboxValidation::update_moneybox();
                 default: return [];
             }
         }
@@ -65,7 +73,13 @@ class PLRequest extends Request{
             case "createSetting": return SettingValidation::messages();
             case "createOption": return SettingOptionValidation::messages();
             case "createMoneybox": return MoneyboxValidation::messages();
+            case "listMoneybox": return MoneyboxValidation::messages();
             case "listSetting": return SettingValidation::messages();
+            case "getProfile": return UserValidation::messages();
+            case "updateProfile": return UserValidation::messages();
+            case "changePassword": return UserValidation::messages();
+            case "recoveryPassword": return AuthValidation::messages();
+            case "updateMoneybox": return MoneyboxValidation::messages();
             default: return [];
         }
 

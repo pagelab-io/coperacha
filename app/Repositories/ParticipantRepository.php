@@ -9,24 +9,24 @@
 namespace App\Repositories;
 
 
-use App\Models\Member;
+use App\Models\Participant;
 
-class MemberRepository extends BaseRepository{
+class ParticipantRepository extends BaseRepository{
 
     //region attributes
 
     /**
-     * @var Member
+     * @var Participant
      */
-    private $_member = null;
+    private $_participant = null;
 
     //endregion
 
     //region Static
     //endregion
 
-    public function __construct(Member $member){
-        $this->_member = $member;
+    public function __construct(Participant $participant){
+        $this->_participant = $participant;
     }
 
     //region Methods
@@ -38,7 +38,7 @@ class MemberRepository extends BaseRepository{
      */
     function model()
     {
-        return 'App\Models\Member';
+        return 'App\Models\Participant';
     }
 
     //endregion

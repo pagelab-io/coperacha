@@ -42,6 +42,10 @@ $router->group([
         'middleware' => 'guest',
         'uses' => 'AuthController@login'
     ]);
+    $router->put('/passwordRecovery', [
+        'middleware' => 'guest',
+        'uses' => 'PasswordController@passwordRecovery'
+    ]);
 });
 //endregion
 
@@ -51,29 +55,59 @@ $router->group([
     'namespace' => 'Moneybox',
     'prefix' => 'moneybox'
 ], function($router){
-    $router->post('/create', [
+    $router->post('/', [
         'middleware' => 'guest',
         'uses' => 'MoneyboxController@createMoneybox'
     ]);
-    $router->post('/categories/create', [
+    $router->put('/', [
+        'middleware' => 'guest',
+        'uses' => 'MoneyboxController@updateMoneybox'
+    ]);
+    $router->get('/', [
+        'middleware' => 'guest',
+        'uses' => 'MoneyboxController@getAll'
+    ]);
+    $router->post('/categories', [
         'middleware' => 'guest',
         'uses' => 'CategoryController@createCategory'
     ]);
-    $router->post('/categories/list', [
+    $router->get('/categories', [
         'middleware' => 'guest',
         'uses' => 'CategoryController@getAll'
     ]);
-    $router->post('/settings/create', [
+    $router->post('/settings', [
         'middleware' => 'guest',
         'uses' => 'SettingController@createSetting'
     ]);
-    $router->post('/settings/list', [
+    $router->get('/settings', [
         'middleware' => 'guest',
         'uses' => 'SettingController@getAll'
     ]);
-    $router->post('/options/create', [
+    $router->post('/option', [
         'middleware' => 'guest',
         'uses' => 'SettingController@createOptions'
+    ]);
+});
+//endregion
+
+//region User
+$router->group([
+    'as' => 'user',
+    'namespace' => 'User',
+    'prefix' => 'user'
+], function($router){
+    // register
+    $router->get('/profile', [
+        'middleware' => 'guest',
+        'uses' => 'UserController@getProfile'
+    ]);
+    $router->put('/profile', [
+        'middleware' => 'guest',
+        'uses' => 'UserController@updateProfile'
+    ]);
+    $router->put('/changePassword', [
+        'middleware' => 'guest',
+        'uses' => 'UserController@changePassword'
     ]);
 });
 //endregion
