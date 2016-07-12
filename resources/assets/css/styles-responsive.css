@@ -159,7 +159,18 @@
 
 
     /* Block Intro */
+    .block.intro {
+        padding: 45px 0 50px;
+    }
 
+    .block.intro .header-block {
+        margin-bottom: 25px;
+    }
+
+    .block.intro .video {
+        margin-top: 30px;
+        max-width: none;
+    }
 
     /* Block Advantages */
     .block.advantages {
@@ -269,7 +280,40 @@
 
 
     /* Block Intro */
+    .block.intro {
+        padding: 15px 0 20px;
+    }
 
+    .block.intro .header-block {
+        margin-bottom: 10px;
+    }
+
+    .block.intro .header-block .title {
+        font-size: 22px;
+    }
+
+    .block.intro .content-block {
+        max-width: 195px;
+    }
+
+    .block.intro .content-block .moneyboxes {
+        margin-left: -10px;
+        margin-right: -10px;
+    }
+
+    .block.intro .content-block .moneyboxes .moneybox-type {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .block.intro .video {
+        margin-top: 20px;
+    }
+
+    .block.intro .video .share-fb {
+        margin-left: 0;
+        margin-top: 20px;
+    }
 
     /* Block Advantages */
     .block.advantages {

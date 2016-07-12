@@ -64,7 +64,7 @@
                                 <div class="image">
                                     <img class="img-responsive center-block" src="images/how-it-works-card-2.png" alt="">
                                 </div>
-                                <div class="name">2. Invita a Usuarios</div>
+                                <div class="name"><span>2. Invita a Usuarios</span></div>
                                 <div class="desc">Cuéntale a tus amigos, por mail  o Facebook.</div>
                             </div>
                         </div>
@@ -74,7 +74,7 @@
                                 <div class="image">
                                     <img class="img-responsive center-block" src="images/how-it-works-card-3.png" alt="">
                                 </div>
-                                <div class="name">3. Participa</div>
+                                <div class="name"><span>3. Participa</span></div>
                                 <div class="desc">Paga de forma segura y reúne  el dinero de tus amigos.</div>
                             </div>
                         </div>
@@ -84,7 +84,7 @@
                                 <div class="image">
                                     <img class="img-responsive center-block" src="images/how-it-works-card-4.png" alt="">
                                 </div>
-                                <div class="name">4. Gasta</div>
+                                <div class="name"><span>4. Gasta</span></div>
                                 <div class="desc">Compra en nuestras tiendas asociadas o ingresa el dinero a tu cuenta. </div>
                             </div>
                         </div>
@@ -104,21 +104,15 @@
                             <h2 class="title">Arma tu Coperacha para fiestas, regalos o viajes</h2>
                         </div>
                         <div class="content-block">
-                            <div class="row">
-                                <div class="col-xs-4">
-                                    <div class="moneybox-type">
-                                        <img class="img-responsive" src="images/intro-moneybox-1.png" alt="">
-                                    </div>
+                            <div class="clearfix moneyboxes">
+                                <div class="moneybox-type">
+                                    <img class="img-responsive" src="images/intro-moneybox-1.png" alt="">
                                 </div>
-                                <div class="col-xs-4">
-                                    <div class="moneybox-type">
-                                        <img class="img-responsive" src="images/intro-moneybox-2.png" alt="">
-                                    </div>
+                                <div class="moneybox-type">
+                                    <img class="img-responsive" src="images/intro-moneybox-2.png" alt="">
                                 </div>
-                                <div class="col-xs-4">
-                                    <div class="moneybox-type">
-                                        <img class="img-responsive" src="images/intro-moneybox-3.png" alt="">
-                                    </div>
+                                <div class="moneybox-type">
+                                    <img class="img-responsive" src="images/intro-moneybox-3.png" alt="">
                                 </div>
                             </div>
                         </div>
