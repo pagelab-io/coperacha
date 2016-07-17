@@ -7,7 +7,7 @@ use App\Entities\User;
 use App\Http\Requests\PLRequest;
 use App\Repositories\UserRepository;
 
-class TxRegister {
+class TxRegister extends PLTransaction{
 
     //region attributes
 

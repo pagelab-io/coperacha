@@ -19,10 +19,26 @@ class Moneybox extends Model
      */
     protected $fillable = ['category_id', 'name', 'goal_amount', 'collected_amount', 'owner_id', 'end_date', 'description'];
 
+    /**
+     * Default values for Moneybox
+     * @var array
+     */
+    protected $defaults = [
+        'collected_amount' => 0,
+        'description' => '',
+        'active' => 1
+    ];
+
     //endregion
 
     //region Static Methods
     //endregion
+
+    public function __construct(array $attributes = array())
+    {
+        $this->setRawAttributes($this->defaults, true);
+        parent::__construct($attributes);
+    }
 
     //region Methods
 
@@ -32,7 +48,7 @@ class Moneybox extends Model
      */
     public function payments()
     {
-        return $this->hasMany('App\Models\Payment');
+        return $this->hasMany('App\Entities\Payment');
     }
 
     /**
@@ -41,7 +57,7 @@ class Moneybox extends Model
      */
     public function persons()
     {
-        return $this->hasMany('App\Models\Member');
+        return $this->hasMany('App\Entities\Member');
     }
 
     /**
@@ -50,7 +66,7 @@ class Moneybox extends Model
      */
     public function category()
     {
-        return $this->belongsTo('App\Models\Category');
+        return $this->belongsTo('App\Entities\Category');
     }
 
     //endregion

@@ -41,7 +41,7 @@ class PersonRepository extends BaseRepository
      */
     function model()
     {
-        return 'App\Models\Person';
+        return 'App\Entities\Person';
     }
     //endregion
 

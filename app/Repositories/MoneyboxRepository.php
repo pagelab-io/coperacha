@@ -8,11 +8,13 @@
 
 namespace App\Repositories;
 
-use App\Models\Category;
-use App\Models\Person;
+use App\Entities\Category;
+use App\Entities\Person;
+use App\Http\Responses\PLResponse;
+use App\Transactions\TxCreateMoneybox;
 use Illuminate\Container\Container as App;
 use App\Http\Requests\PLRequest;
-use App\Models\Moneybox;
+use App\Entities\Moneybox;
 
 class MoneyboxRepository extends BaseRepository{
 
@@ -43,6 +45,11 @@ class MoneyboxRepository extends BaseRepository{
      */
     private $_participantRepository;
 
+    /**
+     * @var TxCreateMoneybox
+     */
+    private $_txCreateMoneybox;
+
     //endregion
 
     //region Static
@@ -50,6 +57,7 @@ class MoneyboxRepository extends BaseRepository{
 
     public function __construct(
         App $app,
+        TxCreateMoneybox $txCreateMoneybox,
         Moneybox $moneybox,
         PersonRepository $personRepository,
         CategoryRepository $categoryRepository,
@@ -57,10 +65,10 @@ class MoneyboxRepository extends BaseRepository{
     {
         parent::__construct($app);
         $this->_moneybox = $moneybox;
+        $this->_txCreateMoneybox = $txCreateMoneybox;
         $this->_personRepository = $personRepository;
         $this->_categoryRepository = $categoryRepository;
         $this->_memberSettingRepository = $memberSettingRepository;
-        $this->setDefault();
     }
 
     //region Methods
@@ -71,14 +79,14 @@ class MoneyboxRepository extends BaseRepository{
      */
     function model()
     {
-        return 'App\Models\Moneybox';
+        return 'App\Entities\Moneybox';
     }
 
     /**
      * Create a new moneybox
      *
      * @param PLRequest $request
-     * @return Moneybox
+     * @return PLResponse
      * @throws \Exception
      */
     public function create(PLRequest $request)
@@ -97,39 +105,16 @@ class MoneyboxRepository extends BaseRepository{
         }catch(\Exception $ex){ throw new \Exception("Person does not exist", -1, $ex);}
         \Log::info("Person : ".$person);
 
-        \Log::info("=== Creating moneybox ===");
-        $this->_moneybox->category_id = $category->id;
-        $this->_moneybox->name = $request->get('name');
-        $this->_moneybox->goal_amount = $request->get('goal_amount');
-        $this->_moneybox->owner = $person->id;
-        $this->_moneybox->end_date = $request->get('end_date');
-        $this->_moneybox->description = ($request->exists('description')) ? $request->get('description') : '';
-        $this->_moneybox->url = $this->generateURL($request->get('name'));
-        if (!$this->_moneybox->save()) throw new \Exception("Unable to create Moneybox", -1);
-        \Log::info("=== Moneybox created successfully : === \n".$this->_moneybox);
+        \Log::info("Executing transaction : TxCreateMoneybox");
+        $this->_moneybox = $this->_txCreateMoneybox->executeTx($request);
+        \Log::info("End transaction : TxCreateMoneybox");
 
-        return $this->_moneybox;
-    }
+        // response
+        $response               = new PLResponse();
+        $response->description  = 'Moneybox was created successfully';
+        $response->data         = $this->_moneybox;
 
-    /**
-     * Generate the public access URL
-     * @param $name
-     * @return string
-     */
-    public function generateURL($name)
-    {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        return md5($name.substr(str_shuffle($characters), 0, 10));
-    }
-
-    /**
-     * Set the default values for person
-     */
-    public function setDefault()
-    {
-        $this->_moneybox->collected_amount = '0.0';
-        $this->_moneybox->description = '';
-        $this->_moneybox->active =1;
+        return $response;
     }
 
     /**

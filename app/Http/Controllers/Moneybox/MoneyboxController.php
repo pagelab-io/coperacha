@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Moneybox;
 
 use App\Http\Controllers\PLController;
 use App\Http\Requests\PLRequest;;
+use App\Http\Responses\PLResponse;
 use App\Models\Moneybox;
 use App\Repositories\MoneyboxRepository;
 use App\Repositories\MemberSettingRepository;
@@ -52,35 +53,16 @@ class MoneyboxController extends PLController {
      */
     public function createMoneybox(PLRequest $request)
     {
-        // 1 : validate request
-        $this->validate($request, $request->rules(), $request->messages());
-
-        $moneybox = null;
-
         try {
-            // 2: create moneybox
-            $moneybox = $this->_moneyboxRepository->create($request);
-            if ($moneybox instanceof Moneybox) {
-                $this->_memberSettingsRepository->setSettings($request, $moneybox);
-                $this->_response['description'] = "Moneybox was created successfully";
-                $this->_response['data'] = $moneybox;
-            }
-            return response()->json($this->_response);
-        } catch(\Exception $ex) {
-
-            // if money box has been created, and after an exception is throwed, then delete unnecesary registers
-            if($moneybox instanceof Moneybox)
-            {
-                // delete registers associated with the moneybox in moneybox_settings table
-                $this->_memberSettingsRepository->deleteSettings($request->get('owner'), $moneybox->id);
-                // delete moneybox
-                $this->_moneyboxRepository->delete();
-            }
-
-            $this->_response['status'] = $ex->getCode();
-            $this->_response['description'] = $ex->getMessage();
-            $this->_response['data'] = $ex->getTraceAsString();
-            return response()->json($this->_response);
+            $this->validate($request, $request->rules(), $request->messages());
+            $this->setResponse($this->_moneyboxRepository->create($request));
+            return response()->json($this->getResponse());
+        } catch (\Exception $ex) {
+            $response = new PLResponse();
+            $response->status = $ex->getCode();
+            $response->description = $ex->getMessage();
+            $response->data = $ex->getTraceAsString();
+            return response()->json($response);
         }
     }
 

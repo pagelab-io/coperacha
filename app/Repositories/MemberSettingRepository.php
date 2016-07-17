@@ -8,13 +8,13 @@
 
 namespace App\Repositories;
 
-use App\Http\Requests\PLRequest;
-use App\Models\Moneybox;
-use App\Models\Participant;
-use App\Models\Setting;
-use App\Models\SettingOption;
 use Illuminate\Container\Container as App;
-use App\Models\MemberSetting;
+use App\Http\Requests\PLRequest;
+use App\Entities\Moneybox;
+use App\Entities\Participant;
+use App\Entities\Setting;
+use App\Entities\SettingOption;
+use App\Entities\MemberSetting;
 
 class MemberSettingRepository extends BaseRepository{
 
@@ -60,7 +60,7 @@ class MemberSettingRepository extends BaseRepository{
      */
     function model()
     {
-        return 'App\Models\MemberSetting';
+        return 'App\Entities\MemberSetting';
     }
 
     /**
