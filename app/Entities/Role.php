@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Models;
+namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MemberSetting extends Model
+class Role extends Model
 {
     //region attributes
     /**
      * The database table used by the model
      * @var string
      */
-    protected $table = 'member_settings';
+    protected $table = 'roles';
 
     /**
      * These are the mass-assignable keys
      * @var array
      */
-    protected $fillable = ['setting_id', 'option_id', 'owner_id', 'owner', 'value'];
+    protected $fillable = ['name'];
     //endregion
 
     //region Static Methods

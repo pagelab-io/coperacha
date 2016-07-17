@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Models;
+namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Setting extends Model
+class Category extends Model
 {
     //region attributes
     /**
      * The database table used by the model
      * @var string
      */
-    protected $table = 'settings';
+    protected $table = 'categories';
 
     /**
      * These are the mass-assignable keys
      * @var array
      */
-    protected $fillable = ['name', 'path', 'type'];
+    protected $fillable = ['name'];
     //endregion
 
     //region Static Methods
@@ -26,14 +26,13 @@ class Setting extends Model
     //region Methods
 
     /**
-     * Define the relation between Setting and SettingOptions
+     * Define the relation between MoneyboxCategory and Moneybox
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function options()
+    public function moneybox()
     {
-        return $this->hasMany('App\Models\SettingOption');
+        return $this->hasMany('App\Models\Moneybox');
     }
-
     //endregion
 
     //region Private Methods

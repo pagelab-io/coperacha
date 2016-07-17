@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Models;
+namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SettingOption extends Model
+class Setting extends Model
 {
     //region attributes
     /**
      * The database table used by the model
      * @var string
      */
-    protected $table = 'setting_options';
+    protected $table = 'settings';
 
     /**
      * These are the mass-assignable keys
      * @var array
      */
-    protected $fillable = ['setting_id', 'name', 'subtype'];
+    protected $fillable = ['name', 'path', 'type'];
     //endregion
 
     //region Static Methods
@@ -26,12 +26,12 @@ class SettingOption extends Model
     //region Methods
 
     /**
-     * Define the relation between SettingOption and Setting
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * Define the relation between Setting and SettingOptions
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function setting()
+    public function options()
     {
-        return $this->belongsTo('App\Models\Setting');
+        return $this->hasMany('App\Models\SettingOption');
     }
 
     //endregion
