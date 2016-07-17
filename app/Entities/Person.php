@@ -49,7 +49,7 @@ class Person extends Model
      */
     public function payments()
     {
-        return $this->hasMany('App\Models\Payment');
+        return $this->hasMany('App\Entities\Payment');
     }
 
     /**
@@ -58,7 +58,7 @@ class Person extends Model
      */
     public function personMoneyboxes()
     {
-        return $this->hasMany('App\Models\Participant');
+        return $this->hasMany('App\Entities\Participant');
     }
 
     //endregion

@@ -12,7 +12,7 @@ namespace App\Http\Controllers\Moneybox;
 use App\Http\Controllers\PLController;
 use App\Http\Requests\PLRequest;;
 use App\Http\Responses\PLResponse;
-use App\Models\Moneybox;
+use App\Entities\Moneybox;
 use App\Repositories\MoneyboxRepository;
 use App\Repositories\MemberSettingRepository;
 
@@ -74,25 +74,18 @@ class MoneyboxController extends PLController {
      */
     public function getAll(PLRequest $request)
     {
+
         $this->validate($request, $request->rules(), $request->messages());
-        $moneybox_list = [];
 
         try {
-
-            $my_moneyboxes = $this->_moneyboxRepository->myMoneyboxes($request);
-            $third_moneyboxes = $this->_moneyboxRepository->moneyboxesParticipation($request);
-
-            $moneybox_list['my_moneyboxes'] = $my_moneyboxes;
-            $moneybox_list['moneyboxes_participation'] = $third_moneyboxes;
-
-            $this->_response['data'] = $moneybox_list;
-            return response()->json($this->_response);
-
+            $this->setResponse($this->_moneyboxRepository->getAll($request));
+            return response()->json($this->getResponse());
         } catch (\Exception $ex) {
-            $this->_response['status'] = $ex->getCode();
-            $this->_response['description'] = $ex->getMessage();
-            $this->_response['data'] = $ex->getTraceAsString();
-            return response()->json($this->_response);
+            $response = new PLResponse();
+            $response->status = $ex->getCode();
+            $response->description = $ex->getMessage();
+            $response->data = $ex->getTraceAsString();
+            return response()->json($response);
         }
     }
 

@@ -118,6 +118,23 @@ class MoneyboxRepository extends BaseRepository{
     }
 
     /**
+     * @param PLRequest $request
+     * @return PLResponse
+     * @throws \Exception
+     */
+    public function getAll(PLRequest $request)
+    {
+        $moneybox_list = [];
+        $moneybox_list['my_moneyboxes'] = $this->myMoneyboxes($request);
+        $moneybox_list['moneyboxes_participation'] = $this->moneyboxesParticipation($request);
+
+        $response = new PLResponse();
+        $response->description = 'Listing all momeybox succesfully';
+        $response->data = $moneybox_list;
+        return $response;
+    }
+
+    /**
      * Get the moneyboxes created by person
      * @param PLRequest $request
      * @return mixed
