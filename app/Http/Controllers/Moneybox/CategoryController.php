@@ -11,7 +11,8 @@ namespace App\Http\Controllers\Moneybox;
 
 use App\Http\Controllers\PLController;
 use App\Http\Requests\PLRequest;
-use App\Models\Category;
+use App\Entities\Category;
+use App\Http\Responses\PLResponse;
 use App\Repositories\CategoryRepository;
 
 class CategoryController extends PLController{
@@ -47,20 +48,18 @@ class CategoryController extends PLController{
         // validate the request
         $this->validate($request,$request->rules(),$request->messages());
 
+
+
         try {
-            $category = $this->_categoryRepository->create($request);
-            if($category instanceof Category)
-            {
-                $this->_response['description'] = "category was added successfully";
-                $this->_response['data'] = $category;
-            }
-            return response()->json($this->_response);
+            $this->setResponse($this->_categoryRepository->create($request));
+            return response()->json($this->getResponse());
 
         } catch(\Exception $ex) {
-            $this->_response['status'] = $ex->getCode();
-            $this->_response['description'] = $ex->getMessage();
-            $this->_response['data'] = $ex->getTraceAsString();
-            return response()->json($this->_response);
+            $response = new PLResponse();
+            $response->status = $ex->getCode();
+            $response->description = $ex->getMessage();
+            $response->data = $ex->getTraceAsString();
+            return response()->json($response);
         }
     }
 
@@ -72,13 +71,14 @@ class CategoryController extends PLController{
     public function getAll()
     {
         try {
-            $this->_response['data'] = $this->_categoryRepository->getALl();
-            return response()->json($this->_response);
+            $this->setResponse($this->_categoryRepository->getALl());
+            return response()->json($this->getResponse());
         } catch(\Exception $ex) {
-            $this->_response['status'] = $ex->getCode();
-            $this->_response['description'] = $ex->getMessage();
-            $this->_response['data'] = $ex->getTraceAsString();
-            return response()->json($this->_response);
+            $response = new PLResponse();
+            $response->status = $ex->getCode();
+            $response->description = $ex->getMessage();
+            $response->data = $ex->getTraceAsString();
+            return response()->json($response);
         }
     }
 

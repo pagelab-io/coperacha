@@ -38,7 +38,7 @@ class FbUserRepository extends BaseRepository{
      */
     function model()
     {
-        return 'App\Models\FbUser';
+        return 'App\Entities\FbUser';
     }
 
     /**

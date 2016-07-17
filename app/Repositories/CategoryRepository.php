@@ -8,9 +8,10 @@
 
 namespace App\Repositories;
 
+use App\Http\Responses\PLResponse;
 use Illuminate\Container\Container as App;
 use App\Http\Requests\PLRequest;
-use App\Models\Category;
+use App\Entities\Category;
 
 class CategoryRepository extends BaseRepository{
 
@@ -19,14 +20,14 @@ class CategoryRepository extends BaseRepository{
     /**
      * @var Category
      */
-    private $_category = null;
+    private $_category;
 
     //endregion
 
     //region Static
     //endregion
 
-    public function __construct(Category $Category, App $app){
+    public function __construct(App $app, Category $Category){
         parent::__construct($app);
         $this->_category = $Category;
     }
@@ -39,34 +40,43 @@ class CategoryRepository extends BaseRepository{
      */
     function model()
     {
-        return 'App\Models\Category';
+        return 'App\Entities\Category';
     }
 
     /**
      * Create a new category
      *
      * @param PLRequest $request
-     * @return Category
+     * @return PLResponse
      * @throws \Exception
      */
     public function create(PLRequest $request)
     {
-        \Log::info("=== Category create ===");
+        $response = new PLResponse();
+
+        \Log::info("=== creating Category ===");
         $this->_category->name = $request->get('name');
         if (!$this->_category->save()) throw new \Exception("Unable to create Category", -1);
         \Log::info("=== Category created successfully : ".$this->_category." ===");
-        return $this->_category;
+
+        $response->description  = "category was added successfully";
+        $response->data         = $this->_category;
+
+        return $response;
     }
 
     /**
      * Get all categories
      *
-     * @return mixed
+     * @return PLResponse
      */
     public function getALl()
     {
         \Log::info("=== get all categories ===");
-        return $this->all();
+        $response               = new PLResponse();
+        $response->description  = 'listing all categories successfully';
+        $response->data         = $this->all();
+        return $response;
     }
 
     //endregion
