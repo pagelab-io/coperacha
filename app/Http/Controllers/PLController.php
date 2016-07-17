@@ -8,32 +8,42 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Responses\PLResponse;
+
 class PLController extends Controller{
 
     //region attributes
 
     /**
-     * response for each service
-     * @var array
+     * @var PLResponse
      */
-    protected $_response = [
-        'status' => 200,
-        'description' => '',
-        'data' => null
-    ];
+    private $_response;
 
     //endregion
 
     //region Static Methods
     //endregion
 
+    public function __construct(PLResponse $response)
+    {
+        $this->setResponse($response);
+    }
+
     //region Private Methods
     //endregion
 
     //region Methods
-    //endregion
 
-    //region Abstract methods
+    public function getResponse()
+    {
+        return $this->_response;
+    }
+
+    public function setResponse(PLResponse $response)
+    {
+        $this->_response = $response;
+    }
+
     //endregion
 
 }

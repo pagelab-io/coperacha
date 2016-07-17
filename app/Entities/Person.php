@@ -14,6 +14,17 @@ class Person extends Model
     protected $table = 'persons';
 
     /**
+     * Default values for person
+     * @var array
+     */
+    protected $defaults = [
+        'birthday' => '0000-00-00',
+        'gender' => 'H',
+        'city' => '',
+        'country' => ''
+    ];
+
+    /**
      * These are the mass-assignable keys
      * @var array
      */
@@ -23,6 +34,12 @@ class Person extends Model
 
     //region Static Methods
     //endregion
+
+    public function __construct(array $attributes = array())
+    {
+        $this->setRawAttributes($this->defaults, true);
+        parent::__construct($attributes);
+    }
 
     //region Methods
 

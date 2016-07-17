@@ -9,7 +9,7 @@
 namespace App\Repositories;
 
 use App\Http\Requests\PLRequest;
-use App\Models\Person;
+use App\Entities\Person;
 use Illuminate\Container\Container as App;
 
 class PersonRepository extends BaseRepository
@@ -31,7 +31,6 @@ class PersonRepository extends BaseRepository
     {
         parent::__construct($app);
         $this->_person = $person;
-        $this->setDefault();
     }
 
     //region Methods
@@ -94,17 +93,6 @@ class PersonRepository extends BaseRepository
         }
 
         return $this->_person;
-    }
-
-    /**
-     * Set the default values for person
-     */
-    public function setDefault()
-    {
-        $this->_person->birthday = '0000-00-00';
-        $this->_person->gender = 'H';
-        $this->_person->city = '';
-        $this->_person->country = '';
     }
 
     //region Private Methods

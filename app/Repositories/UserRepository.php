@@ -10,8 +10,8 @@ namespace App\Repositories;
 
 use Illuminate\Container\Container as App;
 use App\Http\Requests\PLRequest;
-use App\Models\Person;
-use App\Models\User;
+use App\Entities\Person;
+use App\Entities\User;
 
 class UserRepository extends BaseRepository{
 
@@ -43,7 +43,7 @@ class UserRepository extends BaseRepository{
      */
     public function model()
     {
-        return 'App\Models\User';
+        return 'App\Entities\User';
     }
 
     /**
@@ -229,15 +229,6 @@ class UserRepository extends BaseRepository{
         } catch(\Exception $ex){
             throw new \Exception("User does not exist", -1, $ex);
         }
-    }
-
-    /**
-     * Set the default values for user
-     */
-    public function setDefault()
-    {
-        $this->_user->firstaccess = 0;
-        $this->_user->username = "";
     }
 
     //endregion

@@ -4,34 +4,25 @@ namespace App\Http\Controllers\Register;
 
 use App\Http\Controllers\PLController;
 use \App\Http\Requests\PLRequest;
-use App\Models\Person;
-use App\Repositories\PersonRepository;
-use App\Repositories\UserRepository;
-use Log;
+use App\Http\Responses\PLResponse;
+use App\Models\Register;
 
 class RegisterController extends PLController{
 
     //region attributes
 
     /**
-     * @var PersonRepository
+     * @var Register
      */
-    private $_personRepository;
-
-    /**
-     * @var UserRepository
-     */
-    private $_userRepository;
+    private $_register;
 
     //endregion
 
     //region Static methods
     //endregion
 
-    public function __construct(PersonRepository $personRepository, UserRepository $userRepository)
-    {
-        $this->_personRepository = $personRepository;
-        $this->_userRepository = $userRepository;
+    public function __construct(Register $register){
+        $this->_register = $register;
     }
 
     //region Methods
@@ -48,41 +39,17 @@ class RegisterController extends PLController{
         // validate the request
         $this->validate($request,$request->rules(),$request->messages());
 
-        try {
-
-            $person = null;
-            $user   = null;
-            $fbUser = null;
-
-            // step 1: check for user existence
-            if ($this->_userRepository->userExist($request->get('email'))) {
-                throw new \Exception ("User already exist", -2);
-            } else {
-
-                // step 2: create person
-                $person = $this->_personRepository->create($request);
-
-                if ($person instanceof Person) {
-
-                    // step 3: create user
-                    $user = $this->_userRepository->create($request, $person);
-                    if ($request->get('isFB') == 1) \Log::info("FBUser");
-                }
-
-                // return response
-                $this->_response['description'] = "User registered successfully";
-                $this->_response['data'] = array(['Person' => $person, 'User' => $user, 'FBUser' => $fbUser]);
-                return response()->json($this->_response);
-            }
-
+        // execute register
+        try{
+            $this->setResponse($this->_register->userRegister($request));
+            return response()->json($this->getResponse());
+        }catch (\Exception $ex){
+            $response = new PLResponse();
+            $response->status = $ex->getCode();
+            $response->description = $ex->getMessage();
+            $response->data = $ex->getTraceAsString();
+            return response()->json($response);
         }
-        catch (\Exception $ex) {
-            $this->_response['status'] = $ex->getCode();
-            $this->_response['description'] = $ex->getMessage();
-            $this->_response['data'] = $ex->getTraceAsString();
-            return response()->json($this->_response);
-        }
-
     }
 
     //endregion

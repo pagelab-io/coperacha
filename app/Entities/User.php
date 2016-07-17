@@ -26,10 +26,20 @@ class User extends Model
      */
     protected $hidden = ['password'];
 
+    protected $defaults = [
+        'firstaccess' => 0
+    ];
+
     //endregion
 
     //region Static Methods
     //endregion
+
+    public function __construct(array $attributes = array())
+    {
+        $this->setRawAttributes($this->defaults, true);
+        parent::__construct($attributes);
+    }
 
     //region Methods
 
