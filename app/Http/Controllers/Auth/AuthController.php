@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\PLController;
 use App\Http\Requests\PLRequest;
+use App\Http\Responses\PLResponse;
 use App\Repositories\FbUserRepository;
 use App\Repositories\UserRepository;
 
@@ -50,23 +51,15 @@ class AuthController extends PLController
 
             // get login response
             $response = ($request->get('isFB') == 0) ? $this->_userRepository->login($request) : $this->_fbUserRepository->login($request);
-
-            if ($response) {
-                $this->_response['status'] = 200;
-                $this->_response['description'] = "Login successfully";
-            } else {
-                $this->_response['status'] = -1;
-                $this->_response['description'] = "Invalid Credentials";
-            }
-
-            $this->_response['data'] = $response;
-            return response()->json($this->_response);
+            $this->setResponse($response);
+            return response()->json($this->getResponse());
 
         } catch(\Exception $ex){
-            $this->_response['status'] = $ex->getCode();
-            $this->_response['description'] = $ex->getMessage();
-            $this->_response['data'] = $ex->getTraceAsString();
-            return response()->json($this->_response);
+            $response = new PLResponse();
+            $response->status = $ex->getCode();
+            $response->description = $ex->getMessage();
+            $response->data = $ex->getTraceAsString();
+            return response()->json($response);
         }
     }
 

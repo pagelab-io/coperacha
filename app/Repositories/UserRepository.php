@@ -8,6 +8,7 @@
 
 namespace App\Repositories;
 
+use App\Http\Responses\PLResponse;
 use Illuminate\Container\Container as App;
 use App\Http\Requests\PLRequest;
 use App\Entities\Person;
@@ -205,12 +206,23 @@ class UserRepository extends BaseRepository{
      * email login
      *
      * @param PLRequest $request
-     * @return bool
+     * @return PLResponse
      */
     public function login(PLRequest $request)
     {
         $count = User::where(['email' => trim($request->get('email')), 'password' => md5(trim($request->get('password')))])->count();
-        return ($count == 1) ? true : false;
+        $response = new PLResponse();
+
+        if ($count == 1) {
+            $response->description = 'Login successfully';
+            $response->data = true;
+        } else {
+            $response->status = -1;
+            $response->description = 'Invalid Credentials';
+            $response->data = false;
+        }
+
+        return $response;
     }
 
     /**

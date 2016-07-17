@@ -10,7 +10,7 @@ namespace App\Repositories;
 
 
 use App\Http\Requests\PLRequest;
-use App\Models\FbUser;
+use App\Entities\FbUser;
 
 class FbUserRepository extends BaseRepository{
 
