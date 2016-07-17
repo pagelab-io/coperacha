@@ -9,6 +9,7 @@ namespace App\Http\Controllers\User;
 
 use \App\Http\Controllers\PLController;
 use App\Http\Requests\PLRequest;
+use App\Http\Responses\PLResponse;
 use App\Models\Person;
 use App\Models\User;
 use App\Repositories\PersonRepository;
@@ -51,14 +52,14 @@ class UserController extends PLController{
     {
         $this->validate($request, $request->rules(), $request->messages());
         try {
-            $this->_response['data'] = $this->_userRepository->getProfile($request);
-            $this->_response['description'] = "Profile obtained successfully";
-            return response()->json($this->_response);
+            $this->setResponse($this->_userRepository->getProfile($request));
+            return response()->json($this->getResponse());
         } catch(\Exception $ex) {
-            $this->_response['status'] = $ex->getCode();
-            $this->_response['description'] = $ex->getMessage();
-            $this->_response['data'] = $ex->getTraceAsString();
-            return response()->json($this->_response);
+            $response = new PLResponse();
+            $response->status = $ex->getCode();
+            $response->description = $ex->getMessage();
+            $response->data = $ex->getTraceAsString();
+            return response()->json($response);
         }
 
     }

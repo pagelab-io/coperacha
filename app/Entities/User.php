@@ -49,7 +49,7 @@ class User extends Model
      */
     public function person()
     {
-        return $this->belongsTo('App\Models\Person');
+        return $this->belongsTo('App\Entities\Person');
     }
 
     //endregion

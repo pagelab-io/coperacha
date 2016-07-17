@@ -234,13 +234,18 @@ class UserRepository extends BaseRepository{
      */
     public function getProfile(PLRequest $request)
     {
+        $user = null;
         try{
             $user = $this->byId($request->get('user_id'));
             $user->person;
-            return $user;
-        } catch(\Exception $ex){
+        }catch(\Exception $ex){
             throw new \Exception("User does not exist", -1, $ex);
         }
+
+        $response = new PLResponse();
+        $response->description = 'Getting user profile successfully';
+        $response->data = $user;
+        return $response;
     }
 
     //endregion
