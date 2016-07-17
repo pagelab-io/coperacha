@@ -7,6 +7,6 @@ use App\Http\Requests\PLRequest;
 
 abstract class PLTransaction {
 
-    abstract function executeTx(PLRequest $request);
+    abstract function executeTx(PLRequest $request, $params = array());
 
 } 

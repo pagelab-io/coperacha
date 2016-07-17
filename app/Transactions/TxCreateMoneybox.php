@@ -59,10 +59,11 @@ class TxCreateMoneybox extends PLTransaction{
      * Execute the transaction to create a moneybox
      *
      * @param PLRequest $request
-     * @return Moneybox
+     * @param array $params
      * @throws \Exception
+     * @return Moneybox
      */
-    function executeTx(PLRequest $request)
+    function executeTx(PLRequest $request, $params = array())
     {
 
         $moneybox = null;

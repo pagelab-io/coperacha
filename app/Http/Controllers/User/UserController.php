@@ -72,27 +72,19 @@ class UserController extends PLController{
      */
     public function updateProfile(PLRequest $request)
     {
+        \Log::info("llega a controller");
         $this->validate($request, $request->rules(), $request->messages());
-        $response = [];
+
+        \Log::info("pasa validacion");
         try {
-
-            $person = $this->_personRepository->update($request);
-            $user = $this->_userRepository->update($request);
-
-            if ($person instanceof Person && $user instanceof User) {
-                $response['person'] = $person;
-                $response['user'] = $user;
-            }
-
-            $this->_response['description'] = "User was updated successfully";
-            $this->_response['data'] = $response;
-            return response()->json($this->_response);
-
+            $this->setResponse($this->_userRepository->updateProfile($request));
+            return response()->json($this->getResponse());
         } catch(\Exception $ex) {
-            $this->_response['status'] = $ex->getCode();
-            $this->_response['description'] = $ex->getMessage();
-            $this->_response['data'] = $ex->getTraceAsString();
-            return response()->json($this->_response);
+            $response = new PLResponse();
+            $response->status = $ex->getCode();
+            $response->description = $ex->getMessage();
+            $response->data = $ex->getTraceAsString();
+            return response()->json($response);
         }
 
     }
@@ -100,7 +92,7 @@ class UserController extends PLController{
 
     public function changePassword(PLRequest $request)
     {
-        $this->validate($request, $request->rules(), $request->messages());
+        /*$this->validate($request, $request->rules(), $request->messages());
 
         try {
 
@@ -119,7 +111,7 @@ class UserController extends PLController{
             $this->_response['description'] = $ex->getMessage();
             $this->_response['data'] = $ex->getTraceAsString();
             return response()->json($this->_response);
-        }
+        }*/
     }
 
     //endregion

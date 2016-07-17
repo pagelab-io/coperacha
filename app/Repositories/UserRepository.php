@@ -8,8 +8,9 @@
 
 namespace App\Repositories;
 
-use App\Http\Responses\PLResponse;
 use Illuminate\Container\Container as App;
+use App\Http\Responses\PLResponse;
+use App\Transactions\TxUpdateUser;
 use App\Http\Requests\PLRequest;
 use App\Entities\Person;
 use App\Entities\User;
@@ -22,17 +23,29 @@ class UserRepository extends BaseRepository{
      *
      * @var User
      */
-    private $_user = null;
+    private $_user;
+
+    /**
+     * @var TxUpdateUser
+     */
+    private $_txUpdateUser;
+
+    /**
+     * @var PersonRepository
+     */
+    private $_personRepository;
 
     //endregion
 
     //region Static
     //endregion
 
-    public function __construct(App $app, User $user)
+    public function __construct(App $app, User $user, PersonRepository $personRepository, TxUpdateUser $txUpdateUser)
     {
         parent::__construct($app);
         $this->_user = $user;
+        $this->_personRepository = $personRepository;
+        $this->_txUpdateUser = $txUpdateUser;
     }
 
     //region Methods
@@ -89,25 +102,33 @@ class UserRepository extends BaseRepository{
      * Update the specified user
      *
      * @param PLRequest $request
-     * @return User
+     * @return PLResponse
      * @throws \Exception
      */
-    public function update(PLRequest $request)
+    public function updateProfile(PLRequest $request)
     {
-        try{
-            $this->_user = $this->byId($request->get('user_id'));
-            if ($request->exists('email')) $this->_user->email = $request->get('email');
-            if ($request->exists('username')) $this->_user->username = $request->get('username');
 
-            if ($request->exists('method') && ($request->get('method') == 'changePassword')) {
-                if ($request->exists('newPassword')) $this->_user->password = md5($request->get('newPassword'));
-            }
+        $user = null;
+        $person = null;
 
-            if (!$this->_user->save()) throw new \Exception("Unable to update User", -1);
-        } catch(\Exception $ex) {
-            throw new \Exception("User does not exist", -1, $ex);
+        try {$user = $this->byId($request->get('user_id'));}
+        catch(\Exception $ex) { throw new \Exception("User does not exist", -1, $ex); }
+        \Log::info("User : ".$user);
+
+        try {$person = $this->_personRepository->byId($request->get('person_id'));}
+        catch(\Exception $ex) { throw new \Exception("Person does not exist", -1, $ex); }
+        \Log::info("Person : ".$person);
+
+        \Log::info("Call txUpdateUser");
+        $update_response = $this->_txUpdateUser->executeTx($request, array('user' => $user, 'person' => $person));
+        \Log::info("end txUpdateUser");
+
+        $response = new PLResponse();
+        if (is_array($update_response)) {
+            $response->description = 'User was updated successfully';
+            $response->data = $update_response;
         }
-        return $this->_user;
+        return $response;
     }
 
     /**

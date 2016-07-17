@@ -36,10 +36,11 @@ class TxRegister extends PLTransaction{
      * Execute the transaction for register a new user
      *
      * @param PLRequest $request
-     * @return array
+     * @param array $params
      * @throws \Exception
+     * @return array
      */
-    public function executeTx(PLRequest $request)
+    public function executeTx(PLRequest $request, $params = array())
     {
         $response   = array();
         $fbUser     = null;
