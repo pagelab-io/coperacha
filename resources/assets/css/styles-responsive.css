@@ -49,12 +49,13 @@
         right: -270px;
         top: 0;
         width: 270px;
+        z-index: 2;
 
-        -webkit-transition: right 350ms;
-        -moz-transition: right 350ms;
-        -ms-transition: right 350ms;
-        -o-transition: right 350ms;
-        transition: right 350ms;
+        -webkit-transition: right 350ms, box-shadow 350ms;
+        -moz-transition: right 350ms, box-shadow 350ms;
+        -ms-transition: right 350ms, box-shadow 350ms;
+        -o-transition: right 350ms, box-shadow 350ms;
+        transition: right 350ms, box-shadow 350ms;
     }
 
     .mobile-navigation .list {
@@ -96,6 +97,7 @@
 
     .mobile-navigation.mobile-navigation-open {
         right: 0;
+        box-shadow: -2px 2px 2px rgba(0, 0, 0, .35);
     }
 
 
@@ -140,6 +142,12 @@
     }
 
 
+    /* Block */
+    .block .header-block .title {
+        font-size: 28px;
+    }
+
+
     /* Block How it Works */
     .block.how-it-works {
         padding: 40px 0 55px;
@@ -147,10 +155,6 @@
 
     .block.how-it-works .header-block {
         margin-bottom: 35px;
-    }
-
-    .block.how-it-works .header-block .title {
-        font-size: 28px;
     }
 
     .block.how-it-works .card {
@@ -181,10 +185,6 @@
         margin-bottom: 35px;
     }
 
-    .block.advantages .header-block .title {
-        font-size: 28px;
-    }
-
     .block.advantages .advantage {
         margin-bottom: 40px;
     }
@@ -199,10 +199,6 @@
         margin-bottom: 40px;
     }
 
-    .block.payment-methods .header-block .title {
-        font-size: 28px;
-    }
-
 
     /* Block Create Moneybox */
     .block.create-moneybox {
@@ -215,7 +211,6 @@
     }
 
     .block.create-moneybox .header-block .title {
-        font-size: 28px;
         margin-bottom: 5px;
     }
 
@@ -237,6 +232,12 @@
 
 @media (max-width: 480px) {
 
+    /* Block */
+    .block .header-block .title {
+        font-size: 22px;
+    }
+
+
     /* Block How it Works */
     .block.how-it-works {
         padding: 20px 0 25px;
@@ -249,10 +250,6 @@
 
     .block.how-it-works .header-block {
         margin-bottom: 15px;
-    }
-
-    .block.how-it-works .header-block .title {
-        font-size: 22px;
     }
 
     /* Override */
@@ -288,10 +285,6 @@
         margin-bottom: 10px;
     }
 
-    .block.intro .header-block .title {
-        font-size: 22px;
-    }
-
     .block.intro .content-block {
         max-width: 195px;
     }
@@ -324,10 +317,6 @@
         margin-bottom: 15px;
     }
 
-    .block.advantages .header-block .title {
-        font-size: 22px;
-    }
-
     .block.advantages .align-top {
         margin-right: 0;
         width: 100%;
@@ -355,10 +344,6 @@
         margin-bottom: 20px;
     }
 
-    .block.payment-methods .header-block .title {
-        font-size: 22px;
-    }
-
     /* Override */
     .block.payment-methods .row {
         margin-left: -10px;
@@ -379,10 +364,6 @@
     .block.create-moneybox .header-block {
         font-size: 17px;
         margin-bottom: 25px;
-    }
-
-    .block.create-moneybox .header-block .title {
-        font-size: 22px;
     }
 
     .block.create-moneybox .sign-in input[type=submit] {
