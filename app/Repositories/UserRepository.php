@@ -64,8 +64,8 @@ class UserRepository extends BaseRepository{
         // if person
         $this->_user->person_id = $person->id;
         $this->_user->email = $request->get('email');
-        $this->_user->password = md5($request->get('password'));
-        $this->_user->username = $request->get('email'); // for first time we add the email into the username
+        $this->_user->password = ($request->exists('password')) ? md5($request->get('password')) : "";
+        $this->_user->username = ($request->exists('username')) ? $request->get('username') : "";
 
         try{
 

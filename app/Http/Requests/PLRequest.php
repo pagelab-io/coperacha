@@ -12,6 +12,7 @@ use App\Validations\AuthValidation;
 use App\Validations\CategoryValidation;
 use App\Validations\LoginValidation;
 use App\Validations\MoneyboxValidation;
+use App\Validations\ParticipantValidation;
 use App\Validations\RegisterValidation;
 use App\Validations\SettingOptionValidation;
 use App\Validations\SettingValidation;
@@ -54,6 +55,7 @@ class PLRequest extends Request{
                 case "changePassword": return UserValidation::change_password_rules();
                 case "recoveryPassword": return AuthValidation::password_recovery_rules();
                 case "updateMoneybox": return MoneyboxValidation::update_moneybox();
+                case "createParticipant": return ParticipantValidation::rules();
                 default: return [];
             }
         }
@@ -80,6 +82,7 @@ class PLRequest extends Request{
             case "changePassword": return UserValidation::messages();
             case "recoveryPassword": return AuthValidation::messages();
             case "updateMoneybox": return MoneyboxValidation::messages();
+            case "createParticipant": return ParticipantValidation::messages();
             default: return [];
         }
 

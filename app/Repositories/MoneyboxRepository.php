@@ -53,15 +53,13 @@ class MoneyboxRepository extends BaseRepository{
         Moneybox $moneybox,
         PersonRepository $personRepository,
         CategoryRepository $categoryRepository,
-        MemberSettingRepository $memberSettingRepository,
-        ParticipantRepository $participantRepository)
+        MemberSettingRepository $memberSettingRepository)
     {
         parent::__construct($app);
         $this->_moneybox = $moneybox;
         $this->_personRepository = $personRepository;
         $this->_categoryRepository = $categoryRepository;
         $this->_memberSettingRepository = $memberSettingRepository;
-        $this->_participantRepository = $participantRepository;
         $this->setDefault();
     }
 

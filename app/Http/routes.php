@@ -111,3 +111,18 @@ $router->group([
     ]);
 });
 //endregion
+
+//region Participants
+
+$router->group([
+    'as' => 'participant',
+    'namespace' => 'Participant',
+    'prefix' => 'participant'
+], function($router){
+    $router->post('/', [
+        'middleware' => 'guest',
+        'uses' => 'ParticipantController@createParticipant'
+    ]);
+});
+
+//endregion

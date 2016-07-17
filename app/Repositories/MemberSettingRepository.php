@@ -64,7 +64,7 @@ class MemberSettingRepository extends BaseRepository{
     }
 
     /**
-     * Create the relations between moneybox and settings
+     * Create the relations between moneybox or participant and settings
      *
      * @param PLRequest $request
      * @param Moneybox|Participant $member
@@ -72,7 +72,7 @@ class MemberSettingRepository extends BaseRepository{
      */
     public function setSettings(PLRequest $request, $member)
     {
-        \Log::info("=== Creating settings for moneybox ===");
+        \Log::info("=== Creating settings ===");
         $settings = json_decode($request->get('settings'),true);
         $memberSettings = [];
 
