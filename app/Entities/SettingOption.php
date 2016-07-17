@@ -31,7 +31,7 @@ class SettingOption extends Model
      */
     public function setting()
     {
-        return $this->belongsTo('App\Models\Setting');
+        return $this->belongsTo('App\Entities\Setting');
     }
 
     //endregion

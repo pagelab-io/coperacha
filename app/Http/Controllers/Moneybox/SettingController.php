@@ -10,8 +10,8 @@ namespace App\Http\Controllers\Moneybox;
 
 use App\Http\Controllers\PLController;
 use App\Http\Requests\PLRequest;
-use App\Models\Setting;
-use App\Models\SettingOption;
+use App\Entities\SettingOption;
+use App\Http\Responses\PLResponse;
 use App\Repositories\SettingOptionRepository;
 use App\Repositories\SettingRepository;
 
@@ -55,19 +55,14 @@ class SettingController extends PLController{
         $this->validate($request,$request->rules(),$request->messages());
 
         try {
-            $setting = $this->_settingRepository->create($request);
-            if($setting instanceof Setting)
-            {
-                $this->_response['description'] = "setting was added successfully";
-                $this->_response['data'] = $setting;
-            }
-            return response()->json($this->_response);
-
+            $this->setResponse($this->_settingRepository->create($request));
+            return response()->json($this->getResponse());
         } catch(\Exception $ex) {
-            $this->_response['status'] = $ex->getCode();
-            $this->_response['description'] = $ex->getMessage();
-            $this->_response['data'] = $ex->getTraceAsString();
-            return response()->json($this->_response);
+            $response = new PLResponse();
+            $response->status = $ex->getCode();
+            $response->description = $ex->getMessage();
+            $response->data = $ex->getTraceAsString();
+            return response()->json($response);
         }
     }
 
@@ -81,18 +76,14 @@ class SettingController extends PLController{
     {
         $this->validate($request, $request->rules(), $request->messages());
         try {
-            $option = $this->_settingOptionRepository->create($request);
-            if($option instanceof SettingOption)
-            {
-                $this->_response['description'] = "option was added successfully";
-                $this->_response['data'] = $option;
-            }
-            return response()->json($this->_response);
+            $this->setResponse($this->_settingOptionRepository->create($request));
+            return response()->json($this->getResponse());
         } catch (\Exception $ex) {
-            $this->_response['status'] = $ex->getCode();
-            $this->_response['description'] = $ex->getMessage();
-            $this->_response['data'] = $ex->getTraceAsString();
-            return response()->json($this->_response);
+            $response = new PLResponse();
+            $response->status = $ex->getCode();
+            $response->description = $ex->getMessage();
+            $response->data = $ex->getTraceAsString();
+            return response()->json($response);
         }
     }
 
@@ -107,17 +98,18 @@ class SettingController extends PLController{
         $this->validate($request, $request->rules(), $request->messages());
 
         try {
-            $this->_response['data'] = $this->_settingRepository->childsOf($request);
-            return response()->json($this->_response);
+            $this->setResponse($this->_settingRepository->childsOf($request));
+            return response()->json($this->getResponse());
         } catch(\Exception $ex) {
-            $this->_response['status'] = $ex->getCode();
-            $this->_response['description'] = $ex->getMessage();
-            $this->_response['data'] = $ex->getTraceAsString();
-            return response()->json($this->_response);
+            $response = new PLResponse();
+            $response->status = $ex->getCode();
+            $response->description = $ex->getMessage();
+            $response->data = $ex->getTraceAsString();
+            return response()->json($response);
         }
     }
 
     //endregion
 
 
-} 
+}

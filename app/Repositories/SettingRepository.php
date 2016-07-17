@@ -10,7 +10,8 @@ namespace App\Repositories;
 
 
 use App\Http\Requests\PLRequest;
-use App\Models\Setting;
+use App\Http\Responses\PLResponse;
+use App\Entities\Setting;
 use Illuminate\Container\Container as App;
 
 class SettingRepository extends BaseRepository{
@@ -25,10 +26,9 @@ class SettingRepository extends BaseRepository{
     //region Static
     //endregion
 
-    public function __construct(Setting $setting, App $app){
+    public function __construct(App $app, Setting $setting){
         parent::__construct($app);
         $this->_setting = $setting;
-        $this->setDefault();
     }
 
     //region Methods
@@ -40,31 +40,37 @@ class SettingRepository extends BaseRepository{
      */
     function model()
     {
-        return 'App\Models\Setting';
+        return 'App\Entities\Setting';
     }
 
     /**
      * Create a new Setting
      *
      * @param PLRequest $request
-     * @return Setting
+     * @return PLResponse
      * @throws \Exception
      */
     public function create(PLRequest $request){
+
         \Log::info("=== Setting create ===");
         $this->_setting->name = $request->get('name');
-        $this->_setting->path = ($request->get('path') != "") ? $request->get('path') : "/";
-        $this->_setting->type = ($request->get('type') != "") ? $request->get('type') : "text";
+        $this->_setting->path = (trim($request->get('path')) != "") ? trim($request->get('path')) : "/";
+        $this->_setting->type = (trim($request->get('type')) != "") ? trim($request->get('type')) : "text";
         if (!$this->_setting->save()) throw new \Exception("Unable to create Setting", -1);
         \Log::info("=== Setting created successfully : ".$this->_setting." ===");
-        return $this->_setting;
+
+        $response               = new PLResponse();
+        $response->description  = "setting was added successfully";
+        $response->data         = $this->_setting;
+
+        return $response;
     }
 
     /**
      * Get all settings with it's childrens
      *
      * @param PLRequest $request
-     * @return mixed
+     * @return PLResponse
      */
     public function childsOf(PLRequest $request)
     {
@@ -75,16 +81,10 @@ class SettingRepository extends BaseRepository{
             foreach ($parents as $parent)
                 $parent->options;
 
-        return $parents;
-    }
-
-    /**
-     * Set the default values for person
-     */
-    public function setDefault()
-    {
-        $this->_setting->path = '/';
-        $this->_setting->type = 'text';
+        $response               = new PLResponse();
+        $response->description  = "listing all settings successfully";
+        $response->data         = $parents;
+        return $response;
     }
     //endregion
 

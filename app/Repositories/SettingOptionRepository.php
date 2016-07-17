@@ -10,8 +10,9 @@ namespace App\Repositories;
 
 
 use App\Http\Requests\PLRequest;
-use App\Models\Setting;
-use App\Models\SettingOption;
+use App\Entities\Setting;
+use App\Entities\SettingOption;
+use App\Http\Responses\PLResponse;
 use Illuminate\Container\Container as App;
 
 class SettingOptionRepository extends BaseRepository{
@@ -40,14 +41,14 @@ class SettingOptionRepository extends BaseRepository{
      */
     function model()
     {
-        return 'App\Models\SettingOption';
+        return 'App\Entities\SettingOption';
     }
 
     /**
      * Create a new Setting
      *
      * @param PLRequest $request
-     * @return Setting
+     * @return PLResponse
      * @throws \Exception
      */
     public function create(PLRequest $request){
@@ -57,7 +58,11 @@ class SettingOptionRepository extends BaseRepository{
         $this->_settingOption->subtype = ($request->exists('subtype')) ? $request->get('subtype') : "";
         if (!$this->_settingOption->save()) throw new \Exception("Unable to create SettingOption", -1);
         \Log::info("=== Setting Option created successfully : ".$this->_settingOption." ===");
-        return $this->_settingOption;
+
+        $response = new PLResponse();
+        $response->description = "Option was added successfully";
+        $response->data = $this->_settingOption;
+        return $response;
     }
     //endregion
 

@@ -31,7 +31,7 @@ class Setting extends Model
      */
     public function options()
     {
-        return $this->hasMany('App\Models\SettingOption');
+        return $this->hasMany('App\Entities\SettingOption');
     }
 
     //endregion
