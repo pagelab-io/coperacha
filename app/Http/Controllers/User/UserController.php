@@ -92,26 +92,18 @@ class UserController extends PLController{
 
     public function changePassword(PLRequest $request)
     {
-        /*$this->validate($request, $request->rules(), $request->messages());
+        $this->validate($request, $request->rules(), $request->messages());
 
         try {
-
-            if ($this->_userRepository->changePassword($request)) {
-                $this->_response['data'] = true;
-                $this->_response['description'] = "password changed successfully";
-            } else {
-                $this->_response['data'] = false;
-                $this->_response['description'] = "password cannot be changed";
-            }
-
-            return response()->json($this->_response);
-
+            $this->setResponse($this->_userRepository->changePassword($request));
+            return response()->json($this->getResponse());
         } catch(\Exception $ex) {
-            $this->_response['status'] = $ex->getCode();
-            $this->_response['description'] = $ex->getMessage();
-            $this->_response['data'] = $ex->getTraceAsString();
-            return response()->json($this->_response);
-        }*/
+            $response = new PLResponse();
+            $response->status = $ex->getCode();
+            $response->description = $ex->getMessage();
+            $response->data = $ex->getTraceAsString();
+            return response()->json($response);
+        }
     }
 
     //endregion

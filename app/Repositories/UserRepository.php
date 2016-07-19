@@ -174,7 +174,7 @@ class UserRepository extends BaseRepository{
      * Change the password for specific user
      *
      * @param PLRequest $request
-     * @return bool|\Exception
+     * @return PLResponse
      * @throws \Exception
      */
     public function changePassword(PLRequest $request)
@@ -190,8 +190,19 @@ class UserRepository extends BaseRepository{
 
         if ($password != $passwordConfirm) throw new \Exception("Passwords not are equals", -1);
 
-        return ($this->update($request) instanceof User) ? true:false;
+        $this->_user = $this->byId($request->get('user_id'));
+        if ($request->exists('newPassword')) $this->_user->password = md5($request->get('newPassword'));
 
+        $response = new PLResponse();
+        if ($this->_user->update()) {
+            $response->description = 'password changed successfully';
+            $response->data = true;
+        } else {
+            $response->description = 'password cannot be changed';
+            $response->data = false;
+        }
+
+        return $response;
     }
 
     /**

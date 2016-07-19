@@ -43,9 +43,6 @@ class TxUpdateUser extends PLTransaction{
             \Log::info("=== Updating user ===");
             if ($request->exists('email')) $user->email = $request->get('email');
             if ($request->exists('username')) $user->username = $request->get('username');
-            if ($request->exists('method') && ($request->get('method') == 'changePassword')) {
-                if ($request->exists('newPassword')) $user->password = md5($request->get('newPassword'));
-            }
             if (!$user->save()) throw new \Exception("Unable to update User", -1);
             \Log::info("=== User updated successfully : ".$user." ===");
 
