@@ -136,14 +136,15 @@ class UserRepository extends BaseRepository{
      * // TODO - al hacer este proceso te deberia mandar a cambiar tu contraseña en el primer login que hagas.
      *
      * @param PLRequest $request
-     * @return bool
+     * @return PLResponse
      * @throws \Exception
      */
     public function passwordRecovery(PLRequest $request)
     {
         \Log::info("--- Password Recovery --- ");
 
-        // buscar por email
+        $response = null;
+
         if ($this->userExist($request->get('email'))) {
             \Log::info("--- generating new password  --- ");
             $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -153,11 +154,15 @@ class UserRepository extends BaseRepository{
             $this->_user->password = md5($newPassword);
             if (!$this->_user->save()) throw new \Exception("Unable to update User", -1);
 
+            $response = new PLResponse();
+            $response->description = 'Password recovered successfully';
+            $response->data = true;
+
         } else {
             throw new \Exception("User does not exist", -1);
         }
 
-        return true;
+        return $response;
     }
 
     /**

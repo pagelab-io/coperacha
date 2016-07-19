@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\PLController;
 use App\Http\Requests\PLRequest;
+use App\Http\Responses\PLResponse;
 use App\Repositories\UserRepository;
 
 class PasswordController extends PLController
@@ -32,18 +33,15 @@ class PasswordController extends PLController
         $this->validate($request, $request->rules(), $request->messages());
 
         try {
-
-            if ($this->_userRepository->passwordRecovery($request)) {
-                $this->_response['description'] = "Password recovered successfully";
-                $this->_response['data'] = true;
-            }
-            return response()->json($this->_response);
+            $this->setResponse($this->_userRepository->passwordRecovery($request));
+            return response()->json($this->getResponse());
 
         } catch(\Exception $ex) {
-            $this->_response['status'] = $ex->getCode();
-            $this->_response['description'] = $ex->getMessage();
-            $this->_response['data'] = $ex->getTraceAsString();
-            return response()->json($this->_response);
+            $response = new PLResponse();
+            $response->status = $ex->getCode();
+            $response->description = $ex->getMessage();
+            $response->data = $ex->getTraceAsString();
+            return response()->json($response);
         }
 
     }
