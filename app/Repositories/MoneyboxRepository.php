@@ -8,10 +8,10 @@
 
 namespace App\Repositories;
 
-use App\Entities\Category;
 use App\Entities\Person;
 use App\Http\Responses\PLResponse;
 use App\Transactions\TxCreateMoneybox;
+use App\Transactions\TxUpdateMoneybox;
 use Illuminate\Container\Container as App;
 use App\Http\Requests\PLRequest;
 use App\Entities\Moneybox;
@@ -41,14 +41,14 @@ class MoneyboxRepository extends BaseRepository{
     private $_memberSettingRepository;
 
     /**
-     * @var ParticipantRepository
-     */
-    private $_participantRepository;
-
-    /**
      * @var TxCreateMoneybox
      */
     private $_txCreateMoneybox;
+
+    /**
+     * @var TxUpdateMoneybox
+     */
+    private $_txUpdateMoneybox;
 
     //endregion
 
@@ -57,18 +57,20 @@ class MoneyboxRepository extends BaseRepository{
 
     public function __construct(
         App $app,
-        TxCreateMoneybox $txCreateMoneybox,
         Moneybox $moneybox,
         PersonRepository $personRepository,
         CategoryRepository $categoryRepository,
-        MemberSettingRepository $memberSettingRepository)
+        MemberSettingRepository $memberSettingRepository,
+        TxCreateMoneybox $txCreateMoneybox,
+        TxUpdateMoneybox $txUpdateMoneybox)
     {
         parent::__construct($app);
         $this->_moneybox = $moneybox;
-        $this->_txCreateMoneybox = $txCreateMoneybox;
         $this->_personRepository = $personRepository;
         $this->_categoryRepository = $categoryRepository;
         $this->_memberSettingRepository = $memberSettingRepository;
+        $this->_txCreateMoneybox = $txCreateMoneybox;
+        $this->_txUpdateMoneybox = $txUpdateMoneybox;
     }
 
     //region Methods
@@ -195,36 +197,30 @@ class MoneyboxRepository extends BaseRepository{
      * @return Moneybox|mixed
      * @throws \Exception
      */
-    public function update(PLRequest $request)
+    public function updateMoneybox(PLRequest $request)
     {
 
-        try {
+        $category = null;
+        $moneybox = null;
 
-            $this->_moneybox = $this->byId($request->get('moneybox_id'));
-            \Log::info("=== Moneybox update ===");
+        try {$moneybox = $this->byId($request->get('moneybox_id')); }
+        catch(\Exception $ex) { throw new \Exception("Moneybox does not exist", -1, $ex); }
+        \Log::info("Moneybox : ".$moneybox);
 
-            // check for category existence
-            if ($request->exists('category_id')) {
-                try {
-                    $category = $this->_categoryRepository->byId($request->get('category_id'));
-                    if($category instanceof Category) $this->_moneybox->category_id = $request->get("category_id");
-                }
-                catch(\Exception $ex) {throw new \Exception("Category does not exist", -1, $ex);}
-            }
-
-            if ($request->exists('name')) $this->_moneybox->name = $request->get('name');
-            if ($request->exists('goal_amount')) $this->_moneybox->goal_amount = $request->get('goal_amount');
-            if ($request->exists('end_date')) $this->_moneybox->end_date = $request->get('end_date');
-            if ($request->exists('description')) $this->_moneybox->description = $request->get('description');
-            if (!$this->_moneybox->save()) throw new \Exception("Unable to update Moneybox", -1);
-
-            \Log::info("=== Moneybox updated successfully : " . $this->_moneybox . " ===");
-
-        } catch(\Exception $ex) {
-            throw new \Exception("Moneybox does not exist", -1, $ex);
+        // check for category existence
+        if ($request->exists('category_id')) {
+            try { $category = $this->_categoryRepository->byId($request->get('category_id')); }
+            catch(\Exception $ex) { throw new \Exception("Category does not exist", -1, $ex); }
+            \Log::info("Category : ".$category);
         }
 
-        return $this->_moneybox;
+        $response = $this->_txUpdateMoneybox->executeTx($request, array('moneybox' => $moneybox, 'category' => $category));
+
+        if ($response->status == '200') {
+            $response->description = 'Moneybox was updated successfully';
+        }
+
+        return $response;
 
     }
 

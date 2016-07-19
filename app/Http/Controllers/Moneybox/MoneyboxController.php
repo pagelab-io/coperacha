@@ -102,20 +102,14 @@ class MoneyboxController extends PLController {
         $moneybox = null;
 
         try {
-
-            $moneybox = $this->_moneyboxRepository->update($request);
-            if ($request->exists('settings')) {
-                $this->_memberSettingsRepository->updateSettings($request, $moneybox);
-            }
-            $this->_response['data'] = $moneybox;
-
-            return response()->json($this->_response);
-
+            $this->setResponse($this->_moneyboxRepository->updateMoneybox($request));
+            return response()->json($this->getResponse());
         } catch(\Exception $ex) {
-            $this->_response['status'] = $ex->getCode();
-            $this->_response['description'] = $ex->getMessage();
-            $this->_response['data'] = $ex->getTraceAsString();
-            return response()->json($this->_response);
+            $response = new PLResponse();
+            $response->status = $ex->getCode();
+            $response->description = $ex->getMessage();
+            $response->data = $ex->getTraceAsString();
+            return response()->json($response);
         }
     }
 

@@ -31,11 +31,12 @@ class TxUpdateUser extends PLTransaction{
      * @throws \Exception
      * @return array
      */
-    function executeTx(PLRequest $request, $params = array())
+    public function executeTx(PLRequest $request, $params = array())
     {
 
         $user = $params['user'];
         $person = $params['person'];
+        $response = null;
 
         try {
             \DB::beginTransaction();

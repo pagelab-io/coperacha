@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Emmanuel
- * Date: 17/07/2016
- * Time: 12:34 AM
- */
 
 namespace App\Transactions;
-
 
 use App\Entities\MemberSetting;
 use App\Entities\Moneybox;
@@ -26,6 +19,9 @@ class TxCreateMoneybox extends PLTransaction{
      */
     private $_settingRepository;
 
+    /**
+     * @var SettingOptionRepository
+     */
     private $_optionRepository;
 
     //endregion
@@ -63,7 +59,7 @@ class TxCreateMoneybox extends PLTransaction{
      * @throws \Exception
      * @return Moneybox
      */
-    function executeTx(PLRequest $request, $params = array())
+    public function executeTx(PLRequest $request, $params = array())
     {
 
         $moneybox = null;
