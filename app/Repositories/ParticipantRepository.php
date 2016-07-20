@@ -8,29 +8,19 @@
 
 namespace App\Repositories;
 
-
-use Illuminate\Container\Container as App;
-use App\Models\Moneybox;
-use App\Models\Participant;
-use App\Models\Person;
+use App\Entities\Participant;
 
 class ParticipantRepository extends BaseRepository{
 
     //region attributes
 
-    /**
-     * @var Participant
-     */
-    private $_participant = null;
 
     //endregion
 
     //region Static
     //endregion
 
-    public function __construct(App $app, Participant $participant){
-        parent::__construct($app);
-        $this->_participant = $participant;
+    public function __construct(){
     }
 
     //region Methods
@@ -42,26 +32,14 @@ class ParticipantRepository extends BaseRepository{
      */
     function model()
     {
-        return 'App\Models\Participant';
+        return 'App\Entities\Participant';
     }
 
-    /**
-     * Create a participant for the selected moneybox
-     *
-     * @param Person $person
-     * @param Moneybox $moneybox
-     * @return Participant
-     * @throws \Exception
-     */
-    public function create(Person $person, Moneybox $moneybox)
-    {
-        \Log::info("=== Participant create ===");
-        $this->_participant->person_id = $person->id;
-        $this->_participant->moneybox_id = $moneybox->id;
-        if (!$this->_participant->save()) throw new \Exception("Unable to create Person", -1);
 
-        \Log::info("=== Participant created successfully : " . $this->_participant . " ===");
-        return $this->_participant;
+    public function isParticipant($person_id, $moneybox_id)
+    {
+        $count = Participant::where(['person_id'=>$person_id, 'moneybox_id' => $moneybox_id])->count();
+        return ($count > 0) ? true:false;
     }
 
     //endregion

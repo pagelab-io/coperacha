@@ -23,7 +23,13 @@ class ParticipantValidation {
      */
     static function rules()
     {
-        return [];
+        return [
+            'moneybox_id' => 'required|numeric',
+            'name' => 'required|string',
+            'lastname' => 'required|string',
+            'email' => 'required|email',
+            'settings' => 'required|json',
+        ];
     }
 
     /**

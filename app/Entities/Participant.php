@@ -30,7 +30,7 @@ class Participant extends Model
      */
     public function person()
     {
-        return $this->belongsTo('App\Models\Person');
+        return $this->belongsTo('App\Entities\Person');
     }
 
     /**
@@ -39,7 +39,7 @@ class Participant extends Model
      */
     public function moneybox()
     {
-        return $this->belongsTo('App\Models\Moneybox');
+        return $this->belongsTo('App\Entities\Moneybox');
     }
     //endregion
 

@@ -9,6 +9,7 @@ use App\Entities\SettingOption;
 use App\Http\Requests\PLRequest;
 use App\Repositories\SettingOptionRepository;
 use App\Repositories\SettingRepository;
+use App\Utilities\PLConstants;
 
 class TxCreateMoneybox extends PLTransaction{
 
@@ -94,7 +95,7 @@ class TxCreateMoneybox extends PLTransaction{
                             $ms->setting_id = $setting['setting_id'];
                             $ms->option_id  = $setting['option_id'];
                             $ms->owner_id   = $moneybox->id;
-                            $ms->owner      = $request->get('owner');
+                            $ms->owner      = PLConstants::OWNER_MONEYBOX;
                             $ms->value      = $setting['value'];
                             array_push($memberSettings, $ms);
                         }

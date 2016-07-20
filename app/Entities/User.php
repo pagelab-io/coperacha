@@ -27,7 +27,7 @@ class User extends Model
     protected $hidden = ['password'];
 
     protected $defaults = [
-        'firstaccess' => 0
+        'first_access' => 0
     ];
 
     //endregion

@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Participant;
 
 use \App\Http\Controllers\PLController;
 use App\Http\Requests\PLRequest;
+use App\Http\Responses\PLResponse;
 use App\Models\Moneybox;
 use App\Models\Participant;
+use App\Models\ParticipantModel;
 use App\Models\Person;
 use App\Repositories\MemberSettingRepository;
 use App\Repositories\MoneyboxRepository;
@@ -18,45 +20,18 @@ class ParticipantController extends PLController {
     //region attributes
 
     /**
-     * @var PersonRepository
+     * @var ParticipantModel
      */
-    private $_personRepository;
-
-    /**
-     * @var UserRepository
-     */
-    private $_userRepository;
-
-    /**
-     * @var ParticipantRepository
-     */
-    private $_participantRepository;
-
-    /**
-     * @var MoneyboxRepository
-     */
-    private $_moneyboxRepository;
-
-    /**
-     * @var MemberSettingRepository
-     */
-    private $_memberSettingRepository;
+    private $_participant;
 
     //endregion
 
     //region Static methods
     //endregion
 
-    public function __construct(
-        PersonRepository $personRepository,
-        UserRepository $userRepository,
-        ParticipantRepository $participantRepository,
-        MoneyboxRepository $moneyboxRepository)
+    public function __construct(ParticipantModel $participant)
     {
-        $this->_personRepository = $personRepository;
-        $this->_userRepository = $userRepository;
-        $this->_participantRepository = $participantRepository;
-        $this->_moneyboxRepository = $moneyboxRepository;
+        $this->_participant = $participant;
     }
 
     //region Methods
@@ -71,52 +46,18 @@ class ParticipantController extends PLController {
     {
 
         // validate the request
-        $this->validate($request,$request->rules(),$request->messages());
+        $this->validate($request, $request->rules(),$request->messages());
 
         try {
-
-            $person = null;
-            $user   = null;
-
-            // obtain or create user and person
-            if ($this->_userRepository->userExist($request->get('email'))) {
-                $user = $this->_userRepository->byEmail($request->get('email'));
-                $person = $user->person;
-            } else {
-                $person = $this->_personRepository->create($request);
-                if ($person instanceof Person)
-                    $user = $this->_userRepository->create($request, $person);
-            }
-
-            //obtain the moneybox
-            $moneybox = $this->_moneyboxRepository->byId($request->get("moneybox_id"));
-
-            if ($moneybox instanceof Moneybox) {
-
-                // create participant
-                $participant = $this->_participantRepository->create($person, $moneybox);
-
-                if ($participant instanceof Participant) {
-                    // create participant settings
-                    //$this->_memberSettingRepository->setSettings($request, $participant);
-                    $this->_response['description'] = "Participant was created successfully";
-                    $participant->person;
-                    $participant->moneybox;
-                    $this->_response['data'] = $participant;
-                }
-
-            } else {
-                throw new \Exception("Moneybox does not exist", -1);
-            }
-
-            return response()->json($this->_response);
-
+            $this->setResponse($this->_participant->createParticipant($request));
+            return response()->json($this->getResponse());
         }
         catch (\Exception $ex) {
-            $this->_response['status'] = $ex->getCode();
-            $this->_response['description'] = $ex->getMessage();
-            $this->_response['data'] = $ex->getTraceAsString();
-            return response()->json($this->_response);
+            $response = new PLResponse();
+            $response->status = $ex->getCode();
+            $response->description = $ex->getMessage();
+            $response->data = $ex->getTraceAsString();
+            return response()->json($response);
         }
 
     }
