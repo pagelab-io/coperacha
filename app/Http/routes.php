@@ -29,6 +29,11 @@ $router->group([
         'middleware' => 'guest',
         'uses' => 'RegisterController@register'
     ]);
+    // register
+    $router->get('/test', [
+        'middleware' => 'guest',
+        'uses' => 'RegisterController@emailTest'
+    ]);
 });
 //endregion
 

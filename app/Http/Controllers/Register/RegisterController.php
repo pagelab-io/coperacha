@@ -6,6 +6,7 @@ use App\Http\Controllers\PLController;
 use \App\Http\Requests\PLRequest;
 use App\Http\Responses\PLResponse;
 use App\Models\Register;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends PLController{
 
@@ -50,6 +51,17 @@ class RegisterController extends PLController{
             $response->data = $ex->getTraceAsString();
             return response()->json($response);
         }
+    }
+
+    public function emailTest()
+    {
+        \Log::info("Enviando email ...");
+        Mail::send('emails.test', [] , function ($m){
+            $m->from('no-reply@pagelab.io', 'Page');
+            $m->to('sanchezz985@gmail.com', "Emmanuel")->subject('Prueba !');
+        });
+        \Log::info("email enviado");
+        \Log::info("");
     }
 
     //endregion
