@@ -18,7 +18,7 @@ class User extends Model
      * These are the mass-assignable keys
      * @var array
      */
-    protected $fillable = ['person_id', 'email', 'password', 'username', 'first_access'];
+    protected $fillable = ['person_id', 'email', 'password', 'username'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -27,7 +27,7 @@ class User extends Model
     protected $hidden = ['password'];
 
     protected $defaults = [
-        'first_access' => 0
+        'tracking' => 0
     ];
 
     //endregion

@@ -14,6 +14,7 @@ use App\Transactions\TxUpdateUser;
 use App\Http\Requests\PLRequest;
 use App\Entities\Person;
 use App\Entities\User;
+use Mockery\CountValidator\Exception;
 
 class UserRepository extends BaseRepository{
 
@@ -133,7 +134,6 @@ class UserRepository extends BaseRepository{
 
     /**
      * Make a new random password for specific user
-     * // TODO - al hacer este proceso te deberia mandar a cambiar tu contraseña en el primer login que hagas.
      *
      * @param PLRequest $request
      * @return PLResponse
@@ -152,6 +152,7 @@ class UserRepository extends BaseRepository{
             $this->_user = $this->byEmail(trim($request->get('email')));
             \Log::info("--- freshPassword :: " .$newPassword." ---");
             $this->_user->password = md5($newPassword);
+            $this->_user->tracking = 2;
             if (!$this->_user->save()) throw new \Exception("Unable to update User", -1);
 
             $response = new PLResponse();
@@ -247,19 +248,39 @@ class UserRepository extends BaseRepository{
      */
     public function login(PLRequest $request)
     {
-        $count = User::where(['email' => trim($request->get('email')), 'password' => md5(trim($request->get('password')))])->count();
-        $response = new PLResponse();
+        $count      = User::where(['email' => trim($request->get('email')), 'password' => md5(trim($request->get('password')))])->count();
+        $response   = new PLResponse();
+        $user       = null;
 
         if ($count == 1) {
+            $user = $this->byEmail($request->get('email'));
+            if ($user->tracking == 0) {
+                $user->first_access = 1;
+                $this->updateTracking($user, 1);
+            }
+            $user->first_access = 0;
             $response->description = 'Login successfully';
-            $response->data = true;
+            $response->data = $user;
         } else {
             $response->status = -1;
             $response->description = 'Invalid Credentials';
-            $response->data = false;
+            $response->data = null;
         }
 
         return $response;
+    }
+
+    /**
+     * @param User $user
+     * @param $tracking
+     * @return User
+     */
+    public function updateTracking(User $user, $tracking)
+    {
+        \Log::info("Updatint tracking ...");
+        $user->tracking = $tracking;
+        if (!$user->save()) throw new Exception("Unable to update user", -1);
+        return $user;
     }
 
     /**

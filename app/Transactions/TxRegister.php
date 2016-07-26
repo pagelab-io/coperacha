@@ -44,43 +44,84 @@ class TxRegister extends PLTransaction{
     {
         $response   = array();
         $fbUser     = null;
+        $user       = null;
 
-        if ($this->_userRepository->userExist($request->get('email'))) throw new \Exception ("User already exist", -2);
+        if ($this->_userRepository->userExist($request->get('email'))){
+            $user = $this->_userRepository->byEmail($request->get('email'));
+            if ($user->tracking == 0 || $user->tracking == 1) throw new \Exception ("User already exist", -2);
 
-        try {
+            if ($user->tracking == -1) { // just update data
 
-            \DB::beginTransaction();
+                try {
 
-            \Log::info("=== Creating person ... ===");
-            $person             = new Person();
-            $person->name       = $request->get('name');
-            $person->lastname   = $request->get('lastname');
-            if (!$person->save()) throw new \Exception("Unable to create Person", -1);
-            \Log::info("=== Person created successfully : " . $person . " ===");
+                    \DB::beginTransaction();
+
+                    \Log::info("=== Updating person ... ===");
+                    $person             = $user->person;
+                    $person->name       = $request->get('name');
+                    $person->lastname   = $request->get('lastname');
+                    if (!$person->save()) throw new \Exception("Unable to update Person", -1);
+                    \Log::info("=== Person created successfully : " . $person . " ===");
+
+                    \Log::info("=== Updating user ... ===");
+                    $user->password  = md5($request->get('password'));
+                    $user->tracking  = 0;
+                    if (!$user->save()) throw new \Exception("Unable to update User", -1);
+                    \Log::info("=== User created successfully : ".$user." ===");
+
+                    if ($request->get('isFB') == 1) \Log::info("TODO -  do something");
+
+                    \DB::commit();
+
+                    $response['Person'] = $person;
+                    $response['User']   = $user;
+                    $response['FbUser'] = $fbUser;
+
+                } catch(\Exception $ex) {
+                    \Log::info("=== Executing rollback ... ===");
+                    \DB::rollback();
+                    throw $ex;
+                }
+
+            }
+
+        } else {
+
+            try {
+
+                \DB::beginTransaction();
+
+                \Log::info("=== Creating person ... ===");
+                $person             = new Person();
+                $person->name       = $request->get('name');
+                $person->lastname   = $request->get('lastname');
+                if (!$person->save()) throw new \Exception("Unable to create Person", -1);
+                \Log::info("=== Person created successfully : " . $person . " ===");
 
 
-            \Log::info("=== Creating user ... ===");
-            $user            = new User();
-            $user->person_id = $person->id;
-            $user->email     = $request->get('email');
-            $user->password  = md5($request->get('password'));
-            $user->username  = $request->get('email');
-            if (!$user->save()) throw new \Exception("Unable to create User", -1);
-            \Log::info("=== User created successfully : ".$user." ===");
+                \Log::info("=== Creating user ... ===");
+                $user            = new User();
+                $user->person_id = $person->id;
+                $user->email     = $request->get('email');
+                $user->password  = md5($request->get('password'));
+                $user->username  = $request->get('email');
+                if (!$user->save()) throw new \Exception("Unable to create User", -1);
+                \Log::info("=== User created successfully : ".$user." ===");
 
 
-            if ($request->get('isFB') == 1) \Log::info("TODO -  create FBUser");
+                if ($request->get('isFB') == 1) \Log::info("TODO -  create FBUser");
 
-            \DB::commit();
+                \DB::commit();
 
-            $response['Person'] = $person;
-            $response['User']   = $user;
-            $response['FbUser'] = $fbUser;
+                $response['Person'] = $person;
+                $response['User']   = $user;
+                $response['FbUser'] = $fbUser;
 
-        } catch(\Exception $ex) {
-            \Log::info("=== Executing rollback ... ===");
-            \DB::rollback();
-            throw $ex;
+            } catch(\Exception $ex) {
+                \Log::info("=== Executing rollback ... ===");
+                \DB::rollback();
+                throw $ex;
+            }
         }
 
         return $response;

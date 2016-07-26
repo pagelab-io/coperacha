@@ -21,14 +21,15 @@ class Person extends Model
         'birthday' => '0000-00-00',
         'gender' => 'H',
         'city' => '',
-        'country' => ''
+        'country' => '',
+        'phone' => ''
     ];
 
     /**
      * These are the mass-assignable keys
      * @var array
      */
-    protected $fillable = ['name', 'lastname', 'birthday', 'gender', 'city', 'country'];
+    protected $fillable = ['name', 'lastname', 'birthday', 'gender', 'city', 'country', 'phone'];
 
     //endregion
 
