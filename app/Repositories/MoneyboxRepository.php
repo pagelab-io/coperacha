@@ -103,7 +103,6 @@ class MoneyboxRepository extends BaseRepository{
         // check for creation date
         $today = new Carbon();
         $moneybox_enddate = PLDateTime::toCarbon($request->get('end_date'));
-
         if($today->gt($moneybox_enddate)) throw new Exception("Incorrect End Date", -1);
 
         // check for category
