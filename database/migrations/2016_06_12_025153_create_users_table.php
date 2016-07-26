@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
                 $table->string('email', 128)->unique();
                 $table->string('password', 128);
                 $table->string('username',128)->unique();
-                $table->integer('first_access',false,true);
+                $table->integer('tracking');
                 $table->timestamps();
 
                 $table->foreign('person_id')->references('id')->on('persons');

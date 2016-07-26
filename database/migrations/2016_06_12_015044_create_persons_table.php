@@ -21,6 +21,7 @@ class CreatePersonsTable extends Migration
                 $table->string('lastname', 128);
                 $table->date('birthday');
                 $table->enum('gender', ['H','M']);
+                $table->string('phone', 15);
                 $table->string('city', 128);
                 $table->string('country', 128);
                 $table->timestamps();
