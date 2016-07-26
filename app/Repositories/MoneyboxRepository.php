@@ -12,9 +12,12 @@ use App\Entities\Person;
 use App\Http\Responses\PLResponse;
 use App\Transactions\TxCreateMoneybox;
 use App\Transactions\TxUpdateMoneybox;
+use App\Utilities\PLDateTime;
 use Illuminate\Container\Container as App;
 use App\Http\Requests\PLRequest;
 use App\Entities\Moneybox;
+use Carbon\Carbon;
+use Mockery\CountValidator\Exception;
 
 class MoneyboxRepository extends BaseRepository{
 
@@ -96,6 +99,12 @@ class MoneyboxRepository extends BaseRepository{
 
         $category = null;
         $person   = null;
+
+        // check for creation date
+        $today = new Carbon();
+        $moneybox_enddate = PLDateTime::toCarbon($request->get('end_date'));
+
+        if($today->gt($moneybox_enddate)) throw new Exception("Incorrect End Date", -1);
 
         // check for category
         try {$category = $this->_categoryRepository->byId($request->get('category_id'));}
@@ -213,6 +222,8 @@ class MoneyboxRepository extends BaseRepository{
             catch(\Exception $ex) { throw new \Exception("Category does not exist", -1, $ex); }
             \Log::info("Category : ".$category);
         }
+
+        // check dates
 
         $response = $this->_txUpdateMoneybox->executeTx($request, array('moneybox' => $moneybox, 'category' => $category));
 

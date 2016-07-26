@@ -46,6 +46,7 @@ class SettingOptionRepository extends BaseRepository{
 
     /**
      * Create a new Setting
+     * TODO - validate setting_id
      *
      * @param PLRequest $request
      * @return PLResponse
