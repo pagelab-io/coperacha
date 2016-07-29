@@ -11,6 +11,7 @@ namespace App\Repositories;
 
 use App\Http\Requests\PLRequest;
 use App\Entities\FbUser;
+use App\Http\Responses\PLResponse;
 
 class FbUserRepository extends BaseRepository{
 
@@ -19,15 +20,20 @@ class FbUserRepository extends BaseRepository{
     /**
      * @var FbUser
      */
-    private $_fbUser = null;
+    private $_fbUser;
 
+    /**
+     * @var UserRepository
+     */
+    private $_userRepository;
     //endregion
 
     //region Static
     //endregion
 
-    public function __construct(FbUser $fbUser){
+    public function __construct(FbUser $fbUser, UserRepository $userRepository){
         $this->_fbUser = $fbUser;
+        $this->_userRepository = $userRepository;
     }
 
     //region Methods
@@ -45,12 +51,56 @@ class FbUserRepository extends BaseRepository{
      * Facebook login
      *
      * @param PLRequest $request
-     * @return bool
+     * @throws \Exception
+     * @return PLResponse
      */
     public function login(PLRequest $request)
     {
-        return true;
+        $count      = \DB::table('users')
+                        ->join('fbusers', 'users.id', '=', 'fbusers.user_id')
+                        ->select('*')
+                        ->where([
+                            'email'=>$request->get('email'),
+                            'fb_uid'=>$request->get('facebook_uid'),
+                        ])
+                        ->count();
+
+        $response   = new PLResponse();
+        $user       = null;
+        $fbUser     = null;
+
+        if ($count == 1) {
+            $user = $this->_userRepository->byEmail($request->get('email'));
+            $fbUser = $this->byUID($request->get('facebook_uid'));
+
+            if ($user->tracking == 0) {
+                $user->tracking = 1;
+                if (!$user->save()) throw new \Exception("Unable to update user", -1);
+                $user->first_access = 1;
+            }
+            $user->first_access = 0;
+            $user->fbUser = $fbUser;
+            $response->description = 'Login successfully';
+            $response->data = $user;
+        } else {
+            $response->status = -1;
+            $response->description = 'Invalid Credentials';
+            $response->data = null;
+        }
+
+        return $response;
     }
+
+    /**
+     * get a fbUser by facebook_uid
+     * @param $fb_uid
+     * @return mixed
+     */
+    public function byUID($fb_uid)
+    {
+        return FBUser::where("fb_uid", $fb_uid)->firstOrFail();
+    }
+
     //endregion
 
     //region Private Methods
