@@ -2,6 +2,7 @@
 
 namespace App\Transactions;
 
+use App\Entities\FbUser;
 use App\Entities\Person;
 use App\Entities\User;
 use App\Http\Requests\PLRequest;
@@ -48,9 +49,11 @@ class TxRegister extends PLTransaction{
 
         if ($this->_userRepository->userExist($request->get('email'))){
             $user = $this->_userRepository->byEmail($request->get('email'));
+
+            // if user is visitant but he has tracking 0 or 1 (first access or user active)
             if ($user->tracking == 0 || $user->tracking == 1) throw new \Exception ("User already exist", -2);
 
-            if ($user->tracking == -1) { // just update data
+            if ($user->tracking == -1) { // just update data becasuse he should be visitant
 
                 try {
 
@@ -103,13 +106,21 @@ class TxRegister extends PLTransaction{
                 $user            = new User();
                 $user->person_id = $person->id;
                 $user->email     = $request->get('email');
-                $user->password  = md5($request->get('password'));
+                $user->password  = ($request->exists('facebook_uid')) ? '' : md5($request->get('password'));
                 $user->username  = $request->get('email');
                 if (!$user->save()) throw new \Exception("Unable to create User", -1);
                 \Log::info("=== User created successfully : ".$user." ===");
 
+                if ($request->get('isFB') == 1) {
 
-                if ($request->get('isFB') == 1) \Log::info("TODO -  create FBUser");
+                    \Log::info("=== Creating FBUser ... ===");
+                    $fbUser = new FbUser();
+                    $fbUser->user_id = $user->id;
+                    $fbUser->fb_uid = $request->get('facebook_uid');
+                    if (!$fbUser->save()) throw new \Exception("Unable to create FBUser", -1);
+                    \Log::info("=== FBUser created successfully : ".$fbUser." ===");
+
+                }
 
                 \DB::commit();
 

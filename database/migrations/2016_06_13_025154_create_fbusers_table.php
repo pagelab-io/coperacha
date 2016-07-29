@@ -19,6 +19,7 @@ class CreateFbusersTable extends Migration
                 $table->increments('id');
                 $table->integer('user_id')->unsigned();
                 $table->string('fb_uid', 128)->unique();
+                $table->timestamps();
 
                 $table->foreign('user_id')->references('id')->on('users');
             });
