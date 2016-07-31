@@ -92,6 +92,10 @@ $router->group([
         'middleware' => 'guest',
         'uses' => 'SettingController@createOptions'
     ]);
+    $router->post('/payment', [
+        'middleware' => 'guest',
+        'uses' => 'PaymentController@createPayment'
+    ]);
 });
 //endregion
 

@@ -9,24 +9,49 @@
 namespace App\Repositories;
 
 
-use App\Models\Payment;
+use App\Http\Requests\PLRequest;
+use App\Http\Responses\PLResponse;
+use App\Entities\Payment;
+use App\Models\PLConektaOxxo;
+use App\Utilities\PLConstants;
+use Mockery\CountValidator\Exception;
 
-class PaymentRepository extends BaseRepository{
+class PaymentRepository extends BaseRepository
+{
 
     //region attributes
 
     /**
      * @var Payment
      */
-    private $_payment = null;
+    private $_payment;
+
+    /**
+     * @var PLConektaOxxo
+     */
+    private $_oxxo;
+
+    /**
+     * PLConektaSpei
+     * @var
+     */
+    private $_spei;
+
+    /**
+     * PLPaypel
+     * @var
+     */
+    private $_paypal;
 
     //endregion
 
     //region Static
     //endregion
 
-    public function __construct(Payment $payment){
+    public function __construct(Payment $payment, PLConektaOxxo $oxxo)
+    {
         $this->_payment = $payment;
+        $this->_oxxo = $oxxo;
     }
 
     //region Methods
@@ -38,11 +63,61 @@ class PaymentRepository extends BaseRepository{
      */
     function model()
     {
-        return 'App\Models\Payment';
+        return 'App\Entities\Payment';
+    }
+
+    public function payment(PLRequest $request)
+    {
+
+        $response = new PLResponse();
+
+        switch ($request->get('payment_method')) {
+            case PLConstants::PAYMENT_OXXO :
+                $response = $this->oxxoPayment($request);
+                break;
+            case PLConstants::PAYMENT_SPEI: // hacer spai
+                break;
+            case PLConstants::PAYMENT_PAYPAL: // hacer paypal
+                break;
+        }
+
+        return $response;
     }
 
     //endregion
 
     //region Private Methods
+
+    private function oxxoPayment(PLRequest $request)
+    {
+        $oxxoResponse = $this->_oxxo->sendPayment($request);
+        if (is_array($oxxoResponse)) {
+            $payment = new Payment();
+            $payment->person_id     = $request->get('person_id');
+            $payment->moneybox_id   = $request->get('moneybox_id');
+            $payment->amount        = $request->get('amount');
+            $payment->method        = PLConstants::PAYMENT_OXXO;
+            $payment->uid           = $oxxoResponse['reference_id'];
+            $payment->status        = PLConstants::PAYMENT_PENDING;
+            if (!$payment->save()) throw new Exception("Unable to create payment", -1);
+        }
+
+        $response = new PLResponse();
+        $response->data = $oxxoResponse;
+        $response->description = "Oxxo Payment created successfully";
+        return $response;
+    }
+
+    private function speiPayment(PLRequest $request)
+    {
+        // TODO
+    }
+
+    private function paypalPayment(PLRequest $request)
+    {
+        // TODO
+    }
+
+
     //endregion
 }

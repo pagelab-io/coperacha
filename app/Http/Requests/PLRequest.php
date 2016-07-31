@@ -13,6 +13,7 @@ use App\Validations\CategoryValidation;
 use App\Validations\LoginValidation;
 use App\Validations\MoneyboxValidation;
 use App\Validations\ParticipantValidation;
+use App\Validations\PaymentValidation;
 use App\Validations\RegisterValidation;
 use App\Validations\SettingOptionValidation;
 use App\Validations\SettingValidation;
@@ -56,6 +57,7 @@ class PLRequest extends Request{
                 case "recoveryPassword": return AuthValidation::password_recovery_rules();
                 case "updateMoneybox": return MoneyboxValidation::update_moneybox();
                 case "createParticipant": return ParticipantValidation::rules();
+                case "createPayment": return PaymentValidation::rules();
                 default: return [];
             }
         }
@@ -83,6 +85,7 @@ class PLRequest extends Request{
             case "recoveryPassword": return AuthValidation::messages();
             case "updateMoneybox": return MoneyboxValidation::messages();
             case "createParticipant": return ParticipantValidation::messages();
+            case "createPayment": return PaymentValidation::messages();
             default: return [];
         }
 

@@ -20,7 +20,9 @@ class CreatePaymentsTable extends Migration
                 $table->integer('person_id')->unsigned(); //FK
                 $table->integer('moneybox_id')->unsigned(); //FK
                 $table->decimal('amount',10,2);
-                $table->enum('method', ['p','o','s']);
+                $table->string('uid')->unique();
+                $table->enum('method', ['P','O','S']);
+                $table->enum('status', ['PENDING', 'CANCELED', 'PAYED']);
                 $table->timestamps();
 
                 $table->foreign('person_id')->references('id')->on('persons');
