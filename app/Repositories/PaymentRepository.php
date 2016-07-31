@@ -13,6 +13,7 @@ use App\Http\Requests\PLRequest;
 use App\Http\Responses\PLResponse;
 use App\Entities\Payment;
 use App\Models\PLConektaOxxo;
+use App\Models\PLConektaSpei;
 use App\Utilities\PLConstants;
 use Mockery\CountValidator\Exception;
 
@@ -32,8 +33,7 @@ class PaymentRepository extends BaseRepository
     private $_oxxo;
 
     /**
-     * PLConektaSpei
-     * @var
+     * @var PLConektaSpei
      */
     private $_spei;
 
@@ -48,10 +48,11 @@ class PaymentRepository extends BaseRepository
     //region Static
     //endregion
 
-    public function __construct(Payment $payment, PLConektaOxxo $oxxo)
+    public function __construct(Payment $payment, PLConektaOxxo $oxxo, PLConektaSpei $spei)
     {
         $this->_payment = $payment;
         $this->_oxxo = $oxxo;
+        $this->_spei = $spei;
     }
 
     //region Methods
@@ -75,7 +76,8 @@ class PaymentRepository extends BaseRepository
             case PLConstants::PAYMENT_OXXO :
                 $response = $this->oxxoPayment($request);
                 break;
-            case PLConstants::PAYMENT_SPEI: // hacer spai
+            case PLConstants::PAYMENT_SPEI:
+                $response = $this->speiPayment($request);
                 break;
             case PLConstants::PAYMENT_PAYPAL: // hacer paypal
                 break;
@@ -110,7 +112,22 @@ class PaymentRepository extends BaseRepository
 
     private function speiPayment(PLRequest $request)
     {
-        // TODO
+        $speiResponse = $this->_spei->sendPayment($request);
+        if (is_array($speiResponse)) {
+            $payment = new Payment();
+            $payment->person_id     = $request->get('person_id');
+            $payment->moneybox_id   = $request->get('moneybox_id');
+            $payment->amount        = $request->get('amount');
+            $payment->method        = PLConstants::PAYMENT_SPEI;
+            $payment->uid           = $speiResponse['reference_id'];
+            $payment->status        = PLConstants::PAYMENT_PENDING;
+            if (!$payment->save()) throw new Exception("Unable to create payment", -1);
+        }
+
+        $response = new PLResponse();
+        $response->data = $speiResponse;
+        $response->description = "Spei Payment created successfully";
+        return $response;
     }
 
     private function paypalPayment(PLRequest $request)
