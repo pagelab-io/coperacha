@@ -96,6 +96,10 @@ $router->group([
         'middleware' => 'guest',
         'uses' => 'PaymentController@createPayment'
     ]);
+    $router->get('/paypal/return', [
+        'middleware' => 'guest',
+        'uses' => 'PaymentController@paypalResponse'
+    ]);
 });
 //endregion
 

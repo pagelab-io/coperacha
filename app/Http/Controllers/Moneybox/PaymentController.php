@@ -58,7 +58,20 @@ class PaymentController extends PLController{
             $response->data = $ex->getTraceAsString();
             return response()->json($response);
         }
+    }
 
+    public function paypalResponse(PLRequest $request)
+    {
+        try {
+            $this->setResponse($this->_paymentRepository->paypalResponse($request));
+            return response()->json($this->getResponse());
+        } catch(\Exception $ex) {
+            $response = new PLResponse();
+            $response->status = $ex->getCode();
+            $response->description = $ex->getMessage();
+            $response->data = $ex->getTraceAsString();
+            return response()->json($response);
+        }
     }
 
     //endregion

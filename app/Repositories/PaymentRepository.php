@@ -38,21 +38,39 @@ class PaymentRepository extends BaseRepository
     private $_spei;
 
     /**
-     * PLPaypel
-     * @var
+     * @var PayPalRepository
      */
     private $_paypal;
+
+    /**
+     * @var MoneyboxRepository
+     */
+    private $_moneyboxRepository;
+
+    /**
+     * @var PersonRepository
+     */
+    private $_personRepository;
 
     //endregion
 
     //region Static
     //endregion
 
-    public function __construct(Payment $payment, PLConektaOxxo $oxxo, PLConektaSpei $spei)
+    public function __construct(
+        Payment $payment,
+        PLConektaOxxo $oxxo,
+        PLConektaSpei $spei,
+        PayPalRepository $payPalRepository,
+        MoneyboxRepository $moneyboxRepository,
+        PersonRepository $personRepository)
     {
         $this->_payment = $payment;
         $this->_oxxo = $oxxo;
         $this->_spei = $spei;
+        $this->_paypal = $payPalRepository;
+        $this->_moneyboxRepository = $moneyboxRepository;
+        $this->_personRepository = $personRepository;
     }
 
     //region Methods
@@ -79,11 +97,70 @@ class PaymentRepository extends BaseRepository
             case PLConstants::PAYMENT_SPEI:
                 $response = $this->speiPayment($request);
                 break;
-            case PLConstants::PAYMENT_PAYPAL: // hacer paypal
+            case PLConstants::PAYMENT_PAYPAL:
+                $response = $this->paypalPayment($request);
                 break;
         }
 
         return $response;
+    }
+
+    public function paypalResponse(PLRequest $request)
+    {
+        \Log::info("=== PayPal Response ===");
+        $response = new PLResponse();
+
+        if($request->exists('token') && $request->exists('PayerID')) {
+            \Log::info($request);
+            $payment = null;
+            $moneybox = null;
+
+            \Log::info("=== Searching payment ===");
+            try { $payment = $this->byToken($request->get('token')); }
+            catch(\Exception $ex) { throw new \Exception('Unable to find the selected payment, try again', -1, $ex); }
+            \Log::info("=== Payment: ".$payment." ===");
+
+            \Log::info("=== Searching moneybox ===");
+            try { $moneybox = $this->_moneyboxRepository->byId($payment->moneybox_id);}
+            catch(\Exception $ex) { throw new \Exception('Unable to find moneybox', -1, $ex); }
+            \Log::info("=== Moneybox: ".$moneybox." ===");
+
+            // DoExpressCheckout
+            $doExpress = $this->_paypal->checkOut('DoExpressCheckoutPayment', $request, array('amount' => $payment->amount));
+            if (is_array($doExpress)) {
+                if ($doExpress['success'] == 1) {
+                    try {
+                        \DB::beginTransaction();
+                        $payment->status = PLConstants::PAYMENT_PAYED;
+                        $payment->save();
+                        $moneybox->collected_amount = $payment->amount;
+                        $moneybox->save();
+                        \DB::commit();
+                    } catch(\Exception $ex) {
+                        \Log::info("=== Executing rollback ... ===");
+                        \DB::rollback();
+                        throw $ex;
+                    }
+                    $response->data = $doExpress;
+                    $response->description = "Pago realizado correctamente";
+                } else {
+                    $response->status = -301;
+                    $response->data = $doExpress;
+                    $response->description = "No se pudieron actualizar los datos del pago";
+                }
+            }
+
+        } else {
+            $response->status = -300;
+            $response->description = 'Invalid parameters';
+        }
+
+        return $response;
+    }
+
+    public function byToken($token)
+    {
+        return Payment::where('uid', $token)->firstOrFail();
     }
 
     //endregion
@@ -132,9 +209,41 @@ class PaymentRepository extends BaseRepository
 
     private function paypalPayment(PLRequest $request)
     {
-        // TODO
-    }
 
+        $response = new PLResponse();
+
+        \Log::info("=== Searching person ===");
+        try{$person = $this->_personRepository->byId($request->get('person_id')); }
+        catch(\Exception $ex){ throw new \Exception("Unable to find person", -1); }
+        \Log::info("=== Person : ".$person."===");
+
+        \Log::info("=== Searching moneybox ===");
+        try{$moneybox = $this->_moneyboxRepository->byId($request->get('moneybox_id')); }
+        catch(\Exception $ex){ throw new \Exception("Unable to find moneybox", -1); }
+        \Log::info("=== Moneybox : ".$moneybox."===");
+
+        $paypalResponse = $this->_paypal->sendPayment($request);
+        \Log::info($paypalResponse);
+        if (is_array($paypalResponse)) {
+            if($paypalResponse['success'] == 1) {
+                $payment = new Payment();
+                $payment->person_id     = $request->get('person_id');
+                $payment->moneybox_id   = $request->get('moneybox_id');
+                $payment->amount        = $request->get('amount');
+                $payment->method        = PLConstants::PAYMENT_PAYPAL;
+                $payment->uid           = urldecode($paypalResponse['data']['TOKEN']);
+                $payment->status        = PLConstants::PAYMENT_PENDING;
+                if (!$payment->save()) throw new Exception("Unable to create payment", -1);
+                $response->description = "PayPal Payment created successfully";
+                $response->data = $paypalResponse;
+            } else {
+                $response->description = "Error in setExpressChekout";
+                $response->status = -300;
+                $response->data = $paypalResponse;
+            }
+        }
+        return $response;
+    }
 
     //endregion
 }
