@@ -258,10 +258,11 @@ class UserRepository extends BaseRepository{
             $user = $this->byEmail($request->get('email'));
             \Log::info("=== Auteticación exitosa ===");
             if ($user->tracking == 0) {
-                $user->tracking = 1;
                 $this->updateTracking($user, 1);
+                $user->first_access = 1;
+            } else {
+                $user->first_access = 0;
             }
-            $user->first_access = 0;
             $response->description = 'Login successfully';
             $response->data = $user;
         } else {

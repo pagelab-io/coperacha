@@ -56,6 +56,7 @@ class FbUserRepository extends BaseRepository{
      */
     public function login(PLRequest $request)
     {
+        \Log::info("=== llegando a Facebook Login, intentanto validar credenciales ===");
         $count      = \DB::table('users')
                         ->join('fbusers', 'users.id', '=', 'fbusers.user_id')
                         ->select('*')
@@ -70,19 +71,25 @@ class FbUserRepository extends BaseRepository{
         $fbUser     = null;
 
         if ($count == 1) {
+
             $user = $this->_userRepository->byEmail($request->get('email'));
+            \Auth::login($user);
+            \Log::info("=== Auteticación exitosa ===");
             $fbUser = $this->byUID($request->get('facebook_uid'));
 
             if ($user->tracking == 0) {
                 $user->tracking = 1;
                 if (!$user->save()) throw new \Exception("Unable to update user", -1);
                 $user->first_access = 1;
+            } else {
+                $user->first_access = 0;
             }
-            $user->first_access = 0;
             $user->fbUser = $fbUser;
             $response->description = 'Login successfully';
             $response->data = $user;
+
         } else {
+            \Log::info("=== Credenciales inválidas ===");
             $response->status = -1;
             $response->description = 'Invalid Credentials';
             $response->data = null;
