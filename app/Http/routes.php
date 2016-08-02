@@ -156,7 +156,7 @@ Route::group([
     /* Registration Routes...*/
     $this->get('register', 'Auth\AuthController@showRegistrationForm');
     $this->post('register', 'Auth\AuthController@register');
-    
+
     /* Password Reset Routes... */
     $router->get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
     $router->post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
@@ -169,5 +169,6 @@ Route::group([
     'middleware' => ['dashboard']
 ], function ($router) {
     $router->get('/','DashboardController@index');
+    $router->get('/home','DashboardController@index');
 });
 //endregion

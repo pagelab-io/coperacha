@@ -77,11 +77,13 @@ class AuthController extends Controller
     {
         $person = new Person();
         $person->name = $data['name'];
+        $person->lastname = $data['name'];
         $person->save();
 
         return User::create([
             'person_id' => $person->id,
             'name'      => $data['name'],
+            'username'  => $data['email'],
             'email'     => $data['email'],
             'password'  => bcrypt($data['password']),
         ]);
