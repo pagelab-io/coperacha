@@ -1,0 +1,111 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: Roboto, sans-serif;
+    font-weight: 400;
+}
+
+.navbar-default {
+    background: #00bcd4;
+}
+
+.container-fluid>.navbar-collapse,
+.container-fluid>.navbar-header,
+.container>.navbar-collapse,
+.container>.navbar-header {
+    background: #00bcd4;
+}
+
+.navbar-default .navbar-brand,
+.navbar-default .navbar-brand:hover {
+    color: white;
+}
+
+.navbar-default .navbar-brand {
+    font-size: 28px;
+    font-weight: 400;
+}
+
+.navbar-default .navbar-nav>li>a:focus,
+.navbar-default .navbar-nav>li>a:hover {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: rgba(255, 255, 255, 1);
+}
+
+.navbar-default .navbar-toggle {
+    border-color: transparent;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: white;
+}
+
+.navbar-default .navbar-toggle:focus,
+.navbar-default .navbar-toggle:hover {
+    background: transparent;
+}
+
+
+/*
+|------------------------------------------------------------------------------
+| Dashboard
+|------------------------------------------------------------------------------
+|
+|
+*/
+.dashboard {
+
+}
+
+.dashboard h1{
+    font-family: Roboto, sans-serif;
+}
+
+.dashboard .items {
+    padding: 15px 0;
+}
+
+.dashboard .item > header {
+    border-bottom: solid 1px #DBDCE2;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.dashboard .item > header,
+.dashboard .item > main {
+    padding: 10px;
+}
+
+.dashboard .item > main {
+}
+
+.dashboard .item .amount {
+    color: #44464F;
+    font-size: 26px;
+    display: flex;
+    justify-content: center;
+}
+.dashboard .item .amount > span {
+    font-size: 15px;
+    margin-left: 5px;
+}
+
+.dashboard .item {
+    background: white;
+    box-sizing: border-box;
+    border: solid 1px #DBDCE2;
+    color: #727684;
+    height: 100px;
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    width: calc(25% - 15px);
+}
+
+.dashboard .item:last-child {
+    margin-right: 0;
+}

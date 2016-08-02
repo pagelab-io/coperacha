@@ -141,3 +141,33 @@ $router->group([
 });
 
 //endregion
+
+//region Dashboard
+
+Route::group([
+    'prefix' => 'dashboard',
+    'namespace' => 'Dashboard'
+], function ($router) {
+    // Authentication Routes...
+    $router->get('login', 'Auth\AuthController@showLoginForm');
+    $router->post('login', 'Auth\AuthController@login');
+    $router->get('logout', 'Auth\AuthController@logout');
+
+    /* Registration Routes...*/
+    $this->get('register', 'Auth\AuthController@showRegistrationForm');
+    $this->post('register', 'Auth\AuthController@register');
+    
+    /* Password Reset Routes... */
+    $router->get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
+    $router->post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
+    $router->post('password/reset', 'Auth\PasswordController@reset');
+});
+
+Route::group([
+    'prefix' => 'dashboard',
+    'namespace' => 'Dashboard',
+    'middleware' => ['dashboard']
+], function ($router) {
+    $router->get('/','DashboardController@index');
+});
+//endregion
