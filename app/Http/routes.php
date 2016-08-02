@@ -44,11 +44,13 @@ $router->group([
     'prefix' => 'auth'
 ], function($router){
     $router->post('/login', [
-        'middleware' => 'guest',
         'uses' => 'AuthController@login'
     ]);
+    $router->get('/logout', [
+        'middleware' => 'auth',
+        'uses' => 'AuthController@logout'
+    ]);
     $router->put('/passwordRecovery', [
-        'middleware' => 'guest',
         'uses' => 'PasswordController@passwordRecovery'
     ]);
 });
@@ -73,11 +75,11 @@ $router->group([
         'uses' => 'MoneyboxController@getAll'
     ]);
     $router->post('/categories', [
-        'middleware' => 'guest',
+        'middleware' => 'auth',
         'uses' => 'CategoryController@createCategory'
     ]);
     $router->get('/categories', [
-        'middleware' => 'guest',
+        'middleware' => 'auth',
         'uses' => 'CategoryController@getAll'
     ]);
     $router->post('/settings', [

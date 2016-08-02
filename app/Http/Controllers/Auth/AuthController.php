@@ -48,7 +48,6 @@ class AuthController extends PLController
         $this->validate($request, $request->rules(), $request->messages());
 
         try {
-
             // get login response
             $response = ($request->get('isFB') == 0) ? $this->_userRepository->login($request) : $this->_fbUserRepository->login($request);
             $this->setResponse($response);
@@ -62,6 +61,24 @@ class AuthController extends PLController
             return response()->json($response);
         }
     }
+
+    public function logout()
+    {
+        try {
+            // get login response
+            $response = $this->_userRepository->logout();
+            $this->setResponse($response);
+            return response()->json($this->getResponse());
+
+        } catch(\Exception $ex){
+            $response = new PLResponse();
+            $response->status = $ex->getCode();
+            $response->description = $ex->getMessage();
+            $response->data = $ex->getTraceAsString();
+            return response()->json($response);
+        }
+    }
+
 
     //endregion
 

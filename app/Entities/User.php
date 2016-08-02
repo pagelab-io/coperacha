@@ -2,10 +2,15 @@
 
 namespace App\Entities;
 
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class User extends Model implements Authenticatable
 {
+
+    // region traits
+    use \Illuminate\Auth\Authenticatable;
+    // endregion
 
     //region attributes
     /**
@@ -51,6 +56,32 @@ class User extends Model
     {
         return $this->belongsTo('App\Entities\Person');
     }
+
+
+    /**
+     * Get the token value for the "remember me" session.
+     *
+     * @return string
+     */
+    public function getRememberToken()
+    {}
+
+    /**
+     * Set the token value for the "remember me" session.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setRememberToken($value)
+    {}
+
+    /**
+     * Get the column name for the "remember me" token.
+     *
+     * @return string
+     */
+    public function getRememberTokenName()
+    {}
 
     //endregion
 

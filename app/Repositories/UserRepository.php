@@ -79,7 +79,7 @@ class UserRepository extends BaseRepository{
         // if person
         $this->_user->person_id = $person->id;
         $this->_user->email = $request->get('email');
-        $this->_user->password = ($request->exists('password')) ? md5($request->get('password')) : "";
+        $this->_user->password = ($request->exists('password')) ? bcrypt($request->get('password')) : "";
         $this->_user->username = ($request->exists('username')) ? $request->get('username') : "";
 
         try{
@@ -151,7 +151,7 @@ class UserRepository extends BaseRepository{
             $newPassword = substr(str_shuffle($characters), 0, 6);
             $this->_user = $this->byEmail(trim($request->get('email')));
             \Log::info("--- freshPassword :: " .$newPassword." ---");
-            $this->_user->password = md5($newPassword);
+            $this->_user->password = bcrypt($newPassword);
             $this->_user->tracking = 2;
             if (!$this->_user->save()) throw new \Exception("Unable to update User", -1);
 
@@ -187,7 +187,7 @@ class UserRepository extends BaseRepository{
     {
         if (User::where(
                 [
-                    'password' => md5($request->get('currentPassword')),
+                    'password' => bcrypt($request->get('currentPassword')),
                     'id' => $request->get('user_id')
                 ])->count() <= 0) throw new \Exception("Incorrect password", -1);
 
@@ -197,7 +197,7 @@ class UserRepository extends BaseRepository{
         if ($password != $passwordConfirm) throw new \Exception("Passwords not are equals", -1);
 
         $this->_user = $this->byId($request->get('user_id'));
-        if ($request->exists('newPassword')) $this->_user->password = md5($request->get('newPassword'));
+        if ($request->exists('newPassword')) $this->_user->password = bcrypt($request->get('newPassword'));
 
         $response = new PLResponse();
         if ($this->_user->update()) {
@@ -248,20 +248,24 @@ class UserRepository extends BaseRepository{
      */
     public function login(PLRequest $request)
     {
-        $count      = User::where(['email' => trim($request->get('email')), 'password' => md5(trim($request->get('password')))])->count();
+        \Log::info("=== llegando a login, intentanto validar credenciales ===");
+        $auth       = \Auth::attempt(['email' => trim($request->get('email')), 'password' => trim($request->get('password'))]);
         $response   = new PLResponse();
         $user       = null;
 
-        if ($count == 1) {
+
+        if ($auth) {
             $user = $this->byEmail($request->get('email'));
+            \Log::info("=== Auteticación exitosa ===");
             if ($user->tracking == 0) {
-                $user->first_access = 1;
+                $user->tracking = 1;
                 $this->updateTracking($user, 1);
             }
             $user->first_access = 0;
             $response->description = 'Login successfully';
             $response->data = $user;
         } else {
+            \Log::info("=== Credenciales inválidas ===");
             $response->status = -1;
             $response->description = 'Invalid Credentials';
             $response->data = null;
@@ -304,6 +308,21 @@ class UserRepository extends BaseRepository{
         $response->description = 'Getting user profile successfully';
         $response->data = $user;
         return $response;
+    }
+
+    public function logout()
+    {
+        $response = new PLResponse();
+        try {
+            \Auth::logout();
+            $response->data = true;
+            $response->description = "Logout successfully";
+        } catch(\Exception $ex) {
+            throw new \Exception("Error in logout", -1, $ex);
+        }
+
+        return $response;
+
     }
 
     //endregion

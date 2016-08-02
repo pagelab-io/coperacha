@@ -67,7 +67,7 @@ class TxRegister extends PLTransaction{
                     \Log::info("=== Person created successfully : " . $person . " ===");
 
                     \Log::info("=== Updating user ... ===");
-                    $user->password  = md5($request->get('password'));
+                    $user->password  = bcrypt($request->get('password'));
                     $user->tracking  = 0;
                     if (!$user->save()) throw new \Exception("Unable to update User", -1);
                     \Log::info("=== User created successfully : ".$user." ===");
@@ -106,7 +106,7 @@ class TxRegister extends PLTransaction{
                 $user            = new User();
                 $user->person_id = $person->id;
                 $user->email     = $request->get('email');
-                $user->password  = ($request->exists('facebook_uid')) ? '' : md5($request->get('password'));
+                $user->password  = ($request->exists('facebook_uid')) ? '' : bcrypt($request->get('password'));
                 $user->username  = $request->get('email');
                 if (!$user->save()) throw new \Exception("Unable to create User", -1);
                 \Log::info("=== User created successfully : ".$user." ===");
