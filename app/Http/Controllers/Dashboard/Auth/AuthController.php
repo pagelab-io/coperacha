@@ -78,7 +78,6 @@ class AuthController extends Controller
         $person = new Person();
         $person->name = $data['name'];
         $person->lastname = $data['name'];
-        $person->phone = '0000-0000-0000';
         $person->save();
 
         return User::create([
