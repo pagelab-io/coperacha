@@ -18,6 +18,10 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/test', function () {
+    return view('emails.test');
+});
+
 //region Register
 $router->group([
     'as' => 'register',
@@ -26,11 +30,8 @@ $router->group([
 ], function($router){
     // register
     $router->post('/', [
+        'middleware' => 'rest',
         'uses' => 'RegisterController@register'
-    ]);
-    // register
-    $router->get('/test', [
-        'uses' => 'RegisterController@emailTest'
     ]);
 });
 //endregion
@@ -42,13 +43,15 @@ $router->group([
     'prefix' => 'auth'
 ], function($router){
     $router->post('/login', [
+        'middleware' => 'rest',
         'uses' => 'AuthController@login'
     ]);
     $router->get('/logout', [
-        'middleware' => 'auth',
+        'middleware' => ['auth', 'rest'],
         'uses' => 'AuthController@logout'
     ]);
     $router->put('/passwordRecovery', [
+        'middleware' => 'rest',
         'uses' => 'PasswordController@passwordRecovery'
     ]);
 });
@@ -61,38 +64,39 @@ $router->group([
     'prefix' => 'moneybox'
 ], function($router){
     $router->post('/', [
-        'middleware' => 'auth',
+        'middleware' => ['auth', 'rest'],
         'uses' => 'MoneyboxController@createMoneybox'
     ]);
     $router->put('/', [
-        'middleware' => 'auth',
+        'middleware' => ['auth', 'rest'],
         'uses' => 'MoneyboxController@updateMoneybox'
     ]);
     $router->get('/', [
-        'middleware' => 'auth',
+        'middleware' => ['auth', 'rest'],
         'uses' => 'MoneyboxController@getAll'
     ]);
     $router->post('/categories', [
-        'middleware' => 'auth',
+        'middleware' => ['auth', 'rest'],
         'uses' => 'CategoryController@createCategory'
     ]);
     $router->get('/categories', [
-        'middleware' => 'auth',
+        'middleware' => ['auth', 'rest'],
         'uses' => 'CategoryController@getAll'
     ]);
     $router->post('/settings', [
-        'middleware' => 'auth',
+        'middleware' => ['auth', 'rest'],
         'uses' => 'SettingController@createSetting'
     ]);
     $router->get('/settings', [
-        'middleware' => 'auth',
+        'middleware' => ['auth', 'rest'],
         'uses' => 'SettingController@getAll'
     ]);
     $router->post('/option', [
-        'middleware' => 'auth',
+        'middleware' => ['auth', 'rest'],
         'uses' => 'SettingController@createOptions'
     ]);
     $router->post('/payment', [
+        'middleware' => 'rest',
         'uses' => 'PaymentController@createPayment'
     ]);
     $router->get('/paypal/return', [
@@ -109,15 +113,15 @@ $router->group([
 ], function($router){
     // register
     $router->get('/profile', [
-        'middleware' => 'auth',
+        'middleware' => ['auth', 'rest'],
         'uses' => 'UserController@getProfile'
     ]);
     $router->put('/profile', [
-        'middleware' => 'auth',
+        'middleware' => ['auth', 'rest'],
         'uses' => 'UserController@updateProfile'
     ]);
     $router->put('/changePassword', [
-        'middleware' => 'auth',
+        'middleware' => ['auth', 'rest'],
         'uses' => 'UserController@changePassword'
     ]);
 });
