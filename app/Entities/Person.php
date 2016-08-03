@@ -62,6 +62,13 @@ class Person extends Model
         return $this->hasMany('App\Entities\Participant');
     }
 
+    /**
+     * Define the relation between Person and User
+     */
+    public function user(){
+       return $this->hasOne(User::class);
+    }
+
     //endregion
 
     //region Private Methods
