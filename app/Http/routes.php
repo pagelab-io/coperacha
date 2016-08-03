@@ -26,12 +26,10 @@ $router->group([
 ], function($router){
     // register
     $router->post('/', [
-        'middleware' => 'guest',
         'uses' => 'RegisterController@register'
     ]);
     // register
     $router->get('/test', [
-        'middleware' => 'guest',
         'uses' => 'RegisterController@emailTest'
     ]);
 });
@@ -63,15 +61,15 @@ $router->group([
     'prefix' => 'moneybox'
 ], function($router){
     $router->post('/', [
-        'middleware' => 'guest',
+        'middleware' => 'auth',
         'uses' => 'MoneyboxController@createMoneybox'
     ]);
     $router->put('/', [
-        'middleware' => 'guest',
+        'middleware' => 'auth',
         'uses' => 'MoneyboxController@updateMoneybox'
     ]);
     $router->get('/', [
-        'middleware' => 'guest',
+        'middleware' => 'auth',
         'uses' => 'MoneyboxController@getAll'
     ]);
     $router->post('/categories', [
@@ -83,23 +81,21 @@ $router->group([
         'uses' => 'CategoryController@getAll'
     ]);
     $router->post('/settings', [
-        'middleware' => 'guest',
+        'middleware' => 'auth',
         'uses' => 'SettingController@createSetting'
     ]);
     $router->get('/settings', [
-        'middleware' => 'guest',
+        'middleware' => 'auth',
         'uses' => 'SettingController@getAll'
     ]);
     $router->post('/option', [
-        'middleware' => 'guest',
+        'middleware' => 'auth',
         'uses' => 'SettingController@createOptions'
     ]);
     $router->post('/payment', [
-        'middleware' => 'guest',
         'uses' => 'PaymentController@createPayment'
     ]);
     $router->get('/paypal/return', [
-        'middleware' => 'guest',
         'uses' => 'PaymentController@paypalResponse'
     ]);
 });
@@ -113,15 +109,15 @@ $router->group([
 ], function($router){
     // register
     $router->get('/profile', [
-        'middleware' => 'guest',
+        'middleware' => 'auth',
         'uses' => 'UserController@getProfile'
     ]);
     $router->put('/profile', [
-        'middleware' => 'guest',
+        'middleware' => 'auth',
         'uses' => 'UserController@updateProfile'
     ]);
     $router->put('/changePassword', [
-        'middleware' => 'guest',
+        'middleware' => 'auth',
         'uses' => 'UserController@changePassword'
     ]);
 });
