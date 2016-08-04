@@ -30,7 +30,7 @@ $router->group([
         'uses' => 'RegisterController@register'
     ]);
     // register
-    $router->get('/', [
+    $router->get('/test', [
         'uses' => 'RegisterController@emailTest'
     ]);
 });
