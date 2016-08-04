@@ -18,10 +18,6 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/test', function () {
-    return view('emails.test');
-});
-
 //region Register
 $router->group([
     'as' => 'register',
@@ -32,6 +28,10 @@ $router->group([
     $router->post('/', [
         'middleware' => 'rest',
         'uses' => 'RegisterController@register'
+    ]);
+    // register
+    $router->get('/', [
+        'uses' => 'RegisterController@emailTest'
     ]);
 });
 //endregion
