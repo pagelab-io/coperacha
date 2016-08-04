@@ -57,7 +57,7 @@ class RegisterController extends PLController{
     {
         \Log::info("Enviando email ...");
         Mail::send('emails.test', [] , function ($m){
-            $m->from('hola@coperacha.com.mx', 'PageLab');
+            $m->from('no-reply@pagelab.io', 'PageLab');
             $m->to(['super_puma_05@hotmail.com', "sanchezz985@gmail.com", "emmanuel.sanchez.luna@gmail.com"])->subject('Registro !');
         });
         \Log::info("email enviado");
