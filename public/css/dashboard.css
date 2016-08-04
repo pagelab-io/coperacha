@@ -64,48 +64,74 @@ html, body {
     font-family: Roboto, sans-serif;
 }
 
-.dashboard .items {
-    padding: 15px 0;
+.items {
+    justify-content: space-between;
+    display: flex;
+
+    flex-flow: row wrap;
+    width: 100%;
 }
 
-.dashboard .item > header {
+
+.items .item {
+    background: white;
+    box-sizing: border-box;
+    border: solid 1px #DBDCE2;
+    color: #727684;
+    margin: 5px 10px 15px 10px;
+    flex: 1 0 calc(100% - 30px);
+}
+
+.items .item > header {
     border-bottom: solid 1px #DBDCE2;
-    text-transform: uppercase;
-    font-size: 13px;
-    font-weight: 600;
 }
 
-.dashboard .item > header,
-.dashboard .item > main {
+.items .item > header,
+.items .item > main {
     padding: 10px;
 }
 
-.dashboard .item > main {
+.items .item > header .item-title {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 600;
 }
 
-.dashboard .item .amount {
+.items .item > header .item-desc{
+    font-size: 11px;
+}
+
+.items .item > main {
+}
+
+.items .item .amount {
     color: #44464F;
     font-size: 26px;
     display: flex;
     justify-content: center;
 }
-.dashboard .item .amount > span {
+.items .item .amount > span {
     font-size: 15px;
     margin-left: 5px;
 }
 
-.dashboard .item {
-    background: white;
-    box-sizing: border-box;
+.table {
     border: solid 1px #DBDCE2;
-    color: #727684;
-    height: 100px;
-    float: left;
-    margin-right: 15px;
-    margin-bottom: 15px;
-    width: calc(25% - 15px);
 }
 
-.dashboard .item:last-child {
-    margin-right: 0;
+.table > thead > tr > th {
+    border-width: 1px;
+    color: #2F91FF;
+    text-transform: uppercase;
+}
+
+.table > tfoot > tr > td,
+.table > tbody > tr > td {
+    border-color: #DBDCE2;
+}
+
+@media screen and (min-width: 768px){
+    .items .item {
+        flex: 1 0 calc(50% - 30px);
+    }
 }
