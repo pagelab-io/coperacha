@@ -18,6 +18,10 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/sendmail', function () {
+    return view('emails.test');
+});
+
 //region Register
 $router->group([
     'as' => 'register',
@@ -30,9 +34,9 @@ $router->group([
         'uses' => 'RegisterController@register'
     ]);
     // register
-    $router->get('/test', [
+    /*$router->get('/test', [
         'uses' => 'RegisterController@emailTest'
-    ]);
+    ]);*/
 });
 //endregion
 
