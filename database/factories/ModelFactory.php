@@ -54,8 +54,8 @@ $factory->define(\App\Entities\Moneybox::class, function (Faker\Generator $faker
         'active' => 1,
         'name' => $faker->firstName,
         'goal_amount' => 1000,
-        'end_date' => $faker->dateTimeThisMonth(),
         'url' => '/moneyboxe/' . $faker->firstName,
-        'created_at' => $faker->dateTimeThisYear
+        'created_at' => $faker->dateTimeThisYear($max='now'),
+        'end_date' => $faker->dateTimeThisYear($min='now')
     ];
 });

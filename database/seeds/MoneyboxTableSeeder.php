@@ -13,7 +13,7 @@ class MoneyboxTableSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-        factory(\App\Entities\Moneybox::class, 500)->create();
+        factory(\App\Entities\Moneybox::class, 10)->create();
         Model::reguard();
     }
 }
