@@ -7,6 +7,7 @@ use DateTime;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
+use Money\Money;
 
 class DashboardController extends Controller
 {
@@ -19,11 +20,14 @@ class DashboardController extends Controller
         return view('dashboard.index', [
             'users' => $this->getUsersByGender(),
             'moneyboxes' => $this->getMoneyboxesByCreationDate(),
-            'averages' => $this->getAverageDurabilityOfMoneybox()
+            'durability' => $this->getAverageDurabilityOfMoneybox(),
+            'payments' => $this->getPaymentsMethodsStats()
         ]);
     }
 
     /**
+     * Gets statistics of creation of users
+     *
      * @return mixed
      */
     public function getUsersByGender()
@@ -46,6 +50,8 @@ class DashboardController extends Controller
     }
 
     /**
+     * Gets statistics of creation of moneybox
+     *
      * @return mixed
      */
     public function getMoneyboxesByCreationDate()
@@ -64,16 +70,16 @@ class DashboardController extends Controller
 
         $daily = ceil($qty / count($resultRaw));
         $weekly = ceil($qty / 52);
-        $response = [
+
+        return [
             'Diario' => $daily,
             'Por Semana' => $weekly,
             'Por año' => $qty
         ];
-
-        return $response;
     }
 
     /**
+     * Gets the average durability of moneybox
      *
      */
     public function getAverageDurabilityOfMoneybox(){
@@ -112,14 +118,42 @@ class DashboardController extends Controller
 
         //region Coperacha Promedio
         $amountRaw = DB::select("SELECT AVG(collected_amount) AS amount FROM moneyboxes");
-        $amount = $amountRaw[0]->amount;
+        $amountAvg = $amountRaw[0]->amount;
         //endregion
-
 
         return [
             'Duración promedio (días)' => floor($durabilityAvg),
-            'Monto promedio diario' => '$ ' . floor($collectedAvg),
-            'Coperacha promedio' => '$ ' . floor($amount)
+            'Monto promedio diario' => number_format($collectedAvg, 2),
+            'Coperacha promedio' =>  number_format($amountAvg, 2)
         ];
+    }
+
+
+    /**
+     * Gets the statistics of payment for method
+     *
+     * http://lists.mysql.com/mysql-es/82
+     */
+    public function getPaymentsMethodsStats() {
+
+        // Calc total rows
+        DB::select("SELECT SQL_CALC_FOUND_ROWS * FROM payments LIMIT 0,1;");
+
+        // Execute the query for retrieve the pivotal data
+        $resultRaw = DB::select("
+                    SELECT
+                      CASE method
+                        WHEN 'P' THEN 'P'
+                        WHEN 'O' THEN 'O'
+                        ELSE 'S' END AS method,
+                    
+                      COUNT(method) AS qty,
+                      COUNT(method) / FOUND_ROWS() * 100 AS percent
+                    
+                    FROM payments
+                    GROUP BY payments.method");
+
+
+        return $resultRaw;
     }
 }

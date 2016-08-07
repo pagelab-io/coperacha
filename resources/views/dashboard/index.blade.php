@@ -14,7 +14,6 @@
                     <main>
                         <table class="table table-striped table-responsive">
                             <caption>
-                                <div>Usuarios por sexo</div>
                                 <span class="small">Total de Usuarios: {{$users['total']}}</span>
                             </caption>
                             <thead>
@@ -74,8 +73,6 @@
                     <main>
                         <table class="table table-striped table-responsive">
                             <caption>
-                                <div>Creación de alcancías promedio</div>
-                                <span class="small"></span>
                             </caption>
                             <thead>
                             <tr>
@@ -85,7 +82,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($averages as $type => $value)
+                            @foreach($durability as $type => $value)
                                 <tr>
                                     <td></td>
                                     <td>{{$type}}</td>
@@ -99,10 +96,29 @@
                 <div class="item">
                     <header>
                         <div class="item-title">Métodos de Pago</div>
-                        <div class="item-desc">Cual es el método más usado.</div>
+                        <div class="item-desc">Porcentaje de uso</div>
                     </header>
                     <main>
-                        <div class="amount">$ 150 <span>.00</span></div>
+                        <table class="table table-striped table-responsive">
+                            <caption>
+                            </caption>
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Método de Pago</th>
+                                <th>Valor Promedio</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($payments as $index => $row)
+                                <tr>
+                                    <td></td>
+                                    <td>{{$row->method}}</td>
+                                    <td>{{number_format($row->percent, 2)}} %</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
                     </main>
                 </div>
             </div>
