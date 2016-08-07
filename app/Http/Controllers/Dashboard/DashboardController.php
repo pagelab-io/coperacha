@@ -41,7 +41,7 @@ class DashboardController extends Controller
      */
     public function getMoneyboxesByCreatedDate()
     {
-        $daily = 12;
+
         $dateTime = new DateTime();
         $result = DB::select('SELECT DATE(created_at) day, count(*) as qty
                                 FROM moneyboxes
@@ -57,11 +57,11 @@ class DashboardController extends Controller
         }
 
         $daily = ceil($qty / count($result));
-
+        $weekly = ceil($qty / 52);
         $response = [
-            'daily' => $daily,
-            'weekly' => 40,
-            'yearly' => 450,
+            'Diario' => $daily,
+            'Por Semana' => $weekly,
+            'Por año' => $qty
         ];
 
         return $response;
