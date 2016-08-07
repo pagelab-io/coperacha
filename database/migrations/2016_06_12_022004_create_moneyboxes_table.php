@@ -18,10 +18,10 @@ class CreateMoneyboxesTable extends Migration
                 $table->engine = 'InnoDB';
                 $table->increments('id');
                 $table->integer('category_id')->unsigned();
+                $table->integer('owner_id')->unsigned();
                 $table->string('name', 128);
                 $table->decimal('goal_amount',10,2);
                 $table->decimal('collected_amount',10,2);
-                $table->integer('owner');
                 $table->date('end_date');
                 $table->text('description');
                 $table->integer('active');

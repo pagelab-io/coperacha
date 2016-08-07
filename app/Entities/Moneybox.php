@@ -17,13 +17,14 @@ class Moneybox extends Model
      * These are the mass-assignable keys
      * @var array
      */
-    protected $fillable = ['category_id', 'name', 'goal_amount', 'collected_amount', 'owner_id', 'end_date', 'description'];
+    protected $fillable = ['category_id', 'owner_id', 'name'];
 
     /**
      * Default values for Moneybox
      * @var array
      */
     protected $defaults = [
+        'goal_amount' => 1000,
         'collected_amount' => 0,
         'description' => '',
         'active' => 1

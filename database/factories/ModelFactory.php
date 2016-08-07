@@ -11,18 +11,6 @@
 |
 */
 
-$factory->define(\App\Entities\User::class, function (Faker\Generator $faker) {
-
-    return [
-        'person_id' => 0,
-        'username' => $faker->name,
-        'email' => $faker->name . '@gmail.com',
-        'password' => bcrypt('123456'),
-        'remember_token' => str_random(10)
-    ];
-});
-
-
 $factory->define(\App\Entities\Person::class, function (Faker\Generator $faker) {
 
     $gender = $faker->randomDigit % 2 == 0 ? 'male' : 'female';
@@ -35,5 +23,39 @@ $factory->define(\App\Entities\Person::class, function (Faker\Generator $faker) 
         'birthday' => $faker->date($format = 'Y-m-d', $max = '2000-06-09'),
         'city'     => $faker->city(),
         'country'  => $faker->country()
+    ];
+});
+
+$factory->define(\App\Entities\User::class, function (Faker\Generator $faker) {
+
+    return [
+        'person_id' => 0,
+        'username' => $faker->name,
+        'email' => $faker->name . '@gmail.com',
+        'password' => bcrypt('123456'),
+        'remember_token' => str_random(10)
+    ];
+});
+
+
+$factory->define(\App\Entities\Category::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name
+    ];
+});
+
+
+$factory->define(\App\Entities\Moneybox::class, function (Faker\Generator $faker) {
+    return [
+        'category_id' => 1,
+        'owner_id' => 1,
+        'collected_amount' => 0,
+        'description' => 'Box de ejemplo no 1',
+        'active' => 1,
+        'name' => $faker->firstName,
+        'goal_amount' => 1000,
+        'end_date' => $faker->dateTimeThisMonth(),
+        'url' => '/moneyboxe/' . $faker->firstName,
+        'created_at' => $faker->dateTimeThisYear
     ];
 });

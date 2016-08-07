@@ -9,13 +9,13 @@
                 <div class="item">
                     <header>
                         <div class="item-title">Usuarios del servicio</div>
-                        <div class="item-desc">Número total de usuarios (inscritos/activos) por sexo, edad, cuidad</div>
+                        <div class="item-desc">Número total de usuarios (inscritos/activos) por genero, edad, cuidad</div>
                     </header>
                     <main>
                         <table class="table table-striped table-responsive">
                             <caption>
                                 <div>Usuarios por sexo</div>
-                                <span style="font-size: 11px">Total de Usuarios: 500</span>
+                                <span class="small">Total de Usuarios: 500</span>
                             </caption>
                             <thead>
                                 <tr>
@@ -25,7 +25,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-
                                 @foreach($users as $i => $row)
                                     <tr>
                                         <td>{{++$i}}</td>
@@ -43,7 +42,28 @@
                         <div class="item-desc">Cuantas alcancias se crean diario, mensual, anual</div>
                     </header>
                     <main>
-                        <div class="amount">15</div>
+                        <table class="table table-striped table-responsive">
+                            <caption>
+                                <div>Creación de alcancias en promedio</div>
+                                <span class="small"></span>
+                            </caption>
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Alcancias</th>
+                                <th>Cantidad</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($moneyboxes as $type => $value)
+                                <tr>
+                                    <td></td>
+                                    <td>{{$type}}</td>
+                                    <td>{{$value}}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
                     </main>
                 </div>
                 <div class="item">
