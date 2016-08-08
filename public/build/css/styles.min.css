@@ -196,6 +196,12 @@ body {
     z-index: 0;
 }
 
+.block.cover .graphics img {
+    display: block;
+    height: auto;
+    max-width: 100%;
+}
+
 .block.cover .graphics .laptop {
     margin: 0 auto;
     max-width: 354px;
@@ -594,6 +600,24 @@ body {
 
 }
 
+@media (max-width: 992px) {
+
+    /* Block Cover */
+    .block.cover {
+        padding: 65px 0 65px;
+    }
+
+    .block.cover .graphics {
+        margin: 0 auto 45px;
+        max-width: 520px;
+    }
+
+    .block.cover .content-block .button {
+        margin: 0 auto;
+    }
+
+}
+
 @media (max-width: 767px) {
 
     /* Body */
@@ -681,7 +705,7 @@ body {
     }
 
     .navigation .navigation-toggle {
-        margin: 2px 0 0;
+        margin: 2px -15px 0 0;
     }
 
     .navigation.mobile-navigation-open {
@@ -798,6 +822,38 @@ body {
     /* Block */
     .block .header-block .title {
         font-size: 22px;
+    }
+
+
+    /* Block Cover */
+    .block.cover {
+        padding: 25px 0 40px;
+    }
+
+    .block.cover .graphics {
+        margin-bottom: 20px;
+        max-width: 290px;
+    }
+
+    .block.cover .graphics .money { left: 35px; margin-top: -34px; width: 80px; }
+    .block.cover .graphics .laptop { width: 135px; }
+    .block.cover .graphics .wallet { margin-top: -32px; right: 50px; width: 54px; }
+
+    .block.cover .header-block {
+        font-size: 16px;
+        line-height: normal;
+        margin-bottom: 10px;
+    }
+
+    .block.cover .content-block .html {
+        font-size: 13px;
+        margin-bottom: 20px;
+    }
+
+    .block.cover .content-block .button {
+        font-size: 14px;
+        max-width: 170px;
+        padding: 15px 5px;
     }
 
 
@@ -927,6 +983,10 @@ body {
     .block.create-moneybox .header-block {
         font-size: 17px;
         margin-bottom: 25px;
+    }
+
+    .block.create-moneybox .header-block .title {
+        font-size: 22px;
     }
 
     .block.create-moneybox .sign-in input[type=submit] {

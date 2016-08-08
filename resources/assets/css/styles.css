@@ -148,6 +148,12 @@ body {
     z-index: 0;
 }
 
+.block.cover .graphics img {
+    display: block;
+    height: auto;
+    max-width: 100%;
+}
+
 .block.cover .graphics .laptop {
     margin: 0 auto;
     max-width: 354px;

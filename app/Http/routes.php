@@ -18,6 +18,10 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/faq', function () {
+    return view('faq');
+});
+
 Route::get('/sendmail', function () {
     return view('emails.test');
 });

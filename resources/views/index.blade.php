@@ -5,35 +5,37 @@
     <div class="block cover">
         <div class="holder">
             <div class="container-fluid">
-                <div class="col-sm-6 align-middle">
-                    <div class="graphics">
-                        <!-- Money -->
-                        <div class="money graphic">
-                            <img src="images/cover-money.png" alt="">
-                        </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 align-middle">
+                        <div class="graphics">
+                            <!-- Money -->
+                            <div class="money graphic">
+                                <img src="images/cover-money.png" alt="">
+                            </div>
 
-                        <!-- Laptop -->
-                        <div class="laptop graphic">
-                            <img src="images/cover-laptop.png" alt="">
-                        </div>
+                            <!-- Laptop -->
+                            <div class="laptop graphic">
+                                <img src="images/cover-laptop.png" alt="">
+                            </div>
 
-                        <!-- Wallet -->
-                        <div class="wallet graphic">
-                            <img src="images/cover-wallet.png" alt="">
-                        </div>
+                            <!-- Wallet -->
+                            <div class="wallet graphic">
+                                <img src="images/cover-wallet.png" alt="">
+                            </div>
 
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-sm-6 align-middle">
-                    <div class="header-block">
-                        <div>El servicio online para recaudar dinero entre amigos</div>
-                    </div>
-                    <div class="content-block">
-                        <div class="html">
-                            <div>Coperacha es un servicio de gestión de dinero comunitario que sirve para hacer regalos o transferencias entre amigos.</div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 align-middle">
+                        <div class="header-block">
+                            <div>El servicio online para recaudar dinero entre amigos</div>
                         </div>
-                        <a href="#" class="button">Crear mi Alcancía</a>
+                        <div class="content-block">
+                            <div class="html">
+                                <div>Coperacha es un servicio de gestión de dinero comunitario que sirve para hacer regalos o transferencias entre amigos.</div>
+                            </div>
+                            <a href="#" class="button">Crear mi Alcancía</a>
+                        </div>
                     </div>
                 </div>
             </div>
