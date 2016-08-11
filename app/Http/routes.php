@@ -18,8 +18,8 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/faq', function () {
-    return view('faq');
+Route::get('/faqs', function () {
+    return view('faqs', ['pageTitle' => 'Preguntas Frecuentes']);
 });
 
 Route::get('/sendmail', function () {

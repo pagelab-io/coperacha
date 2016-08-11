@@ -143,6 +143,7 @@ body {
     background-color: transparent;
     border: none;
     float: right;
+    outline: none;
     padding: 10px;
     width: 50px;
 }
@@ -567,6 +568,79 @@ body {
 
 .footer .contact-info h5 { font-family: 'verbmedium'; font-size: 12px; margin: 0; }
 
+
+/* Content Header */
+.content-header {
+    background-color: #51B7CD;
+    padding: 19px 0;
+}
+
+.content-header h1 {
+    color: #fff;
+    font-family: 'brandon_grotesquebold';
+    font-size: 25px;
+    letter-spacing: 1px;
+    margin: 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+/* Content Body */
+.content-body {
+    padding: 50px 0 65px;
+}
+
+
+/* Faqs Layout */
+.faqs-layout { }
+
+.faqs-layout .faqs {
+    margin: 0 auto;
+    max-width: 845px;
+}
+
+.faqs-layout .faq {
+    border-bottom: 1px solid #DBDBEA;
+}
+
+.faqs-layout .faq .question {
+    cursor: pointer;
+    padding: 15px 10px;
+}
+
+.faqs-layout .faq .question .text {
+    color: #646472;
+    float: left;
+    font-family: 'verbmedium';
+    font-size: 19px;
+    line-height: 33px;
+}
+
+.faqs-layout .faq .question .icon {
+    background-color: #4CB7CF;
+    border-radius: 50%;
+    color: #fff;
+    float: right;
+    font-size: 24px;
+    height: 33px;
+    line-height: 33px;
+    text-align: center;
+    width: 33px;
+}
+
+.faqs-layout .faq .question .icon:after { content: '+'; }
+.faqs-layout .faq.displayed .question .icon:after { content: '-'; }
+
+.faqs-layout .faq .answer {
+    height: 0;
+    overflow: hidden;
+}
+
+.faqs-layout .faq .answer .inner {
+    color: #646472;
+    font-size: 13px;
+    padding: 0 10px 30px;
+}
 @media (max-width: 1010px) {
 
     /* Navigation */
@@ -1014,6 +1088,36 @@ body {
 
     .footer .rights .text {
         font-size: 10px;
+    }
+
+
+    /* Content Header */
+    .content-header {
+        padding: 9px 0;
+    }
+
+    .content-header h1 {
+        font-size: 16px;
+    }
+
+
+    /* Content Body */
+    .content-body {
+        padding: 25px 0 30px;
+    }
+
+
+    /* Faqs Layout */
+    .faqs-layout .faq .question .text {
+        font-size: 16px;
+        line-height: 25px;
+    }
+
+    .faqs-layout .faq .question .icon {
+        font-size: 18px;
+        height: 25px;
+        line-height: 25px;
+        width: 25px;
     }
 
 }

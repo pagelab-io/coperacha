@@ -3,7 +3,9 @@
 @section("content")
     <!-- Content Header -->
     <header class="content-header">
-        <h1>This title should be dynamic</h1>
+        <div class="container-fluid">
+            <h1>{{ $pageTitle }}</h1>
+        </div>
     </header>
 
     @yield("page-content")
