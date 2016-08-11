@@ -18,6 +18,10 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/contacto', function () {
+    return view('contact', ['pageTitle' => 'Contacto']);
+});
+
 Route::get('/faqs', function () {
     return view('faqs', ['pageTitle' => 'Preguntas Frecuentes']);
 });
