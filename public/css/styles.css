@@ -677,6 +677,10 @@ body {
     transition: 350ms all;
 }
 
+.contact-body .contact-form button[disabled] {
+    opacity: 0.7;
+}
+
 .contact-body .contact-form button {
     border: none;
     background: #FF4F00;
