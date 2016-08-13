@@ -36,6 +36,7 @@
 
                     <!-- Contact Form -->
                     <form id="contact-form" v-on:submit.prevent="onSubmit" class="contact-form" action="/" method="post">
+                        <div v-if="sending" class="alert alert-success" role="alert">@{{message}}</div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <input name="name" v-model="contact.name" placeholder="Nombre" type="text" required>
@@ -51,9 +52,11 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-12 clearfix">
-                                <button class="pull-right">Enviar</button>
+                                <button class="pull-right">@{{sendText}}</button>
                             </div>
                         </div>
+
+
                     </form>
                 </div>
             </div>

@@ -74,6 +74,7 @@ class HomeController extends Controller
         Mail::send('emails.contact', $data, function ($message) {
             $message->from('contacto@coperacha.com.mx', 'Contacto');
             $message->to('perezatanaciod@gmail.com');
+            $message->subject('Mensaje de Contacto');
         });
 
         return response()->json(['success' => true, 'data' => $data]);

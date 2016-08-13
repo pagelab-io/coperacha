@@ -653,11 +653,15 @@ body {
     font-size:11px;
 }
 
+::-webkit-input-placeholder {
+    color: #9797A5;
+}
+
 .contact-body .contact-form input,
 .contact-body .contact-form textarea {
     border: solid 1px #FF4F00;
     border-radius: 7px;
-    color: #9797A5;
+    color: #333;
     font-family: verbregular;
     font-size: 14px;
     padding: 10px;
