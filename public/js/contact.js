@@ -7,9 +7,9 @@ var vm = new Vue({
     data: {
 
         contact: {
-            name: 'Daniel Pérez',
-            email: 'Daniel_pro4@hotmail.com',
-            content: 'sending text form contact'
+            name: '',
+            email: '',
+            content: ''
         },
 
         sending: false,
@@ -49,7 +49,7 @@ var vm = new Vue({
 
                         setTimeout(function () {
                             _this.sended = false;
-                        }, 5 * 1000);
+                        }, 3 * 1000);
                     }
                 }
 
