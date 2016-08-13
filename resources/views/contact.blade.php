@@ -36,7 +36,7 @@
 
                     <!-- Contact Form -->
                     <form id="contact-form" v-on:submit.prevent="onSubmit" class="contact-form" action="/" method="post">
-                        <div v-if="sended" class="alert alert-success" role="alert">@{{message}}</div>
+                        <div v-show="sended" class="alert alert-success sended" role="alert">@{{message}}</div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <input name="name" v-model="contact.name" placeholder="Nombre" type="text" required>
@@ -53,7 +53,7 @@
                         <div class="row">
                             <div class="col-sm-12 clearfix">
                                 <button v-bind:disabled="!isValid" class="pull-right">
-                                    <span v-if="sending" class="icon"></span>
+                                    <span v-show="sending" class="icon"></span>
                                     <span class="text">@{{sendText}}</span>
                                 </button>
                             </div>
