@@ -8,11 +8,12 @@
 
         <!-- List -->
         <ul class="clearfix list hidden-xs">
-            <li><a href="#">¿Qué es Coperacha?</a></li>
-            <li><a href="#">¿Cómo funciona?</a></li>
+            <li><a href="{{route('about')}}">¿Qué es Coperacha?</a></li>
+            <li><a href="/#como-funciona">¿Cómo funciona?</a></li>
             <li><a href="{{route('faqs')}}">FAQS</a></li>
-            <li><a class="button" href="#">Crear mi Alcancía</a></li>
-            <li><a href="#">Entrar</a></li>
+            <li><a href="{{route('contact')}}">Contacto</a></li>
+            <li><a class="button" href="{{route('register')}}">Crear mi Alcancía</a></li>
+            <li><a href="{{route('auth')}}">Entrar</a></li>
         </ul>
 
         <!-- Navigation toggle -->

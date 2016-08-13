@@ -402,8 +402,8 @@ body {
     padding: 50px 0 110px;
 }
 
-/* Override */
-.block.create-moneybox .holder { max-width: 960px; }
+
+
 
 .block.create-moneybox .header-block {
     font-size: 24px;
@@ -449,32 +449,34 @@ body {
     width: 100%;
 }
 
-.block.create-moneybox .sign-in-fb {
+.block .sign-in-wrap {
+    margin-top: 60px;
+}
+
+.block .sign-in-fb {
     background: #4671C7;
     border-radius: 5px;
     color: #fff;
     display: block;
     font-size: 19px;
-    margin-left: auto;
-    margin-top: 35px;
+    margin: auto;
     max-width: 355px;
     padding: 19px 10px;
     text-align: center;
     text-decoration: none;
 }
 
-.block.create-moneybox .sign-in-fb span,
-.block.create-moneybox .sign-in-fb img {
+.block .sign-in-fb span,
+.block .sign-in-fb img {
     display: inline-block;
     vertical-align: middle;
 }
 
-.block.create-moneybox .sign-in-fb span {
+.block .sign-in-fb span {
     line-height: normal;
     margin-right: 5px;
     margin-top: 5px;
 }
-
 
 /* Footer */
 .footer {
@@ -594,10 +596,10 @@ body {
     padding: 0 10px 30px;
 }
 
+
 /*-----------------------------------------------------------------------------
 | Contact Form Section
 |-----------------------------------------------------------------------------
-|
 |
 |
 */
@@ -709,3 +711,85 @@ body {
     height: 20px;
 }
 
+
+
+/*-----------------------------------------------------------------------------
+| Register Form Section
+|-----------------------------------------------------------------------------
+|
+|
+*/
+
+/* Block reasons */
+.block.reasons {
+    background: #32B7D4 url(../../images/create-moneybox-bg.png) no-repeat center center;
+    background-size: cover;
+    color: #fff;
+    padding: 50px 0 110px;
+}
+
+/* Override */
+.block.reasons .holder {
+    max-width: 710px;
+}
+
+.block.reasons .header-block {
+    margin-bottom: 85px;
+    text-align: center;
+}
+
+.block.reasons .header-block .title {
+    color: #fff;
+    font-family: 'brandon_grotesquemedium';
+    font-size: 29px;
+    text-transform: uppercase;
+    text-align: left;
+}
+
+.block.reasons .content-block ul {
+    list-style-image: url('../images/icon-option.png');
+    padding-left: 30px;
+}
+
+.block.reasons .content-block ul li{
+    font-family: verbregular;
+    font-size: 17px;
+    line-height: 17px;
+    padding: 10px 0;
+}
+
+
+.form.register {
+
+}
+
+.form.register .form-group {
+    margin-bottom: 20px;
+}
+
+.form.register .form-control {
+    border-color: #A8A8B7;
+    outline: none;
+    box-shadow: none;
+    height: 36px;
+}
+
+.form.register .form-control:hover {
+    border-color: #FF4E00;
+}
+
+.form.register label{
+    color: #FF4E00;
+    font-family: verbregular;
+    font-size: 14px;
+}
+
+.form.register button {
+    background: #FF4E00;
+    border: #FF4E00;
+    border-radius: 7px;
+    font-family: brandon_grotesquebold;
+    font-size: 18px;
+    padding: 20.50px 46px;
+    text-transform: uppercase;
+}

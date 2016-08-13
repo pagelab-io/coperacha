@@ -264,10 +264,12 @@
                         </div>
 
                         <div class="col-sm-6">
-                            <a class="sign-in-fb" href="javascript:void(0)">
-                                <span>O regístrate con</span>
-                                <img src="images/facebook-logo.png" alt="">
-                            </a>
+                            <div class="sign-in-wrap">
+                                <a class="sign-in-fb" href="javascript:void(0)">
+                                    <span>O regístrate con</span>
+                                    <img src="images/facebook-logo.png" alt="">
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

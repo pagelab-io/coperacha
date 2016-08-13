@@ -28,19 +28,30 @@ Route::get('/sendmail', function () {
 });
 
 //region Register
+
+// FORM
+$router->group([
+    'namespace' => 'Register',
+    'prefix' => '/'
+], function($router){
+    // register
+    $router->get('/register', ['as'=>'register', 'uses' => 'RegisterController@getRegisterForm']);
+});
+
+/* API
 $router->group([
     'as' => 'register',
     'namespace' => 'Register',
-    'prefix' => 'register',
+    'prefix' => 'api/register',
     'middleware' => 'rest',
 ], function($router){
     // register
-    $router->post('/', [
-        'uses' => 'RegisterController@register'
-    ]);
-});
+    $router->post('/', ['uses' => 'RegisterController@register']);
+});*/
 
 //endregion
+
+
 
 //region Login
 $router->group([
@@ -90,18 +101,9 @@ $router->group([
     'prefix' => 'user'
 ], function($router){
     // register
-    $router->get('/profile', [
-        'middleware' => ['auth', 'rest'],
-        'uses' => 'UserController@getProfile'
-    ]);
-    $router->put('/profile', [
-        'middleware' => ['auth', 'rest'],
-        'uses' => 'UserController@updateProfile'
-    ]);
-    $router->put('/changePassword', [
-        'middleware' => ['auth', 'rest'],
-        'uses' => 'UserController@changePassword'
-    ]);
+    $router->get('/profile', ['middleware' => ['auth', 'rest'], 'uses' => 'UserController@getProfile']);
+    $router->put('/profile', ['middleware' => ['auth', 'rest'], 'uses' => 'UserController@updateProfile']);
+    $router->put('/changePassword', ['middleware' => ['auth', 'rest'], 'uses' => 'UserController@changePassword']);
 });
 //endregion
 

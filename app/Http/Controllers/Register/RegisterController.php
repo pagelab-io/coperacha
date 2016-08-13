@@ -6,6 +6,7 @@ use App\Http\Controllers\PLController;
 use \App\Http\Requests\PLRequest;
 use App\Http\Responses\PLResponse;
 use App\Models\Register;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends PLController{
@@ -27,6 +28,20 @@ class RegisterController extends PLController{
     }
 
     //region Methods
+
+    /**
+     * Show the register page
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getRegisterForm(Request $request) {
+        $months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo','Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
+        return view('register')
+            ->with('months', $months)
+            ->with('pageTitle','Registro');
+    }
 
     /**
      * register method
