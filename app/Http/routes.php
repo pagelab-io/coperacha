@@ -19,6 +19,7 @@ Route::get('/', [ 'as' => 'index', 'uses' => 'HomeController@getHomePage']);
 Route::get('/about', [ 'as' => 'about', 'uses' => 'HomeController@getAboutPage']);
 Route::get('/contact', [ 'as' => 'contact', 'uses' => 'HomeController@getContactPage']);
 Route::get('/faqs', [ 'as' => 'faqs', 'uses' => 'HomeController@getFaqsPage']);
+Route::post('/sendmail', [ 'as' => 'sendmail', 'uses' => 'HomeController@postMailContact']);
 
 //endregion
 

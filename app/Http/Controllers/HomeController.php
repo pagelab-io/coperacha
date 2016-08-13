@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -54,5 +55,27 @@ class HomeController extends Controller
     public function getFaqsPage()
     {
         return view('faqs', ['pageTitle' => 'Preguntas Frecuentes']);
+    }
+
+    /**
+     * Send mail contact
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function postMailContact(Request $request) {
+
+        $data = [
+            'name' => $request->get('name'),
+            'email' => $request->get('email'),
+            'content' => $request->get('content'),
+        ];
+
+        Mail::send('emails.contact', $data, function ($message) {
+            $message->from('contacto@coperacha.com.mx', 'Contacto');
+            $message->to('perezatanaciod@gmail.com');
+        });
+
+        return response()->json(['success' => true, 'data' => $data]);
     }
 }
