@@ -52,7 +52,7 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-12 clearfix">
-                                <button class="pull-right">@{{sendText}}</button>
+                                <button v-bind:disabled="!isValid" class="pull-right">@{{sendText}}</button>
                             </div>
                         </div>
 

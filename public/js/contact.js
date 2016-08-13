@@ -18,16 +18,19 @@ var vm = new Vue({
 
     },
 
+    computed: {
+        isValid: function () {
+            return this.contact.name != '' && this.contact.email != ''
+        }
+    },
+
     methods: {
         onSubmit: function () {
 
             var _this = this;
-
             this.sendText = 'Enviando...';
 
-            var data = this.contact;
-
-            this.$http.post('/sendmail', data).then(function(response, status, request) {
+            this.$http.post('/sendmail', this.contact).then(function(response, status, request) {
 
                 if (response.status == 200) {
                     var res = JSON.parse(response.body);
