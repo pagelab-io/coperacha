@@ -1,0 +1,480 @@
+@media (max-width: 1010px) {
+
+    /* Navigation */
+    .navigation { height: 55px; }
+
+    /* Navigation - Logo */
+    .navigation .logo {
+        margin-left: auto;
+        max-width: 155px;
+    }
+
+    /* Navigation - List */
+    .navigation .list {
+        margin: 7px 0 0;
+    }
+
+    .navigation .list li {
+        margin: 0 5px;
+    }
+
+    .navigation .list li a.button {
+        font-size: 13px;
+        padding: 10px 5px;
+    }
+
+
+    /* Outer wrapper */
+    .outer-wrapper {
+        margin-top: 55px;
+    }
+
+}
+
+@media (max-width: 992px) {
+
+    /* Block Cover */
+    .block.cover {
+        padding: 65px 0 65px;
+    }
+
+    .block.cover .graphics {
+        margin: 0 auto 45px;
+        max-width: 520px;
+    }
+
+    .block.cover .content-block .button {
+        margin: 0 auto;
+    }
+
+}
+
+@media (max-width: 767px) {
+
+    /* Body */
+    body.mobile-navigation-open {
+        overflow: hidden;
+    }
+
+
+    /* Mobile navigation */
+    .mobile-navigation {
+        background: #51B7CD;
+        color: #fff;
+        height: 100%;
+        overflow-y: scroll;
+        position: fixed;
+        right: -270px;
+        top: 0;
+        width: 270px;
+        z-index: 2;
+
+        -webkit-transition: right 350ms, box-shadow 350ms;
+        -moz-transition: right 350ms, box-shadow 350ms;
+        -ms-transition: right 350ms, box-shadow 350ms;
+        -o-transition: right 350ms, box-shadow 350ms;
+        transition: right 350ms, box-shadow 350ms;
+    }
+
+    .mobile-navigation .list {
+        list-style: none;
+        margin: 0;
+        padding: 0 10px;
+    }
+
+    .mobile-navigation .list li:after {
+        border-bottom: 1px solid #3C96AB;
+        border-top: 1px solid #53CBE9;
+        content: '';
+        display: block;
+        width: 100%;
+    }
+
+    .mobile-navigation .list li:last-child:after {
+        content: normal;
+    }
+
+    .mobile-navigation .list li a {
+        color: #fff;
+        display: block;
+        font-family: 'verbmedium';
+        font-size: 18px;
+        padding: 35px 10px;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+
+    .mobile-navigation .list li .button span {
+        background-color: #FF4C00;
+        border-radius: 5px;
+        display: block;
+        font-size: 14px;
+        padding: 14px 10px;
+        text-align: center;
+    }
+
+    .mobile-navigation.mobile-navigation-open {
+        right: 0;
+        box-shadow: -2px 2px 2px rgba(0, 0, 0, .35);
+    }
+
+
+    /* Navigation */
+    .navigation {
+        padding: 5px 0;
+
+        -webkit-transition: right 350ms;
+        -moz-transition: right 350ms;
+        -ms-transition: right 350ms;
+        -o-transition: right 350ms;
+        transition: right 350ms;
+    }
+
+    /* Navigation - Logo */
+    .navigation .logo {
+        max-width: 135px;
+    }
+
+    .navigation .navigation-toggle {
+        margin: 2px -15px 0 0;
+    }
+
+    .navigation.mobile-navigation-open {
+        right: 270px;
+    }
+
+
+    /* Outer wrapper */
+    .outer-wrapper {
+        right: 0;
+
+        -webkit-transition: right 350ms;
+        -moz-transition: right 350ms;
+        -ms-transition: right 350ms;
+        -o-transition: right 350ms;
+        transition: right 350ms;
+    }
+
+    .outer-wrapper.mobile-navigation-open {
+        right: 270px;
+    }
+
+
+    /* Block */
+    .block .header-block .title {
+        font-size: 28px;
+    }
+
+
+    /* Block How it Works */
+    .block.how-it-works {
+        padding: 40px 0 55px;
+    }
+
+    .block.how-it-works .header-block {
+        margin-bottom: 35px;
+    }
+
+    .block.how-it-works .card {
+        margin-bottom: 30px;
+    }
+
+
+    /* Block Intro */
+    .block.intro {
+        padding: 45px 0 50px;
+    }
+
+    .block.intro .header-block {
+        margin-bottom: 25px;
+    }
+
+    .block.intro .video {
+        margin-top: 30px;
+        max-width: none;
+    }
+
+    /* Block Advantages */
+    .block.advantages {
+        padding: 40px 0 5px;
+    }
+
+    .block.advantages .header-block {
+        margin-bottom: 35px;
+    }
+
+    .block.advantages .advantage {
+        margin-bottom: 40px;
+    }
+
+
+    /* Block Payment Methods */
+    .block.payment-methods {
+        padding: 40px 0 50px;
+    }
+
+    .block.payment-methods .header-block {
+        margin-bottom: 40px;
+    }
+
+
+    /* Block Create Moneybox */
+    .block.create-moneybox {
+        padding: 40px 0 80px;
+    }
+
+    .block.create-moneybox .header-block {
+        font-size: 22px;
+        margin-bottom: 45px;
+    }
+
+    .block.create-moneybox .header-block .title {
+        margin-bottom: 5px;
+    }
+
+    .block.create-moneybox .sign-in-fb {
+        margin: 35px auto 0;
+    }
+
+
+    /* Footer */
+    .footer {
+        padding: 10px 0 15px;
+    }
+
+    .footer .rights .logo {
+        max-width: 135px;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    /* Block */
+    .block .header-block .title {
+        font-size: 22px;
+    }
+
+
+    /* Block Cover */
+    .block.cover {
+        padding: 25px 0 40px;
+    }
+
+    .block.cover .graphics {
+        margin-bottom: 20px;
+        max-width: 290px;
+    }
+
+    .block.cover .graphics .money { left: 35px; margin-top: -34px; width: 80px; }
+    .block.cover .graphics .laptop { width: 135px; }
+    .block.cover .graphics .wallet { margin-top: -32px; right: 50px; width: 54px; }
+
+    .block.cover .header-block {
+        font-size: 16px;
+        line-height: normal;
+        margin-bottom: 10px;
+    }
+
+    .block.cover .content-block .html {
+        font-size: 13px;
+        margin-bottom: 20px;
+    }
+
+    .block.cover .content-block .button {
+        font-size: 14px;
+        max-width: 170px;
+        padding: 15px 5px;
+    }
+
+
+    /* Block How it Works */
+    .block.how-it-works {
+        padding: 20px 0 25px;
+    }
+
+    .block.how-it-works .container-fluid {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .block.how-it-works .header-block {
+        margin-bottom: 15px;
+    }
+
+    /* Override */
+    .block.how-it-works .content-block .row {
+        margin-left: -8px;
+        margin-right: -8px;
+    }
+
+    .block.how-it-works .content-block .align-top {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .block.how-it-works .card {
+        margin-bottom: 30px;
+    }
+
+    .block.how-it-works .card .image {
+        margin-bottom: 20px;
+    }
+
+    .block.how-it-works .card .name {
+        font-size: 12px;
+    }
+
+
+    /* Block Intro */
+    .block.intro {
+        padding: 15px 0 20px;
+    }
+
+    .block.intro .header-block {
+        margin-bottom: 10px;
+    }
+
+    .block.intro .content-block {
+        max-width: 195px;
+    }
+
+    .block.intro .content-block .moneyboxes {
+        margin-left: -10px;
+        margin-right: -10px;
+    }
+
+    .block.intro .content-block .moneyboxes .moneybox-type {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .block.intro .video {
+        margin-top: 20px;
+    }
+
+    .block.intro .video .share-fb {
+        margin-left: 0;
+        margin-top: 20px;
+    }
+
+    /* Block Advantages */
+    .block.advantages {
+        padding: 22px 0 5px;
+    }
+
+    .block.advantages .header-block {
+        margin-bottom: 15px;
+    }
+
+    .block.advantages .align-top {
+        margin-right: 0;
+        width: 100%;
+    }
+
+    .block.advantages .advantage {
+        margin-bottom: 15px;
+    }
+
+    .block.advantages .advantage .image {
+        width: 21.98%;
+    }
+
+    .block.advantages .advantage .info {
+        width: 78.02%;
+    }
+
+
+    /* Block Payment Methods */
+    .block.payment-methods {
+        padding: 20px 0 45px;
+    }
+
+    .block.payment-methods .header-block {
+        margin-bottom: 20px;
+    }
+
+    /* Override */
+    .block.payment-methods .row {
+        margin-left: -10px;
+        margin-right: -10px;
+    }
+
+    .block.payment-methods .method {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+
+    /* Block Create Moneybox */
+    .block.create-moneybox {
+        padding: 15px 0 50px;
+    }
+
+    .block.create-moneybox .header-block {
+        font-size: 17px;
+        margin-bottom: 25px;
+    }
+
+    .block.create-moneybox .header-block .title {
+        font-size: 22px;
+    }
+
+    .block.create-moneybox .sign-in input[type=submit] {
+        font-size: 14px;
+        padding: 12px 10px;
+    }
+
+    .block.create-moneybox .sign-in-fb {
+        font-size: 15px;
+    }
+
+    .block.create-moneybox .sign-in-fb img {
+        max-width: 107px;
+    }
+
+
+    /* Footer */
+    .footer {
+        padding: 5px 0;
+    }
+
+    .footer .rights .logo {
+        max-width: 110px;
+    }
+
+    .footer .rights .text {
+        font-size: 10px;
+    }
+
+
+    /* Content Header */
+    .content-header {
+        padding: 9px 0;
+    }
+
+    .content-header h1 {
+        font-size: 16px;
+    }
+
+
+    /* Content Body */
+    .content-body {
+        padding: 25px 0 30px;
+    }
+
+
+    /* Faqs Layout */
+    .faqs-layout .faq .question .text {
+        font-size: 16px;
+        line-height: 25px;
+    }
+
+    .faqs-layout .faq .question .icon {
+        font-size: 18px;
+        height: 25px;
+        line-height: 25px;
+        width: 25px;
+    }
+
+}

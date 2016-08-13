@@ -46,7 +46,9 @@
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
         <!-- Page Styles -->
         {{--<link href="{{ elixir('build/css/styles.min.css') }}" rel="stylesheet">--}}
-        <link href="build/css/styles.min.css" rel="stylesheet">
+        <link href="/css/fonts.css" rel="stylesheet">
+        <link href="/css/styles.css" rel="stylesheet">
+        <link href="/css/styles-responsive.css" rel="stylesheet">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
