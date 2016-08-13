@@ -76,7 +76,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group clearfix">
                                     <div class="pull-right">
                                         <button class="btn btn-primary">Crear cuenta</button>
                                     </div>
