@@ -20,11 +20,12 @@
                         <div class="col-sm-6 align-middle">
                             <nav class="footer-nav">
                                 <ul>
-                                    <li><a href="javascript:void(0)">¿Qué es Cooperacha?</a></li>
+                                    <li><a href="{{route('about')}}">¿Qué es Coperacha?</a></li>
                                     <li><a href="javascript:void(0)">¿Cómo Funciona?</a></li>
                                     <li><a href="javascript:void(0)">Formas de Pago</a></li>
+                                    <li><a href="{{route('contact')}}">Contaco</a></li>
                                     <li><a href="javascript:void(0)">Video</a></li>
-                                    <li><a href="javascript:void(0)">FAQs</a></li>
+                                    <li><a href="{{route('faqs')}}">FAQs</a></li>
                                 </ul>
                             </nav>
                         </div>

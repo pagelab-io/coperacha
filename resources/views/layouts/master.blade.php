@@ -16,6 +16,7 @@
         <link rel="alternate" hreflang="en" href="http://coperacha.com.mx/" />
 
         <!-- Favicons -->
+        <link rel="shortcut icon" href="images/favicon.png">
         <link rel="icon" href="favicons/favicon.ico" type="image/x-icon">
         <link rel="apple-touch-icon" sizes="72x72" href="favicons/apple-touch-icon-72x72.png">
         <link rel="apple-touch-icon" sizes="114x114" href="favicons/apple-touch-icon-114x114.png">
@@ -54,7 +55,7 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-        <!-- Google Analytics -->
+        <!-- Google Analytics
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -62,7 +63,7 @@
             })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
             ga('create', 'UA-XXXXX-X', 'auto');
             ga('send', 'pageview');
-        </script>
+        </script> -->
     </head>
     <body>
 
@@ -72,11 +73,9 @@
 
         <!-- Outer wrapper -->
         <div class="outer-wrapper">
-
             @yield("content")
 
             @include("partials.footer")
-
         </div>
 
         <!-- Include jQuery -->
@@ -86,5 +85,7 @@
         <!-- Page Scripts (production) -->
         {{--<script src="{{ elixir('build/js/scripts.min.js') }}"></script>--}}
         <script src="build/js/scripts.min.js"></script>
+
+        @yield('js')
     </body>
 </html>

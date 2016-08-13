@@ -10,7 +10,7 @@
         <ul class="clearfix list hidden-xs">
             <li><a href="#">¿Qué es Coperacha?</a></li>
             <li><a href="#">¿Cómo funciona?</a></li>
-            <li><a href="#">FAQS</a></li>
+            <li><a href="{{route('faqs')}}">FAQS</a></li>
             <li><a class="button" href="#">Crear mi Alcancía</a></li>
             <li><a href="#">Entrar</a></li>
         </ul>

@@ -14,17 +14,13 @@
 header('Access-Control-Allow-Origin: *');
 header( 'Access-Control-Allow-Headers: Authorization, Content-Type');
 
-Route::get('/', function () {
-    return view('index');
-});
+//region page routes
+Route::get('/', [ 'as' => 'index', 'uses' => 'HomeController@getHomePage']);
+Route::get('/about', [ 'as' => 'about', 'uses' => 'HomeController@getAboutPage']);
+Route::get('/contact', [ 'as' => 'contact', 'uses' => 'HomeController@getContactPage']);
+Route::get('/faqs', [ 'as' => 'faqs', 'uses' => 'HomeController@getFaqsPage']);
 
-Route::get('/contacto', function () {
-    return view('contact', ['pageTitle' => 'Contacto']);
-});
-
-Route::get('/faqs', function () {
-    return view('faqs', ['pageTitle' => 'Preguntas Frecuentes']);
-});
+//endregion
 
 Route::get('/sendmail', function () {
     return view('emails.test');
@@ -34,18 +30,15 @@ Route::get('/sendmail', function () {
 $router->group([
     'as' => 'register',
     'namespace' => 'Register',
-    'prefix' => 'register'
+    'prefix' => 'register',
+    'middleware' => 'rest',
 ], function($router){
     // register
     $router->post('/', [
-        'middleware' => 'rest',
         'uses' => 'RegisterController@register'
     ]);
-    // register
-    /*$router->get('/test', [
-        'uses' => 'RegisterController@emailTest'
-    ]);*/
 });
+
 //endregion
 
 //region Login
@@ -73,47 +66,19 @@ $router->group([
 $router->group([
     'as' => 'moneybox',
     'namespace' => 'Moneybox',
-    'prefix' => 'moneybox'
+    'prefix' => 'moneybox',
+    'middleware' => ['auth', 'rest'],
 ], function($router){
-    $router->post('/', [
-        'middleware' => ['auth', 'rest'],
-        'uses' => 'MoneyboxController@createMoneybox'
-    ]);
-    $router->put('/', [
-        'middleware' => ['auth', 'rest'],
-        'uses' => 'MoneyboxController@updateMoneybox'
-    ]);
-    $router->get('/', [
-        'middleware' => ['auth', 'rest'],
-        'uses' => 'MoneyboxController@getAll'
-    ]);
-    $router->post('/categories', [
-        'middleware' => ['auth', 'rest'],
-        'uses' => 'CategoryController@createCategory'
-    ]);
-    $router->get('/categories', [
-        'middleware' => ['auth', 'rest'],
-        'uses' => 'CategoryController@getAll'
-    ]);
-    $router->post('/settings', [
-        'middleware' => ['auth', 'rest'],
-        'uses' => 'SettingController@createSetting'
-    ]);
-    $router->get('/settings', [
-        'middleware' => ['auth', 'rest'],
-        'uses' => 'SettingController@getAll'
-    ]);
-    $router->post('/option', [
-        'middleware' => ['auth', 'rest'],
-        'uses' => 'SettingController@createOptions'
-    ]);
-    $router->post('/payment', [
-        'middleware' => 'rest',
-        'uses' => 'PaymentController@createPayment'
-    ]);
-    $router->get('/paypal/return', [
-        'uses' => 'PaymentController@paypalResponse'
-    ]);
+    $router->post('/',  [ 'uses' => 'MoneyboxController@createMoneybox']);
+    $router->put('/',   [ 'uses' => 'MoneyboxController@updateMoneybox']);
+    $router->get('/',   [ 'uses' => 'MoneyboxController@getAll']);
+    $router->post('/categories',    ['uses' => 'CategoryController@createCategory']);
+    $router->get('/categories',     ['uses' => 'CategoryController@getAll']);
+    $router->post('/settings',      ['uses' => 'SettingController@createSetting']);
+    $router->get('/settings',       ['uses' => 'SettingController@getAll']);
+    $router->post('/option',        ['uses' => 'SettingController@createOptions']);
+    $router->post('/payment',       ['uses' => 'PaymentController@createPayment']);
+    $router->get('/paypal/return',  ['uses' => 'PaymentController@paypalResponse']);
 });
 //endregion
 

@@ -274,4 +274,5 @@
             </div>
         </div>
     </section>
-@stop
+
+@endsection

@@ -10,4 +10,4 @@
 
     @yield("page-content")
 
-@stop
+@endsection

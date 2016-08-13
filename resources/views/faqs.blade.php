@@ -446,4 +446,4 @@
         </div>
     </section>
 
-@stop
+@endsection
