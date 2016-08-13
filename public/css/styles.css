@@ -673,6 +673,15 @@ body {
     margin-bottom: 15px;
 }
 
+.contact-body .contact-form button .icon {
+    background: url("../images/loader.gif");
+    background-size: 20px;
+    display: block;
+    float: left;
+    width: 20px;
+    height: 20px;
+}
+
 .contact-body .contact-form button {
     border: none;
     background: #FF4F00;
