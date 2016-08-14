@@ -1113,17 +1113,21 @@ body {
     }
 }
 
-@media screen and (min-width: 768px) and (max-width: 1140px){
+@media screen and (min-width: 768px) {
 
     .moneybox-item header img {
         height: auto;
     }
 
+    .moneybox-item header {
+        padding: 10px 15px;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1140px){
+
     .col-xs-6 {
         width: 50%;
     }
 
-    .moneybox-item header {
-        padding: 10px 15px;
-    }
 }
