@@ -1052,7 +1052,7 @@ body {
 }
 
 .moneybox-item header {
-    padding: 0px;
+    padding: 5px 0px;
 }
 
 .moneybox-item:nth-child(odd) header {
@@ -1068,6 +1068,8 @@ body {
 .moneybox-item header img {
     display: block;
     margin: auto;
+
+    height: 42px;
 }
 
 .moneybox-item main {
@@ -1105,10 +1107,27 @@ body {
     width: 91px;
 }
 
+@media screen and (max-width: 520px){
+    .col-xs-6 {
+        width: 100%;
+    }
+}
 
-@media screen and (min-width: 769px){
+@media screen and (min-width: 768px) {
+
+    .moneybox-item header img {
+        height: auto;
+    }
 
     .moneybox-item header {
         padding: 10px 15px;
     }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1140px){
+
+    .col-xs-6 {
+        width: 50%;
+    }
+
 }
