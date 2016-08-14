@@ -10,7 +10,9 @@
                         @for($i = 0; $i<8; $i++)
                             <div class="col-xs-6 col-sm-4 moneybox-item">
                                 <header>
-                                    <img class="img-responsive" src="/images/icon-mbox-{{$i%2==0?'1':'2'}}.png" alt="">
+                                    <figure>
+                                        <img class="img-responsive" src="/images/icon-mbox-{{$i%2==0?'1':'2'}}.png" alt="">
+                                    </figure>
                                 </header>
                                 <main class="actions">
                                     <h2 class="title">Prueba</h2>
