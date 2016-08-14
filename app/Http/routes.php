@@ -29,7 +29,7 @@ Route::group([
     $router->get('/about', [ 'as' => 'about', 'uses' => 'HomeController@getAboutPage']);
     $router->get('/contact', [ 'as' => 'contact', 'uses' => 'HomeController@getContactPage']);
     $router->get('/faqs', [ 'as' => 'faqs', 'uses' => 'HomeController@getFaqsPage']);
-    $router->get('/test', [ 'as' => 'test', 'uses' => 'HomeController@getTestPage']);
+    $router->get('/test', [ 'as' => 'test', 'middleware' => 'auth', 'uses' => 'HomeController@getTestPage']);
 });
 
 Route::group([

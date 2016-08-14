@@ -5,7 +5,9 @@
         [
             'ModalController',
             'RegisterController',
+            'LoginController',
             'RegisterService',
+            'LoginService',
             'CoperachaModalDirective'
         ]);
 

@@ -7,17 +7,17 @@
 
     <!-- ./header -->
 
-    <div class="close">x</div>
+    <div class="close close-popup">x</div>
 
     <!-- body -->
-    <div class="popup-body">
+    <div class="popup-body" ng-controller="loginController">
 
         <!-- email login -->
         <div class="email-login">
-            <input type="text" placeholder="Tu email"/>
-            <input type="password" placeholder="Contraseña"/>
+            <input type="text" placeholder="Tu email" ng-model="email"/>
+            <input type="password" placeholder="Contraseña" ng-model="password"/>
             <span>Olvidé mi contraseña</span>
-            <button class="btn-email-login">ENTRAR</button>
+            <button class="btn-email-login" ng-click="emailLogin()">ENTRAR</button>
         </div>
         <!-- email login -->
 
