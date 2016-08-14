@@ -6,7 +6,7 @@
                 <div class="col-sm-4 col-xs-12 align-middle">
                     <div class="rights">
                         <div class="logo">
-                            <a href="/"><img class="img-responsive" src="images/logo.png" alt="Coperacha | Recauda Dinero Entre Amigos"></a>
+                            <a href="/"><img class="img-responsive" src="/images/logo.png" alt="Coperacha | Recauda Dinero Entre Amigos"></a>
                         </div>
                         <div class="text">
                             <div>Coperacha 2016.</div>
@@ -20,12 +20,12 @@
                         <div class="col-sm-6 align-middle">
                             <nav class="footer-nav">
                                 <ul>
-                                    <li><a href="{{route('about')}}">¿Qué es Coperacha?</a></li>
+                                    <li><a href="{{route('pages.about')}}">¿Qué es Coperacha?</a></li>
                                     <li><a href="javascript:void(0)">¿Cómo Funciona?</a></li>
                                     <li><a href="javascript:void(0)">Formas de Pago</a></li>
-                                    <li><a href="{{route('contact')}}">Contaco</a></li>
+                                    <li><a href="{{route('pages.contact')}}">Contaco</a></li>
                                     <li><a href="javascript:void(0)">Video</a></li>
-                                    <li><a href="{{route('faqs')}}">FAQs</a></li>
+                                    <li><a href="{{route('pages.faqs')}}">FAQs</a></li>
                                 </ul>
                             </nav>
                         </div>

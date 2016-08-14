@@ -14,6 +14,7 @@ use App\Models\Person;
 use App\Models\User;
 use App\Repositories\PersonRepository;
 use App\Repositories\UserRepository;
+use Illuminate\Http\Request;
 
 class UserController extends PLController{
 
@@ -41,6 +42,19 @@ class UserController extends PLController{
     }
 
     //region Methods
+    /**
+     * Show the register page
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function create(Request $request) {
+        $months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo','Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
+        return view('user.create')
+            ->with('months', $months)
+            ->with('pageTitle','Registro');
+    }
 
     /**
      * Get the profile for a specific user

@@ -35,7 +35,7 @@
                                 <div>Coperacha es un servicio de gestión de dinero comunitario que sirve para hacer regalos o transferencias entre amigos.</div>
                             </div>
                             <a style="display: none" href="#" class="button">Crear mi Alcancía</a>
-                            <a class="button" href="{{route('register')}}">Crear mi Alcancía</a>
+                            <a class="button" href="{{route('user.create')}}">Crear mi Alcancía</a>
                         </div>
                     </div>
                 </div>
@@ -57,8 +57,8 @@
                                 <div class="image">
                                     <img class="img-responsive center-block" src="images/how-it-works-card-1.png" alt="">
                                 </div>
-                                <div class="name"><a class="button" href="javascript:void(0)">1. Crea tu Alcancía</a></div>
-                                <div class="desc">Es gratis y te llevará un minuto crearla.. </div>
+                                <div class="name"><a class="button" href="{{route('user.create')}}">1. Crea tu Alcancía</a></div>
+                                <div class="desc">Es gratis y te llevará un minuto crearla... </div>
                             </div>
                         </div>
 

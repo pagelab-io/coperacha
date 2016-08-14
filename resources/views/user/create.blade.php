@@ -88,7 +88,7 @@
                             <div class="sign-in-wrap">
                                 <a class="sign-in-fb" href="javascript:void(0)">
                                     <span>O regístrate con</span>
-                                    <img src="images/facebook-logo.png" alt="register with facebook">
+                                    <img src="/images/facebook-logo.png" alt="register with facebook">
                                 </a>
                             </div>
                         </div>
@@ -122,7 +122,5 @@
 @endsection
 
 @section('js')
-    <script src="js/vendor/vuejs/vue.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.9.3/vue-resource.js"></script>
 
 @endsection

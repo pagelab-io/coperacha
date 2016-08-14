@@ -12,13 +12,21 @@
 */
 
 header('Access-Control-Allow-Origin: *');
-header( 'Access-Control-Allow-Headers: Authorization, Content-Type');
+header('Access-Control-Allow-Headers: Authorization, Content-Type');
 
 //region page routes
-Route::get('/', [ 'as' => 'index', 'uses' => 'HomeController@getHomePage']);
-Route::get('/about', [ 'as' => 'about', 'uses' => 'HomeController@getAboutPage']);
-Route::get('/contact', [ 'as' => 'contact', 'uses' => 'HomeController@getContactPage']);
-Route::get('/faqs', [ 'as' => 'faqs', 'uses' => 'HomeController@getFaqsPage']);
+
+Route::group([
+    'as' => 'pages.',
+    'prefix' => ''
+], function ($router) {
+    $router->get('/', [ 'as' => 'index', 'uses' => 'HomeController@getHomePage']);
+    $router->get('/about', [ 'as' => 'about', 'uses' => 'HomeController@getAboutPage']);
+    $router->get('/contact', [ 'as' => 'contact', 'uses' => 'HomeController@getContactPage']);
+    $router->get('/faqs', [ 'as' => 'faqs', 'uses' => 'HomeController@getFaqsPage']);
+
+});
+
 Route::post('/sendmail', [ 'as' => 'sendmail', 'uses' => 'HomeController@postMailContact']);
 
 //endregion
@@ -29,24 +37,35 @@ Route::get('/sendmail', function () {
 
 //region Register
 
-// FORM
+//region FORMs
 $router->group([
-    'namespace' => 'Register',
-    'prefix' => '/'
+    'as'        => 'user.',
+    'namespace' => 'User',
+    'prefix' => '/user'
 ], function($router){
     // register
-    $router->get('/register', ['as'=>'register', 'uses' => 'RegisterController@getRegisterForm']);
+    $router->get('/create', ['as'=>'create', 'uses' => 'UserController@create']);
 });
+
+$router->group([
+    'as'        => 'moneybox.',
+    'prefix' => '/moneybox'
+], function($router){
+    // register
+    $router->get('/create', ['as'=>'create', 'uses' => 'HomeController@getCreateMoneyboxPage']);
+});
+//endregion
+
 
 /* API
 $router->group([
     'as' => 'register',
     'namespace' => 'Register',
-    'prefix' => 'api/register',
+    'prefix' => '/api/v1/',
     'middleware' => 'rest',
 ], function($router){
     // register
-    $router->post('/', ['uses' => 'RegisterController@register']);
+    $router->post('/register', ['uses' => 'RegisterController@register']);
 });*/
 
 //endregion

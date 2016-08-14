@@ -28,21 +28,7 @@ class RegisterController extends PLController{
     }
 
     //region Methods
-
-    /**
-     * Show the register page
-     *
-     * @param Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function getRegisterForm(Request $request) {
-        $months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo','Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-
-        return view('register')
-            ->with('months', $months)
-            ->with('pageTitle','Registro');
-    }
-
+    
     /**
      * register method
      *

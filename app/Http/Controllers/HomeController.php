@@ -33,7 +33,7 @@ class HomeController extends Controller
      */
     public function getContactPage()
     {
-        return view('contact', ['pageTitle' => 'Contacto']);
+        return view('pages.contact', ['pageTitle' => 'Contacto']);
     }
 
    /**
@@ -43,7 +43,7 @@ class HomeController extends Controller
      */
     public function getAboutPage()
     {
-        return view('about', ['pageTitle' => '¿Por qué organizar la recaudación con Coperacha?']);
+        return view('pages.about', ['pageTitle' => '¿Por qué organizar la recaudación con Coperacha?']);
     }
 
 
@@ -54,7 +54,15 @@ class HomeController extends Controller
      */
     public function getFaqsPage()
     {
-        return view('faqs', ['pageTitle' => 'Preguntas Frecuentes']);
+        return view('pages.faqs', ['pageTitle' => 'Preguntas Frecuentes']);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getCreateMoneyboxPage(Request $request){
+        return view('moneybox.create')->with('pageTitle','Crear mi alcancía 1/2');
     }
 
     /**

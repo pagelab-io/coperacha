@@ -58,8 +58,6 @@
                                 </button>
                             </div>
                         </div>
-
-
                     </form>
                 </div>
             </div>
@@ -69,7 +67,7 @@
 @endsection
 
 @section('js')
-    <script src="js/vendor/vuejs/vue.js"></script>
+    <script src="{{asset('/js/vendor/vuejs/vue.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.9.3/vue-resource.js"></script>
-    <script src="js/contact.js"></script>
+    <script src="{{asset('/js/contact.js')}}"></script>
 @endsection
