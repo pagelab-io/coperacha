@@ -277,6 +277,8 @@
             </div>
         </div>
     </section>
+
+    <!-- LoginDialogView -->
     <coperacha-modal class="popup-wrapper"></coperacha-modal>
 
 @endsection
