@@ -1,6 +1,7 @@
 @extends("layouts.master")
 
 @section("content")
+
     <!-- Cover -->
     <div class="block cover">
         <div class="holder">
