@@ -47,23 +47,22 @@ window.fbAsyncInit = function() {
     //
     // These three cases are handled in the callback function.
 
-    FB.getLoginStatus(function(response) {
+    /*FB.getLoginStatus(function(response) {
         console.log("===");
         console.log(response);
         statusChangeCallback(response);
-    });
+    });*/
 };
 
-function login(){
+function FBLogin(callback){
     FB.login(function(response) {
-        console.log("***");
-        console.log(response);
+        callback(response);
     }, {scope: 'public_profile,email,user_friends'});
 }
 
-function dataFace(){
+function FBData(callback){
     FB.api('/me?fields=name,email', function(response) {
-        console.log(JSON.stringify(response));
+        callback(response);
     });
 }
 

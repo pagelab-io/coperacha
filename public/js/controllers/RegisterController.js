@@ -21,6 +21,7 @@
         $scope.birthday = '';
         $scope.country = '';
         $scope.city = '';
+        $scope.facebook_uid = '';
         $scope.request = {};
         // TODO -  use this for redirections
         $scope.toMoneybox = 0;
@@ -43,18 +44,61 @@
             }
 
             $scope.request = $scope.buildRequest();
-            $scope.request.isFB = 0;
             Register.register($scope.request).success(function(response)
             {
                 console.log(response);
-                window.location="/test";
+                if (response.status == 200) {
+                    window.location="/test";
+                } else if(response.status == -2) {
+                    alert("El correo ingresado ya existe en el sistema, por favor intenta con otro.");
+                }
             }).error(function(response){
                 console.log(response);
             });
         };
 
+        /**
+         * Register by Faceboook
+         */
         $scope.facebookRegister = function()
         {
+            // 1. Facebook Login
+            FBLogin(function (result) {
+                if (result.status === 'connected') {
+                    console.log('Logged in Facebook.');
+
+                    // 2. get Facebook data
+                    FBData(function(result){
+                        var names = result.name.split(" ");
+                        $scope.name = names[0];
+                        for (var i = 1; i<names.length; i++){
+                            $scope.lastname += names[i]+" ";
+                        }
+                        $scope.FBemail = result.email;
+                        $scope.facebook_uid = result.id;
+
+                        // 3. call facebook register
+                        $scope.request = $scope.buildFacebookRequest();
+                        Register.register($scope.request).success(function(response)
+                        {
+                            console.log(response);
+                            if (response.status == 200) {
+                                window.location="/test";
+                            } else if(response.status == -2) {
+                                alert("El correo ingresado ya existe en el sistema, por favor intenta con otro.");
+                            }
+
+                        }).error(function(response){
+                            console.log(response);
+                        });
+
+                    });
+
+                } else {
+                    console.log("Ocurrio un problema al hacer la conexión con Facebook, por favor intentalo maás tarde");
+                }
+            });
+
         };
 
         /**
@@ -69,6 +113,7 @@
                 'lastname': $scope.lastname,
                 'email': $scope.email,
                 'password': $scope.password,
+                'isFB' : 0,
                 'method': 'register',
                 'api-key' : '$2y$10$ScZUgkFzrMr9NM5qPzKag.4mLTW8ugSG/DtT6nerJb3W1v5sg6UBC'
             };
@@ -80,7 +125,26 @@
             if ($scope.city != "") request.city = $scope.city;
 
             return request;
+        };
+
+        /**
+         * Build the request for Facebook register
+         */
+        $scope.buildFacebookRequest = function()
+        {
+            var request = {
+                'name': $scope.name,
+                'lastname': $scope.lastname,
+                'email': $scope.FBemail,
+                'facebook_uid': $scope.facebook_uid,
+                'isFB' : 1,
+                'method': 'register',
+                'api-key' : '$2y$10$ScZUgkFzrMr9NM5qPzKag.4mLTW8ugSG/DtT6nerJb3W1v5sg6UBC'
+            };
+
+            return request;
         }
+
     }
 
 })();

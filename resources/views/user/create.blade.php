@@ -96,7 +96,7 @@
 
                         <div class="col-sm-6">
                             <div class="sign-in-wrap">
-                                <a class="sign-in-fb" href="javascript:void(0)">
+                                <a class="sign-in-fb" href="javascript:void(0)" ng-click="facebookRegister()">
                                     <span>O regístrate con</span>
                                     <img src="/images/facebook-logo.png" alt="register with facebook">
                                 </a>
@@ -135,12 +135,14 @@
 <!-- AngularJS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
     <!-- Facebook SDK -->
-    <script src='/js/facebook.js'></script>
+    <script src="{{asset('/js/facebook.js')}}"></script>
 
     <script src="/js/coperacha.js"></script>
     <script src="/js/Utils.js"></script>
     <script src="/js/controllers/ModalController.js"></script>
     <script src="/js/controllers/RegisterController.js"></script>
+    <script src="{{asset('/js/controllers/LoginController.js')}}"></script>
     <script src="/js/services/RegisterService.js"></script>
+    <script src="{{asset('/js/services/LoginService.js')}}"></script>
     <script src="/js/directives/CoperachaModal.js"></script>
 @endsection
