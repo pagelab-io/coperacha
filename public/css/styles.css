@@ -114,6 +114,20 @@ body {
     margin-bottom: 0;
 }
 
+.logged{
+    position: relative;
+    top: -5px;
+}
+
+.logged > a {
+    text-align: center;
+    padding: 0 !important;;
+}
+
+.logged > .logout{
+    font-size: 10px !important;
+}
+
 
 /* Outer wrapper */
 .outer-wrapper {

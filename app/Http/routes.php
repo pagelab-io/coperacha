@@ -85,7 +85,7 @@ $router->group([
         'uses' => 'AuthController@login'
     ]);
     $router->get('/logout', [
-        'middleware' => ['auth', 'rest'],
+        'middleware' => 'auth',
         'uses' => 'AuthController@logout'
     ]);
     $router->put('/passwordRecovery', [

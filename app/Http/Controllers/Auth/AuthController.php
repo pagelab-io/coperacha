@@ -62,8 +62,14 @@ class AuthController extends PLController
         }
     }
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function logout()
     {
+        \Auth::logout();
+        return redirect()->guest('/');
+        /*
         try {
             // get login response
             $response = $this->_userRepository->logout();
@@ -76,7 +82,7 @@ class AuthController extends PLController
             $response->description = $ex->getMessage();
             $response->data = $ex->getTraceAsString();
             return response()->json($response);
-        }
+        }*/
     }
 
 

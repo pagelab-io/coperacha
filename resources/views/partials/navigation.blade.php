@@ -12,7 +12,20 @@
             <li><a href="{{route('pages.faqs')}}">FAQS</a></li>
             <li><a href="{{route('pages.contact')}}">Contacto</a></li>
             <li><a class="button" href="{{route('moneybox.create')}}">Crear mi Alcancía</a></li>
-            <li><a href="#" ng-click="showModal()">Entrar</a></li>
+            @if(Auth::guest())
+                <li><a href="#" ng-click="showModal()">Entrar</a></li>
+            @else
+                <li>
+                    <div class="logged">
+                        @if(Auth::user()->person->gender === 'H')
+                            <a href="#" class="logged-user">Bienvenido <br>{{Auth::user()->person->name}}</a>
+                        @else
+                            <a href="#" class="logged-user">Bienvenida <br>{{Auth::user()->person->name}}</a>
+                        @endif
+                        <a href="{{url('/api/v1/auth/logout')}}" class="logout" >Cerrar sesión</a>
+                    </div>
+                </li>
+            @endif
         </ul>
 
         <!-- Navigation toggle -->
