@@ -23,12 +23,15 @@ class RegisterValidation{
     static function rules()
     {
         return [
+            //required
             'name' => 'required|string',
             'lastname' => 'required|string',
             'email' => 'required|email',
             'password' => 'required_if:isFB,0',
             'facebook_uid' => 'required_if:isFB,1',
-            'isFB' => 'required|digits:1|number_between:0,1'
+            'isFB' => 'required|digits:1|number_between:0,1',
+            // optionals
+            'birthday' => 'date_format:"Y-m-d"'
         ];
     }
 

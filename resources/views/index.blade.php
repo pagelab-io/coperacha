@@ -288,6 +288,7 @@
     <script src="{{asset('/js/facebook.js')}}"></script>
 
     <script src="{{asset('/js/coperacha.js')}}"></script>
+    <script src="{{asset('/js/Utils.js')}}"></script>
     <script src="{{asset('/js/controllers/ModalController.js')}}"></script>
     <script src="{{asset('/js/controllers/RegisterController.js')}}"></script>
     <script src="{{asset('/js/services/RegisterService.js')}}"></script>

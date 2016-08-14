@@ -63,6 +63,12 @@ class TxRegister extends PLTransaction{
                     $person             = $user->person;
                     $person->name       = $request->get('name');
                     $person->lastname   = $request->get('lastname');
+                    if($request->exists('birthday')) $person->birthday = $request->get('birthday');
+                    if($request->exists('gender')) $person->gender = $request->get('gender');
+                    if($request->exists('phone')) $person->phone = $request->get('phone');
+                    if($request->exists('city')) $person->city = $request->get('city');
+                    if($request->exists('country')) $person->country = $request->get('country');
+
                     if (!$person->save()) throw new \Exception("Unable to update Person", -1);
                     \Log::info("=== Person created successfully : " . $person . " ===");
 
@@ -98,6 +104,11 @@ class TxRegister extends PLTransaction{
                 $person             = new Person();
                 $person->name       = $request->get('name');
                 $person->lastname   = $request->get('lastname');
+                if($request->exists('birthday')) $person->birthday = $request->get('birthday');
+                if($request->exists('gender')) $person->gender = $request->get('gender');
+                if($request->exists('phone')) $person->phone = $request->get('phone');
+                if($request->exists('city')) $person->city = $request->get('city');
+                if($request->exists('country')) $person->country = $request->get('country');
                 if (!$person->save()) throw new \Exception("Unable to create Person", -1);
                 \Log::info("=== Person created successfully : " . $person . " ===");
 
@@ -107,7 +118,7 @@ class TxRegister extends PLTransaction{
                 $user->person_id = $person->id;
                 $user->email     = $request->get('email');
                 $user->password  = ($request->exists('facebook_uid')) ? '' : bcrypt($request->get('password'));
-                $user->username  = $request->get('email');
+                $user->username  = ($request->exists('username')) ? $request->get('username') : $request->get('email');
                 if (!$user->save()) throw new \Exception("Unable to create User", -1);
                 \Log::info("=== User created successfully : ".$user." ===");
 
