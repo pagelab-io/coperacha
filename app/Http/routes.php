@@ -12,71 +12,53 @@
 */
 
 header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Headers: Authorization, Content-Type');
+header( 'Access-Control-Allow-Headers: Authorization, Content-Type');
 
-//region page routes
-
-Route::group([
-    'as' => 'pages.',
-    'prefix' => ''
-], function ($router) {
-    $router->get('/', [ 'as' => 'index', 'uses' => 'HomeController@getHomePage']);
-    $router->get('/about', [ 'as' => 'about', 'uses' => 'HomeController@getAboutPage']);
-    $router->get('/contact', [ 'as' => 'contact', 'uses' => 'HomeController@getContactPage']);
-    $router->get('/faqs', [ 'as' => 'faqs', 'uses' => 'HomeController@getFaqsPage']);
-
-});
-
+//region Coperacha routes
+Route::get('/', [ 'as' => 'index', 'uses' => 'HomeController@getHomePage']);
+Route::get('/about', [ 'as' => 'about', 'uses' => 'HomeController@getAboutPage']);
+Route::get('/contact', [ 'as' => 'contact', 'uses' => 'HomeController@getContactPage']);
+Route::get('/faqs', [ 'as' => 'faqs', 'uses' => 'HomeController@getFaqsPage']);
 Route::post('/sendmail', [ 'as' => 'sendmail', 'uses' => 'HomeController@postMailContact']);
+Route::get('/sendmail', function () { return view('emails.test');});
+
+$router->group([
+    'namespace' => 'Register',
+    'prefix' => '/'
+], function($router){
+    // register
+    $router->get('/register', ['as'=>'register', 'uses' => 'RegisterController@getRegisterForm']);
+});
+
 
 //endregion
 
-Route::get('/sendmail', function () {
-    return view('emails.test');
-});
+//region API routes
 
-//region Register
-
-//region FORMs
-$router->group([
-    'as'        => 'user.',
-    'namespace' => 'User',
-    'prefix' => '/user'
-], function($router){
-    // register
-    $router->get('/create', ['as'=>'create', 'uses' => 'UserController@create']);
-});
-
-$router->group([
-    'as'        => 'moneybox.',
-    'prefix' => '/moneybox'
-], function($router){
-    // register
-    $router->get('/create', ['as'=>'create', 'uses' => 'HomeController@getCreateMoneyboxPage']);
-});
-//endregion
-
-
-/* API
+/*
+|--------------------------------------------------------------------------
+| REGISTER
+|--------------------------------------------------------------------------
+*/
 $router->group([
     'as' => 'register',
     'namespace' => 'Register',
-    'prefix' => '/api/v1/',
+    'prefix' => 'api/v1/register',
     'middleware' => 'rest',
 ], function($router){
     // register
-    $router->post('/register', ['uses' => 'RegisterController@register']);
-});*/
+    $router->post('/', ['uses' => 'RegisterController@register']);
+});
 
-//endregion
-
-
-
-//region Login
+/*
+|--------------------------------------------------------------------------
+| AUTH ROUTES
+|--------------------------------------------------------------------------
+*/
 $router->group([
     'as' => 'auth',
     'namespace' => 'Auth',
-    'prefix' => 'auth'
+    'prefix' => 'api/v1/auth'
 ], function($router){
     $router->post('/login', [
         'middleware' => 'rest',
@@ -91,13 +73,16 @@ $router->group([
         'uses' => 'PasswordController@passwordRecovery'
     ]);
 });
-//endregion
 
-//region Moneyboxes
+/*
+|--------------------------------------------------------------------------
+| MONEYBOX ROUTES
+|--------------------------------------------------------------------------
+*/
 $router->group([
     'as' => 'moneybox',
     'namespace' => 'Moneybox',
-    'prefix' => 'moneybox',
+    'prefix' => 'api/v1/moneybox',
     'middleware' => ['auth', 'rest'],
 ], function($router){
     $router->post('/',  [ 'uses' => 'MoneyboxController@createMoneybox']);
@@ -111,27 +96,32 @@ $router->group([
     $router->post('/payment',       ['uses' => 'PaymentController@createPayment']);
     $router->get('/paypal/return',  ['uses' => 'PaymentController@paypalResponse']);
 });
-//endregion
 
-//region User
+/*
+|--------------------------------------------------------------------------
+| USER ROUTES
+|--------------------------------------------------------------------------
+*/
 $router->group([
     'as' => 'user',
     'namespace' => 'User',
-    'prefix' => 'user'
+    'prefix' => 'api/v1/user'
 ], function($router){
     // register
     $router->get('/profile', ['middleware' => ['auth', 'rest'], 'uses' => 'UserController@getProfile']);
     $router->put('/profile', ['middleware' => ['auth', 'rest'], 'uses' => 'UserController@updateProfile']);
     $router->put('/changePassword', ['middleware' => ['auth', 'rest'], 'uses' => 'UserController@changePassword']);
 });
-//endregion
 
-//region Participants
-
+/*
+|--------------------------------------------------------------------------
+| PARTICIPANT ROUTES
+|--------------------------------------------------------------------------
+*/
 $router->group([
     'as' => 'participant',
     'namespace' => 'Participant',
-    'prefix' => 'participant'
+    'prefix' => 'api/v1/participant'
 ], function($router){
     $router->post('/', [
         'middleware' => 'guest',
@@ -141,7 +131,7 @@ $router->group([
 
 //endregion
 
-//region Dashboard
+//region Dashboard routes
 
 Route::group([
     'prefix' => 'dashboard',

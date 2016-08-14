@@ -433,7 +433,7 @@ body {
     width: 100%;
 }
 
-.block.create-moneybox .sign-in input[type=submit] {
+.block.create-moneybox .sign-in input[type=button] {
     background-color: #FF4F00;
     border: none;
     border-radius: 5px;

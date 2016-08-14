@@ -38,6 +38,8 @@ class Register {
         $response = new PLResponse();
 
         if (is_array($txRegister)) {
+            \Log::info("Usuario registrado correctamente, comenzando autenticación");
+            \Auth::login($txRegister['User']);
             $response->description = 'User registered successfully';
             $response->data = $txRegister;
         }

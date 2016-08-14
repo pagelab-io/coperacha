@@ -16,7 +16,7 @@
         <link rel="alternate" hreflang="en" href="http://coperacha.com.mx/" />
 
         <!-- Favicons -->
-        <link rel="shortcut icon" href="/images/favicon.png">
+        <link rel="shortcut icon" href="images/favicon.png">
         <link rel="icon" href="favicons/favicon.ico" type="image/x-icon">
         <link rel="apple-touch-icon" sizes="72x72" href="favicons/apple-touch-icon-72x72.png">
         <link rel="apple-touch-icon" sizes="114x114" href="favicons/apple-touch-icon-114x114.png">
@@ -46,9 +46,10 @@
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
         <!-- Page Styles -->
         {{--<link href="{{ elixir('build/css/styles.min.css') }}" rel="stylesheet">--}}
-        <link href="{{asset('/css/fonts.css')}}" rel="stylesheet">
-        <link href="{{asset('/css/styles.css')}}" rel="stylesheet">
-        <link href="{{asset('/css/styles-responsive.css')}}" rel="stylesheet">
+        <link href="/css/fonts.css" rel="stylesheet">
+        <link href="/css/styles.css" rel="stylesheet">
+        <link href="/css/styles-responsive.css" rel="stylesheet">
+        <link href="/css/coperacha.css" rel="stylesheet">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -67,7 +68,7 @@
             ga('send', 'pageview');
         </script> -->
     </head>
-    <body>
+    <body ng-app="coperachaApp">
 
         @include("partials.mobile-navigation")
 
@@ -86,7 +87,7 @@
         <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
         <!-- Page Scripts (production) -->
         {{--<script src="{{ elixir('build/js/scripts.min.js') }}"></script>--}}
-        <script src="{{asset('/build/js/scripts.min.js')}}"></script>
+        <script src="build/js/scripts.min.js"></script>
 
         @yield('js')
     </body>

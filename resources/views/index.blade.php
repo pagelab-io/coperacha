@@ -35,7 +35,7 @@
                                 <div>Coperacha es un servicio de gestión de dinero comunitario que sirve para hacer regalos o transferencias entre amigos.</div>
                             </div>
                             <a style="display: none" href="#" class="button">Crear mi Alcancía</a>
-                            <a class="button" href="{{route('user.create')}}">Crear mi Alcancía</a>
+                            <a class="button" href="{{route('register')}}">Crear mi Alcancía</a>
                         </div>
                     </div>
                 </div>
@@ -57,8 +57,8 @@
                                 <div class="image">
                                     <img class="img-responsive center-block" src="images/how-it-works-card-1.png" alt="">
                                 </div>
-                                <div class="name"><a class="button" href="{{route('user.create')}}">1. Crea tu Alcancía</a></div>
-                                <div class="desc">Es gratis y te llevará un minuto crearla... </div>
+                                <div class="name"><a class="button" href="javascript:void(0)">1. Crea tu Alcancía</a></div>
+                                <div class="desc">Es gratis y te llevará un minuto crearla.. </div>
                             </div>
                         </div>
 
@@ -252,15 +252,15 @@
                     <h2 class="title">Crea tu Alcancía</h2>
                     <div>Es rápido, fácil y seguro</div>
                 </div>
-                <div class="content-block">
+                <div class="content-block" ng-controller="registerController">
                     <div class="row">
                         <div class="col-sm-6">
                             <form class="sign-in">
-                                <input name="name" placeholder="Nombre" type="text">
-                                <input name="lastname" placeholder="Apellido" type="text">
-                                <input name="email" placeholder="Correo Electrónico" type="text">
-                                <input name="password" placeholder="Contraseña" type="password">
-                                <input type="submit" value="Crear mi Alcancía">
+                                <input name="name" placeholder="Nombre" type="text" ng-model="name">
+                                <input name="lastname" placeholder="Apellido" type="text" ng-model="lastname">
+                                <input name="email" placeholder="Correo Electrónico" type="text" ng-model="email">
+                                <input name="password" placeholder="Contraseña" type="password" ng-model="password">
+                                <input type="button" value="Crear mi Alcancía" ng-click="emailRegister()">
                             </form>
                         </div>
 
@@ -277,5 +277,20 @@
             </div>
         </div>
     </section>
+    <coperacha-modal class="popup-wrapper"></coperacha-modal>
+
+@endsection
+
+@section('js')
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <!-- Facebook SDK -->
+    <script src='/js/facebook.js'></script>
+
+    <script src="/js/coperacha.js"></script>
+    <script src="/js/controllers/ModalController.js"></script>
+    <script src="/js/controllers/RegisterController.js"></script>
+    <script src="/js/services/RegisterService.js"></script>
+    <script src="/js/directives/CoperachaModal.js"></script>
 
 @endsection
