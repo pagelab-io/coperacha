@@ -71,6 +71,18 @@ class HomeController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getCreateMoneyboxPage2(Request $request){
+        $categories = Category::all();
+
+        return view('moneybox.step-2')
+            ->with('categories', $categories)
+            ->with('pageTitle','Crear mi alcancía 2/2');
+    }
+
+    /**
      * Send mail contact
      *
      * @param Request $request
