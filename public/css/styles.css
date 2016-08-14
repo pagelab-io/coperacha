@@ -774,40 +774,36 @@ body {
     padding: 10px 0;
 }
 
-
-.form.register {
-
-}
-
-.form.register .form-group {
+/* Form Styles */
+.form .form-group {
     margin-bottom: 20px;
 }
 
-.form.register .form-control {
+.form .form-control {
     border-color: #A8A8B7;
     outline: none;
     box-shadow: none;
-
 }
 
-.form.register input[type=number].form-control,
-.form.register input[type=date].form-control,
-.form.register input[type=text].form-control {
+.form input[type=number].form-control,
+.form input[type=date].form-control,
+.form input[type=text].form-control {
     height: 36px;
 }
 
-.form.register .form-control:hover {
+.form .form-control:hover {
     border-color: #FF4E00;
 }
 
-.form.register .form-group > label {
+.form .form-group > label {
     color: #FF4E00;
     font-family: verbmedium;
     font-weight: normal;
     font-size: 14px;
 }
 
-.form.register button {
+.form .btn-primary,
+.form button {
     background: #FF4E00;
     border: #FF4E00;
     border-radius: 7px;
@@ -840,20 +836,37 @@ body {
 |
 */
 
-.block.register.moneybox {
-    padding: 10px 0;
+.icon-file {
+    display: inline-block;
+    background: url("../images/icon-file.png");
+    width: 47px;
+    height: 41px;
 }
 
-.block.register.moneybox .holder {
+.icon-calendar {
+    display: inline-block;
+    background: url("../images/icon-calendar.png");
+    width: 49px;
+    height: 49px;
+}
+
+.moneybox-view {
+    
+}
+
+.moneybox-view .holder {
     max-width: 850px;
 }
 
-.block.register.moneybox .header-block {
+.moneybox-view .header-block {
     color: #FF4E00;
 }
 
-.block.register.step-2 .title h2,
-.block.register.moneybox .title h2 {
+.moneybox-view .stage-item {
+    text-align: center;
+}
+
+.moneybox-view .stage-item-title {
     color: #FF4E00;
     font-size: 16px;
     font-weight: normal;
@@ -861,65 +874,145 @@ body {
     text-transform: uppercase;
 }
 
-.stages-control {
-    background: url("/images/category-stages.png") no-repeat center center;
-    height: 25px;
-    width: 150px;
-    margin: auto;
+.moneybox-view .stage-item .label.active {
+    color: #FF4E00;
 }
 
+.moneybox-view .stage-item .label {
+    color: #858596;
+    font-size: 12px;
+    padding: 5px 25px;
+    display: inline-block;
+}
 
-.form.register.moneybox .text-info {
+.moneybox-view .stage-item .icon-step {
+    height: 25px;
+    width: 150px;
+    margin: 15px auto;
+}
+
+.moneybox-view .stage-item .icon-step-1 {
+    background: url("/images/icon-step-1.png") no-repeat center center;
+}
+
+.moneybox-view .stage-item .icon-step-2 {
+    background: url("/images/icon-step-2.png") no-repeat center center;
+}
+
+.moneybox-view .text-info {
     color: #52525F;
     font-size:18px;
 }
 
-.register.moneybox .category {
-
-}
-
-.form.register.moneybox .form-control {
+.moneybox-view .form-control {
     border-color: #FF4F00;
 }
 
-.form.register.moneybox .category-items {
+.moneybox-view .category-items {
     display: flex;
     align-items: flex-end;
+    flex-wrap: wrap;
 }
 
-.form.register.moneybox .category-items .radio-item img {
+.moneybox-view .category-item {
+    border: solid 1px transparent;
+    display: flex;
+    cursor: pointer;
+    border-radius: 7px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+    width: 33.3333%;
+}
+
+@media screen and (min-width: 769px){
+
+    .moneybox-view .category-items {
+        flex-wrap: nowrap;
+    }
+
+    .moneybox-view .category-item {
+        width: 120px;
+    }
+}
+
+.moneybox-view .category-item:hover {
+    border-color: rgb(255, 79, 0);
+    color: white;
+}
+
+.moneybox-view .category-item > img {
     height: 64px;
     width: 64px;
 }
 
-.form.register.moneybox .category-items .radio-item label {
+.moneybox-view .category-item > .label {
     color: #646472;
     font-size: 14px;
     font-family: verbregular;
     font-weight: normal;
 }
 
-.form.register.moneybox .category-items .radio-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 10px 0;
-    width: 120px;
+.moneybox-view .radio label {
+    color: #646472;
 }
 
-.form.register.moneybox button {
+.moneybox-view .radio label strong {
+    color: black;
+}
+
+.moneybox-view .btn-link {
+    color: #757584;
+    padding: 11px 25px;
+    font-family: brandon_grotesquebold;
+    font-size:14px;
+    text-transform: uppercase;
+}
+
+.moneybox-view .btn-primary {
     font-size: 14px;
     padding-top: 11px;
     padding-bottom: 11px;
 }
 
-.block.register.step-2 {
 
+.moneybox-view.step-2 .holder {
+    max-width: 540px;
 }
 
-.block.register.step-2 .holder{
-    max-width: 540px;
+.moneybox-view.step-2 input[type=number].form-control {
+    height: 30px;
+}
+
+.moneybox-view.step-2 label.flex-element {
+    display: flex;
+    align-items: center;
+}
+
+.moneybox-view.step-2 label.flex-element > span {
+    width: 60px;
+}
+
+.moneybox-view.step-2 label.flex-element input[type=radio] {
+    top: 5px;
+}
+
+.moneybox-view.step-2 label.flex-element > * {
+    margin-right: 5px;
+}
+
+.moneybox-view.step-2 .form-control {
+    color: #31313F;
+    border-color: #B9B9C8;
+    background: #ECECFB;
+    border-radius: 0;
+    font-size: 14px;
+    width: 145px;
+}
+
+.moneybox-view.step-2 .form-control:hover {
+    border-color: rgb(255, 79, 0);
 }
 
 
