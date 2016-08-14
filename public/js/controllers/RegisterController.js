@@ -32,7 +32,6 @@
          */
         $scope.emailRegister = function ()
         {
-            var utils = new Utils();
             $scope.birthday = $scope.birthdayYear+"-"+$scope.birthdayMonth+"-"+$scope.birthdayDay;
 
             if ($scope.confirmPassword != "")
@@ -43,27 +42,12 @@
                 }
             }
 
-            $scope.request = {
-                'name': $scope.name,
-                'lastname': $scope.lastname,
-                'email': $scope.email,
-                'password': $scope.password,
-                'isFB' : '0',
-                'method': 'register',
-                'api-key' : '$2y$10$ScZUgkFzrMr9NM5qPzKag.4mLTW8ugSG/DtT6nerJb3W1v5sg6UBC'
-            };
-
-            if ($scope.gender != "") $scope.request.gender = $scope.gender;
-            if ($scope.username != "") $scope.request.username = $scope.username;
-            if ($scope.username != "") $scope.request.username = $scope.username;
-            if ($scope.birthday != "--") $scope.request.birthday = utils.formatDate($scope.birthday);
-            if ($scope.country != "") $scope.request.country = $scope.country;
-            if ($scope.city != "") $scope.request.city = $scope.city;
-
+            $scope.request = $scope.buildRequest();
+            $scope.request.isFB = 0;
             Register.register($scope.request).success(function(response)
             {
                 console.log(response);
-                // redirigir dependiendo de donde se dio el click.
+                window.location="/test";
             }).error(function(response){
                 console.log(response);
             });
@@ -71,8 +55,32 @@
 
         $scope.facebookRegister = function()
         {
-
         };
+
+        /**
+         * Build the request for register
+         * @returns JSON
+         */
+        $scope.buildRequest = function()
+        {
+            var utils = new Utils();
+            var request = {
+                'name': $scope.name,
+                'lastname': $scope.lastname,
+                'email': $scope.email,
+                'password': $scope.password,
+                'method': 'register',
+                'api-key' : '$2y$10$ScZUgkFzrMr9NM5qPzKag.4mLTW8ugSG/DtT6nerJb3W1v5sg6UBC'
+            };
+            if ($scope.gender != "") request.gender = $scope.gender;
+            if ($scope.username != "") request.username = $scope.username;
+            if ($scope.username != "") request.username = $scope.username;
+            if ($scope.birthday != "--") request.birthday = utils.formatDate($scope.birthday);
+            if ($scope.country != "") request.country = $scope.country;
+            if ($scope.city != "") request.city = $scope.city;
+
+            return request;
+        }
     }
 
 })();

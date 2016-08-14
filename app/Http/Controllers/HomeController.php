@@ -37,7 +37,7 @@ class HomeController extends Controller
         return view('pages.contact', ['pageTitle' => 'Contacto']);
     }
 
-   /**
+    /**
      * About View
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -92,5 +92,14 @@ class HomeController extends Controller
         });
 
         return response()->json(['success' => true, 'data' => $data]);
+    }
+
+    /**
+     * JUST FOR TEST - DELETE IN A FUTURE
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getTestPage()
+    {
+        return view('pages.test', ['pageTitle' => 'Bienvenido']);
     }
 }
