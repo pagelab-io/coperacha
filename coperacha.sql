@@ -31,21 +31,24 @@ CREATE TABLE `categories` (
   `name` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `path` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `categories_name_unique` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `categories`
 --
 
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-INSERT INTO `categories` (`id`,`name`,`created_at`,`updated_at`) VALUES 
- (1,'Cumpleaños','2016-08-07 00:14:29','2016-08-07 00:14:29'),
- (2,'Despedidas','2016-08-07 00:14:30','2016-08-07 00:14:30'),
- (3,'Bodas','2016-08-07 00:14:30','2016-08-07 00:14:30'),
- (4,'Viajes','2016-08-07 00:14:30','2016-08-07 00:14:30'),
- (5,'Cursos','2016-08-07 00:14:30','2016-08-07 00:14:30');
+INSERT INTO `categories` (`id`,`name`,`created_at`,`updated_at`,`path`) VALUES 
+ (1,'Cumpleaños','2016-08-07 00:14:29','2016-08-07 00:14:29','/images/category/birthday.png'),
+ (2,'Festejos','2016-08-07 00:14:30','2016-08-07 00:14:30','/images/category/celebrations.png'),
+ (3,'Viajes','2016-08-07 00:14:30','2016-08-07 00:14:30','/images/category/travels.png'),
+ (4,'Bodas','2016-08-07 00:14:30','2016-08-07 00:14:30','/images/category/wedding.png'),
+ (5,'Baby Shawer','2016-08-07 00:14:30','2016-08-07 00:14:30','/images/category/baby-shawer.png'),
+ (6,'Emergencias','2016-08-07 00:14:30','2016-08-07 00:14:30','/images/category/emergencies.png'),
+ (7,'Otro','2016-08-07 00:14:30','2016-08-07 00:14:30','/images/category/others.png');
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 
 
@@ -2998,53 +3001,6 @@ INSERT INTO `persons` (`id`,`name`,`lastname`,`birthday`,`gender`,`phone`,`city`
  (9,'Manley','Schmidt','1992-05-27','H','+1-384-331-4198','South Arvillaburgh','Qatar','2016-08-07 00:11:20','2016-08-07 00:11:20'),
  (10,'Jameson','Hoeger','1991-01-10','M','(983) 270-7937 ','Macyport','Jersey','2016-08-07 00:11:20','2016-08-07 00:11:20');
 /*!40000 ALTER TABLE `persons` ENABLE KEYS */;
-
-
---
--- Definition of table `role_users`
---
-
-DROP TABLE IF EXISTS `role_users`;
-CREATE TABLE `role_users` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(10) unsigned NOT NULL,
-  `role_id` int(10) unsigned NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `role_users_user_id_foreign` (`user_id`),
-  KEY `role_users_role_id_foreign` (`role_id`),
-  CONSTRAINT `role_users_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`),
-  CONSTRAINT `role_users_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `role_users`
---
-
-/*!40000 ALTER TABLE `role_users` DISABLE KEYS */;
-/*!40000 ALTER TABLE `role_users` ENABLE KEYS */;
-
-
---
--- Definition of table `roles`
---
-
-DROP TABLE IF EXISTS `roles`;
-CREATE TABLE `roles` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` int(10) unsigned NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `roles`
---
-
-/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 
 
 --
