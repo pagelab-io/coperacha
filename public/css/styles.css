@@ -1016,10 +1016,99 @@ body {
 }
 
 
+/* Styles for item box */
+
+.my-moneybox-view .holder {
+    max-width: 910px;
+}
+
+.moneybox-list {
+
+}
+
+.moneybox-item {
+    margin-bottom: 50px;
+}
+
+.moneybox-item .title {
+    color: rgb(255, 79, 0);
+    font-family: verbsemibold;
+    font-weight:normal;
+    font-size: 16px;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.moneybox-item .btn {
+    background: #3398CC;
+    display: block;
+    font-family: verbregular;
+    font-size: 13px;
+    margin: auto;
+    padding: 12px 0;
+    text-align: center;
+    text-transform: inherit;
+    width: 183px;
+}
+
+.moneybox-item header {
+    padding: 0px;
+}
+
+.moneybox-item:nth-child(odd) header {
+    background: #ff4f00;
+    border: solid 1px #ff4f00;
+}
+
+.moneybox-item:nth-child(even) header {
+    background: #54CDE9;
+    border: solid 1px #54CDE9;
+}
+
+.moneybox-item header img {
+    display: block;
+    margin: auto;
+}
+
+.moneybox-item main {
+    padding: 10px 0;
+    border-right: solid 1px #DBDBEA;
+    border-left: solid 1px #DBDBEA;
+}
+
+.moneybox-item .form-group {
+    margin-bottom: 10px;
+}
+
+.moneybox-item footer {
+    border: 1px solid #DBDBEA;
+    padding: 10px;
+}
+
+.moneybox-item footer div {
+    color: rgb(255, 79, 0);
+    font-family: verbsemibold;
+    padding-bottom: 10px;
+}
+
+.moneybox-item footer div span {
+    color: #52525F;
+    font-family: verbregular;
+}
+
+.moneybox-item footer div:nth-child(1):after,
+.moneybox-item footer div:nth-child(2):after{
+    border-bottom: solid 1px #42B9A7;
+    content: "";
+    display: block;
+    margin-top: 4px;
+    width: 91px;
+}
 
 
+@media screen and (min-width: 769px){
 
-
-
-
-
+    .moneybox-item header {
+        padding: 10px 15px;
+    }
+}

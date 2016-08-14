@@ -83,6 +83,16 @@ class HomeController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getDashboardPage(Request $request){
+
+        return view('moneybox.dashboard')
+            ->with('pageTitle','Mis Alcancías');
+    }
+
+    /**
      * Send mail contact
      *
      * @param Request $request
