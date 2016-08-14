@@ -14,22 +14,42 @@
 header('Access-Control-Allow-Origin: *');
 header( 'Access-Control-Allow-Headers: Authorization, Content-Type');
 
-//region Coperacha routes
-Route::get('/', [ 'as' => 'index', 'uses' => 'HomeController@getHomePage']);
-Route::get('/about', [ 'as' => 'about', 'uses' => 'HomeController@getAboutPage']);
-Route::get('/contact', [ 'as' => 'contact', 'uses' => 'HomeController@getContactPage']);
-Route::get('/faqs', [ 'as' => 'faqs', 'uses' => 'HomeController@getFaqsPage']);
-Route::post('/sendmail', [ 'as' => 'sendmail', 'uses' => 'HomeController@postMailContact']);
-Route::get('/sendmail', function () { return view('emails.test');});
+//region pages routes
 
-$router->group([
-    'namespace' => 'Register',
-    'prefix' => '/'
-], function($router){
-    // register
-    $router->get('/register', ['as'=>'register', 'uses' => 'RegisterController@getRegisterForm']);
+/*
+|--------------------------------------------------------------------------
+| PAGE
+|--------------------------------------------------------------------------
+*/
+Route::group([
+    'as' => 'pages.',
+    'prefix' => ''
+], function ($router) {
+    $router->get('/', [ 'as' => 'index', 'uses' => 'HomeController@getHomePage']);
+    $router->get('/about', [ 'as' => 'about', 'uses' => 'HomeController@getAboutPage']);
+    $router->get('/contact', [ 'as' => 'contact', 'uses' => 'HomeController@getContactPage']);
+    $router->get('/faqs', [ 'as' => 'faqs', 'uses' => 'HomeController@getFaqsPage']);
+
 });
 
+Route::group([
+    'as'        => 'user.',
+    'namespace' => 'User',
+    'prefix' => '/user'
+], function($router){
+    // register
+    $router->get('/create', ['as'=>'create', 'uses' => 'UserController@create']);
+});
+
+Route::group([
+    'as'        => 'moneybox.',
+    'prefix' => '/moneybox'
+], function($router){
+    // register
+    $router->get('/create', ['as'=>'create', 'uses' => 'HomeController@getCreateMoneyboxPage']);
+});
+
+Route::post('/sendmail', [ 'as' => 'sendmail', 'uses' => 'HomeController@postMailContact']);
 
 //endregion
 

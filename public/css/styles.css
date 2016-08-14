@@ -715,11 +715,12 @@ body {
 
 
 /*-----------------------------------------------------------------------------
-| Register Form Section
+| Register User Form Section
 |-----------------------------------------------------------------------------
 |
 |
 */
+
 
 /* Block reasons */
 .block.reasons {
@@ -772,6 +773,12 @@ body {
     border-color: #A8A8B7;
     outline: none;
     box-shadow: none;
+
+}
+
+.form.register input[type=number].form-control,
+.form.register input[type=date].form-control,
+.form.register input[type=text].form-control {
     height: 36px;
 }
 
@@ -810,3 +817,94 @@ body {
         margin-bottom: 0px;
     }
 }
+
+/*-----------------------------------------------------------------------------
+| Register Moneybox Form
+|-----------------------------------------------------------------------------
+|
+|
+*/
+
+.block.register.moneybox {
+    padding: 10px 0;
+}
+
+.block.register.moneybox .holder {
+    max-width: 850px;
+}
+
+.block.register.moneybox .header-block {
+    color: #FF4E00;
+}
+
+.block.register.moneybox .title h2 {
+    color: #FF4E00;
+    font-size: 16px;
+    font-weight: normal;
+    font-family: verbmedium;
+    text-transform: uppercase;
+}
+
+.block.register.moneybox .stages {
+    background: url("/images/category-stages.png") no-repeat center center;
+    height: 25px;
+    width: 150px;
+    margin: auto;
+}
+
+
+.form.register.moneybox .text-info {
+    color: #52525F;
+    font-size:18px;
+}
+
+.register.moneybox .category {
+
+}
+
+.form.register.moneybox .form-control {
+    border-color: #FF4F00;
+}
+
+.form.register.moneybox .category-items {
+    display: flex;
+    align-items: flex-end;
+}
+
+.form.register.moneybox .category-items .radio-item img {
+    height: 64px;
+    width: 64px;
+}
+
+.form.register.moneybox .category-items .radio-item label {
+    color: #646472;
+    font-size: 14px;
+    font-family: verbregular;
+    font-weight: normal;
+}
+
+.form.register.moneybox .category-items .radio-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+    width: 120px;
+}
+
+.form.register.moneybox button {
+    font-size: 14px;
+    padding-top: 11px;
+    padding-bottom: 11px;
+}
+
+
+
+
+
+
+
+
+
+
+

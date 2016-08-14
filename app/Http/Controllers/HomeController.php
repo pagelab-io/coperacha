@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\Category;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -62,7 +63,11 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function getCreateMoneyboxPage(Request $request){
-        return view('moneybox.create')->with('pageTitle','Crear mi alcancía 1/2');
+        $categories = Category::all();
+
+        return view('moneybox.create')
+            ->with('categories', $categories)
+            ->with('pageTitle','Crear mi alcancía 1/2');
     }
 
     /**
