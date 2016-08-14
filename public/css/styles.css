@@ -800,9 +800,10 @@ body {
     border-color: #FF4E00;
 }
 
-.form.register label{
+.form.register .form-group > label {
     color: #FF4E00;
-    font-family: verbregular;
+    font-family: verbmedium;
+    font-weight: normal;
     font-size: 14px;
 }
 
@@ -851,6 +852,7 @@ body {
     color: #FF4E00;
 }
 
+.block.register.step-2 .title h2,
 .block.register.moneybox .title h2 {
     color: #FF4E00;
     font-size: 16px;
@@ -859,7 +861,7 @@ body {
     text-transform: uppercase;
 }
 
-.block.register.moneybox .stages {
+.stages-control {
     background: url("/images/category-stages.png") no-repeat center center;
     height: 25px;
     width: 150px;
@@ -912,7 +914,13 @@ body {
     padding-bottom: 11px;
 }
 
+.block.register.step-2 {
 
+}
+
+.block.register.step-2 .holder{
+    max-width: 540px;
+}
 
 
 

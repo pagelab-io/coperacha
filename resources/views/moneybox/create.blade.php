@@ -7,8 +7,7 @@
 
                 <div class="header-block">
                     <div class="title"><h2>Información</h2></div>
-                    <div class="stages"></div>
-
+                    <div class="stages-control"></div>
                 </div>
 
                 <div class="content-block">
@@ -60,7 +59,7 @@
 
                         <div class="form-group clearfix">
                             <div class="pull-right">
-                                <button class="btn btn-primary">Siguiente ></button>
+                                <a class="btn btn-primary" href="{{route('moneybox.step-2')}}">Siguiente ></a>
                             </div>
                         </div>
 

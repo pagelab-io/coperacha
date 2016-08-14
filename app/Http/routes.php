@@ -47,6 +47,7 @@ Route::group([
 ], function($router){
     // register
     $router->get('/create', ['as'=>'create', 'uses' => 'HomeController@getCreateMoneyboxPage']);
+    $router->get('/step-2', ['as'=>'step-2', 'uses' => 'HomeController@getCreateMoneyboxPage2']);
 });
 
 Route::post('/sendmail', [ 'as' => 'sendmail', 'uses' => 'HomeController@postMailContact']);
