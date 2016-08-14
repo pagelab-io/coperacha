@@ -26,6 +26,7 @@ class CreateMoneyboxesTable extends Migration
                 $table->text('description');
                 $table->integer('active');
                 $table->string('url',128);
+                $table->string('path',256);
                 $table->timestamps();
 
                 $table->foreign('category_id')->references('id')->on('categories');

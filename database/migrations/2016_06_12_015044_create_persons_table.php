@@ -24,6 +24,7 @@ class CreatePersonsTable extends Migration
                 $table->string('phone', 15);
                 $table->string('city', 128);
                 $table->string('country', 128);
+                $table->string('path', 256);
                 $table->timestamps();
             });
         }
