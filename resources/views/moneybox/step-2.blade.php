@@ -15,7 +15,6 @@
                 </div>
 
                 <div class="content-block">
-
                     <form action="{{route('moneybox.dashboard')}}" class="form register moneybox">
                         <div class="form-group">
                             <div class="row">
