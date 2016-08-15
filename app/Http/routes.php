@@ -47,6 +47,7 @@ Route::group([
 ], function($router){
     // register
     $router->get('/dashboard', ['as'=>'dashboard', 'uses' => 'HomeController@getDashboardPage']);
+    $router->get('/detail', ['as'=>'detail', 'uses' => 'HomeController@getDetailPage']);
     $router->get('/create', ['as'=>'create', 'uses' => 'HomeController@getCreateMoneyboxPage']);
     $router->get('/step-2', ['as'=>'step-2', 'uses' => 'HomeController@getCreateMoneyboxPage2']);
 });

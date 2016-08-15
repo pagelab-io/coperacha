@@ -128,6 +128,51 @@ body {
     font-size: 10px !important;
 }
 
+.btn-share-twitter:hover,
+.btn-share-fb:hover {
+    text-decoration: none;
+    color: white;
+}
+
+.btn-share-twitter,
+.btn-share-fb {
+    border-radius: 5px;
+    color: #fff;
+    display: block;
+    font-size: 16px;
+    max-width: 225px;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.btn-share-twitter {
+    background: #00B4FF;
+}
+
+.btn-share-fb {
+    background: #3A5997;
+}
+
+.btn-share-twitter span,
+.btn-share-twitter img,
+.btn-share-fb span,
+.btn-share-fb img {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.btn-share-twitter span,
+.btn-share-fb span {
+    line-height: normal;
+    margin-right: 3px;
+    margin-top: 5px;
+}
+
+.btn-share-twitter img ,
+.btn-share-fb img {
+    width: 87px;
+}
 
 /* Outer wrapper */
 .outer-wrapper {
@@ -307,36 +352,10 @@ body {
     max-width: 490px;
 }
 
-.block.intro .video .share-fb {
-    background: #4671C7;
-    border-radius: 5px;
-    color: #fff;
-    display: block;
-    font-size: 16px;
+.block.intro .video .btn-share-fb {
     margin-left: auto;
     margin-top: 10px;
-    max-width: 225px;
-    padding: 10px;
-    text-align: center;
-    text-decoration: none;
 }
-
-.block.intro .video .share-fb span,
-.block.intro .video .share-fb img {
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.block.intro .video .share-fb span {
-    line-height: normal;
-    margin-right: 3px;
-    margin-top: 5px;
-}
-
-.block.intro .video .share-fb img {
-    width: 87px;
-}
-
 
 /* Block Advantages */
 .block.advantages {
@@ -813,6 +832,11 @@ body {
     text-transform: uppercase;
 }
 
+.form .btn-primary.small {
+    padding: 11.5px 46px;
+    font-size: 14px;
+}
+
 .col-sm-4,
 .col-sm-5,
 .col-sm-6,
@@ -1130,4 +1154,71 @@ body {
         width: 50%;
     }
 
+}
+
+.toolbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.toolbar > .left-items,
+.toolbar > .middle-items,
+.toolbar > .right-items {
+
+}
+
+.toolbar > .left-items {
+
+}
+
+.toolbar > .middle-items {
+    flex: 1 1 auto;
+}
+
+.back-link {
+    color: white;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.moneybox-profile {
+
+}
+.moneybox-profile .text-info {
+    color: #747484;
+}
+
+.moneybox-profile .label-owner {
+    color: #424251;
+}
+
+.moneybox-profile .text-info,
+.moneybox-profile .label-owner {
+    font-size: 12px;
+}
+
+.moneybox-profile .holder {
+    max-width: 750px;
+}
+
+.moneybox-profile .form.share textarea {
+    border: none;
+    background: #ECECFB;
+}
+
+.moneybox-profile .form.share label {
+    color: #4CB7CD;
+    font-size: 18px;
+    font-family: verbsemibold;
+    line-height: 18px;
+}
+
+.moneybox-profile .form.profile label {
+    color: #4CB7CE;
 }

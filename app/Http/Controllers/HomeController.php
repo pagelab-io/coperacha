@@ -92,6 +92,17 @@ class HomeController extends Controller
             ->with('pageTitle','Mis Alcancías');
     }
 
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getDetailPage(Request $request){
+
+        return view('moneybox.detail')
+            ->with('pageTitle','Alcancía de prueba No. 1');
+    }
+
     /**
      * Send mail contact
      *

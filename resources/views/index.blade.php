@@ -127,7 +127,7 @@
                                 <iframe class="embed-responsive-item" src="https://player.vimeo.com/video/142285041?title=0&byline=0&portrait=0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
                             </div>
 
-                            <a class="share-fb" href="javascript:void(0)">
+                            <a class="btn-share-fb" href="javascript:void(0)">
                                 <span>Compartir en</span>
                                 <img src="images/facebook-logo.png" alt="">
                             </a>
