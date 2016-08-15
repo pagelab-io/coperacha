@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="content-block">
-                    <form action="#" class="form register moneybox">
+                    <form action="{{route('moneybox.dashboard')}}" class="form register moneybox">
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-12">
