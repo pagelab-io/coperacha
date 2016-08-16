@@ -8,6 +8,7 @@
 
     function loginController($scope, Login)
     {
+        $scope.utils = new Utils();
         $scope.email = "";
         $scope.FBemail = "";
         $scope.password = "";
@@ -21,14 +22,17 @@
         $scope.emailLogin = function ()
         {
             $scope.request = $scope.buildRequest();
+            $scope.utils.showLoader();
             Login.login($scope.request).success(function(response){
                 console.log(response);
                 if (response.status == 200) {
                     window.location="/test";
                 } else if(response.status == -1) {
+                    $scope.utils.hideLoader();
                     alert("Correo y/o contraseña inválidos.");
                 }
             }).error(function(response){
+                $scope.utils.hideLoader();
                 console.log(response);
             });
         };
@@ -51,15 +55,18 @@
 
                         // 3. call facebook register
                         $scope.request = $scope.buildFacebookRequest();
+                        $scope.utils.showLoader();
                         Login.login($scope.request).success(function(response)
                         {
                             console.log(response);
                             if (response.status == 200) {
                                 window.location="/test";
                             } else if(response.status == -1) {
+                                $scope.utils.hideLoader();
                                 alert("Ocurrio un problema al hacer la autenticación por medio de Facebook, por favor intentalo más tarde");
                             }
                         }).error(function(response){
+                            $scope.utils.hideLoader();
                             console.log(response);
                         });
 

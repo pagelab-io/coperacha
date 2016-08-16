@@ -26,6 +26,7 @@
         // TODO -  use this for redirections
         $scope.toMoneybox = 0;
         $scope.toProfile = 0;
+        $scope.utils = new Utils();
 
         /**
          * Register a new user by email
@@ -42,17 +43,19 @@
                     return;
                 }
             }
-
             $scope.request = $scope.buildRequest();
+            $scope.utils.showLoader();
             Register.register($scope.request).success(function(response)
             {
                 console.log(response);
                 if (response.status == 200) {
                     window.location="/test";
                 } else if(response.status == -2) {
+                    $scope.utils.hideLoader();
                     alert("El correo ingresado ya existe en el sistema, por favor intenta con otro.");
                 }
             }).error(function(response){
+                $scope.utils.hideLoader();
                 console.log(response);
             });
         };
@@ -79,12 +82,14 @@
 
                         // 3. call facebook register
                         $scope.request = $scope.buildFacebookRequest();
+                        $scope.utils.showLoader();
                         Register.register($scope.request).success(function(response)
                         {
                             console.log(response);
                             if (response.status == 200) {
                                 window.location="/test";
                             } else if(response.status == -2) {
+                                $scope.utils.hideLoader();
                                 alert("El correo ingresado ya existe en el sistema, por favor intenta con otro.");
                             }
 
@@ -107,7 +112,6 @@
          */
         $scope.buildRequest = function()
         {
-            var utils = new Utils();
             var request = {
                 'name': $scope.name,
                 'lastname': $scope.lastname,
@@ -120,7 +124,7 @@
             if ($scope.gender != "") request.gender = $scope.gender;
             if ($scope.username != "") request.username = $scope.username;
             if ($scope.username != "") request.username = $scope.username;
-            if ($scope.birthday != "--") request.birthday = utils.formatDate($scope.birthday);
+            if ($scope.birthday != "--") request.birthday = $scope.utils.formatDate($scope.birthday);
             if ($scope.country != "") request.country = $scope.country;
             if ($scope.city != "") request.city = $scope.city;
 

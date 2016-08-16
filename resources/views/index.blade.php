@@ -277,25 +277,4 @@
             </div>
         </div>
     </section>
-
-    <!-- LoginDialogView -->
-    <coperacha-modal class="popup-wrapper"></coperacha-modal>
-
-@endsection
-
-@section('js')
-    <!-- AngularJS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-    <!-- Facebook SDK -->
-    <script src="{{asset('/js/facebook.js')}}"></script>
-
-    <script src="{{asset('/js/coperacha.js')}}"></script>
-    <script src="{{asset('/js/Utils.js')}}"></script>
-    <script src="{{asset('/js/controllers/ModalController.js')}}"></script>
-    <script src="{{asset('/js/controllers/RegisterController.js')}}"></script>
-    <script src="{{asset('/js/controllers/LoginController.js')}}"></script>
-    <script src="{{asset('/js/services/RegisterService.js')}}"></script>
-    <script src="{{asset('/js/services/LoginService.js')}}"></script>
-    <script src="{{asset('/js/directives/CoperachaModal.js')}}"></script>
-
 @endsection
