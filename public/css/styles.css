@@ -1222,3 +1222,23 @@ body {
 .moneybox-profile .form.profile label {
     color: #4CB7CE;
 }
+
+.request-view {
+
+}
+
+.request-view .holder {
+    max-width: 750px;
+}
+
+.request-view .text-info {
+    font-size: 18px;
+    color: #535362;
+}
+
+.request-view .title h2 {
+    color: #ff4f00;
+    font-weight:normal;
+    font-size: 24px;
+    text-align: left;
+}

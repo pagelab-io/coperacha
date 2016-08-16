@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Entities\Category;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
 
+    /**
+     * HomeController constructor.
+     */
     public function __construct()
     {
 
@@ -92,7 +93,6 @@ class HomeController extends Controller
             ->with('pageTitle','Mis Alcancías');
     }
 
-
     /**
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -101,6 +101,16 @@ class HomeController extends Controller
 
         return view('moneybox.detail')
             ->with('pageTitle','Alcancía de prueba No. 1');
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getRequestPage(Request $request){
+
+        return view('moneybox.request')
+            ->with('pageTitle','Solicitud de Dinero');
     }
 
     /**
