@@ -113,6 +113,16 @@ class HomeController extends Controller
             ->with('pageTitle','Solicitud de Dinero');
     }
 
+        /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getJoinPage(Request $request){
+
+        return view('moneybox.join')
+            ->with('pageTitle','Participa');
+    }
+
     /**
      * Send mail contact
      *

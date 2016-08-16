@@ -51,6 +51,7 @@ Route::group([
     $router->get('/create',  ['as'=>'create', 'uses' => 'HomeController@getCreateMoneyboxPage']);
     $router->get('/step-2',  ['as'=>'step-2', 'uses' => 'HomeController@getCreateMoneyboxPage2']);
     $router->get('/request', ['as'=>'request', 'uses' => 'HomeController@getRequestPage']);
+    $router->get('/join',    ['as'=>'join', 'uses' => 'HomeController@getJoinPage']);
 });
 
 Route::post('/sendmail', [ 'as' => 'sendmail', 'uses' => 'HomeController@postMailContact']);
