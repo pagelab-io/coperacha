@@ -59,4 +59,16 @@ function Utils()
     {
         return (day < 10) ? "0"+day : day;
     };
+
+    this.showLoader = function()
+    {
+        var loader = document.createElement('div');
+        loader.className = 'loader';
+        document.body.appendChild(loader);
+    };
+
+    this.hideLoader = function(){
+        var loader = document.getElementsByClassName('loader')[0];
+        document.body.removeChild(loader);
+    };
 }
