@@ -1223,8 +1223,8 @@ body {
     color: #4CB7CE;
 }
 
-.request-view {
-
+.request-view .form .form-group > label {
+    font-family: verbmedium;
 }
 
 .request-view .holder {
@@ -1238,6 +1238,7 @@ body {
 
 .request-view .title h2 {
     color: #ff4f00;
+    font-family: verbsemibold;
     font-weight:normal;
     font-size: 24px;
     text-align: left;
