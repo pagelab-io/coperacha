@@ -113,7 +113,7 @@ class HomeController extends Controller
             ->with('pageTitle','Solicitud de Dinero');
     }
 
-        /**
+    /**
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -121,6 +121,16 @@ class HomeController extends Controller
 
         return view('moneybox.join')
             ->with('pageTitle','Participa');
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getSummaryPage(Request $request){
+
+        return view('moneybox.summary')
+            ->with('pageTitle','Resumen de tu participación antes del pago');
     }
 
     /**
