@@ -15,11 +15,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="moneybox">Nombre de la alcancía:</label><input id="moneybox" readonly type="text">
+                            <label for="moneybox">Nombre de la alcancía:</label><input id="moneybox" readonly type="text" value="Demo 18373">
                         </div>
                         
                         <div class="form-group">
-                            <label for="name">Tu Nombre:</label><input id="name" readonly type="text" value="Sanchez">
+                            <label for="name">Tu Nombre:</label><input id="name" readonly type="text" value="Sanchez Gonzalez">
                         </div>
                                           
                         <div class="form-group">
@@ -27,11 +27,11 @@
                         </div>
                          
                         <div class="form-group">
-                            <label for="mobile">Correo:</label><input id="mobile" readonly type="text" value="243877348">
+                            <label for="mobile">Celular:</label><input id="mobile" readonly type="text" value="243877348">
                         </div>
                     
                         <div class="form-group">
-                            <label for="amount">Correo:</label><input id="amount" readonly type="text" value="100">
+                            <label for="amount">Tu participacón:</label><input id="amount" readonly type="text" value="100">
                         </div>
                         
                         <div class="form-group">
@@ -41,13 +41,13 @@
                          <div class="form-group">
                             <label>Selecciona tu método de pago:</label>
                             <div class="radio">
-                                <label for="payment-oxxo"><input id="payment-o" name="payment" type="radio" value="O"> OXXO</label>
+                                <label for="payment-oxxo"><input id="payment-oxxo" name="payment" type="radio" value="O"> OXXO</label>
                             </div>
                             <div class="radio">
-                                <label for="payment-paypal"><input id="payment-p" name="payment" type="radio" value="O"> PAYPAL</label>
+                                <label for="payment-paypal"><input id="payment-paypal" name="payment" type="radio" value="P"> PAYPAL</label>
                             </div>
                             <div class="radio">
-                                <label for="payment-spei"><input id="payment-s" name="payment" type="radio" value="O"> SPEI</label>
+                                <label for="payment-spei"><input id="payment-spei" name="payment" type="radio" value="S"> SPEI</label>
                             </div>
                         </div>
                         
