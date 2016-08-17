@@ -52,7 +52,7 @@ Route::group([
     $router->get('/step-2',  ['as' => 'step-2', 'uses' => 'HomeController@getCreateMoneyboxPage2']);
     $router->get('/request', ['as' => 'request', 'uses' => 'HomeController@getRequestPage']);
     $router->get('/join',    ['as' => 'join', 'uses' => 'HomeController@getJoinPage']);
-    $router->get('/join',    ['as' => 'summary', 'uses' => 'HomeController@getSummaryPage']);
+    $router->get('/summary', ['as' => 'summary', 'uses' => 'HomeController@getSummaryPage']);
 });
 
 Route::post('/sendmail', [ 'as' => 'sendmail', 'uses' => 'HomeController@postMailContact']);
