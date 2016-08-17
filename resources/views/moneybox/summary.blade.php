@@ -1,18 +1,13 @@
 @extends("layouts.master")
-
 @section("content")
-
     @include('partials.header')
-
+    
     <section class="block request-view">
         <div class="holder">
             <div class="container-fluid">
-
                 <div class="header-block">
-                    <div class="title">
-                    </div>
+                    <div class="title"></div>
                 </div>
-
                 <div class="content-block">
                     <form action="#" class="form">
                         <div class="form-group">
@@ -39,42 +34,34 @@
                             <label for="amount">Correo:</label><input id="amount" readonly type="text" value="100">
                         </div>
                         
-                        <div class="form-group clearfix">
-                            <div class="pull-right">
-                                <button class="btn btn-primary small">editar</button>
-                            </div>
+                        <div class="form-group">
+                            <a class="btn-link">editar</button>
                         </div>
                         
                          <div class="form-group">
-                            <label>Método de Pago:</label>
+                            <label>Selecciona tu método de pago:</label>
                             <div class="radio">
                                 <label for="payment-oxxo"><input id="payment-o" name="payment" type="radio" value="O"> OXXO</label>
                             </div>
-                            
                             <div class="radio">
                                 <label for="payment-paypal"><input id="payment-p" name="payment" type="radio" value="O"> PAYPAL</label>
                             </div>
-                            
                             <div class="radio">
                                 <label for="payment-spei"><input id="payment-s" name="payment" type="radio" value="O"> SPEI</label>
                             </div>
-                        
                         </div>
                         
                         <div class="form-group clearfix">
                             <div class="pull-right">
-                                <button class="btn btn-primary small">REALIZAR PAGO</button>
+                                <button class="btn btn-primary small">Realizar Pago</button>
                             </div>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>
     </section>
-
 @endsection
 
 @section('js')
-
 @endsection
