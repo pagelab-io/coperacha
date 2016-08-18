@@ -55,6 +55,20 @@ class UserController extends PLController{
             ->with('months', $months)
             ->with('pageTitle','Registro');
     }
+    
+    /**
+     * Show the register page
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getProfilePage(Request $request) {
+        $months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo','Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
+        return view('user.profile')
+            ->with('months', $months)
+            ->with('pageTitle','Mi cuenta');
+    }
 
     /**
      * Get the profile for a specific user

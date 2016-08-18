@@ -1306,6 +1306,63 @@ body {
 }
 
 /*-----------------------------------------------------------------------------
+| Profile View
+|-----------------------------------------------------------------------------
+|
+|
+*/
+
+.profile-view .holder {
+    max-width: 850px;
+}
+
+.profile-view .header-block {
+    color: #FF4E00;
+}
+
+.profile-view .stage-item {
+    text-align: center;
+}
+
+.profile-view .stage-item-title {
+    color: #FF4E00;
+    font-size: 16px;
+    font-weight: normal;
+    font-family: verbmedium;
+    text-transform: uppercase;
+}
+
+.profile-view .stage-item .label.active {
+    color: #FF4E00;
+}
+
+.profile-view .stage-item .label {
+    color: #858596;
+    font-size: 12px;
+    padding: 5px 25px;
+    display: inline-block;
+}
+
+.profile-view .stage-item .icon-step {
+    height: 34px;
+    width: 281px;
+    margin: 15px auto;
+}
+
+.profile-view .stage-item .icon-step-1 {
+    background: url("/images/icon-profile-step-1.png") no-repeat center center;
+}
+
+.profile-view .stage-item .icon-step-2 {
+    background: url("/images/icon-profile-step-2.png") no-repeat center center;
+}
+
+.profile-view .stage-item .icon-step-3 {
+    background: url("/images/icon-profile-step-3.png") no-repeat center center;
+}
+
+
+/*-----------------------------------------------------------------------------
 | Loader
 |-----------------------------------------------------------------------------
 |
