@@ -57,7 +57,7 @@ class UserController extends PLController{
     }
     
     /**
-     * Show the register page
+     * Show the profile page
      *
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -68,6 +68,18 @@ class UserController extends PLController{
         return view('user.profile')
             ->with('months', $months)
             ->with('pageTitle','Mi cuenta');
+    }
+
+    /**
+     * Show the password page
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getPasswordPage(Request $request) {
+
+        return view('user.password')
+            ->with('pageTitle','Contraseña');
     }
 
     /**
