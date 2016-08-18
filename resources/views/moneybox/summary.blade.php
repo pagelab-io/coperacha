@@ -11,23 +11,24 @@
                 <div class="content-block">
                     <form action="#" class="form summary">
                         <div class="form-group">
-                            <label for="moneybox">Nombre de la alcancía:</label><input id="moneybox" readonly type="text" value="Demo 18373">
+                            <label for="moneybox">Nombre de la alcancía:</label>
+                            <input id="moneybox" readonly type="text" value="Demo 18373">
                         </div>
-                        
                         <div class="form-group">
-                            <label for="name">Tu Nombre: </label><input id="name" readonly type="text" value="Sanchez Gonzalez">
+                            <label for="name">Tu Nombre: </label>
+                            <input id="name" readonly type="text" value="Emmanuel Sanchez">
                         </div>
-                                          
                         <div class="form-group">
-                            <label for="email">Correo: </label><input id="email" readonly type="text" value="something@company.com">
+                            <label for="mobile">Celular: </label>
+                            <input id="mobile" readonly type="text" value="243877348">
                         </div>
-                         
                         <div class="form-group">
-                            <label for="mobile">Celular: </label><input id="mobile" readonly type="text" value="243877348">
+                            <label for="email">Correo: </label>
+                            <input id="email" readonly type="text" value="loremips@gmail.com">
                         </div>
-                    
                         <div class="form-group">
-                            <label for="amount">Tu participación: </label><input id="amount" readonly type="text" value="100">
+                            <label for="amount">Tu participación: </label>
+                            <input id="amount" readonly type="text" value="$50.00 (+ $2.50 por comisión) MXN">
                         </div>
                         
                         <div class="form-group">
