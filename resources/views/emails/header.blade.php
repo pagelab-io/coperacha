@@ -1,6 +1,6 @@
 <tr>
     <td>
-        <a href='http://coperacha.pagelab.io' style='color:#FF5000;text-decoration:none'>Ver en linea</a>
+        <a href="{{route('pages.index')}}" style='color:#FF5000;text-decoration:none'>Ver en linea</a>
     </td>
     <td style="padding: 5px; text-align: right;">
         <a href='#'><img width="30" height="30" src="{{asset('/images/emails/fb.png')}}" alt='facebook'/></a>

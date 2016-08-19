@@ -12,7 +12,13 @@
             <!-- header -->
 
             <!-- body -->
-            @yield('body')
+            <tr>
+                <td style="padding: 15px 10px" colspan="2">
+                    <table width="100%">
+                        @yield('body')
+                    </table>
+                </td>
+            </tr>
             <!-- body -->
 
             <!-- footer -->
