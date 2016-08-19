@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <div class="content-block">
-                    <form class="form register">
+                    <div class="form register">
                         <div class="form-group">
                             <label class="text-info">Comparte tu alcancía en tus redes sociales</label>
                         </div>
@@ -32,11 +32,13 @@
                                 <img src="/images/twitter-logo.png" alt="">
                             </a>
                         </div>
+                    </div>
 
+                    <form class="form register" action="" method="post">
                         <div class="form-group">
                             <label class="text-info">O envía correo a tus amigos para invitarlos a participar.</label>
                             <div class="small">Introduce los emails separando cada uno con punto y coma (;)</div>
-                            <textarea name="email" id="email" class="form-control" rows="3" placeholder="Introduce las direcciones de correo"></textarea>
+                            <textarea required name="email" id="email" class="form-control" rows="3" placeholder="Introduce las direcciones de correo"></textarea>
                         </div>
 
                         <div class="form-group clearfix">
