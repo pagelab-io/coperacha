@@ -7,12 +7,12 @@
         <td colspan="2"><h3>Mensaje de Contacto</h3></td>
     </tr>
     <tr>
-        <td>Nombre:</td><td>{{$name}}</td>
+        <td><strong>Nombre:</strong></td><td>{{$name}}</td>
     </tr>
     <tr>
-        <td>Email:</td><td>{{$email}}</td>
+        <td><strong>Email:</strong></td><td>{{$email}}</td>
     </tr>
     <tr>
-        <td>Mensaje:</td><td>{{$content}}</td>
+        <td valign="top"><strong>Mensaje:</strong></td><td>{{$content}}</td>
     </tr>
 @endsection
