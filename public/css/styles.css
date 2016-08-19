@@ -37,6 +37,14 @@ body {
 .align-bottom { vertical-align: bottom; }
 
 
+.btn-link {
+    color: #757584;
+    padding: 11px 25px;
+    font-family: brandon_grotesquebold;
+    font-size:14px;
+    text-transform: uppercase;
+}
+
 /* Navigation */
 .navigation {
     background-color: #FF5000;
@@ -990,14 +998,6 @@ body {
     color: black;
 }
 
-.moneybox-view .btn-link {
-    color: #757584;
-    padding: 11px 25px;
-    font-family: brandon_grotesquebold;
-    font-size:14px;
-    text-transform: uppercase;
-}
-
 .moneybox-view .btn-primary {
     font-size: 14px;
     padding-top: 11px;
@@ -1359,6 +1359,20 @@ body {
 
 .profile-view .stage-item .icon-step-3 {
     background: url("/images/icon-profile-step-3.png") no-repeat center center;
+}
+
+.profile-view.contacts .holder {
+    max-width: 500px;
+}
+
+.profile-view.contacts label.text-info {
+    color: #525261;
+    font-size: 15px;
+}
+
+.profile-view.contacts .textarea {
+    border: none;
+    background: #ECECFB;
 }
 
 

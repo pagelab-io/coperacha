@@ -41,6 +41,7 @@ Route::group([
     $router->get('/create', ['as'=>'create', 'uses' => 'UserController@create']);
     $router->get('/profile', ['as'=>'profile', 'uses' => 'UserController@getProfilePage']);
     $router->get('/password', ['as'=>'password', 'uses' => 'UserController@getPasswordPage']);
+    $router->get('/contacts', ['as'=>'contacts', 'uses' => 'UserController@getContactsPage']);
 });
 
 Route::group([

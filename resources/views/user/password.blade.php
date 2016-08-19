@@ -8,8 +8,8 @@
                 <div class="header-block">
                     <div class="stage-item">
                         <div class="icon-step icon-step-2"></div>
-                        <div class="label active">Mi perfil</div>
-                        <div class="label">Contraseña</div>
+                        <div class="label">Mi perfil</div>
+                        <div class="label active">Contraseña</div>
                         <div class="label">Contacto</div>
                     </div>
                 </div>
@@ -35,7 +35,8 @@
 
                         <div class="form-group clearfix">
                             <div class="pull-right">
-                                <button class="btn btn-primary small" ng-click="emailRegister()">Guardar</button>
+                                <a href="{{route('user.profile')}}" class="btn-link">< Regresar a mi perfil</a>
+                                <button class="btn btn-primary small">Guardar</button>
                             </div>
                         </div>
                     </form>

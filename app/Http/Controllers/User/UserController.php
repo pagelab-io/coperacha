@@ -83,6 +83,18 @@ class UserController extends PLController{
     }
 
     /**
+     * Show the password page
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getContactsPage(Request $request) {
+
+        return view('user.contacts')
+            ->with('pageTitle','Contactos');
+    }
+
+    /**
      * Get the profile for a specific user
      *
      * @param PLRequest $request
