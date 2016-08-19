@@ -26,7 +26,7 @@
             Login.login($scope.request).success(function(response){
                 console.log(response);
                 if (response.status == 200) {
-                    window.location="/test";
+                    window.location="/user/profile";
                 } else if(response.status == -1) {
                     $scope.utils.hideLoader();
                     alert("Correo y/o contraseña inválidos.");
@@ -60,7 +60,7 @@
                         {
                             console.log(response);
                             if (response.status == 200) {
-                                window.location="/test";
+                                window.location="/user/profile";
                             } else if(response.status == -1) {
                                 $scope.utils.hideLoader();
                                 alert("Ocurrio un problema al hacer la autenticación por medio de Facebook, por favor intentalo más tarde");

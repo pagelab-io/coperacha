@@ -39,7 +39,7 @@ Route::group([
 ], function($router){
     // register
     $router->get('/create', ['as'=>'create', 'uses' => 'UserController@create']);
-    $router->get('/profile', ['as'=>'create', 'uses' => 'UserController@getProfilePage']);
+    $router->get('/profile', ['as'=>'profile', 'uses' => 'UserController@getProfilePage']);
     $router->get('/password', ['as'=>'password', 'uses' => 'UserController@getPasswordPage']);
 });
 
@@ -50,7 +50,7 @@ Route::group([
     // register
     $router->get('/dashboard', ['as' => 'dashboard', 'uses' => 'HomeController@getDashboardPage']);
     $router->get('/detail',  ['as' => 'detail', 'uses' => 'HomeController@getDetailPage']);
-    $router->get('/create',  ['as' => 'create', 'uses' => 'HomeController@getCreateMoneyboxPage']);
+    $router->get('/create',  ['middleware' => 'auth', 'as' => 'create', 'uses' => 'HomeController@getCreateMoneyboxPage']);
     $router->get('/step-2',  ['as' => 'step-2', 'uses' => 'HomeController@getCreateMoneyboxPage2']);
     $router->get('/request', ['as' => 'request', 'uses' => 'HomeController@getRequestPage']);
     $router->get('/join',    ['as' => 'join', 'uses' => 'HomeController@getJoinPage']);
