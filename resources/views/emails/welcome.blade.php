@@ -1,14 +1,10 @@
 @extends('emails.master')
-@extends('emails.header')
-@extends('emails.footer')
 
-@section('title')
-<title>Bienvenido</title>
-@endsection
+@section('title', 'Bienvenido')
 
 @section('body')
     <tr>
-        <td COLSPAN=2 style="font-family: Arial;font-size: 30px;color: #51B7CD;text-align: center;line-height: 30px;padding-top:45px;">¡Bienvenida/o a Coperacha, Emmanuel!</td>
+        <td COLSPAN=2 style="font-family: Arial;font-size: 30px;color: #51B7CD;text-align: center;line-height: 30px;padding-top:45px;">¡Bienvenido/a a Coperacha, Emmanuel!</td>
     </tr>
 
     <tr>
