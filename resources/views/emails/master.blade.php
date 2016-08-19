@@ -2,13 +2,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        @yield('title')
+        <title>@yield('title')</title>
     </head>
-    <body style='width:600px; margin: 0 auto;'>
+    <body style='font-family: Arial; font-size: 15px; width:600px; margin: 0 auto;'>
         <table border="0" cellpadding="0" cellspacing="0" width="600">
 
             <!-- header -->
-            @yield('header')
+            @include('emails.header')
             <!-- header -->
 
             <!-- body -->
@@ -16,7 +16,7 @@
             <!-- body -->
 
             <!-- footer -->
-            @yield('footer')
+            @include('emails.footer')
             <!-- footer -->
 
         </table>

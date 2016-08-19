@@ -158,6 +158,20 @@ class HomeController extends Controller
     }
 
     /**
+     * Send mail contact
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getMailContact(Request $request) {
+
+        return view('emails.contact')
+            ->with('name', 'Daniel')
+            ->with('email', 'daniel@pagelab.io')
+            ->with('content', 'Content');
+    }
+
+    /**
      * JUST FOR TEST - DELETE IN A FUTURE
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
