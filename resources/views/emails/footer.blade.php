@@ -3,7 +3,7 @@
 </tr>
 <tr>
     <td COLSPAN=2 style="padding-top:10px; text-align: center">
-        <img src="/images/emails/personaje1.png" width="80" height="80"/>
+        <img src="{{asset('/images/emails/personaje1.png')}}" width="80" height="80"/>
     </td>
 </tr>
 <tr>
@@ -18,7 +18,7 @@
 </tr>
 <tr>
     <td COLSPAN=2 style="text-align: center; padding-bottom:25px;">
-        <a href="#" style='color:#FF5000;text-decoration:none;'>Clic aquí</a>
+        <a href="{{route('pages.contact')}}" style='color:#FF5000;text-decoration:none;'>Clic aquí</a>
     </td>
 </tr>
 <tr>
