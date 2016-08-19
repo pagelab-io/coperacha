@@ -93,6 +93,7 @@
 
         <!-- AngularJS -->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+
         <!-- Facebook SDK -->
         <script src="{{asset('/js/facebook.js')}}"></script>
 
@@ -104,5 +105,8 @@
         <script src="{{asset('/js/services/RegisterService.js')}}"></script>
         <script src="{{asset('/js/services/LoginService.js')}}"></script>
         <script src="{{asset('/js/directives/CoperachaModal.js')}}"></script>
+
+        <!-- Javascript Section -->
+        @yield('js')
     </body>
 </html>
