@@ -142,8 +142,8 @@ class HomeController extends Controller
     public function postMailContact(Request $request) {
 
         $data = [
-            'name' => $request->get('name'),
-            'email' => $request->get('email'),
+            'name'    => $request->get('name'),
+            'email'   => $request->get('email'),
             'content' => $request->get('content'),
         ];
 
@@ -155,6 +155,20 @@ class HomeController extends Controller
         });
 
         return response()->json(['success' => true, 'data' => $data]);
+    }
+
+    /**
+     * Send mail contact
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getMailContact(Request $request) {
+
+        return view('emails.contact')
+            ->with('name', 'Daniel')
+            ->with('email', 'daniel@pagelab.io')
+            ->with('content', 'The Laravel framework has a few system requirements. Of course, all of these requirements are satisfied by the Laravel Homestead virtual machine, so it\'s highly recommended that you use Homestead as your local Laravel development environment.');
     }
 
     /**

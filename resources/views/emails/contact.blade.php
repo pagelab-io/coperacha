@@ -1,17 +1,18 @@
 @extends('emails.master')
-@include('emails.header')
 
-
-@section('title')
-    <title>Contacto</title>
-@endsection
+@section('title', 'Contacto')
 
 @section('body')
     <tr>
-        <td>Nombre:</td><td>{{$name}}</td>
-        <td>Email:</td><td>{{$email}}</td>
-        <td>Mensaje:</td><td>{{$content}}</td>
+        <td colspan="2"><h3>Mensaje de Contacto</h3></td>
+    </tr>
+    <tr>
+        <td><strong>Nombre:</strong></td><td>{{$name}}</td>
+    </tr>
+    <tr>
+        <td><strong>Email:</strong></td><td>{{$email}}</td>
+    </tr>
+    <tr>
+        <td valign="top"><strong>Mensaje:</strong></td><td>{{$content}}</td>
     </tr>
 @endsection
-
-@include('emails.footer')
