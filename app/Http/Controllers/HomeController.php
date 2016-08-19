@@ -150,7 +150,7 @@ class HomeController extends Controller
         Mail::send('emails.contact', $data, function ($message) {
             $message->from('contacto@coperacha.com.mx', 'Contacto');
             $message->to('perezatanaciod@gmail.com', 'Daniel');
-            // $message->cc('sanchezz985@gmail.com', 'Emmanuel');
+            $message->cc('sanchezz985@gmail.com', 'Emmanuel');
             $message->subject('Mensaje de Contacto');
         });
 
