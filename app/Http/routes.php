@@ -56,6 +56,9 @@ Route::group([
     $router->get('/request', ['as' => 'request', 'uses' => 'HomeController@getRequestPage']);
     $router->get('/join',    ['as' => 'join', 'uses' => 'HomeController@getJoinPage']);
     $router->get('/summary', ['as' => 'summary', 'uses' => 'HomeController@getSummaryPage']);
+    $router->get('/createSession', ['middleware' => 'auth', 'as' => 'createSession', 'uses' => 'MoneyboxController@createSession']);
+    $router->get('/getSession', ['middleware' => 'auth', 'as' => 'getSession', 'uses' => 'MoneyboxController@getSession']);
+    $router->get('/deleteSession', ['middleware' => 'auth', 'as' => 'deleteSession', 'uses' => 'MoneyboxController@deleteSession']);
 });
 
 Route::post('/sendmail', [ 'as' => 'sendmail', 'uses' => 'HomeController@postMailContact']);

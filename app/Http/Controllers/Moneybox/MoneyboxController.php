@@ -113,6 +113,43 @@ class MoneyboxController extends PLController {
         }
     }
 
+    public function createSession(PLRequest $request)
+    {
+        $tmp_moneybox = array(
+            'name'          => ($request->exists('name')) ? $request->get('name') : '',
+            'person_id'     => ($request->exists('person_id')) ? $request->get('person_id') : '',
+            'person_name'   => ($request->exists('person_name')) ? $request->get('person_name') : '',
+            'goal_amount'   => ($request->exists('goal_amount')) ? $request->get('goal_amount') : '',
+            'description'   => ($request->exists('description')) ? $request->get('description') : ''
+        );
+        $session = \Session::put('tmp_moneybox', $tmp_moneybox);
+        $response = new PLResponse();
+        $response->data = $session;
+        $response->description = "Datos temporales para la alcancia creados correctamente";
+        $this->setResponse($response);
+        return response()->json($this->getResponse());
+    }
+
+    public function getSession()
+    {
+        $session = \Session::get('tmp_moneybox');
+        $response = new PLResponse();
+        $response->data = $session;
+        $response->description = "Datos temporales para la alcancia recuperados correctamente";
+        $this->setResponse($response);
+        return response()->json($this->getResponse());
+    }
+
+    public function deleteSession()
+    {
+        $session = \Session::forget('tmp_moneybox');
+        $response = new PLResponse();
+        $response->data = $session;
+        $response->description = "Datos temporales para la alcancia borrados correctamente";
+        $this->setResponse($response);
+        return response()->json($this->getResponse());
+    }
+
     //endregion
 
 } 

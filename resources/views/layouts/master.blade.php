@@ -102,8 +102,10 @@
         <script src="{{asset('/js/controllers/ModalController.js')}}"></script>
         <script src="{{asset('/js/controllers/RegisterController.js')}}"></script>
         <script src="{{asset('/js/controllers/LoginController.js')}}"></script>
+        <script src="{{asset('/js/controllers/MoneyboxController.js')}}"></script>
         <script src="{{asset('/js/services/RegisterService.js')}}"></script>
         <script src="{{asset('/js/services/LoginService.js')}}"></script>
+        <script src="{{asset('/js/services/MoneyboxService.js')}}"></script>
         <script src="{{asset('/js/directives/CoperachaModal.js')}}"></script>
 
         <!-- Javascript Section -->
