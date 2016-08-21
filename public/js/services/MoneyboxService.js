@@ -12,7 +12,7 @@
             /**
              * Url base
              */
-            url: 'api/v1/moneybox',
+            url: '/api/v1/moneybox',
 
             /**
              * Url base for sessions
@@ -23,16 +23,16 @@
                 return $http.post(Moneybox.url, request);
             },
 
-            createSession: function(request){
+            getCategories: function(){
+                return $http.get(Moneybox.url+"/categories?api-key=$2y$10$ScZUgkFzrMr9NM5qPzKag.4mLTW8ugSG/DtT6nerJb3W1v5sg6UBC");
+            },
+
+            step1: function(request){
                 return $http.post(Moneybox.urlSession+"/createSession", request);
             },
 
-            getSession: function(request){
-                return $http.post(Moneybox.urlSession+"/getSession", request);
-            },
-
-            deleteSession: function(request){
-                return $http.post(Moneybox.urlSession+"/deleteSession", request);
+            step2: function(){
+                return $http.post(Moneybox.urlSession+"/deleteSession", null);
             }
         };
         return Moneybox;

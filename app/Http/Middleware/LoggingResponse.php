@@ -16,13 +16,16 @@ class LoggingResponse
     public function handle($request, Closure $next)
     {
         $response = $next($request);
-
-        \Log::info(
-            "\n=========== Response =========== \n".
-            "SessionId: ".$request->getSession()->getId()."\n".
-            "Response: ".$response."\n".
-            "\n=========== end Response =========== \n"
-        );
+        $api = 'api/v1';
+        $api_log = strpos($request->getUri(), $api);
+        if ($api_log !== false) {
+            \Log::info(
+                "\n=========== Response =========== \n".
+                "SessionId: ".$request->getSession()->getId()."\n".
+                "Response: ".$response."\n".
+                "\n=========== end Response =========== \n"
+            );
+        }
 
         return $response;
     }

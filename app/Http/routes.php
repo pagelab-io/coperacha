@@ -18,7 +18,7 @@ header( 'Access-Control-Allow-Headers: Authorization, Content-Type');
 
 /*
 |--------------------------------------------------------------------------
-| PAGE
+| SITE
 |--------------------------------------------------------------------------
 */
 Route::group([
@@ -50,15 +50,20 @@ Route::group([
 ], function($router){
     // register
     $router->get('/dashboard', ['as' => 'dashboard', 'uses' => 'HomeController@getDashboardPage']);
-    $router->get('/detail',  ['as' => 'detail', 'uses' => 'HomeController@getDetailPage']);
+    $router->get('/detail/{url}', ['as' => 'detail', 'uses' => 'HomeController@getDetailPage']);
     $router->get('/create',  ['middleware' => 'auth', 'as' => 'create', 'uses' => 'HomeController@getCreateMoneyboxPage']);
     $router->get('/step-2',  ['as' => 'step-2', 'uses' => 'HomeController@getCreateMoneyboxPage2']);
     $router->get('/request', ['as' => 'request', 'uses' => 'HomeController@getRequestPage']);
     $router->get('/join',    ['as' => 'join', 'uses' => 'HomeController@getJoinPage']);
     $router->get('/summary', ['as' => 'summary', 'uses' => 'HomeController@getSummaryPage']);
-    $router->get('/createSession', ['middleware' => 'auth', 'as' => 'createSession', 'uses' => 'MoneyboxController@createSession']);
-    $router->get('/getSession', ['middleware' => 'auth', 'as' => 'getSession', 'uses' => 'MoneyboxController@getSession']);
-    $router->get('/deleteSession', ['middleware' => 'auth', 'as' => 'deleteSession', 'uses' => 'MoneyboxController@deleteSession']);
+
+    $router->group([
+        'namespace' => 'Moneybox',
+        'middleware' => 'auth'
+    ], function($router){
+        $router->post('/createSession', ['uses' => 'MoneyboxController@step1']);
+        $router->post('/deleteSession', ['uses' => 'MoneyboxController@step2']);
+    });
 });
 
 Route::post('/sendmail', [ 'as' => 'sendmail', 'uses' => 'HomeController@postMailContact']);

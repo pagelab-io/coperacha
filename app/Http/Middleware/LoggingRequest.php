@@ -16,14 +16,18 @@ class LoggingRequest
     public function handle($request, Closure $next)
     {
 
-        \Log::info(
-            "\n=========== Request =========== \n".
-            "Uri: ".$request->getUri()."\n".
-            "ClientIp: ".$request->getClientIp()."\n".
-            "SessionId: ".$request->getSession()->getId()."\n".
-            "content: ".$request->getContent().
-            "\n=========== end Request =========== \n"
-        );
+        $api = 'api/v1';
+        $api_log = strpos($request->getUri(), $api);
+        if ($api_log !== false) {
+            \Log::info(
+                "\n=========== Request =========== \n".
+                "Uri: ".$request->getUri()."\n".
+                "ClientIp: ".$request->getClientIp()."\n".
+                "SessionId: ".$request->getSession()->getId()."\n".
+                "content: ".$request->getContent().
+                "\n=========== end Request =========== \n"
+            );
+        }
 
         return $next($request);
     }

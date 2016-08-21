@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Category;
+use App\Http\Requests\PLRequest;
+use App\Http\Responses\PLResponse;
+use App\Repositories\SettingRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -10,11 +13,17 @@ class HomeController extends Controller
 {
 
     /**
-     * HomeController constructor.
+     * @var SettingRepository
      */
-    public function __construct()
-    {
+    private $_settingRepository;
 
+    /**
+     * HomeController constructor.
+     * @param SettingRepository $settingRepository
+     */
+    public function __construct(SettingRepository $settingRepository)
+    {
+        $this->_settingRepository = $settingRepository;
     }
 
     /**
@@ -65,21 +74,22 @@ class HomeController extends Controller
      */
     public function getCreateMoneyboxPage(Request $request){
         $categories = Category::all();
-
         return view('moneybox.create')
             ->with('categories', $categories)
             ->with('pageTitle','Crear mi alcancía 1/2');
     }
 
     /**
-     * @param Request $request
+     * @param PLRequest $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getCreateMoneyboxPage2(Request $request){
-        $categories = Category::all();
+    public function getCreateMoneyboxPage2(PLRequest $request){
 
+        $request->merge(array('path' => '/moneybox'));
+        $response = $this->_settingRepository->childsOf($request);
+        \Log::info($response->data);
         return view('moneybox.step-2')
-            ->with('categories', $categories)
+            ->with('settings', $response->data)
             ->with('pageTitle','Crear mi alcancía 2/2');
     }
 
@@ -99,6 +109,8 @@ class HomeController extends Controller
      */
     public function getDetailPage(Request $request){
 
+        // TODO -  agregar variables con las que se inicializara la vista
+        // crear metodo para la busqueda por la url (no se si ya esta)
         return view('moneybox.detail')
             ->with('pageTitle','Alcancía de prueba No. 1');
     }

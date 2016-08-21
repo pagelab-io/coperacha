@@ -27,10 +27,9 @@ class MoneyboxValidation {
             'category_id' => 'required|numeric',
             'name' => 'required|string',
             'goal_amount' => 'required|numeric',
-            'owner_id' => 'required|numeric',
+            'person_id' => 'required|numeric',
             'end_date' => 'required|date_format:"Y-m-d"',
             'settings' => 'required|json',
-            'method' => 'required|string'
         ];
     }
 

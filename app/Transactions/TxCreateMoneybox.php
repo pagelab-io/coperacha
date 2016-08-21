@@ -74,7 +74,7 @@ class TxCreateMoneybox extends PLTransaction{
             $moneybox->category_id  = $request->get('category_id');
             $moneybox->name         = $request->get('name');
             $moneybox->goal_amount  = $request->get('goal_amount');
-            $moneybox->owner        = $request->get('owner_id');
+            $moneybox->person_id        = $request->get('person_id');
             $moneybox->end_date     = $request->get('end_date');
             $moneybox->description  = ($request->exists('description')) ? $request->get('description') : '';
             $moneybox->url          = $this->generateURL($request->get('name'));

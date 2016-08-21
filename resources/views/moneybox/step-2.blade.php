@@ -15,11 +15,38 @@
                 </div>
 
                 <div class="content-block">
-                    <form action="{{route('moneybox.dashboard')}}" class="form register moneybox">
+                    <form class="form register moneybox" ng-controller="moneyboxController">
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="form-group">
+
+                                    @foreach($settings as $setting)
+
+                                        <div class="form-group">
+                                            <label>{{utf8_decode($setting->name)}}</label>
+                                        </div>
+
+                                        @foreach($setting->options as $option)
+                                        <div class="radio">
+                                            @if($option->subtype=='text')
+                                            <label for="{{$option->name}}" class="flex-element">
+                                                <input type="radio" value="{{$setting->id}}|{{$option->id}}|Y" ng-model="{{$setting->id==1 ? "participation" : "privacy"}}">
+                                                <span>{{$option->name}}</span>
+                                                <input class="form-control" type="number" value="0" id="txtOption-{{$option->id}}">
+                                                <strong> .00 MXN</strong>
+                                            </label>
+                                            @else
+                                            <label for="{{$option->name}}">
+                                                <input type="radio" value="{{$setting->id}}|{{$option->id}}|N" ng-model="{{$setting->id==1 ? "participation" : "privacy"}}"> {{$option->name}}
+                                            </label>
+                                            @endif
+                                        </div>
+                                        @endforeach
+
+                                    @endforeach
+
+                                    <!-- settings section -->
+                                    <!--<div class="form-group">
                                         <label>¿Cómo quiéres que sea el monto de participación?</label>
                                         <div class="radio">
                                             <label for="libre">
@@ -61,16 +88,27 @@
                                                 <input id="hidden" name="privacy" type="radio"> Ocultar el importe del bote
                                             </label>
                                         </div>
-                                    </div>
+                                    </div>-->
+                                    <!-- settings section -->
+
                                 </div>
                             </div>
                         </div>
                         <div class="form-group clearfix">
                             <div class="pull-right">
                                 <a href="{{route('moneybox.create')}}" class="btn-link">< Volver </a>
-                                <button class="btn btn-primary">Siguiente ></button>
+                                <button class="btn btn-primary" ng-click="step2()">Siguiente ></button>
                             </div>
                         </div>
+                        @if(Session::has('tmp_moneybox'))
+                            <input type="hidden" ng-init="category_id='{{Session::get('tmp_moneybox')['category_id']}}'" ng-model="category_id"/>
+                            <input type="hidden" ng-init="name='{{Session::get('tmp_moneybox')['name']}}'" ng-model="name"/>
+                            <input type="hidden" ng-init="description='{{Session::get('tmp_moneybox')['description']}}'" ng-model="description"/>
+                            <input type="hidden" ng-init="goal_amount='{{Session::get('tmp_moneybox')['goal_amount']}}'" ng-model="goal_amount"/>
+                            <input type="hidden" ng-init="end_date='{{Session::get('tmp_moneybox')['end_date']}}'" ng-model="end_date"/>
+                            <input type="hidden" ng-init="person_name='{{Session::get('tmp_moneybox')['person_name']}}'" ng-model="person_name"/>
+                            <input type="hidden" ng-init="person_id='{{Session::get('tmp_moneybox')['person_id']}}'" ng-model="person_id"/>
+                        @endif
                     </form>
                 </div>
             </div>

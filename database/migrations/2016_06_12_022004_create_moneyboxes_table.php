@@ -18,7 +18,7 @@ class CreateMoneyboxesTable extends Migration
                 $table->engine = 'InnoDB';
                 $table->increments('id');
                 $table->integer('category_id')->unsigned();
-                $table->integer('owner_id')->unsigned();
+                $table->integer('person_id')->unsigned(); // moneybox's creator
                 $table->string('name', 128);
                 $table->decimal('goal_amount',10,2);
                 $table->decimal('collected_amount',10,2);
