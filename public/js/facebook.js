@@ -72,6 +72,16 @@ function closeFacebookSession(){
     });
 }
 
+function share(){
+    var share = document.getElementsByClassName('moneybox-share')[0];
+    FB.ui({
+        method: 'share',
+        href: window.location.href
+    }, function(response){
+        console.log(response);
+    });
+}
+
 // Load the SDK asynchronously
 (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];

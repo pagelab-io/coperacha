@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Entities\Category;
 use App\Http\Requests\PLRequest;
 use App\Http\Responses\PLResponse;
+use App\Repositories\MoneyboxRepository;
 use App\Repositories\SettingRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -18,12 +19,19 @@ class HomeController extends Controller
     private $_settingRepository;
 
     /**
+     * @var MoneyboxRepository
+     */
+    private $_moneyboxRepository;
+
+    /**
      * HomeController constructor.
      * @param SettingRepository $settingRepository
+     * @param MoneyboxRepository $moneyboxRepository
      */
-    public function __construct(SettingRepository $settingRepository)
+    public function __construct(SettingRepository $settingRepository, MoneyboxRepository $moneyboxRepository)
     {
         $this->_settingRepository = $settingRepository;
+        $this->_moneyboxRepository = $moneyboxRepository;
     }
 
     /**
@@ -104,15 +112,22 @@ class HomeController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param $url
+     * @internal param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getDetailPage(Request $request){
+    public function getDetailPage($url){
 
-        // TODO -  agregar variables con las que se inicializara la vista
-        // crear metodo para la busqueda por la url (no se si ya esta)
+        $variables = $this->_moneyboxRepository->getByURL($url);
+        $moneybox = $variables['moneybox'];
+        $person = $variables['person'];
+        $partiticipantsnumber = $variables['partiticipantsnumber'];
+
         return view('moneybox.detail')
-            ->with('pageTitle','Alcancía de prueba No. 1');
+            ->with('moneybox', $moneybox)
+            ->with('person', $person)
+            ->with('partiticipantsnumber', $partiticipantsnumber)
+            ->with('pageTitle',$moneybox->name);
     }
 
     /**

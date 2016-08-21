@@ -12,7 +12,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <div class="label-owner">Alcancía organizada por: <span>Emmanuel Sánchez L</span></div>
+                                <div class="label-owner">Alcancía organizada por: <span>{{$person->name}} {{$person->lastname}}</span></div>
                             </div>
                        </div>
                     </div>
@@ -27,19 +27,19 @@
                                 <div class="form-group">
                                     <label>
                                         <img src="/images/icon-profile-user.png" alt="">
-                                        Participantes: 7
+                                        Participantes: {{$partiticipantsnumber}}
                                     </label>
                                 </div>
                                 <div class="form-group">
                                     <label>
                                         <img src="/images/icon-profile-calendar.png" alt="">
-                                        21 días 6 horas
+                                        21 días 6 horas <!-- TODO - calcular este tiempo con carbon -->
                                     </label>
                                 </div>
                                 <div class="form-group">
                                     <label>
                                         <img src="/images/icon-profile-total.png" alt="">
-                                        Total recaudado: $350
+                                        Total recaudado: ${{number_format($moneybox->collected_amount, 2)}}
                                     </label>
                                 </div>
                                 <div class="form-group">
@@ -55,18 +55,19 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <a class="btn-share-fb" href="javascript:void(0)">
+                                    <a class="btn-share-fb" href="javascript:void(0)" onclick="share()">
                                         <span>Compartir en</span>
                                         <img src="/images/facebook-logo.png" alt="">
                                     </a>
                                 </div>
 
-                                <div class="form-group">
+                                <!--<div class="form-group">
                                     <a class="btn-share-twitter" href="javascript:void(0)">
                                         <span>Compartir en</span>
                                         <img src="/images/twitter-logo.png" alt="">
                                     </a>
-                                </div>
+                                </div>-->
+                                <!-- Your share button code -->
 
                                 <div class="form-group">
                                     <br>

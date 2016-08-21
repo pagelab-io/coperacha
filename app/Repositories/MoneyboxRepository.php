@@ -8,6 +8,7 @@
 
 namespace App\Repositories;
 
+use App\Entities\Participant;
 use App\Entities\Person;
 use App\Http\Responses\PLResponse;
 use App\Transactions\TxCreateMoneybox;
@@ -151,7 +152,7 @@ class MoneyboxRepository extends BaseRepository{
      */
     public function myMoneyboxes(PLRequest $request)
     {
-        $moneyboxes = Moneybox::where("owner", $request->get('person_id'))->get();
+        $moneyboxes = Moneybox::where("person_id", $request->get('person_id'))->get();
 
         if (count($moneyboxes) > 0) {
             foreach ($moneyboxes as $m) {
@@ -232,6 +233,27 @@ class MoneyboxRepository extends BaseRepository{
 
         return $response;
 
+    }
+
+    public function getByURL($url)
+    {
+        try {
+
+            $person = null;
+            $moneybox = Moneybox::where("url", $url)->firstOrFail();
+            $participantsnumber = 0;
+            $result = array();
+            if ($moneybox) {
+                $person = Person::where("id", $moneybox->person_id)->firstOrFail();
+                $participantsnumber = Participant::where('moneybox_id', $moneybox->id)->count();
+            }
+            $result['moneybox'] = $moneybox;
+            $result['person'] = $person;
+            $result['partiticipantsnumber'] = $participantsnumber;
+        } catch(\Exception $ex){
+            throw $ex;
+        }
+        return $result;
     }
 
     //endregion
