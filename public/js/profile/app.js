@@ -68,19 +68,23 @@ var vm = new Vue({
 
     },
 
+    /**
+     * Global methods
+     */
     methods: {
         activeTab: function (tab) {
-
             this.isProfile = false;
             this.isPassword = false;
             this.isShare = false;
-
             this.tab = tab;
 
             switch (tab) {
                 case 'profile': this.isProfile = true; break;
                 case 'password': this.isPassword = true; break;
                 case 'share': this.isShare = true; break;
+
+                default:
+                    this.isProfile = true;
             }
         },
 
