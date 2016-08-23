@@ -4,8 +4,7 @@
 
 var $api = '$2y$10$ScZUgkFzrMr9NM5qPzKag.4mLTW8ugSG/DtT6nerJb3W1v5sg6UBC';
 var months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo','Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-var base = 'http://coperacha.local.pagelab.io';
-
+var base = 'http://coperacha.pagelab.io';
 
 var vm = new Vue({
     el: '#ProfileView',
@@ -43,19 +42,22 @@ var vm = new Vue({
         isShare: false
     },
 
+    /**
+     * Computed properties
+     */
     computed: {
 
     },
 
     /**
-     *
+     * Occurs when the document was created
      */
     created: function () {
 
     },
 
     /**
-     *
+     * Occurs when the document is mounted
      */
     ready: function () {
         this.userid = (this.$el.dataset.userid);
