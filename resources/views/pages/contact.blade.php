@@ -7,7 +7,7 @@
         <div class="holder">
             <div class="container-fluid">
                 <div class="header">
-                    <h2>Queremos saber qué opinas de Coperacha, mándamos un mensaje.</h2>
+                    <h2>Quéremos saber qué opinas de Coperacha, mándanos un mensaje.</h2>
                 </div>
                 <div class="content">
                     <!-- Contact Info -->
@@ -71,6 +71,6 @@
 
 @section('js')
     <script src="{{asset('/js/vendor/vuejs/vue.js')}}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.9.3/vue-resource.js"></script>
+    <script src="{{asset('/js/vendor/vuejs/vue-resource.js')}}"></script>
     <script src="{{asset('/js/contact.js')}}"></script>
 @endsection

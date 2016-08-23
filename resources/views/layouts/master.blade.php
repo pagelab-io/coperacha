@@ -42,8 +42,10 @@
         <meta name="twitter:image" content="image-url">
         <meta name="twitter:card" content="summary">
 
-        <!-- Bootstrap Styles -->
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Bootstrap Styles
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"> -->
+        <link href="{{asset('/css/bootstrap.css')}}" rel="stylesheet">
+
         <!-- Page Styles -->
         {{--<link href="{{ elixir('build/css/styles.min.css') }}" rel="stylesheet">--}}
         <link href="{{asset('/css/fonts.css')}}" rel="stylesheet">
@@ -83,19 +85,21 @@
         <!-- LoginDialogView -->
         <coperacha-modal class="popup-wrapper"></coperacha-modal>
 
-        <!-- Include jQuery -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <!-- Include jQuery
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
+        <script src="{{asset('/js/vendor/jquery/jquery-3.1.0.js')}}"></script>
+
         <!-- Include Bootstrap Scripts -->
         <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
         <!-- Page Scripts (production) -->
         {{--<script src="{{ elixir('build/js/scripts.min.js') }}"></script>--}}
         <script src="{{asset('/build/js/scripts.min.js')}}"></script>
 
-        <!-- AngularJS -->
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+        <!-- Facebook SDK
+        <script src="{{asset('/js/facebook.js')}}"></script> -->
 
-        <!-- Facebook SDK -->
-        <script src="{{asset('/js/facebook.js')}}"></script>
+        <!-- Angular JS -->
+        <script src="{{asset('/js/vendor/angular/angular.js')}}"></script>
 
         <script src="{{asset('/js/coperacha.js')}}"></script>
         <script src="{{asset('/js/Utils.js')}}"></script>

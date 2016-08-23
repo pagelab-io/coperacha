@@ -39,7 +39,7 @@ Route::group([
 ], function($router){
     // register
     $router->get('/create', ['as'=>'create', 'uses' => 'UserController@create']);
-    $router->get('/profile', ['as'=>'profile', 'uses' => 'UserController@getProfilePage']);
+    $router->get('/profile/{userid}', ['as'=>'profile', 'uses' => 'UserController@getProfilePage']);
     $router->get('/password', ['as'=>'password', 'uses' => 'UserController@getPasswordPage']);
     $router->get('/contacts', ['as'=>'contacts', 'uses' => 'UserController@getContactsPage']);
 });
@@ -143,12 +143,13 @@ $router->group([
 $router->group([
     'as' => 'user',
     'namespace' => 'User',
-    'prefix' => 'api/v1/user'
+    'prefix' => 'api/v1/user',
+    'middleware' => ['auth', 'rest']
 ], function($router){
     // register
-    $router->get('/profile', ['middleware' => ['auth', 'rest'], 'uses' => 'UserController@getProfile']);
-    $router->put('/profile', ['middleware' => ['auth', 'rest'], 'uses' => 'UserController@updateProfile']);
-    $router->put('/changePassword', ['middleware' => ['auth', 'rest'], 'uses' => 'UserController@changePassword']);
+    $router->get('/profile/{userid}', ['uses' => 'UserController@getProfile']);
+    $router->put('/profile', ['uses' => 'UserController@updateProfile']);
+    $router->put('/changePassword', ['uses' => 'UserController@changePassword']);
 });
 
 /*

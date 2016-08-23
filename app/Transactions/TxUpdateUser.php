@@ -8,9 +8,9 @@
 
 namespace App\Transactions;
 
-use App\Http\Requests\PLRequest;
+use Illuminate\Http\Request;
 
-class TxUpdateUser extends PLTransaction{
+class TxUpdateUser {
 
     //region Attributes
     //endregion
@@ -26,14 +26,13 @@ class TxUpdateUser extends PLTransaction{
     /**
      * Execute the User update transaction
      *
-     * @param PLRequest $request
+     * @param Request $request
      * @param array $params
      * @throws \Exception
      * @return array
      */
-    public function executeTx(PLRequest $request, $params = array())
+    public function executeTx(Request $request, $params = array())
     {
-
         $user = $params['user'];
         $person = $params['person'];
         $response = null;
@@ -51,6 +50,7 @@ class TxUpdateUser extends PLTransaction{
             if ($request->exists('name')) $person->name = $request->get('name');
             if ($request->exists('lastname')) $person->lastname = $request->get('lastname');
             if ($request->exists('birthday')) $person->birthday = $request->get('birthday');
+            if ($request->exists('phone')) $person->phone = $request->get('phone');
             if ($request->exists('gender')) $person->gender = $request->get('gender');
             if ($request->exists('city')) $person->city = $request->get('city');
             if ($request->exists('country')) $person->country = $request->get('country');

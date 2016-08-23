@@ -15,6 +15,7 @@ use App\Models\User;
 use App\Repositories\PersonRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends PLController{
 
@@ -63,10 +64,23 @@ class UserController extends PLController{
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function getProfilePage(Request $request) {
-        $months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo','Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+        $months = [
+              '01' => 'Enero'
+            , '02' =>'Febrero'
+            , '03' =>'Marzo'
+            , '04' =>'Abril'
+            , '05' =>'Mayo'
+            , '06' =>'Junio'
+            , '07' =>'Julio'
+            , '08' =>'Agosto'
+            , '09' =>'Septiembre'
+            , '10' =>'Octubre'
+            , '11' =>'Noviembre'
+            , '12' =>'Diciembre'];
 
         return view('user.profile')
             ->with('months', $months)
+            ->with('user', \Auth::user())
             ->with('pageTitle','Mi cuenta');
     }
 
@@ -97,14 +111,16 @@ class UserController extends PLController{
     /**
      * Get the profile for a specific user
      *
-     * @param PLRequest $request
+     * @param int $userid
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getProfile(PLRequest $request)
+    public function getProfile($userid)
     {
-        $this->validate($request, $request->rules(), $request->messages());
+        /* $this->validate($request, $request->rules(), $request->messages()); */
         try {
-            $this->setResponse($this->_userRepository->getProfile($request));
+            $data = $this->_userRepository->getProfile($userid);
+            $this->setResponse($data);
+
             return response()->json($this->getResponse());
         } catch(\Exception $ex) {
             $response = new PLResponse();
@@ -119,26 +135,23 @@ class UserController extends PLController{
     /**
      * Update the user attributes
      *
-     * @param PLRequest $request
+     * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function updateProfile(PLRequest $request)
+    public function updateProfile(Request $request)
     {
-        \Log::info("llega a controller");
-        $this->validate($request, $request->rules(), $request->messages());
-
-        \Log::info("pasa validacion");
+        // $this->validate($request, $request->rules(), $request->messages());
         try {
             $this->setResponse($this->_userRepository->updateProfile($request));
-            return response()->json($this->getResponse());
+            $response = $this->getResponse();
         } catch(\Exception $ex) {
             $response = new PLResponse();
             $response->status = $ex->getCode();
             $response->description = $ex->getMessage();
             $response->data = $ex->getTraceAsString();
-            return response()->json($response);
         }
 
+        return response()->json($response);
     }
 
 

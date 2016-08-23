@@ -9,7 +9,6 @@ class AuthAPI
 
     public function handle($request, Closure $next)
     {
-
         if (!$request->exists("api-key")) {
             return response('Unauthorized, api-key is required', 403);
         }

@@ -26,7 +26,8 @@
             Login.login($scope.request).success(function(response){
                 console.log(response);
                 if (response.status == 200) {
-                    window.location="/user/profile";
+                    var user = response.data;
+                    window.location="/user/profile/" + user.id;
                 } else if(response.status == -1) {
                     $scope.utils.hideLoader();
                     alert("Correo y/o contraseña inválidos.");

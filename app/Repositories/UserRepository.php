@@ -14,6 +14,7 @@ use App\Transactions\TxUpdateUser;
 use App\Http\Requests\PLRequest;
 use App\Entities\Person;
 use App\Entities\User;
+use Illuminate\Http\Request;
 use Mockery\CountValidator\Exception;
 
 class UserRepository extends BaseRepository{
@@ -71,7 +72,6 @@ class UserRepository extends BaseRepository{
      */
     public function create(PLRequest $request, Person $person)
     {
-
         \Log::info("=== User create ===");
 
         if(!$person) throw new \Exception("Person cannot be null", -1);
@@ -102,33 +102,32 @@ class UserRepository extends BaseRepository{
     /**
      * Update the specified user
      *
-     * @param PLRequest $request
+     * @param Request $request
      * @return PLResponse
      * @throws \Exception
      */
-    public function updateProfile(PLRequest $request)
+    public function updateProfile(Request $request)
     {
-
         $user = null;
         $person = null;
 
-        try {$user = $this->byId($request->get('user_id'));}
-        catch(\Exception $ex) { throw new \Exception("User does not exist", -1, $ex); }
-        \Log::info("User : ".$user);
+        try {
+            $user = $this->byId($request->get('user_id'));
+            $person = $user->person;
+        }
+        catch(\Exception $ex) {
+            throw new \Exception("User does not exist", -1, $ex);
+        }
 
-        try {$person = $this->_personRepository->byId($request->get('person_id'));}
-        catch(\Exception $ex) { throw new \Exception("Person does not exist", -1, $ex); }
-        \Log::info("Person : ".$person);
-
-        \Log::info("Call txUpdateUser");
-        $update_response = $this->_txUpdateUser->executeTx($request, array('user' => $user, 'person' => $person));
-        \Log::info("end txUpdateUser");
+        $updateResponse = $this->_txUpdateUser->executeTx($request, [
+            'user' => $user,
+            'person' => $person
+        ]);
 
         $response = new PLResponse();
-        if (is_array($update_response)) {
-            $response->description = 'User was updated successfully';
-            $response->data = $update_response;
-        }
+        $response->description = 'User was updated successfully';
+        $response->data = $updateResponse;
+
         return $response;
     }
 
@@ -291,16 +290,18 @@ class UserRepository extends BaseRepository{
     /**
      * Get the user profile
      *
-     * @param PLRequest $request
+     * @param int $userId
      * @throws \Exception
      * @return mixed
      */
-    public function getProfile(PLRequest $request)
+    public function getProfile($userId)
     {
         $user = null;
         try{
-            $user = $this->byId($request->get('user_id'));
+
+            $user = $this->byId($userId);
             $user->person;
+
         }catch(\Exception $ex){
             throw new \Exception("User does not exist", -1, $ex);
         }
@@ -308,6 +309,7 @@ class UserRepository extends BaseRepository{
         $response = new PLResponse();
         $response->description = 'Getting user profile successfully';
         $response->data = $user;
+        
         return $response;
     }
 

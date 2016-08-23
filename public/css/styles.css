@@ -39,6 +39,7 @@ body {
 
 .btn-link {
     color: #757584;
+    cursor: pointer;
     padding: 11px 25px;
     font-family: brandon_grotesquebold;
     font-size:14px;
@@ -1312,16 +1313,33 @@ body {
 |
 */
 
+.profile-view {
+    min-height: 500px;
+}
+
 .profile-view .holder {
     max-width: 850px;
 }
 
 .profile-view .header-block {
     color: #FF4E00;
+    margin-bottom: 10px;
+}
+
+.profile-view .content-block {
+    min-height: 400px;
+}
+
+.profile-view .content-block.selected {
 }
 
 .profile-view .stage-item {
-    text-align: center;
+    margin: 0 auto;
+    width: 320px;
+}
+
+.profile-view .stage-item .labels {
+    padding: 15px 0;
 }
 
 .profile-view .stage-item-title {
@@ -1332,7 +1350,7 @@ body {
     text-transform: uppercase;
 }
 
-.profile-view .stage-item .label.active {
+.profile-view .stage-item .label.selected {
     color: #FF4E00;
 }
 
@@ -1344,21 +1362,22 @@ body {
 }
 
 .profile-view .stage-item .icon-step {
-    height: 34px;
-    width: 281px;
-    margin: 15px auto;
+    background: url("/images/icon-profile-tabs.png") no-repeat 0 0;
+    margin: 0 auto;
+    height: 40px;
+    width: 300px;
 }
 
-.profile-view .stage-item .icon-step-1 {
-    background: url("/images/icon-profile-step-1.png") no-repeat center center;
+.profile-view .stage-item .icon-step-profile {
+    background-position: 0 0;
 }
 
-.profile-view .stage-item .icon-step-2 {
-    background: url("/images/icon-profile-step-2.png") no-repeat center center;
+.profile-view .stage-item .icon-step-password {
+    background-position: 0 -40px;
 }
 
-.profile-view .stage-item .icon-step-3 {
-    background: url("/images/icon-profile-step-3.png") no-repeat center center;
+.profile-view .stage-item .icon-step-share {
+    background-position: 0 -80px;
 }
 
 .profile-view.contacts .holder {
@@ -1375,6 +1394,10 @@ body {
     background: #ECECFB;
 }
 
+.message-ui {
+    height: 50px;
+    margin-bottom: 15px;
+}
 
 /*-----------------------------------------------------------------------------
 | Loader
@@ -1393,3 +1416,17 @@ body {
     z-index: 100;
 }
 
+/* always present */
+.expand-transition {
+    transition: all .3s ease;
+    height: 40px;
+    padding: 10px;
+}
+
+/* .expand-enter defines the starting state for entering */
+/* .expand-leave defines the ending state for leaving */
+.expand-enter, .expand-leave {
+    height: 0;
+    padding: 0 10px;
+    opacity: 0;
+}
