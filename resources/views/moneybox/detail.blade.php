@@ -33,7 +33,15 @@
                                 <div class="form-group">
                                     <label>
                                         <img src="/images/icon-profile-calendar.png" alt="">
-                                        21 días 6 horas <!-- TODO - calcular este tiempo con carbon -->
+                                        <?php
+                                            $end_date = \App\Utilities\PLDateTime::toCarbon($moneybox->end_date);
+                                            $current_date = \Carbon\Carbon::now();
+                                        ?>
+                                        @if($current_date->diffInDays($end_date) > 1 || $current_date->diffInDays($end_date) == 0)
+                                            {{$current_date->diffInDays($end_date)}} días
+                                        @else
+                                            {{$current_date->diffInDays($end_date)}} día
+                                        @endif
                                     </label>
                                 </div>
                                 <div class="form-group">

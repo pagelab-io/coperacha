@@ -5,34 +5,44 @@
         <div class="holder">
             <div class="container-fluid">
                 <div class="content-block">
-
                     <div class="row moneybox-list clearfix">
-                        @for($i = 0; $i<8; $i++)
-                            <div class="col-xs-6 col-sm-4 moneybox-item">
-                                <header>
-                                    <picture>
-                                        <img class="img-responsive" src="/images/icon-mbox-{{$i%2==0?'1':'2'}}.png" alt="">
-                                    </picture>
-                                </header>
-                                <main class="actions">
-                                    <h2 class="title">Prueba</h2>
-                                    <div class="form-group">
-                                        <a href="{{route('moneybox.detail')}}" class="btn btn-primary">Modificar</a>
-                                    </div>
-                                    <div class="form-group">
-                                        <a class="btn btn-primary">Utilizar dinero</a>
-                                    </div>
-                                    <div class="form-group">
-                                        <a class="btn btn-primary">Invitar</a>
-                                    </div>
-                                </main>
-                                <footer>
-                                    <div>Faltan: <span>22 días</span></div>
-                                    <div>Participantes: <span>1</span></div>
-                                    <div>Recolectado: <span>$ 50.00</span></div>
-                                </footer>
+                        @if(count($moneyboxes['my_moneyboxes']) > 0)
+                            @foreach($moneyboxes['my_moneyboxes'] as $i => $moneybox)
+                                <div class="col-xs-6 col-sm-4 moneybox-item">
+                                    <header>
+                                        <picture>
+                                            <img class="img-responsive" src="/images/icon-mbox-{{$i%2==0?'1':'2'}}.png" alt="">
+                                        </picture>
+                                    </header>
+                                    <main class="actions">
+                                        <h2 class="title">{{$moneybox->name}}</h2>
+                                        <div class="form-group">
+                                            <a href="#" class="btn btn-primary">Modificar</a>
+                                        </div>
+                                        <div class="form-group">
+                                            <a class="btn btn-primary">Utilizar dinero</a>
+                                        </div>
+                                        <div class="form-group">
+                                            <a class="btn btn-primary">Invitar</a>
+                                        </div>
+                                    </main>
+                                    <footer>
+                                        <?php
+                                        $end_date = \App\Utilities\PLDateTime::toCarbon($moneybox->end_date);
+                                        $current_date = \Carbon\Carbon::now();
+                                        ?>
+                                        <div>Faltan: <span>{{$current_date->diffInDays($end_date)}} días</span></div>
+                                        <div>Participantes: <span>{{count($moneybox->participants)}}</span></div>
+                                        <div>Recolectado: <span>$ {{number_format($moneybox->collected_amount,2)}}</span></div>
+                                    </footer>
+                                </div>
+                            @endforeach
+                        @else
+                            <div style="text-align: center; height: 400px;">
+                                <h3 style="color:#51B7CD">No has creado ninguna alcancía, puedes empezar <a href="{{route('moneybox.create')}}" style="color:#FF5000">aqui !</a></h3>
                             </div>
-                        @endfor
+                        @endif
+
                     </div>
                 </div>
             </div>

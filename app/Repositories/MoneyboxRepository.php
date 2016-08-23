@@ -135,10 +135,12 @@ class MoneyboxRepository extends BaseRepository{
      */
     public function getAll(PLRequest $request)
     {
+        \Log::info("Searching all moneybox for person :: ".$request->get("person_id"));
         $moneybox_list = [];
         $moneybox_list['my_moneyboxes'] = $this->myMoneyboxes($request);
         $moneybox_list['moneyboxes_participation'] = $this->moneyboxesParticipation($request);
 
+        \Log::info($moneybox_list);
         $response = new PLResponse();
         $response->description = 'Listing all momeybox succesfully';
         $response->data = $moneybox_list;
@@ -153,13 +155,12 @@ class MoneyboxRepository extends BaseRepository{
     public function myMoneyboxes(PLRequest $request)
     {
         $moneyboxes = Moneybox::where("person_id", $request->get('person_id'))->get();
-
         if (count($moneyboxes) > 0) {
             foreach ($moneyboxes as $m) {
+                $m->participants;
                 $m->settings = $this->_memberSettingRepository->getSettings('moneybox', $m->id);
             }
         }
-
         return $moneyboxes;
     }
 
@@ -180,6 +181,7 @@ class MoneyboxRepository extends BaseRepository{
                 if (count($personMoneyboxes) > 0) {
                     foreach ($personMoneyboxes as $pm) {
                         $moneybox = $this->byId($pm->moneybox_id);
+                        $moneybox->participants;
                         array_push($moneyboxes, $moneybox);
                     }
                 }

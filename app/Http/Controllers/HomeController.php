@@ -102,12 +102,16 @@ class HomeController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param PLRequest $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getDashboardPage(Request $request){
-
+    public function getDashboardPage(PLRequest $request){
+        \Log::info(\Auth::user());
+        \Log::info(\Auth::user()->person->id);
+        $request->merge(array('person_id' => \Auth::user()->person->id));
+        $response = $this->_moneyboxRepository->getAll($request);
         return view('moneybox.dashboard')
+            ->with('moneyboxes', $response->data)
             ->with('pageTitle','Mis Alcancías');
     }
 

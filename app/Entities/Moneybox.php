@@ -61,6 +61,11 @@ class Moneybox extends Model
         return $this->hasMany('App\Entities\Member');
     }
 
+    public function participants()
+    {
+        return $this->hasMany('App\Entities\Participant');
+    }
+
     /**
      * Define the relation between Moneybox and MoneyboxCategory
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
