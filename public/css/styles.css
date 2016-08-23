@@ -137,6 +137,17 @@ body {
     font-size: 10px !important;
 }
 
+/* Loader */
+.loader {
+    background: url('/images/loader2.gif') no-repeat center center rgba(255,255,255,0.8);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+}
+
 .btn-share-twitter:hover,
 .btn-share-fb:hover {
     text-decoration: none;
@@ -188,7 +199,6 @@ body {
     margin-top: 75px;
     position: relative;
 }
-
 
 /* Block */
 .block { padding: 45px 0; }
@@ -414,7 +424,6 @@ body {
     font-size: 13px;
 }
 
-
 /* Block Payment Methods */
 .block.payment-methods {
     padding: 60px 0 75px;
@@ -448,9 +457,6 @@ body {
     color: #fff;
     padding: 50px 0 110px;
 }
-
-
-
 
 .block.create-moneybox .header-block {
     font-size: 24px;
@@ -757,8 +763,6 @@ body {
     width: 20px;
     height: 20px;
 }
-
-
 
 /*-----------------------------------------------------------------------------
 | Register User Form Section
@@ -1397,23 +1401,6 @@ body {
 .message-ui {
     height: 50px;
     margin-bottom: 15px;
-}
-
-/*-----------------------------------------------------------------------------
-| Loader
-|-----------------------------------------------------------------------------
-|
-|
-*/
-
-.loader {
-    background: url('/images/loader2.gif') no-repeat center center rgba(255,255,255,0.8);
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 100;
 }
 
 /* always present */
