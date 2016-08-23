@@ -4,7 +4,7 @@
 
 var $api = '$2y$10$ScZUgkFzrMr9NM5qPzKag.4mLTW8ugSG/DtT6nerJb3W1v5sg6UBC';
 var months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo','Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-var base = 'http://coperacha.pagelab.io';
+var base = window.location.origin;
 
 var vm = new Vue({
     el: '#ProfileView',
