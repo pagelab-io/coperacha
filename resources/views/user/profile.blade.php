@@ -153,8 +153,8 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="password">Contraseña</label>
-                                <input id="password" class="form-control" name="password" placeholder="Contraseña" type="password" ng-model="password">
+                                <label for="password">Nueva Contraseña</label>
+                                <input id="password" class="form-control" name="password" placeholder="Nueva Contraseña" type="password" ng-model="password">
                             </div>
 
                             <div class="form-group">
