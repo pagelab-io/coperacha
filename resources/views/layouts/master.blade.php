@@ -95,8 +95,8 @@
         {{--<script src="{{ elixir('build/js/scripts.min.js') }}"></script>--}}
         <script src="{{asset('/build/js/scripts.min.js')}}"></script>
 
-        <!-- Facebook SDK
-        <script src="{{asset('/js/facebook.js')}}"></script> -->
+        <!-- Facebook SDK -->
+        <script src="{{asset('/js/facebook.js')}}"></script>
 
         <!-- Angular JS -->
         <script src="{{asset('/js/vendor/angular/angular.js')}}"></script>
