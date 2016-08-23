@@ -49,7 +49,9 @@
             {
                 console.log(response);
                 if (response.status == 200) {
-                    window.location="/user/profile";
+                    var user = response.data['User'];
+                    window.userdata = response.data;
+                    window.location.assign("/user/profile/" + user.id);
                 } else if(response.status == -2) {
                     $scope.utils.hideLoader();
                     alert("El correo ingresado ya existe en el sistema, por favor intenta con otro.");
