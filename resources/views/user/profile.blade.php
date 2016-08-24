@@ -26,7 +26,7 @@
                          v-show="isProfile"
                          v-bind:class="{'selected':isProfile}">
                     <div v-if="loading" class="loader"></div>
-                    <form class="form register" v-on:submit.prevent="onSubmit">
+                    <form class="form update-data" v-on:submit.prevent="onUpdateData">
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
@@ -144,22 +144,35 @@
                          v-show="isPassword"
                          transition="expand"
                          v-bind:class="{'selected':isPassword}">
-                    <form class="form register">
+
+                    <form class="form change-password" v-on:submit.prevent="onChangePassword">
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="current">Contraseña Actual</label>
-                                <input id="current" class="form-control" name="current" placeholder="Contraseña actual" type="password" ng-model="password">
+                                <input id="current" class="form-control"
+                                       name="current"
+                                       placeholder="Contraseña actual"
+                                       type="password"
+                                       v-model="passwordData.current" required>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="password">Nueva Contraseña</label>
-                                <input id="password" class="form-control" name="password" placeholder="Nueva Contraseña" type="password" ng-model="password">
+                                <input id="password" class="form-control"
+                                       name="password"
+                                       placeholder="Nueva Contraseña"
+                                       type="password"
+                                       v-model="passwordData.new" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="confirm">Confirmar Contraseña</label>
-                                <input id="confirm" class="form-control" name="confirm" placeholder="Confirmar Contraseña" type="password" ng-model="confirmPassword">
+                                <input id="confirm" class="form-control"
+                                       name="confirm"
+                                       placeholder="Confirmar Contraseña"
+                                       type="password"
+                                       v-model="passwordData.confirm" required>
                             </div>
                         </div>
 

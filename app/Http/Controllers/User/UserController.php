@@ -154,7 +154,10 @@ class UserController extends PLController{
         return response()->json($response);
     }
 
-
+    /**
+     * @param PLRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function changePassword(PLRequest $request)
     {
         $this->validate($request, $request->rules(), $request->messages());
