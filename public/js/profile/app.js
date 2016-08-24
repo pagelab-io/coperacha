@@ -39,7 +39,13 @@ var vm = new Vue({
         tab: 'profile',
         isProfile: true,
         isPassword: false,
-        isShare: false
+        isShare: false,
+
+        passwordData: {
+            current: '',
+            new: '',
+            confirm: ''
+        }
     },
 
     /**
@@ -138,9 +144,9 @@ var vm = new Vue({
         },
 
         /**
-         * Handler the submit form
+         * Handler the submit form of the user
          */
-        onSubmit: function () {
+        onUpdateData: function () {
             this.loading = true;
 
             var _this = this;
@@ -186,9 +192,60 @@ var vm = new Vue({
             }, function (error) {
                 console.error(error);
             });
+        },
+
+        /**
+         * Handler the submit form of the change password
+         * @param e
+         */
+        onChangePassword: function (e) {
+            this.loading = true;
+
+            var _this = this;
+            var path = base + '/api/v1/user/changePassword/?api-key='+$api;
+            var data = {
+                user_id: this.user.id,
+                currentPassword: this.passwordData.current,
+                newPassword: this.passwordData.new,
+                passwordConfirm: this.passwordData.confirm,
+                method: 'PUT'
+            };
+
+            this.$http.put(path, data, {
+                method: 'PUT'
+            }).then(function (response) {
+
+                console.log(response);
+
+                if (response.status === 200) {
+                    this.loading = false;
+
+                    this.message = {
+                        status: 'success',
+                        text: 'Contraseña actualizada correctamente.'
+                    };
+
+                    this.passwordData.current = '';
+                    this.passwordData.new = '';
+                    this.passwordData.confirm = '';
+
+                    setTimeout(function () {
+                        _this.message = {
+                            status: '',
+                            text: ''
+                        };
+                    }, 3 * 1000);
+
+                } else {
+                    console.error(response);
+                }
+
+            }, function (error) {
+                console.error(error);
+            });
         }
+
     }
 });
-
 
 window.vm = vm;
