@@ -2,9 +2,15 @@
 <nav class="navigation">
     <div class="container-fluid">
         <!-- Logo -->
+        @if(Auth::guest())
         <a class="logo" href="/">
             <img class="img-responsive" src="/images/logo.png" alt="Coperacha | Recauda Dinero Entre Amigos">
         </a>
+        @else
+        <a class="logo" href="{{route('moneybox.dashboard')}}">
+            <img class="img-responsive" src="/images/logo.png" alt="Coperacha | Recauda Dinero Entre Amigos">
+        </a>
+        @endif
 
         <!-- List -->
         <ul class="clearfix list hidden-xs" ng-controller="modalController">
@@ -19,9 +25,9 @@
                 <li>
                     <div class="logged">
                         @if(Auth::user()->person->gender === 'H')
-                            <a href="#" class="logged-user">Bienvenido <br>{{Auth::user()->person->name}}</a>
+                            <a href="{{url('/user/profile/'.Auth::user()->id)}}" class="logged-user">Bienvenido <br>{{Auth::user()->person->name}}</a>
                         @else
-                            <a href="#" class="logged-user">Bienvenida <br>{{Auth::user()->person->name}}</a>
+                            <a href="{{url('/user/profile/'.Auth::user()->id)}}" class="logged-user">Bienvenida <br>{{Auth::user()->person->name}}</a>
                         @endif
                         <a href="{{url('/api/v1/auth/logout')}}" class="logout" >Cerrar sesión</a>
                     </div>
