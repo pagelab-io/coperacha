@@ -60,6 +60,8 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
 
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+
         <!-- Google Analytics
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -88,6 +90,7 @@
         <!-- Include jQuery
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
         <script src="{{asset('/js/vendor/jquery/jquery-3.1.0.js')}}"></script>
+        <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 
         <!-- Include Bootstrap Scripts -->
         <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->

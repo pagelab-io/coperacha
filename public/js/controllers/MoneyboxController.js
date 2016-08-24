@@ -7,6 +7,7 @@
     moneyboxController.$inject = ['$scope', 'Moneybox'];
 
     function moneyboxController($scope, Moneybox) {
+        init();
         $scope.utils = new Utils();
         $scope.request = {};
         $scope.name = '';
@@ -93,11 +94,13 @@
                 'method' : 'createMoneybox',
                 'api-key' : '$2y$10$ScZUgkFzrMr9NM5qPzKag.4mLTW8ugSG/DtT6nerJb3W1v5sg6UBC'
             };
-
             Moneybox.create($scope.request)
                 .success(function(response){
                     if (response.status == 200) {
                         window.location = '/moneybox/detail/'+response.data.url;
+                    } else {
+                        $scope.utils.hideLoader();
+                        alert("Ocurrio un error al generar la alcancía, intentalo nuevamente porfavor");
                     }
                 })
                 .error(function(response){
@@ -106,6 +109,20 @@
                 });
         }
 
+    }
+
+    /**
+     * Init the datepicker component
+     */
+    function init(){
+        // init date picker
+        $( "#datepicker" ).datepicker({
+            dateFormat: 'yy-mm-dd',
+            dayNames: [ "Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" ],
+            dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
+            monthNames: [ "Enero", "Febrero", "Marzo", "April", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+            minDate: new Date()
+        });
     }
 
 })();

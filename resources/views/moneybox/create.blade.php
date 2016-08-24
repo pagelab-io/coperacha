@@ -61,7 +61,9 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <!-- maybe this control will be change to a datepicker from jQuery-->
-                                        <div class="col-xs-10"><input id="ended" name="ended" type="text" class="form-control" placeholder="Fecha límite para reunir los fondos" ng-model="end_date"></div>
+                                        <div class="col-xs-10">
+                                            <input id="datepicker" name="end_date" type="text" class="form-control" placeholder="Fecha límite para reunir los fondos" ng-model="end_date">
+                                        </div>
                                         <div class="col-xs-2"><span class="icon-calendar"></span></div>
                                     </div>
                                 </div>
