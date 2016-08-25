@@ -124,7 +124,7 @@
                     <div class="col-sm-6">
                         <div class="video">
                             <div class="embed-responsive embed-responsive-16by9">
-                                <!-- <iframe class="embed-responsive-item" src="https://player.vimeo.com/video/142285041?title=0&byline=0&portrait=0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> -->
+                                <iframe class="embed-responsive-item" src="https://player.vimeo.com/video/142285041?title=0&byline=0&portrait=0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
                             </div>
 
                             <a class="btn-share-fb" href="javascript:void(0)">
