@@ -155,23 +155,41 @@ class UserController extends PLController{
     }
 
     /**
-     * @param PLRequest $request
+     * Change password
+     *
+     * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function changePassword(PLRequest $request)
+    public function changePassword(Request $request)
     {
-        $this->validate($request, $request->rules(), $request->messages());
-
+        // $this->validate($request, $request->rules(), $request->messages());
+        $response = new PLResponse();
         try {
-            $this->setResponse($this->_userRepository->changePassword($request));
-            return response()->json($this->getResponse());
+
+            $userid = $request->get('user_id');
+            $current = $request->get('currentPassword');
+            $password = $request->get('newPassword');
+            $confirm = $request->get('passwordConfirm');
+
+            $success = $this->_userRepository->changePassword($userid, $current, $password, $confirm);
+
+            if ($success) {
+                $response->status = 1;
+                $response->description = 'Password changed successfully';
+                $response->data = $success;
+
+                $this->setResponse($response);
+            }
+
         } catch(\Exception $ex) {
-            $response = new PLResponse();
             $response->status = $ex->getCode();
             $response->description = $ex->getMessage();
             $response->data = $ex->getTraceAsString();
-            return response()->json($response);
+
+            $this->setResponse($response);
         }
+
+        return response()->json($this->getResponse());
     }
 
     //endregion

@@ -145,11 +145,12 @@
                          transition="expand"
                          v-bind:class="{'selected':isPassword}">
 
-                    <form class="form change-password" v-on:submit.prevent="onChangePassword">
+                    <form autocomplete="off" class="form change-password" v-on:submit.prevent="onChangePassword">
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="current">Contraseña Actual</label>
                                 <input id="current" class="form-control"
+                                       autocomplete="off"
                                        name="current"
                                        placeholder="Contraseña actual"
                                        type="password"
@@ -160,6 +161,7 @@
                             <div class="form-group">
                                 <label for="password">Nueva Contraseña</label>
                                 <input id="password" class="form-control"
+                                       autocomplete="off"
                                        name="password"
                                        placeholder="Nueva Contraseña"
                                        type="password"
@@ -169,6 +171,7 @@
                             <div class="form-group">
                                 <label for="confirm">Confirmar Contraseña</label>
                                 <input id="confirm" class="form-control"
+                                       autocomplete="off"
                                        name="confirm"
                                        placeholder="Confirmar Contraseña"
                                        type="password"

@@ -214,27 +214,33 @@ var vm = new Vue({
             this.$http.put(path, data, {
                 method: 'PUT'
             }).then(function (response) {
-
-                console.log(response);
-
+                // console.log(response);
                 if (response.status === 200) {
                     this.loading = false;
 
-                    this.message = {
-                        status: 'success',
-                        text: 'Contraseña actualizada correctamente.'
-                    };
+                    if (response.data.status == 1) {
 
-                    this.passwordData.current = '';
-                    this.passwordData.new = '';
-                    this.passwordData.confirm = '';
-
-                    setTimeout(function () {
-                        _this.message = {
-                            status: '',
-                            text: ''
+                        this.message = {
+                            status: 'success',
+                            text: response.data.description
                         };
-                    }, 3 * 1000);
+
+                        setTimeout(function () {
+                            for (var field in _this.passwordData) {
+                                _this.passwordData[field] = '';
+                            }
+                            _this.message = {
+                                status: '',
+                                text: ''
+                            };
+                        }, 3 * 1000);
+
+                    } else {
+                        this.message = {
+                            status: 'danger',
+                            text: response.data.description
+                        };
+                    }
 
                 } else {
                     console.error(response);

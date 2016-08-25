@@ -15,6 +15,7 @@ use App\Http\Requests\PLRequest;
 use App\Entities\Person;
 use App\Entities\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Mockery\CountValidator\Exception;
 
 class UserRepository extends BaseRepository{
@@ -178,36 +179,30 @@ class UserRepository extends BaseRepository{
     /**
      * Change the password for specific user
      *
-     * @param PLRequest $request
-     * @return PLResponse
+     * @param int $userid
+     * @param string $pass
+     * @param string $new
+     * @param string $confirm
+     * @return boolean
      * @throws \Exception
      */
-    public function changePassword(PLRequest $request)
+    public function changePassword($userid, $pass, $new, $confirm)
     {
-        if (User::where(
-                [
-                    'password' => bcrypt($request->get('currentPassword')),
-                    'id' => $request->get('user_id')
-                ])->count() <= 0) throw new \Exception("Incorrect password", -1);
+        // Find the user
+        $this->_user = $this->byId($userid);
 
-        $password = $request->get('newPassword');
-        $passwordConfirm = $request->get('passwordConfirm');
-
-        if ($password != $passwordConfirm) throw new \Exception("Passwords not are equals", -1);
-
-        $this->_user = $this->byId($request->get('user_id'));
-        if ($request->exists('newPassword')) $this->_user->password = bcrypt($request->get('newPassword'));
-
-        $response = new PLResponse();
-        if ($this->_user->update()) {
-            $response->description = 'password changed successfully';
-            $response->data = true;
-        } else {
-            $response->description = 'password cannot be changed';
-            $response->data = false;
+        if (!Hash::check($pass, $this->_user->password)) {
+            throw new \Exception("Incorrect password", -1);
         }
 
-        return $response;
+        if ($new != $confirm) {
+            throw new \Exception("Passwords not are equals", -1);
+        }
+
+        $this->_user->password = Hash::make($new);
+        $this->_user->update();
+
+        return true;
     }
 
     /**
