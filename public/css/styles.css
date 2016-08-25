@@ -1010,32 +1010,32 @@ body {
 }
 
 
-.moneybox-view.step-2 .holder {
+#moneybox-step2.step-2 .holder {
     max-width: 540px;
 }
 
-.moneybox-view.step-2 input[type=number].form-control {
+#moneybox-step2.step-2 input[type=number].form-control {
     height: 30px;
 }
 
-.moneybox-view.step-2 label.flex-element {
+#moneybox-step2.step-2 label.flex-element {
     display: flex;
     align-items: center;
 }
 
-.moneybox-view.step-2 label.flex-element > span {
+#moneybox-step2.step-2 label.flex-element > span {
     width: 60px;
 }
 
-.moneybox-view.step-2 label.flex-element input[type=radio] {
+#moneybox-step2.step-2 label.flex-element input[type=radio] {
     top: 5px;
 }
 
-.moneybox-view.step-2 label.flex-element > * {
+#moneybox-step2.step-2 label.flex-element > * {
     margin-right: 5px;
 }
 
-.moneybox-view.step-2 .form-control {
+#moneybox-step2.step-2 .form-control {
     color: #31313F;
     border-color: #B9B9C8;
     background: #ECECFB;
@@ -1044,7 +1044,7 @@ body {
     width: 145px;
 }
 
-.moneybox-view.step-2 .form-control:hover {
+#moneybox-step2.step-2 .form-control:hover {
     border-color: rgb(255, 79, 0);
 }
 

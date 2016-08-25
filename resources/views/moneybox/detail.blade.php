@@ -33,6 +33,7 @@
                                 <div class="form-group">
                                     <label>
                                         <img src="/images/icon-profile-calendar.png" alt="">
+                                        Faltan:
                                         <?php
                                             $end_date = \App\Utilities\PLDateTime::toCarbon($moneybox->end_date);
                                             $current_date = \Carbon\Carbon::now();

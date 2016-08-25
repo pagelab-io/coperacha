@@ -7,8 +7,10 @@
     moneyboxController.$inject = ['$scope', 'Moneybox'];
 
     function moneyboxController($scope, Moneybox) {
-        init();
+        initDatePicker();
         $scope.utils = new Utils();
+        $scope.step1 = document.getElementById('moneybox-step1');
+        $scope.step2 = document.getElementById('moneybox-step2');
         $scope.request = {};
         $scope.name = '';
         $scope.person_name = '';
@@ -20,19 +22,26 @@
         $scope.privacy = '';
         $scope.participation = '';
         $scope.settings = [];
+        $scope.step2.style.display = "none";
 
-        /**
-         * Get all categories in data base
-         */
-        $scope.getCategories = function () {
-            // TODO : implement this in a future
+
+        $scope.step1Click = function()
+        {
+            if($scope.step1.style.display != 'none') {
+                $scope.step1.style.display = "none";
+                $scope.step2.style.display = "block";
+            }
         };
 
-        $scope.createMoneybox = function () {
-
+        $scope.step2Click = function()
+        {
+            if($scope.step2.style.display != 'none') {
+                $scope.step2.style.display = "none";
+                $scope.step1.style.display = "block";
+            }
         };
 
-        $scope.step1 = function()
+        /*$scope.createMoneybox = function()
         {
             $scope.utils.showLoader();
             var request = {
@@ -51,9 +60,9 @@
                 .error(function(response){
                     $scope.utils.hideLoader();
                 });
-        };
+        };*/
 
-        $scope.step2 = function()
+        $scope.createMoneybox = function()
         {
             $scope.utils.showLoader();
             // try to clear the tmp_moneybox variable from Session
@@ -114,7 +123,7 @@
     /**
      * Init the datepicker component
      */
-    function init(){
+    function initDatePicker(){
         // init date picker
         $( "#datepicker" ).datepicker({
             dateFormat: 'yy-mm-dd',

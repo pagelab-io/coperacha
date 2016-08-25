@@ -1,9 +1,10 @@
 @extends("layouts.content")
 
 @section("page-content")
-    <section class="block moneybox-view" id="register">
-        <div class="holder">
-            <div class="container-fluid">
+    <section class="block moneybox-view">
+        <div class="holder" ng-controller="moneyboxController">
+
+            <div class="container-fluid" id="moneybox-step1">
 
                 <div class="header-block">
                     <div class="stage-item">
@@ -15,7 +16,7 @@
                 </div>
 
                 <div class="content-block">
-                    <form class="form" ng-controller="moneyboxController">
+                    <form class="form">
                         <div class="form-group">
                             <p class="text-info">Llena por favor los siguientes datos:</p>
                         </div>
@@ -60,7 +61,6 @@
 
                                 <div class="form-group">
                                     <div class="row">
-                                        <!-- maybe this control will be change to a datepicker from jQuery-->
                                         <div class="col-xs-10">
                                             <input id="datepicker" name="end_date" type="text" class="form-control" placeholder="Fecha límite para reunir los fondos" ng-model="end_date">
                                         </div>
@@ -72,7 +72,7 @@
 
                         <div class="form-group clearfix">
                             <div class="pull-right">
-                                <a class="btn btn-primary" href="#" ng-click="step1()">Siguiente ></a>
+                                <a class="btn btn-primary" href="#" ng-click="step1Click()">Siguiente ></a>
                             </div>
                         </div>
 
@@ -80,6 +80,57 @@
 
                 </div>
             </div>
+
+            <div class="container-fluid step-2" id="moneybox-step2">
+
+                <div class="header-block">
+                    <div class="stage-item">
+                        <div class="stage-item-title">Participación</div>
+                        <div class="icon-step icon-step-2"></div>
+                        <div class="label">Información</div>
+                        <div class="label active">Participación</div>
+                    </div>
+                </div>
+
+                <div class="content-block">
+                    <form class="form register moneybox">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                @foreach($settings as $setting)
+                                    <div class="form-group">
+                                        <label>{{utf8_decode($setting->name)}}</label>
+                                    </div>
+                                    @foreach($setting->options as $option)
+                                    <div class="radio">
+                                        @if($option->subtype=='text')
+                                        <label for="{{$option->name}}" class="flex-element">
+                                            <input type="radio" value="{{$setting->id}}|{{$option->id}}|Y" ng-model="{{$setting->id==1 ? "participation" : "privacy"}}">
+                                            <span>{{$option->name}}</span>
+                                            <input class="form-control" type="number" value="0" id="txtOption-{{$option->id}}">
+                                            <strong> .00 MXN</strong>
+                                        </label>
+                                        @else
+                                        <label for="{{$option->name}}">
+                                            <input type="radio" value="{{$setting->id}}|{{$option->id}}|N" ng-model="{{$setting->id==1 ? "participation" : "privacy"}}"> {{$option->name}}
+                                        </label>
+                                        @endif
+                                    </div>
+                                    @endforeach
+                                @endforeach
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group clearfix">
+                            <div class="pull-right">
+                                <a href="#" class="btn-link" ng-click="step2Click()">< Volver </a>
+                                <button class="btn btn-primary" ng-click="createMoneybox()">Siguiente ></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
         </div>
     </section>
 

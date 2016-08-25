@@ -30,14 +30,14 @@
                                         <div class="radio">
                                             @if($option->subtype=='text')
                                             <label for="{{$option->name}}" class="flex-element">
-                                                <input type="radio" value="{{$setting->id}}|{{$option->id}}|Y" ng-model="{{$setting->id==1 ? "participation" : "privacy"}}">
+                                                <input type="radio" value="{{$setting->id}}|{{$option->id}}" ng-model="{{$setting->id==1 ? "participation" : "privacy"}}">
                                                 <span>{{$option->name}}</span>
-                                                <input class="form-control" type="number" value="0" id="txtOption-{{$option->id}}">
+                                                <input class="form-control" type="number" value="0">
                                                 <strong> .00 MXN</strong>
                                             </label>
                                             @else
                                             <label for="{{$option->name}}">
-                                                <input type="radio" value="{{$setting->id}}|{{$option->id}}|N" ng-model="{{$setting->id==1 ? "participation" : "privacy"}}"> {{$option->name}}
+                                                <input type="radio" value="{{$setting->id}}|{{$option->id}}" ng-model="{{$setting->id==1 ? "participation" : "privacy"}}"> {{$option->name}}
                                             </label>
                                             @endif
                                         </div>

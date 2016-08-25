@@ -82,8 +82,12 @@ class HomeController extends Controller
      */
     public function getCreateMoneyboxPage(Request $request){
         $categories = Category::all();
+        $request->merge(array('path' => '/moneybox'));
+        $response = $this->_settingRepository->childsOf($request);
+        \Log::info($response->data);
         return view('moneybox.create')
             ->with('categories', $categories)
+            ->with('settings', $response->data)
             ->with('pageTitle','Crear mi alcancía 1/2');
     }
 
