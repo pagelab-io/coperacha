@@ -51,8 +51,8 @@
                                         Total recaudado: ${{number_format($moneybox->collected_amount, 2)}}
                                     </label>
                                 </div>
-                                <div class="form-group">
-                                    <button class="btn-primary small">Participa</button>
+                                <div class="form-group" ng-controller="participantController">
+                                    <button class="btn-primary small" ng-click="goToParticipation()">Participa</button>
                                 </div>
                             </form>
                         </div>

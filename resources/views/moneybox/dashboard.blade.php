@@ -20,7 +20,7 @@
                                             <a href="#" class="btn btn-primary">Modificar</a>
                                         </div>
                                         <div class="form-group">
-                                            <a class="btn btn-primary {{$moneybox->goal_amount < $moneybox->collected_amount ? 'enabled' : 'disabled'}}" href="{{route('moneybox.request')}}">Utilizar dinero</a>
+                                            <a class="btn btn-primary" href="{{route('moneybox.request')}}">Utilizar dinero</a>
                                         </div>
                                         <div class="form-group">
                                             <a class="btn btn-primary" href="{{url('/moneybox/detail/'.$moneybox->url)}}">Invitar</a>
