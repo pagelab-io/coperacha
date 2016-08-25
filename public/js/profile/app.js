@@ -124,9 +124,9 @@ var vm = new Vue({
             var path = base + '/api/v1/user/profile/'+ id + '?api-key=' + $api;
             this.$http.get(path).then(function (response) {
 
-                var body = JSON.parse(response.body);
+                var body = response.data;
 
-                if (body.data) {
+                if (body.data && body.status == 200) {
                     this.user = body.data;
                     this.person = body.data.person;
 
@@ -134,6 +134,8 @@ var vm = new Vue({
                     this.birthdayMonth = date.getMonth() + 1;
                     this.birthdayDay = date.getDate() + 1;
                     this.birthdayYear = date.getFullYear();
+
+                    window.user = this.user;
                 }
 
                 this.loading = false;
@@ -254,4 +256,4 @@ var vm = new Vue({
     }
 });
 
-window.vm = vm;
+window.ProfileViewModel = vm;

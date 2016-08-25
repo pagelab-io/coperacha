@@ -199,6 +199,7 @@ class UserRepository extends BaseRepository{
             throw new \Exception("Passwords not are equals", -1);
         }
 
+        // Update new password
         $this->_user->password = Hash::make($new);
         $this->_user->update();
 
