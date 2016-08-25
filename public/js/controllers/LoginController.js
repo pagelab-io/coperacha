@@ -8,6 +8,18 @@
 
     function loginController($scope, Login)
     {
+
+        /**
+         * add the enter action
+         */
+        document.addEventListener('keyup', function(e){
+            if(e.keyCode === 13){
+                if($scope.email!="" && $scope.password != ""){
+                    $scope.emailLogin();
+                }
+            }
+        });
+
         $scope.utils = new Utils();
         $scope.email = "";
         $scope.FBemail = "";
