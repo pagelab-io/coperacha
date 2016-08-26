@@ -84,8 +84,8 @@ class DashboardController extends Controller
      */
     public function getAverageDurabilityOfMoneybox(){
         //region durability
-        $sql = "SELECT id, 
-                  DATE(created_at)
+        $sql = "SELECT id
+                  , DATE(created_at)
                   , end_date
                   , datediff(end_Date, created_at) AS days 
                   FROM moneyboxes 
@@ -105,19 +105,19 @@ class DashboardController extends Controller
         $sql = "SELECT DATE(created_at) date, AVG(amount) avg
                   FROM payments
                 GROUP BY (DATE(created_at))";
+                
         $collectedRaw = DB::select($sql);
 
+        $collectedAvg = 0;
         $collected = 0;
 
         foreach ($collectedRaw as $row) {
             $collected += (int)$row->avg;
         }
 
-        try {
-            $collectedAvg = 0; // $collected / count($collectedRaw);
-        } catch (Exception $e) {
-            $collectedAvg = 0;
-        } 
+        if (count($collectedRaw) > 0) {
+             $collectedAvg = $collected / count($collectedRaw);
+        }
         //endregion
 
         //region Coperacha Promedio
