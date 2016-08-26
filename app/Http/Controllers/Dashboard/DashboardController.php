@@ -113,7 +113,11 @@ class DashboardController extends Controller
             $collected += (int)$row->avg;
         }
 
-        $collectedAvg = $collected / count($collectedRaw);
+        try {
+            $collectedAvg = $collected / count($collectedRaw);
+        } catch (Exception $e) {
+            $collectedAvg = 0;
+        } 
         //endregion
 
         //region Coperacha Promedio
