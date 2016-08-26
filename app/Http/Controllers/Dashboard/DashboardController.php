@@ -114,7 +114,7 @@ class DashboardController extends Controller
         }
 
         try {
-            $collectedAvg = $collected / count($collectedRaw);
+            $collectedAvg = 0; // $collected / count($collectedRaw);
         } catch (Exception $e) {
             $collectedAvg = 0;
         } 
