@@ -1396,7 +1396,7 @@ body {
 }
 
 .stage-element .stage-item-icon {
-    background: url("/images/icon-profile-step.png") no-repeat 0 0;
+    background: url("/images/icon-profile-stage.png") no-repeat 0 0;
     height: 34px;
     width: 34px;
     z-index: 100;
