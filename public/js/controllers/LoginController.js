@@ -73,7 +73,8 @@
                         {
                             console.log(response);
                             if (response.status == 200) {
-                                window.location="/user/profile";
+                                var user = response.data;
+                                window.location="/user/profile/"+ user.id;
                             } else if(response.status == -1) {
                                 $scope.utils.hideLoader();
                                 alert("Ocurrio un problema al hacer la autenticación por medio de Facebook, por favor intentalo más tarde");

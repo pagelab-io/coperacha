@@ -5,15 +5,24 @@
         <div class="holder">
             <div class="container-fluid">
                 <div class="header-block">
-                    <div class="stage-item">
-                        <div class="stage-item-icon"><div class="icon-step icon-step-@{{tab}}"></div></div>
-                        <div class="labels">
-                            <a v-on:click="onClickProfile" class="label" v-bind:class="{'selected':isProfile}">Mi perfil</a>
-                            <a v-on:click="onClickPassword" class="label" v-bind:class="{'selected':isPassword}">Contraseña</a>
-                            <a v-on:click="onClickShare" class="label" v-bind:class="{'selected':isShare}">Contacto</a>
-                        </div>
+                    <div class="stage-element">
+                        <a class="stage-item profile" v-on:click="onClickProfile($event)" v-bind:class="{'selected':isProfile}">
+                            <div class="stage-item-icon"></div>
+                            <div class="stage-item-label">Mi perfil</div>
+                            <div class="stage-bar"></div>
+                        </a>
+                        <a class="stage-item password" v-on:click="onClickPassword($event)" v-bind:class="{'selected':isPassword}">
+                            <div class="stage-item-icon"></div>
+                            <div class="stage-item-label">Contraseña</div>
+                            <div class="stage-bar"></div>
+                        </a>
+                        <a class="stage-item share" v-on:click="onClickShare($event)" v-bind:class="{'selected':isShare}">
+                            <div class="stage-item-icon"></div>
+                            <div class="stage-item-label">Contacto</div>
+                        </a>
                     </div>
                 </div>
+
                 <div class="message-ui">
                     <div id="message-element" class="alert alert-@{{message.status}}"
                          transition="expand"

@@ -98,7 +98,10 @@ var vm = new Vue({
          * Handler the submit form
          */
         onClickProfile: function (e) {
+            e.stopPropagation();
             this.activeTab('profile');
+
+            e.currentTarget.classList.remove('completed');
         },
 
         /**
@@ -106,6 +109,9 @@ var vm = new Vue({
          */
         onClickPassword: function (e) {
             this.activeTab('password');
+
+            $('.stage-item.profile').addClass('completed');
+            e.currentTarget.classList.remove('completed');
         },
 
         /**
@@ -113,6 +119,8 @@ var vm = new Vue({
          */
         onClickShare: function (e) {
             this.activeTab('share');
+            $('.stage-item.password').addClass('completed');
+            e.currentTarget.classList.remove('completed');
         },
         
         /**
