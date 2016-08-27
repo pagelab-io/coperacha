@@ -191,8 +191,11 @@ class UserRepository extends BaseRepository{
         // Find the user
         $this->_user = $this->byId($userid);
 
-        if (!Hash::check($pass, $this->_user->password)) {
-            throw new \Exception("Incorrect password", -1);
+        if ($this->_user->getHasPasswordAttribute()) {
+
+            if (!Hash::check($pass, $this->_user->password)) {
+                throw new \Exception("Incorrect password", -1);
+            }
         }
 
         if ($new != $confirm) {
@@ -217,8 +220,7 @@ class UserRepository extends BaseRepository{
     public function userExist($email = "" , $username = "")
     {
         $count = 0;
-
-        try{
+        try {
 
             if (trim($email) != "" && trim($username) != "") {
                 $count = User::where('email', $email)->orwhere('username', $username)->count();
@@ -228,7 +230,7 @@ class UserRepository extends BaseRepository{
                 $count = User::where('username', $username)->count();
             }
 
-        }catch(\Exception $ex){
+        } catch(\Exception $ex) {
             throw $ex;
         }
 
@@ -293,20 +295,18 @@ class UserRepository extends BaseRepository{
     public function getProfile($userId)
     {
         $user = null;
-        try{
 
+        try {
             $user = $this->byId($userId);
             $user->person;
+            $user->fbuser;
+            $user->getHasPasswordAttribute();
 
-        }catch(\Exception $ex){
+        } catch(\Exception $ex) {
             throw new \Exception("User does not exist", -1, $ex);
         }
 
-        $response = new PLResponse();
-        $response->description = 'Getting user profile successfully';
-        $response->data = $user;
-        
-        return $response;
+        return $user;
     }
 
     public function logout()

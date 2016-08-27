@@ -39,9 +39,10 @@ Route::group([
 ], function($router){
     // register
     $router->get('/create', ['as'=>'create', 'uses' => 'UserController@create']);
-    $router->get('/profile/{userid}', ['as'=>'profile', 'uses' => 'UserController@getProfilePage']);
-    $router->get('/password', ['as'=>'password', 'uses' => 'UserController@getPasswordPage']);
-    $router->get('/contacts', ['as'=>'contacts', 'uses' => 'UserController@getContactsPage']);
+    $router->get('/profile/{userid}', [
+        'middleware' => 'auth',
+        'as'=>'profile',
+        'uses' => 'UserController@getProfilePage']);
 });
 
 Route::group([

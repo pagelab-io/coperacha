@@ -24,9 +24,13 @@ var vm = new Vue({
             birthday: '',
             gender: '',
             phone: '',
-            city:'',
-            country:''
+            city: '',
+            country: ''
         },
+        fbuser: {
+            fb_uid: ''
+        },
+
         birthdayMonth: '',
         birthdayDay: 1,
         birthdayYear: 1,
@@ -70,7 +74,7 @@ var vm = new Vue({
 
         setTimeout(function () {
             this.onGetProfile(this.userid); // Called data
-        }.bind(this), 300);
+        }.bind(this), 100);
 
     },
 
@@ -131,12 +135,12 @@ var vm = new Vue({
         onGetProfile: function (id) {
             var path = base + '/api/v1/user/profile/'+ id + '?api-key=' + $api;
             this.$http.get(path).then(function (response) {
-
                 var body = response.data;
-
+                
                 if (body.data && body.status == 200) {
                     this.user = body.data;
                     this.person = body.data.person;
+                    this.fbuser = body.data.fbuser;
 
                     var date = new Date(this.person.birthday);
                     this.birthdayMonth = date.getMonth() + 1;

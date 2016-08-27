@@ -12,7 +12,7 @@ class FbUser extends Model
      * @var string
      */
     protected $table = 'fbusers';
-
+    
     /**
      * These are the mass-assignable keys
      * @var array

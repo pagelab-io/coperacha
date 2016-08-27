@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model implements Authenticatable
 {
-
     // region traits
     use \Illuminate\Auth\Authenticatable;
     // endregion
@@ -31,9 +30,19 @@ class User extends Model implements Authenticatable
      */
     protected $hidden = ['password'];
 
+    /**
+     * @var array
+     */
     protected $defaults = [
         'tracking' => 0
     ];
+
+    /**
+     * The accessors to append to the model´s array from.
+     *
+     * @var array
+     */
+    protected $appends = ['has_password'];
 
     //endregion
 
@@ -57,6 +66,20 @@ class User extends Model implements Authenticatable
         return $this->belongsTo('App\Entities\Person');
     }
 
+    /**
+     * Get the fbuser record associate with the user
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function fbuser(){
+        return $this->hasOne(FbUser::class);
+    }
+
+    /**
+     * Check if has a password
+     */
+    public function getHasPasswordAttribute(){
+        return strlen($this->attributes['password']) > 0;
+    }
 
     /**
      * Get the token value for the "remember me" session.

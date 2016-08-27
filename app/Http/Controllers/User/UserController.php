@@ -117,19 +117,25 @@ class UserController extends PLController{
     public function getProfile($userid)
     {
         /* $this->validate($request, $request->rules(), $request->messages()); */
-        try {
-            $data = $this->_userRepository->getProfile($userid);
-            $this->setResponse($data);
+        $response = new PLResponse();
 
-            return response()->json($this->getResponse());
+        try {
+            $user = $this->_userRepository->getProfile($userid);
+            $response->description = 'Getting user profile successfully';
+            $response->data = $user;
+            $this->setResponse($response);
+
         } catch(\Exception $ex) {
-            $response = new PLResponse();
+
             $response->status = $ex->getCode();
             $response->description = $ex->getMessage();
             $response->data = $ex->getTraceAsString();
-            return response()->json($response);
+
+            $this->setResponse($response);
         }
 
+
+        return response()->json($this->getResponse());
     }
 
     /**

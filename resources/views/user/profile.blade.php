@@ -155,39 +155,40 @@
                          v-bind:class="{'selected':isPassword}">
 
                     <form autocomplete="off" class="form change-password" v-on:submit.prevent="onChangePassword">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="current">Contraseña Actual</label>
-                                <input id="current" class="form-control"
-                                       autocomplete="off"
-                                       name="current"
-                                       placeholder="Contraseña actual"
-                                       type="password"
-                                       v-model="passwordData.current" required>
+                        <div class="row">
+                            <div class="col-sm-6" v-if="user.has_password">
+                                <div class="form-group">
+                                    <label for="current">Contraseña Actual</label>
+                                    <input id="current" class="form-control"
+                                           autocomplete="off"
+                                           name="current"
+                                           placeholder="Contraseña actual"
+                                           type="password"
+                                           v-model="passwordData.current" required>
+                                </div>
+                            </div>
+                            <div v-bind:class="{'col-sm-12':!user.has_password, 'col-sm-6':user.has_password}">
+                                <div class="form-group">
+                                    <label for="password">Nueva Contraseña</label>
+                                    <input id="password" class="form-control"
+                                           autocomplete="off"
+                                           name="password"
+                                           placeholder="Nueva Contraseña"
+                                           type="password"
+                                           v-model="passwordData.new" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="confirm">Confirmar Contraseña</label>
+                                    <input id="confirm" class="form-control"
+                                           autocomplete="off"
+                                           name="confirm"
+                                           placeholder="Confirmar Contraseña"
+                                           type="password"
+                                           v-model="passwordData.confirm" required>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="password">Nueva Contraseña</label>
-                                <input id="password" class="form-control"
-                                       autocomplete="off"
-                                       name="password"
-                                       placeholder="Nueva Contraseña"
-                                       type="password"
-                                       v-model="passwordData.new" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="confirm">Confirmar Contraseña</label>
-                                <input id="confirm" class="form-control"
-                                       autocomplete="off"
-                                       name="confirm"
-                                       placeholder="Confirmar Contraseña"
-                                       type="password"
-                                       v-model="passwordData.confirm" required>
-                            </div>
-                        </div>
-
                         <div class="form-group clearfix">
                             <div class="pull-right">
                                 <a class="btn-link" v-on:click="onClickProfile">< Regresar a mi perfil</a>
@@ -216,7 +217,7 @@
                         <div class="form-group">
                             <a class="btn-share-twitter" href="javascript:void(0)">
                                 <span>Compartir en</span>
-                                <img src="/images/twitter-logo.png" alt="twiiter">
+                                <img src="/images/twitter-logo.png" alt="twitter">
                             </a>
                         </div>
                     </div>
