@@ -15,7 +15,9 @@
                 </div>
 
                 <div class="content-block">
-                    <form action="#" class="form">
+                    <form class="form" ng-controller="participantController">
+                        <input type="hidden" ng-init="moneybox='{{$moneybox}}'"/>
+                        <input type="hidden" ng-init="moneyboxSettings='{{$moneyboxSettings}}'"/>
                         <div class="form-group">
                             <p class="text-info">Llena por favor tus datos para participar en esta alcancía</p>
                         </div>
@@ -24,55 +26,57 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="name">Nombre</label>
-                                    <input id="name" name="name" type="text"
-                                           required
-                                           class="form-control"
-                                           placeholder="Nombre ">
+                                    @if(Auth::user())
+                                        <input type="text" required class="form-control" placeholder="Nombre" ng-init="name='{{Auth::user()->person->name}}'" ng-model="name">
+                                    @else
+                                        <input type="text" required class="form-control" placeholder="Nombre" ng-model="name">
+                                    @endif
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="mobile">Celular</label>
-                                    <input id="mobile" name="mobile" type="text"
-                                           required
-                                           class="form-control"
-                                           placeholder="Celular ">
+                                    <label for="name">Apellidos</label>
+                                    @if(Auth::user())
+                                        <input type="text" required class="form-control" placeholder="Apellidos" ng-init="lastname='{{Auth::user()->person->lastname}}'" ng-model="lastname">
+                                    @else
+                                        <input type="text" required class="form-control" placeholder="Apellidos" ng-model="lastname">
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="email">Correo Electrónico</label>
-                                    <input id="email" name="email" type="number" class="form-control" placeholder="Correo Electrónico">
+                                    <label for="mobile">Celular</label>
+                                    <input type="text" required class="form-control" placeholder="Celular" ng-model="phone">
                                 </div>
-
+                                <div class="form-group">
+                                    <label for="email">Correo Electrónico</label>
+                                    <input type="email" class="form-control" placeholder="Correo Electrónico" ng-model="email">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="amount">Monto con el que quiere participar</label>
-                                    <input id="amount" name="amount" type="number" class="form-control" placeholder="Monto">
+                                    <input type="number" class="form-control" placeholder="Monto" ng-model="amount">
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label>Hacer mi participación:</label>
-                            <div class="radio">
-                                <label for="hidden">
-                                    <input id="hidden" name="privacy" type="radio"> Visible: enseñar mi nombre y el monto con el que participo
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label for="hidden">
-                                    <input id="hidden" name="privacy" type="radio"> Mostrar mi nombre y esconder el monto con el que participo
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label for="hidden">
-                                    <input id="hidden" name="privacy" type="radio"> Anónimamente
-                                </label>
-                            </div>
+
+                            @foreach($settings as $setting)
+                            <label>{{utf8_decode($setting->name)}}</label>
+                                @foreach($setting->options as $option)
+                                <div class="radio">
+                                    <label for="hidden">
+                                        <input type="radio" value="{{$setting->id}}|{{$option->id}}" ng-model="settings"> {{utf8_decode($option->name)}}
+                                    </label>
+                                </div>
+                                @endforeach
+                            @endforeach
                         </div>
 
                         <div class="form-group clearfix">
                             <div class="pull-right">
-                                <button class="btn btn-primary small">Siguiente > </button>
+                                <button class="btn btn-primary small" ng-click="createParticipant()">Siguiente > </button>
                             </div>
                         </div>
                     </form>

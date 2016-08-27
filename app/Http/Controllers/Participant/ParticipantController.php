@@ -62,6 +62,29 @@ class ParticipantController extends PLController {
 
     }
 
+    public function createTmpParticipant(PLRequest $request)
+    {
+        $tmp_participant = array(
+            'amount' => ($request->exists('amount')) ? $request->get('amount') : '0',
+        );
+        $session = \Session::put('tmp_participant', $tmp_participant);
+        $response = new PLResponse();
+        $response->data = $session;
+        $response->description = "Datos temporales de participante creados correctamente";
+        $this->setResponse($response);
+        return response()->json($this->getResponse());
+    }
+
+    public function deleteTmpParticipant()
+    {
+        $session = \Session::forget('tmp_participant');
+        $response = new PLResponse();
+        $response->data = $session;
+        $response->description = "Datos temporales de participante borrados correctamente";
+        $this->setResponse($response);
+        return response()->json($this->getResponse());
+    }
+
     //endregion
 
     //region Private Methods

@@ -54,8 +54,8 @@ Route::group([
     $router->get('/create',  ['middleware' => 'auth', 'as' => 'create', 'uses' => 'HomeController@getCreateMoneyboxPage']);
     $router->get('/step-2',  ['middleware' => 'auth', 'as' => 'step-2', 'uses' => 'HomeController@getCreateMoneyboxPage2']);
     $router->get('/request', ['as' => 'request', 'uses' => 'HomeController@getRequestPage']);
-    $router->get('/join',    ['as' => 'join', 'uses' => 'HomeController@getJoinPage']);
-    $router->get('/summary', ['as' => 'summary', 'uses' => 'HomeController@getSummaryPage']);
+    $router->get('/join/{moneyboxurl}',    ['as' => 'join', 'uses' => 'HomeController@getJoinPage']);//->where('moneyboxurl','[moneyboxurl]+');
+    $router->get('/summary/{url}', ['as' => 'summary', 'uses' => 'HomeController@getSummaryPage']);
 
     $router->group([
         'namespace' => 'Moneybox',
@@ -163,8 +163,16 @@ $router->group([
     'prefix' => 'api/v1/participant'
 ], function($router){
     $router->post('/', [
-        'middleware' => 'guest',
+        'middleware' => ['guest', 'rest'],
         'uses' => 'ParticipantController@createParticipant'
+    ]);
+    $router->post('/createTmpParticipant', [
+        'middleware' => ['guest', 'rest'],
+        'uses' => 'ParticipantController@createTmpParticipant'
+    ]);
+    $router->post('/deleteTmpParticipant', [
+        'middleware' => ['guest', 'rest'],
+        'uses' => 'ParticipantController@deleteTmpParticipant'
     ]);
 });
 

@@ -73,13 +73,21 @@ class TxRegister extends PLTransaction{
                     \Log::info("=== Person created successfully : " . $person . " ===");
 
                     \Log::info("=== Updating user ... ===");
-                    $user->password  = bcrypt($request->get('password'));
                     $user->tracking  = 0;
+                    if ($request->get('isFB') == 0) {
+                        $user->password  = bcrypt($request->get('password'));
+                    }
                     if (!$user->save()) throw new \Exception("Unable to update User", -1);
-                    \Log::info("=== User created successfully : ".$user." ===");
+                    \Log::info("=== User updated successfully : ".$user." ===");
 
-                    if ($request->get('isFB') == 1) \Log::info("TODO -  do something");
-
+                    if ($request->get('isFB') == 1) {
+                        \Log::info("=== Creating FBUser ... ===");
+                        $fbUser = new FbUser();
+                        $fbUser->user_id = $user->id;
+                        $fbUser->fb_uid = $request->get('facebook_uid');
+                        if (!$fbUser->save()) throw new \Exception("Unable to create FBUser", -1);
+                        \Log::info("=== FBUser created successfully : ".$fbUser." ===");
+                    }
                     \DB::commit();
 
                     $response['Person'] = $person;
@@ -91,7 +99,6 @@ class TxRegister extends PLTransaction{
                     \DB::rollback();
                     throw $ex;
                 }
-
             }
 
         } else {

@@ -8,6 +8,7 @@
 
 namespace App\Repositories;
 
+use App\Entities\MemberSetting;
 use App\Entities\Participant;
 use App\Entities\Person;
 use App\Http\Responses\PLResponse;
@@ -240,18 +241,20 @@ class MoneyboxRepository extends BaseRepository{
     public function getByURL($url)
     {
         try {
-
             $person = null;
+            $settings = null;
             $moneybox = Moneybox::where("url", $url)->firstOrFail();
             $participantsnumber = 0;
             $result = array();
             if ($moneybox) {
                 $person = Person::where("id", $moneybox->person_id)->firstOrFail();
                 $participantsnumber = Participant::where('moneybox_id', $moneybox->id)->count();
+                $settings = MemberSetting::where(["owner_id" => $moneybox->id, "owner" => "moneybox"])->get();
             }
             $result['moneybox'] = $moneybox;
             $result['person'] = $person;
             $result['partiticipantsnumber'] = $participantsnumber;
+            $result['settings'] = $settings;
         } catch(\Exception $ex){
             throw $ex;
         }

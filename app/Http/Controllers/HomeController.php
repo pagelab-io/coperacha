@@ -99,7 +99,6 @@ class HomeController extends Controller
 
         $request->merge(array('path' => '/moneybox'));
         $response = $this->_settingRepository->childsOf($request);
-        \Log::info($response->data);
         return view('moneybox.step-2')
             ->with('settings', $response->data)
             ->with('pageTitle','Crear mi alcancía 2/2');
@@ -149,12 +148,26 @@ class HomeController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param $moneyboxurl
+     * @internal param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getJoinPage(Request $request){
+    public function getJoinPage($moneyboxurl){
+
+        // get moneybox with it's settings
+        $variables = $this->_moneyboxRepository->getByURL($moneyboxurl);
+        $moneybox = $variables['moneybox'];
+        $moneyboxSettings = $variables['settings'];
+
+        // get settings for participants
+        $request = new PLRequest();
+        $request->merge(array('path' => '/participant'));
+        $settings = $this->_settingRepository->childsOf($request);
 
         return view('moneybox.join')
+            ->with('moneybox', $moneybox)
+            ->with('moneyboxSettings', $moneyboxSettings)
+            ->with('settings', $settings->data)
             ->with('pageTitle','Participa');
     }
 

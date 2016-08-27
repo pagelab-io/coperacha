@@ -64,16 +64,6 @@
 
         $scope.createMoneybox = function()
         {
-            $scope.utils.showLoader();
-            // try to clear the tmp_moneybox variable from Session
-            Moneybox.step2()
-                .success(function(response){
-                })
-                .error(function(response) {
-                    console.log(response);
-                    $scope.utils.hideLoader();
-                });
-
             // build the settings object
             var participation = $scope.participation.split('|');
             var privacy = $scope.privacy.split('|');
@@ -103,6 +93,7 @@
                 'method' : 'createMoneybox',
                 'api-key' : '$2y$10$ScZUgkFzrMr9NM5qPzKag.4mLTW8ugSG/DtT6nerJb3W1v5sg6UBC'
             };
+            $scope.utils.showLoader();
             Moneybox.create($scope.request)
                 .success(function(response){
                     if (response.status == 200) {

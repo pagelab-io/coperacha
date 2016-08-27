@@ -74,7 +74,7 @@ class SettingRepository extends BaseRepository{
      */
     public function childsOf(PLRequest $request)
     {
-        \Log::info("=== Get all settings with it's childrens ===");
+        \Log::info("=== Get all settings with it's childrens ".$request->get("path")." ===");
         $parents = Setting::where("path",$request->get("path"))->get();
 
         if (count($parents) > 0)

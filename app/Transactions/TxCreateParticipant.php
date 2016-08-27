@@ -95,6 +95,7 @@ class TxCreateParticipant extends PLTransaction{
         $user->person_id = $person->id;
         $user->email     = $request->get('email');
         $user->username  = $request->get('email');
+        $user->tracking  = -1;
         if (!$user->save()) throw new \Exception("Unable to create User", -1);
         \Log::info("=== User created successfully : ".$user." ===");
         return $user;

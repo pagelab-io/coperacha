@@ -16,7 +16,8 @@ use App\Entities\Moneybox;
 use App\Repositories\MoneyboxRepository;
 use App\Repositories\MemberSettingRepository;
 
-class MoneyboxController extends PLController {
+class MoneyboxController extends PLController
+{
 
     //region Attributes
     /**
@@ -104,7 +105,7 @@ class MoneyboxController extends PLController {
         try {
             $this->setResponse($this->_moneyboxRepository->updateMoneybox($request));
             return response()->json($this->getResponse());
-        } catch(\Exception $ex) {
+        } catch (\Exception $ex) {
             $response = new PLResponse();
             $response->status = $ex->getCode();
             $response->description = $ex->getMessage();
