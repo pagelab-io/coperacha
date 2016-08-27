@@ -1337,16 +1337,57 @@ body {
 .profile-view .content-block.selected {
 }
 
-.profile-view .stage-item {
+/* Stage Component */
+.stage-element {
+    display: flex;
+    align-content: space-between;
     margin: 0 auto;
-    width: 320px;
+    width: 300px;
 }
 
-.profile-view .stage-item .labels {
-    padding: 15px 0;
+.stage-element .stage-item {
+    cursor: pointer;
+    text-decoration: none;
+    flex: 0 0 100px;
+    padding: 10px 0px;
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
-.profile-view .stage-item-title {
+.stage-element .stage-item .stage-bar {
+    height: 10px;
+    background: #868695;
+    width: 100%;
+    position: absolute;
+    top: 23px;
+    z-index: -100;
+    margin-left: 65px;
+}
+
+.stage-element .stage-item .stage-bar:after {
+    content: "";
+    background: #FF4E00;
+    display: block;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 200;
+    height: 10px;
+    width: 0px;
+    transition: all 50ms;
+}
+
+.stage-element .stage-item.completed .stage-bar:after {
+    width: 100%;
+}
+
+.stage-element .stage-item.selected .stage-item-label,
+.stage-element .stage-item:hover .stage-item-label {
+    color: #FF4E00;
+}
+
+.stage-element .stage-item-title {
     color: #FF4E00;
     font-size: 16px;
     font-weight: normal;
@@ -1354,36 +1395,43 @@ body {
     text-transform: uppercase;
 }
 
-.profile-view .stage-item .label.selected {
-    color: #FF4E00;
+.stage-element .stage-item-icon {
+    background: url("/images/icon-profile-step.png") no-repeat 0 0;
+    height: 34px;
+    width: 34px;
+    z-index: 100;
 }
 
-.profile-view .stage-item .label {
+.stage-element .stage-item-label,
+.stage-element .stage-item-icon {
+    display: block;
+    margin: 0px auto;
+}
+
+.stage-element .stage-item-label {
     color: #858596;
     font-size: 12px;
-    padding: 5px 25px;
-    display: inline-block;
+    text-align: center;
+    padding-top: 15px;
 }
 
-.profile-view .stage-item .icon-step {
-    background: url("/images/icon-profile-tabs.png") no-repeat 0 0;
-    margin: 0 auto;
-    height: 40px;
-    width: 300px;
+.stage-element .stage-item.profile.completed .stage-item-icon,
+.stage-element .stage-item.profile.selected .stage-item-icon {
+    background-position: 0 -34px;
 }
 
-.profile-view .stage-item .icon-step-profile {
-    background-position: 0 0;
+.stage-element .stage-item.password.completed .stage-item-icon,
+.stage-element .stage-item.password.selected .stage-item-icon {
+    background-position: -34px -34px;
 }
 
-.profile-view .stage-item .icon-step-password {
-    background-position: 0 -40px;
+.stage-element .stage-item.share.completed .stage-item-icon,
+.stage-element .stage-item.share.selected .stage-item-icon {
+    background-position: -69px -34px;
 }
 
-.profile-view .stage-item .icon-step-share {
-    background-position: 0 -80px;
-}
 
+/* Contacts View*/
 .profile-view.contacts .holder {
     max-width: 500px;
 }
