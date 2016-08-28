@@ -35,7 +35,7 @@
     </tr>
     <tr>
         <td COLSPAN=2 style="text-align: center;padding-bottom:20px;">
-            <img width="300" src="/images/emails/logo2.png"/>
+            <img width="300" src="{{asset('/images/emails/logo2.png')}}"/>
         </td>
     </tr>
 @endsection
