@@ -18,13 +18,13 @@
                 Realiza tu coperacha en:
             </p>
             <p>
-                <a href="" style='color:#FF5000;text-decoration:none;'>link de la alcancía</a>
+                <a href="{{asset($link)}}" style='color:#FF5000;text-decoration:none;'>{{$moneybox}}</a>
             </p>
             <p>
                 Y no olvides invitar a nuevos participantes, comparte este link para que se unan a la alcancía:
             </p>
             <p>
-                <a href="" style='color:#FF5000;text-decoration:none;'>link de la alcancía</a>
+                <a href="{{asset($link)}}" style='color:#FF5000;text-decoration:none;'>{{$moneybox}}</a>
             </p>
             <p>
                 Saludos,

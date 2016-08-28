@@ -57,12 +57,15 @@ class MoneyboxChecker extends Command
 
         $ids = [];
         foreach ($mb as $i => $m) {
-
             $user = User::byPerson($m->person_id)->first();
 
             if ($user instanceof User) {
                 $person = $user->person;
-                $data = ['name' => $person->name];
+                $data = [
+                    'name' => $person->name,
+                    'link' => "/moneybox/detail/" . $m->url,
+                    'moneybox' => $m->name
+                ];
 
                 Mail::send('emails.deadline', $data, function ($message) use ($user) {
                     $message->from('info@coperacha.com.mx', 'Coperacha');
@@ -77,9 +80,9 @@ class MoneyboxChecker extends Command
         }
 
         $this->info("Completed");
-        $message = sprintf("Registros actualizados: %s [%s]", ($i + 1), implode(',', $ids));
+        // $message = sprintf("Registros actualizados: %s [%s]", ($i + 1), implode(',', $ids));
 
         // Write info
-        Log::info($message);
+        //Log::info($message);
     }
 }
