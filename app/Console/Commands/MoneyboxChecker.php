@@ -68,7 +68,7 @@ class MoneyboxChecker extends Command
                     $message->from('info@coperacha.com.mx', 'Coperacha');
                     $message->to($user->email, $user->username);
                     $message->bcc('perezatanaciod@gmail.com', 'Daniel');
-                    $message->bcc('sanchezz985@gmail.com', 'Emmanuel');
+                    // $message->bcc('sanchezz985@gmail.com', 'Emmanuel');
                     $message->subject('Deadline');
                 });
 
