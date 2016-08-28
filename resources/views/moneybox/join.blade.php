@@ -61,15 +61,14 @@
                         </div>
 
                         <div class="form-group">
-
                             @foreach($settings as $setting)
                             <label>{{utf8_decode($setting->name)}}</label>
                                 @foreach($setting->options as $option)
-                                <div class="radio">
-                                    <label for="hidden">
-                                        <input type="radio" value="{{$setting->id}}|{{$option->id}}" ng-model="settings"> {{utf8_decode($option->name)}}
-                                    </label>
-                                </div>
+                                    <div class="radio">
+                                        <label for="hidden">
+                                            <input type="radio" value="{{$setting->id}}|{{$option->id}}" ng-model="settings"> {{utf8_decode($option->name)}}
+                                        </label>
+                                    </div>
                                 @endforeach
                             @endforeach
                         </div>
@@ -80,14 +79,11 @@
                             </div>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>
     </section>
-
 @endsection
 
 @section('js')
-
 @endsection

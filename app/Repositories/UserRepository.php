@@ -300,7 +300,6 @@ class UserRepository extends BaseRepository{
             $user = $this->byId($userId);
             $user->person;
             $user->fbuser;
-            $user->getHasPasswordAttribute();
 
         } catch(\Exception $ex) {
             throw new \Exception("User does not exist", -1, $ex);

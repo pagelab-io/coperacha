@@ -75,14 +75,11 @@
                                 <a class="btn btn-primary" href="#" ng-click="step1Click()">Siguiente ></a>
                             </div>
                         </div>
-
                     </form>
-
                 </div>
             </div>
 
             <div class="container-fluid step-2" id="moneybox-step2">
-
                 <div class="header-block">
                     <div class="stage-item">
                         <div class="stage-item-title">Participación</div>
@@ -91,7 +88,6 @@
                         <div class="label active">Participación</div>
                     </div>
                 </div>
-
                 <div class="content-block">
                     <form class="form register moneybox">
                         <div class="form-group">
@@ -100,25 +96,25 @@
                                 @foreach($settings as $setting)
                                     <div class="form-group">
                                         <label>{{utf8_decode($setting->name)}}</label>
+                                        @foreach($setting->options as $option)
+                                        <div class="radio">
+                                            @if($option->subtype=='text')
+                                            <label for="{{$option->name}}" class="flex-element">
+                                                <input type="radio" value="{{$setting->id}}|{{$option->id}}|Y" ng-model="{{$setting->id==1 ? "participation" : "privacy"}}">
+                                                <span>{{$option->name}}</span>
+                                                <input class="form-control" type="number" value="0" id="txtOption-{{$option->id}}">
+                                                <strong> .00 MXN</strong>
+                                            </label>
+                                            @else
+                                            <label for="{{$option->name}}">
+                                                <input type="radio" value="{{$setting->id}}|{{$option->id}}|N" ng-model="{{$setting->id==1 ? "participation" : "privacy"}}"> {{$option->name}}
+                                            </label>
+                                            @endif
+                                        </div>
+                                        @endforeach
                                     </div>
-                                    @foreach($setting->options as $option)
-                                    <div class="radio">
-                                        @if($option->subtype=='text')
-                                        <label for="{{$option->name}}" class="flex-element">
-                                            <input type="radio" value="{{$setting->id}}|{{$option->id}}|Y" ng-model="{{$setting->id==1 ? "participation" : "privacy"}}">
-                                            <span>{{$option->name}}</span>
-                                            <input class="form-control" type="number" value="0" id="txtOption-{{$option->id}}">
-                                            <strong> .00 MXN</strong>
-                                        </label>
-                                        @else
-                                        <label for="{{$option->name}}">
-                                            <input type="radio" value="{{$setting->id}}|{{$option->id}}|N" ng-model="{{$setting->id==1 ? "participation" : "privacy"}}"> {{$option->name}}
-                                        </label>
-                                        @endif
-                                    </div>
-                                    @endforeach
                                 @endforeach
-                                </div>
+                                </div><!-- ./col-sm-12 -->
                             </div>
                         </div>
                         <div class="form-group clearfix">
