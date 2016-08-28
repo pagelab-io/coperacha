@@ -97,7 +97,7 @@ class TxCreateParticipant extends PLTransaction{
         $user->username  = $request->get('email');
         $user->tracking  = -1;
         if (!$user->save()) throw new \Exception("Unable to create User", -1);
-        \Log::info("=== User created successfully : ".$user." ===");
+        //\Log::info("=== User created successfully : ".$user." ===");
         return $user;
     }
 
@@ -196,7 +196,6 @@ class TxCreateParticipant extends PLTransaction{
             \DB::rollback();
             throw $ex;
         }
-
         $response['user']   = $user;
         $response['person'] = $person;
         return $response;

@@ -7,6 +7,7 @@ use App\Http\Requests\PLRequest;
 use App\Http\Responses\PLResponse;
 use App\Repositories\MoneyboxRepository;
 use App\Repositories\SettingRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -24,14 +25,21 @@ class HomeController extends Controller
     private $_moneyboxRepository;
 
     /**
+     * @var UserRepository
+     */
+    private $_userRepository;
+
+
+    /**
      * HomeController constructor.
      * @param SettingRepository $settingRepository
      * @param MoneyboxRepository $moneyboxRepository
      */
-    public function __construct(SettingRepository $settingRepository, MoneyboxRepository $moneyboxRepository)
+    public function __construct(SettingRepository $settingRepository, MoneyboxRepository $moneyboxRepository, UserRepository $userRepository)
     {
         $this->_settingRepository = $settingRepository;
         $this->_moneyboxRepository = $moneyboxRepository;
+        $this->_userRepository = $userRepository;
     }
 
     /**
@@ -172,12 +180,29 @@ class HomeController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param $url
+     * @throws \Exception
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getSummaryPage(Request $request){
+    public function getSummaryPage($url){
+
+        // get moneybox with it's settings
+        $variables  = $this->_moneyboxRepository->getByURL($url);
+        $moneybox   = $variables['moneybox'];
+        $moneyboxSetttings = $variables['settings'];
+        $user       = '';
+        $amount     = 0;
+        if (\Session::has('tmp_participant')){
+            $session = \Session::get('tmp_participant');
+            $user       = $this->_userRepository->byEmail($session['email']);
+            $amount     = $session['amount'];
+        }
 
         return view('moneybox.summary')
+            ->with('moneybox', $moneybox)
+            ->with('moneyboxSettings', $moneyboxSetttings)
+            ->with('participant', $user->person)
+            ->with('amount', $amount)
             ->with('pageTitle','Resumen de tu participación antes del pago');
     }
 

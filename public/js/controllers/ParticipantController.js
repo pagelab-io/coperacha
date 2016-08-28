@@ -69,7 +69,7 @@
                             .error(function(create_response)
                             {
                                 $scope.utils.hideLoader();
-                                alert("Ocurrio un error al registrar tus datos, porfavor intentalo mas tarde"+"\n\t"+create_response);
+                                alert("Ocurrio un error al registrar tus datos, porfavor intentalo mas tarde");
                                 console.log(create_response);
                             });
                     }
@@ -132,6 +132,7 @@
         {
             var request = {
                 'amount': $scope.amount,
+                'email' : $scope.email,
                 'api-key' : '$2y$10$ScZUgkFzrMr9NM5qPzKag.4mLTW8ugSG/DtT6nerJb3W1v5sg6UBC'
             };
 

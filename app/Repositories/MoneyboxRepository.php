@@ -238,6 +238,17 @@ class MoneyboxRepository extends BaseRepository{
 
     }
 
+    /**
+     * Get's an array with the next info
+     * ['moneybox'] - the selected moneybox by url
+     * ['person'] - the moneybox's creator
+     * ['participantsnumber'] - number of participants in this moneybox
+     * ['settings'] - the moneybox's settings when was created
+     *
+     * @param $url
+     * @return array
+     * @throws \Exception
+     */
     public function getByURL($url)
     {
         try {

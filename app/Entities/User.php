@@ -23,7 +23,7 @@ class User extends Authenticatable
      * These are the mass-assignable keys
      * @var array
      */
-    protected $fillable = ['person_id', 'email', 'password', 'username'];
+    protected $fillable = ['person_id', 'email', 'password', 'username', 'tracking'];
 
     /**
      * The attributes that should be hidden for arrays.
