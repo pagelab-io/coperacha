@@ -11,7 +11,6 @@ use Money\Money;
 
 class DashboardController extends Controller
 {
-
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

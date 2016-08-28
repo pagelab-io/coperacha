@@ -3,7 +3,7 @@
 @section("page-content")
 
     <!-- Contact Layout -->
-    <section class="contact-body contact-layout">
+    <section class="contact-body">
         <div class="holder">
             <div class="container-fluid">
                 <div class="header">

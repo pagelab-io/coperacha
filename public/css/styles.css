@@ -1465,3 +1465,7 @@ body {
     padding: 0 10px;
     opacity: 0;
 }
+
+section.block.reset-password {
+    padding: 70px 0;
+}

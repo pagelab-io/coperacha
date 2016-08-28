@@ -2,10 +2,11 @@
 
 namespace App\Entities;
 
-use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Model;
+//use Illuminate\Contracts\Auth\Authenticatable;
+//use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Model implements Authenticatable
+class User extends Authenticatable
 {
     // region traits
     use \Illuminate\Auth\Authenticatable;
@@ -80,31 +81,6 @@ class User extends Model implements Authenticatable
     public function getHasPasswordAttribute(){
         return strlen($this->attributes['password']) > 0;
     }
-
-    /**
-     * Get the token value for the "remember me" session.
-     *
-     * @return string
-     */
-    public function getRememberToken()
-    {}
-
-    /**
-     * Set the token value for the "remember me" session.
-     *
-     * @param  string  $value
-     * @return void
-     */
-    public function setRememberToken($value)
-    {}
-
-    /**
-     * Get the column name for the "remember me" token.
-     *
-     * @return string
-     */
-    public function getRememberTokenName()
-    {}
 
     //endregion
 

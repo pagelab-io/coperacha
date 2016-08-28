@@ -1,12 +1,9 @@
 <div class="popup">
-
     <!-- header -->
     <div class="popup-header">
-        <span>Inicia sesión</span>
+        <span>Iniciar Sesión</span>
     </div>
-
     <!-- ./header -->
-
     <div class="close close-popup">x</div>
 
     <!-- body -->
@@ -16,7 +13,7 @@
         <div class="email-login">
             <input type="text" placeholder="Tu email" ng-model="email"/>
             <input type="password" placeholder="Contraseña" ng-model="password"/>
-            <span>Olvidé mi contraseña</span>
+            <a href="/password/recovery">Olvidé mi contraseña</a>
             <button class="btn-email-login" ng-click="emailLogin()">ENTRAR</button>
         </div>
         <!-- email login -->
@@ -25,11 +22,11 @@
 
         <!-- facebook login -->
         <div class="facebook-login">
-            <button class="btn-facebook-login" ng-click="facebookLogin()"><img src="/images/facebook-login.png" alt=""/></button>
+            <button class="btn-facebook-login" ng-click="facebookLogin()">
+                <img src="/images/facebook-login.png"/>
+            </button>
         </div>
         <!-- facebook login -->
-
     </div>
     <!-- ./body -->
-
 </div>

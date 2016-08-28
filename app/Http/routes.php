@@ -25,11 +25,17 @@ Route::group([
     'as' => 'pages.',
     'prefix' => ''
 ], function ($router) {
+    /* Home Routes... */
     $router->get('/', [ 'as' => 'index', 'uses' => 'HomeController@getHomePage']);
     $router->get('/about', [ 'as' => 'about', 'uses' => 'HomeController@getAboutPage']);
     $router->get('/contact', [ 'as' => 'contact', 'uses' => 'HomeController@getContactPage']);
     $router->get('/faqs', [ 'as' => 'faqs', 'uses' => 'HomeController@getFaqsPage']);
     $router->get('/test', [ 'as' => 'test', 'middleware' => 'auth', 'uses' => 'HomeController@getTestPage']);
+    /* Password Reset Routes... */
+    $router->get('password/recovery', 'Auth\PasswordController@getEmail');
+    $router->get('password/reset/{token?}', 'Auth\PasswordController@getReset');
+    $router->post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
+    $router->post('password/reset', 'Auth\PasswordController@reset');
 });
 
 Route::group([
@@ -39,7 +45,7 @@ Route::group([
 ], function($router){
     // register
     $router->get('/create', ['as'=>'create', 'uses' => 'UserController@create']);
-    $router->get('/profile/{userid}', [
+    $router->get('/profile/{userid?}', [
         'middleware' => 'auth',
         'as'=>'profile',
         'uses' => 'UserController@getProfilePage']);
@@ -148,7 +154,7 @@ $router->group([
     'middleware' => ['auth', 'rest']
 ], function($router){
     // register
-    $router->get('/profile/{userid}', ['uses' => 'UserController@getProfile']);
+    $router->get('/profile/{userid?}', ['uses' => 'UserController@getProfile']);
     $router->put('/profile', ['uses' => 'UserController@updateProfile']);
     $router->put('/changePassword', ['uses' => 'UserController@changePassword']);
 });

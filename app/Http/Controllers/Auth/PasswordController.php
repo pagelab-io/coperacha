@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\PLController;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\PLRequest;
 use App\Http\Responses\PLResponse;
 use App\Repositories\UserRepository;
+use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Http\Request;
 
-class PasswordController extends PLController
+class PasswordController extends Controller
 {
+    use ResetsPasswords;
+
+    protected $redirectTo = '/user/profile/';
 
     //region attributes
-
     /**
      * @var UserRepository
      */
@@ -27,7 +31,34 @@ class PasswordController extends PLController
     }
 
     //region Methods
+    /**
+     * Override
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getEmail(Request $request){
+        return view('auth.passwords.email', ['pageTitle' => 'Recuperar contraseña']);
+    }
 
+    /**
+     * Override
+     * @param Request $request
+     * @param string $token
+     * @param string $email
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getReset(Request $request, $token = null, $email= null){
+        return view('auth.passwords.reset', [
+            'pageTitle' => 'Actualizar contraseña',
+            'token' => $token,
+            'email' => $email
+        ]);
+    }
+
+    /**
+     * @param PLRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function passwordRecovery(PLRequest $request)
     {
         $this->validate($request, $request->rules(), $request->messages());

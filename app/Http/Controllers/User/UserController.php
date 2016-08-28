@@ -17,7 +17,7 @@ use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class UserController extends PLController{
+class UserController extends PLController {
 
     //region attributes
 
@@ -80,7 +80,7 @@ class UserController extends PLController{
 
         return view('user.profile')
             ->with('months', $months)
-            ->with('user', \Auth::user())
+            ->with('user', Auth::user())
             ->with('pageTitle','Mi cuenta');
     }
 
@@ -121,6 +121,7 @@ class UserController extends PLController{
 
         try {
             $user = $this->_userRepository->getProfile($userid);
+
             $response->description = 'Getting user profile successfully';
             $response->data = $user;
             $this->setResponse($response);
