@@ -1,14 +1,9 @@
 @extends('emails.master')
-@extends('emails.header')
-@extends('emails.footer')
-
-@section('title')
-<title>Vencimiento de la alcancía</title>
-@endsection
+@section('title', 'Vencimiento de la alcancía')
 
 @section('body')
     <tr>
-        <td COLSPAN=2 style="font-family: Arial;font-size: 30px;color: #51B7CD;text-align: center;line-height: 45px;padding-top:10px;"> Hola FirstName </td>
+        <td COLSPAN=2 style="font-family: Arial;font-size: 30px;color: #51B7CD;text-align: center;line-height: 45px;padding-top:10px;"> Hola {{$name}} </td>
     </tr>
 
     <tr>

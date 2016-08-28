@@ -59,6 +59,17 @@ class User extends Authenticatable
     //region Methods
 
     /**
+     * Scope a query to only include users of a given person id
+     *
+     * @param any $query
+     * @param int $person_id
+     * @return mixed
+     */
+    public function scopeByPerson($query, $person_id) {
+        return $query->where('person_id', $person_id);
+    }
+
+    /**
      * Define the relation between User and Person
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
