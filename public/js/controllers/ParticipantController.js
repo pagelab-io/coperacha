@@ -61,7 +61,7 @@
                             {
                                 console.log(create_response);
                                 if(create_response.status == 200){
-                                    window.location = '/moneybox/summary/'+moneybox.url;
+                                    //window.location = '/moneybox/summary/'+moneybox.url;
                                 } else {
                                     $scope.utils.hideLoader();
                                 }
@@ -107,7 +107,10 @@
             for (var i = 0; i < settings.length; i++) {
 
                 if (settings[i].setting_id == 1) { // validate amount settings
-                    if (settings[i].option_id == 2) {
+                    if (settings[i].option_id == 1) {
+                        result = true;
+                        break;
+                    }else if (settings[i].option_id == 2) {
                         if (amount < settings[i].value) {
                             alert("El monto sugerido para participar en esta alcancía es de $ " + parseFloat(settings[i].value));
                         } else {
