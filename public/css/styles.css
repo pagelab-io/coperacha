@@ -123,6 +123,32 @@ body {
     margin-bottom: 0;
 }
 
+
+.btn-primary {
+    background: #FF4E00;
+    border: #FF4E00;
+    border-radius: 7px;
+    font-family: brandon_grotesquebold;
+    font-size: 18px;
+    padding: 20.50px 46px;
+    text-transform: uppercase;
+}
+
+.btn-primary:active:hover,
+.btn-primary:visited:hover,
+.btn-primary:visited,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary:hover,
+.btn-primary[disabled]:hover {
+    background: #FF4E00;
+}
+
+.btn-primary.small {
+    padding: 11.5px 46px;
+    font-size: 14px;
+}
+
 .logged{
     position: relative;
     top: -5px;
@@ -268,7 +294,7 @@ body {
 .block.cover .content-block .html {
     margin-bottom: 15px;
 }
-
+/*
 .block.cover .content-block .button {
     background-color: #FF4F00;
     border-radius: 5px;
@@ -283,7 +309,7 @@ body {
     text-transform: uppercase;
     width: 100%;
 }
-
+*/
 
 /* Block How it Works */
 .block.how-it-works {
@@ -484,7 +510,7 @@ body {
     padding: 11px;
     width: 100%;
 }
-
+/*
 .block.create-moneybox .sign-in input[type=button] {
     background-color: #FF4F00;
     border: none;
@@ -500,7 +526,7 @@ body {
     text-align: center;
     text-transform: uppercase;
     width: 100%;
-}
+}*/
 
 .block .sign-in-wrap {
     margin-top: 60px;
@@ -732,6 +758,7 @@ body {
     transition: 350ms all;
 }
 
+/*
 .contact-body .contact-form button[disabled] {
     opacity: 0.7;
 }
@@ -754,7 +781,7 @@ body {
     text-transform: uppercase;
     width: 100%;
 }
-
+*/
 .contact-body .contact-form button .icon {
     background: url("../images/loader.gif");
     background-size: 20px;
@@ -835,22 +862,6 @@ body {
     color: #FF4E00;
     font-family: verbmedium;
     font-weight: normal;
-    font-size: 14px;
-}
-
-.form .btn-primary,
-.form button {
-    background: #FF4E00;
-    border: #FF4E00;
-    border-radius: 7px;
-    font-family: brandon_grotesquebold;
-    font-size: 18px;
-    padding: 20.50px 46px;
-    text-transform: uppercase;
-}
-
-.form .btn-primary.small {
-    padding: 11.5px 46px;
     font-size: 14px;
 }
 
@@ -1002,13 +1013,12 @@ body {
 .moneybox-view .radio label strong {
     color: black;
 }
-
+/*
 .moneybox-view .btn-primary {
     font-size: 14px;
     padding-top: 11px;
     padding-bottom: 11px;
-}
-
+}*/
 
 #moneybox-step2.step-2 .holder {
     max-width: 540px;
