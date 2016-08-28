@@ -35,7 +35,7 @@
                             <div class="html">
                                 <div>Coperacha es un servicio de gestión de dinero comunitario que sirve para hacer regalos o transferencias entre amigos.</div>
                             </div>
-                            <a class="button" href="{{route('user.create')}}">Crear mi Alcancía</a>
+                            <a class="button btn btn-primary" href="{{route('user.create')}}">Crear mi Alcancía</a>
                         </div>
                     </div>
                 </div>
@@ -260,7 +260,7 @@
                                 <input name="lastname" placeholder="Apellido" type="text" ng-model="lastname">
                                 <input name="email" placeholder="Correo Electrónico" type="text" ng-model="email">
                                 <input name="password" placeholder="Contraseña" type="password" ng-model="password">
-                                <input type="button" value="Crear mi Alcancía" ng-click="emailRegister()">
+                                <input class="btn btn-primary small" type="button" value="Crear mi Alcancía" ng-click="emailRegister()">
                             </form>
                         </div>
 

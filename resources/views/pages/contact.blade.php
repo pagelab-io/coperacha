@@ -56,7 +56,7 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-12 clearfix">
-                                <button v-bind:disabled="!isValid" class="pull-right">
+                                <button v-bind:disabled="!isValid" class="btn btn-primary small pull-right">
                                     <span v-show="sending" class="icon"></span>
                                     <span class="text">@{{sendText}}</span>
                                 </button>
