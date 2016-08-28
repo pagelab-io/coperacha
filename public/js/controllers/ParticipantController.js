@@ -178,7 +178,28 @@
 
             $scope.utils.showLoader();
 
-            $scope.deleteTmpParticipant(function(response){
+            Participant.doPayment($scope.request)
+                .success(function(response){
+                    if(response.status == 200) {
+
+                        if ($scope.paymentMethod == 'P') {
+                            window.location = response.data.url;
+                        } else {
+                            $scope.utils.hideLoader();
+                            console.log(response);
+                        }
+
+                    } else {
+                        $scope.utils.hideLoader();
+                        alert("Ocurrio un error al generarse el pago, porfavor intentelo mas tarde o elija otro método de pago");
+                    }
+                })
+                .error(function(response){
+                    $scope.utils.hideLoader();
+                    console.log(response);
+                });
+
+            /*$scope.deleteTmpParticipant(function(response){
                 console.log(response);
                 if(response.status == 200){
                     Participant.doPayment($scope.request)
@@ -202,7 +223,7 @@
                             console.log(response);
                         });
                 }
-            })
+            })*/
         }
 
     }
