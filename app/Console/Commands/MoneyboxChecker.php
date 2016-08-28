@@ -3,10 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Entities\User;
-use App\Repositories\MoneyboxRepository;
-use Faker\Provider\lv_LV\Person;
 use Illuminate\Console\Command;
-use Illuminate\Mail\Mailer;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -40,10 +37,10 @@ class MoneyboxChecker extends Command
      * Execute the console command.
      * Docs:
      *  - https://www.digitalocean.com/community/tutorials/how-to-use-cron-to-automate-tasks-on-a-vps
-     *
      *  - Crontab
      *     1. sudo crontab -e
-     *     2. Add line * * * * * /var/www/coperacha artisan moneybox:checker
+     *     2. Add line - at 5 minutes of each hour
+     *        - 5 * * * * php /var/www/coperacha.pagelab.io/artisan moneybox:checker
      *
      * @return mixed
      */
