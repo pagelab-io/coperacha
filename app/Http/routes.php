@@ -170,15 +170,15 @@ $router->group([
     'prefix' => 'api/v1/participant'
 ], function($router){
     $router->post('/', [
-        'middleware' => ['guest', 'rest'],
+        'middleware' => ['rest'],
         'uses' => 'ParticipantController@createParticipant'
     ]);
     $router->post('/createTmpParticipant', [
-        'middleware' => ['guest', 'rest'],
+        'middleware' => ['rest'],
         'uses' => 'ParticipantController@createTmpParticipant'
     ]);
     $router->post('/deleteTmpParticipant', [
-        'middleware' => ['guest', 'rest'],
+        'middleware' => ['rest'],
         'uses' => 'ParticipantController@deleteTmpParticipant'
     ]);
 });
