@@ -61,7 +61,7 @@
                             {
                                 console.log(create_response);
                                 if(create_response.status == 200){
-                                    //window.location = '/moneybox/summary/'+moneybox.url;
+                                    window.location = '/moneybox/summary/'+moneybox.url;
                                 } else {
                                     $scope.utils.hideLoader();
                                 }
@@ -129,7 +129,7 @@
             }
 
             return result;
-        }
+        };
 
         $scope.createTmpParticipant = function(callback)
         {

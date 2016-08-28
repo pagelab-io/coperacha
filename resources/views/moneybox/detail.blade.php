@@ -52,7 +52,7 @@
                                     </label>
                                 </div>
                                 <div class="form-group" ng-controller="participantController">
-                                    <input type="hidden" ng-init="moneyboxurl='{{$moneybox->url}}'" ng-model="{{$moneybox->url}}"/>
+                                    <input type="hidden" ng-init="moneyboxurl='{{$moneybox->url}}'"/>
                                     <button class="btn-primary small" ng-click="goToParticipation()">Participa</button>
                                 </div>
                             </form>

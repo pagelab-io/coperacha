@@ -79,7 +79,7 @@ class User extends Authenticatable
      * Check if has a password
      */
     public function getHasPasswordAttribute(){
-        return strlen($this->attributes['password']) > 0;
+        return strlen($this->password) > 0;
     }
 
     //endregion
