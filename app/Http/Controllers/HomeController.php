@@ -192,17 +192,20 @@ class HomeController extends Controller
         $moneyboxSetttings = $variables['settings'];
         $user       = '';
         $amount     = 0;
+        $comision   = 0;
         if (\Session::has('tmp_participant')){
             $session = \Session::get('tmp_participant');
             $user       = $this->_userRepository->byEmail($session['email']);
             $amount     = $session['amount'];
+            $comision   = $amount*.05;
         }
 
         return view('moneybox.summary')
             ->with('moneybox', $moneybox)
             ->with('moneyboxSettings', $moneyboxSetttings)
-            ->with('participant', $user->person)
+            ->with('participant', $user)
             ->with('amount', $amount)
+            ->with('comision', $comision)
             ->with('pageTitle','Resumen de tu participación antes del pago');
     }
 

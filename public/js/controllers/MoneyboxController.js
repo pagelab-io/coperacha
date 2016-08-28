@@ -96,6 +96,7 @@
             $scope.utils.showLoader();
             Moneybox.create($scope.request)
                 .success(function(response){
+                    console.log(response);
                     if (response.status == 200) {
                         window.location = '/moneybox/detail/'+response.data.url;
                     } else {

@@ -128,17 +128,29 @@ $router->group([
     'as' => 'moneybox',
     'namespace' => 'Moneybox',
     'prefix' => 'api/v1/moneybox',
-    'middleware' => ['auth', 'rest'],
+    'middleware' => 'rest',
 ], function($router){
-    $router->post('/',  [ 'uses' => 'MoneyboxController@createMoneybox']);
-    $router->put('/',   [ 'uses' => 'MoneyboxController@updateMoneybox']);
-    $router->get('/',   [ 'uses' => 'MoneyboxController@getAll']);
-    $router->post('/categories',    ['uses' => 'CategoryController@createCategory']);
-    $router->get('/categories',     ['uses' => 'CategoryController@getAll']);
-    $router->post('/settings',      ['uses' => 'SettingController@createSetting']);
-    $router->get('/settings',       ['uses' => 'SettingController@getAll']);
-    $router->post('/option',        ['uses' => 'SettingController@createOptions']);
+    $router->post('/',  [ 'middleware' => 'auth', 'uses' => 'MoneyboxController@createMoneybox']);
+    $router->put('/',   [ 'middleware' => 'auth', 'uses' => 'MoneyboxController@updateMoneybox']);
+    $router->get('/',   [ 'middleware' => 'auth', 'uses' => 'MoneyboxController@getAll']);
+    $router->post('/categories',    ['middleware' => 'auth', 'uses' => 'CategoryController@createCategory']);
+    $router->get('/categories',     ['middleware' => 'auth', 'uses' => 'CategoryController@getAll']);
+    $router->post('/settings',      ['middleware' => 'auth', 'uses' => 'SettingController@createSetting']);
+    $router->get('/settings',       ['middleware' => 'auth', 'uses' => 'SettingController@getAll']);
+    $router->post('/option',        ['middleware' => 'auth', 'uses' => 'SettingController@createOptions']);
     $router->post('/payment',       ['uses' => 'PaymentController@createPayment']);
+});
+
+/*
+|--------------------------------------------------------------------------
+| MONEYBOX ROUTES
+|--------------------------------------------------------------------------
+*/
+$router->group([
+    'as' => 'payment',
+    'namespace' => 'Moneybox',
+    'prefix' => 'payment',
+], function($router){
     $router->get('/paypal/return',  ['uses' => 'PaymentController@paypalResponse']);
 });
 

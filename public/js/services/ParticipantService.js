@@ -25,6 +25,11 @@
             deleteTmpParticipant: function(request)
             {
                 return $http.post(Participant.url+'/deleteTmpParticipant', request);
+            },
+
+            doPayment: function(request)
+            {
+                return $http.post('/api/v1/moneybox/payment', request);
             }
 
         };

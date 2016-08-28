@@ -64,7 +64,13 @@ class PaymentController extends PLController{
     {
         try {
             $this->setResponse($this->_paymentRepository->paypalResponse($request));
-            return response()->json($this->getResponse());
+            if($this->getResponse()->status == 200)
+            {
+                return redirect('/');
+            } else {
+                // TODO - change this for anoter view
+                return response()->json($this->getResponse());
+            }
         } catch(\Exception $ex) {
             $response = new PLResponse();
             $response->status = $ex->getCode();

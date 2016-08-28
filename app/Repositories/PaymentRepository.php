@@ -133,7 +133,7 @@ class PaymentRepository extends BaseRepository
                         \DB::beginTransaction();
                         $payment->status = PLConstants::PAYMENT_PAYED;
                         $payment->save();
-                        $moneybox->collected_amount = $payment->amount;
+                        $moneybox->collected_amount += $payment->amount;
                         $moneybox->save();
                         \DB::commit();
                     } catch(\Exception $ex) {

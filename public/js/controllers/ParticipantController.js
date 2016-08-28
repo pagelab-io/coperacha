@@ -18,6 +18,7 @@
         $scope.amount = '';
         $scope.settings = '';
         $scope.request = {};
+        $scope.paymentMethod = '';
 
         $scope.goToParticipation = function()
         {
@@ -98,7 +99,7 @@
             if (amount == '' || isNaN(amount))
                 return result;
 
-            if (parseFloat(amount) <= 50)
+            if (parseFloat(amount) <= 49)
             {
                 alert("El monto mínimo de participación son $50.00");
                 return result;
@@ -148,6 +149,60 @@
                     alert("Ocurrio un error al registrar tus datos, porfavor intentalo mas tarde"+"\n\t"+response);
                 });
 
+        };
+
+        $scope.deleteTmpParticipant = function(callback)
+        {
+
+            var request = {'api-key' : '$2y$10$ScZUgkFzrMr9NM5qPzKag.4mLTW8ugSG/DtT6nerJb3W1v5sg6UBC'};
+            Participant.deleteTmpParticipant(request)
+                .success(function(response){
+                    callback(response);
+                })
+                .error(function(response){
+                    alert("Ocurrio un error, porfavor intentalo mas tarde"+"\n\t"+response);
+                });
+        };
+
+        $scope.doPayment = function()
+        {
+            var moneybox = JSON.parse($scope.moneybox);
+            $scope.request = {
+                'person_id' : $scope.person_id,
+                'moneybox_id'  : moneybox.id,
+                'amount'  : $scope.amount,
+                'payment_method'  : $scope.paymentMethod,
+                'method' : 'createPayment',
+                'api-key' : '$2y$10$ScZUgkFzrMr9NM5qPzKag.4mLTW8ugSG/DtT6nerJb3W1v5sg6UBC'
+            };
+
+            $scope.utils.showLoader();
+
+            $scope.deleteTmpParticipant(function(response){
+                console.log(response);
+                if(response.status == 200){
+                    Participant.doPayment($scope.request)
+                        .success(function(response){
+                            if(response.status == 200) {
+
+                                if ($scope.paymentMethod == 'P') {
+                                    window.location = response.data.url;
+                                } else {
+                                    $scope.utils.hideLoader();
+                                    console.log(response);
+                                }
+
+                            } else {
+                                $scope.utils.hideLoader();
+                                alert("Ocurrio un error al generarse el pago, porfavor intentelo mas tarde o elija otro método de pago");
+                            }
+                        })
+                        .error(function(response){
+                            $scope.utils.hideLoader();
+                            console.log(response);
+                        });
+                }
+            })
         }
 
     }
