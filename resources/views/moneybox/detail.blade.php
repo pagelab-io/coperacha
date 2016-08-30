@@ -74,6 +74,7 @@
                                 <!-- Your share button code -->
                             </div>
                             <form id="FormShare" class="form share"
+                                  data-url="{{$moneybox->url}}"
                                   v-on:submit.prevent="onSubmit" role="form">
 
                                 <div class="form-group">
