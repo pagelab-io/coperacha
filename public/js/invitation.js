@@ -16,7 +16,7 @@ var vm = new Vue({
     methods: {
         onSubmit: function (e) {
             this.$http.post('/sendinvitation', {
-                url: 'a6ac664ed52c97ef5ae230434ddfd6bd',
+                url: 'dbc0908372299d32dc812f99a15758a9',
                 emails: this.emails
             }).then(function(response, status, request) {
                 console.log(response);
