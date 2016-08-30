@@ -20,20 +20,19 @@ var vm = new Vue({
 
     methods: {
         onSubmit: function (e) {
-            console.log(this.url);
-            console.log(this.emails);
-
             this.$http.post('/sendinvitation', {
                 url: this.url,
                 emails: this.emails
             }).then(function(response, status, request) {
-                console.log(response);
+
                 if (response.status == 200) {
                     var res = JSON.parse(response.body);
                     if (res.success == true) {
                         this.message.text = 'Mensaje enviado correctamente';
                        // this.emails = '';
                     }
+                } else {
+                    console.log(response);
                 }
 
             }, function() {
