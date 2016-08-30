@@ -224,10 +224,10 @@ class HomeController extends Controller
             'content' => $request->get('content'),
         ];
 
-        Mail::send('emails.contact', $data, function ($message) {
-            $message->from('contacto@coperacha.com.mx', 'Coperacha');
-            $message->to('perezatanaciod@gmail.com', 'Daniel');
-            $message->cc('sanchezz985@gmail.com', 'Emmanuel');
+        Mail::send('emails.contact', $data, function ($message) use($request){
+            $message->from($request->get('email'), 'Coperacha');
+            $message->to('coperachamexico@gmail.com');
+            $message->bcc(array('sanchezz985@gmail.com','perezatanaciod@gmail.com'));
             $message->subject('Mensaje de Contacto');
         });
 
