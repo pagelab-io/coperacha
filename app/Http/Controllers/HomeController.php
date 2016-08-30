@@ -9,6 +9,7 @@ use App\Http\Responses\PLResponse;
 use App\Repositories\MoneyboxRepository;
 use App\Repositories\SettingRepository;
 use App\Repositories\UserRepository;
+use Illuminate\Contracts\Queue\EntityNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -242,9 +243,13 @@ class HomeController extends Controller
      */
     public function postMailInvitation(Request $request) {
 
-        $emails = explode(',', $request->get('emails'));
         $moneybox = Moneybox::byUrl($request->get('url'))->first();
 
+        if (!$moneybox) {
+            throw new EntityNotFoundException('No existe la alcancía');
+        }
+
+        $emails = explode(',', $request->get('emails'));
         foreach ($emails as $email) {
             $data = [
                 'invitation' => $email,
