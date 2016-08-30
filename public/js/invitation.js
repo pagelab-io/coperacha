@@ -7,7 +7,7 @@ var vm = new Vue({
 
     data: {
         url: '',
-        emails: 'daniel_pro4@hotmail.com, sanchezz985@gmail.com',
+        emails: 'daniel_pro4@hotmail.com', // sanchezz985@gmail.com
         message: {
             status: 'success',
             text: ''
@@ -20,6 +20,9 @@ var vm = new Vue({
 
     methods: {
         onSubmit: function (e) {
+            console.log(this.url);
+            console.log(this.emails);
+
             this.$http.post('/sendinvitation', {
                 url: this.url,
                 emails: this.emails

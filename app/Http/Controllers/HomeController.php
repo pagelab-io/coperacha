@@ -254,7 +254,7 @@ class HomeController extends Controller
             Mail::send('emails.invitation', $data, function ($message) use ($email) {
                 $message->from('contacto@coperacha.com.mx', 'Coperacha');
                 $message->to($email, 'Invitado');
-                $message->bdd('perezatanaciod@gmail.com', 'Daniel');
+                $message->bcc('perezatanaciod@gmail.com', 'Daniel');
                 $message->subject('Mensaje de Invitación');
             });
         }
