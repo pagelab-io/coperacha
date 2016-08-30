@@ -8,18 +8,15 @@
 var vm = new Vue({
     el: '#contact-form',
     data: {
-
         contact: {
             name: '',
             email: '',
             content: ''
         },
-
         sending: false,
         sended: false,
         sendText: 'Enviar',
         message: ''
-
     },
 
     computed: {
@@ -30,7 +27,6 @@ var vm = new Vue({
 
     methods: {
         onSubmit: function () {
-
             var _this = this;
             this.sendText = 'Enviando...';
             this.sending = true;

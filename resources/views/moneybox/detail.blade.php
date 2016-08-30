@@ -73,13 +73,23 @@
                                 </div>-->
                                 <!-- Your share button code -->
                             </div>
-                            <form class="form share" v-submit.prevent="onSubmit" role="form">
+                            <form id="FormShare" class="form share"
+                                  v-on:submit.prevent="onSubmit" role="form">
+
                                 <div class="form-group">
                                     <label>O envía correo a tus amigos para invitarlos a participar.</label>
                                 </div>
+
+                                <div class="alert alert-success" role="alert">@{{message.text}}</div>
+
                                 <div class="form-group">
                                     <div class="text-info">Introduce los emails separando cada uno con punto y coma (;)</div>
-                                    <textarea required class="form-control" rows="4" placeholder="Introduce las direcciones de correo"></textarea>
+                                    <textarea required
+                                              class="form-control"
+                                              rows="4"
+                                              name="emails"
+                                              v-model="emails"
+                                              placeholder="Introduce las direcciones de correo"></textarea>
                                 </div>
                                 <div class="form-group clearfix">
                                     <div class="pull-right">
@@ -96,5 +106,7 @@
 @endsection
 
 @section('js')
-
+    <script src="{{asset('/js/vendor/vuejs/vue.js')}}"></script>
+    <script src="{{asset('/js/vendor/vuejs/vue-resource.js')}}"></script>
+    <script src="{{asset('/js/invitation.js')}}"></script>
 @endsection

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Category;
+use App\Entities\Moneybox;
 use App\Http\Requests\PLRequest;
 use App\Http\Responses\PLResponse;
 use App\Repositories\MoneyboxRepository;
@@ -229,6 +230,33 @@ class HomeController extends Controller
             $message->cc('sanchezz985@gmail.com', 'Emmanuel');
             $message->subject('Mensaje de Contacto');
         });
+
+        return response()->json(['success' => true, 'data' => $data]);
+    }
+
+    /**
+     * Send mail contact
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function postMailInvitation(Request $request) {
+
+        $emails = explode(',', $request->get('emails'));
+        $moneybox = Moneybox::byUrl($request->get('url'))->first();
+
+        foreach ($emails as $email) {
+            $data = [
+                'invitation' => $email,
+                'moneybox' => $moneybox
+            ];
+
+            Mail::send('emails.invitation', $data, function ($message) use ($email) {
+                $message->from('contacto@coperacha.com.mx', 'Coperacha');
+                $message->to($email, 'Invitado');
+                $message->subject('Mensaje de Invitación');
+            });
+        }
 
         return response()->json(['success' => true, 'data' => $data]);
     }

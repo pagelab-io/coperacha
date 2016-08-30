@@ -75,6 +75,16 @@ class Moneybox extends Model
         return $this->belongsTo('App\Entities\Category');
     }
 
+    /**
+     * Scope a query to only include moneybox of a given uid
+     *
+     * @param $query
+     * @param $uid
+     */
+    public function scopeByUrl($query, $uid) {
+        return $query->where('url', $uid);
+    }
+
     //endregion
 
     //region Private Methods

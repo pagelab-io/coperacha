@@ -74,6 +74,7 @@ Route::group([
 });
 
 Route::post('/sendmail', [ 'as' => 'sendmail', 'uses' => 'HomeController@postMailContact']);
+Route::post('/sendinvitation', [ 'as' => 'sendinvitation', 'uses' => 'HomeController@postMailInvitation']);
 Route::get('/sendmail', [ 'as' => 'sendmail', 'uses' => 'HomeController@getMailContact']);
 
 //endregion
