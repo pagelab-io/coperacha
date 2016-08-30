@@ -1226,6 +1226,10 @@ body {
     max-width: 750px;
 }
 
+.moneybox-profile div.form.share {
+    margin-bottom: 50px;
+}
+
 .moneybox-profile .form.share textarea {
     border: none;
     background: #ECECFB;

@@ -20,7 +20,7 @@ class PLConstants {
     const EMAIL_CONTACT = 'emails.contact';
     const EMAIL_DEADLINE = 'emails.deadline';
     const EMAIL_GOAL_FINISHED = 'emails.goalfinished';
-    const EMAIL_MONEYBOX_INVITATION = 'emails.moneyboxinvitation';
+    const EMAIL_MONEYBOX_INVITATION = 'emails.invitation';
     const EMAIL_NEW_COPERACHA = 'emails.newcoperacha';
     const EMAIL_NEW_MONEYBOX = 'emails.newmoneybox';
     const EMAIL_PASSWORD_RECOVERY = 'emails.passwordrecovery';
