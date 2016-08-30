@@ -12,8 +12,10 @@ use App\Entities\MemberSetting;
 use App\Entities\Participant;
 use App\Entities\Person;
 use App\Http\Responses\PLResponse;
+use App\Models\Mailer;
 use App\Transactions\TxCreateMoneybox;
 use App\Transactions\TxUpdateMoneybox;
+use App\Utilities\PLConstants;
 use App\Utilities\PLDateTime;
 use Illuminate\Container\Container as App;
 use App\Http\Requests\PLRequest;
@@ -55,6 +57,11 @@ class MoneyboxRepository extends BaseRepository{
      */
     private $_txUpdateMoneybox;
 
+    /**
+     * @var Mailer
+     */
+    private $_mailer;
+
     //endregion
 
     //region Static
@@ -67,7 +74,8 @@ class MoneyboxRepository extends BaseRepository{
         CategoryRepository $categoryRepository,
         MemberSettingRepository $memberSettingRepository,
         TxCreateMoneybox $txCreateMoneybox,
-        TxUpdateMoneybox $txUpdateMoneybox)
+        TxUpdateMoneybox $txUpdateMoneybox,
+        Mailer $mailer)
     {
         parent::__construct($app);
         $this->_moneybox = $moneybox;
@@ -76,6 +84,7 @@ class MoneyboxRepository extends BaseRepository{
         $this->_memberSettingRepository = $memberSettingRepository;
         $this->_txCreateMoneybox = $txCreateMoneybox;
         $this->_txUpdateMoneybox = $txUpdateMoneybox;
+        $this->_mailer = $mailer;
     }
 
     //region Methods
@@ -125,6 +134,24 @@ class MoneyboxRepository extends BaseRepository{
         $response               = new PLResponse();
         $response->description  = 'Moneybox was created successfully';
         $response->data         = $this->_moneybox;
+
+        try{
+            // send email
+            $data = array(
+                'moneybox'  => $this->_moneybox,
+                'person'    => $person
+            );
+            $user = $person->user;
+            $options = array(
+                'to' => $user->email,
+                'bcc' => explode(',', PLConstants::EMAIL_BCC),
+                'title' => 'Tu alcancía fue creada'
+            );
+            $this->_mailer->send(PLConstants::EMAIL_NEW_MONEYBOX, $data, $options);
+        }catch(\Exception $ex) {
+            \Log::info("Error sending email");
+            \Log::info($ex->getTraceAsString());
+        }
 
         return $response;
     }

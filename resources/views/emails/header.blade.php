@@ -3,7 +3,7 @@
         <a href="{{route('pages.index')}}" style='color:#FF5000;text-decoration:none'>Ver en linea</a>
     </td>
     <td style="padding: 5px; text-align: right;">
-        <a style="display: inline-block" href="https://www.facebook.com/Coperacha-Mx-444730879054310/?fref=ts">
+        <a style="display: inline-block" href="https://www.facebook.com/coperachamx">
             <img width="30" height="30" src="{{asset('/images/emails/fb.png')}}" alt='facebook'/>
         </a>
         <a style="display: inline-block" href="https://www.instagram.com/coperachamx/">
