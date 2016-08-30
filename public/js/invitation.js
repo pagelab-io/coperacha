@@ -6,17 +6,25 @@ var vm = new Vue({
     el: '#FormShare',
 
     data: {
-        emails: 'daniel_pro4@hotmail.com, sanchezz985@gmail.com',
+        url: '',
+        emails: 'daniel_pro4@hotmail.com', // sanchezz985@gmail.com
         message: {
             status: 'success',
             text: ''
         }
     },
 
+    ready: function () {
+        this.url = (this.$el.dataset.url);
+    },
+
     methods: {
         onSubmit: function (e) {
+            console.log(this.url);
+            console.log(this.emails);
+
             this.$http.post('/sendinvitation', {
-                url: 'a6ac664ed52c97ef5ae230434ddfd6bd',
+                url: this.url,
                 emails: this.emails
             }).then(function(response, status, request) {
                 console.log(response);
