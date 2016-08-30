@@ -55,6 +55,9 @@
                 } else if(response.status == -2) {
                     $scope.utils.hideLoader();
                     alert("El correo ingresado ya existe en el sistema, por favor intenta con otro.");
+                } else {
+                    $scope.utils.hideLoader();
+                    alert("Ocurrio un error mientras realizabamos tu registro, por favor intenta mas tarde");
                 }
             }).error(function(response){
                 $scope.utils.hideLoader();

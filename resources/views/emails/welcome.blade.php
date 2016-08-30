@@ -4,7 +4,7 @@
 
 @section('body')
     <tr>
-        <td COLSPAN=2 style="font-family: Arial;font-size: 30px;color: #51B7CD;text-align: center;line-height: 30px;padding-top:45px;">¡Bienvenido/a a Coperacha, Emmanuel!</td>
+        <td COLSPAN=2 style="font-family: Arial;font-size: 30px;color: #51B7CD;text-align: center;line-height: 30px;padding-top:45px;">¡Bienvenido/a a Coperacha, {{$person->name}}!</td>
     </tr>
 
     <tr>
@@ -13,7 +13,7 @@
                 Primero que nada, queremos agradecerte por unirte a nuestra comunidad, esperamos acompañarte en muchas aventuras.
             </p>
             <p>
-                <a href="#" style='color:#FF5000;text-decoration:none; font-weight: bold'>Coperacha</a>, nace de la necesidad de hacer que el juntar el dinero de un grupo de personas sea mucho más fácil y divertido.
+                <a href="{{route('pages.index')}}" style='color:#FF5000;text-decoration:none; font-weight: bold'>Coperacha</a>, nace de la necesidad de hacer que el juntar el dinero de un grupo de personas sea mucho más fácil y divertido.
             </p>
             <p>
                 Estaremos en contacto contigo a través de emails para mantenerte informado de las novedades y algunos tips que pueden ser de utilidad para tus alcancías.
@@ -30,7 +30,7 @@
     </tr>
     <tr>
         <td COLSPAN=2 style="text-align: center;padding-bottom:20px;">
-            <img width="300" src="/images/emails/logo2.png"/>
+            <img width="300" src="{{asset('/images/emails/logo2.png')}}"/>
         </td>
     </tr>
 @endsection
