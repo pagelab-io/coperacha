@@ -7,7 +7,7 @@ var vm = new Vue({
 
     data: {
         url: '',
-        emails: '', // sanchezz985@gmail.com
+        emails: 'daniel_pro4@hotmail.com', //daniel_pro4@hotmail.com, sanchezz985@gmail.com
         message: {
             status: 'success',
             text: ''
@@ -29,7 +29,11 @@ var vm = new Vue({
                     var res = JSON.parse(response.body);
                     if (res.success == true) {
                         this.message.text = 'Mensaje enviado correctamente';
-                       // this.emails = '';
+                        this.emails = '';
+
+                        setTimeout(function () {
+                            this.message.text = '';
+                        }.bind(this), 3000);
                     }
                 } else {
                     console.log(response);

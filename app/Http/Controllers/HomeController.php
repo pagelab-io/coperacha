@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Category;
+use App\Entities\Invitation;
 use App\Entities\Moneybox;
 use App\Http\Requests\PLRequest;
 use App\Http\Responses\PLResponse;
@@ -250,18 +251,23 @@ class HomeController extends Controller
         }
 
         $emails = explode(',', $request->get('emails'));
+
         foreach ($emails as $email) {
             $data = [
                 'invitation' => $email,
                 'moneybox' => $moneybox
             ];
 
-            Mail::send('emails.invitation', $data, function ($message) use ($email) {
-                $message->from('contacto@coperacha.com.mx', 'Coperacha');
-                $message->to($email, 'Invitado');
-                $message->bcc('perezatanaciod@gmail.com', 'Daniel');
-                $message->subject('Mensaje de Invitación');
-            });
+            $record = Invitation::create(['email' => $email, 'status' => 1]);
+            
+            if ($record) {
+                Mail::send('emails.invitation', $data, function ($message) use ($email) {
+                    $message->from('contacto@coperacha.com.mx', 'Coperacha');
+                    $message->to($email, 'Invitado');
+                    $message->bcc('perezatanaciod@gmail.com', 'Daniel');
+                    $message->subject('Mensaje de Invitación');
+                });
+            }
         }
 
         return response()->json(['success' => true, 'data' => $emails]);
