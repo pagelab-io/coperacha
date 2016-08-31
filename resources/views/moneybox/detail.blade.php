@@ -93,7 +93,7 @@
                                 </div>
                                 <div class="form-group clearfix">
                                     <div class="pull-right">
-                                        <button class="btn btn-primary small">Enviar invitaciones</button>
+                                        <button id="btnSendInvitation" class="btn btn-primary small">Enviar invitaciones</button>
                                     </div>
                                 </div>
                             </form>

@@ -2,15 +2,15 @@
 @section('title', 'Invitación a alcancía')
 @section('body')
     <tr>
+        <td COLSPAN=2 style="font-family: Arial;font-size: 30px;color: #51B7CD;text-align: left;line-height: 30px;padding-top:10px;">Hola: </td>
+    </tr>
+    <tr>
         <td COLSPAN=2 style="font-family: Arial;font-size: 30px;color: #FF5000;text-align: center;line-height: 30px;padding-top:45px;padding-bottom:15px;">
             <a href="{{asset('/moneybox/detail/'.$moneybox->url)}}" style='color:#FF5000;text-decoration:none;'>{{$moneybox->name}}</a>
         </td>
     </tr>
     <tr>
         <td COLSPAN=2 align="center" height="1" style="font-size:1px; line-height:1px; background: #CCCCCC"></td>
-    </tr>
-    <tr>
-        <td COLSPAN=2 style="font-family: Arial;font-size: 30px;color: #51B7CD;text-align: left;line-height: 30px;padding-top:10px;">Hola: </td>
     </tr>
     <tr>
         <td COLSPAN=2 style="font-family: Arial;font-size: 16px;color: #666666;text-align: justify;line-height: 28px; padding-top:10px;">

@@ -20,6 +20,10 @@ var vm = new Vue({
 
     methods: {
         onSubmit: function (e) {
+
+            var btnSend = $('#btnSendInvitation');
+            btnSend.text('Enviando').addClass('disabled');
+
             this.$http.post('/sendinvitation', {
                 url: this.url,
                 emails: this.emails
@@ -32,6 +36,7 @@ var vm = new Vue({
                         this.emails = '';
 
                         setTimeout(function () {
+                            btnSend.text('Enviar invitaciones').removeClass('disabled');
                             this.message.text = '';
                         }.bind(this), 3000);
                     }
