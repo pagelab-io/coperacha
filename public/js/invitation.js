@@ -7,7 +7,7 @@ var vm = new Vue({
 
     data: {
         url: '',
-        emails: 'daniel_pro4@hotmail.com', // sanchezz985@gmail.com
+        emails: '', // sanchezz985@gmail.com
         message: {
             status: 'success',
             text: ''
