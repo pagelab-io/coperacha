@@ -18,6 +18,7 @@ class CreateInvitationsTable extends Migration
             $table->integer('moneybox_id');
             $table->string('email', 128);
             $table->integer('status');
+            $table->integer('count');
             $table->timestamps();
         });
     }
