@@ -61,6 +61,9 @@ class Moneybox extends Model
         return $this->hasMany('App\Entities\Member');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function participants()
     {
         return $this->hasMany('App\Entities\Participant');
@@ -73,6 +76,15 @@ class Moneybox extends Model
     public function category()
     {
         return $this->belongsTo('App\Entities\Category');
+    }
+
+    /**
+     * Define the relation between Moneybox and Person
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function person(){
+        return $this->belongsTo(Person::class);
     }
 
     /**

@@ -7,7 +7,7 @@ var vm = new Vue({
 
     data: {
         url: '',
-        emails: '', //daniel_pro4@hotmail.com, sanchezz985@gmail.com
+        emails: 'daniel_pro4@hotmail.com', //daniel_pro4@hotmail.com, sanchezz985@gmail.com
         message: {
             status: 'success',
             text: ''
@@ -16,19 +16,18 @@ var vm = new Vue({
 
     ready: function () {
         this.url = (this.$el.dataset.url);
+        this.btnSend = $('#btnSendInvitation');
     },
 
     methods: {
         onSubmit: function (e) {
 
-            var btnSend = $('#btnSendInvitation');
-            btnSend.text('Enviando').addClass('disabled');
+            this.btnSend.text('Enviando').addClass('disabled');
 
             this.$http.post('/sendinvitation', {
                 url: this.url,
                 emails: this.emails
             }).then(function(response, status, request) {
-
                 if (response.status == 200) {
                     var res = JSON.parse(response.body);
                     if (res.success == true) {
@@ -36,16 +35,14 @@ var vm = new Vue({
                         this.emails = '';
 
                         setTimeout(function () {
-                            btnSend.text('Enviar invitaciones').removeClass('disabled');
+                            this.btnSend.text('Enviar invitaciones').removeClass('disabled');
                             this.message.text = '';
                         }.bind(this), 3000);
                     }
                 } else {
                     console.log(response);
                 }
-
             }, function() {
-                console.log('failed');
                 this.message.text = 'El Mensaje no se pudo enviar, inténtelo más tarde.';
             });
         }

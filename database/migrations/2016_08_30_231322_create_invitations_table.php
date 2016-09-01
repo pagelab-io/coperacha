@@ -13,7 +13,9 @@ class CreateInvitationsTable extends Migration
     public function up()
     {
         Schema::create('invitations', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
+            $table->integer('moneybox_id');
             $table->string('email', 128);
             $table->integer('status');
             $table->timestamps();

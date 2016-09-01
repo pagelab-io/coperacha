@@ -18,5 +18,12 @@ class Invitation extends Model
      *
      * @var string[]
      */
-    protected $fillable = ['email', 'status'];
+    protected $fillable = ['email', 'status', 'moneybox_id'];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function moneybox() {
+        return $this->belongsTo(Moneybox::class);
+    }
 }

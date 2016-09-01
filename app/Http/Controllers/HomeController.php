@@ -229,7 +229,7 @@ class HomeController extends Controller
         Mail::send('emails.contact', $data, function ($message) use($request){
             $message->from($request->get('email'), 'Coperacha');
             $message->to('coperachamexico@gmail.com');
-            $message->bcc(array('sanchezz985@gmail.com','perezatanaciod@gmail.com'));
+            $message->bcc(['sanchezz985@gmail.com','perezatanaciod@gmail.com']);
             $message->subject('Mensaje de Contacto');
         });
 
@@ -242,7 +242,8 @@ class HomeController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function postMailInvitation(Request $request) {
+    public function postMailInvitation(Request $request)
+    {
 
         $moneybox = Moneybox::byUrl($request->get('url'))->first();
 
@@ -254,23 +255,56 @@ class HomeController extends Controller
 
         foreach ($emails as $email) {
             $data = [
-                'invitation' => $email,
                 'moneybox' => $moneybox
             ];
 
-            $record = Invitation::create(['email' => $email, 'status' => 1]);
-            
+            $record = Invitation::create(['email' => $email, 'status' => 0, 'moneybox_id' => $moneybox->id]);
+
             if ($record) {
                 Mail::send('emails.invitation', $data, function ($message) use ($email) {
                     $message->from('contacto@coperacha.com.mx', 'Coperacha');
                     $message->to($email, 'Invitado');
-                    $message->bcc('perezatanaciod@gmail.com', 'Daniel');
+                    $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com']);
+                    $message->subject('Mensaje de Invitación');
+                });
+            }
+        }
+    }
+        /**
+     * Send mail contact
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function postMailRememberInvitation(Request $request) {
+
+        $invitations = Invitation::where('status', 0)->get();
+
+        if (!$invitations) {
+            throw new EntityNotFoundException('No existe la alcancía');
+        }
+
+        $attends = [];
+
+        foreach ($invitations as $invitation) {
+            if (!isset($attends[$invitation->email])) {
+
+                $attends[$invitation->email] = $invitation->id;
+                $data = [
+                    'invitation' => $invitation,
+                    'moneybox' => $invitation->moneybox
+                ];
+
+                Mail::send('emails.pendinginvitation', $data, function ($message) use ($invitation) {
+                    $message->from('contacto@coperacha.com.mx', 'Coperacha');
+                    $message->to($invitation->email, 'Invitado');
+                    $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com']);
                     $message->subject('Mensaje de Invitación');
                 });
             }
         }
 
-        return response()->json(['success' => true, 'data' => $emails]);
+        return response()->json(['success' => true, 'data' => $attends]);
     }
 
     /**
