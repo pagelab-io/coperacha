@@ -244,7 +244,6 @@ class HomeController extends Controller
      */
     public function postMailInvitation(Request $request)
     {
-
         $moneybox = Moneybox::byUrl($request->get('url'))->first();
 
         if (!$moneybox) {
@@ -258,7 +257,7 @@ class HomeController extends Controller
                 'moneybox' => $moneybox
             ];
 
-            $record = Invitation::create(['email' => $email, 'status' => 0, 'moneybox_id' => $moneybox->id]);
+            $record = Invitation::create(['email' => trim($email), 'status' => 0, 'moneybox_id' => $moneybox->id]);
 
             if ($record) {
                 Mail::send('emails.invitation', $data, function ($message) use ($email) {
