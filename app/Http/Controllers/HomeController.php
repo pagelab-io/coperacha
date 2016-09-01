@@ -264,7 +264,7 @@ class HomeController extends Controller
                 Mail::send('emails.invitation', $data, function ($message) use ($email) {
                     $message->from('contacto@coperacha.com.mx', 'Coperacha');
                     $message->to($email, 'Invitado');
-                    $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com']);
+                    $message->bcc(['perezatanaciod@gmail.com']);
                     $message->subject('Mensaje de Invitación');
                 });
             }
@@ -298,7 +298,7 @@ class HomeController extends Controller
                 Mail::send('emails.pendinginvitation', $data, function ($message) use ($invitation) {
                     $message->from('contacto@coperacha.com.mx', 'Coperacha');
                     $message->to($invitation->email, 'Invitado');
-                    $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com']);
+                    $message->bcc(['perezatanaciod@gmail.com']);
                     $message->subject('Mensaje de Invitación');
                 });
             }

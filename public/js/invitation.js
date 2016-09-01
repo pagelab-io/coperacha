@@ -21,7 +21,6 @@ var vm = new Vue({
 
     methods: {
         onSubmit: function (e) {
-
             this.btnSend.text('Enviando').addClass('disabled');
 
             this.$http.post('/sendinvitation', {
