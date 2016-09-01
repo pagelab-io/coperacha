@@ -12,10 +12,9 @@
                 participar en la alcancía llamada <strong>{{$moneybox->name}}</strong>
                 creada por <strong>{{$moneybox->person->name}}</strong>, la cual busca {{$moneybox->description}}.
             </p>
-            <p>Para poder participar entra al siguiente link:</p>
-            <strong>
-                <a href="{{asset('/moneybox/detail/'.$moneybox->url)}}" style='color:#FF5000;text-decoration:none;'>{{$moneybox->name}}</a>
-            </strong>
+            <p>
+                Para poder participar entra al siguiente link:<strong><a href="{{asset('/moneybox/detail/'.$moneybox->url)}}" style='color:#FF5000;text-decoration:none;'>{{$moneybox->name}}</a></strong>
+            </p>
             <p>Saludos,<br>Pepe</p>
         </td>
     </tr>
