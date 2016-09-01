@@ -269,6 +269,8 @@ class HomeController extends Controller
                 });
             }
         }
+
+        return response()->json(['success' => true, 'data' => $emails]);
     }
         /**
      * Send mail contact
