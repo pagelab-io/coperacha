@@ -105,6 +105,37 @@ class PaymentRepository extends BaseRepository
         return $response;
     }
 
+
+    public function conektaResponse(PLRequest $request)
+    {
+        \Log::info("=== Conekta Response ===");
+        $response = new PLResponse();
+
+        if ($request->get('type') == 'charge.paid'){
+            $payment = null;
+            $moneybox = null;
+            $return_data = $request->get('data');
+            \Log::info($return_data);
+
+            /*\Log::info("=== Searching payment ===");
+            try { $payment = $this->byToken($request->get('token')); }
+            catch(\Exception $ex) { throw new \Exception('Unable to find the selected payment, try again', -1, $ex); }
+            \Log::info("=== Payment: ".$payment." ===");
+
+            \Log::info("=== Searching moneybox ===");
+            try { $moneybox = $this->_moneyboxRepository->byId($payment->moneybox_id);}
+            catch(\Exception $ex) { throw new \Exception('Unable to find moneybox', -1, $ex); }
+            \Log::info("=== Moneybox: ".$moneybox." ===");*/
+
+
+        } else {
+            \Log::info("Error ...");
+        }
+
+        $response->description = 'success';
+        return $response;
+    }
+
     public function paypalResponse(PLRequest $request)
     {
         \Log::info("=== PayPal Response ===");

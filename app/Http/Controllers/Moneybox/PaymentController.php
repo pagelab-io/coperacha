@@ -82,18 +82,16 @@ class PaymentController extends PLController{
 
     public function conektaResponse(PLRequest $request)
     {
-        header('HTTP/1.1 200 OK');
-        \Log::info("=== LLegando a response de conekta ");
-        \Log::info($request);
-        $body = @file_get_contents('php://input');
-        $event = json_decode($body);
-        $charge = $event->data->object;
-
-        \Log::info("====================");
-        \Log::info($body);
-        \Log::info($event);
-        \Log::info($charge);
-        \Log::info("====================");
+        try {
+            $this->setResponse($this->_paymentRepository->conektaResponse($request));
+            return response()->json($this->getResponse());
+        } catch(\Exception $ex) {
+            $response = new PLResponse();
+            $response->status = $ex->getCode();
+            $response->description = $ex->getMessage();
+            $response->data = $ex->getTraceAsString();
+            return response()->json($response);
+        }
     }
 
     //endregion
