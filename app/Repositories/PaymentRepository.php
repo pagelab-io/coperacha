@@ -117,6 +117,7 @@ class PaymentRepository extends BaseRepository
             $return_data = $request->get('data');
             \Log::info("======>");
             \Log::info($return_data['reference_id']);
+            \Log::info($return_data->reference_id);
 
             /*\Log::info("=== Searching payment ===");
             try { $payment = $this->byToken($request->get('token')); }
