@@ -80,6 +80,12 @@ class PaymentController extends PLController{
         }
     }
 
+    public function conektaResponse(PLRequest $request)
+    {
+        \Log::info("=== LLegando a response de conekta ");
+        \Log::info($request);
+    }
+
     //endregion
 
 
