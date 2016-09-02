@@ -11,7 +11,7 @@
                                 <div class="col-xs-6 col-sm-4 moneybox-item">
                                     <header>
                                         <picture>
-                                            <img class="img-responsive" src="/images/icon-mbox-{{$i%2==0?'1':'2'}}.png" alt="">
+                                            <img class="img-responsive" src="/images/icon-mbox-{{$i%2==0?'1':'2'}}.png">
                                         </picture>
                                     </header>
                                     <main class="actions">
@@ -20,7 +20,7 @@
                                             <a href="#" class="btn btn-primary">Modificar</a>
                                         </div>
                                         <div class="form-group">
-                                            <a class="btn btn-primary" href="{{route('moneybox.request')}}">Utilizar dinero</a>
+                                            <a class="btn btn-primary" href="{{url('moneybox/request/'.$moneybox->url)}}">Utilizar dinero</a>
                                         </div>
                                         <div class="form-group">
                                             <a class="btn btn-primary" href="{{url('/moneybox/detail/'.$moneybox->url)}}">Invitar</a>

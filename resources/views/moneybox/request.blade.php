@@ -1,13 +1,10 @@
 @extends("layouts.master")
 
 @section("content")
-
     @include('partials.header')
-
     <section class="block request-view">
         <div class="holder">
             <div class="container-fluid">
-
                 <div class="header-block">
                     <div class="title">
                         <div class="row">
@@ -17,8 +14,8 @@
                             <div class="col-sm-9">
                                 <h2>
                                     <div>¡Felicidades!</div>
-                                    <div>Ya se recaudó el dinero para tu alcancía “Prueba 2”</div>
-                                    <div>por un monto de $350.00</div>
+                                    <div>Ya se recaudó el dinero para tu alcancía <strong>"{{$moneybox->name}}"</strong></div>
+                                    <div>por un monto de $ {{$moneybox->collected_amount}}</div>
                                 </h2>
                             </div>
                         </div>
@@ -26,7 +23,7 @@
                 </div>
 
                 <div class="content-block">
-                    <form action="#" class="form">
+                    <form class="form" data-moneyboxurl="{{$moneybox->url}}">
                         <div class="form-group">
                             <p class="text-info">Llena por favor los siguientes datos:</p>
                         </div>
