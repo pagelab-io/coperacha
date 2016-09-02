@@ -115,25 +115,35 @@ class PaymentRepository extends BaseRepository
             $payment = null;
             $moneybox = null;
             $return_data = $request->get('data');
-            \Log::info("======>");
-            \Log::info($return_data['object']['reference_id']);
-            \Log::info("======>");
 
-            /*\Log::info("=== Searching payment ===");
-            try { $payment = $this->byToken($request->get('token')); }
+            \Log::info("=== Searching payment ===");
+            try { $payment = $this->byToken($return_data['object']['reference_id']); }
             catch(\Exception $ex) { throw new \Exception('Unable to find the selected payment, try again', -1, $ex); }
             \Log::info("=== Payment: ".$payment." ===");
 
             \Log::info("=== Searching moneybox ===");
             try { $moneybox = $this->_moneyboxRepository->byId($payment->moneybox_id);}
             catch(\Exception $ex) { throw new \Exception('Unable to find moneybox', -1, $ex); }
-            \Log::info("=== Moneybox: ".$moneybox." ===");*/
+            \Log::info("=== Moneybox: ".$moneybox." ===");
 
+            try {
+                \DB::beginTransaction();
+                $payment->status = PLConstants::PAYMENT_PAYED;
+                $payment->save();
+                $moneybox->collected_amount += $payment->amount;
+                $moneybox->save();
+                \DB::commit();
+            } catch(\Exception $ex) {
+                \Log::info("=== Executing rollback ... ===");
+                \DB::rollback();
+                throw $ex;
+            }
+            $response->description = 'success';
         } else {
-            \Log::info("Error ...");
+            \Log::info("Waiting for charge ...");
+            $response->description = 'Waiting for charge ...';
         }
 
-        $response->description = 'success';
         return $response;
     }
 
