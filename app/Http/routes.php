@@ -153,6 +153,7 @@ $router->group([
     'prefix' => 'payment',
 ], function($router){
     $router->get('/paypal/return',  ['uses' => 'PaymentController@paypalResponse']);
+    $router->get('/conekta/return',  ['uses' => 'PaymentController@paypalResponse']);
 });
 
 /*
