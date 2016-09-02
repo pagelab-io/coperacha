@@ -127,7 +127,6 @@ class PaymentRepository extends BaseRepository
             catch(\Exception $ex) { throw new \Exception('Unable to find moneybox', -1, $ex); }
             \Log::info("=== Moneybox: ".$moneybox." ===");*/
 
-
         } else {
             \Log::info("Error ...");
         }
