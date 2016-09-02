@@ -116,7 +116,7 @@ class PaymentRepository extends BaseRepository
             $moneybox = null;
             $return_data = $request->get('data');
             \Log::info("======>");
-            \Log::info($return_data['object']);
+            \Log::info($return_data['object']['reference_id']);
             \Log::info("======>");
 
             /*\Log::info("=== Searching payment ===");
