@@ -149,13 +149,19 @@ class HomeController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param $moneyboxurl
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Exception
+     * @internal param Request $request
      */
-    public function getRequestPage(Request $request){
-
+    public function getRequestPage($moneyboxurl)
+    {
+        // get moneybox with it's settings
+        $variables = $this->_moneyboxRepository->getByURL($moneyboxurl);
+        $moneybox = $variables['moneybox'];
         return view('moneybox.request')
-            ->with('pageTitle','Solicitud de Dinero');
+            ->with('pageTitle','Solicitud de Dinero')
+            ->with('moneybox',$moneybox);
     }
 
     /**
@@ -164,7 +170,6 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function getJoinPage($moneyboxurl){
-
         // get moneybox with it's settings
         $variables = $this->_moneyboxRepository->getByURL($moneyboxurl);
         $moneybox = $variables['moneybox'];
