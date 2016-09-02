@@ -3,9 +3,6 @@
 
 @section('body')
     <tr>
-        <td COLSPAN=2 style="font-family: Arial;font-size: 30px;color: #51B7CD;text-align: center;line-height: 30px;padding-top:45px;">Hola {{$invitation->email}}</td>
-    </tr>
-    <tr>
         <td COLSPAN=2 style="font-family: Arial;font-size: 16px;color: #666666;text-align: justify;line-height: 28px; padding-top:10px;">
             <p>
                 Hola, observamos que tienes una invitación pendiente para
