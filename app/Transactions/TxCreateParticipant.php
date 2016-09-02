@@ -3,6 +3,7 @@
 namespace App\Transactions;
 
 
+use App\Entities\Invitation;
 use App\Entities\MemberSetting;
 use App\Entities\Moneybox;
 use App\Entities\Participant;
@@ -147,6 +148,20 @@ class TxCreateParticipant extends PLTransaction{
         \Log::info("=== Settings created successfully ===");
     }
 
+    /**
+     * Get's the invitation field if exist
+     * @param $email
+     * @param $moneybox_id
+     * @return mixed
+     */
+    private function getInvitation($email, $moneybox_id)
+    {
+        if (Invitation::where(['email' => $email, 'moneybox_id' => $moneybox_id])->count() == 1){
+            return Invitation::where(['email' => $email, 'moneybox_id' => $moneybox_id])->firstOrFail();
+        }
+        return null;
+    }
+
     //endregion
 
     //region Methods
@@ -189,6 +204,14 @@ class TxCreateParticipant extends PLTransaction{
             }
             // create participant
             $participant = $this->createParticipant($person, $moneybox);
+
+            // update invitation's table
+            $invitation = $this->getInvitation($user->email, $moneybox->id);
+            if($invitation instanceof Invitation){
+                $invitation->status=1;
+                if (!$invitation->save()) throw new \Exception("Unable to update invitation", -1);
+            }
+
             // create participant settings
             $this->createSettings($request, $participant);
             \DB::commit();
