@@ -1,6 +1,11 @@
 function Utils()
 {
 
+    this.init = function()
+    {
+        console.log("utils :D");
+    };
+
     /**
      * return a formatted date in YYYY-mm-dd format
      * input: 1990-March-1
@@ -71,4 +76,41 @@ function Utils()
         var loader = document.getElementsByClassName('loader')[0];
         document.body.removeChild(loader);
     };
+
+    this.showAlert = function()
+    {
+        var alert = document.getElementById('alert-modal-coperacha');
+        alert.style.display = 'block';
+        this.initAlertEvents();
+    };
+
+    this.hideAlert = function()
+    {
+        var alert = document.getElementById('alert-modal-coperacha');
+        alert.style.display = 'none';
+    };
+
+    this.setAlertTitle = function(text)
+    {
+        document.getElementById('alert-title').innerHTML=text;
+    };
+
+    this.initAlertEvents = function()
+    {
+        var _this = this;
+        document.getElementById('close-alert-1').addEventListener('click', function(){
+            _this.hideAlert();
+        });
+        document.getElementById('close-alert-2').addEventListener('click', function(){
+            _this.hideAlert();
+        });
+        document.addEventListener('keyup', function(e){
+            if (e.keyCode == 27) {
+                if(document.getElementById('alert-modal-coperacha').style.display != 'none'){
+                    _this.hideAlert();
+                }
+            }
+        });
+    }
+
 }

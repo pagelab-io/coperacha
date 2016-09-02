@@ -10,11 +10,12 @@
     transition: 300ms all;
 }
 
+.alert-modal,
 .popup {
     position: absolute;
     background: white;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    height: 404px;
+    max-height: 404px;
     width: 534px;
     top: 50%;
     left: 50%;
@@ -23,10 +24,16 @@
     transition: 300ms all;
 }
 
+.alert-modal{
+    min-height: 200px;
+}
+
+.alert-modal .close:hover,
 .popup .close:hover {
     opacity: 1;
 }
 
+.alert-modal .close,
 .popup .close {
     color: white;
     opacity: .8;
@@ -38,6 +45,7 @@
     font-size:16px;
 }
 
+.alert-modal > .popup-header,
 .popup > .popup-header {
     background-color: #FF5000;
     color: white;
@@ -47,7 +55,7 @@
     padding: 20px;
     width: 100%;
 }
-
+.alert-modal > .popup-body > .email-login,
 .popup > .popup-body > .email-login {
     margin: 20px;
     text-align: center;
@@ -66,12 +74,14 @@
     font-size: 13px;
 }
 
+.alert-modal > .popup-body > .email-login > span,
 .popup > .popup-body > .email-login > span{
     color: #0085B2;
     font-size: 11px;
     display: block;
 }
 
+.alert-modal > .popup-body > .email-login > .btn-email-login,
 .popup > .popup-body > .email-login > .btn-email-login {
     background-color: #2EB2CD;
     width: 342px;
@@ -96,4 +106,8 @@
     margin: 20px auto;
     display: block;
     border: none;
+}
+.info-alert{
+    font-size: 11px;
+    color: #2eb2cd;
 }

@@ -87,6 +87,32 @@
         <!-- LoginDialogView -->
         <coperacha-modal class="popup-wrapper"></coperacha-modal>
 
+        <!-- Alert Dialog -->
+        <div class="popup-wrapper" id="alert-modal-coperacha">
+            <div class="alert-modal">
+                <!-- header -->
+                <div class="popup-header">
+                    <span id="alert-title"><!--title--></span>
+                </div>
+                <!-- ./header -->
+                <div class="close" id="close-alert-1">x</div>
+
+                <!-- body -->
+                <div class="popup-body">
+
+                    <!-- email login -->
+                    <div class="email-login">
+                        <div id="alert-content">
+                            <!--content-->
+                        </div>
+                        <button class="btn-email-login" id="close-alert-2">ACEPTAR</button>
+                    </div>
+                    <!-- email login -->
+                </div>
+            </div>
+        </div>
+        <!-- Alert Dialog -->
+
         <!-- Include jQuery
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
         <script src="{{asset('/js/vendor/jquery/jquery-3.1.0.js')}}"></script>
