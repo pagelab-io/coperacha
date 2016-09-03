@@ -223,7 +223,7 @@ class PaymentRepository extends BaseRepository
                     // send email
                     $payer   = $this->getPayerOrCreator($payment->person_id);
                     $creator = $this->getPayerOrCreator($moneybox->person_id);
-                    $this->sendPaymentEmails($payer, $creator, $moneybox, ($moneybox->goal_amount > $moneybox->collected_amount) ? true : false);
+                    $this->sendPaymentEmails($payer, $creator, $moneybox, ($moneybox->goal_amount > $moneybox->collected_amount) ? false : true);
 
                 } else {
                     $response->status = -301;
