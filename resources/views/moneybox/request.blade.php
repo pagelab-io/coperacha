@@ -2,7 +2,9 @@
 
 @section("content")
     @include('partials.header')
-    <section class="block request-view">
+    <section id="RequestMoneyView" class="block request-view"
+             data-moneybox_id="{{$moneybox->id}}"
+             data-user_id="{{$moneybox->person->user->id}}">
         <div class="holder">
             <div class="container-fluid">
                 <div class="header-block">
@@ -21,9 +23,11 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="content-block">
-                    <form class="form" data-moneyboxurl="{{$moneybox->url}}">
+                    <div v-if="loading" class="loader"></div>
+                    <form id="RequestForm"
+                          v-on:submit.prevent="onSubmit"
+                          class="form request-form" data-moneyboxurl="{{$moneybox->url}}">
                         <div class="form-group">
                             <p class="text-info">Llena por favor los siguientes datos:</p>
                         </div>
@@ -32,7 +36,9 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="name">Nombre del titular de la cuenta</label>
-                                    <input id="name" name="name" type="text"
+                                    <input id="name"
+                                           v-model="order.name"
+                                           name="name" type="text"
                                            required
                                            class="form-control"
                                            placeholder="Nombre del titular de la cuenta">
@@ -40,36 +46,59 @@
 
                                 <div class="form-group">
                                     <label for="name">Selecciona tu banco</label>
-                                    <select name="bank" id="bank" class="form-control">
+                                    <select id="bank"
+                                            name="bank"
+                                            v-model="order.bank_name"
+                                            class="form-control">
+                                        <option value="banorte">Banorte</option>
+                                        <option value="bancomer">Bancome</option>
+                                        <option value="hsbs">HSBC</option>
+                                        <option value="banamex">Banamex</option>
                                         <option value="santander">Santander</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="address">Dirección del banco</label>
-                                    <textarea id="address" name="address"  class="form-control" rows="3" placeholder="Dirección del banco"></textarea>
+                                    <textarea id="address"
+                                              name="address"
+                                              v-model="order.bank_address"
+                                              class="form-control" rows="3" placeholder="Dirección del banco"></textarea>
                                 </div>
 
                                 <div class="form-group">
                                     <span for="file">Adjuntar copia de su información bancaria para
                                             confirmar los datos</span>
-                                    <input id="file" name="file" type="file">
+                                    <input id="file"
+                                           name="file"
+                                           v-model="order.file"
+                                           type="file">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="clabe">Clabe Interbancaria</label>
-                                    <input id="clabe" name="clabe" type="number" class="form-control" placeholder="Clabe Interbancaria">
+                                    <input id="clabe"
+                                           name="clabe"
+                                           v-model="order.clabe"
+                                           type="text" class="form-control" placeholder="Clabe Interbancaria">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="account">Número de cuenta</label>
-                                    <input id="account" name="account" type="number" class="form-control" placeholder="Número de cuenta">
+                                    <input id="account"
+                                           name="account"
+                                           v-model="order.account"
+                                           type="number" class="form-control"
+                                           placeholder="Número de cuenta">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="comments">Comentarios</label>
-                                    <textarea id="comments" name="comments"  class="form-control" rows="3" placeholder="Comentarios"></textarea>
+                                    <textarea id="comments"
+                                              name="comments"
+                                              v-model="order.comments"
+                                              class="form-control" rows="3" placeholder="Comentarios"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -80,14 +109,14 @@
                             </div>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>
     </section>
-
 @endsection
 
 @section('js')
-
+    <script src="{{asset('/js/vendor/vuejs/vue.js')}}"></script>
+    <script src="{{asset('/js/vendor/vuejs/vue-resource.js')}}"></script>
+    <script src="{{asset('/js/request.js')}}"></script>
 @endsection

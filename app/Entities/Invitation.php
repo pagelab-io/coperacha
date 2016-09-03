@@ -21,6 +21,8 @@ class Invitation extends Model
     protected $fillable = ['email', 'status', 'moneybox_id'];
 
     /**
+     * Gets the moneybox that belong the invitation
+     * 
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function moneybox() {

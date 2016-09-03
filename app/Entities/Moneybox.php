@@ -88,6 +88,15 @@ class Moneybox extends Model
     }
 
     /**
+     * Define the relation between Moneybox and Order
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function order() {
+        return $this->hasOne(Order::class);
+    }
+
+    /**
      * Scope a query to only include moneybox of a given uid
      *
      * @param $query

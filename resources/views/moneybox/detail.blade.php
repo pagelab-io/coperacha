@@ -52,7 +52,7 @@
                                     <input type="hidden" ng-init="moneyboxurl='{{$moneybox->url}}'"/>
                                     <button class="btn-primary small" ng-click="goToParticipation()">Participa</button>
                                 </div>
-                            </form>
+                            </form> <!-- ./FormProfile -->
                         </div>
                         <div class="col-sm-7">
                             <div class="form share">
@@ -72,7 +72,7 @@
                                     </a>
                                 </div>-->
                                 <!-- Your share button code -->
-                            </div>
+                            </div> <!-- ./FormShare -->
                             <form id="FormShare" class="form share"
                                   data-url="{{$moneybox->url}}"
                                   v-on:submit.prevent="onSubmit" role="form">
@@ -96,7 +96,7 @@
                                         <button id="btnSendInvitation" class="btn btn-primary small">Enviar invitaciones</button>
                                     </div>
                                 </div>
-                            </form>
+                            </form> <!-- ./FormShare -->
                         </div>
                     </div>
                 </div>

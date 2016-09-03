@@ -245,5 +245,5 @@
 @section('js')
     <script src="{{asset('/js/vendor/vuejs/vue.js')}}"></script>
     <script src="{{asset('/js/vendor/vuejs/vue-resource.js')}}"></script>
-    <script src="{{asset('/js/profile/app.js')}}"></script>
+    <script src="{{asset('/js/profile.js')}}"></script>
 @endsection

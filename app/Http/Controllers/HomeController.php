@@ -5,14 +5,15 @@ namespace App\Http\Controllers;
 use App\Entities\Category;
 use App\Entities\Invitation;
 use App\Entities\Moneybox;
+use App\Entities\Order;
 use App\Http\Requests\PLRequest;
-use App\Http\Responses\PLResponse;
 use App\Repositories\MoneyboxRepository;
 use App\Repositories\SettingRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Contracts\Queue\EntityNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Mockery\CountValidator\Exception;
 
 class HomeController extends Controller
 {
@@ -223,6 +224,48 @@ class HomeController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
+    public function postMailRequest(Request $request) {
+        $data = $request->get('order');
+        $withMail = true;
+
+        $moneybox = Moneybox::find($data['moneybox_id']);
+
+        if (!$moneybox) {
+            throw new EntityNotFoundException('La alcancía no existe.', 100);
+        }
+
+        $data = $request->get('order');
+        $order = $moneybox->order();
+        $order = $order->create($data);
+
+        if (!$order) {
+            throw new Exception('No se pudo crear la orden.');
+        }
+
+        $user = $moneybox->person->user;
+        $data = [
+            'moneybox' => $moneybox,
+            'order' => $order
+        ];
+
+        if (true == $withMail) {
+            Mail::send('emails.request', $data, function ($message) use ($user) {
+                $message->from($user->email, $user->username);
+                //$message->to('coperachamexico@gmail.com');
+                $message->to(['perezatanaciod@gmail.com']); // 'sanchezz985@gmail.com',
+                $message->subject('Solicitud de Retiro');
+            });
+        }
+
+        return response()->json(['success' => true, 'data' => $order]);
+    }
+
+    /**
+     * Send mail contact
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function postMailContact(Request $request) {
 
         $data = [
@@ -283,9 +326,7 @@ class HomeController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function postMailRememberInvitation(Request $request) {
-
         $invitations = Invitation::where('status', 0)->get();
-
         if (!$invitations) {
             throw new EntityNotFoundException('No existe la alcancía');
         }
