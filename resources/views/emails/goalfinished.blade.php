@@ -1,6 +1,4 @@
 @extends('emails.master')
-@extends('emails.header')
-@extends('emails.footer')
 
 @section('title')
 <title>Meta alcanzada</title>

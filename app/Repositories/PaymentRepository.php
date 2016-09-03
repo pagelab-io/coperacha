@@ -164,7 +164,7 @@ class PaymentRepository extends BaseRepository
             // send email
             $payer   = $this->getPayerOrCreator($payment->person_id);
             $creator = $this->getPayerOrCreator($moneybox->person_id);
-            $this->sendPaymentEmails($payer, $creator, $moneybox, ($moneybox->goal_amount > $moneybox->collected_amount) ? true : false);
+            $this->sendPaymentEmails($payer, $creator, $moneybox, ($moneybox->goal_amount > $moneybox->collected_amount) ? false : true);
 
         } else {
             \Log::info("Waiting for charge ...");
@@ -412,7 +412,7 @@ class PaymentRepository extends BaseRepository
             $options = array(
                 'to' => $payerCreator->email,
                 'bcc' => explode(',', PLConstants::EMAIL_BCC),
-                'title' => '¡Nueva coperacha!'
+                'title' => 'Meta alcanzada'
             );
             $this->_mailer->send(PLConstants::EMAIL_GOAL_FINISHED, $data, $options);
         }
