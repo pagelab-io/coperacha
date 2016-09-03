@@ -121,7 +121,7 @@ class PayPalRepository implements IPLPayment{
 
             case 'SetExpressCheckout':
 
-                \Log::info($httpParsedResponseAr);
+                \Log::info("Generating response for SetExpressCheckout ...");
                 //Respond according to message we receive from Paypal
                 if("SUCCESS" == strtoupper($httpParsedResponseAr["ACK"]) || "SUCCESSWITHWARNING" == strtoupper($httpParsedResponseAr["ACK"])){
 
@@ -150,7 +150,7 @@ class PayPalRepository implements IPLPayment{
                 break;
 
             case 'DoExpressCheckoutPayment':
-                \Log::info($httpParsedResponseAr);
+                \Log::info("Generating response for DoExpressCheckout ...");
                 //Check if everything went ok..
                 if("SUCCESS" == strtoupper($httpParsedResponseAr["ACK"]) || "SUCCESSWITHWARNING" == strtoupper($httpParsedResponseAr["ACK"])){
 
@@ -172,7 +172,6 @@ class PayPalRepository implements IPLPayment{
                     $paypal_string = '&TOKEN='.$token;
                     $httpParsedResponseAr = $this->_paypal->PPHttpPost('GetExpressCheckoutDetails', $paypal_string);
 
-                    \Log::info($httpParsedResponseAr);
                     if("SUCCESS" == strtoupper($httpParsedResponseAr["ACK"]) || "SUCCESSWITHWARNING" == strtoupper($httpParsedResponseAr["ACK"])){
                         \Log::info("--- DoExpressCheckout success ---");
                         return array(

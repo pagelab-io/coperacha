@@ -8,10 +8,12 @@
 
 namespace App\Repositories;
 
-
+use App\Entities\Moneybox;
+use App\Entities\Person;
 use App\Http\Requests\PLRequest;
 use App\Http\Responses\PLResponse;
 use App\Entities\Payment;
+use App\Models\Mailer;
 use App\Models\PLConektaOxxo;
 use App\Models\PLConektaSpei;
 use App\Utilities\PLConstants;
@@ -52,6 +54,11 @@ class PaymentRepository extends BaseRepository
      */
     private $_personRepository;
 
+    /**
+     * @var Mailer
+     */
+    private $_mailer;
+
     //endregion
 
     //region Static
@@ -63,7 +70,8 @@ class PaymentRepository extends BaseRepository
         PLConektaSpei $spei,
         PayPalRepository $payPalRepository,
         MoneyboxRepository $moneyboxRepository,
-        PersonRepository $personRepository)
+        PersonRepository $personRepository,
+        Mailer $mailer)
     {
         $this->_payment = $payment;
         $this->_oxxo = $oxxo;
@@ -71,6 +79,7 @@ class PaymentRepository extends BaseRepository
         $this->_paypal = $payPalRepository;
         $this->_moneyboxRepository = $moneyboxRepository;
         $this->_personRepository = $personRepository;
+        $this->_mailer = $mailer;
     }
 
     //region Methods
@@ -85,6 +94,12 @@ class PaymentRepository extends BaseRepository
         return 'App\Entities\Payment';
     }
 
+    /**
+     * Do payment by PayPal, OXXO, SPEI
+     * @param PLRequest $request
+     * @return PLResponse
+     * @throws \Exception
+     */
     public function payment(PLRequest $request)
     {
 
@@ -105,7 +120,13 @@ class PaymentRepository extends BaseRepository
         return $response;
     }
 
-
+    /**
+     * Get the Conekta response after payment and send emails.
+     *
+     * @param PLRequest $request
+     * @return PLResponse
+     * @throws \Exception
+     */
     public function conektaResponse(PLRequest $request)
     {
         \Log::info("=== Conekta Response ===");
@@ -139,6 +160,12 @@ class PaymentRepository extends BaseRepository
                 throw $ex;
             }
             $response->description = 'success';
+
+            // send email
+            $payer   = $this->getPayerOrCreator($payment->person_id);
+            $creator = $this->getPayerOrCreator($moneybox->person_id);
+            $this->sendPaymentEmails($payer, $creator, $moneybox, ($moneybox->goal_amount > $moneybox->collected_amount) ? true : false);
+
         } else {
             \Log::info("Waiting for charge ...");
             $response->description = 'Waiting for charge ...';
@@ -147,6 +174,13 @@ class PaymentRepository extends BaseRepository
         return $response;
     }
 
+    /**
+     * Get the PayPal response after payment and send emails
+     *
+     * @param PLRequest $request
+     * @return PLResponse
+     * @throws \Exception
+     */
     public function paypalResponse(PLRequest $request)
     {
         \Log::info("=== PayPal Response ===");
@@ -185,6 +219,12 @@ class PaymentRepository extends BaseRepository
                     }
                     $response->data = $doExpress;
                     $response->description = "Pago realizado correctamente";
+
+                    // send email
+                    $payer   = $this->getPayerOrCreator($payment->person_id);
+                    $creator = $this->getPayerOrCreator($moneybox->person_id);
+                    $this->sendPaymentEmails($payer, $creator, $moneybox, ($moneybox->goal_amount > $moneybox->collected_amount) ? true : false);
+
                 } else {
                     $response->status = -301;
                     $response->data = $doExpress;
@@ -200,6 +240,11 @@ class PaymentRepository extends BaseRepository
         return $response;
     }
 
+    /**
+     * Search a specified payment by token after payments.
+     * @param $token
+     * @return mixed
+     */
     public function byToken($token)
     {
         return Payment::where('uid', $token)->firstOrFail();
@@ -209,6 +254,12 @@ class PaymentRepository extends BaseRepository
 
     //region Private Methods
 
+    /**
+     * Create a Conekta charge for OXXO.
+     *
+     * @param PLRequest $request
+     * @return PLResponse
+     */
     private function oxxoPayment(PLRequest $request)
     {
         $oxxoResponse = $this->_oxxo->sendPayment($request);
@@ -229,6 +280,11 @@ class PaymentRepository extends BaseRepository
         return $response;
     }
 
+    /**
+     * Create a Conekta charge for SPEI
+     * @param PLRequest $request
+     * @return PLResponse
+     */
     private function speiPayment(PLRequest $request)
     {
         $speiResponse = $this->_spei->sendPayment($request);
@@ -249,6 +305,13 @@ class PaymentRepository extends BaseRepository
         return $response;
     }
 
+    /**
+     * Generates an url for PayPal SetExpressCheckout
+     *
+     * @param PLRequest $request
+     * @return PLResponse
+     * @throws \Exception
+     */
     private function paypalPayment(PLRequest $request)
     {
 
@@ -285,6 +348,75 @@ class PaymentRepository extends BaseRepository
             }
         }
         return $response;
+    }
+
+    /**
+     * Get moneybox creator or moneybox payer
+     * @param $person_id
+     * @return Person
+     * @throws \Exception
+     */
+    private function getPayerOrCreator($person_id)
+    {
+        $person = null;
+        \Log::info("=== Searching Payer or moneybox creator ===");
+        try { $person = $this->_personRepository->byId($person_id);}
+        catch(\Exception $ex) { throw new \Exception('Unable to find person', -1, $ex); }
+        \Log::info("=== Person: ".$person." ===");
+        return $person;
+    }
+
+    /**
+     * Send all emails after payment
+     *
+     * @param Person $payer
+     * @param Person $creator
+     * @param Moneybox $moneybox
+     * @param bool $goal_finished
+     */
+    private function sendPaymentEmails(Person $payer, Person $creator, Moneybox $moneybox, $goal_finished = false)
+    {
+        // ====== Send email for payer ========
+        $data = array(
+            'payer' => $payer,
+            'moneybox' => $moneybox
+        );
+        $payerUser = $payer->user;
+        $options = array(
+            'to' => $payerUser->email,
+            'bcc' => explode(',', PLConstants::EMAIL_BCC),
+            'title' => 'Confirmación de pago'
+        );
+        $this->_mailer->send(PLConstants::EMAIL_PAYMENT_CONFIRMATION, $data, $options);
+
+        // ====== Send email for moneybox creator ========
+        $data = array(
+            'creator' => $creator,
+            'moneybox' => $moneybox
+        );
+        $payerCreator = $creator;
+        $options = array(
+            'to' => $payerCreator->email,
+            'bcc' => explode(',', PLConstants::EMAIL_BCC),
+            'title' => '¡Nueva coperacha!'
+        );
+        $this->_mailer->send(PLConstants::EMAIL_NEW_COPERACHA, $data, $options);
+
+        if ($goal_finished) {
+            // ====== Send email for moneybox creator ========
+            $data = array(
+                'creator' => $creator,
+                'moneybox' => $moneybox
+            );
+            $payerCreator = $creator;
+            $options = array(
+                'to' => $payerCreator->email,
+                'bcc' => explode(',', PLConstants::EMAIL_BCC),
+                'title' => '¡Nueva coperacha!'
+            );
+            $this->_mailer->send(PLConstants::EMAIL_GOAL_FINISHED, $data, $options);
+        }
+
     }
 
     //endregion

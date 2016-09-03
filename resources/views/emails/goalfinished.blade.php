@@ -8,7 +8,7 @@
 
 @section('body')
     <tr>
-        <td COLSPAN=2 style="font-family: Arial;font-size: 30px;color: #51B7CD;text-align: center;line-height: 30px;padding-top:45px;">Hola Firstname</td>
+        <td COLSPAN=2 style="font-family: Arial;font-size: 30px;color: #51B7CD;text-align: center;line-height: 30px;padding-top:45px;">Hola {{$creator->name}}</td>
     </tr>
 
     <tr>
@@ -20,12 +20,12 @@
                 Seguro te estarás preguntando qué sigue ahora. Pues ahora viene la parte divertida: tienes que decidir a quién le transferirás el dinero de la alcancía.
             </p>
             <p>
-                Para hacerlo has click aquí.
+                Para hacerlo has click <a style='color:#FF5000;text-decoration:none;' href={{url('/moneybox/detail/'.$moneybox->url)}}>aqui</a>.
             </p>
             <p>
                 <a href="#">link de tranferencía de la alcancía (deberia estar logueado)</a>
             </p>
-            <p>Si tienes dudas por favor <a href="#">has click aquí. (link de contacto quizas)</a></p>
+            <p>Si tienes dudas por favor has click <a style='color:#FF5000;text-decoration:none;' href={{route('pages.contact')}}>aquí.</a></p>
             <p>
                 Saludos,
                 <br>
@@ -35,7 +35,7 @@
     </tr>
     <tr>
         <td COLSPAN=2 style="text-align: center;padding-bottom:20px;">
-            <img width="300" src="/images/emails/logo2.png"/>
+            <img width="300" src={{asset('/images/emails/logo2.png')}}/>
         </td>
     </tr>
 @endsection

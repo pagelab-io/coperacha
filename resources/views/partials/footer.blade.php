@@ -6,7 +6,7 @@
                 <div class="col-sm-4 col-xs-12 align-middle">
                     <div class="rights">
                         <div class="logo">
-                            <a href="/"><img class="img-responsive" src="/images/logo.png" alt="Coperacha | Recauda Dinero Entre Amigos"></a>
+                            <a href={{route('/')}}><img class="img-responsive" src={{asset('/images/logo.png')}} alt="Coperacha | Recauda Dinero Entre Amigos"></a>
                         </div>
                         <div class="text">
                             <div>Coperacha 2016.</div>
