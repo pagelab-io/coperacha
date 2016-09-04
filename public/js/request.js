@@ -69,6 +69,7 @@ var vm = new Vue({
         onSubmit: function () {
             this.order.moneybox_id = this.$el.dataset.moneybox_id;
 
+            var _this = this;
             var path = base + '/sendrequest';
             var form = new FormData();
             form.append('file', this.file);
@@ -77,8 +78,21 @@ var vm = new Vue({
                 form.append(field, this.order[field]);
             }
 
+            this.loading = true;
+
             this.$http.post(path, form).then(function (response) {
                 console.log(response.data);
+
+                _this.message.text = 'Información enviada correctamente, Gracias.';
+                _this.loading = false;
+
+                for (var field in _this.order) {
+                    _this.order[field] = '';
+                }
+
+                setTimeout(function () {
+                    _this.message.text = '';
+                }, 3*1000);
             }, function (error) {
                 console.error(error);
                 $('body').html(error.body);

@@ -25,6 +25,7 @@
                 </div>
                 <div class="content-block">
                     <div v-if="loading" class="loader"></div>
+                    <div v-show="message.text!==''" class="alert alert-success sended" role="alert">@{{message.text}}</div>
                     <form id="RequestForm"
                           v-on:submit.prevent="onSubmit"
                           method="post"
