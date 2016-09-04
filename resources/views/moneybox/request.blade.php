@@ -24,13 +24,14 @@
                     </div>
                 </div>
                 <div class="content-block">
-                    <div v-if="loading" class="loader"></div>
-                    <div v-show="message.text!==''" class="alert alert-success sended" role="alert">@{{message.text}}</div>
                     <form id="RequestForm"
                           v-on:submit.prevent="onSubmit"
                           method="post"
                           enctype="multipart/form-data"
                           class="form request-form">
+
+                        <div v-if="loading" class="loader"></div>
+                        <div v-if="message.text!==''" class="alert alert-success" role="alert">@{{message.text}}</div>
 
                         <div class="form-group">
                             <p class="text-info">Llena por favor los siguientes datos:</p>

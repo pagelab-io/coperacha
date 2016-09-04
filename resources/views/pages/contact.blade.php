@@ -36,20 +36,25 @@
 
                     <!-- Contact Form -->
                     <form id="contact-form" v-on:submit.prevent="onSubmit" class="contact-form" method="post">
-                        <div v-show="sended" class="alert alert-success sended" role="alert">@{{message}}</div>
+                        <div v-if="loading" class="loader"></div>
+                        <div v-if="message.text != ''" class="alert alert-success" role="alert">@{{message.text}}</div>
+
                         <div class="row">
                             <div class="col-sm-6">
-                                <input name="name" v-model="contact.name"
+                                <input name="name"
+                                       v-model="contact.name"
                                        placeholder="Nombre" type="text" required>
                             </div>
                             <div class="col-sm-6">
-                                <input name="email" v-model="contact.email"
+                                <input name="email"
+                                       v-model="contact.email"
                                        placeholder="Correo electrónico" type="email" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                <textarea rows="4" v-model="contact.content"
+                                <textarea rows="4"
+                                          v-model="contact.content"
                                           name="message"
                                           placeholder="Mensaje" required></textarea>
                             </div>
@@ -58,7 +63,7 @@
                             <div class="col-sm-12 clearfix">
                                 <button v-bind:disabled="!isValid" class="btn btn-primary small pull-right">
                                     <span v-show="sending" class="icon"></span>
-                                    <span class="text">@{{sendText}}</span>
+                                    <span class="text">Enviar</span>
                                 </button>
                             </div>
                         </div>

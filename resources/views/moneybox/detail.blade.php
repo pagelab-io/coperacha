@@ -76,12 +76,11 @@
                             <form id="FormShare" class="form share"
                                   data-url="{{$moneybox->url}}"
                                   v-on:submit.prevent="onSubmit" role="form">
+                                <div v-if="loading" class="loader"></div>
+                                <div v-if="message.text!=''" class="alert alert-success" role="alert">@{{message.text}}</div>
                                 <div class="form-group">
                                     <label>O envía correo a tus amigos para invitarlos a participar.</label>
                                 </div>
-
-                                <div v-if="message.text != ''" class="alert alert-success" role="alert">@{{message.text}}</div>
-
                                 <div class="form-group">
                                     <div class="text-info">Introduce los emails separando cada uno con punto y coma (;)</div>
                                     <textarea required
