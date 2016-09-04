@@ -385,6 +385,7 @@ class PaymentRepository extends BaseRepository
             'moneybox' => $moneybox
         );
         $payerUser = $payer->user;
+        \Log::info($payerUser->email);
         $options = array(
             'to' => $payerUser->email,
             'bcc' => explode(',', PLConstants::EMAIL_BCC),
@@ -398,9 +399,9 @@ class PaymentRepository extends BaseRepository
             'creator' => $creator,
             'moneybox' => $moneybox
         );
-        $payerCreator = $creator;
+        $creatorUser = $creator->user;
         $options = array(
-            'to' => $payerCreator->email,
+            'to' => $creatorUser->email,
             'bcc' => explode(',', PLConstants::EMAIL_BCC),
             'title' => '¡Nueva coperacha!'
         );
@@ -413,9 +414,9 @@ class PaymentRepository extends BaseRepository
                 'creator' => $creator,
                 'moneybox' => $moneybox
             );
-            $payerCreator = $creator;
+            $creatorUser = $creator->user;
             $options = array(
-                'to' => $payerCreator->email,
+                'to' => $creatorUser->email,
                 'bcc' => explode(',', PLConstants::EMAIL_BCC),
                 'title' => 'Meta alcanzada'
             );
