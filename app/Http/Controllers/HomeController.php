@@ -40,6 +40,7 @@ class HomeController extends Controller
      * HomeController constructor.
      * @param SettingRepository $settingRepository
      * @param MoneyboxRepository $moneyboxRepository
+     * @param UserRepository $userRepository
      */
     public function __construct(SettingRepository $settingRepository, MoneyboxRepository $moneyboxRepository, UserRepository $userRepository)
     {
@@ -55,9 +56,18 @@ class HomeController extends Controller
      */
     public function getHomePage()
     {
-        return view('index', ['pageTitle' => '']);
-    }
+        $categories = Category::where('id', 1)
+            ->orWhere('id',2)
+            ->orWhere('id',3)
+            ->orWhere('id',4)
+            ->orWhere('id',6)
+            ->get();
 
+        return view('index', [
+            'pageTitle' => '',
+            'categories' => $categories
+        ]);
+    }
 
     /**
      * Contact View
@@ -96,7 +106,7 @@ class HomeController extends Controller
      * @throws \Exception
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getCreateMoneyboxPage(Request $request, $url){
+    public function getCreateMoneyboxPage(Request $request, $url = ''){
 
         $moneybox = null;
         $moneyboxSettings   = null;
