@@ -321,8 +321,8 @@ class HomeController extends Controller
 
         Mail::send('emails.contact', $data, function ($message) use($request) {
             $message->from($request->get('email'), 'Contacto');
-            //$message->to('coperachamexico@gmail.com');
-            $message->bcc(['perezatanaciod@gmail.com']);
+            $message->to('coperachamexico@gmail.com');
+            $message->bcc(['sanchezz985@gmail.com','perezatanaciod@gmail.com']);
             $message->subject('Mensaje de Contacto');
         });
 
