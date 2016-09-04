@@ -81,20 +81,21 @@ var vm = new Vue({
             this.loading = true;
 
             this.$http.post(path, form).then(function (response) {
-
                 if (response.status == 200) {
-                    _this.message.text = 'Información enviada correctamente, ¡Gracias!';
-                    _this.loading = false;
 
-                    for (var field in _this.order) {
-                        _this.order[field] = '';
+                    if (response.data.success == true) {
+                        _this.message.text = 'Información enviada correctamente, ¡Gracias!';
+                        _this.loading = false;
+
+                        for (var field in _this.order) {
+                            _this.order[field] = '';
+                        }
+
+                        setTimeout(function () {
+                            $('#file').val('');
+                            _this.message.text = '';
+                        }, 3 * 1000);
                     }
-
-                    setTimeout(function () {
-                        $('#file').val('');
-                        _this.message.text = '';
-                    }, 3 * 1000);
-
                 } else {
                     console.log(response);
                 }

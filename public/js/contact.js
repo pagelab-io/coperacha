@@ -13,10 +13,11 @@ var vm = new Vue({
             email: '',
             content: ''
         },
-        sending: false,
-        sended: false,
-        sendText: 'Enviar',
-        message: ''
+        loading: false,
+        message: {
+            status: '',
+            text: ''
+        }
     },
 
     computed: {
@@ -28,26 +29,23 @@ var vm = new Vue({
     methods: {
         onSubmit: function () {
             var _this = this;
-            this.sendText = 'Enviando...';
-            this.sending = true;
+            this.loading = true;
 
             this.$http.post('/sendmail', this.contact).then(function(response, status, request) {
 
                 if (response.status == 200) {
-                    var res = JSON.parse(response.body);
-                    if (res.success == true) {
 
-                        this.message = 'Mensaje enviado correctamente';
-                        this.contact.name = '';
-                        this.contact.email = '';
-                        this.contact.content = '';
-                        this.sendText = 'Enviar';
+                    if (response.data.success == true) {
 
-                        _this.sended = true;
-                        _this.sending = false;
+                        for (var i in _this.contact) {
+                            _this.contact[i] = '';
+                        }
+
+                        _this.loading = false;
+                        _this.message.text = 'Mensaje enviado correctamente';
 
                         setTimeout(function () {
-                            _this.sended = false;
+                            _this.message.text = ''
                         }, 3 * 1000);
                     }
                 }
