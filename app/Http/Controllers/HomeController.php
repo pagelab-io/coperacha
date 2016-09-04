@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use App\Entities\Category;
 use App\Entities\Invitation;
 use App\Entities\Moneybox;
-use App\Entities\Order;
+use App\Entities\File;
 use App\Http\Requests\PLRequest;
 use App\Repositories\MoneyboxRepository;
 use App\Repositories\SettingRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Contracts\Queue\EntityNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Mockery\CountValidator\Exception;
 
 class HomeController extends Controller
@@ -245,35 +247,59 @@ class HomeController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function postMailRequest(Request $request) {
-        $data = $request->get('order');
-        $withMail = true;
-
-        $moneybox = Moneybox::find($data['moneybox_id']);
-
+        $moneybox = Moneybox::find($request->get('moneybox_id'));
+        
         if (!$moneybox) {
-            throw new EntityNotFoundException('La alcancía no existe.', 100);
+            throw new EntityNotFoundException('La alcancía no existe.', -1);
         }
 
-        $data = $request->get('order');
+        if (!$request->hasFile('file')) {
+            throw new Exception('El archivo es es requerido.');
+        }
+
+        /// Vars
+        $withMail = true;
+        $data = $request->all();
         $order = $moneybox->order();
         $order = $order->create($data);
+        $user = $moneybox->person->user;
 
         if (!$order) {
-            throw new Exception('No se pudo crear la orden.');
+            throw new Exception('No se pudo crear la orden de retiro');
         }
 
-        $user = $moneybox->person->user;
+        // Extract file info
+        $extension = $request->file('file')->getClientOriginalExtension();
+        $filename = $request->file('file')->getClientOriginalName();
+        $mine = $request->file('file')->getClientMimeType();
+        $size = $request->file('file')->getSize();
+        $name =  uniqid() . '_' . $filename;
+
+        if ($stored = Storage::disk('public')->put($name, $request->file('file'))) {
+            $file = File::create(['name' => $name, 'size' => $size, 'path' => 'public', 'extension' => $extension]);
+            $file->user_id = Auth::user()->id;
+            $file->metadata = $mine;
+            $file->owner = 'Order';
+            $file->owner_id = $order->id;
+            $file->save();
+        }
+
         $data = [
             'moneybox' => $moneybox,
-            'order' => $order
+            'order' => $order,
+            'file' => $file
         ];
 
         if (true == $withMail) {
-            Mail::send('emails.request', $data, function ($message) use ($user) {
+            Mail::send('emails.request', $data, function ($message) use ($user, $file) {
+
+                $pdf = Storage::disk('public')->get($file->name);
+
                 $message->from($user->email, $user->username);
                 //$message->to('coperachamexico@gmail.com');
                 $message->to(['perezatanaciod@gmail.com']); // 'sanchezz985@gmail.com',
                 $message->subject('Solicitud de Retiro');
+                $message->attach($pdf, ['display'=>$pdf->name, 'mime' => $pdf->metadata]);
             });
         }
 
@@ -374,26 +400,4 @@ class HomeController extends Controller
         return response()->json(['success' => true, 'data' => $attends]);
     }
 
-    /**
-     * Send mail contact
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function getMailContact(Request $request) {
-
-        return view('emails.contact')
-            ->with('name', 'Daniel')
-            ->with('email', 'daniel@pagelab.io')
-            ->with('content', 'The Laravel framework has a few system requirements. Of course, all of these requirements are satisfied by the Laravel Homestead virtual machine, so it\'s highly recommended that you use Homestead as your local Laravel development environment.');
-    }
-
-    /**
-     * JUST FOR TEST - DELETE IN A FUTURE
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function getTestPage()
-    {
-        return view('pages.test', ['pageTitle' => 'Bienvenido']);
-    }
 }

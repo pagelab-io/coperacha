@@ -33,14 +33,6 @@
                     <td><strong>Comentarios</strong></td>
                     <td>{{$order->comments}}</td>
                 </tr>
-                <tr>
-                    <td colspan="2">
-                        <strong>Archivos</strong>
-                        <ul>
-                            <li>Datos.pdf</li>
-                        </ul>
-                    </td>
-                </tr>
             </table>
 
             <p>Un administrador de coperacha se pondra en contacto contigo a la brevedad para dar seguimiento al retiro.</p>

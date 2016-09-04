@@ -18,8 +18,8 @@ var vm = new Vue({
             clabe: '98289893 9329893',
             account: '98898943',
             comments: 'Solicito mi dinero por favor...',
-            file: ''
         },
+        file: '',
         message: {
             text: '',
             status: ''
@@ -52,22 +52,33 @@ var vm = new Vue({
      */
     methods: {
         /**
+         *
+         * @param e
+         */
+        onFileChange: function(e) {
+            if (e.target.files.length > 0) {
+                this.file = e.target.files[0];
+            }
+        },
+
+        /**
          * Submit the request form
          *
          * @param id
          */
         onSubmit: function () {
-
             this.order.moneybox_id = this.$el.dataset.moneybox_id;
 
             var path = base + '/sendrequest';
-            var data = {
-                moneyboxid: this.moneyboxid,
-                order: this.order
-            };
+            var form = new FormData();
+            form.append('file', this.file);
 
-            this.$http.post(path, data).then(function (response) {
-                console.log(response);
+            for (var field in this.order) {
+                form.append(field, this.order[field]);
+            }
+
+            this.$http.post(path, form).then(function (response) {
+                console.log(response.data);
             }, function (error) {
                 console.error(error);
                 $('body').html(error.body);

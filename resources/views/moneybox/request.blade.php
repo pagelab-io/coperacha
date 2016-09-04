@@ -27,7 +27,10 @@
                     <div v-if="loading" class="loader"></div>
                     <form id="RequestForm"
                           v-on:submit.prevent="onSubmit"
-                          class="form request-form" data-moneyboxurl="{{$moneybox->url}}">
+                          method="post"
+                          enctype="multipart/form-data"
+                          class="form request-form">
+
                         <div class="form-group">
                             <p class="text-info">Llena por favor los siguientes datos:</p>
                         </div>
@@ -70,9 +73,10 @@
                                     <span for="file">Adjuntar copia de su información bancaria para
                                             confirmar los datos</span>
                                     <input id="file"
-                                           name="file"
-                                           v-model="order.file"
-                                           type="file">
+                                           name="file[]"
+                                           type="file"
+                                           v-on:change="onFileChange"
+                                           required>
                                 </div>
                             </div>
                             <div class="col-sm-6">
