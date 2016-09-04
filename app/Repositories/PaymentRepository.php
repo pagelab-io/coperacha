@@ -164,7 +164,7 @@ class PaymentRepository extends BaseRepository
             // send email
             $payer   = $this->getPayerOrCreator($payment->person_id);
             $creator = $this->getPayerOrCreator($moneybox->person_id);
-            $this->sendPaymentEmails($payer, $creator, $moneybox, ($moneybox->goal_amount > $moneybox->collected_amount) ? false : true);
+            $this->sendPaymentEmails($payer, $creator, $moneybox, $this->amountComplete($moneybox));
 
         } else {
             \Log::info("Waiting for charge ...");
@@ -223,7 +223,7 @@ class PaymentRepository extends BaseRepository
                     // send email
                     $payer   = $this->getPayerOrCreator($payment->person_id);
                     $creator = $this->getPayerOrCreator($moneybox->person_id);
-                    $this->sendPaymentEmails($payer, $creator, $moneybox, ($moneybox->goal_amount > $moneybox->collected_amount) ? false : true);
+                    $this->sendPaymentEmails($payer, $creator, $moneybox, $this->amountComplete($moneybox));
 
                 } else {
                     $response->status = -301;
@@ -331,20 +331,22 @@ class PaymentRepository extends BaseRepository
         \Log::info($paypalResponse);
         if (is_array($paypalResponse)) {
             if($paypalResponse['success'] == 1) {
-                $payment = new Payment();
-                $payment->person_id     = $request->get('person_id');
-                $payment->moneybox_id   = $request->get('moneybox_id');
-                $payment->amount        = $request->get('amount');
-                $payment->method        = PLConstants::PAYMENT_PAYPAL;
-                $payment->uid           = urldecode($paypalResponse['data']['TOKEN']);
-                $payment->status        = PLConstants::PAYMENT_PENDING;
-                if (!$payment->save()) throw new Exception("Unable to create payment", -1);
-                $response->description = "PayPal Payment created successfully";
-                $response->data = $paypalResponse;
-            } else {
-                $response->description = "Error in setExpressChekout";
-                $response->status = -300;
-                $response->data = $paypalResponse;
+                if($paypalResponse['success'] == 1) {
+                    $payment = new Payment();
+                    $payment->person_id     = $request->get('person_id');
+                    $payment->moneybox_id   = $request->get('moneybox_id');
+                    $payment->amount        = $request->get('amount');
+                    $payment->method        = PLConstants::PAYMENT_PAYPAL;
+                    $payment->uid           = urldecode($paypalResponse['data']['TOKEN']);
+                    $payment->status        = PLConstants::PAYMENT_PENDING;
+                    if (!$payment->save()) throw new Exception("Unable to create payment", -1);
+                    $response->description = "PayPal Payment created successfully";
+                    $response->data = $paypalResponse;
+                } else {
+                    $response->description = "Error in setExpressChekout";
+                    $response->status = -300;
+                    $response->data = $paypalResponse;
+                }
             }
         }
         return $response;
@@ -376,6 +378,7 @@ class PaymentRepository extends BaseRepository
      */
     private function sendPaymentEmails(Person $payer, Person $creator, Moneybox $moneybox, $goal_finished = false)
     {
+        \Log::info("sending payment confirmation email ...");
         // ====== Send email for payer ========
         $data = array(
             'payer' => $payer,
@@ -389,6 +392,7 @@ class PaymentRepository extends BaseRepository
         );
         $this->_mailer->send(PLConstants::EMAIL_PAYMENT_CONFIRMATION, $data, $options);
 
+        \Log::info("sending new coperacha email ...");
         // ====== Send email for moneybox creator ========
         $data = array(
             'creator' => $creator,
@@ -403,6 +407,7 @@ class PaymentRepository extends BaseRepository
         $this->_mailer->send(PLConstants::EMAIL_NEW_COPERACHA, $data, $options);
 
         if ($goal_finished) {
+            \Log::info("sending goal complete email ...");
             // ====== Send email for moneybox creator ========
             $data = array(
                 'creator' => $creator,
@@ -417,6 +422,11 @@ class PaymentRepository extends BaseRepository
             $this->_mailer->send(PLConstants::EMAIL_GOAL_FINISHED, $data, $options);
         }
 
+    }
+
+    private function amountComplete(Moneybox $moneybox)
+    {
+        return $moneybox->collected_amount >= $moneybox->goal_amount;
     }
 
     //endregion
