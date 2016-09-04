@@ -30,40 +30,78 @@
 
         /**
          * Register a new user by email
-         * TODO - make validations
          */
         $scope.emailRegister = function ()
         {
-            $scope.birthday = $scope.birthdayYear+"-"+$scope.birthdayMonth+"-"+$scope.birthdayDay;
+            if($scope.emailValidate()){
 
-            if ($scope.confirmPassword != "")
-            {
+                $scope.birthday = $scope.birthdayYear+"-"+$scope.birthdayMonth+"-"+$scope.birthdayDay;
+                $scope.request = $scope.buildRequest();
+                $scope.utils.showLoader();
+                Register.register($scope.request).success(function(response)
+                {
+                    if (response.status == 200) {
+                        var user = response.data['User'];
+                        window.userdata = response.data;
+                        window.location.assign("/user/profile/" + user.id);
+                    } else if(response.status == -2) {
+                        $scope.utils.hideLoader();
+                        $scope.utils.setAlertTitle("Error !");
+                        document.getElementById('alert-content').innerHTML="" +
+                        "<p>El correo ingresado ya existe en el sistema, por favor intenta con otro.<p>";
+                        $scope.utils.showAlert();
+                    } else {
+                        $scope.utils.hideLoader();
+                        $scope.utils.setAlertTitle("Error !");
+                        document.getElementById('alert-content').innerHTML="" +
+                        "<p>Se ha generado producido un error al realizar el registro, por favor inténtalo más tarde<p>";
+                        $scope.utils.showAlert();
+                    }
+                }).error(function(response){
+                    $scope.utils.hideLoader();
+                    $scope.utils.setAlertTitle("Error !");
+                    document.getElementById('alert-content').innerHTML="" +
+                    "<p>Se ha generado producido un error al realizar el registro, por favor inténtalo más tarde<p>";
+                    $scope.utils.showAlert();
+                });
+            }
+        };
+
+        /**
+         * Validate when register is by email
+         * @returns {boolean}
+         */
+        $scope.emailValidate = function()
+        {
+
+            var utils = $scope.utils;
+
+            if (utils.isNullOrEmpty($scope.name)) {
+                utils.setValidationError("El campo Nombre es requerido");
+                return false;
+            } else if (utils.isNullOrEmpty($scope.lastname)) {
+                utils.setValidationError("El campo Apellido es requerido");
+                return false;
+            } else if (utils.isNullOrEmpty($scope.email)) {
+                utils.setValidationError("El campo Correo electrónico es requerido");
+                return false;
+            } else if (!utils.isValidEmail($scope.email)) {
+                utils.setValidationError("El Correo electrónico ingresado no es válido");
+                return false;
+            } else if (utils.isNullOrEmpty($scope.password)) {
+                utils.setValidationError("El campo Contraseña no es válido");
+                return false;
+            } else if (!utils.isNullOrEmpty($scope.confirmPassword)) {
                 if($scope.confirmPassword != $scope.password){
-                    alert("Las contraseñas no coinciden"); // TODO - change this alert
-                    return;
+                    utils.setValidationError("Las contraseñas no coinciden");
+                    return false;
                 }
             }
-            $scope.request = $scope.buildRequest();
-            $scope.utils.showLoader();
-            Register.register($scope.request).success(function(response)
-            {
-                console.log(response);
-                if (response.status == 200) {
-                    var user = response.data['User'];
-                    window.userdata = response.data;
-                    window.location.assign("/user/profile/" + user.id);
-                } else if(response.status == -2) {
-                    $scope.utils.hideLoader();
-                    alert("El correo ingresado ya existe en el sistema, por favor intenta con otro.");
-                } else {
-                    $scope.utils.hideLoader();
-                    alert("Ocurrio un error mientras realizabamos tu registro, por favor intenta mas tarde");
-                }
-            }).error(function(response){
-                $scope.utils.hideLoader();
-                console.log(response);
-            });
+
+            return true;
+
         };
+
 
         /**
          * Register by Faceboook
@@ -73,8 +111,6 @@
             // 1. Facebook Login
             FBLogin(function (result) {
                 if (result.status === 'connected') {
-                    console.log('Logged in Facebook.');
-
                     // 2. get Facebook data
                     FBData(function(result){
                         var names = result.name.split(" ");
@@ -90,23 +126,32 @@
                         $scope.utils.showLoader();
                         Register.register($scope.request).success(function(response)
                         {
-                            console.log(response);
                             if (response.status == 200) {
                                 var user = response.data['User'];
                                 window.location="/user/profile/"+user.id;
                             } else if(response.status == -2) {
                                 $scope.utils.hideLoader();
-                                alert("El correo ingresado ya existe en el sistema, por favor intenta con otro.");
+                                $scope.utils.setAlertTitle("Error !");
+                                document.getElementById('alert-content').innerHTML="" +
+                                "<p>El correo ingresado ya existe en el sistema, por favor intenta con otro.<p>";
+                                $scope.utils.showAlert();
                             }
 
                         }).error(function(response){
-                            console.log(response);
+                            $scope.utils.hideLoader();
+                            $scope.utils.setAlertTitle("Error !");
+                            document.getElementById('alert-content').innerHTML="" +
+                            "<p>Se ha generado producido un error al realizar el registro, por favor inténtalo más tarde<p>";
+                            $scope.utils.showAlert();
                         });
 
                     });
 
                 } else {
-                    console.log("Ocurrio un problema al hacer la conexión con Facebook, por favor intentalo maás tarde");
+                    $scope.utils.setAlertTitle("Error !");
+                    document.getElementById('alert-content').innerHTML="" +
+                    "<p>Ocurrio un problema al hacer la conexión con Facebook, por favor intentalo maás tarde<p>";
+                    $scope.utils.showAlert();
                 }
             });
 

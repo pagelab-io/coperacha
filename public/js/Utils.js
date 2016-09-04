@@ -111,6 +111,47 @@ function Utils()
                 }
             }
         });
-    }
+    };
+
+    this.setValidationError = function(message)
+    {
+        this.setAlertTitle("Error !");
+        document.getElementById('alert-content').innerHTML="" +
+        "<p>Uno de los campos es inválido, verifica que la informacion es correcta : <br><b>"+message+"<b><p>";
+        this.showAlert();
+    };
+
+    this.isNullOrEmpty = function(value){
+
+        if(typeof value == 'number')
+            return number == 0;
+
+        if(typeof value == 'string')
+            return value == "";
+
+        if(typeof value == 'object')
+            return value == null;
+
+    };
+
+    this.isValidEmail = function(value)
+    {
+        return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(value);
+    };
+
+    this.validLength = function(value, length)
+    {
+      return value.length == length;
+    };
+
+    this.minLength = function(value, length)
+    {
+        return value.length >= length;
+    };
+
+    this.maxLength = function(value, length)
+    {
+        return value.length <= length;
+    };
 
 }
