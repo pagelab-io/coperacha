@@ -8,7 +8,7 @@
 
     <tr>
         <td COLSPAN=2 style="font-family: Arial;font-size: 16px;color: #666666;text-align: justify;line-height: 28px; padding-top:10px;">
-            <h3>Datos de la alcancía:</h3>
+            <h3 style="margin-bottom: 1px;">Datos de la alcancía:</h3>
             <table style="width: 100%">
                 <tr>
                     <td style="width: 200px"><strong>Nombre</strong></td>
@@ -20,7 +20,7 @@
                 </tr>
             </table>
             <hr>
-            <h3>Datos del usuario:</h3>
+            <h3 style="margin-bottom: 1px;">Datos del usuario:</h3>
             <table style="width: 100%">
                 <tr>
                     <td style="width: 200px"><strong>Nombre del titular</strong></td>

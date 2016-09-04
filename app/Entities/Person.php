@@ -69,6 +69,13 @@ class Person extends Model
        return $this->hasOne(User::class);
     }
 
+    /**
+     * @return string
+     */
+    public function fullName() {
+        return $this->name .' '. $this->lastname;
+    }
+    
     //endregion
 
     //region Private Methods
