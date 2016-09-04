@@ -22,6 +22,9 @@
         $scope.privacy = '';
         $scope.participation = '';
         $scope.settings = [];
+        $scope.moneybox_id = 0;
+        $scope.amount_id = 0;
+        $scope.privacy_id = 0;
         $scope.step2.style.display = "none";
 
 
@@ -41,27 +44,6 @@
             }
         };
 
-        /*$scope.createMoneybox = function()
-        {
-            $scope.utils.showLoader();
-            var request = {
-                'name' : $scope.name,
-                'person_name' : $scope.person_name,
-                'person_id' : $scope.person_id,
-                'goal_amount' : $scope.goal_amount,
-                'end_date' : $scope.end_date,
-                'description' : $scope.description,
-                'category_id' : $scope.category_id
-            };
-            Moneybox.step1(request)
-                .success(function(response){
-                    window.location = "/moneybox/step-2";
-                })
-                .error(function(response){
-                    $scope.utils.hideLoader();
-                });
-        };*/
-
         $scope.createMoneybox = function()
         {
             // build the settings object
@@ -78,8 +60,14 @@
                 privacyValue = document.getElementById('txtOption-'+privacy[1]).value;
             }
 
-            $scope.settings.push({'setting_id':participation[0],'option_id':participation[1],'value':participationValue});
-            $scope.settings.push({'setting_id':privacy[0],'option_id':privacy[1],'value':privacyValue});
+            if ($scope.amount != 0 && $scope.privacy != 0)
+            {
+                $scope.settings.push({'member_setting_id':$scope.amount_id, 'setting_id':participation[0],'option_id':participation[1],'value':participationValue});
+                $scope.settings.push({'member_setting_id':$scope.privacy_id,'setting_id':privacy[0],'option_id':privacy[1],'value':privacyValue});
+            } else {
+                $scope.settings.push({'setting_id':participation[0],'option_id':participation[1],'value':participationValue});
+                $scope.settings.push({'setting_id':privacy[0],'option_id':privacy[1],'value':privacyValue});
+            }
 
             // build the request to save the moneybox
             $scope.request = {
@@ -90,24 +78,49 @@
                 'goal_amount' : $scope.goal_amount,
                 'end_date' : $scope.end_date,
                 'settings' : JSON.stringify($scope.settings),
-                'method' : 'createMoneybox',
                 'api-key' : '$2y$10$ScZUgkFzrMr9NM5qPzKag.4mLTW8ugSG/DtT6nerJb3W1v5sg6UBC'
             };
-            $scope.utils.showLoader();
-            Moneybox.create($scope.request)
-                .success(function(response){
-                    console.log(response);
-                    if (response.status == 200) {
-                        window.location = '/moneybox/detail/'+response.data.url;
-                    } else {
+
+
+            if ($scope.moneybox_id != 0) {
+                // update
+                $scope.request['method'] = 'updateMoneybox';
+                $scope.request['moneybox_id'] = $scope.moneybox_id;
+                $scope.utils.showLoader();
+                console.log($scope.request);
+                Moneybox.update($scope.request)
+                    .success(function(response){
+                        if (response.status == 200) {
+                            window.location = '/moneybox/detail/'+response.data.url;
+                        } else {
+                            $scope.utils.hideLoader();
+                            alert("Ocurrio un error al actualizar la alcancía, intentalo nuevamente porfavor");
+                        }
+                    })
+                    .error(function(response){
                         $scope.utils.hideLoader();
-                        alert("Ocurrio un error al generar la alcancía, intentalo nuevamente porfavor");
-                    }
-                })
+                        console.log(response);
+                    });
+            } else {
+                // creation
+                $scope.request['method'] = 'createMoneybox';
+                $scope.utils.showLoader();
+                console.log($scope.request);
+                Moneybox.create($scope.request)
+                    .success(function(response){
+                        if (response.status == 200) {
+                            window.location = '/moneybox/detail/'+response.data.url;
+                        } else {
+                            $scope.utils.hideLoader();
+                            alert("Ocurrio un error al generar la alcancía, intentalo nuevamente porfavor");
+                        }
+                    })
                 .error(function(response){
                     $scope.utils.hideLoader();
                     console.log(response);
                 });
+            }
+
         }
 
     }

@@ -17,7 +17,7 @@
                                     <main class="actions">
                                         <h2 class="title">{{$moneybox->name}}</h2>
                                         <div class="form-group">
-                                            <a href="#" class="btn btn-primary">Modificar</a>
+                                            <a class="btn btn-primary" href={{url('/moneybox/create/'.$moneybox->url)}}>Modificar</a>
                                         </div>
                                         <div class="form-group">
                                             <a class="btn btn-primary" href="{{url('moneybox/request/'.$moneybox->url)}}">Utilizar dinero</a>

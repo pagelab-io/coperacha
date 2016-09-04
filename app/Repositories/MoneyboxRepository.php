@@ -167,8 +167,6 @@ class MoneyboxRepository extends BaseRepository{
         $moneybox_list = [];
         $moneybox_list['my_moneyboxes'] = $this->myMoneyboxes($request);
         $moneybox_list['moneyboxes_participation'] = $this->moneyboxesParticipation($request);
-
-        \Log::info($moneybox_list);
         $response = new PLResponse();
         $response->description = 'Listing all momeybox succesfully';
         $response->data = $moneybox_list;

@@ -26,7 +26,11 @@
                                 @foreach($categories as $category)
                                     <label for="chk-{{$category->id}}" class="category-item">
                                         <img src="{{$category->path}}" alt="{{$category->name}}">
-                                        <div class="label"><input id="chk-{{$category->id}}" type="radio" name="category" ng-model="category_id" value="{{$category->id}}"> {{$category->name}}</div>
+                                        @if ($moneybox && $moneybox->category_id == $category->id)
+                                            <div class="label"><input id="chk-{{$category->id}}" type="radio" name="category" ng-model="category_id" ng-init="category_id={{$category->id}}" value="{{$category->id}}"> {{$category->name}}</div>
+                                        @else
+                                            <div class="label"><input id="chk-{{$category->id}}" type="radio" name="category" ng-model="category_id" value="{{$category->id}}"> {{$category->name}}</div>
+                                        @endif
                                     </label>
                                 @endforeach
                             </div>
@@ -35,7 +39,14 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <input id="name" name="name" type="text" class="form-control" placeholder="Nombre de la alcancía" ng-model="name">
+                                @if ($moneybox)
+                                    <input type="hidden" ng-model="amount_id" ng-init="amount_id='{{$amountoption->id}}'">
+                                    <input type="hidden" ng-model="privacy_id" ng-init="privacy_id='{{$privacyoption->id}}'">
+                                    <input type="hidden" ng-model="moneybox_id" ng-init="moneybox_id='{{$moneybox->id}}'">
+                                    <input type="text" class="form-control" placeholder="Nombre de la alcancía" ng-model="name" ng-init="name='{{$moneybox->name}}'">
+                                @else
+                                    <input type="text" class="form-control" placeholder="Nombre de la alcancía" ng-model="name">
+                                @endif
                                 </div>
 
                                 <div class="form-group">
@@ -51,18 +62,30 @@
                                 </div>
 
                                 <div class="form-group">
+                                @if ($moneybox)
+                                    <textarea id="description" name="description"  class="form-control" rows="3" placeholder="Descripción" ng-model="description" ng-init="description='{{$moneybox->description}}'"></textarea>
+                                @else
                                     <textarea id="description" name="description"  class="form-control" rows="3" placeholder="Descripción" ng-model="description"></textarea>
+                                @endif
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <input id="quantity" name="quantity" type="number" class="form-control" placeholder="Cantidad que desea reunir" ng-model="goal_amount">
+                                @if ($moneybox)
+                                    <input readonly type="text" class="form-control" placeholder="Cantidad que desea reunir" ng-model="goal_amount" ng-init="goal_amount='{{$moneybox->goal_amount}}'">
+                                @else
+                                    <input type="number" class="form-control" placeholder="Cantidad que desea reunir" ng-model="goal_amount">
+                                @endif
                                 </div>
 
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-xs-10">
-                                            <input id="datepicker" name="end_date" type="text" class="form-control" placeholder="Fecha límite para reunir los fondos" ng-model="end_date">
+                                        @if ($moneybox)
+                                            <input readonly type="text" class="form-control" placeholder="Fecha límite para reunir los fondos" ng-model="end_date" ng-init="end_date='{{$moneybox->end_date}}'">
+                                        @else
+                                            <input type="text" class="form-control" placeholder="Fecha límite para reunir los fondos" ng-model="end_date">
+                                        @endif
                                         </div>
                                         <div class="col-xs-2"><span class="icon-calendar"></span></div>
                                     </div>
@@ -100,14 +123,44 @@
                                         <div class="radio">
                                             @if($option->subtype=='text')
                                             <label for="{{$option->name}}" class="flex-element">
-                                                <input type="radio" value="{{$setting->id}}|{{$option->id}}|Y" ng-model="{{$setting->id==1 ? "participation" : "privacy"}}">
-                                                <span>{{$option->name}}</span>
-                                                <input class="form-control" type="number" value="0" id="txtOption-{{$option->id}}">
-                                                <strong> .00 MXN</strong>
+                                                @if($moneybox)
+                                                    @if($option->id == $amountoption->option_id)
+                                                        <input type="radio" value="{{$setting->id}}|{{$option->id}}|Y" ng-model="participation" ng-init="participation='{{$setting->id}}|{{$amountoption->option_id}}|Y'">
+                                                        <span>{{$option->name}}</span>
+                                                        <input class="form-control" type="number" value="{{$amountoption->value}}" id="txtOption-{{$option->id}}">
+                                                        <strong> .00 MXN</strong>
+                                                    @else
+                                                        <input type="radio" value="{{$setting->id}}|{{$option->id}}|Y" ng-model="participation">
+                                                        <span>{{$option->name}}</span>
+                                                        <input class="form-control" type="number" value="0" id="txtOption-{{$option->id}}">
+                                                        <strong> .00 MXN</strong>
+                                                    @endif
+                                                @else
+                                                    <input type="radio" value="{{$setting->id}}|{{$option->id}}|Y" ng-model="participation">
+                                                    <span>{{$option->name}}</span>
+                                                    <input class="form-control" type="number" value="0" id="txtOption-{{$option->id}}">
+                                                    <strong> .00 MXN</strong>
+                                                @endif
                                             </label>
                                             @else
                                             <label for="{{$option->name}}">
-                                                <input type="radio" value="{{$setting->id}}|{{$option->id}}|N" ng-model="{{$setting->id==1 ? "participation" : "privacy"}}"> {{$option->name}}
+                                                @if ($moneybox)
+                                                    @if($setting->id==1)
+                                                        @if($option->id == $amountoption->option_id)
+                                                            <input type="radio" value="{{$setting->id}}|{{$option->id}}|N" ng-model="participation" ng-init="participation='{{$setting->id}}|{{$amountoption->option_id}}|N'"> {{$option->name}}
+                                                        @else
+                                                            <input type="radio" value="{{$setting->id}}|{{$option->id}}|N" ng-model="participation"> {{$option->name}}
+                                                        @endif
+                                                    @else
+                                                        @if($option->id == $privacyoption->option_id)
+                                                            <input type="radio" value="{{$setting->id}}|{{$option->id}}|N" ng-model="privacy" ng-init="privacy='{{$setting->id}}|{{$privacyoption->option_id}}|N'"> {{$option->name}}
+                                                        @else
+                                                            <input type="radio" value="{{$setting->id}}|{{$option->id}}|N" ng-model="privacy"> {{$option->name}}
+                                                        @endif
+                                                    @endif
+                                                @else
+                                                    <input type="radio" value="{{$setting->id}}|{{$option->id}}|N" ng-model="{{$setting->id==1 ? "participation" : "privacy"}}"> {{$option->name}}
+                                                @endif
                                             </label>
                                             @endif
                                         </div>

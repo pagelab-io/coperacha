@@ -90,9 +90,25 @@ class HomeController extends Controller
 
     /**
      * @param Request $request
+     * @param $url
+     * @throws \Exception
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getCreateMoneyboxPage(Request $request){
+    public function getCreateMoneyboxPage(Request $request, $url){
+
+        $moneybox = null;
+        $moneyboxSettings   = null;
+        $privacyoption      = 0;
+        $amountoption       = 0;
+        $amount_id          = 0;
+        $privacy_id         = 0;
+        if ($url != "") {
+            $variables          = $this->_moneyboxRepository->getByURL($url);
+            $moneybox           = $variables['moneybox'];
+            $moneyboxSettings   = $variables['settings'];
+            $amountoption       = $moneyboxSettings[0];
+            $privacyoption      = $moneyboxSettings[1];
+        }
         $categories = Category::all();
         $request->merge(array('path' => '/moneybox'));
         $response = $this->_settingRepository->childsOf($request);
@@ -100,6 +116,10 @@ class HomeController extends Controller
         return view('moneybox.create')
             ->with('categories', $categories)
             ->with('settings', $response->data)
+            ->with('moneybox', $moneybox)
+            ->with('moneyboxSettings', $moneyboxSettings)
+            ->with('privacyoption', $privacyoption)
+            ->with('amountoption', $amountoption)
             ->with('pageTitle','Crear mi alcancía 1/2');
     }
 

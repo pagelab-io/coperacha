@@ -78,7 +78,7 @@ class TxUpdateMoneybox extends PLTransaction{
 
             if ($request->exists('settings')) {
 
-                \Log::info("=== Creating settings for moneybox ===");
+                \Log::info("=== Updating settings for moneybox ===");
                 $settings = json_decode($request->get('settings'),true);
                 $memberSettings = [];
 

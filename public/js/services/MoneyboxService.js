@@ -19,8 +19,14 @@
              */
             urlSession: '/moneybox',
 
-            create: function(request){
+            create: function (request)
+            {
                 return $http.post(Moneybox.url, request);
+            },
+
+            update: function (request)
+            {
+                return $http.put(Moneybox.url, request);
             },
 
             getCategories: function(){
