@@ -52,6 +52,7 @@
                                     <label for="name">Selecciona tu banco</label>
                                     <select id="bank"
                                             name="bank"
+                                            required
                                             v-model="order.bank_name"
                                             class="form-control">
                                         <option value="banorte">Banorte</option>
@@ -67,12 +68,12 @@
                                     <textarea id="address"
                                               name="address"
                                               v-model="order.bank_address"
+                                              required
                                               class="form-control" rows="3" placeholder="Dirección del banco"></textarea>
                                 </div>
 
                                 <div class="form-group">
-                                    <span for="file">Adjuntar copia de su información bancaria para
-                                            confirmar los datos</span>
+                                    <span for="file">Adjuntar copia de su información bancaria para confirmar los datos</span>
                                     <input id="file"
                                            name="file[]"
                                            type="file"
@@ -94,7 +95,8 @@
                                     <input id="account"
                                            name="account"
                                            v-model="order.account"
-                                           type="number" class="form-control"
+                                           type="text"
+                                           class="form-control"
                                            placeholder="Número de cuenta">
                                 </div>
 
