@@ -11,13 +11,13 @@ var vm = new Vue({
     data: {
         loading: false,
         order: {
-            moneybox_id: 0,
-            name: 'Daniel Pérez Atanacio',
-            bank_name: 'santander',
-            bank_address: 'Teziutlán Sur 23',
-            clabe: '98289893 9329893',
-            account: '98898943',
-            comments: 'Solicito mi dinero por favor...',
+            moneybox_id:    0,
+            name:           '',
+            bank_name:      '',
+            bank_address:   '',
+            clabe:          '',
+            account:        '',
+            comments:       ''
         },
         file: '',
         message: {
@@ -81,20 +81,24 @@ var vm = new Vue({
             this.loading = true;
 
             this.$http.post(path, form).then(function (response) {
-                console.log(response.data);
 
-                _this.message.text = 'Información enviada correctamente, Gracias.';
-                _this.loading = false;
+                if (response.status == 200) {
+                    _this.message.text = 'Información enviada correctamente, ¡Gracias!';
+                    _this.loading = false;
 
-                for (var field in _this.order) {
-                    _this.order[field] = '';
+                    for (var field in _this.order) {
+                        _this.order[field] = '';
+                    }
+
+                    setTimeout(function () {
+                        $('#file').val('');
+                        _this.message.text = '';
+                    }, 3 * 1000);
+
+                } else {
+                    console.log(response);
                 }
-
-                setTimeout(function () {
-                    _this.message.text = '';
-                }, 3*1000);
             }, function (error) {
-                console.error(error);
                 $('body').html(error.body);
             });
         }

@@ -254,7 +254,7 @@ class HomeController extends Controller
         }
 
         if (!$request->hasFile('file')) {
-            throw new Exception('El archivo es es requerido.');
+            throw new Exception('El campo de archivo es es requerido.');
         }
 
         /// Vars
