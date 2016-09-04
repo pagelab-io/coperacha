@@ -20,9 +20,6 @@
             <p>
                 Para hacerlo has click <a style='color:#FF5000;text-decoration:none;' href={{url('/moneybox/detail/'.$moneybox->url)}}>aqui</a>.
             </p>
-            <p>
-                <a href="#">link de tranferencía de la alcancía (deberia estar logueado)</a>
-            </p>
             <p>Si tienes dudas por favor has click <a style='color:#FF5000;text-decoration:none;' href={{route('pages.contact')}}>aquí.</a></p>
             <p>
                 Saludos,
