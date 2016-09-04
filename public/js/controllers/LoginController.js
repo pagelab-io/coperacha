@@ -4,17 +4,16 @@
         .module("LoginController", [])
         .controller('loginController', loginController);
 
-    loginController.$inject = ['$scope', 'Login'];
+    loginController.$inject = ['$scope', '$element', 'Login'];
 
-    function loginController($scope, Login)
+    function loginController($scope, $element, Login)
     {
-
         /**
          * add the enter action
          */
         document.addEventListener('keyup', function(e){
-            if(e.keyCode === 13){
-                if($scope.email!="" && $scope.password != ""){
+            if (e.keyCode === 13) {
+                if ($scope.email != "" && $scope.password != "") {
                     $scope.emailLogin();
                 }
             }
@@ -33,13 +32,18 @@
          */
         $scope.emailLogin = function ()
         {
+            $scope.redirectTo = $element.attr('data-redirect-to');
             $scope.request = $scope.buildRequest();
             $scope.utils.showLoader();
             Login.login($scope.request).success(function(response){
-                console.log(response);
+                // console.log(response);
                 if (response.status == 200) {
                     var user = response.data;
-                    window.location="/user/profile/" + user.id;
+                    if ($scope.redirectTo) {
+                        window.location.assign($scope.redirectTo);
+                    } else {
+                        window.location.assign("/user/profile/" + user.id);
+                    }
                 } else if(response.status == -1) {
                     $scope.utils.hideLoader();
                     alert("Correo y/o contraseña inválidos.");
@@ -56,13 +60,15 @@
          */
         $scope.facebookLogin = function()
         {
+            $scope.redirectTo = $element.attr('data-redirect-to');
+
             // 1. Facebook Login
             FBLogin(function (result) {
                 if (result.status === 'connected') {
                     console.log('Logged in Facebook.');
 
                     // 2. get Facebook data
-                    FBData(function(result){
+                    FBData(function(result) {
                         $scope.FBemail = result.email;
                         $scope.facebook_uid = result.id;
 
@@ -71,10 +77,15 @@
                         $scope.utils.showLoader();
                         Login.login($scope.request).success(function(response)
                         {
-                            console.log(response);
+                            // console.log(response);
                             if (response.status == 200) {
                                 var user = response.data;
-                                window.location="/user/profile/"+ user.id;
+                                //window.location="/user/profile/"+ user.id;
+                                if ($scope.redirectTo) {
+                                    window.location.assign($scope.redirectTo);
+                                } else {
+                                    window.location.assign("/user/profile/" + user.id);
+                                }
                             } else if(response.status == -1) {
                                 $scope.utils.hideLoader();
                                 alert("Ocurrio un problema al hacer la autenticación por medio de Facebook, por favor intentalo más tarde");
@@ -94,7 +105,7 @@
 
         /**
          * Build the request for login
-         * @returns JSON
+         * @returns {{email: string, password: string, isFB: number, method: string, api-key: string}}
          */
         $scope.buildRequest = function()
         {
@@ -110,7 +121,8 @@
 
         /**
          * Build the request for Facebook login
-         * @returns JSON
+         *
+         * @returns {{email: (string|*), facebook_uid: (*|string), isFB: number, method: string, api-key: string}}
          */
         $scope.buildFacebookRequest = function()
         {
