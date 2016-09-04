@@ -104,19 +104,16 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="header-block">
-                            <h2 class="title">Arma tu Coperacha para fiestas, regalos o viajes</h2>
+                            <h2 class="hidden">Arma tu Coperacha para fiestas, regalos o viajes</h2>
                         </div>
                         <div class="content-block">
                             <div class="clearfix moneyboxes">
-                                <div class="moneybox-type">
-                                    <img class="img-responsive" src="images/intro-moneybox-1.png" alt="">
-                                </div>
-                                <div class="moneybox-type">
-                                    <img class="img-responsive" src="images/intro-moneybox-2.png" alt="">
-                                </div>
-                                <div class="moneybox-type">
-                                    <img class="img-responsive" src="images/intro-moneybox-3.png" alt="">
-                                </div>
+                                @foreach ($categories as $category)
+                                    <div class="moneybox-type">
+                                        <div class="title">{{$category->name}}</div>
+                                        <img class="img-responsive" src="{{$category->path}}" alt="{{$category->name}}">
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
