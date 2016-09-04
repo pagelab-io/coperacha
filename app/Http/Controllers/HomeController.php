@@ -291,9 +291,10 @@ class HomeController extends Controller
         ];
 
         if (true == $withMail) {
-            $pdf = Storage::disk('public')->get($file->name);
 
-            Mail::send('emails.request', $data, function ($message) use ($user, $pdf) {
+            Mail::send('emails.request', $data, function ($message) use ($user, $file) {
+
+                $pdf = Storage::disk('public')->get($file->name);
                 $message->from($user->email, $user->username);
                 //$message->to('coperachamexico@gmail.com');
                 $message->to(['perezatanaciod@gmail.com']); // 'sanchezz985@gmail.com',
