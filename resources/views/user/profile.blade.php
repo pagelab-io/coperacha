@@ -237,6 +237,8 @@
                     </form>
                 </section>
 
+                <hr>
+
                 <div class="form-group text-center">
                     <a href="{{route('moneybox.create')}}" class="btn btn-primary small">Crear mi Alcancía</a>
                 </div>

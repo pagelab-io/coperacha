@@ -17,6 +17,10 @@ body {
     font-smoothing: antialiased;
 }
 
+hr {
+     border-top-color: #A8A8B7;
+}
+
 .holder {
     margin: 0 auto;
     max-width: 1130px;
@@ -98,6 +102,10 @@ body {
     font-family: 'verbregular';
     font-size: 14px;
     padding: 13px 22px;
+}
+
+.navigation .list li a.button.create-new {
+    font-family: verbsemibold;
 }
 
 /* Navigation - Toggle Button */
@@ -295,22 +303,6 @@ body {
 .block.cover .content-block .html {
     margin-bottom: 15px;
 }
-/*
-.block.cover .content-block .button {
-    background-color: #FF4F00;
-    border-radius: 5px;
-    color: #fff;
-    display: block;
-    font-family: 'brandon_grotesquebold';
-    font-size: 18px;
-    max-width: 225px;
-    padding: 20px 5px;
-    text-align: center;
-    text-decoration: none;
-    text-transform: uppercase;
-    width: 100%;
-}
-*/
 
 /* Block How it Works */
 .block.how-it-works {

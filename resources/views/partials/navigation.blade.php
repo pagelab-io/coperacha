@@ -2,26 +2,22 @@
 <nav class="navigation">
     <div class="container-fluid">
         <!-- Logo -->
-        @if(Auth::guest())
-            <a class="logo" href="/">
-                <img class="img-responsive" src="/images/logo.png" alt="Coperacha | Recauda Dinero Entre Amigos">
-            </a>
-        @else
-            <a class="logo" href="{{route('moneybox.dashboard')}}">
-                <img class="img-responsive" src="/images/logo.png" alt="Coperacha | Recauda Dinero Entre Amigos">
-            </a>
-        @endif
+        <a class="logo" href="{{ Auth::guest() ? route('pages.index') : route('moneybox.dashboard') }}">
+            <img class="img-responsive" src="/images/logo.png" alt="Coperacha | Recauda Dinero Entre Amigos">
+        </a>
 
         <!-- List -->
         <ul class="clearfix list hidden-xs" ng-controller="modalController">
-            <li><a href="{{route('pages.about')}}">¿Qué es Coperacha?</a></li>
-            <li><a href="{{route('pages.faqs')}}">FAQS</a></li>
-            <li><a href="{{route('pages.contact')}}">Contacto</a></li>
             @if (Auth::guest())
-                <li><a class="button" href="{{route('user.create')}}">Registro</a></li>
+                <li><a href="{{route('pages.about')}}">¿Qué es Coperacha?</a></li>
+                <li><a href="{{route('pages.faqs')}}">FAQS</a></li>
+                <li><a href="{{route('pages.contact')}}">Contacto</a></li>
+                <li><a class="button create-new" href="{{route('user.create')}}">Registro</a></li>
                 <li><a href="#" ng-click="showModal()">Entrar</a></li>
             @else
-                <li><a class="button" href="{{route('moneybox.create')}}">Crear mi Alcancía</a></li>
+                <li><a href="{{route('pages.contact')}}">Contacto</a></li>
+                <li><a href="{{route('moneybox.dashboard')}}">Mis Alcancías</a></li>
+                <li><a class="button create-new" href="{{route('moneybox.create')}}">Crear Nueva Alcancía</a></li>
                 <li>
                     <div class="logged">
                         @if(Auth::user()->person->gender === 'H')
