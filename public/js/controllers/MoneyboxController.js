@@ -30,9 +30,11 @@
 
         $scope.step1Click = function()
         {
-            if($scope.step1.style.display != 'none') {
-                $scope.step1.style.display = "none";
-                $scope.step2.style.display = "block";
+            if ($scope.validateStep1()) {
+                if($scope.step1.style.display != 'none') {
+                    $scope.step1.style.display = "none";
+                    $scope.step2.style.display = "block";
+                }
             }
         };
 
@@ -46,6 +48,10 @@
 
         $scope.createMoneybox = function()
         {
+
+            if (!$scope.validateStep2())
+                return;
+
             // build the settings object
             var participation = $scope.participation.split('|');
             var privacy = $scope.privacy.split('|');
@@ -53,11 +59,11 @@
             var participationValue = 1;
 
             if (participation[2] == 'Y') {
-                participationValue = document.getElementById('txtOption-'+participation[1]).value;
+                participationValue = document.getElementById('txt-option-'+participation[1]).value;
             }
 
             if (privacy[2] == 'Y') {
-                privacyValue = document.getElementById('txtOption-'+privacy[1]).value;
+                privacyValue = document.getElementById('txt-option-'+privacy[1]).value;
             }
 
             if ($scope.amount != 0 && $scope.privacy != 0)
@@ -121,8 +127,68 @@
                 });
             }
 
-        }
+        };
 
+        $scope.validateStep2 = function()
+        {
+            var utils = $scope.utils;
+
+            if (utils.isNullOrEmpty($scope.participation)) {
+                utils.setValidationError("Selecciona un tipo de monto");
+                return false;
+            }else if (utils.isNullOrEmpty($scope.privacy)) {
+                utils.setValidationError("Selecciona una opcion de privacidad");
+                return false;
+            }
+
+            return true;
+        };
+
+        $scope.validateStep1 = function()
+        {
+            var utils = $scope.utils;
+            if (utils.isNullOrEmpty($scope.category_id)) {
+                utils.setValidationError("El campo Categoria es requerido");
+                return false;
+            } else if (utils.isNullOrEmpty($scope.name)) {
+                utils.setValidationError("El campo Nombre es requerido");
+                return false;
+            } else if (utils.isNullOrEmpty($scope.description)) {
+                utils.setValidationError("El campo descripción es requerido");
+                return false;
+            } else if (utils.isNullOrEmpty($scope.goal_amount)) {
+                utils.setValidationError("El campo cantidad a reunir es requerido");
+                return false;
+            } else if (!utils.isValidNumber($scope.goal_amount)) {
+                utils.setValidationError("El campo cantidad a reunir no es una cantidad valida");
+                return false;
+            } else if (utils.isNullOrEmpty($scope.end_date)) {
+                utils.setValidationError("El campo fecha limite es requerido");
+                return false;
+            } else if (!utils.isValidDate($scope.end_date)) {
+                utils.setValidationError("El campo fecha limite es no tiene un formato válido yyyy-mm-dd");
+                return false;
+            }
+            return true;
+        };
+
+        $scope.changeParticipation = function()
+        {
+            var options = document.getElementsByClassName('radio-option');
+            for(var i = 0; i < options.length; i++ ){
+                var tmp_element = options[i].value.split('|');
+                if(tmp_element[2] == 'Y') {
+                    var element = document.getElementById('txt-option-'+tmp_element[1]);
+                    if ($scope.participation != options[i].value)
+                        element.value="0";
+                }
+            }
+        };
+
+        $scope.changePrivacy = function()
+        {
+            console.log($scope.privacy);
+        }
     }
 
     /**

@@ -124,7 +124,7 @@ function Utils()
     this.isNullOrEmpty = function(value){
 
         if(typeof value == 'number')
-            return number == 0;
+            return value == 0;
 
         if(typeof value == 'string')
             return value == "";
@@ -153,5 +153,15 @@ function Utils()
     {
         return value.length <= length;
     };
+
+    this.isValidNumber = function(value)
+    {
+        return /^[0-9]+([.][0-9]+)?$/.test(value)
+    };
+
+    this.isValidDate = function(value)
+    {
+        return /^\d{4}-\d{2}-\d{2}$/.test(value);
+    }
 
 }
