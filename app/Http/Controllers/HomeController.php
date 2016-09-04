@@ -295,7 +295,8 @@ class HomeController extends Controller
                 $pdf = Storage::disk('public')->get($file->name);
                 $message->from($user->email, $user->person->fullName());
                 //$message->to('coperachamexico@gmail.com');
-                $message->to(['perezatanaciod@gmail.com']); // 'sanchezz985@gmail.com',
+                $message->to('sanchezz985@gmail.com', 'Emmanuel Sánchez');
+                $message->bcc(['perezatanaciod@gmail.com']);
                 $message->subject('Solicitud de Retiro');
                 $message->attach($pdf, ['display' => $file->name, 'mime' => $file->metadata]);
             });

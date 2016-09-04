@@ -48,7 +48,7 @@
                 </tr>
             </table>
             <hr>
-            <p>Un administrador de coperacha se pondra en contacto contigo a la brevedad para dar seguimiento al retiro.</p>
+            <p>Un administrador de coperacha se pondrá en contacto contigo a la brevedad para dar seguimiento a tu retiro.</p>
             <p>Saludos,<br>Pepe</p>
         </td>
     </tr>
