@@ -27,7 +27,6 @@
         $scope.privacy_id = 0;
         $scope.step2.style.display = "none";
 
-
         $scope.step1Click = function()
         {
             if ($scope.validateStep1()) {
@@ -148,7 +147,7 @@
         {
             var utils = $scope.utils;
             if (utils.isNullOrEmpty($scope.category_id)) {
-                utils.setValidationError("El campo Categoria es requerido");
+                utils.setValidationError("El campo Categoría es requerido");
                 return false;
             } else if (utils.isNullOrEmpty($scope.name)) {
                 utils.setValidationError("El campo Nombre es requerido");
@@ -163,10 +162,10 @@
                 utils.setValidationError("El campo cantidad a reunir no es una cantidad valida");
                 return false;
             } else if (utils.isNullOrEmpty($scope.end_date)) {
-                utils.setValidationError("El campo fecha limite es requerido");
+                utils.setValidationError("El campo fecha límite es requerido");
                 return false;
             } else if (!utils.isValidDate($scope.end_date)) {
-                utils.setValidationError("El campo fecha limite es no tiene un formato válido yyyy-mm-dd");
+                utils.setValidationError("El campo fecha límite es no tiene un formato válido yyyy-mm-dd");
                 return false;
             }
             return true;
@@ -188,7 +187,24 @@
         $scope.changePrivacy = function()
         {
             console.log($scope.privacy);
-        }
+        };
+
+        $scope.fileChanged = function (element) {
+            if (element.files.length > 0) {
+                var file = element.files[0];
+                var imageType = /image.*/;
+                if (file.type.match(imageType)) {
+                    var reader = new FileReader();
+                    reader.onload = function () {
+                        document.querySelector('#moneybox-image').src = (reader.result);
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    console.log("File not supported!");
+                }
+            }
+        };
+
     }
 
     /**
