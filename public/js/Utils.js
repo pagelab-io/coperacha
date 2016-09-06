@@ -162,6 +162,11 @@ function Utils()
     this.isValidDate = function(value)
     {
         return /^\d{4}-\d{2}-\d{2}$/.test(value);
+    };
+
+    this.isValidPhone = function(value)
+    {
+        return /^\d{10}?$/.test(value)
     }
 
 }

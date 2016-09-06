@@ -27,17 +27,15 @@
 
         $scope.createParticipant = function()
         {
+            if (!$scope.validate())
+                return;
+
             var moneybox = JSON.parse($scope.moneybox);
             var participantSettings = [];
             var tmp = [];
 
-            if ($scope.settings != '') {
-                tmp = $scope.settings.split('|');
-                participantSettings.push({'setting_id':tmp[0],'option_id':tmp[1],"value":1});
-            } else {
-                alert("Selecciona una opción");
-                return;
-            }
+            tmp = $scope.settings.split('|');
+            participantSettings.push({'setting_id':tmp[0],'option_id':tmp[1],"value":1});
 
             if ($scope.validateAmount()) {
                 $scope.request = {
@@ -177,62 +175,36 @@
             };
 
             $scope.utils.showLoader();
-            /*$scope.deleteTmpParticipant(function(response){
-                console.log(response);
-                if(response.status == 200){*/
-                    Participant.payment($scope.request)
-                        .success(function(response){
-                            if(response.status == 200) {
-
-                                if ($scope.paymentMethod == 'P') {
-                                    window.location = response.data.url;
-                                } else if($scope.paymentMethod == 'O'){
-                                    $scope.utils.hideLoader();
-                                    $scope.utils.setAlertTitle("Confirmación de pago por OXXO");
-                                    document.getElementById('alert-content').innerHTML="" +
-                                    "<p>Se ha generado un nuevo cargo, puedes ir a tu tienda OXXO mas cercana y hacer tu pago con los siguientes datos:<p>" +
-                                    "<br>" +
-                                    "<image src='"+response.data.payment_method.barcode_url+"'>" +
-                                    "<br>" +
-                                    "<span>"+response.data.payment_method.barcode+"</span>" +
-                                    "<br><br>" +
-                                    "<span class='info-alert'>Nota: al realizar tu pago, recibirás un correo de confirmación de pago</span>";
-                                    $scope.utils.showAlert();
-                                } else if($scope.paymentMethod == 'S'){
-                                    console.log("== SPEI ==");
-                                    console.log(response);
-                                    $scope.utils.hideLoader();
-                                    $scope.utils.setAlertTitle("Confirmación de pago por SPEI");
-                                    document.getElementById('alert-content').innerHTML="" +
-                                    "<p>Se ha generado un nuevo cargo, puedes ir a realizar tu pago con los siguientes datos:<p>" +
-                                    "<br>" +
-                                    "<span> No. Clabe: "+response.data.payment_method.clabe+"</span>" +
-                                    "<br><br>" +
-                                    "<span class='info-alert'>Nota: al realizar tu pago, recibirás un correo de confirmación de pago</span>";
-                                    $scope.utils.showAlert();
-                                }
-
-                            } else {
-                                $scope.utils.hideLoader();
-                                alert("Ocurrio un error al generarse el pago, porfavor intentelo mas tarde o elija otro método de pago");
-                            }
-                        })
-                        .error(function(response){
-                            $scope.utils.hideLoader();
-                            console.log(response);
-                        });
-                /*}
-            });*/
-
-            /*Participant.doPayment($scope.request)
+            Participant.payment($scope.request)
                 .success(function(response){
                     if(response.status == 200) {
 
                         if ($scope.paymentMethod == 'P') {
                             window.location = response.data.url;
-                        } else {
+                        } else if($scope.paymentMethod == 'O'){
                             $scope.utils.hideLoader();
+                            $scope.utils.setAlertTitle("Confirmación de pago por OXXO");
+                            document.getElementById('alert-content').innerHTML="" +
+                            "<p>Se ha generado un nuevo cargo, puedes ir a tu tienda OXXO mas cercana y hacer tu pago con los siguientes datos:<p>" +
+                            "<br>" +
+                            "<image src='"+response.data.payment_method.barcode_url+"'>" +
+                            "<br>" +
+                            "<span>"+response.data.payment_method.barcode+"</span>" +
+                            "<br><br>" +
+                            "<span class='info-alert'>Nota: al realizar tu pago, recibirás un correo de confirmación de pago</span>";
+                            $scope.utils.showAlert();
+                        } else if($scope.paymentMethod == 'S'){
+                            console.log("== SPEI ==");
                             console.log(response);
+                            $scope.utils.hideLoader();
+                            $scope.utils.setAlertTitle("Confirmación de pago por SPEI");
+                            document.getElementById('alert-content').innerHTML="" +
+                            "<p>Se ha generado un nuevo cargo, puedes ir a realizar tu pago con los siguientes datos:<p>" +
+                            "<br>" +
+                            "<span> No. Clabe: "+response.data.payment_method.clabe+"</span>" +
+                            "<br><br>" +
+                            "<span class='info-alert'>Nota: al realizar tu pago, recibirás un correo de confirmación de pago</span>";
+                            $scope.utils.showAlert();
                         }
 
                     } else {
@@ -243,8 +215,47 @@
                 .error(function(response){
                     $scope.utils.hideLoader();
                     console.log(response);
-                });*/
+                });
         }
+
+        /**
+         * Validate when register is by email
+         * @returns {boolean}
+         */
+        $scope.validate = function()
+        {
+
+            var utils = $scope.utils;
+
+            if (utils.isNullOrEmpty($scope.name)) {
+                utils.setValidationError("El campo Nombre es requerido");
+                return false;
+            } else if (utils.isNullOrEmpty($scope.lastname)) {
+                utils.setValidationError("El campo Apellido es requerido");
+                return false;
+            } else if (utils.isNullOrEmpty($scope.phone)) {
+                utils.setValidationError("El campo teléfono es requerido");
+                return false;
+            } else if (!utils.isValidPhone($scope.phone)) {
+                utils.setValidationError("El campo teléfono es incorrecto, deben ser 10 números");
+                return false;
+            } else if (!utils.isValidEmail($scope.email)) {
+                utils.setValidationError("El Correo electrónico ingresado no es válido");
+                return false;
+            } else if (utils.isNullOrEmpty($scope.amount)) {
+                utils.setValidationError("El campo Contraseña no es válido");
+                return false;
+            } else if (!utils.isValidNumber($scope.amount)) {
+                utils.setValidationError("El campo Contraseña no es válido");
+                return false;
+            } else if (utils.isNullOrEmpty($scope.settings)) {
+                utils.setValidationError("Debes elegir una opcion para tu participación");
+                return false;
+            }
+
+            return true;
+
+        };
 
     }
 

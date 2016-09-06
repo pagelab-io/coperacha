@@ -27,29 +27,37 @@
                                 <div class="form-group">
                                     <label for="name">Nombre</label>
                                     @if(Auth::user())
-                                        <input type="text" required class="form-control" placeholder="Nombre" ng-init="name='{{Auth::user()->person->name}}'" ng-model="name">
+                                        <input readonly type="text" class="form-control" placeholder="Nombre" ng-init="name='{{Auth::user()->person->name}}'" ng-model="name">
                                     @else
-                                        <input type="text" required class="form-control" placeholder="Nombre" ng-model="name">
+                                        <input type="text" class="form-control" placeholder="Nombre" ng-model="name">
                                     @endif
                                 </div>
 
                                 <div class="form-group">
                                     <label for="name">Apellidos</label>
                                     @if(Auth::user())
-                                        <input type="text" required class="form-control" placeholder="Apellidos" ng-init="lastname='{{Auth::user()->person->lastname}}'" ng-model="lastname">
+                                        <input readonly type="text" class="form-control" placeholder="Apellidos" ng-init="lastname='{{Auth::user()->person->lastname}}'" ng-model="lastname">
                                     @else
-                                        <input type="text" required class="form-control" placeholder="Apellidos" ng-model="lastname">
+                                        <input type="text" class="form-control" placeholder="Apellidos" ng-model="lastname">
                                     @endif
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="mobile">Celular</label>
-                                    <input type="text" required class="form-control" placeholder="Celular" ng-model="phone">
+                                    @if(Auth::user())
+                                        <input readonly type="text" class="form-control" placeholder="Celular" ng-model="phone" ng-init="phone='{{Auth::user()->person->phone}}'">
+                                    @else
+                                        <input type="text" class="form-control" placeholder="Celular" ng-model="phone">
+                                    @endif
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Correo Electrónico</label>
-                                    <input type="email" class="form-control" placeholder="Correo Electrónico" ng-model="email">
+                                    @if(Auth::user())
+                                        <input readonly type="text" class="form-control" placeholder="Correo Electrónico" ng-model="email" ng-init="email='{{Auth::user()->email}}'">
+                                    @else
+                                        <input type="text" class="form-control" placeholder="Correo Electrónico" ng-model="email">
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-sm-6">
