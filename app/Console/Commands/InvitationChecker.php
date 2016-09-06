@@ -69,9 +69,9 @@ class InvitationChecker extends Command
                 $invitation->save();
 
                 Mail::send('emails.pendinginvitation', $data, function ($message) use ($invitation) {
-                    $message->from('contacto@coperacha.com.mx', 'Coperacha');
+                    $message->from('info@coperacha.com.mx', 'Coperacha');
                     $message->to($invitation->email, 'Invitado');
-                    $message->bcc(['perezatanaciod@gmail.com']);
+                    $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com']);
                     $message->subject('Recordatorio de Invitación a ' . $invitation->moneybox->name);
                 });
             }
