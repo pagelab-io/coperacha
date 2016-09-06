@@ -304,9 +304,8 @@ class HomeController extends Controller
             Mail::send('emails.request', $data, function ($message) use ($user, $file) {
                 $pdf = Storage::disk('public')->get($file->name);
                 $message->from($user->email, $user->person->fullName());
-                //$message->to('coperachamexico@gmail.com');
                 $message->to('sanchezz985@gmail.com', 'Emmanuel Sánchez');
-                $message->bcc(['perezatanaciod@gmail.com']);
+                $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com']);
                 $message->subject('Solicitud de Retiro');
                 $message->attach($pdf, ['display' => $file->name, 'mime' => $file->metadata]);
             });
@@ -332,7 +331,7 @@ class HomeController extends Controller
         Mail::send('emails.contact', $data, function ($message) use($request) {
             $message->from($request->get('email'), 'Contacto');
             $message->to('coperachamexico@gmail.com');
-            $message->bcc(['sanchezz985@gmail.com','perezatanaciod@gmail.com']);
+            $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com']);
             $message->subject('Mensaje de Contacto');
         });
 
@@ -364,9 +363,9 @@ class HomeController extends Controller
 
             if ($record) {
                 Mail::send('emails.invitation', $data, function ($message) use ($email) {
-                    $message->from('contacto@coperacha.com.mx', 'Coperacha');
+                    $message->from('info@coperacha.com.mx', 'Coperacha');
                     $message->to($email, 'Invitado');
-                    $message->bcc(['perezatanaciod@gmail.com']);
+                    $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com']);
                     $message->subject('Mensaje de Invitación');
                 });
             }
@@ -398,10 +397,10 @@ class HomeController extends Controller
                 ];
 
                 Mail::send('emails.pendinginvitation', $data, function ($message) use ($invitation) {
-                    $message->from('contacto@coperacha.com.mx', 'Coperacha');
+                    $message->from('info@coperacha.com.mx', 'Coperacha');
                     $message->to($invitation->email, 'Invitado');
-                    $message->bcc(['perezatanaciod@gmail.com']);
-                    $message->subject('Mensaje de Invitación');
+                    $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com']);
+                    $message->subject('Mensaje de Recordatorio');
                 });
             }
         }
