@@ -23,7 +23,7 @@
                                             <a class="btn btn-primary" href="{{url('moneybox/request/'.$moneybox->url)}}">Utilizar dinero</a>
                                         </div>
                                         <div class="form-group">
-                                            <a class="btn btn-primary" href="{{url('/moneybox/detail/'.$moneybox->url)}}">Invitar</a>
+                                            <a class="btn btn-primary" href="{{url('/moneybox/detail/'.$moneybox->url)}}">Invitar/Participar</a>
                                         </div>
                                     </main>
                                     <footer>

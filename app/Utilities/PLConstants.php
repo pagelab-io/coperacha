@@ -28,5 +28,5 @@ class PLConstants {
     const EMAIL_PENDING_INVITATION = 'emails.pendinginvitation';
     const EMAIL_CONFIRM_TRANSFER = 'emails.transferconfirm';
     const EMAIL_REGISTER = 'emails.welcome';
-    const EMAIL_BCC = 'perezatanaciod@gmail.com';
+    const EMAIL_BCC = 'perezatanaciod@gmail.com,sanchezz985@gmail.com,coperachamexico@gmail.com';
 }
