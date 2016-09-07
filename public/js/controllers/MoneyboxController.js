@@ -97,7 +97,10 @@
                             window.location = '/moneybox/detail/'+response.data.url;
                         } else {
                             $scope.utils.hideLoader();
-                            alert("Ocurrio un error al actualizar la alcancía, intentalo nuevamente porfavor");
+                            $scope.utils.setAlertTitle("Coperacha - Alerta");
+                            document.getElementById('alert-content').innerHTML="" +
+                            "<p>Ocurrio una incidencia al actualizar la alcancía, intentalo nuevamente por favor<p>";
+                            $scope.utils.showAlert();
                         }
                     })
                     .error(function(response){
@@ -115,7 +118,10 @@
                             window.location = '/moneybox/detail/'+response.data.url;
                         } else {
                             $scope.utils.hideLoader();
-                            alert("Ocurrio un error al generar la alcancía, intentalo nuevamente porfavor");
+                            $scope.utils.setAlertTitle("Coperacha - Alerta");
+                            document.getElementById('alert-content').innerHTML="" +
+                            "<p>Ocurrio una incidencia al crear la alcancía, intentalo nuevamente por favor<p>";
+                            $scope.utils.showAlert();
                         }
                     })
                 .error(function(response){

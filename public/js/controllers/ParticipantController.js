@@ -68,8 +68,10 @@
                             .error(function(create_response)
                             {
                                 $scope.utils.hideLoader();
-                                alert("Ocurrio un error al registrar tus datos, porfavor intentalo mas tarde");
-                                console.log(create_response);
+                                $scope.utils.setAlertTitle("Coperacha - Alerta");
+                                document.getElementById('alert-content').innerHTML="" +
+                                "<p>Ocurrio un error al registrar tus datos, por favor intentalo más tarde<p>";
+                                $scope.utils.showAlert();
                             });
                     }
                 });
@@ -99,7 +101,10 @@
 
             if (parseFloat(amount) <= 49)
             {
-                alert("El monto mínimo de participación son $50.00");
+                $scope.utils.setAlertTitle("Coperacha - Alerta");
+                document.getElementById('alert-content').innerHTML="" +
+                "<p>El monto mínimo de participación son $50.00<p>";
+                $scope.utils.showAlert();
                 return result;
             }
 
@@ -111,14 +116,20 @@
                         break;
                     }else if (settings[i].option_id == 2) {
                         if (amount < settings[i].value) {
-                            alert("El monto sugerido para participar en esta alcancía es de $ " + parseFloat(settings[i].value));
+                            $scope.utils.setAlertTitle("Coperacha - Alerta");
+                            document.getElementById('alert-content').innerHTML="" +
+                            "<p>El monto sugerido para participar en esta alcancía es de $ " + parseFloat(settings[i].value)+"<p>";
+                            $scope.utils.showAlert();
                         } else {
                             result = true;
                             break;
                         }
                     } else if (settings[i].option_id == 3) {
                         if (amount != settings[i].value) {
-                            alert("El monto fijado para esta alcancía es de $ " + parseFloat(settings[i].value));
+                            $scope.utils.setAlertTitle("Coperacha - Alerta");
+                            document.getElementById('alert-content').innerHTML="" +
+                            "<p>El monto fijado para esta alcancía es de $ " + parseFloat(settings[i].value)+"<p>";
+                            $scope.utils.showAlert();
                         } else {
                             result = true;
                             break;
@@ -144,7 +155,10 @@
                 })
                 .error(function(response)
                 {
-                    alert("Ocurrio un error al registrar tus datos, porfavor intentalo mas tarde"+"\n\t"+response);
+                    $scope.utils.setAlertTitle("Coperacha - Alerta");
+                    document.getElementById('alert-content').innerHTML="" +
+                    "<p>Ocurrio un error al registrar tus datos, porfavor intentalo mas tarde<p>";
+                    $scope.utils.showAlert();
                 });
 
         };
@@ -158,7 +172,10 @@
                     callback(response);
                 })
                 .error(function(response){
-                    alert("Ocurrio un error, porfavor intentalo mas tarde"+"\n\t"+response);
+                    $scope.utils.setAlertTitle("Coperacha - Alerta");
+                    document.getElementById('alert-content').innerHTML="" +
+                    "<p>Ocurrio una incidencia, porfavor intentalo mas tarde<p>";
+                    $scope.utils.showAlert();
                 });
         };
 
@@ -209,14 +226,20 @@
 
                     } else {
                         $scope.utils.hideLoader();
-                        alert("Ocurrio un error al generarse el pago, porfavor intentelo mas tarde o elija otro método de pago");
+                        $scope.utils.setAlertTitle("Coperacha - Alerta");
+                        document.getElementById('alert-content').innerHTML="" +
+                        "<p>Ocurrio una incidencia al generarse el pago, por favor intentelo más tarde o elija otro método de pago<p>";
+                        $scope.utils.showAlert();
                     }
                 })
                 .error(function(response){
                     $scope.utils.hideLoader();
-                    console.log(response);
+                    $scope.utils.setAlertTitle("Coperacha - Alerta");
+                    document.getElementById('alert-content').innerHTML="" +
+                    "<p>Ocurrio una incidencia al generarse el pago, por favor intentelo más tarde<p>";
+                    $scope.utils.showAlert();
                 });
-        }
+        };
 
         /**
          * Validate when register is by email
