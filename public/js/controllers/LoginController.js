@@ -32,6 +32,10 @@
          */
         $scope.emailLogin = function ()
         {
+
+            if(!$scope.validateLogin())
+                return ;
+
             $scope.redirectTo = $element.attr('data-redirect-to');
             $scope.request = $scope.buildRequest();
             $scope.utils.showLoader();
@@ -46,11 +50,17 @@
                     }
                 } else if(response.status == -1) {
                     $scope.utils.hideLoader();
-                    alert("Correo y/o contraseña inválidos.");
+                    $scope.utils.setAlertTitle("Coperacha - Alerta");
+                    document.getElementById('alert-content').innerHTML="" +
+                    "<p>Correo y/o contraseña inválidos.<p>";
+                    $scope.utils.showAlert();
                 }
             }).error(function(response){
                 $scope.utils.hideLoader();
-                console.log(response);
+                $scope.utils.setAlertTitle("Coperacha - Alerta");
+                document.getElementById('alert-content').innerHTML="" +
+                "<p>Ocurrio una incidencia al intentar iniciar sesión, por favor intentalo mas tarde.<p>";
+                $scope.utils.showAlert();
             });
         };
 
@@ -88,7 +98,10 @@
                                 }
                             } else if(response.status == -1) {
                                 $scope.utils.hideLoader();
-                                alert("Ocurrio un problema al hacer la autenticación por medio de Facebook, por favor intentalo más tarde");
+                                $scope.utils.setAlertTitle("Coperacha - Alerta");
+                                document.getElementById('alert-content').innerHTML="" +
+                                "<p>Ocurrio una incidencia al intentar iniciar sesión, por favor intentalo mas tarde.<p>";
+                                $scope.utils.showAlert();
                             }
                         }).error(function(response){
                             $scope.utils.hideLoader();
@@ -98,7 +111,10 @@
                     });
 
                 } else {
-                    console.log("Ocurrio un problema al hacer la conexión con Facebook, por favor intentalo más tarde");
+                    $scope.utils.setAlertTitle("Coperacha - Alerta");
+                    document.getElementById('alert-content').innerHTML="" +
+                    "<p>Ocurrio un problema al hacer la conexión con Facebook, por favor intentalo más tarde.<p>";
+                    $scope.utils.showAlert();
                 }
             });
         };
@@ -134,6 +150,24 @@
                 'api-key' : '$2y$10$ScZUgkFzrMr9NM5qPzKag.4mLTW8ugSG/DtT6nerJb3W1v5sg6UBC'
             };
             return request;
+        };
+
+        $scope.validateLogin = function()
+        {
+            var utils = $scope.utils;
+
+            if (utils.isNullOrEmpty($scope.email)) {
+                utils.setValidationError("El correo electrónico es requerido.");
+                return false;
+            } else if (!utils.isValidEmail($scope.email)) {
+                utils.setValidationError("El correo electrónico no tiene un formato válido");
+                return false;
+            } else if (utils.isNullOrEmpty($scope.password)) {
+                utils.setValidationError("La contraseña es requerida");
+                return false;
+            }
+
+            return true;
         }
 
     }
