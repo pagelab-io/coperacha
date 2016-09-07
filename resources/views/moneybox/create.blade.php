@@ -54,21 +54,23 @@
                                     <input id="person_id" name="person_id" type="hidden" class="form-control" ng-init="person_id='{{Auth::user()->person->id}}'" ng-model="person_id">
                                 </div>
 
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-xs-2">
-                                            <img id="moneybox-image" class="icon-file" src="/images/icon-file.png">
-                                        </div>
-                                        <div class="col-xs-10">
-                                            <input id="file"
-                                                   onchange="angular.element(this).scope().fileChanged(this)"
-                                                   ng-molde="file"
-                                                   name="file"
-                                                   type="file"
-                                                   accept="image/*">
+                                @if ($moneybox)
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-xs-2">
+                                                <img id="moneybox-image" class="icon-file" src="/images/icon-file.png">
+                                            </div>
+                                            <div class="col-xs-10">
+                                                <input id="file"
+                                                       onchange="angular.element(this).scope().fileChanged(this)"
+                                                       ng-molde="file"
+                                                       name="file"
+                                                       type="file"
+                                                       accept="image/*">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endif
 
                                 <div class="form-group">
                                 @if ($moneybox)

@@ -8,11 +8,15 @@
 
 namespace App\Http\Controllers\Moneybox;
 
+use App\Entities\File;
 use App\Http\Controllers\PLController;
 use App\Http\Requests\PLRequest;;
+use Illuminate\Http\Request;
 use App\Http\Responses\PLResponse;
 use App\Repositories\MoneyboxRepository;
 use App\Repositories\MemberSettingRepository;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class MoneyboxController extends PLController
 {
@@ -52,7 +56,6 @@ class MoneyboxController extends PLController
      */
     public function getAll(PLRequest $request)
     {
-
         $this->validate($request, $request->rules(), $request->messages());
 
         try {
@@ -110,6 +113,32 @@ class MoneyboxController extends PLController
             $response->data = $ex->getTraceAsString();
             return response()->json($response);
         }
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function upload(Request $request) {
+
+        if ($request->hasFile('file')) {
+            $extension = $request->file('file')->getClientOriginalExtension();
+            $filename = $request->file('file')->getClientOriginalName();
+            $mine = $request->file('file')->getClientMimeType();
+            $size = $request->file('file')->getSize();
+            $name =  uniqid() . '_' . $filename;
+
+            if ($stored = Storage::disk('public')->put($name, $request->file('file'))) {
+                $file = File::create(['name' => $name, 'size' => $size, 'path' => 'public', 'extension' => $extension]);
+                $file->user_id = Auth::user()->id;
+                $file->metadata = $mine;
+                $file->owner = 'Moneybox';
+                $file->owner_id = $request->get('id');
+                $file->save();
+            }
+        }
+
+        return response()->json(['success' => true, 'data' => $file]);
     }
     //endregion
 }

@@ -131,9 +131,10 @@ $router->group([
     'prefix' => 'api/v1/moneybox',
     'middleware' => 'rest',
 ], function($router){
-    $router->post('/',  [ 'middleware' => 'auth', 'uses' => 'MoneyboxController@createMoneybox']);
-    $router->put('/',   [ 'middleware' => 'auth', 'uses' => 'MoneyboxController@updateMoneybox']);
-    $router->get('/',   [ 'middleware' => 'auth', 'uses' => 'MoneyboxController@getAll']);
+    $router->post('/',  ['middleware' => 'auth', 'uses' => 'MoneyboxController@createMoneybox']);
+    $router->post('/upload', ['middleware' => 'auth', 'uses' => 'MoneyboxController@upload']);
+    $router->put('/',   ['middleware' => 'auth', 'uses' => 'MoneyboxController@updateMoneybox']);
+    $router->get('/',   ['middleware' => 'auth', 'uses' => 'MoneyboxController@getAll']);
     $router->post('/categories',    ['middleware' => 'auth', 'uses' => 'CategoryController@createCategory']);
     $router->get('/categories',     ['middleware' => 'auth', 'uses' => 'CategoryController@getAll']);
     $router->post('/settings',      ['middleware' => 'auth', 'uses' => 'SettingController@createSetting']);

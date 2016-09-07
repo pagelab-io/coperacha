@@ -47,7 +47,6 @@
 
         $scope.createMoneybox = function()
         {
-
             if (!$scope.validateStep2())
                 return;
 
@@ -85,7 +84,6 @@
                 'settings' : JSON.stringify($scope.settings),
                 'api-key' : '$2y$10$ScZUgkFzrMr9NM5qPzKag.4mLTW8ugSG/DtT6nerJb3W1v5sg6UBC'
             };
-
 
             if ($scope.moneybox_id != 0) {
                 // update
@@ -190,15 +188,29 @@
         };
 
         $scope.fileChanged = function (element) {
-            if (element.files.length > 0) {
+            if ($scope.moneybox_id && element.files.length > 0) {
                 var file = element.files[0];
                 var imageType = /image.*/;
                 if (file.type.match(imageType)) {
-                    var reader = new FileReader();
-                    reader.onload = function () {
-                        document.querySelector('#moneybox-image').src = (reader.result);
-                    };
-                    reader.readAsDataURL(file);
+
+                    var form = new FormData();
+                    form.append('api-key', '$2y$10$ScZUgkFzrMr9NM5qPzKag.4mLTW8ugSG/DtT6nerJb3W1v5sg6UBC');
+                    form.append('id', $scope.moneybox_id);
+                    form.append('file', file);
+
+                    Moneybox.upload(form).success(function (r) {
+                        console.log(r);
+
+                        var reader = new FileReader();
+                        reader.onload = function () {
+                            document.querySelector('#moneybox-image').src = (reader.result);
+                        };
+                        reader.readAsDataURL(file);
+
+                    }).error(function(response){
+                        $('body').html(response);
+                    });
+
                 } else {
                     console.log("File not supported!");
                 }
