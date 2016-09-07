@@ -2,7 +2,7 @@
 <nav class="navigation">
     <div class="container-fluid">
         <!-- Logo -->
-        <a class="logo" href="{{ Auth::guest() ? route('pages.index') : route('moneybox.dashboard') }}">
+        <a class="logo" href="{{ route('pages.index') }}">
             <img class="img-responsive" src="/images/logo.png" alt="Coperacha | Recauda Dinero Entre Amigos">
         </a>
 

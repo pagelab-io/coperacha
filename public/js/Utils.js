@@ -115,7 +115,7 @@ function Utils()
 
     this.setValidationError = function(message)
     {
-        this.setAlertTitle("Error !");
+        this.setAlertTitle("Coperacha - Alerta");
         document.getElementById('alert-content').innerHTML="" +
         "<p>Uno de los campos es inválido, verifica que la informacion es correcta : <br><b>"+message+"<b><p>";
         this.showAlert();

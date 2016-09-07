@@ -23,9 +23,6 @@
         $scope.city = '';
         $scope.facebook_uid = '';
         $scope.request = {};
-        // TODO -  use this for redirections
-        $scope.toMoneybox = 0;
-        $scope.toProfile = 0;
         $scope.utils = new Utils();
 
         /**
@@ -46,20 +43,20 @@
                         window.location.assign("/user/profile/" + user.id);
                     } else if(response.status == -2) {
                         $scope.utils.hideLoader();
-                        $scope.utils.setAlertTitle("Error !");
+                        $scope.utils.setAlertTitle("Coperacha - Alerta");
                         document.getElementById('alert-content').innerHTML="" +
                         "<p>El correo ingresado ya existe en el sistema, por favor intenta con otro.<p>";
                         $scope.utils.showAlert();
                     } else {
                         $scope.utils.hideLoader();
-                        $scope.utils.setAlertTitle("Error !");
+                        $scope.utils.setAlertTitle("Coperacha - Alerta");
                         document.getElementById('alert-content').innerHTML="" +
                         "<p>Se ha generado producido un error al realizar el registro, por favor inténtalo más tarde<p>";
                         $scope.utils.showAlert();
                     }
                 }).error(function(response){
                     $scope.utils.hideLoader();
-                    $scope.utils.setAlertTitle("Error !");
+                    $scope.utils.setAlertTitle("Coperacha - Alerta");
                     document.getElementById('alert-content').innerHTML="" +
                     "<p>Se ha generado producido un error al realizar el registro, por favor inténtalo más tarde<p>";
                     $scope.utils.showAlert();
@@ -131,7 +128,7 @@
                                 window.location="/user/profile/"+user.id;
                             } else if(response.status == -2) {
                                 $scope.utils.hideLoader();
-                                $scope.utils.setAlertTitle("Error !");
+                                $scope.utils.setAlertTitle("Coperacha - Alerta");
                                 document.getElementById('alert-content').innerHTML="" +
                                 "<p>El correo ingresado ya existe en el sistema, por favor intenta con otro.<p>";
                                 $scope.utils.showAlert();
@@ -139,7 +136,7 @@
 
                         }).error(function(response){
                             $scope.utils.hideLoader();
-                            $scope.utils.setAlertTitle("Error !");
+                            $scope.utils.setAlertTitle("Coperacha - Alerta");
                             document.getElementById('alert-content').innerHTML="" +
                             "<p>Se ha generado producido un error al realizar el registro, por favor inténtalo más tarde<p>";
                             $scope.utils.showAlert();
@@ -148,7 +145,7 @@
                     });
 
                 } else {
-                    $scope.utils.setAlertTitle("Error !");
+                    $scope.utils.setAlertTitle("Coperacha - Alerta");
                     document.getElementById('alert-content').innerHTML="" +
                     "<p>Ocurrio un problema al hacer la conexión con Facebook, por favor intentalo maás tarde<p>";
                     $scope.utils.showAlert();
