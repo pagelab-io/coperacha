@@ -62,26 +62,23 @@ class TxCreateMoneybox extends PLTransaction{
      */
     public function executeTx(PLRequest $request, $params = array())
     {
-
         $moneybox = null;
 
         try {
-
             \DB::beginTransaction();
-
             \Log::info("=== Creating moneybox ===");
-            $moneybox               = new Moneybox();
+            
+            $moneybox = new Moneybox();
             $moneybox->category_id  = $request->get('category_id');
             $moneybox->name         = $request->get('name');
             $moneybox->goal_amount  = $request->get('goal_amount');
-            $moneybox->person_id        = $request->get('person_id');
+            $moneybox->person_id    = $request->get('person_id');
             $moneybox->end_date     = $request->get('end_date');
             $moneybox->description  = ($request->exists('description')) ? $request->get('description') : '';
             $moneybox->url          = $this->generateURL($request->get('name'));
             if (!$moneybox->save()) throw new \Exception("Unable to create Moneybox", -1);
             \Log::info("=== Moneybox created successfully : === \n".$moneybox);
-
-
+            
             \Log::info("=== Creating settings ===");
             $settings = json_decode($request->get('settings'),true);
             $memberSettings = [];
@@ -118,7 +115,7 @@ class TxCreateMoneybox extends PLTransaction{
             throw $ex;
         }
 
-        return  $moneybox;
+        return $moneybox;
     }
 
     //endregion

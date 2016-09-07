@@ -8,11 +8,9 @@
 
 namespace App\Http\Controllers\Moneybox;
 
-
 use App\Http\Controllers\PLController;
 use App\Http\Requests\PLRequest;;
 use App\Http\Responses\PLResponse;
-use App\Entities\Moneybox;
 use App\Repositories\MoneyboxRepository;
 use App\Repositories\MemberSettingRepository;
 
@@ -47,27 +45,6 @@ class MoneyboxController extends PLController
     //region Methods
 
     /**
-     * Create a new moneybox
-     *
-     * @param PLRequest $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function createMoneybox(PLRequest $request)
-    {
-        try {
-            $this->validate($request, $request->rules(), $request->messages());
-            $this->setResponse($this->_moneyboxRepository->create($request));
-            return response()->json($this->getResponse());
-        } catch (\Exception $ex) {
-            $response = new PLResponse();
-            $response->status = $ex->getCode();
-            $response->description = $ex->getMessage();
-            $response->data = $ex->getTraceAsString();
-            return response()->json($response);
-        }
-    }
-
-    /**
      * Get all moneyboxes
      *
      * @param PLRequest $request
@@ -80,6 +57,27 @@ class MoneyboxController extends PLController
 
         try {
             $this->setResponse($this->_moneyboxRepository->getAll($request));
+            return response()->json($this->getResponse());
+        } catch (\Exception $ex) {
+            $response = new PLResponse();
+            $response->status = $ex->getCode();
+            $response->description = $ex->getMessage();
+            $response->data = $ex->getTraceAsString();
+            return response()->json($response);
+        }
+    }
+    
+    /**
+     * Create a new moneybox
+     *
+     * @param PLRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function createMoneybox(PLRequest $request)
+    {
+        try {
+            $this->validate($request, $request->rules(), $request->messages());
+            $this->setResponse($this->_moneyboxRepository->create($request));
             return response()->json($this->getResponse());
         } catch (\Exception $ex) {
             $response = new PLResponse();
@@ -113,38 +111,5 @@ class MoneyboxController extends PLController
             return response()->json($response);
         }
     }
-
-    public function step1(PLRequest $request)
-    {
-        \Log::info("request");
-        \Log::info($request);
-        $tmp_moneybox = array(
-            'name'          => ($request->exists('name')) ? $request->get('name') : '',
-            'person_id'     => ($request->exists('person_id')) ? $request->get('person_id') : '',
-            'person_name'   => ($request->exists('person_name')) ? $request->get('person_name') : '',
-            'goal_amount'   => ($request->exists('goal_amount')) ? $request->get('goal_amount') : '',
-            'description'   => ($request->exists('description')) ? $request->get('description') : '',
-            'category_id'   => ($request->exists('category_id')) ? $request->get('category_id') : '',
-            'end_date'      => ($request->exists('end_date')) ? $request->get('end_date') : ''
-        );
-        $session = \Session::put('tmp_moneybox', $tmp_moneybox);
-        $response = new PLResponse();
-        $response->data = $session;
-        $response->description = "Datos temporales para la alcancia creados correctamente";
-        $this->setResponse($response);
-        return response()->json($this->getResponse());
-    }
-
-    public function step2()
-    {
-        $session = \Session::forget('tmp_moneybox');
-        $response = new PLResponse();
-        $response->data = $session;
-        $response->description = "Datos temporales para la alcancia borrados correctamente";
-        $this->setResponse($response);
-        return response()->json($this->getResponse());
-    }
-
     //endregion
-
-} 
+}
