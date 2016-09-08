@@ -30,8 +30,9 @@
                         </div>
                         <div class="form-group">
                             <label for="amount">Tu participación: </label>
-                            <input id="amount"  readonly type="text" value="${{number_format($amount, 2)}} (+ ${{number_format($comision, 2)}} por comisión) MXN">
-                            <input type="hidden" ng-init="amount='{{$amount+$comision}}'" ng-model="amount">
+                            <input id="amount"  readonly type="text" value="${{number_format($amount, 2)}} (+ ${{number_format($commission, 2)}} por comisión) MXN">
+                            <input type="hidden" ng-init="amount='{{$amount}}'" ng-model="amount">
+                            <input type="hidden" ng-init="commission='{{$commission}}'" ng-model="commission">
                         </div>
 
                         <div class="form-group">

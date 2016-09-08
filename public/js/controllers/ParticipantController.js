@@ -16,6 +16,7 @@
         $scope.phone = '';
         $scope.email = '';
         $scope.amount = '';
+        $scope.commission = '';
         $scope.settings = '';
         $scope.request = {};
         $scope.paymentMethod = '';
@@ -186,6 +187,7 @@
                 'person_id' : $scope.person_id,
                 'moneybox_id'  : moneybox.id,
                 'amount'  : $scope.amount,
+                'commission' : $scope.commission,
                 'payment_method'  : $scope.paymentMethod,
                 'method' : 'createPayment',
                 'api-key' : '$2y$10$ScZUgkFzrMr9NM5qPzKag.4mLTW8ugSG/DtT6nerJb3W1v5sg6UBC'

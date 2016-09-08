@@ -153,8 +153,6 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function getDashboardPage(PLRequest $request){
-        \Log::info(\Auth::user());
-        \Log::info(\Auth::user()->person->id);
         $request->merge(array('person_id' => \Auth::user()->person->id));
         $response = $this->_moneyboxRepository->getAll($request);
         return view('moneybox.dashboard')
@@ -233,12 +231,12 @@ class HomeController extends Controller
         $moneyboxSetttings = $variables['settings'];
         $user       = '';
         $amount     = 0;
-        $comision   = 0;
+        $commission = 0;
         if (\Session::has('tmp_participant')){
             $session = \Session::get('tmp_participant');
             $user       = $this->_userRepository->byEmail($session['email']);
             $amount     = $session['amount'];
-            $comision   = $amount*.05;
+            $commission  = $amount*.05;
         }
 
         return view('moneybox.summary')
@@ -246,7 +244,7 @@ class HomeController extends Controller
             ->with('moneyboxSettings', $moneyboxSetttings)
             ->with('participant', $user)
             ->with('amount', $amount)
-            ->with('comision', $comision)
+            ->with('commission', $commission)
             ->with('pageTitle','Resumen de tu participación antes del pago');
     }
 

@@ -17,7 +17,7 @@ class Payment extends Model
      * These are the mass-assignable keys
      * @var array
      */
-    protected $fillable = ['person_id', 'moneybox_id', 'amount', 'method'];
+    protected $fillable = ['person_id', 'moneybox_id', 'amount', 'commission', 'method'];
     //endregion
 
     //region Static Methods

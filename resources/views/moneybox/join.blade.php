@@ -46,7 +46,7 @@
                                 <div class="form-group">
                                     <label for="mobile">Celular</label>
                                     @if(Auth::user())
-                                        <input readonly type="text" class="form-control" placeholder="Celular" ng-model="phone" ng-init="phone='{{Auth::user()->person->phone}}'">
+                                        <input type="text" class="form-control" placeholder="Celular" ng-model="phone" ng-init="phone='{{Auth::user()->person->phone}}'">
                                     @else
                                         <input type="text" class="form-control" placeholder="Celular" ng-model="phone">
                                     @endif

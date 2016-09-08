@@ -26,6 +26,7 @@ class Moneybox extends Model
     protected $defaults = [
         'goal_amount' => 1000,
         'collected_amount' => 0,
+        'commission_amount' => 0,
         'description' => '',
         'active' => 1
     ];

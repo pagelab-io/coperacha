@@ -20,6 +20,7 @@ class CreatePaymentsTable extends Migration
                 $table->integer('person_id')->unsigned(); //FK
                 $table->integer('moneybox_id')->unsigned(); //FK
                 $table->decimal('amount',10,2);
+                $table->decimal('commission', 10,2);
                 $table->string('uid')->unique();
                 $table->enum('method', ['P','O','S']);
                 $table->enum('status', ['PENDING', 'CANCELED', 'PAYED']);

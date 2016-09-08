@@ -22,6 +22,7 @@ class CreateMoneyboxesTable extends Migration
                 $table->string('name', 128);
                 $table->decimal('goal_amount',10,2);
                 $table->decimal('collected_amount',10,2);
+                $table->decimal('commission_amount', 10,2);
                 $table->date('end_date');
                 $table->text('description');
                 $table->integer('active');

@@ -83,7 +83,7 @@ class TxCreateParticipant extends PLTransaction{
         $person             = new Person();
         $person->name       = $request->get('name');
         $person->lastname   = $request->get('lastname');
-        $person->phone   = $request->get('phone');
+        $person->phone      = $request->get('phone');
         if (!$person->save()) throw new \Exception("Unable to create Person", -1);
         \Log::info("=== Person created successfully : " . $person . " ===");
 
@@ -188,6 +188,13 @@ class TxCreateParticipant extends PLTransaction{
                 \Log::info("user already exist");
                 $user   = $this->_userRepository->byEmail($request->get('email'));
                 $person = $user->person;
+
+                // update person before save participation
+                $person->name       = $request->get('name');
+                $person->lastname   = $request->get('lastname');
+                $person->phone      = $request->get('phone');
+                if (!$person->save()) throw new \Exception("Unable to update person", -1);
+
             } else {
                 $person = $this->createPerson($request);
                 $user   = $this->createUser($request, $person);
