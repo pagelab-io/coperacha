@@ -128,12 +128,12 @@ class MoneyboxController extends PLController
             $size = $request->file('file')->getSize();
             $name =  uniqid() . '_' . $filename;
 
-            if ($stored = Storage::disk('public')->put($name, $request->file('file'))) {
-                $file = File::create(['name' => $name, 'size' => $size, 'path' => 'public', 'extension' => $extension]);
+            if ($stored = Storage::disk('uploads')->put($name, $request->file('file'))) {
+                $file = File::create(['name' => $name, 'size' => $size, 'path' => 'uploads', 'extension' => $extension]);
                 $file->user_id = Auth::user()->id;
                 $file->metadata = $mine;
-                $file->owner = 'Moneybox';
-                $file->owner_id = $request->get('id');
+                $file->storable_type = 'App\Entities\Moneybox';
+                $file->storable_id = $request->get('id');
                 $file->save();
             }
         }

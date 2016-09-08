@@ -287,8 +287,8 @@ class HomeController extends Controller
             $file = File::create(['name' => $name, 'size' => $size, 'path' => 'public', 'extension' => $extension]);
             $file->user_id = Auth::user()->id;
             $file->metadata = $mine;
-            $file->owner = 'Order';
-            $file->owner_id = $order->id;
+            $file->storable_type = 'App\Entities\Order';
+            $file->storable_id = $order->id;
             $file->save();
         }
 

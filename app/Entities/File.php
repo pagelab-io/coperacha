@@ -18,6 +18,13 @@ class File extends Model
      *
      * @var string[]
      */
-    protected $fillable = ['name', 'path', 'size', 'extension', 'order', 'owner', 'owner_id', 'user_id'];
-    
+    protected $fillable = ['name', 'path', 'size', 'extension', 'order', 'storable_type', 'storable_id', 'user_id'];
+
+    /**
+     * Get all of the owning storable models
+     */
+    public function storable()
+    {
+        return $this->morphTo();
+    }
 }

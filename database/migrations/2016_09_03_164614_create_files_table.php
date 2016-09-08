@@ -21,8 +21,8 @@ class CreateFilesTable extends Migration
             $table->string('extension');
             $table->integer('order');
             $table->string('metadata', 512);
-            $table->string('owner');
-            $table->integer('owner_id')->unsigned();
+            $table->string('storable_type');
+            $table->integer('storable_id');
 
             $table->timestamps();
         });

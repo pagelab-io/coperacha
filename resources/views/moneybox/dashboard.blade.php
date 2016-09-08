@@ -11,7 +11,8 @@
                                 <div class="col-xs-6 col-sm-4 moneybox-item">
                                     <header>
                                         <picture>
-                                            <img class="img-responsive" src="/images/icon-mbox-{{$i%2==0?'1':'2'}}.png">
+                                            <img class="img-responsive"
+                                                 src="{{$moneybox->image_url ? $moneybox->image_url : '/images/icon-mbox-1.png'}}">
                                         </picture>
                                     </header>
                                     <main class="actions">

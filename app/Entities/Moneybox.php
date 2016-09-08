@@ -67,7 +67,7 @@ class Moneybox extends Model
      */
     public function participants()
     {
-        return $this->hasMany('App\Entities\Participant');
+        return $this->hasMany(Participant::class);
     }
 
     /**
@@ -95,6 +95,13 @@ class Moneybox extends Model
      */
     public function order() {
         return $this->hasOne(Order::class);
+    }
+
+    /**
+     * Get all of the moneybox's files.
+     */
+    public function files() {
+        return $this->morphMany(File::class, 'storable');
     }
 
     /**

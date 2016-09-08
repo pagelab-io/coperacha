@@ -197,13 +197,14 @@
             if ($scope.moneybox_id && element.files.length > 0) {
                 var file = element.files[0];
                 var imageType = /image.*/;
-                if (file.type.match(imageType)) {
+                if (true || file.type.match(imageType)) {
 
                     var form = new FormData();
                     form.append('api-key', '$2y$10$ScZUgkFzrMr9NM5qPzKag.4mLTW8ugSG/DtT6nerJb3W1v5sg6UBC');
                     form.append('id', $scope.moneybox_id);
                     form.append('file', file);
 
+                    console.log(file);
                     Moneybox.upload(form).success(function (r) {
                         console.log(r);
 

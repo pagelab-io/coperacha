@@ -21,6 +21,8 @@ use Illuminate\Container\Container as App;
 use App\Http\Requests\PLRequest;
 use App\Entities\Moneybox;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 use Mockery\CountValidator\Exception;
 
 class MoneyboxRepository extends BaseRepository{
@@ -168,7 +170,7 @@ class MoneyboxRepository extends BaseRepository{
         $moneybox_list['my_moneyboxes'] = $this->myMoneyboxes($request);
         $moneybox_list['moneyboxes_participation'] = $this->moneyboxesParticipation($request);
         $response = new PLResponse();
-        $response->description = 'Listing all momeybox succesfully';
+        $response->description = 'Listing all moneybox successfully';
         $response->data = $moneybox_list;
         return $response;
     }
@@ -180,13 +182,22 @@ class MoneyboxRepository extends BaseRepository{
      */
     public function myMoneyboxes(PLRequest $request)
     {
-        $moneyboxes = Moneybox::where("person_id", $request->get('person_id'))->get();
+        $moneyboxes = Moneybox::with('files')
+            ->with('participants')
+            ->where("person_id", $request->get('person_id'))->get();
+
         if (count($moneyboxes) > 0) {
             foreach ($moneyboxes as $m) {
-                $m->participants;
+
+                if (count($m->files) > 0) {
+                    $lastfile = $m->files->last();
+                    $m->image_url = 'http://coperacha.local.pagelab.io/uploads/'. $lastfile->name;
+                }
+
                 $m->settings = $this->_memberSettingRepository->getSettings('moneybox', $m->id);
             }
         }
+
         return $moneyboxes;
     }
 
@@ -236,7 +247,6 @@ class MoneyboxRepository extends BaseRepository{
      */
     public function updateMoneybox(PLRequest $request)
     {
-
         $category = null;
         $moneybox = null;
 
