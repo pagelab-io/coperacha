@@ -120,18 +120,17 @@ class HomeController extends Controller
             $amountoption       = $moneyboxSettings[0];
             $privacyoption      = $moneyboxSettings[1];
 
-
             if (count($moneybox->files) > 0) {
                 $lastfile = $moneybox->files->last();
                 $moneybox->image = $lastfile->name;
             }
-
-
         }
+
         $categories = Category::all();
         $request->merge(array('path' => '/moneybox'));
         $response = $this->_settingRepository->childsOf($request);
         \Log::info($response->data);
+
         return view('moneybox.create')
             ->with('categories', $categories)
             ->with('settings', $response->data)
@@ -178,6 +177,11 @@ class HomeController extends Controller
         $moneybox = $variables['moneybox'];
         $person = $variables['person'];
         $partiticipantsnumber = $variables['partiticipantsnumber'];
+
+        if (count($moneybox->files) > 0) {
+            $lastfile = $moneybox->files->last();
+            $moneybox->image = $lastfile->name;
+        }
 
         return view('moneybox.detail')
             ->with('moneybox', $moneybox)

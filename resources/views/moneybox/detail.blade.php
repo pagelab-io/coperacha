@@ -17,8 +17,10 @@
                         <div class="col-sm-5">
                             <form class="form profile">
                                 <div class="form-group">
-                                    <picture>
-                                        <img src="/images/moneybox-demo.png" alt="moneybox-demo">
+                                    <picture style="margin-right: 15px">
+                                        <img  id="moneybox-image" class="icon-file"
+                                              style="height: 115px; width: auto"
+                                              src="{{$moneybox->image ? url('/moneybox/image/' . $moneybox->image) : '/images/moneybox-demo.png'}}">
                                     </picture>
                                 </div>
                                 <div class="form-group">
