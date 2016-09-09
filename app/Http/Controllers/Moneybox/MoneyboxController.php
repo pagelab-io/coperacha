@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use App\Http\Responses\PLResponse;
 use App\Repositories\MoneyboxRepository;
 use App\Repositories\MemberSettingRepository;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -128,7 +129,9 @@ class MoneyboxController extends PLController
             $size = $request->file('file')->getSize();
             $name =  uniqid() . '_' . $filename;
 
-            if ($stored = Storage::disk('uploads')->put($name, $request->file('file'))) {
+            $temp = $request->file('file');
+
+            if ($stored = Storage::disk('uploads')->put($name, \File::get($temp))) {
                 $file = File::create(['name' => $name, 'size' => $size, 'path' => 'uploads', 'extension' => $extension]);
                 $file->user_id = Auth::user()->id;
                 $file->metadata = $mine;
@@ -140,5 +143,17 @@ class MoneyboxController extends PLController
 
         return response()->json(['success' => true, 'data' => $file]);
     }
+
+
+    /**
+     * @param $filename
+     * @return Response
+     */
+    public function getMoneyboxImage($filename)
+    {
+        $file = Storage::disk('uploads')->get($filename);
+        return new Response($file, 200);
+    }
+
     //endregion
 }

@@ -12,7 +12,9 @@
                                     <header>
                                         <picture>
                                             <img class="img-responsive"
-                                                 src="{{$moneybox->image_url ? $moneybox->image_url : '/images/icon-mbox-1.png'}}">
+                                                 width="90px"
+                                                 height="70px"
+                                                 src="{{$moneybox->image ? url('/moneybox/image/' . $moneybox->image) : '/images/icon-mbox-1.png'}}">
                                         </picture>
                                     </header>
                                     <main class="actions">

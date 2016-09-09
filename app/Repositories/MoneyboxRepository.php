@@ -191,7 +191,8 @@ class MoneyboxRepository extends BaseRepository{
 
                 if (count($m->files) > 0) {
                     $lastfile = $m->files->last();
-                    $m->image_url = 'http://coperacha.local.pagelab.io/uploads/'. $lastfile->name;
+                    
+                    $m->image = $lastfile->name;
                 }
 
                 $m->settings = $this->_memberSettingRepository->getSettings('moneybox', $m->id);
@@ -200,7 +201,7 @@ class MoneyboxRepository extends BaseRepository{
 
         return $moneyboxes;
     }
-
+    
     /**
      * Get the moneyboxes where a person has participated
      * @param PLRequest $request

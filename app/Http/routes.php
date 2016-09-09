@@ -143,9 +143,11 @@ $router->group([
     $router->post('/payment',       ['uses' => 'PaymentController@createPayment']);
 });
 
+Route::get('/moneybox/image/{filename}', 'Moneybox\MoneyboxController@getMoneyboxImage');
+
 /*
 |--------------------------------------------------------------------------
-| MONEYBOX ROUTES
+| PAYMENT ROUTES
 |--------------------------------------------------------------------------
 */
 $router->group([
