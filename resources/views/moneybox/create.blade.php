@@ -58,7 +58,7 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-xs-2">
-                                                <picture>
+                                                <picture style="margin-right: 15px">
                                                     <img  id="moneybox-image" class="icon-file"
                                                          style="height: 50px; width: auto"
                                                          src="{{$moneybox->image ? url('/moneybox/image/' . $moneybox->image) : '/images/icon-file.png'}}">
