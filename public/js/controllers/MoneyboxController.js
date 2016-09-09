@@ -204,15 +204,16 @@
                     form.append('id', $scope.moneybox_id);
                     form.append('file', file);
 
-                    console.log(file);
-                    Moneybox.upload(form).success(function (r) {
-                        console.log(r);
+                    Moneybox.upload(form).success(function (response) {
 
-                        var reader = new FileReader();
-                        reader.onload = function () {
-                            document.querySelector('#moneybox-image').src = (reader.result);
-                        };
-                        reader.readAsDataURL(file);
+                        if (response.success) {
+                            var reader = new FileReader();
+                            reader.onload = function () {
+                                document.querySelector('#moneybox-image').src = (reader.result);
+                                alert('Imágen actualizada correctamente.');
+                            };
+                            reader.readAsDataURL(file);
+                        }
 
                     }).error(function(response){
                         $('body').html(response);

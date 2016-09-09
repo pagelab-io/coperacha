@@ -109,7 +109,6 @@ class MoneyboxRepository extends BaseRepository{
      */
     public function create(PLRequest $request)
     {
-
         $category = null;
         $person   = null;
 
@@ -190,8 +189,7 @@ class MoneyboxRepository extends BaseRepository{
             foreach ($moneyboxes as $m) {
 
                 if (count($m->files) > 0) {
-                    $lastfile = $m->files->last();
-                    
+                    $lastfile = $m->files->last();                    
                     $m->image = $lastfile->name;
                 }
 

@@ -106,20 +106,27 @@ class HomeController extends Controller
      * @throws \Exception
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getCreateMoneyboxPage(Request $request, $url = ''){
+    public function getCreateMoneyboxPage(Request $request, $url = '') {
 
         $moneybox = null;
         $moneyboxSettings   = null;
         $privacyoption      = 0;
         $amountoption       = 0;
-        $amount_id          = 0;
-        $privacy_id         = 0;
+        // $amount_id          = 0; $privacy_id         = 0;
         if ($url != "") {
             $variables          = $this->_moneyboxRepository->getByURL($url);
             $moneybox           = $variables['moneybox'];
             $moneyboxSettings   = $variables['settings'];
             $amountoption       = $moneyboxSettings[0];
             $privacyoption      = $moneyboxSettings[1];
+
+
+            if (count($moneybox->files) > 0) {
+                $lastfile = $moneybox->files->last();
+                $moneybox->image = $lastfile->name;
+            }
+
+
         }
         $categories = Category::all();
         $request->merge(array('path' => '/moneybox'));
