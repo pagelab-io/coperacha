@@ -15,7 +15,7 @@
         $scope.lastname = '';
         $scope.phone = '';
         $scope.email = '';
-        $scope.amount = '';
+        $scope.amount = 50;
         $scope.commission = '';
         $scope.settings = '';
         $scope.request = {};

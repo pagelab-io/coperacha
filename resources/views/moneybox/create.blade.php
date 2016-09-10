@@ -91,9 +91,9 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                 @if ($moneybox)
-                                    <input readonly type="text" class="form-control" placeholder="Cantidad que desea reunir" ng-model="goal_amount" ng-init="goal_amount='{{$moneybox->goal_amount}}'">
+                                    <input readonly type="text" class="form-control" placeholder="Cantidad que desea reunir, minimo $50.00" ng-model="goal_amount" ng-init="goal_amount='{{$moneybox->goal_amount}}'">
                                 @else
-                                    <input type="text" class="form-control" placeholder="Cantidad que desea reunir" ng-model="goal_amount">
+                                    <input type="text" class="form-control" placeholder="Cantidad que desea reunir, minimo $50.00" ng-model="goal_amount">
                                 @endif
                                 </div>
 
@@ -148,7 +148,7 @@
                                             <label for="{{$option->name}}" class="flex-element">
                                                 <input class="radio-option" type="radio" value="{{$setting->id}}|{{$option->id}}|Y" ng-model="participation" ng-change="changeParticipation()">
                                                 <span>{{$option->name}}</span>
-                                                <input class="form-control" type="number" value="0" id="txt-option-{{$option->id}}">
+                                                <input class="form-control" type="number" value="50" id="txt-option-{{$option->id}}">
                                                 <strong> .00 MXN</strong>
                                             </label>
                                             @else

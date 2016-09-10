@@ -4,7 +4,7 @@
     <!-- Content Header -->
     <header class="content-header">
         <div class="container-fluid">
-            <h1>{{ $pageTitle }}</h1>
+            <h1 id="pageTitle">{{ $pageTitle }}</h1>
         </div>
     </header>
 

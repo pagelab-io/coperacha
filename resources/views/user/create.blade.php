@@ -12,7 +12,7 @@
                                     <label for="name">Nombre(s)</label>
                                     <div class="row">
                                         <div class="col-sm-5"><input id="name" class="form-control" name="name" placeholder="Nombre(s)" type="text" ng-model="name"></div>
-                                        <div class="col-sm-7"><input id="lastname" class="form-control" name="lastname" placeholder="Apellido" type="text" ng-model="lastname"></div>
+                                        <div class="col-sm-7"><input id="lastname" class="form-control" name="lastname" placeholder="Apellido(s)" type="text" ng-model="lastname"></div>
                                     </div>
                                 </div>
 
@@ -24,6 +24,7 @@
                                 <div class="form-group">
                                     <label for="gender">Sexo</label>
                                     <select name="gender" id="gender" class="form-control" ng-model="gender">
+                                        <option value="">Selecciona una opcion</option>
                                         <option value="M">Femenino</option>
                                         <option value="H">Masculino</option>
                                     </select>
@@ -41,7 +42,7 @@
 
                                 <div class="form-group">
                                     <label for="city">Ciudad</label>
-                                    <input id="city" class="form-control" name="city" placeholder="City" type="text" ng-model="city">
+                                    <input id="city" class="form-control" name="city" placeholder="Ciudad" type="text" ng-model="city">
                                 </div>
 
                                 <div class="form-group">
@@ -59,8 +60,7 @@
                                     <div class="row">
                                         <div class="col-sm-4">
                                             <select class="form-control" name="month" id="month" ng-model="birthdayMonth">
-                                                <option value="-1">Mes</option>
-
+                                                <option value="">Mes</option>
                                                 @foreach($months as $mont)
                                                     <option value="{{$mont}}">{{$mont}}</option>
                                                 @endforeach
@@ -69,7 +69,7 @@
                                         </div>
                                         <div class="col-sm-4">
                                             <select class="form-control" name="day" id="day" ng-model="birthdayDay">
-                                                <option value="-1">Día</option>
+                                                <option value="">Día</option>
                                                 @for($i = 1;  $i <= 31; $i++)
                                                     <option value="{{$i}}">{{$i}}</option>
                                                 @endfor
@@ -77,7 +77,7 @@
                                         </div>
                                         <div class="col-sm-4">
                                             <select class="form-control" name="year" id="year" ng-model="birthdayYear">
-                                                <option value="-1">Año</option>
+                                                <option value="">Año</option>
                                                 @for($i = 2016 - 18;  $i >= 1950; $i--)
                                                     <option value="{{$i}}">{{$i}}</option>
                                                 @endfor

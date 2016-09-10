@@ -35,6 +35,7 @@
                 if($scope.step1.style.display != 'none') {
                     $scope.step1.style.display = "none";
                     $scope.step2.style.display = "block";
+                    document.getElementById('pageTitle').innerHTML = "CREAR MI ALCANCÍA 2/2";
                 }
             }
         };
@@ -44,6 +45,7 @@
             if($scope.step2.style.display != 'none') {
                 $scope.step2.style.display = "none";
                 $scope.step1.style.display = "block";
+                document.getElementById('pageTitle').innerHTML = "CREAR MI ALCANCÍA 1/2";
             }
         };
 
@@ -65,13 +67,24 @@
 
             if (participation[2] == 'Y') {
                 participationValue = document.getElementById('txt-option-'+participation[1]).value;
+                console.log(participationValue);
+                if(participationValue < 50) {
+                    $scope.utils.setAlertTitle("Coperacha - Alerta");
+                    document.getElementById('alert-content').innerHTML="" +
+                    "<p>Los montos mínimos de participacion son $50.00<p>";
+                    $scope.utils.showAlert();
+                    return;
+                }
             }
 
             if ($scope.moneybox_id == 0) {
                 $scope.settings.push({'setting_id':participation[0],'option_id':participation[1],'value':participationValue});
-                $scope.settings.push({'setting_id':privacy1[0],'option_id':privacy1[1],'value':privacyValue1});
-                $scope.settings.push({'setting_id':privacy2[0],'option_id':privacy2[1],'value':privacyValue2});
-                $scope.settings.push({'setting_id':privacy3[0],'option_id':privacy3[1],'value':privacyValue3});
+                if(privacy1[0] != 0 && privacy1[1] != 0)
+                    $scope.settings.push({'setting_id':privacy1[0],'option_id':privacy1[1],'value':privacyValue1});
+                if(privacy2[0] != 0 && privacy2[1] != 0)
+                    $scope.settings.push({'setting_id':privacy2[0],'option_id':privacy2[1],'value':privacyValue2});
+                if(privacy3[0] != 0 && privacy3[1] != 0)
+                    $scope.settings.push({'setting_id':privacy3[0],'option_id':privacy3[1],'value':privacyValue3});
 
                 // build the request to save the moneybox
                 $scope.request = {
@@ -201,7 +214,7 @@
                 if(tmp_element[2] == 'Y') {
                     var element = document.getElementById('txt-option-'+tmp_element[1]);
                     if ($scope.participation != options[i].value)
-                        element.value="0";
+                        element.value="50";
                 }
             }
         };
@@ -252,13 +265,13 @@
      */
     function initDatePicker(){
         // init date picker
-        $( "#datepicker" ).datepicker({
+        /*$( "#datepicker" ).datepicker({
             dateFormat: 'yy-mm-dd',
             dayNames: [ "Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" ],
             dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
             monthNames: [ "Enero", "Febrero", "Marzo", "April", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
             minDate: new Date()
-        });
+        });*/
     }
 
 })();

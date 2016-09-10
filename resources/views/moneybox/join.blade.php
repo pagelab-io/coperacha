@@ -63,7 +63,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="amount">Monto con el que quiere participar</label>
-                                    <input type="number" class="form-control" placeholder="Monto" ng-model="amount">
+                                    <input type="text" class="form-control" placeholder="Monto" ng-model="amount">
                                 </div>
                             </div>
                         </div>
