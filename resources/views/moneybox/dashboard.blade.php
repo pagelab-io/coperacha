@@ -22,7 +22,11 @@
                                             <a class="btn btn-primary" href={{url('/moneybox/create/'.$moneybox->url)}}>Modificar</a>
                                         </div>
                                         <div class="form-group">
-                                            <a class="btn btn-primary" href="{{url('moneybox/request/'.$moneybox->url)}}">Utilizar dinero</a>
+                                            @if($moneybox->collected_amount > 0)
+                                                <a class="btn btn-primary" href="{{url('moneybox/request/'.$moneybox->url)}}">Utilizar dinero</a>
+                                            @else
+                                                <a class="btn btn-primary disabled" href="{{url('moneybox/request/'.$moneybox->url)}}">Utilizar dinero</a>
+                                            @endif
                                         </div>
                                         <div class="form-group">
                                             <a class="btn btn-primary" href="{{url('/moneybox/detail/'.$moneybox->url)}}">Invitar/Participar</a>

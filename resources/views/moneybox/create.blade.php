@@ -115,9 +115,9 @@
                         <div class="form-group clearfix">
                             <div class="pull-right">
                             @if($moneybox)
-                                <a class="btn btn-primary" ng-click="createMoneybox()">Siguiente ></a>
+                                <a class="btn btn-primary" ng-click="createMoneybox()">Modificar</a>
                             @else
-                                <a class="btn btn-primary" ng-click="step1Click()">Modificar</a>
+                                <a class="btn btn-primary" ng-click="step1Click()">Siguiente ></a>
                             @endif
                             </div>
                         </div>
@@ -142,51 +142,21 @@
                                 @foreach($settings as $setting)
                                     <div class="form-group">
                                         <label>{{utf8_decode($setting->name)}}</label>
-                                        @foreach($setting->options as $option)
+                                        @foreach($setting->options as $i => $option)
                                         <div class="radio">
                                             @if($option->subtype=='text')
                                             <label for="{{$option->name}}" class="flex-element">
-                                                @if($moneybox)
-                                                    @if($option->id == $amountoption->option_id)
-                                                        <input class="radio-option" type="radio" value="{{$setting->id}}|{{$option->id}}|Y" ng-model="participation" ng-init="participation='{{$setting->id}}|{{$amountoption->option_id}}|Y'" ng-change="changeParticipation()">
-                                                        <span>{{$option->name}}</span>
-                                                        <input class="form-control" type="number" value="{{$amountoption->value}}" id="txt-option-{{$option->id}}">
-                                                        <strong> .00 MXN</strong>
-                                                    @else
-                                                        <input class="radio-option" type="radio" value="{{$setting->id}}|{{$option->id}}|Y" ng-model="participation" ng-change="changeParticipation()">
-                                                        <span>{{$option->name}}</span>
-                                                        <input class="form-control" type="number" value="0" id="txt-option-{{$option->id}}">
-                                                        <strong> .00 MXN</strong>
-                                                    @endif
-                                                @else
-                                                    <input class="radio-option" type="radio" value="{{$setting->id}}|{{$option->id}}|Y" ng-model="participation" ng-change="changeParticipation()">
-                                                    <span>{{$option->name}}</span>
-                                                    <input class="form-control" type="number" value="0" id="txt-option-{{$option->id}}">
-                                                    <strong> .00 MXN</strong>
-                                                @endif
+                                                <input class="radio-option" type="radio" value="{{$setting->id}}|{{$option->id}}|Y" ng-model="participation" ng-change="changeParticipation()">
+                                                <span>{{$option->name}}</span>
+                                                <input class="form-control" type="number" value="0" id="txt-option-{{$option->id}}">
+                                                <strong> .00 MXN</strong>
                                             </label>
                                             @else
                                             <label for="{{$option->name}}">
-                                                @if ($moneybox)
-                                                    @if($setting->id==1)
-                                                        @if($option->id == $amountoption->option_id)
-                                                            <input type="radio" class="txt-option" value="{{$setting->id}}|{{$option->id}}|N" ng-model="participation" ng-init="participation='{{$setting->id}}|{{$amountoption->option_id}}|N'"> {{$option->name}}
-                                                        @else
-                                                            <input type="radio" class="txt-option" value="{{$setting->id}}|{{$option->id}}|N" ng-model="participation"> {{$option->name}}
-                                                        @endif
-                                                    @else
-                                                        @if($option->id == $privacyoption->option_id)
-                                                            <input type="radio" value="{{$setting->id}}|{{$option->id}}|N" ng-model="privacy" ng-init="privacy='{{$setting->id}}|{{$privacyoption->option_id}}|N'"> {{$option->name}}
-                                                        @else
-                                                            <input type="radio" value="{{$setting->id}}|{{$option->id}}|N" ng-model="privacy"> {{$option->name}}
-                                                        @endif
-                                                    @endif
+                                                @if($setting->id==1)
+                                                    <input type="radio" class="radio-option" value="{{$setting->id}}|{{$option->id}}|N" ng-model="participation" ng-change="changeParticipation()"> {{$option->name}}
                                                 @else
-                                                    @if($setting->id==1)
-                                                        <input type="radio" class="radio-option" value="{{$setting->id}}|{{$option->id}}|N" ng-model="participation" ng-change="changeParticipation()"> {{$option->name}}
-                                                    @else
-                                                        <input type="radio" value="{{$setting->id}}|{{$option->id}}|N" ng-model="privacy" ng-change="changePrivacy()"> {{$option->name}}
-                                                    @endif
+                                                    <input type="checkbox" ng-false-value="'0|0|N'" ng-true-value="'{{$setting->id}}|{{$option->id}}|N'" ng-model="privacy{{$i+1}}" ng-change="changePrivacy()"> {{$option->name}}
                                                 @endif
                                             </label>
                                             @endif
