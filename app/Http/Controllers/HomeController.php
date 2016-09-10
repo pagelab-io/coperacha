@@ -112,18 +112,20 @@ class HomeController extends Controller
         $moneyboxSettings   = null;
         $privacyoption      = 0;
         $amountoption       = 0;
-        // $amount_id          = 0; $privacy_id         = 0;
+        $title              = "";
         if ($url != "") {
             $variables          = $this->_moneyboxRepository->getByURL($url);
             $moneybox           = $variables['moneybox'];
             $moneyboxSettings   = $variables['settings'];
             $amountoption       = $moneyboxSettings[0];
             $privacyoption      = $moneyboxSettings[1];
-
+            $title              = "Modificar alcancía";
             if (count($moneybox->files) > 0) {
                 $lastfile = $moneybox->files->last();
                 $moneybox->image = $lastfile->name;
             }
+        } else {
+            $title = "Crear mi alcancía 1/2";
         }
 
         $categories = Category::all();
@@ -138,7 +140,7 @@ class HomeController extends Controller
             ->with('moneyboxSettings', $moneyboxSettings)
             ->with('privacyoption', $privacyoption)
             ->with('amountoption', $amountoption)
-            ->with('pageTitle','Crear mi alcancía 1/2');
+            ->with('pageTitle',$title);
     }
 
     /**

@@ -27,9 +27,13 @@
                                     <label for="chk-{{$category->id}}" class="category-item">
                                         <img src="{{$category->path}}" alt="{{$category->name}}">
                                         @if ($moneybox && $moneybox->category_id == $category->id)
-                                            <div class="label"><input id="chk-{{$category->id}}" type="radio" name="category" ng-model="category_id" ng-init="category_id={{$category->id}}" value="{{$category->id}}"> {{$category->name}}</div>
+                                            <div class="label"><input disabled id="chk-{{$category->id}}" type="radio" name="category" ng-model="category_id" ng-init="category_id={{$category->id}}" value="{{$category->id}}"> {{$category->name}}</div>
                                         @else
-                                            <div class="label"><input id="chk-{{$category->id}}" type="radio" name="category" ng-model="category_id" value="{{$category->id}}"> {{$category->name}}</div>
+                                            @if($moneybox)
+                                                <div class="label"><input disabled id="chk-{{$category->id}}" type="radio" name="category" ng-model="category_id" value="{{$category->id}}"> {{$category->name}}</div>
+                                            @else
+                                                <div class="label"><input id="chk-{{$category->id}}"type="radio" name="category" ng-model="category_id" value="{{$category->id}}"> {{$category->name}}</div>
+                                            @endif
                                         @endif
                                     </label>
                                 @endforeach
@@ -43,14 +47,14 @@
                                     <input type="hidden" ng-model="amount_id" ng-init="amount_id='{{$amountoption->id}}'">
                                     <input type="hidden" ng-model="privacy_id" ng-init="privacy_id='{{$privacyoption->id}}'">
                                     <input type="hidden" ng-model="moneybox_id" ng-init="moneybox_id='{{$moneybox->id}}'">
-                                    <input type="text" class="form-control" placeholder="Nombre de la alcancía" ng-model="name" ng-init="name='{{$moneybox->name}}'">
+                                    <input readonly type="text" class="form-control" placeholder="Nombre de la alcancía" ng-model="name" ng-init="name='{{$moneybox->name}}'">
                                 @else
                                     <input type="text" class="form-control" placeholder="Nombre de la alcancía" ng-model="name">
                                 @endif
                                 </div>
 
                                 <div class="form-group">
-                                    <input id="person_name" name="person_name" type="text" class="form-control" placeholder="Nombre de quién la organiza" ng-init="person_name='{{Auth::user()->person->name." ".Auth::user()->person->lastname}}'" ng-model="person_name">
+                                    <input readonly id="person_name" name="person_name" type="text" class="form-control" placeholder="Nombre de quién la organiza" ng-init="person_name='{{Auth::user()->person->name." ".Auth::user()->person->lastname}}'" ng-model="person_name">
                                     <input id="person_id" name="person_id" type="hidden" class="form-control" ng-init="person_id='{{Auth::user()->person->id}}'" ng-model="person_id">
                                 </div>
 
@@ -97,7 +101,7 @@
                                     <div class="row">
                                         <div class="col-xs-10">
                                         @if ($moneybox)
-                                            <input readonly type="text" class="form-control" placeholder="Fecha límite para reunir los fondos" ng-model="end_date" ng-init="end_date='{{$moneybox->end_date}}'">
+                                            <input id="datepicker" type="text" class="form-control" placeholder="Fecha límite para reunir los fondos" ng-model="end_date" ng-init="end_date='{{$moneybox->end_date}}'">
                                         @else
                                             <input id="datepicker" type="text" class="form-control" placeholder="Fecha límite para reunir los fondos" ng-model="end_date">
                                         @endif
@@ -110,7 +114,11 @@
 
                         <div class="form-group clearfix">
                             <div class="pull-right">
-                                <a class="btn btn-primary" ng-click="step1Click()">Siguiente ></a>
+                            @if($moneybox)
+                                <a class="btn btn-primary" ng-click="createMoneybox()">Siguiente ></a>
+                            @else
+                                <a class="btn btn-primary" ng-click="step1Click()">Modificar</a>
+                            @endif
                             </div>
                         </div>
                     </form>

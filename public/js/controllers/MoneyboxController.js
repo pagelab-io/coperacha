@@ -204,13 +204,18 @@
                     form.append('id', $scope.moneybox_id);
                     form.append('file', file);
 
+                    $scope.utils.showLoader();
                     Moneybox.upload(form).success(function (response) {
 
                         if (response.success) {
+                            $scope.utils.hideLoader();
                             var reader = new FileReader();
                             reader.onload = function () {
                                 document.querySelector('#moneybox-image').src = (reader.result);
-                                alert('Imágen actualizada correctamente.');
+                                $scope.utils.setAlertTitle("Coperacha - Alerta");
+                                document.getElementById('alert-content').innerHTML="" +
+                                "<p>Imágen actualizada correctamente.<p>";
+                                $scope.utils.showAlert();
                             };
                             reader.readAsDataURL(file);
                         }
