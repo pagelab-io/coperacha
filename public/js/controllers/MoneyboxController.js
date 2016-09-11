@@ -71,7 +71,7 @@
                 if(participationValue < 50) {
                     $scope.utils.setAlertTitle("Coperacha - Alerta");
                     document.getElementById('alert-content').innerHTML="" +
-                    "<p>Los montos mínimos de participacion son $50.00<p>";
+                    "<p>Los montos mínimos de participación son $50.00<p>";
                     $scope.utils.showAlert();
                     return;
                 }
@@ -121,7 +121,7 @@
                             $scope.utils.hideLoader();
                             $scope.utils.setAlertTitle("Coperacha - Alerta");
                             document.getElementById('alert-content').innerHTML="" +
-                            "<p>Ocurrio una incidencia al actualizar la alcancía, intentalo nuevamente por favor<p>";
+                            "<p>Ocurrio un problema al actualizar la alcancía, intentalo nuevamente por favor<p>";
                             $scope.utils.showAlert();
                         }
                     })

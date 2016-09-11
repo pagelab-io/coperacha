@@ -49,7 +49,9 @@ var vm = new Vue({
             current: '',
             new: '',
             confirm: ''
-        }
+        },
+
+        tabSelected: null
     },
 
     /**
@@ -73,7 +75,7 @@ var vm = new Vue({
         this.userid = (this.$el.dataset.userid);
 
         setTimeout(function () {
-            this.onGetProfile(this.userid); // Called data
+            this.onGetProfile(this.userid); // Called data from server
         }.bind(this), 100);
 
     },
@@ -82,19 +84,50 @@ var vm = new Vue({
      * Global methods
      */
     methods: {
-        activeTab: function (tab) {
-            this.isProfile = false;
-            this.isPassword = false;
-            this.isShare = false;
-            this.tab = tab;
+        
+        onTabSelectedChanged: function(tab) {
+            var currentSelectedIndex = $('.stage-item.selected').index();
+            var _this = this;
+            var tabs = $('.stage-element').children();
 
-            switch (tab) {
-                case 'profile': this.isProfile = true; break;
-                case 'password': this.isPassword = true; break;
-                case 'share': this.isShare = true; break;
+            this.tabSelected = $('.stage-item.' + tab);
 
-                default:
-                    this.isProfile = true;
+            var onAnimated = function (orientation) {
+                var currentTab = $(tabs[current]);
+
+                if (orientation == 'next') {
+                    if (current++ < tabs.length) {
+                        setTimeout(function () {
+                            currentTab.index() < _this.tabSelected.index() ? currentTab.addClass('completed') : currentTab.removeClass('completed');
+                            currentTab.index() == _this.tabSelected.index() ? _this.tabSelected.addClass('selected') : currentTab.removeClass('selected');
+
+                            onAnimated(orientation);
+                        }, 100);
+
+                    } else {
+                        //console.log('completed all items, current:', current);
+                    }
+                } else {
+                    if (current-- >= 0) {
+                        setTimeout(function () {
+                            currentTab.index() < _this.tabSelected.index() ? currentTab.addClass('completed') : currentTab.removeClass('completed');
+                            currentTab.index() == _this.tabSelected.index() ? _this.tabSelected.addClass('selected') : currentTab.removeClass('selected');
+
+                            onAnimated(orientation);
+                        }, 100);
+                    } else {
+                        //console.log('completed all items, current:', current);
+                    }
+                }
+            };
+
+            // Next
+            if (currentSelectedIndex < this.tabSelected.index()) {
+                var current = 0;
+                onAnimated('next');
+            } else {
+                var current = tabs.length - 1;
+                onAnimated('prev');
             }
         },
 
@@ -102,29 +135,21 @@ var vm = new Vue({
          * Handler the submit form
          */
         onClickProfile: function (e) {
-            e.stopPropagation();
-            this.activeTab('profile');
-
-            e.currentTarget.classList.remove('completed');
+            this.onTabSelectedChanged('profile');
         },
 
         /**
          * Handler the submit form
          */
         onClickPassword: function (e) {
-            this.activeTab('password');
-
-            $('.stage-item.profile').addClass('completed');
-            e.currentTarget.classList.remove('completed');
+            this.onTabSelectedChanged('password');
         },
 
         /**
          * Handler the submit form
          */
         onClickShare: function (e) {
-            this.activeTab('share');
-            $('.stage-item.password').addClass('completed');
-            e.currentTarget.classList.remove('completed');
+            this.onTabSelectedChanged('share');
         },
         
         /**
@@ -158,7 +183,7 @@ var vm = new Vue({
         },
 
         /**
-         * Handler the submit form of the user
+         * Handler the submit form data of the user
          */
         onUpdateData: function () {
             this.loading = true;

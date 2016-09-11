@@ -333,9 +333,7 @@ var app = app || {};
                                     }
                                 });
                             };
-
                             animation(current);
-
                         }, 500);
                     }
 

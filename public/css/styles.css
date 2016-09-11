@@ -457,7 +457,7 @@ hr {
 }
 
 .block.payment-methods .method {
-    display: inline-block;
+    display: none;
     margin-right: -4px;
     padding-left: 15px;
     padding-right: 15px;
@@ -467,9 +467,9 @@ hr {
 
 .block.payment-methods .method img {
     display: block;
-    height: auto;
+    /*height: auto;*/
     margin: 0 auto;
-    max-width: 100%;
+    /*max-width: 100%;*/
 }
 
 

@@ -8,11 +8,11 @@
                     @include('partials/moneybox-list', [
                         'title' => 'Creadas por mi',
                         'moneyboxes' => $moneyboxes['my_moneyboxes']
-                    ]);
+                    ])
                     @include('partials/moneybox-list', [
                         'title' => 'Alcancías en las que participo',
                         'moneyboxes' => $moneyboxes['moneyboxes_participation']
-                    ]);
+                    ])
                 </div>
             </div>
         </div>

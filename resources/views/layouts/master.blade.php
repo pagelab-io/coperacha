@@ -52,6 +52,7 @@
         <link href="{{asset('/css/styles.css')}}" rel="stylesheet">
         <link href="{{asset('/css/styles-responsive.css')}}" rel="stylesheet">
         <link href="{{asset('/css/coperacha.css')}}" rel="stylesheet">
+        <link href="{{asset('/css/slider.css')}}" rel="stylesheet">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -113,8 +114,8 @@
         </div>
         <!-- Alert Dialog -->
 
-        <!-- Include jQuery
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
+        <!-- Include jQuery-->
+
         <script src="{{asset('/js/vendor/jquery/jquery-3.1.0.js')}}"></script>
         <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 
@@ -142,7 +143,6 @@
         <script src="{{asset('/js/services/MoneyboxService.js')}}"></script>
         <script src="{{asset('/js/services/ParticipantService.js')}}"></script>
         <script src="{{asset('/js/directives/CoperachaModal.js')}}"></script>
-
         <!-- Javascript Section -->
         @yield('js')
     </body>

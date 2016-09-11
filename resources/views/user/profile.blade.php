@@ -6,23 +6,22 @@
             <div class="container-fluid">
                 <div class="header-block">
                     <div class="stage-element">
-                        <a class="stage-item profile" v-on:click="onClickProfile($event)" v-bind:class="{'selected':isProfile}">
+                        <a class="stage-item profile selected" v-on:click.prevent="onClickProfile($event)">
                             <div class="stage-item-icon"></div>
                             <div class="stage-item-label">Mi perfil</div>
                             <div class="stage-bar"></div>
                         </a>
-                        <a class="stage-item password" v-on:click="onClickPassword($event)" v-bind:class="{'selected':isPassword}">
+                        <a class="stage-item password" v-on:click.prevent="onClickPassword($event)">
                             <div class="stage-item-icon"></div>
                             <div class="stage-item-label">Contraseña</div>
                             <div class="stage-bar"></div>
                         </a>
-                        <a class="stage-item share" v-on:click="onClickShare($event)" v-bind:class="{'selected':isShare}">
+                        <a class="stage-item share" v-on:click.prevent="onClickShare($event)">
                             <div class="stage-item-icon"></div>
                             <div class="stage-item-label">Contacto</div>
                         </a>
                     </div>
                 </div>
-
                 <div class="message-ui">
                     <div id="message-element" class="alert alert-@{{message.status}}"
                          transition="expand"
@@ -236,17 +235,13 @@
                         </div>
                     </form>
                 </section>
-
                 <hr>
-
                 <div class="form-group text-center">
                     <a href="{{route('moneybox.create')}}" class="btn btn-primary small">Crear mi Alcancía</a>
                 </div>
-
             </div> <!-- ./container -->
         </div> <!-- ./holder -->
     </div> <!-- ./profile-view -->
-
 @endsection
 
 @section('js')

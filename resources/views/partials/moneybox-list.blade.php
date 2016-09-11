@@ -15,8 +15,10 @@
                         <main class="actions">
                             <h2 class="title">{{$moneybox->name}}</h2>
                             <div class="form-group">
-                                <a class="btn btn-primary"
-                                   href={{url('/moneybox/create/'.$moneybox->url)}}>Modificar</a>
+                                @if (Auth::user()->person->id == $moneybox->person_id)
+                                    <a class="btn btn-primary"
+                                        href={{url('/moneybox/create/'.$moneybox->url)}}>Modificar</a>
+                                @endif
                             </div>
                             <div class="form-group">
                                 @if($moneybox->collected_amount > 0)
