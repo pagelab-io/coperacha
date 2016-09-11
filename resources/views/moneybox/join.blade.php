@@ -29,7 +29,11 @@
                                     @if(Auth::user())
                                         <input readonly type="text" class="form-control" placeholder="Nombre" ng-init="name='{{Auth::user()->person->name}}'" ng-model="name">
                                     @else
-                                        <input type="text" class="form-control" placeholder="Nombre" ng-model="name">
+                                        @if(Session::has('tmp_participant'))
+                                            <input type="text" class="form-control" placeholder="Nombre" ng-model="name" ng-init="name='{{Session::get('tmp_participant')["name"]}}'">
+                                        @else
+                                            <input type="text" class="form-control" placeholder="Nombre" ng-model="name">
+                                        @endif
                                     @endif
                                 </div>
 
@@ -38,7 +42,11 @@
                                     @if(Auth::user())
                                         <input readonly type="text" class="form-control" placeholder="Apellidos" ng-init="lastname='{{Auth::user()->person->lastname}}'" ng-model="lastname">
                                     @else
-                                        <input type="text" class="form-control" placeholder="Apellidos" ng-model="lastname">
+                                        @if(Session::has('tmp_participant'))
+                                            <input type="text" class="form-control" placeholder="Apellidos" ng-model="lastname" ng-init="lastname='{{Session::get('tmp_participant')["lastname"]}}'">
+                                        @else
+                                            <input type="text" class="form-control" placeholder="Apellidos" ng-model="lastname">
+                                        @endif
                                     @endif
                                 </div>
                             </div>
@@ -48,7 +56,11 @@
                                     @if(Auth::user())
                                         <input type="text" class="form-control" placeholder="Celular" ng-model="phone" ng-init="phone='{{Auth::user()->person->phone}}'">
                                     @else
-                                        <input type="text" class="form-control" placeholder="Celular" ng-model="phone">
+                                        @if(Session::has('tmp_participant'))
+                                            <input type="text" class="form-control" placeholder="Celular" ng-model="phone" ng-init="phone='{{Session::get('tmp_participant')["phone"]}}'">
+                                        @else
+                                            <input type="text" class="form-control" placeholder="Celular" ng-model="phone">
+                                        @endif
                                     @endif
                                 </div>
                                 <div class="form-group">
@@ -56,7 +68,11 @@
                                     @if(Auth::user())
                                         <input readonly type="text" class="form-control" placeholder="Correo Electrónico" ng-model="email" ng-init="email='{{Auth::user()->email}}'">
                                     @else
-                                        <input type="text" class="form-control" placeholder="Correo Electrónico" ng-model="email">
+                                        @if(Session::has('tmp_participant'))
+                                            <input type="text" class="form-control" placeholder="Correo Electrónico" ng-model="email" ng-init="email='{{Session::get('tmp_participant')["email"]}}'">
+                                        @else
+                                            <input type="text" class="form-control" placeholder="Correo Electrónico" ng-model="email">
+                                        @endif
                                     @endif
                                 </div>
                             </div>
@@ -65,7 +81,11 @@
                                     <label for="amount">Monto con el que quiere participar</label>
                                     <div class="input-group">
                                         <div class="input-group-addon">$</div>
-                                        <input type="text" class="form-control" placeholder="Monto" ng-model="amount">
+                                        @if(Session::has('tmp_participant'))
+                                            <input type="text" class="form-control" placeholder="Monto" ng-model="amount" ng-init="amount='{{Session::get('tmp_participant')["amount"]}}'">
+                                        @else
+                                            <input type="text" class="form-control" placeholder="Monto" ng-model="amount">
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -77,7 +97,15 @@
                                 @foreach($setting->options as $option)
                                     <div class="radio">
                                         <label for="hidden">
-                                            <input type="radio" value="{{$setting->id}}|{{$option->id}}" ng-model="settings"> {{utf8_decode($option->name)}}
+                                            @if(Session::has('tmp_participant'))
+                                                @if(Session::get('tmp_participant')['option_id'] == $option->id)
+                                                    <input type="radio" value="{{$setting->id}}|{{$option->id}}" ng-model="settings" ng-init="settings='{{$setting->id}}|{{Session::get("tmp_participant")["option_id"]}}'"> {{utf8_decode($option->name)}}
+                                                @else
+                                                    <input type="radio" value="{{$setting->id}}|{{$option->id}}" ng-model="settings"> {{utf8_decode($option->name)}}
+                                                @endif
+                                            @else
+                                                <input type="radio" value="{{$setting->id}}|{{$option->id}}" ng-model="settings"> {{utf8_decode($option->name)}}
+                                            @endif
                                         </label>
                                     </div>
                                 @endforeach

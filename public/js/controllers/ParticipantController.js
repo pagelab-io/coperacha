@@ -144,9 +144,15 @@
 
         $scope.createTmpParticipant = function(callback)
         {
+            var tmp = $scope.settings.split('|');
+
             var request = {
                 'amount': $scope.amount,
+                'name': $scope.name,
+                'lastname': $scope.lastname,
+                'phone' : $scope.phone,
                 'email' : $scope.email,
+                'option_id' : tmp[1],
                 'api-key' : '$2y$10$ScZUgkFzrMr9NM5qPzKag.4mLTW8ugSG/DtT6nerJb3W1v5sg6UBC'
             };
 

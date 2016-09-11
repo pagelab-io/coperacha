@@ -36,7 +36,7 @@
                         </div>
 
                         <div class="form-group">
-                            <a class="btn-link btn-edit">
+                            <a class="btn-link btn-edit" href="{{url('moneybox/join/'.$moneybox->url)}}">
                                 <span class="icon-edit"></span>
                                 <div class="text">Modificar datos</div>
                             </a>

@@ -66,7 +66,11 @@ class ParticipantController extends PLController {
     {
         $tmp_participant = array(
             'amount' => ($request->exists('amount')) ? $request->get('amount') : '0',
-            'email' => ($request->exists('email')) ? $request->get('email') : ''
+            'name' => ($request->exists('name')) ? $request->get('name') : '',
+            'lastname' => ($request->exists('lastname')) ? $request->get('lastname') : '',
+            'email' => ($request->exists('email')) ? $request->get('email') : '',
+            'phone' => ($request->exists('phone')) ? $request->get('phone') : '',
+            'option_id' => ($request->exists('option_id')) ? $request->get('option_id') : '0',
         );
         $session = \Session::put('tmp_participant', $tmp_participant);
         $response = new PLResponse();
