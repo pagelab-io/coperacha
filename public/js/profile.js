@@ -101,11 +101,12 @@ var vm = new Vue({
         },
 
         onTabSelectedChanged: function(tab) {
+            this.activeTab(tab);
+
             var currentSelectedIndex = $('.stage-item.selected').index();
             var _this = this;
             var tabs = $('.stage-element').children();
 
-            this.activeTab(tab);
             this.tabSelected = $('.stage-item.' + tab);
 
             var onAnimated = function (orientation) {
@@ -118,10 +119,10 @@ var vm = new Vue({
                             currentTab.index() == _this.tabSelected.index() ? _this.tabSelected.addClass('selected') : currentTab.removeClass('selected');
 
                             onAnimated(orientation);
-                        }, 100);
+                        }, 50);
 
                     } else {
-                        //console.log('completed all items, current:', current);
+                        //TODO
                     }
                 } else {
                     if (current-- >= 0) {
@@ -130,9 +131,9 @@ var vm = new Vue({
                             currentTab.index() == _this.tabSelected.index() ? _this.tabSelected.addClass('selected') : currentTab.removeClass('selected');
 
                             onAnimated(orientation);
-                        }, 100);
+                        }, 50);
                     } else {
-                        //console.log('completed all items, current:', current);
+                        //TODO
                     }
                 }
             };
@@ -305,7 +306,6 @@ var vm = new Vue({
                 console.error(error);
             });
         }
-
     }
 });
 
