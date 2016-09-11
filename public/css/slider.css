@@ -11,8 +11,7 @@
     display: block;
     font-style: italic;
     position: relative;
-    z-index: 100;
-
+    z-index: 0;
     flex-direction: column;
     margin: 0 auto;
     display: flex;
