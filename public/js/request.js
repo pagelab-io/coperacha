@@ -72,8 +72,8 @@ var vm = new Vue({
             var _this = this;
             var path = base + '/sendrequest';
             var form = new FormData();
-            form.append('file', this.file);
 
+            form.append('file', this.file);
             for (var field in this.order) {
                 form.append(field, this.order[field]);
             }
@@ -82,7 +82,7 @@ var vm = new Vue({
 
             this.$http.post(path, form).then(function (response) {
                 if (response.status == 200) {
-
+                    console.log(response);
                     if (response.data.success == true) {
                         _this.message.text = 'Información enviada correctamente, ¡Gracias!';
                         _this.loading = false;

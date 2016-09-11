@@ -294,9 +294,11 @@ class HomeController extends Controller
         $mine = $request->file('file')->getClientMimeType();
         $size = $request->file('file')->getSize();
         $name =  uniqid() . '_' . $filename;
-        $temp = $request->file('file');
 
-        if ($stored = Storage::disk('public')->put($name, \File::get($temp))) {
+        //$temp = $request->file('file');
+        //if ($stored = Storage::disk('public')->put($name, \File::get($temp))) {
+
+        if ($stored = Storage::disk('public')->put($name, $request->file('file'))) {
             $file = File::create(['name' => $name, 'size' => $size, 'path' => 'public', 'extension' => $extension]);
             $file->user_id = Auth::user()->id;
             $file->metadata = $mine;
