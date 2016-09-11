@@ -84,12 +84,28 @@ var vm = new Vue({
      * Global methods
      */
     methods: {
-        
+        activeTab: function (tab) {
+            this.isProfile = false;
+            this.isPassword = false;
+            this.isShare = false;
+            this.tab = tab;
+
+            switch (tab) {
+                case 'profile': this.isProfile = true; break;
+                case 'password': this.isPassword = true; break;
+                case 'share': this.isShare = true; break;
+
+                default:
+                    this.isProfile = true;
+            }
+        },
+
         onTabSelectedChanged: function(tab) {
             var currentSelectedIndex = $('.stage-item.selected').index();
             var _this = this;
             var tabs = $('.stage-element').children();
 
+            this.activeTab(tab);
             this.tabSelected = $('.stage-item.' + tab);
 
             var onAnimated = function (orientation) {
