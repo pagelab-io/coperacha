@@ -280,16 +280,16 @@
         </div>
     </section>
 @endsection
+
 @section('js')
     <script src="{{asset('/js/slider.js')}}"></script>
     <script>
         $('.slider').slider({
-            slideSpeed: 800,
+            slideSpeed: 500,
             play: 5000,
             preload: true,
             withPagination: false,
             withNavigation: false
         });
     </script>
-
 @endsection

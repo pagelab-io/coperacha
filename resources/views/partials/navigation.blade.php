@@ -9,14 +9,24 @@
         <!-- List -->
         <ul class="clearfix list hidden-xs" ng-controller="modalController">
             @if (Auth::guest())
-                <li><a href="{{route('pages.about')}}">¿Qué es Coperacha?</a></li>
-                <li><a href="{{route('pages.faqs')}}">FAQS</a></li>
-                <li><a href="{{route('pages.contact')}}">Contacto</a></li>
-                <li><a class="button create-new" href="{{route('user.create')}}">Registro</a></li>
+                <li><a class="{{Route::current()->getName() == 'pages.about' ? 'active' : ''}}" href="{{route('pages.about')}}">¿Qué es Coperacha?</a></li>
+                <li><a class="{{Route::current()->getName() == 'pages.faqs' ? 'active' : ''}}" href="{{route('pages.faqs')}}">FAQS</a></li>
+                <li><a class="{{Route::current()->getName() == 'pages.contact' ? 'active' : ''}}" href="{{route('pages.contact')}}">Contacto</a></li>
+                <li><a class="button create-new {{Route::current()->getName() == 'user.create' ? 'active' : ''}}" href="{{route('user.create')}}">Registro</a></li>
                 <li><a href="#" ng-click="showModal()">Entrar</a></li>
             @else
-                <li><a href="{{route('pages.contact')}}">Contacto</a></li>
-                <li><a href="{{route('moneybox.dashboard')}}">Mis Alcancías</a></li>
+                <li>
+                    <a class="{{Route::current()->getName() == 'pages.contact' ? 'active' : ''}}"
+                       href="{{route('pages.contact')}}">Contacto</a>
+                </li>
+                <li>
+                    <a class="{{Route::current()->getName() == 'moneybox.dashboard' ? 'active' : ''}}"
+                       href="{{route('moneybox.dashboard')}}">Mis Alcancías</a>
+                </li>
+                <li><a class="{{Route::current()->getName() == 'user.profile' ? 'active' : ''}}"
+                       href="{{url('/user/profile/'.Auth::user()->id)}}">Mi cuenta</a>
+                </li>
+
                 <li><a class="button create-new" href="{{route('moneybox.create')}}">Crear Nueva Alcancía</a></li>
                 <li>
                     <div class="logged">

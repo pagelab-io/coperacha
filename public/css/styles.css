@@ -96,6 +96,11 @@ hr {
     text-transform: uppercase;
 }
 
+.navigation .list li a:hover,
+.navigation .list li a.active {
+    color: #ffc48c;
+}
+
 .navigation .list li a.button {
     background-color: #26C5E5;
     border-radius: 5px;
@@ -106,6 +111,12 @@ hr {
 
 .navigation .list li a.button.create-new {
     font-family: verbsemibold;
+}
+
+.navigation .list li a.button.create-new:hover,
+.navigation .list li a.button.create-new.active {
+    color: white;
+    background-color: #25b3d2;
 }
 
 /* Navigation - Toggle Button */
