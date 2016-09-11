@@ -181,8 +181,7 @@ class HomeController extends Controller
         $partiticipantsnumber = $variables['partiticipantsnumber'];
 
         if (count($moneybox->files) > 0) {
-            $lastfile = $moneybox->files->last();
-            $moneybox->image = $lastfile->name;
+            $moneybox->lastfile = $moneybox->files->last();
         }
 
         return view('moneybox.detail')
@@ -295,8 +294,9 @@ class HomeController extends Controller
         $mine = $request->file('file')->getClientMimeType();
         $size = $request->file('file')->getSize();
         $name =  uniqid() . '_' . $filename;
+        $temp = $request->file('file');
 
-        if ($stored = Storage::disk('public')->put($name, $request->file('file'))) {
+        if ($stored = Storage::disk('public')->put($name, \File::get($temp))) {
             $file = File::create(['name' => $name, 'size' => $size, 'path' => 'public', 'extension' => $extension]);
             $file->user_id = Auth::user()->id;
             $file->metadata = $mine;

@@ -9,7 +9,7 @@
                             <picture>
                                 <img class="img-responsive"
                                      style="height: 70px; width: auto"
-                                     src="{{$moneybox->image ? url('/moneybox/image/' . $moneybox->image) : '/images/icon-mbox-1.png'}}">
+                                     src="{{$moneybox->lastfile ? url('/moneybox/image/' . $moneybox->lastfile->name) : '/images/icon-mbox-1.png'}}">
                             </picture>
                         </header>
                         <main class="actions">

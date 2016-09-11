@@ -189,8 +189,7 @@ class MoneyboxRepository extends BaseRepository{
             foreach ($moneyboxes as $m) {
 
                 if (count($m->files) > 0) {
-                    $lastfile = $m->files->last();                    
-                    $m->image = $lastfile->name;
+                    $m->lastfile = $m->files->last();
                 }
 
                 $m->settings = $this->_memberSettingRepository->getSettings('moneybox', $m->id);
