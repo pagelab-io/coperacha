@@ -265,13 +265,13 @@
      */
     function initDatePicker(){
         // init date picker
-        /*$( "#datepicker" ).datepicker({
+        $( "#datepicker" ).datepicker({
             dateFormat: 'yy-mm-dd',
             dayNames: [ "Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" ],
             dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
             monthNames: [ "Enero", "Febrero", "Marzo", "April", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
             minDate: new Date()
-        });*/
+        });
     }
 
 })();
