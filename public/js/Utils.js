@@ -81,7 +81,6 @@ function Utils()
     {
         var alert = document.getElementById('alert-modal-coperacha');
         alert.style.display = 'block';
-        this.initAlertEvents();
     };
 
     this.hideAlert = function()
@@ -106,8 +105,19 @@ function Utils()
         });
         document.addEventListener('keyup', function(e){
             if (e.keyCode == 27) {
-                if(document.getElementById('alert-modal-coperacha').style.display != 'none'){
+                if (document.getElementById('alert-modal-coperacha').style.display == 'block' && document.getElementById('login-modal-coperacha').style.display == 'block') {
+                    console.log(1);
                     _this.hideAlert();
+                }else{
+                    if(document.getElementById('login-modal-coperacha').style.display == 'block') {
+                        console.log(2);
+                        document.getElementById('login-modal-coperacha').style.display = 'none';
+                        var element = $.find('.dialog-view');
+                        $(element).attr('data-redirect-to', '');
+                    } else if(document.getElementById('alert-modal-coperacha').style.display == 'block') {
+                        console.log(3);
+                        _this.hideAlert();
+                    }
                 }
             }
         });

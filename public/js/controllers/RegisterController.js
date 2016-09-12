@@ -30,7 +30,6 @@
          */
         $scope.emailRegister = function ()
         {
-            console.log($scope.gender);
             if($scope.emailValidate()){
 
                 $scope.birthday = $scope.birthdayYear+"-"+$scope.birthdayMonth+"-"+$scope.birthdayDay;

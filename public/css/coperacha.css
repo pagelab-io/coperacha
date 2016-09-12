@@ -1,3 +1,4 @@
+.alert-wrapper,
 .popup-wrapper{
     display: none;
     position: fixed;
@@ -5,7 +6,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 1;
+    z-index: 3;
     background: rgba(255, 255, 255,0.9);
     transition: 300ms all;
 }
@@ -110,4 +111,32 @@
 .info-alert{
     font-size: 11px;
     color: #2eb2cd;
+}
+
+@media screen and (max-width: 520px){
+    .alert-modal,
+    .popup {
+        width: 298px;
+        margin-top: -200px;
+        margin-left: -150px;
+    }
+
+    .popup > .popup-body > .email-login > input[type="text"],
+    .popup > .popup-body > .email-login > input[type="password"]{
+        width: 100%;
+    }
+
+    .alert-modal > .popup-body > .email-login > .btn-email-login,
+    .popup > .popup-body > .email-login > .btn-email-login {
+        width: 100%;
+    }
+
+    .popup > .popup-body > .facebook-login > .btn-facebook-login {
+        width: 90%;
+    }
+
+    .popup-splitter {
+        width: 60%;
+        margin: 0 auto;
+    }
 }

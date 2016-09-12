@@ -86,10 +86,10 @@
             @include("partials.footer")
         </div>
         <!-- LoginDialogView -->
-        <coperacha-modal class="popup-wrapper"></coperacha-modal>
+        <coperacha-modal class="popup-wrapper" id="login-modal-coperacha"></coperacha-modal>
 
         <!-- Alert Dialog -->
-        <div class="popup-wrapper" id="alert-modal-coperacha">
+        <div class="alert-wrapper" id="alert-modal-coperacha">
             <div class="alert-modal">
                 <!-- header -->
                 <div class="popup-header">
