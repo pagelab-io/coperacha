@@ -62,7 +62,7 @@
     padding: 0px;
     position: absolute;
     z-index: 0;
-    background: white !important;
+    background: white;
 }
 
 .slider-summary .slide {
