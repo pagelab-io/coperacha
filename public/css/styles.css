@@ -983,7 +983,7 @@ hr {
     align-items: center;
     justify-content: center;
     margin: 10px 0;
-    width: 33.3333%;
+    width: 50%;
 }
 
 @media screen and (min-width: 769px){
@@ -994,6 +994,7 @@ hr {
 
     .moneybox-view .category-item {
         width: 120px;
+        width: 33.3333%;
     }
 }
 
