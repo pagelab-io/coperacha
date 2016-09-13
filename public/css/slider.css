@@ -62,7 +62,13 @@
     padding: 0px;
     position: absolute;
     z-index: 0;
+    background: white !important;
 }
+
+.slider-summary .slide {
+    background: #EEEEEE;
+}
+
 
 .slider .pagination {
     margin: 0 auto;

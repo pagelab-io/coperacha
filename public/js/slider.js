@@ -204,7 +204,6 @@ var app = app || {};
                         var position = ++index;
 
                         slide.css({
-                            background: 'white',
                             display: 'none',
                             height: _this.height + 'px',
                             width: _this.width + 'px'

@@ -83,7 +83,7 @@
                 </div>
                 <div class="content-block">
                     <div class="row">
-                        <div class="slider methods">
+                        <div class="slider methods slider-summary">
                             <img class="item" src="/images/master-card-logo.png" alt="Master Card">
                             <img class="item" src="/images/american-express-logo.png" alt="American Express">
                             <img class="item" src="/images/visa-logo.png" alt="Visa">
