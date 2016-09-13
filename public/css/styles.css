@@ -1515,3 +1515,7 @@ section.block.reset-password {
 .col-sm-4{
     margin-bottom: 0;
 }
+
+.input-group .form-control{
+    z-index: 0;
+}
