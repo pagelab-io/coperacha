@@ -84,11 +84,11 @@
                 <div class="content-block">
                     <div class="row">
                         <div class="slider methods">
-                            <img class="item" src="images/master-card-logo.png" alt="Master Card">
-                            <img class="item" src="images/american-express-logo.png" alt="American Express">
-                            <img class="item" src="images/visa-logo.png" alt="Visa">
-                            <img class="item" src="images/paypal-logo.png" alt="PayPal">
-                            <img class="item" src="images/oxxo-logo.png" alt="Oxxo">
+                            <img class="item" src="{{asset('/images/master-card-logo.png')}}" alt="Master Card">
+                            <img class="item" src="{{asset('/images/american-express-logo.png)}}" alt="American Express">
+                            <img class="item" src="{{asset('/images/visa-logo.png)}}" alt="Visa">
+                            <img class="item" src="{{asset('/images/paypal-logo.png)}}" alt="PayPal">
+                            <img class="item" src="{{asset('/images/oxxo-logo.png)}}" alt="Oxxo">
                         </div>
                     </div>
                 </div>
