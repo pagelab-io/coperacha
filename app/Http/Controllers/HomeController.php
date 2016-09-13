@@ -243,7 +243,7 @@ class HomeController extends Controller
         $user       = '';
         $amount     = 0;
         $commission = 0;
-
+        
         if (\Session::has('tmp_participant')){
             $session = \Session::get('tmp_participant');
             $user       = $this->_userRepository->byEmail($session['email']);
