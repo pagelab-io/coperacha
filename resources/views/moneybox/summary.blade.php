@@ -12,25 +12,25 @@
                     <input type="hidden" ng-init="person_id='{{$participant->person->id}}'"/>
                     <input type="hidden" ng-init="moneybox='{{$moneybox}}'"/>
                     <form class="form summary">
-                        <div class="form-group">
-                            <label for="moneybox">Nombre de la alcancía:</label>
-                            <input id="moneybox" readonly type="text" value="{{$moneybox->name}}">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-4"> <label for="moneybox">Nombre de la alcancía:</label> </div>
+                            <div class="col-xs-12 col-sm-8"> <input id="moneybox" readonly type="text" value="{{$moneybox->name}}"> </div>
                         </div>
-                        <div class="form-group">
-                            <label for="name">Tu Nombre: </label>
-                            <input id="name" readonly type="text" value="{{$participant->person->name." ".$participant->person->lastname}}">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-4"><label for="name">Tu Nombre: </label></div>
+                            <div class="col-xs-12 col-sm-8"><input id="name" readonly type="text" value="{{$participant->person->name." ".$participant->person->lastname}}"></div>
                         </div>
-                        <div class="form-group">
-                            <label for="mobile">Celular: </label>
-                            <input id="mobile" readonly type="text" value="{{$participant->person->phone}}">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-4"><label for="mobile">Celular: </label></div>
+                            <div class="col-xs-12 col-sm-8"><input id="mobile" readonly type="text" value="{{$participant->person->phone}}"></div>
                         </div>
-                        <div class="form-group">
-                            <label for="email">Correo: </label>
-                            <input id="email" readonly type="text" value="{{$participant->email}}">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-4"><label for="email">Correo: </label></div>
+                            <div class="col-xs-12 col-sm-8"><input id="email" readonly type="text" value="{{$participant->email}}"></div>
                         </div>
-                        <div class="form-group">
-                            <label for="amount">Tu participación: </label>
-                            <input id="amount"  readonly type="text" value="${{number_format($amount, 2)}} (+ ${{number_format($commission, 2)}} por comisión) MXN">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-4"><label for="amount">Tu participación: </label></div>
+                            <div class="col-xs-12 col-sm-8"><input id="amount"  readonly type="text" value="${{number_format($amount, 2)}} (+ ${{number_format($commission, 2)}} por comisión) MXN"></div>
                             <input type="hidden" ng-init="amount='{{$amount}}'" ng-model="amount">
                             <input type="hidden" ng-init="commission='{{$commission}}'" ng-model="commission">
                         </div>
