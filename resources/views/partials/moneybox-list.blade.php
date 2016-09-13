@@ -53,11 +53,13 @@
                 </div>
             @endforeach
         @else
-            <div style="text-align: center; height: 400px;">
-                <h3 style="color:#51B7CD">No has creado ninguna alcancía, puedes empezar <a
-                            href="{{route('moneybox.create')}}" style="color:#FF5000">aqui !</a>
-                </h3>
-            </div>
+            @if ($withMessage == true)
+                <div style="text-align: center; height: 400px;">
+                    <h3 style="color:#51B7CD">No has creado ninguna alcancía, puedes empezar <a
+                                href="{{route('moneybox.create')}}" style="color:#FF5000">aquí!</a>
+                    </h3>
+                </div>
+            @endif
         @endif
     </div>
 </section>
