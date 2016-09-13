@@ -105,14 +105,14 @@
 
                                 <div class="form-group">
                                     <div class="row">
-                                        <div class="col-xs-10">
+                                        <div class="col-xs-9">
                                         @if ($moneybox)
                                             <input id="datepicker" type="text" class="form-control" placeholder="Fecha límite para reunir los fondos" ng-model="end_date" ng-init="end_date='{{$moneybox->end_date}}'">
                                         @else
                                             <input id="datepicker" type="text" class="form-control" placeholder="Fecha límite para reunir los fondos" ng-model="end_date">
                                         @endif
                                         </div>
-                                        <div class="col-xs-2"><span class="icon-calendar"></span></div>
+                                        <div class="col-xs-3"><span class="icon-calendar"></span></div>
                                     </div>
                                 </div>
                             </div>
