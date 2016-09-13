@@ -235,8 +235,7 @@ class HomeController extends Controller
      * @throws \Exception
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getSummaryPage($url){
-
+    public function getSummaryPage($url) {
         // get moneybox with it's settings
         $variables  = $this->_moneyboxRepository->getByURL($url);
         $moneybox   = $variables['moneybox'];
@@ -244,6 +243,7 @@ class HomeController extends Controller
         $user       = '';
         $amount     = 0;
         $commission = 0;
+
         if (\Session::has('tmp_participant')){
             $session = \Session::get('tmp_participant');
             $user       = $this->_userRepository->byEmail($session['email']);

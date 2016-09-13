@@ -83,11 +83,13 @@
                 </div>
                 <div class="content-block">
                     <div class="row">
-                        <div class="method"><img src="/images/master-card-logo.png" alt="Master Card"></div>
-                        <div class="method"><img src="/images/american-express-logo.png" alt="American Express"></div>
-                        <div class="method"><img src="/images/visa-logo.png" alt="Visa"></div>
-                        <div class="method"><img src="/images/paypal-logo.png" alt="PayPal"></div>
-                        <div class="method"><img src="/images/oxxo-logo.png" alt="Oxxo"></div>
+                        <div class="slider methods">
+                            <img class="item" src="images/master-card-logo.png" alt="Master Card">
+                            <img class="item" src="images/american-express-logo.png" alt="American Express">
+                            <img class="item" src="images/visa-logo.png" alt="Visa">
+                            <img class="item" src="images/paypal-logo.png" alt="PayPal">
+                            <img class="item" src="images/oxxo-logo.png" alt="Oxxo">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -96,4 +98,14 @@
 @endsection
 
 @section('js')
+    <script src="{{asset('/js/slider.js')}}"></script>
+    <script>
+        $('.slider').slider({
+            slideSpeed: 500,
+            play: 5000,
+            preload: true,
+            withPagination: false,
+            withNavigation: false
+        });
+    </script>
 @endsection
