@@ -112,7 +112,7 @@
                                         <div class="row">
                                             <div class="col-sm-5">
                                                 <select class="form-control" name="month" id="month" v-model="birthdayMonth">
-                                                    <option value="-1">Mes</option>
+                                                    <option value="">Mes</option>
 
                                                     @foreach($months as $mont => $name)
                                                         <option value="{{$mont}}">{{$name}}</option>
@@ -122,7 +122,7 @@
                                             </div>
                                             <div class="col-sm-3">
                                                 <select class="form-control" name="day" id="day" v-model="birthdayDay">
-                                                    <option value="-1">Día</option>
+                                                    <option value="">Día</option>
                                                     @for($i = 1; $i <= 31; $i++)
                                                         <option value="{{$i}}">{{$i}}</option>
                                                     @endfor
@@ -130,7 +130,7 @@
                                             </div>
                                             <div class="col-sm-4">
                                                 <select class="form-control" name="year" id="year" v-model="birthdayYear">
-                                                    <option value="-1">Año</option>
+                                                    <option value="">Año</option>
                                                     @for($i = 2016 - 18;  $i >= 1950; $i--)
                                                         <option value="{{$i}}">{{$i}}</option>
                                                     @endfor

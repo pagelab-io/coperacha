@@ -31,9 +31,9 @@ var vm = new Vue({
             fb_uid: ''
         },
 
-        birthdayMonth: '',
-        birthdayDay: 1,
-        birthdayYear: 1,
+        birthdayMonth: "",
+        birthdayDay: "",
+        birthdayYear:"",
         loading: true,
         message: {
             text: '',
@@ -183,11 +183,13 @@ var vm = new Vue({
                     this.user = body.data;
                     this.person = body.data.person;
                     this.fbuser = body.data.fbuser;
-
-                    var date = new Date(this.person.birthday);
-                    this.birthdayMonth = date.getMonth() + 1;
-                    this.birthdayDay = date.getDate() + 1;
-                    this.birthdayYear = date.getFullYear();
+                    var date = null;
+                    if(this.person.birthday != '0000-00-00') {
+                        date = new Date(this.person.birthday);
+                        this.birthdayMonth = date.getMonth() + 1;
+                        this.birthdayDay = date.getDate() + 1;
+                        this.birthdayYear = date.getFullYear();
+                    }
 
                     window.user = this.user;
                 }
