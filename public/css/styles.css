@@ -375,17 +375,18 @@ hr {
 }
 
 .block.intro .moneyboxes {
-
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
 }
 
 .block.intro .moneyboxes .moneybox-type {
-    display: inline-block;
     padding-left: 15px;
     padding-right: 15px;
-    width: 100%;
     text-align: center;
     margin-bottom: 20px;
-    max-width: 130px;
+
+    flex: 1 1 120px;
 }
 
 .block.intro .moneyboxes .moneybox-type img {

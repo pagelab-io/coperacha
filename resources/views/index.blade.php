@@ -110,7 +110,7 @@
                             <h2 class="hidden">Arma tu Coperacha para fiestas, regalos o viajes</h2>
                         </div>
                         <div class="content-block">
-                            <div class="clearfix moneyboxes">
+                            <div class="moneyboxes">
                                 @foreach ($categories as $category)
                                     <div class="moneybox-type">
                                         <div class="title">{{$category->name}}</div>
