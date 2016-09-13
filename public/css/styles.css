@@ -1309,7 +1309,7 @@ hr {
 .summary-view .form.summary input[readonly] {
     border: none;
     color: #525260;
-    width: 65%;
+    width: 100%;
 }
 
 .summary-view .form.summary .form-group {
@@ -1505,4 +1505,14 @@ hr {
 section.block.reset-password {
     padding: 70px 0;
     height: 500px;
+}
+
+/****************************
+/* BOOTSTRAP OVERRIDE*/
+.row {
+    margin-bottom: 10px;
+}
+
+.col-sm-4{
+    margin-bottom: 0;
 }
