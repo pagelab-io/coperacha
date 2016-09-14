@@ -73,48 +73,6 @@ html, body {
 }
 
 
-.items .item {
-    background: white;
-    box-sizing: border-box;
-    border: solid 1px #DBDCE2;
-    color: #727684;
-    margin: 5px 10px 15px 10px;
-    flex: 1 0 calc(100% - 30px);
-}
-
-.items .item > header {
-    border-bottom: solid 1px #DBDCE2;
-}
-
-.items .item > header,
-.items .item > main {
-    padding: 10px;
-}
-
-.items .item > header .item-title {
-    text-transform: uppercase;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.items .item > header .item-desc{
-    font-size: 12px;
-}
-
-.items .item > main {
-}
-
-.items .item .amount {
-    color: #44464F;
-    font-size: 26px;
-    display: flex;
-    justify-content: center;
-}
-.items .item .amount > span {
-    font-size: 15px;
-    margin-left: 5px;
-}
-
 .table {
     border: solid 1px #DBDCE2;
 }
@@ -128,12 +86,6 @@ html, body {
 .table > tfoot > tr > td,
 .table > tbody > tr > td {
     border-color: #DBDCE2;
-}
-
-@media screen and (min-width: 768px){
-    .items .item {
-        flex: 1 0 calc(50% - 30px);
-    }
 }
 
 /*******************************
@@ -174,6 +126,23 @@ html, body {
 
 .panel-body {
     min-height: 250px;
+}
+
+.panel-footer {
+    text-align: right;
+    background: white;
+    color: #2F91FF;
+    font-weight: 600;
+}
+
+.panel-footer > a{
+    color: #2F91FF;
+    text-decoration: none;
+}
+
+.panel-footer > a:hover{
+    color: #2F91FF;
+    text-decoration: none;
 }
 
 .widget-th {

@@ -44,7 +44,7 @@
                             </div>
                             <!--footer-->
                             <div class="panel-footer">
-                                Ver más <span class="glyphicon glyphicon-arrow-right"></span>
+                                <a href="#">Ver más ></a>
                             </div>
                         </div>
                     </div>
@@ -84,7 +84,9 @@
                                 </table>
                             </div>
                             <!--footer-->
-                            <div class="panel-footer">Panel footer</div>
+                            <div class="panel-footer">
+                                <a href="#">Ver más ></a>
+                            </div>
                         </div>
                     </div>
                 </div> <!-- end row-->
@@ -124,7 +126,7 @@
                                 </table>
                             </div>
                             <!--footer-->
-                            <div class="panel-footer">Panel footer</div>
+                            <div class="panel-footer"></div>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-6">
@@ -161,7 +163,7 @@
                                 </table>
                             </div>
                             <!--footer-->
-                            <div class="panel-footer">Panel footer</div>
+                            <div class="panel-footer"></div>
                         </div>
                     </div>
                 </div> <!-- end row-->
