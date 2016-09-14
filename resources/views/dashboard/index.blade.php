@@ -44,7 +44,7 @@
                             </div>
                             <!--footer-->
                             <div class="panel-footer">
-                                <a href="#">Ver más ></a>
+                                <a href="{{url('dashboard/users')}}">Ver más ></a>
                             </div>
                         </div>
                     </div>

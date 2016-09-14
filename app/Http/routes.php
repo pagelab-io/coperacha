@@ -230,5 +230,6 @@ Route::group([
 ], function ($router) {
     $router->get('/','DashboardController@index');
     $router->get('/home','DashboardController@index');
+    $router->get('/users','DashboardController@getUsers');
 });
 //endregion

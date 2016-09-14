@@ -88,6 +88,10 @@ html, body {
     border-color: #DBDCE2;
 }
 
+.main-view.row{
+    width: 100%;
+}
+
 /*******************************
 * BOOTSRAP OVERRIDE
 ********************************/

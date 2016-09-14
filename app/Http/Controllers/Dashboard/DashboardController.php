@@ -24,6 +24,13 @@ class DashboardController extends Controller
         ]);
     }
 
+    public function getUsers()
+    {
+        return view('dashboard.users');
+    }
+
+
+
     /**
      * Gets statistics of creation of users
      *
