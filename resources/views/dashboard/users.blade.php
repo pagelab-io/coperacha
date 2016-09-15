@@ -1,71 +1,41 @@
 @extends("dashboard.layouts.app")
 
 @section("content")
-    <div class="container">
-        <section class="dashboard">
-            <h3 class="title-1">Usuarios</h3>
-            <hr>
-            <div class="items">
-
-                <div class="main-view row">
-                    <div class="col-xs-12">
-                        <div class="table-responsive">
-                            <table class="table table-hover table-striped">
-                                <tr>
-                                    <th>#</th>
-                                    <th>Nombre</th>
-                                    <th>Apellidos</th>
-                                    <th>Correo</th>
-                                    <th>Teléfono</th>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Emmanuel</td>
-                                    <td>Sánchez Luna</td>
-                                    <td>emmanuel@gmail.com</td>
-                                    <td>2224242424</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Carlos</td>
-                                    <td>Ortega Ortega</td>
-                                    <td>carlos@gmail.com</td>
-                                    <td>2345678901</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Emmanuel</td>
-                                    <td>Sánchez Luna</td>
-                                    <td>emmanuel@gmail.com</td>
-                                    <td>2224242424</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Carlos</td>
-                                    <td>Ortega Ortega</td>
-                                    <td>carlos@gmail.com</td>
-                                    <td>2345678901</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Emmanuel</td>
-                                    <td>Sánchez Luna</td>
-                                    <td>emmanuel@gmail.com</td>
-                                    <td>2224242424</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Carlos</td>
-                                    <td>Ortega Ortega</td>
-                                    <td>carlos@gmail.com</td>
-                                    <td>2345678901</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-            </div><!--end items-->
-        </section>
+    <!-- Title and description-->
+    <div class="dashboard-titles">
+        <h2>Usuarios</h2>
+        <p>Información de usuarios registrados actualmente en el sistema.</p>
     </div>
+    <div class="dashboard-filters">
+        <input type="text" placeholder="Buscar ..."/>
+    </div>
+    <hr/>
+    <section class="dashboard row">
+        <div class="main-view rw">
+            <div class="col-xs-12">
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped">
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Apellidos</th>
+                            <th>Sexo</th>
+                            <th>Correo</th>
+                            <th>Teléfono</th>
+                        </tr>
+                        @foreach($users as $user)
+                        <tr>
+                            <td>{{$user->id}}</td>
+                            <td>{{$user->person->name}}</td>
+                            <td>{{$user->person->lastname}}</td>
+                            <td>{{\App\Utilities\PLUtils::getStringGender($user->person->gender)}}</td>
+                            <td>{{$user->email}}</td>
+                            <td>{{$user->person->phone}}</td>
+                        </tr>
+                        @endforeach
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
 @stop

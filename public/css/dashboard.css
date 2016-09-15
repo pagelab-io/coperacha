@@ -192,3 +192,7 @@ html, body {
     width: 90%;
     margin: 0 auto;
 }
+
+.dashboard-filters {
+    text-align: right;
+}

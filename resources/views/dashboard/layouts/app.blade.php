@@ -56,7 +56,7 @@
                     <li><a href="{{ url('/dashboard/login') }}">Login</a></li>
                 @else
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">
                             {{ Auth::user()->username }} <span class="caret"></span>
                         </a>
 
@@ -71,8 +71,8 @@
 </nav>
 
 <div id="mySidenav" class="sidenav">
-  <a href="#">Dashboard</a>
-  <a href="{{url('/dashboard/users')}}" class="active">Usuarios</a>
+  <a href="{{url('/dashboard')}}">Dashboard</a>
+  <a href="{{url('/dashboard/users')}}">Usuarios</a>
   <a href="#">Alcancías</a>
   <a href="#">Ordenes</a>
 </div>

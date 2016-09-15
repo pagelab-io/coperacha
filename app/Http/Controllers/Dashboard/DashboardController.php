@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Entities\User;
 use App\Http\Controllers\Controller;
-use DateTime;
-use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
-use Money\Money;
 
 class DashboardController extends Controller
 {
@@ -26,7 +24,10 @@ class DashboardController extends Controller
 
     public function getUsers()
     {
-        return view('dashboard.users');
+        $users = User::where('tracking', '!=', '-1')->get();
+        return view('dashboard.users', [
+            'users' => $users
+        ]);
     }
 
 
