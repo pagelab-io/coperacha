@@ -22,6 +22,7 @@
                             <th>Sexo</th>
                             <th>Correo</th>
                             <th>Teléfono</th>
+                            <th>Ver más</th>
                         </tr>
                         @foreach($users as $user)
                         <tr>
@@ -31,6 +32,7 @@
                             <td>{{\App\Utilities\PLUtils::getStringGender($user->person->gender)}}</td>
                             <td>{{$user->email}}</td>
                             <td>{{$user->person->phone}}</td>
+                            <td><a href="{{url('/dashboard/users/'.$user->username.'')}}">[icono]</a></td>
                         </tr>
                         @endforeach
                     </table>

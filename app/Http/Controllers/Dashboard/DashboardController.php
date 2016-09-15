@@ -30,6 +30,10 @@ class DashboardController extends Controller
         ]);
     }
 
+    public function getUserByUsername(){
+        return view('dashboard.userdetail');
+    }
+
 
 
     /**
