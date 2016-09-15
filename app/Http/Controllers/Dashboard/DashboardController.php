@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Entities\Moneybox;
 use App\Entities\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
@@ -25,16 +26,30 @@ class DashboardController extends Controller
     public function getUsers()
     {
         $users = User::where('tracking', '!=', '-1')->get();
-        return view('dashboard.users', [
+        return view('dashboard.user.index', [
             'users' => $users
         ]);
     }
 
     public function getUserByUsername(){
-        return view('dashboard.userdetail');
+        return view('dashboard.user.detail');
+    }
+
+    public function getMoneyboxes()
+    {
+        $moneyboxes = Moneybox::all();
+
+        return view('dashboard.moneybox.index', [
+            'moneyboxes' => $moneyboxes
+        ]);
     }
 
 
+    public function getMoneyboxesByUrl($url){
+        $moneybox = Moneybox::byUrl($url)->first();
+
+        return view('dashboard.moneybox.detail', ['moneybox' => $moneybox]);
+    }
 
     /**
      * Gets statistics of creation of users

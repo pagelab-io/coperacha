@@ -12,7 +12,7 @@
 */
 
 header('Access-Control-Allow-Origin: *');
-header( 'Access-Control-Allow-Headers: Authorization, Content-Type');
+header('Access-Control-Allow-Headers: Authorization, Content-Type');
 
 //region pages routes
 
@@ -232,5 +232,7 @@ Route::group([
     $router->get('/home','DashboardController@index');
     $router->get('/users','DashboardController@getUsers');
     $router->get('/users/{username}','DashboardController@getUserByUsername');
+    $router->get('/moneyboxes','DashboardController@getMoneyboxes');
+    $router->get('/moneyboxes/{url}','DashboardController@getMoneyboxesByUrl');
 });
 //endregion

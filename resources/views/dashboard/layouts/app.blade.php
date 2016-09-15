@@ -73,8 +73,8 @@
 <div id="mySidenav" class="sidenav">
   <a href="{{url('/dashboard')}}">Dashboard</a>
   <a href="{{url('/dashboard/users')}}">Usuarios</a>
-  <a href="#">Alcancías</a>
-  <a href="#">Ordenes</a>
+  <a href="{{url('/dashboard/moneyboxes')}}">Alcancías</a>
+  <a href="#">Órdenes</a>
 </div>
 
 <div id="main">
