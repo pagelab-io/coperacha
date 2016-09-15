@@ -30,7 +30,7 @@
     <!-- Google Analytics -->
 </head>
 <body id="app-layout">
-<nav class="navbar navbar-default navbar-static-top">
+<nav class="dashboard-navbar navbar navbar-default navbar-static-top">
     <div class="container-fluid">
         <div class="navbar-header">
 
@@ -49,11 +49,6 @@
         </div>
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
-            <!-- Left Side Of Navbar -->
-            <ul class="nav navbar-nav">
-                <li><a href="{{ url('/dashboard/users') }}">Usuarios</a></li>
-            </ul>
-
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
@@ -75,7 +70,16 @@
     </div>
 </nav>
 
-@yield('content')
+<div id="mySidenav" class="sidenav">
+  <a href="#">Dashboard</a>
+  <a href="{{url('/dashboard/users')}}" class="active">Usuarios</a>
+  <a href="#">Alcancías</a>
+  <a href="#">Ordenes</a>
+</div>
+
+<div id="main">
+  @yield('content')
+</div>
 
 <!-- JavaScripts -->
 <script src="{{asset('/js/vendor/jquery/jquery-3.1.0.js')}}"></script>

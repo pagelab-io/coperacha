@@ -56,23 +56,6 @@ html, body {
 |
 |
 */
-.dashboard {
-
-}
-
-.dashboard h1{
-    font-family: Roboto, sans-serif;
-}
-
-.items {
-    justify-content: space-between;
-    display: flex;
-
-    flex-flow: row wrap;
-    width: 100%;
-}
-
-
 .table {
     border: solid 1px #DBDCE2;
 }
@@ -151,4 +134,61 @@ html, body {
 
 .widget-th {
     color: #00bcd4 !important;
+}
+
+.sidenav {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #FF6516;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    display: block;
+    transition: 0.3s
+}
+
+.sidenav a:hover, .offcanvas a:focus{
+    color: white;
+    text-decoration: underline;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#main {
+    padding: 0 15px;
+    margin-left: 250px;
+}
+
+.dashboard-titles{
+    margin-bottom: 30px;
+}
+
+.dashboard-titles > h2 {
+    color: #FF6516;
+}
+
+.dashboard-titles > p {
+    color: #00bcd4;
+}
+
+.dashboard-items {
+    width: 90%;
+    margin: 0 auto;
 }
