@@ -3,8 +3,8 @@
 @section("content")
     <!-- Title and description-->
     <div class="dashboard-titles">
-        <h2>Nombre de la alcancía: {{$moneybox->name}}</h2>
-        <p>descripción: {{$moneybox->description}}</p>
+        <h2>Nombre: {{$moneybox->name}}</h2>
+        <p>Descripción: {{$moneybox->description}}</p>
     </div>
     <section class="dashboard row">
         Información

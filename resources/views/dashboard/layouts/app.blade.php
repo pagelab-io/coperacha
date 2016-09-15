@@ -12,6 +12,16 @@
     <!--<meta name="robots" content="INDEX, FOLLOW, ARCHIVE">-->
     <meta name="robots" content="NOINDEX, NOFOLLOW, NOARCHIVE">
 
+    <!-- Href lang -->
+    <link rel="alternate" hreflang="en" href="http://coperacha.com.mx/" />
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="/images/favicon.png">
+    <link rel="icon" href="/favicons/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-touch-icon-114x114.png">
+
+
     <!-- Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,600,700" rel="stylesheet">

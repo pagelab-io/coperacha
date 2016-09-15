@@ -30,8 +30,8 @@
                             <td>{{$moneybox->name}}</td>
                             <td>{{$moneybox->person->name}}</td>
                             <td>{{$moneybox->collected_amount}}</td>
-                            <td>{{$moneybox->commision_amount}}</td>
-                            <td>{{$moneybox->status}}</td>
+                            <td>{{$moneybox->commission_amount}}</td>
+                            <td>{{$moneybox->active == 1 ? 'Active' : 'Completado'}}</td>
                             <td><a href="{{url('/dashboard/moneyboxes/'.$moneybox->url.'')}}">[ícono]</a></td>
                         </tr>
                         @endforeach
