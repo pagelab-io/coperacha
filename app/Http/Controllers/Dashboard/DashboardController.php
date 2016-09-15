@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Entities\Category;
 use App\Entities\Moneybox;
 use App\Entities\User;
 use App\Http\Controllers\Controller;
@@ -45,10 +46,14 @@ class DashboardController extends Controller
     }
 
 
-    public function getMoneyboxesByUrl($url){
+    public function getMoneyboxesByUrl($url) {
+        $categories = Category::all();
         $moneybox = Moneybox::byUrl($url)->first();
 
-        return view('dashboard.moneybox.detail', ['moneybox' => $moneybox]);
+        return view('dashboard.moneybox.detail', [
+            'moneybox' => $moneybox,
+            'categories' => $categories
+        ]);
     }
 
     /**
