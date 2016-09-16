@@ -46,9 +46,9 @@
         <div id="slide-out" class="side-nav fixed">
             <div class="userView">
                 <a href="#!user"><img src="/images/logo.png"></a>
-                <a href="#!name"><span class="white-text name">{{Auth::user()->person->name}}</span></a>
+                <a href="#!name"><span class="white-text name">{{Auth::user()->person->fullName()}}</span></a>
                 <a href="#!email"><span class="white-text email">{{Auth::user()->username}}</span></a>
-                <a href="{{ url('/dashboard/logout') }}"><span class="white-text email small">Cerrar Sesión</span></a>
+                <a href="{{ url('/dashboard/logout') }}"><span class="white-text logout small">Cerrar Sesión</span></a>
             </div>
             <ul class="menu">
                 <li>
