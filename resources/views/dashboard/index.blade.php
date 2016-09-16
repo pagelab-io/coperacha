@@ -7,9 +7,10 @@
         <p>Estadisticas y gráficas acerca de lo mas importante en Coperacha.</p>
     </div>
 
+    <br>
+
     <!-- Content -->
     <section class="dashboard row">
-
         <!-- row -->
         <div class="dashboard-items">
             <div class="col-xs-12 col-sm-6">

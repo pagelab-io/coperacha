@@ -82,7 +82,6 @@
         <!-- Outer wrapper -->
         <div class="outer-wrapper">
             @yield("content")
-
             @include("partials.footer")
         </div>
         <!-- LoginDialogView -->

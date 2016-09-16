@@ -1,0 +1,170 @@
+html, body {
+    font-family: Roboto, sans-serif;
+    font-weight: 400;
+}
+
+header, main, footer {
+    padding-left: 300px;
+}
+
+.side-nav {
+    color: white;
+    background: #ff5102;
+}
+
+.side-nav a {
+    color: white !important;
+    text-decoration: none;
+}
+
+.side-nav .menu a {
+    border-left: solid 3px transparent;
+    margin: 0;
+}
+
+.side-nav .menu a:hover,
+.side-nav .menu a.selected {
+    border-left: solid 3px white;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.side-nav .userView {
+    padding: 10px 0;
+    margin-bottom: 15px;
+}
+
+.side-nav .userView .name {
+    font-size: 15px;
+}
+
+.side-nav .userView .email {
+    font-size: 12px;
+    padding: 0;
+    margin: 0;
+}
+
+@media only screen and (max-width : 992px) {
+    header, main, footer {
+        padding-left: 0;
+    }
+}
+
+/*
+|------------------------------------------------------------------------------
+| Dashboard
+|------------------------------------------------------------------------------
+|
+|
+*/
+
+.pagination li.active {
+    background-color: #FF6516;
+}
+
+
+/*******************************
+* BOOTSTRAP OVERRIDE
+********************************/
+.panel {
+    border-radius: 0;
+}
+
+.panel-primary > .panel-heading {
+    background-color: #FF6516;
+    border-color: #FF6516;
+}
+
+.panel-primary{
+    border-color: #FF6516;
+}
+
+.panel-heading {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 0;
+}
+
+.panel-heading > span {
+    text-transform: none;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.panel-body {
+    min-height: 250px;
+}
+
+.panel-footer {
+    text-align: right;
+    background: white;
+    color: #2F91FF;
+    font-weight: 600;
+}
+
+.panel-footer > a{
+    color: #2F91FF;
+    text-decoration: none;
+}
+
+.panel-footer > a:hover{
+    color: #2F91FF;
+    text-decoration: none;
+}
+
+.widget-th {
+    color: #00bcd4 !important;
+}
+
+.sidenav {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #FF6516;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    display: block;
+    transition: 0.3s
+}
+
+.sidenav a:hover, .offcanvas a:focus{
+    color: white;
+    text-decoration: underline;
+}
+
+
+.dashboard-titles {
+    margin-bottom: 0px;
+}
+
+.dashboard-titles h2 {
+    font-size:24px;
+    margin: 0;
+    color: #FF6516;
+}
+
+.dashboard-titles p {
+    color: #00bcd4;
+    font-size: 13px;
+    margin: 0;
+}
+
+.dashboard-items {
+    width: 90%;
+    margin: 0 auto;
+}
+
+form.search {
+    width: 220px;
+}

@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.app')
+@extends('dashboard.layouts.single')
 
 @section('content')
 <div class="container">
@@ -42,7 +42,8 @@
                             <div class="col-md-6 col-md-offset-4">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="remember"> Remember Me
+                                        <input type="checkbox" id="Remember" checked="checked" />
+                                        <label for="Remember">Remember Me</label>
                                     </label>
                                 </div>
                             </div>
@@ -54,7 +55,7 @@
                                     <i class="fa fa-btn fa-sign-in"></i> Login
                                 </button>
 
-                                <a class="btn btn-link" href="{{ url('/dashboard/password/reset') }}">Forgot Your Password?</a>
+                                <a class="btn-link" href="{{ url('/dashboard/password/reset') }}">Forgot Your Password?</a>
                             </div>
                         </div>
                     </form>

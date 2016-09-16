@@ -21,14 +21,16 @@
                                 @endif
                             </div>
                             <div class="form-group">
-                                @if($moneybox->collected_amount > 0)
-                                    <a class="btn btn-primary"
-                                       href="{{url('moneybox/request/'.$moneybox->url)}}">Utilizar
-                                        dinero</a>
-                                @else
-                                    <a class="btn btn-primary disabled"
-                                       href="{{url('moneybox/request/'.$moneybox->url)}}">Utilizar
-                                        dinero</a>
+                                @if (Auth::user()->person->id == $moneybox->person_id)
+                                    @if($moneybox->collected_amount > 0)
+                                        <a class="btn btn-primary"
+                                           href="{{url('moneybox/request/'.$moneybox->url)}}">Utilizar
+                                            dinero</a>
+                                    @else
+                                        <a class="btn btn-primary disabled"
+                                           href="{{url('moneybox/request/'.$moneybox->url)}}">Utilizar
+                                            dinero</a>
+                                    @endif
                                 @endif
                             </div>
                             <div class="form-group">
