@@ -140,7 +140,7 @@
                             @foreach($payments as $payment => $value)
                             <tr>
                                 <td>{{\App\Utilities\PLUtils::getPaymentMethodString($payment)}}</td>
-                                <td>{{$value."%"}}</td>
+                                <td>{{number_format($value, 2)."%"}}</td>
                             </tr>
                             @endforeach
                         </tbody>

@@ -261,9 +261,9 @@ class PaymentRepository extends BaseRepository
             $sum++;
             $result[$payment->method] += 1;
         }
-        foreach($payments as $payment){
-            $avg = ($result[$payment->method]/$sum)*100;
-            $result[$payment->method] = $avg;
+        foreach($result as $key => $value){
+            $avg = ($result[$key]/$sum)*100;
+            $result[$key] = $avg;
         }
 
         return $result;
