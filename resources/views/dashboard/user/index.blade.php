@@ -6,15 +6,23 @@
         <h2>Usuarios</h2>
         <p>Información de usuarios registrados actualmente en el sistema.</p>
     </div>
-    <div class="dashboard-filters">
-        <input type="text" placeholder="Buscar ..."/>
+    <div class="dashboard-filters clearfix">
+        <div class="pull-right">
+            <form action="" class="search">
+                <div class="input-field">
+                    <i class="material-icons prefix">search</i>
+                    <input id="icon_prefix" type="text" class="validate">
+                    <label for="icon_prefix">Buscar</label>
+                </div>
+            </form>
+        </div>
     </div>
     <hr/>
     <section class="dashboard row">
         <div class="main-view rw">
             <div class="col-xs-12">
                 <div class="table-responsive">
-                    <table class="table table-hover table-striped">
+                    <table class="table bordered highlight stripped responsive-table">
                         <tr>
                             <th>#</th>
                             <th>Nombre</th>

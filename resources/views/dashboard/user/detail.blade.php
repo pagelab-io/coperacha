@@ -10,21 +10,18 @@
     <section class="dashboard row">
 
         <!--general info data-->
-        <div class="dashboard general-info">
-
+        <div class="dashboard general-info col-xs-12">
             <div class="panel panel-primary">
-
                 <!-- header -->
                 <div class="panel-heading">
                     Información general
                     <br>
                     <span>Información proporcionada por el usuario desde el momento de su registro.</span>
                 </div>
-
                 <!-- body -->
                 <div class="panel-body">
                     <!-- Table -->
-                    <table class="table table-striped table-responsive">
+                    <table class="table bordered stripped responsive-table">
                         <tbody>
                             <tr>
                                 <td>Correo electrónico</td>
@@ -54,14 +51,10 @@
                     </table>
                 </div>
             </div>
-
         </div>
 
-        <!--more relevant info-->
-        <div class="dashboard more-info">
-
+        <div class="col-xs-12 col-sm-6">
             <div class="panel panel-primary">
-
                 <!-- header -->
                 <div class="panel-heading">
                     Alcancías creadas
@@ -72,7 +65,7 @@
                 <!-- body -->
                 <div class="panel-body">
                     <!-- Table -->
-                    <table class="table table-striped table-responsive">
+                    <table class="table bordered stripped responsive-table">
                         <thead>
                             <tr>
                                 <th class="widget-th">#</th>
@@ -90,14 +83,10 @@
                     </table>
                 </div>
             </div>
-
         </div>
 
-        <!--more relevant info-->
-        <div class="dashboard more-info">
-
+        <div class="col-xs-12 col-sm-6">
             <div class="panel panel-primary">
-
                 <!-- header -->
                 <div class="panel-heading">
                     Alcancías en las que participa
@@ -108,7 +97,7 @@
                 <!-- body -->
                 <div class="panel-body">
                     <!-- Table -->
-                    <table class="table table-striped table-responsive">
+                    <table class="table bordered stripped responsive-table">
                         <thead>
                             <tr>
                                 <th class="widget-th">#</th>
@@ -126,7 +115,6 @@
                     </table>
                 </div>
             </div>
-
         </div>
 
     </section>
