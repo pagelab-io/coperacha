@@ -167,3 +167,8 @@ header, main, footer {
 form.search {
     width: 220px;
 }
+
+.dashboard.general-info,
+.dashboard.more-info{
+    margin-top: 35px;
+}

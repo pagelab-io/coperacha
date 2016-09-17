@@ -7,10 +7,34 @@ use App\Entities\Moneybox;
 use App\Entities\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
+use App\Repositories\MoneyboxRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
+
+    //region Fields
+
+    /**
+     * @var UserRepository
+     */
+    private $_userRepository;
+
+    /**
+     * @var MoneyboxRepository
+     */
+    private $_moneyboxRepository;
+
+    //endregion
+
+
+    public function __construct(UserRepository $userRepository, MoneyboxRepository $moneyboxRepository)
+    {
+        $this->_userRepository = $userRepository;
+        $this->_moneyboxRepository = $moneyboxRepository;
+    }
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -32,8 +56,16 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function getUserByUsername(){
-        return view('dashboard.user.detail');
+    public function getUserByUsername($email){
+        $user = $this->_userRepository->byEmail($email);
+        $request = new Requests\PLRequest();
+        $request->merge(array('person_id' => $user->person->id));
+        $moneyboxes = $this->_moneyboxRepository->getAll($request);
+        return view('dashboard.user.detail',[
+            'user' => $user,
+            'my_moneyboxes' => $moneyboxes->data['my_moneyboxes'],
+            'moneyboxes_participation' => $moneyboxes->data['moneyboxes_participation']
+        ]);
     }
 
     public function getMoneyboxes()
