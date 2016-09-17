@@ -49,6 +49,22 @@ class PLUtils {
         return Carbon::createFromDate($dates[0],$dates[1],$dates[2])->age." años";
     }
 
+    /**
+     * Gets a payment method letter and return the string for that method
+     *
+     * @param $method - P
+     * @return string - PayPal
+     */
+    public static function getPaymentMethodString($method)
+    {
+        switch($method){
+            case PLConstants::PAYMENT_PAYPAL : return PLConstants::PAYMENT_PAYPAL_STRING; break;
+            case PLConstants::PAYMENT_SPEI : return PLConstants::PAYMENT_SPEI_STRING; break;
+            case PLConstants::PAYMENT_OXXO : return PLConstants::PAYMENT_OXXO_STRING; break;
+            default : return "";
+        }
+    }
+
     //region private methods
 
     /**

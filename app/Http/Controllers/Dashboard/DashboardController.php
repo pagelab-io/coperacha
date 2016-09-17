@@ -8,6 +8,7 @@ use App\Entities\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Repositories\MoneyboxRepository;
+use App\Repositories\PaymentRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\DB;
 
@@ -26,13 +27,19 @@ class DashboardController extends Controller
      */
     private $_moneyboxRepository;
 
+    /**
+     * @var PaymentRepository
+     */
+    private $_paymentRepository;
+
     //endregion
 
 
-    public function __construct(UserRepository $userRepository, MoneyboxRepository $moneyboxRepository)
+    public function __construct(UserRepository $userRepository, MoneyboxRepository $moneyboxRepository, PaymentRepository $paymentRepository)
     {
         $this->_userRepository = $userRepository;
         $this->_moneyboxRepository = $moneyboxRepository;
+        $this->_paymentRepository = $paymentRepository;
     }
 
     /**
@@ -61,10 +68,12 @@ class DashboardController extends Controller
         $request = new Requests\PLRequest();
         $request->merge(array('person_id' => $user->person->id));
         $moneyboxes = $this->_moneyboxRepository->getAll($request);
+        $payments = $this->_paymentRepository->paymentAVGByPerson($user->person->id);
         return view('dashboard.user.detail',[
             'user' => $user,
             'my_moneyboxes' => $moneyboxes->data['my_moneyboxes'],
-            'moneyboxes_participation' => $moneyboxes->data['moneyboxes_participation']
+            'moneyboxes_participation' => $moneyboxes->data['moneyboxes_participation'],
+            'payments' => $payments
         ]);
     }
 

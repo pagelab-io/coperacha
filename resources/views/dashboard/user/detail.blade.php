@@ -117,5 +117,37 @@
             </div>
         </div>
 
+        <div class="col-xs-12 col-sm-6">
+            <div class="panel panel-primary">
+                <!-- header -->
+                <div class="panel-heading">
+                    Métodos pago
+                    <br>
+                    <span>Métodos de pago usados por el usuario.</span>
+                </div>
+
+                <!-- body -->
+                <div class="panel-body">
+                    <!-- Table -->
+                    <table class="table bordered stripped responsive-table">
+                        <thead>
+                            <tr>
+                                <th class="widget-th">Método de pago</th>
+                                <th class="widget-th">% de uso</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($payments as $payment => $value)
+                            <tr>
+                                <td>{{\App\Utilities\PLUtils::getPaymentMethodString($payment)}}</td>
+                                <td>{{$value."%"}}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
     </section>
 @stop

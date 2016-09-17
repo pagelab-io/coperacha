@@ -15,6 +15,9 @@ class PLConstants {
     const PAYMENT_PENDING = 'PENDING';
     const PAYMENT_CANCELED = 'CANCELED';
     const PAYMENT_PAYED = 'PAYED';
+    const PAYMENT_OXXO_STRING = 'Oxxo';
+    const PAYMENT_SPEI_STRING = 'Spei';
+    const PAYMENT_PAYPAL_STRING = 'PayPal';
 
     // email's constants
     const EMAIL_CONTACT = 'emails.contact';

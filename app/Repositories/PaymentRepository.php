@@ -252,6 +252,23 @@ class PaymentRepository extends BaseRepository
         return Payment::where('uid', $token)->firstOrFail();
     }
 
+    public function paymentAVGByPerson($person_id)
+    {
+        $result = array('P' => 0,'O' => 0,'S' => 0);
+        $payments = Payment::where('person_id', $person_id)->get();
+        $sum = 0;
+        foreach($payments as $payment){
+            $sum++;
+            $result[$payment->method] += 1;
+        }
+        foreach($payments as $payment){
+            $avg = ($result[$payment->method]/$sum)*100;
+            $result[$payment->method] = $avg;
+        }
+
+        return $result;
+    }
+
     //endregion
 
     //region Private Methods
