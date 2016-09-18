@@ -15,6 +15,7 @@ use App\Http\Requests\PLRequest;
 use App\Entities\Person;
 use App\Entities\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
 use Mockery\CountValidator\Exception;
 
@@ -61,6 +62,34 @@ class UserRepository extends BaseRepository{
     public function model()
     {
         return 'App\Entities\User';
+    }
+
+    public function search(PLRequest $request)
+    {
+
+        $filters = array(array('users.tracking', '!=', '-1'));
+
+        if($request->exists('name') && $request->get('name') != ''){
+            $filter = array('persons.name', 'LIKE', '%'. $request->get('name') .'%');
+            array_push($filters, $filter);
+        }
+
+        if($request->exists('gender') && $request->get('gender') != ''){
+            $filter = array('persons.gender', '=', $request->get('gender'));
+            array_push($filters, $filter);
+        }
+
+        \Log::info($filters);
+        $query_result = \DB::table('users')->join('persons', 'users.person_id', '=', 'persons.id')
+                    ->select('users.id')
+                    ->where($filters)->get();
+
+        $users = array();
+        foreach($query_result as $row) {
+            $user = User::findOrFail($row->id);
+            array_push($users, $user);
+        }
+        return $users;
     }
 
     /**

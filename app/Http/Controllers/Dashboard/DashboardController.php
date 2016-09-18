@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Http\Requests\PLRequest;
 use App\Entities\Category;
 use App\Entities\Moneybox;
 use App\Entities\User;
@@ -55,9 +56,9 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function getUsers()
+    public function getUsers(PLRequest $request)
     {
-        $users = User::where('tracking', '!=', '-1')->get();
+        $users = $this->_userRepository->search($request);
         return view('dashboard.user.index', [
             'users' => $users
         ]);

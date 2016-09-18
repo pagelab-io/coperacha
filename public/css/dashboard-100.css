@@ -165,10 +165,14 @@ header, main, footer {
 }
 
 form.search {
-    width: 220px;
+    width: 100%;
 }
 
 .dashboard.general-info,
 .dashboard.more-info{
     margin-top: 35px;
+}
+
+.dashboard-filters {
+    width: 100%;
 }

@@ -7,12 +7,27 @@
         <p>Información de usuarios registrados actualmente en el sistema.</p>
     </div>
     <div class="dashboard-filters clearfix">
-        <div class="pull-right">
-            <form action="" class="search">
-                <div class="input-field">
-                    <i class="material-icons prefix">search</i>
-                    <input id="icon_prefix" type="text" class="validate">
-                    <label for="icon_prefix">Buscar</label>
+        <div class="row pull-right">
+            <form accept-charset="UTF-8" method="get" action="{{ route('dashboard.users.index') }}" class="search col s12">
+                <div class="row">
+                    <div class="input-field col s4">
+                        <i class="material-icons prefix">search</i>
+                        <input id="search_name" type="text" class="validate" name="name">
+                        <label for="search_name">Nombre(s)</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <select id="search_gender" name="gender">
+                            <option value="">Sexo</option>
+                            <option value="H">Hombre</option>
+                            <option value="M">Mujer</option>
+                        </select>
+                    </div>
+                    <div class="input-field col s3">
+                        <button class="btn waves-effect waves-light" type="submit">
+                            Filtrar
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>

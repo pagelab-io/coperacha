@@ -257,13 +257,15 @@ class PaymentRepository extends BaseRepository
         $result = array('P' => 0,'O' => 0,'S' => 0);
         $payments = Payment::where('person_id', $person_id)->get();
         $sum = 0;
-        foreach($payments as $payment){
-            $sum++;
-            $result[$payment->method] += 1;
-        }
-        foreach($result as $key => $value){
-            $avg = ($result[$key]/$sum)*100;
-            $result[$key] = $avg;
+        if(count($payments) > 0){
+            foreach($payments as $payment){
+                $sum++;
+                $result[$payment->method] += 1;
+            }
+            foreach($result as $key => $value){
+                $avg = ($result[$key]/$sum)*100;
+                $result[$key] = $avg;
+            }
         }
 
         return $result;

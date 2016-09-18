@@ -226,12 +226,20 @@ Route::group([
 Route::group([
     'prefix' => 'dashboard',
     'namespace' => 'Dashboard',
-    'middleware' => ['dashboard']
+    'middleware' => ['dashboard'],
+    'as' => 'dashboard.'
 ], function ($router) {
     $router->get('/','DashboardController@index');
     $router->get('/home','DashboardController@index');
-    $router->get('/users','DashboardController@getUsers');
-    $router->get('/users/{username}','DashboardController@getUserByUsername');
+
+    $router->group([
+        'prefix' => 'users',
+        'as' => 'users.'
+    ], function($router){
+        $router->get('/{username}','DashboardController@getUserByUsername');
+        $router->get('/{name?}/{gender?}',['as' => 'index','uses' => 'DashboardController@getUsers']);
+    });
+
     $router->get('/moneyboxes','DashboardController@getMoneyboxes');
     $router->get('/moneyboxes/{url}','DashboardController@getMoneyboxesByUrl');
 });
