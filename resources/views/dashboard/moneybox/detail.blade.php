@@ -1,6 +1,7 @@
 @extends("dashboard.layouts.app")
 
 @section("content")
+
     <!-- Title and description-->
     <div class="dashboard-titles">
         <div class="clearfix">
@@ -10,53 +11,127 @@
                      src="{{$moneybox->lastimage ? url('/moneybox/image/' . $moneybox->lastimage) : '/images/icon-file.png'}}">
             </div>
             <div style="float: left; margin-left: 10px">
-                <h2>Nombre: {{$moneybox->name}}</h2>
-                <p>Descripción: {{$moneybox->description}}</p>
+                <h2>{{$moneybox->name}}</h2>
+                <p>Alcancia creada desde {{\App\Utilities\PLUtils::getStringDate($moneybox->created_at)}}</p>
             </div>
         </div>
     </div>
     <hr>
-    <section class="row">
-        <div class="col-sm-12">
-            <form class="form" role="form">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="first_name">Nombre</label>
-                            <input id="first_name" type="text" class="form-control" placeholder="Nombre de la alcancía"
-                                   value="{{$moneybox->name}}">
-                        </div>
+    <section class="dashboard row">
 
-                        <div class="form-group">
-                            <label for="person_name">Propietario</label>
-                            <input id="person_name" name="person_name" type="text" class="form-control"
-                                   placeholder="Nombre de quién la organiza"
-                                   value='{{Auth::user()->person->name." ".Auth::user()->person->lastname}}'>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="description">Descripción</label>
-                            <textarea id="description" name="description" class="materialize-textarea form-control" rows="3"
-                                      placeholder="Descripción">{{$moneybox->description}}</textarea>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="amount">Monto</label>
-                            <input id="amount" type="text" class="form-control" placeholder="Cantidad que desea reunir"
-                                   value='{{$moneybox->goal_amount}}'>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="datepicker">Fecha Límite</label>
-                            <input id="datepicker" type="text" class="form-control"
-                                   placeholder="Fecha límite para reunir los fondos" ng-model="end_date"
-                                   value='{{$moneybox->end_date}}'>
-                        </div>
-                    </div>
+        <!--general info data-->
+        <div class="dashboard general-info col-xs-12">
+            <div class="panel panel-primary">
+                <!-- header -->
+                <div class="panel-heading">
+                    Información general
+                    <br>
+                    <span>Datos de creación de la alcancía.</span>
                 </div>
-            </form>
-            <a href="{{url('/dashboard/moneyboxes')}}" class="btn btn-primary">Regresar</a>
+                <!-- body -->
+                <div class="panel-body">
+                    <!-- Table -->
+                    <table class="table bordered stripped responsive-table">
+                        <tbody>
+                            <tr>
+                                <td>Nombre</td>
+                                <td>{{$moneybox->name}}</td>
+                            </tr>
+                            <tr>
+                                <td>Descripción</td>
+                                <td>{{$moneybox->description}}</td>
+                            </tr>
+                            <tr>
+                                <td>Categoría</td>
+                                <td>{{$moneybox->category->name}}</td>
+                            </tr>
+                            <tr>
+                                <td>Propietario</td>
+                                <td>{{$moneybox->person->name." ".$moneybox->person->lastname}}</td>
+                            </tr>
+                            <tr>
+                                <td>Meta deseada</td>
+                                <td>${{number_format($moneybox->goal_amount, 2)}}</td>
+                            </tr>
+                            <tr>
+                                <td>Monto recaudado</td>
+                                <td>${{number_format($moneybox->collected_amount, 2)}}</td>
+                            </tr>
+                            <tr>
+                                <td>Fecha limite</td>
+                                <td>{{\App\Utilities\PLUtils::getStringDate($moneybox->end_date)}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
+
+        <div class="col-xs-12 col-sm-6">
+            <div class="panel panel-primary">
+                <!-- header -->
+                <div class="panel-heading">
+                    Participación
+                    <br>
+                    <span>Información de los participantes en esta alcancía.</span>
+                </div>
+
+                <!-- body -->
+                <div class="panel-body">
+                    <!-- Table -->
+                    <table class="table bordered stripped responsive-table">
+                        <thead>
+                            <tr>
+                                <th class="widget-th">#</th>
+                                <th class="widget-th">Nombre participante</th>
+                                <th class="widget-th"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($moneybox->participants as $participant)
+                            <tr>
+                                <td>{{$participant->id}}</td>
+                                <td>{{$participant->person->name." ".$participant->person->lastname}}</td>
+                                <td><a href="{{url('/dashboard/users/'.$participant->person->user->username.'')}}">Ver más</a></td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6">
+            <div class="panel panel-primary">
+                <!-- header -->
+                <div class="panel-heading">
+                    Métodos pago
+                    <br>
+                    <span>Métodos de pago usados para participar en esta alcancía.</span>
+                </div>
+
+                <!-- body -->
+                <div class="panel-body">
+                    <!-- Table -->
+                    <table class="table bordered stripped responsive-table">
+                        <thead>
+                            <tr>
+                                <th class="widget-th">Método de pago</th>
+                                <th class="widget-th">% de uso</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($payments as $payment => $value)
+                            <tr>
+                                <td>{{\App\Utilities\PLUtils::getPaymentMethodString($payment)}}</td>
+                                <td>{{number_format($value, 2)."%"}}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
     </section>
 @stop

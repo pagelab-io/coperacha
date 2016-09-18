@@ -6,7 +6,7 @@
         <h2>{{$user->person->name}} {{$user->person->lastname}}</h2>
         <p>Miembro desde {{\App\Utilities\PLUtils::getStringDate($user->person->created_at, 'mm-YY')}}</p>
     </div>
-
+    <hr/>
     <section class="dashboard row">
 
         <!--general info data-->
@@ -70,6 +70,7 @@
                             <tr>
                                 <th class="widget-th">#</th>
                                 <th class="widget-th">Nombre alcancía</th>
+                                <th class="widget-th"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -77,6 +78,7 @@
                             <tr>
                                 <td>{{$moneybox->id}}</td>
                                 <td>{{$moneybox->name}}</td>
+                                <td><a href="{{url('dashboard/moneyboxes/'.$moneybox->url)}}">Ver más</a></td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -102,6 +104,7 @@
                             <tr>
                                 <th class="widget-th">#</th>
                                 <th class="widget-th">Nombre alcancía</th>
+                                <th class="widget-th"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -109,6 +112,7 @@
                             <tr>
                                 <td>{{$moneybox->id}}</td>
                                 <td>{{$moneybox->name}}</td>
+                                <td><a href="{{url('dashboard/moneyboxes/'.$moneybox->url)}}">Ver más</a></td>
                             </tr>
                             @endforeach
                         </tbody>

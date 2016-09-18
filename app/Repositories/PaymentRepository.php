@@ -271,6 +271,28 @@ class PaymentRepository extends BaseRepository
         return $result;
     }
 
+    public function paymentAVGByMoneybox($moneybox_id)
+    {
+        $moneybox = $this->_moneyboxRepository->byId($moneybox_id);
+        $result = array('P' => 0,'O' => 0,'S' => 0);
+        $payments = $moneybox->payments;
+        $sum = 0;
+        if(count($payments) > 0){
+            foreach($payments as $payment){
+                if($payment->status == PLConstants::PAYMENT_PAYED) {
+                    $sum++;
+                    $result[$payment->method] += 1;
+                }
+            }
+            foreach($result as $key => $value){
+                $avg = ($result[$key]/$sum)*100;
+                $result[$key] = $avg;
+            }
+        }
+
+        return $result;
+    }
+
     //endregion
 
     //region Private Methods
