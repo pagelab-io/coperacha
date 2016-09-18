@@ -27,21 +27,35 @@
                         <!-- Table -->
                         <table class="table table-striped table-responsive">
                             <caption>
-                                <span class="small">Total de Usuarios: {{$users['total']}}</span>
+                                <span class="small">Total de Usuarios: {{$statics['totalUsers']}}</span>
                             </caption>
                             <thead>
                                 <tr>
                                     <th class="widget-th">#</th>
-                                    <th class="widget-th">Genero</th>
-                                    <th class="widget-th">Cantidad</th>
+                                    <th class="widget-th">Parametro</th>
+                                    <th class="widget-th">%</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($users['data'] as $i => $row)
+                                @foreach($statics['genderAVG'] as $key => $value)
                                     <tr>
-                                        <td>{{++$i}}</td>
-                                        <td>{{$row->gender}}</td>
-                                        <td>{{$row->qty}}</td>
+                                        <td>{{$i++}}</td>
+                                        <td>{{\App\Utilities\PLUtils::getStringGender($key)}}</td>
+                                        <td>{{number_format($value, 2)}}</td>
+                                    </tr>
+                                @endforeach
+                                @foreach($statics['cityAVG'] as $key => $value)
+                                    <tr>
+                                        <td>{{$i++}}</td>
+                                        <td>{{$key}}</td>
+                                        <td>{{number_format($value, 2)}}</td>
+                                    </tr>
+                                @endforeach
+                                @foreach($statics['countryAVG'] as $key => $value)
+                                    <tr>
+                                        <td>{{$i++}}</td>
+                                        <td>{{$key}}</td>
+                                        <td>{{number_format($value, 2)}}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

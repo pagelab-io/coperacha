@@ -48,11 +48,14 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        $statics = $this->_userRepository->getUsersStatics();
         return view('dashboard.index', [
             'users' => $this->getUsersByGender(),
             'moneyboxes' => $this->getMoneyboxesByCreationDate(),
             'durability' => $this->getAverageDurabilityOfMoneybox(),
-            'payments' => $this->getPaymentsMethodsStats()
+            'payments' => $this->getPaymentsMethodsStats(),
+            'statics'  => $statics,
+            'i' => 0
         ]);
     }
 

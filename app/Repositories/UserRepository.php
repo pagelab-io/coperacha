@@ -19,7 +19,8 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
 use Mockery\CountValidator\Exception;
 
-class UserRepository extends BaseRepository{
+class UserRepository extends BaseRepository
+{
 
     //region attributes
 
@@ -69,27 +70,77 @@ class UserRepository extends BaseRepository{
 
         $filters = array(array('users.tracking', '!=', '-1'));
 
-        if($request->exists('name') && $request->get('name') != ''){
-            $filter = array('persons.name', 'LIKE', '%'. $request->get('name') .'%');
+        if ($request->exists('name') && $request->get('name') != '') {
+            $filter = array('persons.name', 'LIKE', '%' . $request->get('name') . '%');
             array_push($filters, $filter);
         }
 
-        if($request->exists('gender') && $request->get('gender') != ''){
+        if ($request->exists('gender') && $request->get('gender') != '') {
             $filter = array('persons.gender', '=', $request->get('gender'));
             array_push($filters, $filter);
         }
 
         \Log::info($filters);
         $query_result = \DB::table('users')->join('persons', 'users.person_id', '=', 'persons.id')
-                    ->select('users.id')
-                    ->where($filters)->get();
+            ->select('users.id')
+            ->where($filters)->get();
 
         $users = array();
-        foreach($query_result as $row) {
+        foreach ($query_result as $row) {
             $user = User::findOrFail($row->id);
             array_push($users, $user);
         }
         return $users;
+    }
+
+    public function getUsersStatics()
+    {
+        $users      = User::where('tracking', '!=', -1)->get();
+        $genderAVG  = array('H' => 0, 'M' => 0);
+        $cityAVG    = array('Sin Ciudad' => 0);
+        $countryAVG = array('Sin País' => 0);
+        $ageAVG     = array();
+
+        if(count($users) > 0){
+
+            foreach($users as $user){
+                $cityAVG[$user->person->city] = 0;
+                $countryAVG[$user->person->country] = 0;
+            }
+
+            foreach($users as $user){
+                $genderAVG[$user->person->gender] += 1;
+                $cityAVG[($user->person->city == '') ? 'Sin Ciudad' : $user->person->city] += 1;
+                $countryAVG[($user->person->country == '') ? 'Sin País' : $user->person->country] += 1;
+            }
+            unset($cityAVG['']);
+            unset($countryAVG['']);
+
+            // gender percentage
+            foreach($genderAVG as $key => $value){
+                $avg = ($genderAVG[$key]/count($users)) * 100;
+                $genderAVG[$key] = $avg;
+            }
+            // city percentage
+            foreach($cityAVG as $key => $value){
+                $avg = ($cityAVG[$key]/count($users)) * 100;
+                $cityAVG[$key] = $avg;
+            }
+
+            // country percentage
+            foreach($countryAVG as $key => $value){
+                $avg = ($countryAVG[$key]/count($users)) * 100;
+                $countryAVG[$key] = $avg;
+            }
+        }
+
+        return array(
+            'totalUsers' => count($users),
+            'genderAVG'  => $genderAVG,
+            'cityAVG'    => $cityAVG,
+            'countryAVG' => $countryAVG,
+            'ageAVG'     => $ageAVG
+        );
     }
 
     /**

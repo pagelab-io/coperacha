@@ -61,7 +61,7 @@
                 <li><a class="waves-effect waves-light btn-flat {{ Request::is('dashboard/moneyboxes') ? 'selected' : ''}}"
                        href="{{url('/dashboard/moneyboxes')}}">Alcancías</a>
                 </li>
-                <li><a class="waves-effect waves-light btn-flat" href="#!">Órdenes</a></li>
+                <!--<li><a class="waves-effect waves-light btn-flat" href="#!">Órdenes</a></li>-->
             </ul>
         </div>
         <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
