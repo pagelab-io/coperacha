@@ -78,10 +78,9 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function getMoneyboxes()
+    public function getMoneyboxes(PLRequest $request)
     {
-        $moneyboxes = Moneybox::all();
-
+        $moneyboxes = $this->_moneyboxRepository->search($request);
         return view('dashboard.moneybox.index', [
             'moneyboxes' => $moneyboxes
         ]);

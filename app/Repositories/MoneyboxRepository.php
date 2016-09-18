@@ -100,6 +100,24 @@ class MoneyboxRepository extends BaseRepository{
         return 'App\Entities\Moneybox';
     }
 
+    public function search(PLRequest $request)
+    {
+
+        $filters = array();
+
+        if($request->exists('name') && $request->get('name') != ''){
+            $filter = array('name', 'LIKE', '%'. $request->get('name') .'%');
+            array_push($filters, $filter);
+        }
+
+        if($request->exists('status') && $request->get('status') != ''){
+            $filter = array('active', '=', $request->get('status'));
+            array_push($filters, $filter);
+        }
+
+        return Moneybox::where($filters)->get();
+    }
+
     /**
      * Create a new moneybox
      *
