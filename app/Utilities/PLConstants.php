@@ -37,4 +37,8 @@ class PLConstants {
     // person constants
     const PERSON_GENDER_H = "Hombre";
     const PERSON_GENDER_M = "Mujer";
+
+    // moneybox constants
+    const MONEYBOX_STATUS_ACTIVE = "Activo";
+    const MONEYBOX_STATUS_INACTIVE = "Inactivo";
 }

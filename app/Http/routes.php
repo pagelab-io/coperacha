@@ -232,6 +232,7 @@ Route::group([
     $router->get('/','DashboardController@index');
     $router->get('/home','DashboardController@index');
 
+    // dashboard users
     $router->group([
         'prefix' => 'users',
         'as' => 'users.'
@@ -240,7 +241,13 @@ Route::group([
         $router->get('/{name?}/{gender?}',['as' => 'index','uses' => 'DashboardController@getUsers']);
     });
 
-    $router->get('/moneyboxes','DashboardController@getMoneyboxes');
-    $router->get('/moneyboxes/{url}','DashboardController@getMoneyboxesByUrl');
+    // dashboard moneyboxes
+    $router->group([
+        'prefix' => 'moneyboxes',
+        'as' => 'moneyboxes.'
+    ], function ($router){
+        $router->get('/{url}','DashboardController@getMoneyboxesByUrl');
+        $router->get('/{name?}/{status?}',['as' => 'index','uses' => 'DashboardController@getMoneyboxes']);
+    });
 });
 //endregion

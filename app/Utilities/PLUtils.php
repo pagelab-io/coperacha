@@ -65,6 +65,16 @@ class PLUtils {
         }
     }
 
+    /**
+     * Gets a number and return the selected status for each moneybox.
+     * @param $status - 1
+     * @return string - Activo
+     */
+    public static function getMoneyboxStatusString($status)
+    {
+        return $status == 1 ? PLConstants::MONEYBOX_STATUS_ACTIVE : PLConstants::MONEYBOX_STATUS_INACTIVE;
+    }
+
     //region private methods
 
     /**
