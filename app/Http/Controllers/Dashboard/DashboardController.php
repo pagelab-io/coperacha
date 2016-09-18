@@ -65,7 +65,7 @@ class DashboardController extends Controller
     }
 
     public function getUserByUsername($email){
-        $user = $this->_userRepository->byEmail($email);
+        $user = $this->_userRepository->byUsername($email);
         $request = new Requests\PLRequest();
         $request->merge(array('person_id' => $user->person->id));
         $moneyboxes = $this->_moneyboxRepository->getAll($request);

@@ -206,6 +206,16 @@ class UserRepository extends BaseRepository{
     }
 
     /**
+     * Get user by username
+     * @param $username
+     * @return mixed
+     */
+    public function byUsername($username)
+    {
+        return User::where("username", $username)->firstOrFail();
+    }
+
+    /**
      * Change the password for specific user
      *
      * @param int $userid
