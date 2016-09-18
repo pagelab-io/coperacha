@@ -255,7 +255,7 @@ class PaymentRepository extends BaseRepository
     public function paymentAVGByPerson($person_id)
     {
         $result = array('P' => 0,'O' => 0,'S' => 0);
-        $payments = Payment::where('person_id', $person_id)->get();
+        $payments = Payment::where(array(array('person_id', $person_id), array('status', PLConstants::PAYMENT_PAYED)))->get();
         $sum = 0;
         if(count($payments) > 0){
             foreach($payments as $payment){
