@@ -32,8 +32,8 @@
                             <thead>
                                 <tr>
                                     <th class="widget-th">#</th>
-                                    <th class="widget-th">Parametro</th>
-                                    <th class="widget-th">%</th>
+                                    <th class="widget-th">Género</th>
+                                    <th class="widget-th">Porcentaje</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -41,28 +41,43 @@
                                     <tr>
                                         <td>{{$i++}}</td>
                                         <td>{{\App\Utilities\PLUtils::getStringGender($key)}}</td>
-                                        <td>{{number_format($value, 2)}}</td>
+                                        <td>{{number_format($value, 2)." %"}}</td>
                                     </tr>
                                 @endforeach
+                                <tr>
+                                    <th class="widget-th">#</th>
+                                    <th class="widget-th">Ciudad</th>
+                                    <th class="widget-th">Porcentaje</th>
+                                </tr>
                                 @foreach($statics['cityAVG'] as $key => $value)
                                     <tr>
                                         <td>{{$i++}}</td>
                                         <td>{{$key}}</td>
-                                        <td>{{number_format($value, 2)}}</td>
+                                        <td>{{number_format($value, 2)." %"}}</td>
                                     </tr>
                                 @endforeach
+                                <tr>
+                                    <th class="widget-th">#</th>
+                                    <th class="widget-th">País</th>
+                                    <th class="widget-th">Porcentaje</th>
+                                </tr>
                                 @foreach($statics['countryAVG'] as $key => $value)
                                     <tr>
                                         <td>{{$i++}}</td>
                                         <td>{{$key}}</td>
-                                        <td>{{number_format($value, 2)}}</td>
+                                        <td>{{number_format($value, 2)." %"}}</td>
                                     </tr>
                                 @endforeach
+                                <tr>
+                                    <th class="widget-th">#</th>
+                                    <th class="widget-th">Edad</th>
+                                    <th class="widget-th">Porcentaje</th>
+                                </tr>
                                 @foreach($statics['ageAVG'] as $key => $value)
                                     <tr>
                                         <td>{{$i++}}</td>
-                                        <td>{{$key != "No definido" ? $key." años": $key}}</td>
-                                        <td>{{number_format($value, 2)}}</td>
+                                        <td>{{$key != "No definido" ? $key." años ": $key}}</td>
+                                        <td>{{number_format($value, 2)." %"}}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -182,7 +197,7 @@
                             @foreach($payments as $index => $row)
                                 <tr>
                                     <td></td>
-                                    <td>{{$row->method}}</td>
+                                    <td>{{\App\Utilities\PLUtils::getPaymentMethodString($row->method)}}</td>
                                     <td>{{number_format($row->percent, 2)}} %</td>
                                 </tr>
                             @endforeach

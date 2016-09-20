@@ -122,6 +122,8 @@ class UserRepository extends BaseRepository
             unset($cityAVG['']);
             unset($countryAVG['']);
 
+            if ($ageAVG["No definido"] == 0)
+                unset($ageAVG["No definido"]);
             for($i=1;$i<=100;$i++) {
                 if ($ageAVG[$i.""] == 0)
                     unset($ageAVG[$i.""]);
