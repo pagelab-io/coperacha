@@ -129,6 +129,19 @@
                         </div>
                     </form>
                 </div>
+
+                <form class="form-inline">
+                  <div class="form-group">
+                    <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+                    <div class="input-group">
+                      <div class="input-group-addon">$</div>
+                      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+                      <div class="input-group-addon">.00</div>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Transfer cash</button>
+                </form>
+
             </div>
 
             <div class="container-fluid step-2" id="moneybox-step2">

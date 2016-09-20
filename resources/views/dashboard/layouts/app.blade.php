@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-touch-icon-114x114.png">
 
     <!-- Bootstrap -->
-    <link href="{{asset('/css/bootstrap.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/bootstrap-dashboard.css')}}" rel="stylesheet">
 
     <!--Import Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
