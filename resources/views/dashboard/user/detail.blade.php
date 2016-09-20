@@ -37,7 +37,7 @@
                             </tr>
                             <tr>
                                 <td>Edad</td>
-                                <td>{{\App\Utilities\PLUtils::getAge($user->person->birthday)}}</td>
+                                <td>{{\App\Utilities\PLUtils::getAge($user->person->birthday)." años"}}</td>
                             </tr>
                             <tr>
                                 <td>Ciudad</td>

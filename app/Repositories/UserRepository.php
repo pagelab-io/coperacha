@@ -8,6 +8,7 @@
 
 namespace App\Repositories;
 
+use App\Utilities\PLUtils;
 use Illuminate\Container\Container as App;
 use App\Http\Responses\PLResponse;
 use App\Transactions\TxUpdateUser;
@@ -97,9 +98,9 @@ class UserRepository extends BaseRepository
     {
         $users      = User::where('tracking', '!=', -1)->get();
         $genderAVG  = array('H' => 0, 'M' => 0);
-        $cityAVG    = array('Sin Ciudad' => 0);
-        $countryAVG = array('Sin País' => 0);
-        $ageAVG     = array();
+        $cityAVG    = array('No definido' => 0);
+        $countryAVG = array('No definido' => 0);
+        $ageAVG     = array('No definido' => 0);
 
         if(count($users) > 0){
 
@@ -108,13 +109,23 @@ class UserRepository extends BaseRepository
                 $countryAVG[$user->person->country] = 0;
             }
 
+            for($i=1;$i<=100;$i++)
+                $ageAVG[$i.""] = 0;
+
             foreach($users as $user){
                 $genderAVG[$user->person->gender] += 1;
-                $cityAVG[($user->person->city == '') ? 'Sin Ciudad' : $user->person->city] += 1;
-                $countryAVG[($user->person->country == '') ? 'Sin País' : $user->person->country] += 1;
+                $cityAVG[($user->person->city == '') ? 'No definido' : $user->person->city] += 1;
+                $countryAVG[($user->person->country == '') ? 'No definido' : $user->person->country] += 1;
+                $age = ($user->person->birthday == '0000-00-00') ? 'No definido' : PLUtils::getAge($user->person->birthday)."";
+                $ageAVG[$age] += 1;
             }
             unset($cityAVG['']);
             unset($countryAVG['']);
+
+            for($i=1;$i<=100;$i++) {
+                if ($ageAVG[$i.""] == 0)
+                    unset($ageAVG[$i.""]);
+            }
 
             // gender percentage
             foreach($genderAVG as $key => $value){
@@ -131,6 +142,12 @@ class UserRepository extends BaseRepository
             foreach($countryAVG as $key => $value){
                 $avg = ($countryAVG[$key]/count($users)) * 100;
                 $countryAVG[$key] = $avg;
+            }
+
+            // age percentage
+            foreach($ageAVG as $key => $value){
+                $avg = ($ageAVG[$key]/count($users)) * 100;
+                $ageAVG[$key] = $avg;
             }
         }
 

@@ -58,6 +58,13 @@
                                         <td>{{number_format($value, 2)}}</td>
                                     </tr>
                                 @endforeach
+                                @foreach($statics['ageAVG'] as $key => $value)
+                                    <tr>
+                                        <td>{{$i++}}</td>
+                                        <td>{{$key != "No definido" ? $key." años": $key}}</td>
+                                        <td>{{number_format($value, 2)}}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

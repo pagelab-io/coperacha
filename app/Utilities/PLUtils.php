@@ -46,7 +46,7 @@ class PLUtils {
             return '--';
 
         $dates = explode('-', $date);
-        return Carbon::createFromDate($dates[0],$dates[1],$dates[2])->age." años";
+        return Carbon::createFromDate($dates[0],$dates[1],$dates[2])->age;
     }
 
     /**
