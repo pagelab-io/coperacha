@@ -39,7 +39,7 @@
                             <tbody>
                                 @foreach($statics['genderAVG'] as $key => $value)
                                     <tr>
-                                        <td>{{$i++}}</td>
+                                        <td></td>
                                         <td>{{\App\Utilities\PLUtils::getStringGender($key)}}</td>
                                         <td>{{number_format($value, 2)." %"}}</td>
                                     </tr>
@@ -79,7 +79,7 @@
                             <tbody>
                                 @foreach($statics['ageAVG'] as $key => $value)
                                     <tr>
-                                        <td>{{$i++}}</td>
+                                        <td></td>
                                         <td>{{$key != "No definido" ? $key." años ": $key}}</td>
                                         <td>{{number_format($value, 2)." %"}}</td>
                                     </tr>
@@ -119,7 +119,7 @@
                             <tbody>
                                @foreach($statics['cityAVG'] as $key => $value)
                                    <tr>
-                                       <td>{{$i++}}</td>
+                                       <td></td>
                                        <td>{{$key}}</td>
                                        <td>{{number_format($value, 2)." %"}}</td>
                                    </tr>
@@ -159,7 +159,7 @@
                             <tbody>
                                @foreach($statics['countryAVG'] as $key => $value)
                                    <tr>
-                                       <td>{{$i++}}</td>
+                                       <td></td>
                                        <td>{{$key}}</td>
                                        <td>{{number_format($value, 2)." %"}}</td>
                                    </tr>
