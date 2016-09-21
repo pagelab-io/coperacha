@@ -82,6 +82,15 @@ function share(){
     });
 }
 
+function shareHowWorks(){
+    FB.ui({
+        method: 'share',
+        href: 'http://coperacha.pagelab.io/about'
+    }, function(response){
+        console.log(response);
+    });
+}
+
 // Load the SDK asynchronously
 (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
