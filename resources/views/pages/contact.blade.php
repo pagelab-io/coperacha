@@ -43,12 +43,12 @@
                             <div class="col-sm-6">
                                 <input name="name"
                                        v-model="contact.name"
-                                       placeholder="Nombre" type="text" required>
+                                       placeholder="Nombre" type="text">
                             </div>
                             <div class="col-sm-6">
                                 <input name="email"
                                        v-model="contact.email"
-                                       placeholder="Correo electrónico" type="email" required>
+                                       placeholder="Correo electrónico" type="text">
                             </div>
                         </div>
                         <div class="row">
@@ -56,7 +56,7 @@
                                 <textarea rows="4"
                                           v-model="contact.content"
                                           name="message"
-                                          placeholder="Mensaje" required></textarea>
+                                          placeholder="Mensaje"></textarea>
                             </div>
                         </div>
                         <div class="row">

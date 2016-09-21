@@ -29,6 +29,10 @@ var vm = new Vue({
     methods: {
         onSubmit: function () {
             var _this = this;
+            var utils = new Utils();
+
+            if(!this.validate())
+                return;
             this.loading = true;
 
             this.$http.post('/sendmail', this.contact).then(function(response, status, request) {
@@ -42,18 +46,40 @@ var vm = new Vue({
                         }
 
                         _this.loading = false;
-                        _this.message.text = 'Mensaje enviado correctamente';
-
-                        setTimeout(function () {
-                            _this.message.text = ''
-                        }, 3 * 1000);
+                        utils.setAlertTitle("Coperacha - Alerta");
+                        document.getElementById('alert-content').innerHTML="" +
+                        "<p>Tu mensaje fue enviado exitosamente, pronto nos pondremos en contacto contigo.<p>";
+                        utils.showAlert();
                     }
                 }
 
             }, function() {
-                console.log('failed');
-                this.message = 'El Mensaje no se pudo enviar, inténtelo más tarde.';
+                _this.loading = false;
+                utils.setAlertTitle("Coperacha - Alerta");
+                document.getElementById('alert-content').innerHTML="" +
+                "<p>Ocurrio un problema al enviar el correo electrónico, por favor intentalo más tarde.<p>";
+                utils.showAlert();
             });
+        },
+
+        validate: function() {
+            var utils = new Utils();
+
+            if (utils.isNullOrEmpty(this.contact.name)) {
+                utils.setValidationError("El nombre es requerido.");
+                return false;
+            } else if (utils.isNullOrEmpty(this.contact.email)) {
+                utils.setValidationError("El correo electrónico es requerido.");
+                return false;
+            } else if (!utils.isValidEmail(this.contact.email)) {
+                utils.setValidationError("El correo electrónico es inválido.");
+                return false;
+            } else if (utils.isNullOrEmpty(this.contact.content)) {
+                utils.setValidationError("El mensaje es requerido.");
+                return false;
+            }
+
+            return true;
         }
     }
 
