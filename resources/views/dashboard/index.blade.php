@@ -210,7 +210,7 @@
                     </div>
                     <!--footer-->
                     <div class="panel-footer">
-                        <a href="#">Ver más ></a>
+                        <a href="{{url('/dashboard/moneyboxes')}}">Ver más ></a>
                     </div>
                 </div>
             </div>
