@@ -93,7 +93,7 @@ class DashboardController extends Controller
     public function getMoneyboxesByUrl($url) {
         $categories = Category::all();
         $moneybox = Moneybox::byUrl($url)->first();
-        $payments = $this->_paymentRepository->paymentAVGByMoneybox($moneybox->person->id);
+        $payments = $this->_paymentRepository->paymentAVGByMoneybox($moneybox->id);
         return view('dashboard.moneybox.detail', [
             'moneybox' => $moneybox,
             'categories' => $categories,
