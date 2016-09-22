@@ -314,11 +314,11 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($payments as $index => $row)
+                            @foreach($payments as $payment => $value)
                                 <tr>
                                     <td></td>
-                                    <td>{{\App\Utilities\PLUtils::getPaymentMethodString($row->method)}}</td>
-                                    <td>{{number_format($row->percent, 2)}} %</td>
+                                    <td>{{\App\Utilities\PLUtils::getPaymentMethodString($payment)}}</td>
+                                    <td>{{number_format($value, 2)}} %</td>
                                 </tr>
                             @endforeach
                             </tbody>

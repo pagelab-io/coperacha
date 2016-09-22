@@ -252,6 +252,24 @@ class PaymentRepository extends BaseRepository
         return Payment::where('uid', $token)->firstOrFail();
     }
 
+    public function paymentAVGB(){
+        $result = array('P' => 0,'O' => 0,'S' => 0);
+        $payments = Payment::where('status', PLConstants::PAYMENT_PAYED)->get();
+        $sum = 0;
+        if(count($payments) > 0){
+            foreach($payments as $payment){
+                $sum++;
+                $result[$payment->method] += 1;
+            }
+            foreach($result as $key => $value){
+                $avg = ($result[$key]/$sum)*100;
+                $result[$key] = $avg;
+            }
+        }
+
+        return $result;
+    }
+
     public function paymentAVGByPerson($person_id)
     {
         $result = array('P' => 0,'O' => 0,'S' => 0);

@@ -53,7 +53,7 @@ class DashboardController extends Controller
             'users' => $this->getUsersByGender(),
             'moneyboxes' => $this->getMoneyboxesByCreationDate(),
             'durability' => $this->getAverageDurabilityOfMoneybox(),
-            'payments' => $this->getPaymentsMethodsStats(),
+            'payments' => $this->_paymentRepository->paymentAVGB(),
             'statics'  => $statics,
             'i' => 0
         ]);
@@ -211,7 +211,7 @@ class DashboardController extends Controller
 
     /**
      * Gets the statistics of payment for method
-     *
+     * @deprecated
      * http://lists.mysql.com/mysql-es/82
      */
     public function getPaymentsMethodsStats() {
