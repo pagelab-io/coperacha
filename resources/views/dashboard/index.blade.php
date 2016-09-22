@@ -305,6 +305,7 @@
                         <!-- Table -->
                         <table class="table table-striped table-responsive">
                             <caption>
+                                Total de pagos completados: {{$completedPayments}}
                             </caption>
                             <thead>
                             <tr>

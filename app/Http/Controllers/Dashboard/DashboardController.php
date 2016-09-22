@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Entities\Payment;
 use App\Http\Requests\PLRequest;
 use App\Entities\Category;
 use App\Entities\Moneybox;
@@ -11,6 +12,7 @@ use App\Http\Requests;
 use App\Repositories\MoneyboxRepository;
 use App\Repositories\PaymentRepository;
 use App\Repositories\UserRepository;
+use App\Utilities\PLConstants;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
@@ -55,7 +57,8 @@ class DashboardController extends Controller
             'durability' => $this->getAverageDurabilityOfMoneybox(),
             'payments' => $this->_paymentRepository->paymentAVGB(),
             'statics'  => $statics,
-            'i' => 0
+            'i' => 0,
+            'completedPayments' => Payment::where('status', PLConstants::PAYMENT_PAYED)->count()
         ]);
     }
 

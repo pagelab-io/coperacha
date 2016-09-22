@@ -38,7 +38,7 @@
                 <th>#</th>
                 <th>Nombre</th>
                 <th>Propietario</th>
-                <th>Total</th>
+                <th>Monto recaudado</th>
                 <th>Comisión</th>
                 <th>Status</th>
                 <th></th>
@@ -47,7 +47,7 @@
                 <tr>
                     <td>{{$moneybox->id}}</td>
                     <td>{{$moneybox->name}}</td>
-                    <td>{{$moneybox->person->name}}</td>
+                    <td>{{$moneybox->person->name." ".$moneybox->person->lastname}}</td>
                     <td>{{$moneybox->collected_amount}}</td>
                     <td>{{$moneybox->commission_amount}}</td>
                     <td>{{\App\Utilities\PLUtils::getMoneyboxStatusString($moneybox->active)}}</td>
