@@ -60,11 +60,11 @@
 
                                     <div class="form-group">
                                         <label for="email">Teléfono</label>
-                                        <input id="email"
+                                        <input id="phone"
                                                class="form-control"
                                                name="phone"
                                                placeholder="Teléfono"
-                                               type="phone"
+                                               type="text"
                                                v-model="person.phone">
                                     </div>
 
@@ -92,7 +92,7 @@
                                                class="form-control"
                                                name="email"
                                                placeholder="Correo Electrónico"
-                                               type="email" v-model="user.email">
+                                               type="text" v-model="user.email">
                                     </div>
 
                                     <div class="form-group">

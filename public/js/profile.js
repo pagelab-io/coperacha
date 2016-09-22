@@ -205,6 +205,8 @@ var vm = new Vue({
          * Handler the submit form data of the user
          */
         onUpdateData: function () {
+            if(!this.validateProfileData()) return;
+            var utils = new Utils();
             this.loading = true;
 
             var _this = this;
@@ -228,20 +230,21 @@ var vm = new Vue({
             }).then(function (response) {
 
                 if (response.status === 200) {
+
                     this.loading = false;
-                    this.onGetProfile(this.userid);
+                    if (response.data.status == 200) {
+                        this.onGetProfile(this.userid);
 
-                    this.message = {
-                        status: 'success',
-                        text: 'Usuario actualizado correctamente.'
-                    };
-
-                    setTimeout(function () {
-                        _this.message = {
-                            status: '',
-                            text: ''
-                        };
-                    }, 3 * 1000);
+                        utils.setAlertTitle("Coperacha - Alerta");
+                        document.getElementById('alert-content').innerHTML="" +
+                        "<p>Usuario actualizado correctamente.<p>";
+                        utils.showAlert();
+                    } else if(response.data.status == 23000){
+                        utils.setAlertTitle("Coperacha - Alerta");
+                        document.getElementById('alert-content').innerHTML="" +
+                        "<p>El correo electrónico o usuario que intentas actualizar ya existe, intenta con otro.<p>";
+                        utils.showAlert();
+                    }
                     
                 } else {
                     console.error(response);
@@ -307,7 +310,42 @@ var vm = new Vue({
             }, function (error) {
                 console.error(error);
             });
+        },
+
+        validateProfileData: function()
+        {
+            var utils = new Utils();
+
+            if (!utils.isNullOrEmpty(this.person.phone)) {
+                if (!utils.isValidPhone(this.person.phone)) {
+                    utils.setValidationError("El número telefónico debe ser de 10 dígitos.");
+                    return false;
+                }
+            }
+
+            if (!utils.isNullOrEmpty(this.user.email)) {
+                if (!utils.isValidEmail(this.user.email)) {
+                    utils.setValidationError("Ingresa un correo electrónico válido.");
+                    return false;
+                }
+            }
+
+            if (
+                !utils.isNullOrEmpty(this.birthdayMonth) ||
+                !utils.isNullOrEmpty(this.birthdayDay)   ||
+                !utils.isNullOrEmpty(this.birthdayYear)) {
+                if (
+                    utils.isNullOrEmpty(this.birthdayMonth) ||
+                    utils.isNullOrEmpty(this.birthdayDay)   ||
+                    utils.isNullOrEmpty(this.birthdayYear)) {
+                    utils.setValidationError("Ingresa una fecha válida.");
+                    return false;
+                }
+            }
+
+            return true;
         }
+
     }
 });
 
