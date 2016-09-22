@@ -58,9 +58,9 @@
 
                     <!-- header -->
                     <div class="panel-heading">
-                        Usuarios por edad
+                        Usuarios por tipo de registro
                         <br>
-                        <span>Número total de usuarios (inscritos/activos) por Edad</span>
+                        <span>Número de usuarios registrados por Facebook y por correo electrónico</span>
                     </div>
                     <!-- body -->
                     <div class="panel-body">
@@ -72,18 +72,18 @@
                             <thead>
                                 <tr>
                                     <th class="widget-th">#</th>
-                                    <th class="widget-th">Edad</th>
+                                    <th class="widget-th">Tipo registro</th>
                                     <th class="widget-th">Porcentaje</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($statics['ageAVG'] as $key => $value)
-                                    <tr>
-                                        <td></td>
-                                        <td>{{$key != "No definido" ? $key." años ": $key}}</td>
-                                        <td>{{number_format($value, 2)." %"}}</td>
-                                    </tr>
-                                @endforeach
+                               @foreach($statics['registerTypeAVG'] as $key => $value)
+                                   <tr>
+                                       <td></td>
+                                       <td>{{$key}}</td>
+                                       <td>{{number_format($value, 2)." %"}}</td>
+                                   </tr>
+                               @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -164,6 +164,46 @@
                                        <td>{{number_format($value, 2)." %"}}</td>
                                    </tr>
                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--footer-->
+                    <div class="panel-footer">
+                        <a href="{{url('dashboard/users')}}">Ver más ></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <div class="panel panel-primary">
+
+                    <!-- header -->
+                    <div class="panel-heading">
+                        Usuarios por edad
+                        <br>
+                        <span>Número total de usuarios (inscritos/activos) por Edad</span>
+                    </div>
+                    <!-- body -->
+                    <div class="panel-body">
+                        <!-- Table -->
+                        <table class="table table-striped table-responsive">
+                            <caption>
+                                <span class="small">Total de Usuarios: {{$statics['totalUsers']}}</span>
+                            </caption>
+                            <thead>
+                                <tr>
+                                    <th class="widget-th">#</th>
+                                    <th class="widget-th">Edad</th>
+                                    <th class="widget-th">Porcentaje</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($statics['ageAVG'] as $key => $value)
+                                    <tr>
+                                        <td></td>
+                                        <td>{{$key != "No definido" ? $key." años ": $key}}</td>
+                                        <td>{{number_format($value, 2)." %"}}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

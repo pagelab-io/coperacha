@@ -101,6 +101,7 @@ class UserRepository extends BaseRepository
         $cityAVG    = array('No definido' => 0);
         $countryAVG = array('No definido' => 0);
         $ageAVG     = array('No definido' => 0);
+        $registerTypeAVG = array('Correo' => 0, 'Facebook' => 0);
 
         if(count($users) > 0){
 
@@ -112,13 +113,17 @@ class UserRepository extends BaseRepository
             for($i=1;$i<=100;$i++)
                 $ageAVG[$i.""] = 0;
 
+            // set totals
             foreach($users as $user){
                 $genderAVG[$user->person->gender] += 1;
                 $cityAVG[($user->person->city == '') ? 'No definido' : $user->person->city] += 1;
                 $countryAVG[($user->person->country == '') ? 'No definido' : $user->person->country] += 1;
                 $age = ($user->person->birthday == '0000-00-00') ? 'No definido' : PLUtils::getAge($user->person->birthday)."";
                 $ageAVG[$age] += 1;
+                $registerType = ($user->fbUser) ? 'Facebook' : "Correo";
+                $registerTypeAVG[$registerType] += 1;
             }
+
             unset($cityAVG['']);
             unset($countryAVG['']);
 
@@ -151,6 +156,12 @@ class UserRepository extends BaseRepository
                 $avg = ($ageAVG[$key]/count($users)) * 100;
                 $ageAVG[$key] = $avg;
             }
+
+            // age percentage
+            foreach($registerTypeAVG as $key => $value){
+                $avg = ($registerTypeAVG[$key]/count($users)) * 100;
+                $registerTypeAVG[$key] = $avg;
+            }
         }
 
         return array(
@@ -158,6 +169,7 @@ class UserRepository extends BaseRepository
             'genderAVG'  => $genderAVG,
             'cityAVG'    => $cityAVG,
             'countryAVG' => $countryAVG,
+            'registerTypeAVG' => $registerTypeAVG,
             'ageAVG'     => $ageAVG
         );
     }
