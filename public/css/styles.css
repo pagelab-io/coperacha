@@ -1174,6 +1174,14 @@ hr {
     .col-xs-6 {
         width: 100%;
     }
+
+    #moneybox-step2.step-2 label.flex-element > * {
+        margin-right: 25px;
+    }
+
+    #moneybox-step2.step-2 .form-control {
+        width: 120px;
+    }
 }
 
 @media screen and (min-width: 768px) {

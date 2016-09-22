@@ -157,7 +157,7 @@
                                                 <div class="input-group">
                                                     <div class="input-group-addon">$</div>
                                                     <input class="form-control" type="number" value="50" id="txt-option-{{$option->id}}">
-                                                    <strong>.00 MXN</strong>
+                                                    <strong> MXN</strong>
                                                 </div>
                                             </label>
                                             @else
