@@ -1,11 +1,6 @@
 function Utils()
 {
 
-    this.init = function()
-    {
-        console.log("utils :D");
-    };
-
     /**
      * return a formatted date in YYYY-mm-dd format
      * input: 1990-March-1

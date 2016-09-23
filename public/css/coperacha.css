@@ -108,7 +108,9 @@
     display: block;
     border: none;
 }
-.info-alert{
+.info-alert,
+.info-alert > a,
+.info-alert > a:hover{
     font-size: 11px;
     color: #2eb2cd;
 }
