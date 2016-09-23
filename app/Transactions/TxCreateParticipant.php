@@ -205,6 +205,14 @@ class TxCreateParticipant extends PLTransaction{
             // check for participation in selected moneybox
             if ($this->_participantRepository->isParticipant($person->id, $moneybox->id)) {
                 \Log::info("is participant");
+
+                // update invitation's table
+                $invitation = $this->getInvitation($user->email, $moneybox->id);
+                if($invitation instanceof Invitation){
+                    $invitation->status=1;
+                    if (!$invitation->save()) throw new \Exception("Unable to update invitation", -1);
+                }
+
                 $response['user']   = $user;
                 $response['person'] = $person;
                 return $response;
