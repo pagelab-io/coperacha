@@ -12,6 +12,16 @@
                             <div>Coperacha 2016.</div>
                             <div>Todos los derechos reservados.</div>
                         </div>
+
+                        <div class="social part">
+                            <div class="container-fluid">
+                                <ul class="list">
+                                    <li><a href="https://www.facebook.com/coperachamx/"><i class="icon-facebook"></i></a></li>
+                                    <li><a href="https://twitter.com/coperacha_mx"><i class="icon-twitter"></i></a></li>
+                                    <li><a href="https://www.instagram.com/coperachamx/"><i class="icon-instagram"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -21,10 +31,10 @@
                             <nav class="footer-nav">
                                 <ul>
                                     <li><a href="{{route('pages.about')}}">¿Qué es Coperacha?</a></li>
-                                    <li><a href="javascript:void(0)">¿Cómo Funciona?</a></li>
-                                    <li><a href="javascript:void(0)">Formas de Pago</a></li>
+                                    <li><a href="{{asset('/#como-funciona')}}" class="scroll-to">¿Cómo Funciona?</a></li>
+                                    <li><a href="{{asset('/#metodos-de-pago')}}" class="scroll-to">Formas de Pago</a></li>
                                     <li><a href="{{route('pages.contact')}}">Contaco</a></li>
-                                    <li><a href="javascript:void(0)">Video</a></li>
+                                    <li><a href="{{asset('/#intro')}}" class="scroll-to">Video</a></li>
                                     <li><a href="{{route('pages.faqs')}}">FAQs</a></li>
                                 </ul>
                             </nav>

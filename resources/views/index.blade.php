@@ -71,7 +71,7 @@
                                     <img class="img-responsive center-block" src="images/how-it-works-card-2.png" alt="">
                                 </div>
                                 <div class="name"><span>2. Invita a participar</span></div>
-                                <div class="desc">Cuéntale a tus amigos, por mail  o Facebook.</div>
+                                <div class="desc">Cuéntale a tus amigos por mail  o Facebook.</div>
                             </div>
                         </div>
 
@@ -265,7 +265,7 @@
                         <div class="col-sm-6">
                             <div class="sign-in-wrap">
                                 <a class="sign-in-fb" href="#" ng-click="facebookRegister()">
-                                    <span>O regístrate con</span>
+                                    <span>o regístrate con</span>
                                     <img src="/images/facebook-logo.png" alt="">
                                 </a>
                             </div>

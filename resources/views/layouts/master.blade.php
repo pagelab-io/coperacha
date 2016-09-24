@@ -77,6 +77,7 @@
 
         @include("partials.mobile-navigation")
         @include("partials.navigation")
+
         <!-- Outer wrapper -->
         <div class="outer-wrapper">
             @yield("content")
@@ -119,8 +120,8 @@
         <!-- Include Bootstrap Scripts -->
         <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
         <!-- Page Scripts (production) -->
-        {{--<script src="{{ elixir('build/js/scripts.min.js') }}"></script>--}}
-        <script src="{{asset('/build/js/scripts.min.js')}}"></script>
+        {{--<script src="{{ elixir('build/js/scripts.min.js') }}"></script>
+        <script src="{{asset('/build/js/scripts.min.js')}}"></script>--}}
 
         <!-- Facebook SDK -->
         <script src="{{asset('/js/facebook.js')}}"></script>
@@ -128,6 +129,8 @@
         <!-- Angular JS -->
         <script src="{{asset('/js/vendor/angular/angular.js')}}"></script>
 
+        <!-- General JS -->
+        <script src="{{asset('/js/general.js')}}"></script>
         <script src="{{asset('/js/coperacha.js')}}"></script>
         <script src="{{asset('/js/Utils.js')}}"></script>
         <script src="{{asset('/js/controllers/ModalController.js')}}"></script>
