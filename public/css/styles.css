@@ -213,6 +213,7 @@ hr {
 .btn-share-fb:hover {
     text-decoration: none;
     color: white;
+    cursor: pointer;
 }
 
 .btn-share-twitter,

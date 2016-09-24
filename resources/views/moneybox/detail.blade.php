@@ -16,6 +16,10 @@
                     <div class="row">
                         <div class="col-sm-5">
                             <form class="form profile">
+                                <input id="moneybox-id" type="hidden" value="{{$moneybox->id}}">
+                                <input id="moneybox-name" type="hidden" value="{{$moneybox->name}}">
+                                <input id="moneybox-desc" type="hidden" value="{{$moneybox->description}}">
+
                                 <div class="form-group">
                                     <picture style="margin-right: 15px">
                                         <img  id="moneybox-image" class="icon-file"
@@ -62,7 +66,7 @@
                                     <label>Comparte tu alcancía en tus redes sociales</label>
                                 </div>
                                 <div class="form-group">
-                                    <a class="btn-share-fb" href="javascript:void(0)" onclick="share()">
+                                    <a id="btnShareFb" class="btn-share-fb">
                                         <span style="color: white;">Compartir en</span>
                                         <img src="/images/facebook-logo.png" alt="facebook.com">
                                     </a>
@@ -104,4 +108,5 @@
     <script src="{{asset('/js/vendor/vuejs/vue.js')}}"></script>
     <script src="{{asset('/js/vendor/vuejs/vue-resource.js')}}"></script>
     <script src="{{asset('/js/invitation.js')}}"></script>
+    <script src="{{asset('/js/share.js')}}"></script>
 @endsection
