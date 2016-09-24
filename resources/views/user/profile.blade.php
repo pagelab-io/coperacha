@@ -1,7 +1,8 @@
 @extends("layouts.content")
 
 @section("page-content")
-    <div id="ProfileView" class="block profile-view" data-userid="{{$user->id}}">
+    <div id="ProfileView" class="block profile-view" data-userid="{{$user->id}}"
+         xmlns:v-on="http://www.w3.org/1999/xhtml">
         <div class="holder">
             <div class="container-fluid">
                 <div class="header-block">
@@ -87,7 +88,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="email">Correo Electrónico</label>
+                                        <label for="email">Correo electrónico</label>
                                         <input id="email"
                                                class="form-control"
                                                name="email"
@@ -108,7 +109,7 @@
                                                v-model="person.city">
                                     </div>
                                     <div class="form-group">
-                                        <label for="month">Fecha de Nacimiento</label>
+                                        <label for="month">Fecha de nacimiento</label>
                                         <div class="row">
                                             <div class="col-sm-5">
                                                 <select class="form-control" name="month" id="month" v-model="birthdayMonth">

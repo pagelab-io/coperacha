@@ -182,7 +182,7 @@ class UserController extends PLController {
 
             if ($success) {
                 $response->status = 1;
-                $response->description = 'Password changed successfully';
+                $response->description = 'Contraseña actualizada correctamente.';
                 $response->data = $success;
 
                 $this->setResponse($response);

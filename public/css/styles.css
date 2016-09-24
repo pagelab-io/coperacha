@@ -91,7 +91,7 @@ hr {
     display: block;
     font-family: 'verbmedium';
     font-size: 13px;
-    padding: 10px 0;
+    padding: 20px 10px;
     text-decoration: none;
     text-transform: uppercase;
 }
@@ -99,6 +99,17 @@ hr {
 .navigation .list li a:hover,
 .navigation .list li a.active {
     color: #ffc48c;
+    color: white;
+    background: #f35106;
+}
+
+.navigation .list li .logged .logged-user {
+    line-height: 14px;
+    margin-bottom: 5px;
+}
+
+.navigation .list li .logged a:hover {
+    background: transparent;
 }
 
 .navigation .list li a.button {
@@ -170,7 +181,7 @@ hr {
 
 .logged {
     position: relative;
-    top: -5px;
+    top: 0px;
 }
 
 .logged > a {

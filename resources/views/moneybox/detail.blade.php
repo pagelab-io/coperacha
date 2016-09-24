@@ -2,7 +2,7 @@
 
 @section("content")
     @include('partials.header')
-    <section class="block moneybox-profile">
+    <section class="block moneybox-profile" xmlns:v-on="http://www.w3.org/1999/xhtml">
         <div class="holder">
             <div class="container-fluid">
                 <div class="content-block">
@@ -63,7 +63,7 @@
                                 </div>
                                 <div class="form-group">
                                     <a class="btn-share-fb" href="javascript:void(0)" onclick="share()">
-                                        <span>Compartir en</span>
+                                        <span style="color: white;">Compartir en</span>
                                         <img src="/images/facebook-logo.png" alt="">
                                     </a>
                                 </div>
@@ -81,7 +81,7 @@
                                 <div v-if="loading" class="loader"></div>
                                 <div v-if="message.text!=''" class="alert alert-success" role="alert">@{{message.text}}</div>
                                 <div class="form-group">
-                                    <label>O envía correo a tus amigos para invitarlos a participar.</label>
+                                    <label>o envía correo a tus amigos para invitarlos a participar.</label>
                                 </div>
                                 <div class="form-group">
                                     <div class="text-info">Introduce los emails separando cada uno con punto y coma (;)</div>
