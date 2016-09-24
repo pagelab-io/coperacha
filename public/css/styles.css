@@ -387,13 +387,13 @@ hr {
 
 .block.intro .moneyboxes {
     display: flex;
-    align-items: flex-start;
-    align-content: flex-start;
+    justify-content: space-around;
     flex-wrap: wrap;
+    max-width: 95%;
 }
 
 .block.intro .moneyboxes .moneybox-type {
-    flex: 0 1 120px;
+    flex: 0 0 120px;
     padding-left: 15px;
     padding-right: 15px;
     text-align: center;

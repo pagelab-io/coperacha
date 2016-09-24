@@ -108,17 +108,16 @@
                                         <input id="city" class="form-control" name="city" placeholder="Ciudad" type="text"
                                                v-model="person.city">
                                     </div>
+
                                     <div class="form-group">
                                         <label for="month">Fecha de nacimiento</label>
                                         <div class="row">
                                             <div class="col-sm-5">
                                                 <select class="form-control" name="month" id="month" v-model="birthdayMonth">
                                                     <option value="">Mes</option>
-
                                                     @foreach($months as $mont => $name)
                                                         <option value="{{$mont}}">{{$name}}</option>
                                                     @endforeach
-
                                                 </select>
                                             </div>
                                             <div class="col-sm-3">
@@ -225,7 +224,7 @@
 
                         <form class="form register" action="" method="post">
                             <div class="form-group">
-                                <label class="text-info">O envía correo a tus amigos para invitarlos a participar.</label>
+                                <label class="text-info">o envía un correo a tus amigos para invitarlos a participar.</label>
                                 <div class="small">Introduce los emails separando cada uno con punto y coma (;)</div>
                                 <textarea required name="email" id="email" class="form-control" rows="3" placeholder="Introduce las direcciones de correo"></textarea>
                             </div>

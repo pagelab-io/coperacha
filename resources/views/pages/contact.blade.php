@@ -7,7 +7,7 @@
         <div class="holder">
             <div class="container-fluid">
                 <div class="header">
-                    <h2>Quéremos saber qué opinas de Coperacha, mándanos un mensaje.</h2>
+                    <h2>Queremos saber qué opinas de Coperacha, mándanos un mensaje por favor.</h2>
                 </div>
                 <div class="content">
                     <!-- Contact Info -->

@@ -67,12 +67,6 @@
                                         <img src="/images/facebook-logo.png" alt="">
                                     </a>
                                 </div>
-                                <!--<div class="form-group">
-                                    <a class="btn-share-twitter" href="javascript:void(0)">
-                                        <span>Compartir en</span>
-                                        <img src="/images/twitter-logo.png" alt="">
-                                    </a>
-                                </div>-->
                                 <!-- Your share button code -->
                             </div> <!-- ./FormShare -->
                             <form id="FormShare" class="form share"

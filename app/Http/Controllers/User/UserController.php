@@ -177,14 +177,12 @@ class UserController extends PLController {
             $current = $request->get('currentPassword');
             $password = $request->get('newPassword');
             $confirm = $request->get('passwordConfirm');
-
             $success = $this->_userRepository->changePassword($userid, $current, $password, $confirm);
 
             if ($success) {
                 $response->status = 1;
                 $response->description = 'Contraseña actualizada correctamente.';
                 $response->data = $success;
-
                 $this->setResponse($response);
             }
 

@@ -26,7 +26,6 @@
                 <li><a class="{{Route::current()->getName() == 'user.profile' ? 'active' : ''}}"
                        href="{{url('/user/profile/'.Auth::user()->id)}}">Mi cuenta</a>
                 </li>
-
                 <li><a class="button create-new" href="{{route('moneybox.create')}}">Crear Nueva Alcancía</a></li>
                 <li>
                     <div class="logged">

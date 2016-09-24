@@ -28,7 +28,6 @@
     .outer-wrapper {
         margin-top: 55px;
     }
-
 }
 
 @media (max-width: 992px) {
@@ -55,7 +54,6 @@
     body.mobile-navigation-open {
         overflow: hidden;
     }
-
 
     /* Mobile navigation */
     .mobile-navigation {
