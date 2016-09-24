@@ -156,7 +156,7 @@ class MoneyboxRepository extends BaseRepository{
                     'Por Año' => count($moneyboxes)
                 ),
                 'durability' => array(
-                    'Duración promedio (días)' => $durability_sum/count($moneyboxes),
+                    'Duración promedio (días)' => number_format($durability_sum/count($moneyboxes), 2),
                     'Monto Recaudado' => "$".number_format($collected_amount/count($moneyboxes), 2),
                     'Monto a alcanzar' => "$".number_format($goal_amount/count($moneyboxes), 2)
                 )
