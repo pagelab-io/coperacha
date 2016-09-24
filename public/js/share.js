@@ -132,7 +132,7 @@ var App = (function($, window){
             var btnShareFb = $('#btnShareFb');
             var id = $("#moneybox-id").val();
             var title = $("#moneybox-name").val();
-            var caption = $("#moneybox-caption").val();
+            var caption = $("#moneybox-caption").text();
             var desc = $("#moneybox-desc").val();
             var image = $("#moneybox-image").attr('src');
 
