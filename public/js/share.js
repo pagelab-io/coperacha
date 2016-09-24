@@ -1,51 +1,6 @@
 
 var Share = (function() {
 
-    if ((!("classList" in document.documentElement)) && Object.defineProperty && typeof HTMLElement !== "undefined") {
-        Object.defineProperty(HTMLElement.prototype, "classList", {
-            get: function () {
-                var ret, self, update;
-                update = function (fn) {
-                    return function (value) {
-                        var classes, index;
-                        classes = self.className.split(/\s+/);
-                        index = classes.indexOf(value);
-                        fn(classes, index, value);
-                        self.className = classes.join(" ");
-                    };
-                };
-                self = this;
-                ret = {
-                    add: update(function (classes, index, value) {
-                        ~index || classes.push(value);
-                    }),
-                    remove: update(function (classes, index) {
-                        ~index && classes.splice(index, 1);
-                    }),
-                    toggle: update(function (classes, index, value) {
-                        if (~index) {
-                            classes.splice(index, 1);
-                        } else {
-                            classes.push(value);
-                        }
-                    }),
-                    contains: function (value) {
-                        return !!~self.className.split(/\s+/).indexOf(value);
-                    },
-                    item: function (i) {
-                        return self.className.split(/\s+/)[i] || null;
-                    }
-                };
-                Object.defineProperty(ret, "length", {
-                    get: function () {
-                        return self.className.split(/\s+/).length;
-                    }
-                });
-                return ret;
-            }
-        });
-    }
-
     String.prototype.to_rfc3986 = function () {
         var tmp;
         tmp = encodeURIComponent(this);
@@ -53,23 +8,6 @@ var Share = (function() {
             return "%" + c.charCodeAt(0).toString(16);
         });
     };
-
-
-    var extend = function (child, parent) {
-            for (var key in parent) {
-                if (hasProp.call(parent, key)) child[key] = parent[key];
-            }
-
-            function ctor() {
-                this.constructor = child;
-            }
-
-            ctor.prototype = parent.prototype;
-            child.prototype = new ctor();
-            child.__super__ = parent.prototype;
-            return child;
-        },
-        hasProp = {}.hasOwnProperty;
 
     var Share = (function () {
 
@@ -184,6 +122,7 @@ var Share = (function() {
 
     return Share;
 })();
+
 var App = (function($, window){
 
     var Application = {
