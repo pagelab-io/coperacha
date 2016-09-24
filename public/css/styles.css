@@ -53,7 +53,7 @@ hr {
 /* Navigation */
 .navigation {
     background-color: #FF5000;
-    height: 75px;
+    height: 60px;
     overflow: hidden;
     padding: 1px 0;
     position: fixed;
@@ -68,6 +68,10 @@ hr {
     display: block;
     float: left;
     margin-left: 10px;
+}
+
+.navigation .logo img {
+    height: 60px;
 }
 
 /* Navigation - List */
@@ -253,7 +257,7 @@ hr {
 
 /* Outer wrapper */
 .outer-wrapper {
-    margin-top: 75px;
+    margin-top: 60px;
     position: relative;
 }
 
