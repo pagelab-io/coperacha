@@ -87,18 +87,7 @@ var Share = (function() {
                 title: '',
                 image: '',
                 description: '',
-                ui: {
-                    flyout: 'top center',
-                    button_text: 'Compartir',
-                    button_icon: '&#xe073;',
-                    button_font: true,
-                    icon_font: true
-                },
                 networks: {
-                    google_plus: {
-                        enabled: true,
-                        url: null
-                    },
                     twitter: {
                         enabled: true,
                         url: null,
@@ -113,17 +102,6 @@ var Share = (function() {
                         caption: null,
                         description: null,
                         image: null
-                    },
-                    pinterest: {
-                        enabled: true,
-                        url: null,
-                        image: null,
-                        description: null
-                    },
-                    email: {
-                        enabled: true,
-                        title: null,
-                        description: null
                     }
                 }
             };
