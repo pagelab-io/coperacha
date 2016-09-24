@@ -318,6 +318,7 @@ class UserRepository extends BaseRepository
                 throw new \Exception("Contraseña incorrecta", -1);
             }
         }
+        
 
         if ($new != $confirm) {
             throw new \Exception("Las contaseñas no son iguales", -1);
