@@ -16,9 +16,9 @@
                         <div class="social part">
                             <div class="container-fluid">
                                 <ul class="list">
-                                    <li><a href="https://www.facebook.com/coperachamx/"><i class="icon-facebook"></i></a></li>
-                                    <li><a href="https://twitter.com/coperacha_mx"><i class="icon-twitter"></i></a></li>
-                                    <li><a href="https://www.instagram.com/coperachamx/"><i class="icon-instagram"></i></a></li>
+                                    <li><a target="_blank" href="https://www.facebook.com/coperachamx/"><i class="icon-facebook"></i></a></li>
+                                    <li><a target="_blank" href="https://twitter.com/coperacha_mx"><i class="icon-twitter"></i></a></li>
+                                    <li><a target="_blank" href="https://www.instagram.com/coperachamx/"><i class="icon-instagram"></i></a></li>
                                 </ul>
                             </div>
                         </div>

@@ -7,4 +7,4 @@ Homestead.json
 /storage/logs
 /node_modules
 /public/git-request.php
-/storage/framework/sessions
+/storage/framework
