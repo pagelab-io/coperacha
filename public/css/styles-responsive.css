@@ -11,7 +11,7 @@
 
     /* Navigation - List */
     .navigation .list {
-        margin: 7px 0 0;
+        margin: 0px 0 0;
     }
 
     .navigation .list li {
@@ -28,7 +28,6 @@
     .outer-wrapper {
         margin-top: 55px;
     }
-
 }
 
 @media (max-width: 992px) {
@@ -46,7 +45,6 @@
     .block.cover .content-block .button {
         margin: 0 auto;
     }
-
 }
 
 @media (max-width: 767px) {
@@ -55,7 +53,6 @@
     body.mobile-navigation-open {
         overflow: hidden;
     }
-
 
     /* Mobile navigation */
     .mobile-navigation {

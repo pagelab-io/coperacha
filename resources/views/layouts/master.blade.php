@@ -76,9 +76,7 @@
     <body ng-app="coperachaApp">
 
         @include("partials.mobile-navigation")
-
         @include("partials.navigation")
-
         <!-- Outer wrapper -->
         <div class="outer-wrapper">
             @yield("content")

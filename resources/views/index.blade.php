@@ -61,7 +61,7 @@
                                 <div class="name">
                                     <a class="button" ng-click="showModal('/moneybox/create')">1. Crea tu Alcancía</a>
                                 </div>
-                                <div class="desc">Es gratis y te llevará un minuto crearla.. </div>
+                                <div class="desc">Es gratis y te llevará un minuto crearla.</div>
                             </div>
                         </div>
 
@@ -70,7 +70,7 @@
                                 <div class="image">
                                     <img class="img-responsive center-block" src="images/how-it-works-card-2.png" alt="">
                                 </div>
-                                <div class="name"><span>2. Invita a Usuarios</span></div>
+                                <div class="name"><span>2. Invita a participar</span></div>
                                 <div class="desc">Cuéntale a tus amigos, por mail  o Facebook.</div>
                             </div>
                         </div>
@@ -106,10 +106,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="header-block">
-                            <h2 class="hidden">Arma tu Coperacha para fiestas, regalos o viajes</h2>
-                        </div>
-                        <div class="content-block">
+                        <div class="">
                             <div class="moneyboxes">
                                 @foreach ($categories as $category)
                                     <div class="moneybox-type">
@@ -190,11 +187,10 @@
                                 </div>
                                 <div class="info">
                                     <h4 class="name">Personal</h4>
-                                    <div class="desc">Personaliza tu alcancía ponle fotos, escribe lo que quieras.</div>
+                                    <div class="desc">Crea una descripción del objetivo de la alcancía y personalizala con una foto.</div>
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-sm-4 col-xs-6 align-top">
                             <div class="advantage">
                                 <div class="image">
@@ -202,7 +198,7 @@
                                 </div>
                                 <div class="info">
                                     <h4 class="name">Social</h4>
-                                    <div class="desc">Comparte en redes sociales o invita a tus amigos a participar con Facebook.</div>
+                                    <div class="desc">Comparte en redes sociales o invita a tus amigos a participar por medio de su correo.</div>
                                 </div>
                             </div>
                         </div>

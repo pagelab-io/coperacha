@@ -53,7 +53,7 @@ hr {
 /* Navigation */
 .navigation {
     background-color: #FF5000;
-    height: 75px;
+    height: 60px;
     overflow: hidden;
     padding: 1px 0;
     position: fixed;
@@ -70,10 +70,14 @@ hr {
     margin-left: 10px;
 }
 
+.navigation .logo img {
+    height: 60px;
+}
+
 /* Navigation - List */
 .navigation .list {
     list-style: none;
-    margin: 13px 0 0;
+    margin: 0px 0 0;
     padding: 0;
     text-align: right;
 }
@@ -91,7 +95,7 @@ hr {
     display: block;
     font-family: 'verbmedium';
     font-size: 13px;
-    padding: 10px 0;
+    padding: 20px 10px;
     text-decoration: none;
     text-transform: uppercase;
 }
@@ -99,6 +103,17 @@ hr {
 .navigation .list li a:hover,
 .navigation .list li a.active {
     color: #ffc48c;
+    color: white;
+    background: #f35106;
+}
+
+.navigation .list li .logged .logged-user {
+    line-height: 14px;
+    margin-bottom: 5px;
+}
+
+.navigation .list li .logged a:hover {
+    background: transparent;
 }
 
 .navigation .list li a.button {
@@ -170,7 +185,7 @@ hr {
 
 .logged {
     position: relative;
-    top: -5px;
+    top: 0px;
 }
 
 .logged > a {
@@ -242,7 +257,7 @@ hr {
 
 /* Outer wrapper */
 .outer-wrapper {
-    margin-top: 75px;
+    margin-top: 60px;
     position: relative;
 }
 
@@ -376,13 +391,13 @@ hr {
 
 .block.intro .moneyboxes {
     display: flex;
-    align-items: flex-start;
-    align-content: flex-start;
+    justify-content: space-around;
     flex-wrap: wrap;
+    max-width: 95%;
 }
 
 .block.intro .moneyboxes .moneybox-type {
-    flex: 0 1 120px;
+    flex: 0 0 120px;
     padding-left: 15px;
     padding-right: 15px;
     text-align: center;
@@ -1169,6 +1184,7 @@ hr {
     margin-top: 4px;
     width: 91px;
 }
+
 
 @media screen and (max-width: 520px){
     .col-xs-6 {

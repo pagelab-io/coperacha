@@ -3,11 +3,11 @@
 @section("page-content")
 
     <!-- Contact Layout -->
-    <section class="contact-body">
+    <section class="contact-body" xmlns:v-bind="http://www.w3.org/1999/xhtml">
         <div class="holder">
             <div class="container-fluid">
                 <div class="header">
-                    <h2>Quéremos saber qué opinas de Coperacha, mándanos un mensaje.</h2>
+                    <h2>Queremos saber qué opinas de Coperacha, mándanos un mensaje por favor.</h2>
                 </div>
                 <div class="content">
                     <!-- Contact Info -->
@@ -73,7 +73,6 @@
         </div>
     </section>
 @endsection
-
 @section('js')
     <script src="{{asset('/js/vendor/vuejs/vue.js')}}"></script>
     <script src="{{asset('/js/vendor/vuejs/vue-resource.js')}}"></script>

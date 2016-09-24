@@ -26,25 +26,17 @@
                 <li><a class="{{Route::current()->getName() == 'user.profile' ? 'active' : ''}}"
                        href="{{url('/user/profile/'.Auth::user()->id)}}">Mi cuenta</a>
                 </li>
-
                 <li><a class="button create-new" href="{{route('moneybox.create')}}">Crear Nueva Alcancía</a></li>
                 <li>
                     <div class="logged">
-                        @if(Auth::user()->person->gender === 'H')
-                            <a href="{{url('/user/profile/'.Auth::user()->id)}}" class="logged-user">
-                                Bienvenido<br>{{Auth::user()->person->name}}
-                            </a>
-                        @else
-                            <a href="{{url('/user/profile/'.Auth::user()->id)}}" class="logged-user">
-                                Bienvenida<br>{{Auth::user()->person->name}}
-                            </a>
-                        @endif
+                        <a href="{{url('/user/profile/'.Auth::user()->id)}}" class="logged-user">
+                            Bienvenido/a<br>{{Auth::user()->person->name}}
+                        </a>
                         <a href="{{url('/api/v1/auth/logout')}}" class="logout" >Cerrar sesión</a>
                     </div>
                 </li>
             @endif
         </ul>
-
         <!-- Navigation toggle -->
         <button class="navigation-toggle visible-xs">
             <span class="bar"></span>
