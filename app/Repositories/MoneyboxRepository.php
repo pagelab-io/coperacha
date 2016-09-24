@@ -118,6 +118,68 @@ class MoneyboxRepository extends BaseRepository{
         return Moneybox::where($filters)->get();
     }
 
+    public function moneyboxStadistics(){
+
+        $currentDate = new Carbon();
+        $initDate = Carbon::createFromDate($currentDate->year,01,01);
+        $endDate  = Carbon::createFromDate($currentDate->year,01,01);;
+        $endDate->addYear();
+
+        $moneyboxes = Moneybox::where(
+            array(
+                    array('created_at' ,'>', $initDate->format('Y-m-d')),
+                    array('created_at' ,'<', $endDate->format('Y-m-d'))
+            ))->get();
+
+
+        if (count($moneyboxes) > 0) {
+
+            // durability
+            $durability_sum = 0;
+            $collected_amount = 0;
+            $goal_amount = 0;
+
+            foreach ($moneyboxes as $moneybox) {
+                $created_at = explode(' ',$moneybox->created_at);
+                $init = PLDateTime::toCarbon($created_at[0]);
+                $end  = PLDateTime::toCarbon($moneybox->end_date);
+                $durability_sum += $init->diffInDays($end);
+                $collected_amount += $moneybox->collected_amount;
+                $goal_amount += $moneybox->goal_amount;
+            }
+
+            return array(
+                'moneyboxes' => array(
+                    'Por Día' => count($moneyboxes)/365,
+                    'Por Semana' => count($moneyboxes)/52,
+                    'Por Mes' => count($moneyboxes)/12,
+                    'Por Año' => count($moneyboxes)
+                ),
+                'durability' => array(
+                    'Duración promedio (días)' => $durability_sum/count($moneyboxes),
+                    'Monto Recaudado' => "$".number_format($collected_amount/count($moneyboxes), 2),
+                    'Monto a alcanzar' => "$".number_format($goal_amount/count($moneyboxes), 2)
+                )
+            );
+
+        } else {
+            return array(
+                'moneyboxes' => array(
+                    'Por Día' => 0,
+                    'Por Semana' => 0,
+                    'Por Mes' => 0,
+                    'Por Año' => 0
+                ),
+                'durability' => array(
+                    'Duración promedio (días)' =>0,
+                    'Monto promedio diario' => 0,
+                    'Coperacha promedio' =>  0
+                )
+            );
+        }
+
+    }
+
     /**
      * Create a new moneybox
      *

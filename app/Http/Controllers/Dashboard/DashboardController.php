@@ -6,7 +6,6 @@ use App\Entities\Payment;
 use App\Http\Requests\PLRequest;
 use App\Entities\Category;
 use App\Entities\Moneybox;
-use App\Entities\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Repositories\MoneyboxRepository;
@@ -53,7 +52,7 @@ class DashboardController extends Controller
         $statics = $this->_userRepository->getUsersStatics();
         return view('dashboard.index', [
             'users' => $this->getUsersByGender(),
-            'moneyboxes' => $this->getMoneyboxesByCreationDate(),
+            'moneyboxes' => $this->_moneyboxRepository->moneyboxStadistics(),
             'durability' => $this->getAverageDurabilityOfMoneybox(),
             'payments' => $this->_paymentRepository->paymentAVGB(),
             'statics'  => $statics,
@@ -135,6 +134,12 @@ class DashboardController extends Controller
      */
     public function getMoneyboxesByCreationDate()
     {
+        return [
+            'Diario' => 0,
+            'Por Semana' => 0,
+            'Por año' => 0
+        ];
+
         $sql = 'SELECT DATE(created_at) day, count(*) as qty
                     FROM moneyboxes
                   GROUP BY DATE(created_at)
@@ -162,6 +167,13 @@ class DashboardController extends Controller
      *
      */
     public function getAverageDurabilityOfMoneybox(){
+
+        return [
+            'Duración promedio (días)' => 0,
+            'Monto promedio diario' => 0,
+            'Coperacha promedio' =>  0
+        ];
+
         //region durability
         $sql = "SELECT id
                   , DATE(created_at)

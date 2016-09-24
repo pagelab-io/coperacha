@@ -93,6 +93,10 @@
                     </div>
                 </div>
             </div>
+
+        </div>
+        <div class="dashboard-items">
+
             <div class="col-xs-12 col-sm-6">
                 <div class="panel panel-primary">
 
@@ -173,6 +177,9 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="dashboard-items">
+
             <div class="col-xs-12 col-sm-6">
                 <div class="panel panel-primary">
 
@@ -218,7 +225,7 @@
 
                     <!-- header -->
                     <div class="panel-heading">
-                        Alcancías
+                        Creación de alcancias
                         <br>
                         <span>Cuantas alcancías se crean diario, mensual, anual</span>
                     </div>
@@ -238,11 +245,11 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($moneyboxes as $type => $value)
+                            @foreach($moneyboxes['moneyboxes'] as $type => $value)
                                 <tr>
                                     <td></td>
                                     <td>{{$type}}</td>
-                                    <td>{{$value}}</td>
+                                    <td>{{number_format($value, 3)}}</td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -254,14 +261,17 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="dashboard-items">
+
             <div class="col-xs-12 col-sm-6">
                 <div class="panel panel-primary">
 
                     <!-- header -->
                     <div class="panel-heading">
-                        Durabilidad
+                        Alcancías - Estadisticas generales
                         <br>
-                        <span>La durabilidad promedio, el monto promedio recaudado (diario, mensual, anual), la coperacha promedio por alcancía</span>
+                        <span>Durabilidad, monto recaudado y monto a alcanzar promedio</span>
                     </div>
                     <!-- body -->
                     <div class="panel-body">
@@ -277,7 +287,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($durability as $type => $value)
+                            @foreach($moneyboxes['durability'] as $type => $value)
                                 <tr>
                                     <td></td>
                                     <td>{{$type}}</td>
@@ -311,7 +321,7 @@
                             <tr>
                                 <th class="widget-th">#</th>
                                 <th class="widget-th">Método de Pago</th>
-                                <th class="widget-th">Valor Promedio</th>
+                                <th class="widget-th">Porcentaje</th>
                             </tr>
                             </thead>
                             <tbody>
