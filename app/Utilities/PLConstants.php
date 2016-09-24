@@ -18,6 +18,7 @@ class PLConstants {
     const PAYMENT_OXXO_STRING = 'Oxxo';
     const PAYMENT_SPEI_STRING = 'Spei';
     const PAYMENT_PAYPAL_STRING = 'PayPal';
+    const PAYMENT_COMMISSION = 5;
 
     // email's constants
     const EMAIL_CONTACT = 'emails.contact';

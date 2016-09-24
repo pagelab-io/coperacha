@@ -68,14 +68,14 @@ class PayPalRepository implements IPLPayment{
 
                 // Parameters for SetExpressCheckout, which will be sent to PayPal
                 $paypal_string .=
-                    '&L_PAYMENTREQUEST_0_AMT0='.($request->get('amount')+$request->get('commission')).
+                    '&L_PAYMENTREQUEST_0_AMT0='.$request->get('amount').
                     '&LANDINGPAGE=Billing'.
                     '&NOSHIPPING=1'.
-                    '&PAYMENTREQUEST_0_ITEMAMT='.(($request->get('amount')+$request->get('commission'))).
+                    '&PAYMENTREQUEST_0_ITEMAMT='.$request->get('amount').
                     '&PAYMENTREQUEST_0_TAXAMT=0'.
                     '&PAYMENTREQUEST_0_SHIPPINGAMT=0'.
                     '&PAYMENTREQUEST_0_INSURANCEAMT=0'.
-                    '&PAYMENTREQUEST_0_AMT='.($request->get('amount')+$request->get('commission')).
+                    '&PAYMENTREQUEST_0_AMT='.$request->get('amount').
                     '&PAYMENTREQUEST_0_CUSTOM='.$this->generate_uid();
 
                 // We need to execute the "SetExpressCheckOut" method to obtain paypal token
@@ -97,14 +97,14 @@ class PayPalRepository implements IPLPayment{
 
                 // Parameters for DoExpressCheckout, which will be sent to PayPal
                 $paypal_string .=
-                    '&L_PAYMENTREQUEST_0_AMT0='.($options['amount'] + $options['commission']).
+                    '&L_PAYMENTREQUEST_0_AMT0='.$options['amount'].
                     '&TOKEN='.$token.
                     '&PAYERID='.$payer_id.
-                    '&PAYMENTREQUEST_0_ITEMAMT='.($options['amount'] + $options['commission']).
+                    '&PAYMENTREQUEST_0_ITEMAMT='.$options['amount'].
                     '&PAYMENTREQUEST_0_TAXAMT=0'.
                     '&PAYMENTREQUEST_0_SHIPPINGAMT=0'.
                     '&PAYMENTREQUEST_0_INSURANCEAMT=0'.
-                    '&PAYMENTREQUEST_0_AMT='.($options['amount'] + $options['commission']);
+                    '&PAYMENTREQUEST_0_AMT='.$options['amount'];
 
                 $httpParsedResponseAr = $this->_paypal->PPHttpPost($method, $paypal_string);
                 $paypal_response = $this->paypalResponse($httpParsedResponseAr, $method, $token);

@@ -64,14 +64,14 @@
                                     @endif
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Correo Electrónico</label>
+                                    <label for="email">Correo electrónico</label>
                                     @if(Auth::user())
-                                        <input readonly type="text" class="form-control" placeholder="Correo Electrónico" ng-model="email" ng-init="email='{{Auth::user()->email}}'">
+                                        <input readonly type="text" class="form-control" placeholder="Correo electrónico" ng-model="email" ng-init="email='{{Auth::user()->email}}'">
                                     @else
                                         @if(Session::has('tmp_participant'))
-                                            <input type="text" class="form-control" placeholder="Correo Electrónico" ng-model="email" ng-init="email='{{Session::get('tmp_participant')["email"]}}'">
+                                            <input type="text" class="form-control" placeholder="Correo electrónico" ng-model="email" ng-init="email='{{Session::get('tmp_participant')["email"]}}'">
                                         @else
-                                            <input type="text" class="form-control" placeholder="Correo Electrónico" ng-model="email">
+                                            <input type="text" class="form-control" placeholder="Correo electrónico" ng-model="email">
                                         @endif
                                     @endif
                                 </div>
