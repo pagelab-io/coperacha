@@ -614,6 +614,7 @@ hr {
 
 .footer .footer-nav ul li a {
     font-size: 10px;
+    line-height: 20px;
     text-transform: uppercase;
 }
 
