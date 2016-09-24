@@ -64,7 +64,7 @@
                                 <div class="form-group">
                                     <a class="btn-share-fb" href="javascript:void(0)" onclick="share()">
                                         <span style="color: white;">Compartir en</span>
-                                        <img src="/images/facebook-logo.png" alt="">
+                                        <img src="/images/facebook-logo.png" alt="facebook.com">
                                     </a>
                                 </div>
                                 <!-- Your share button code -->

@@ -131,7 +131,6 @@ class HomeController extends Controller
         $categories = Category::all();
         $request->merge(array('path' => '/moneybox'));
         $response = $this->_settingRepository->childsOf($request);
-        
         \Log::info($response->data);
 
         return view('moneybox.create')

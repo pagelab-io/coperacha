@@ -221,7 +221,6 @@
                                 </a>
                             </div>
                         </div>
-
                         <form class="form register" action="" method="post">
                             <div class="form-group">
                                 <label class="text-info">o envía un correo a tus amigos para invitarlos a participar.</label>

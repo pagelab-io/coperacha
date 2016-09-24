@@ -312,7 +312,6 @@ class UserRepository extends BaseRepository
         // Find the user
         $this->_user = $this->byId($userid);
         if ($this->_user->getHasPasswordAttribute()) {
-
             if (!Hash::check($pass, $this->_user->password)) {
                 throw new \Exception("Contraseña incorrecta", -1);
             }

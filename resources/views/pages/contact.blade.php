@@ -3,7 +3,7 @@
 @section("page-content")
 
     <!-- Contact Layout -->
-    <section class="contact-body">
+    <section class="contact-body" xmlns:v-bind="http://www.w3.org/1999/xhtml">
         <div class="holder">
             <div class="container-fluid">
                 <div class="header">
@@ -73,7 +73,6 @@
         </div>
     </section>
 @endsection
-
 @section('js')
     <script src="{{asset('/js/vendor/vuejs/vue.js')}}"></script>
     <script src="{{asset('/js/vendor/vuejs/vue-resource.js')}}"></script>

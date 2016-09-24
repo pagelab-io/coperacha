@@ -37,7 +37,6 @@
                 </li>
             @endif
         </ul>
-
         <!-- Navigation toggle -->
         <button class="navigation-toggle visible-xs">
             <span class="bar"></span>

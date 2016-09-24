@@ -191,7 +191,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-sm-4 col-xs-6 align-top">
                             <div class="advantage">
                                 <div class="image">
