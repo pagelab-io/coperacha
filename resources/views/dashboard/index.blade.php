@@ -24,6 +24,7 @@
                     </div>
                     <!-- body -->
                     <div class="panel-body">
+                        <div class="dashboard-graph" id="genderChart"></div>
                         <!-- Table -->
                         <table class="table table-striped table-responsive">
                             <caption>
@@ -64,6 +65,7 @@
                     </div>
                     <!-- body -->
                     <div class="panel-body">
+                        <div class="dashboard-graph" id="registerChart"></div>
                         <!-- Table -->
                         <table class="table table-striped table-responsive">
                             <caption>
@@ -77,7 +79,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                               @foreach($statics['registerTypeAVG'] as $key => $value)
+                               @foreach($statics['registerAVG'] as $key => $value)
                                    <tr>
                                        <td></td>
                                        <td>{{$key}}</td>
@@ -108,6 +110,7 @@
                     </div>
                     <!-- body -->
                     <div class="panel-body">
+                        <div class="dashboard-graph" id="cityChart"></div>
                         <!-- Table -->
                         <table class="table table-striped table-responsive">
                             <caption>
@@ -148,6 +151,7 @@
                     </div>
                     <!-- body -->
                     <div class="panel-body">
+                        <div class="dashboard-graph" id="countryChart"></div>
                         <!-- Table -->
                         <table class="table table-striped table-responsive">
                             <caption>
@@ -191,6 +195,7 @@
                     </div>
                     <!-- body -->
                     <div class="panel-body">
+                        <div class="dashboard-graph" id="ageChart"></div>
                         <!-- Table -->
                         <table class="table table-striped table-responsive">
                             <caption>
@@ -231,6 +236,7 @@
                     </div>
                     <!-- body -->
                     <div class="panel-body">
+                        <div class="dashboard-graph" id="moneyboxesChart"></div>
                         <!-- Table -->
                         <table class="table table-striped table-responsive">
                             <caption>
@@ -269,6 +275,46 @@
 
                     <!-- header -->
                     <div class="panel-heading">
+                        Métodos de pago
+                        <br>
+                        <span>Porcentaje de uso</span>
+                    </div>
+                    <!-- body -->
+                    <div class="panel-body">
+                        <div class="dashboard-graph" id="paymentsChart"></div>
+                        <!-- Table -->
+                        <table class="table table-striped table-responsive">
+                            <caption>
+                                Total de pagos completados: {{$completedPayments}}
+                            </caption>
+                            <thead>
+                            <tr>
+                                <th class="widget-th">#</th>
+                                <th class="widget-th">Método de Pago</th>
+                                <th class="widget-th">Porcentaje</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($payments as $payment => $value)
+                                <tr>
+                                    <td></td>
+                                    <td>{{\App\Utilities\PLUtils::getPaymentMethodString($payment)}}</td>
+                                    <td>{{number_format($value, 2)}} %</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--footer-->
+                    <div class="panel-footer"></div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6">
+                <div class="panel panel-primary">
+
+                    <!-- header -->
+                    <div class="panel-heading">
                         Alcancías - Estadisticas generales
                         <br>
                         <span>Durabilidad, monto recaudado y monto a alcanzar promedio</span>
@@ -301,44 +347,92 @@
                     <div class="panel-footer"></div>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-6">
-                <div class="panel panel-primary">
 
-                    <!-- header -->
-                    <div class="panel-heading">
-                        Métodos de pago
-                        <br>
-                        <span>Porcentaje de uso</span>
-                    </div>
-                    <!-- body -->
-                    <div class="panel-body">
-                        <!-- Table -->
-                        <table class="table table-striped table-responsive">
-                            <caption>
-                                Total de pagos completados: {{$completedPayments}}
-                            </caption>
-                            <thead>
-                            <tr>
-                                <th class="widget-th">#</th>
-                                <th class="widget-th">Método de Pago</th>
-                                <th class="widget-th">Porcentaje</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($payments as $payment => $value)
-                                <tr>
-                                    <td></td>
-                                    <td>{{\App\Utilities\PLUtils::getPaymentMethodString($payment)}}</td>
-                                    <td>{{number_format($value, 2)}} %</td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    <!--footer-->
-                    <div class="panel-footer"></div>
-                </div>
-            </div>
         </div>
     </section>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+
+        var genderData = google.visualization.arrayToDataTable([
+          ['Género', 'Porcentaje'],
+          @foreach($statics['genderAVG'] as $key => $value)
+            ['{{$key}}', {{$value}}],
+          @endforeach
+        ]);
+
+        var registerData = google.visualization.arrayToDataTable([
+            ['Tipo registro', 'Porcentaje'],
+            @foreach($statics['registerAVG'] as $key => $value)
+                ['{{$key}}', {{$value}}],
+            @endforeach
+        ]);
+
+        var cityData = google.visualization.arrayToDataTable([
+            ['Ciudad', 'Porcentaje'],
+            @foreach($statics['cityAVG'] as $key => $value)
+                ['{{$key}}', {{$value}}],
+            @endforeach
+        ]);
+
+        var countryData = google.visualization.arrayToDataTable([
+            ['País', 'Porcentaje'],
+            @foreach($statics['countryAVG'] as $key => $value)
+                ['{{$key}}', {{$value}}],
+            @endforeach
+        ]);
+
+        var ageData = google.visualization.arrayToDataTable([
+          ['Edad', 'Porcentaje'],
+          @foreach($statics['ageAVG'] as $key => $value)
+              ['{{$key}}', {{$value}}],
+          @endforeach
+        ]);
+
+        var moneyboxesData = google.visualization.arrayToDataTable([
+            ['Alcancías', '2016'],
+            @foreach($moneyboxes['moneyboxes'] as $key => $value)
+                ['{{$key}}', {{$value}}],
+            @endforeach
+        ]);
+
+        var paymentData = google.visualization.arrayToDataTable([
+            ['Método de pago', '2016'],
+            @foreach($payments as $payment => $value)
+                ['{{$payment}}', {{$value}}],
+            @endforeach
+        ]);
+
+          var optionsBar = {
+            chartArea:{width:'50%',height:'50%'},
+            hAxis: {
+              title: 'Total alcancías',
+              minValue: 0
+            }
+          };
+
+
+        var options = {
+          chartArea:{width:'100%',height:'100%', left:'25px'}
+        };
+
+        var genderChart = new google.visualization.PieChart(document.getElementById('genderChart'));
+        var registerChart = new google.visualization.PieChart(document.getElementById('registerChart'));
+        var cityChart = new google.visualization.PieChart(document.getElementById('cityChart'));
+        var countryChart = new google.visualization.PieChart(document.getElementById('countryChart'));
+        var ageChart = new google.visualization.PieChart(document.getElementById('ageChart'));
+        var moneyboxesChart = new google.visualization.BarChart(document.getElementById('moneyboxesChart'));
+        var paymentsChart = new google.visualization.PieChart(document.getElementById('paymentsChart'));
+
+        genderChart.draw(genderData, options);
+        registerChart.draw(registerData, options);
+        cityChart.draw(cityData, options);
+        countryChart.draw(countryData, options);
+        ageChart.draw(ageData, options);
+        moneyboxesChart.draw(moneyboxesData, optionsBar);
+        paymentsChart.draw(paymentData, options);
+      }
+    </script>
 @stop

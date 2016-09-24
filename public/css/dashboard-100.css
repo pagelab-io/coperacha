@@ -178,3 +178,7 @@ form.search {
 .dashboard-filters {
     width: 100%;
 }
+
+.dashboard-graph{
+    margin: 20px auto;
+}

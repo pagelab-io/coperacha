@@ -169,7 +169,7 @@ class UserRepository extends BaseRepository
             'genderAVG'  => $genderAVG,
             'cityAVG'    => $cityAVG,
             'countryAVG' => $countryAVG,
-            'registerTypeAVG' => $registerTypeAVG,
+            'registerAVG' => $registerTypeAVG,
             'ageAVG'     => $ageAVG
         );
     }
