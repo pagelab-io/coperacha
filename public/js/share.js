@@ -142,7 +142,7 @@ var App = (function($, window){
                 share.setup({
                     networks: {
                         facebook: {
-                            enabled: 0,
+                            load_sdk: true,
                             app_id: "1581295808831173",
                             title: title,
                             image: image,
