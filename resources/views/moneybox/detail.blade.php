@@ -9,7 +9,9 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <div class="label-owner">Alcancía organizada por: <span>{{$person->name}} {{$person->lastname}}</span></div>
+                                <div id="moneybox-caption" class="label-owner">
+                                    Alcancía organizada por: <span>{{$person->name}} {{$person->lastname}}</span>
+                                </div>
                             </div>
                        </div>
                     </div>

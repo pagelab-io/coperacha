@@ -132,12 +132,12 @@ var App = (function($, window){
             var btnShareFb = $('#btnShareFb');
             var id = $("#moneybox-id").val();
             var title = $("#moneybox-name").val();
+            var caption = $("#moneybox-caption").val();
             var desc = $("#moneybox-desc").val();
             var image = $("#moneybox-image").attr('src');
 
             if (id > 0 && image.length > 0) {
 
-                console.log(image);
                 var share = new Share();
                 share.setup({
                     networks: {
@@ -148,12 +148,13 @@ var App = (function($, window){
                             image: image,
                             description: desc,
                             url: location.toString(),
-                            caption: title
+                            caption: caption
                         }
                     }
                 });
 
-                btnShareFb.on("click", function () {
+                btnShareFb.on("click", function (evt) {
+                    evt.preventDefault();
                     share.network_facebook();
                 });
             }
