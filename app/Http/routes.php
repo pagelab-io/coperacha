@@ -157,6 +157,7 @@ $router->group([
 ], function($router){
     $router->get('/paypal/return',  ['uses' => 'PaymentController@paypalResponse']);
     $router->post('/conekta/return',  ['uses' => 'PaymentController@conektaResponse']);
+    $router->get('/downloadPayment/{method}/{image}/{barcode}/{clabe}',  ['uses' => 'PaymentController@paymentDownload']);
 });
 
 /*

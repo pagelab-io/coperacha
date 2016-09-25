@@ -29,6 +29,9 @@ var general = {
         general.$window.on('load', function(){ general._onLoad(); });
         general.$window.on('resize', function(){ general._onResize(); });
         general.$window.on('scroll', function(){ general._onScroll(); });
+
+        var utils = new Utils();
+        utils.initAlertEvents();
     },
 
     /**
