@@ -302,9 +302,11 @@ class PaymentRepository extends BaseRepository
                     $result[$payment->method] += 1;
                 }
             }
-            foreach($result as $key => $value){
-                $avg = ($result[$key]/$sum)*100;
-                $result[$key] = $avg;
+            if($sum > 0) {
+                foreach($result as $key => $value){
+                    $avg = ($result[$key]/$sum)*100;
+                    $result[$key] = $avg;
+                }
             }
         }
 
