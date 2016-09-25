@@ -1096,6 +1096,7 @@ hr {
 .moneybox-list {
 
 }
+
 .moneybox-title {
     color: #ff4f00;
     border-bottom: solid 1px #dbdbea;
@@ -1580,3 +1581,40 @@ section.block.reset-password {
 }
 
 .footer .social i:hover { color: #B92D24; }
+
+#pricing {
+
+}
+
+#pricing {
+    background: #F8F8F8;
+}
+
+#pricing .title {
+    color: #4CB7CF;
+}
+
+#pricing ul {
+    list-style-image: url(../images/icon-option-circle.png);
+    padding-left: 30px;
+}
+
+#pricing ul li {
+    color: #31313F;
+    font-family: verbregular;
+    font-size: 15px;
+    line-height: 30px;
+}
+
+#stages .title {
+    color: #ff4f00;
+}
+
+#pricing .title,
+#stages .title {
+    letter-spacing: 1px;
+    padding: 10px 0;
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 23px;
+}

@@ -102,6 +102,17 @@ class HomeController extends Controller
     }
 
     /**
+     * Pricing View
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getPricingPage(){
+
+        return view('pages.pricing')
+            ->with('pageTitle','Precios');
+    }
+
+    /**
      * @param Request $request
      * @param $url
      * @throws \Exception
@@ -142,19 +153,6 @@ class HomeController extends Controller
             ->with('privacyoption', $privacyoption)
             ->with('amountoption', $amountoption)
             ->with('pageTitle',$title);
-    }
-
-    /**
-     * @param PLRequest $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function getCreateMoneyboxPage2(PLRequest $request){
-
-        $request->merge(array('path' => '/moneybox'));
-        $response = $this->_settingRepository->childsOf($request);
-        return view('moneybox.step-2')
-            ->with('settings', $response->data)
-            ->with('pageTitle','Crear mi alcancía 2/2');
     }
 
     /**
@@ -368,13 +366,11 @@ class HomeController extends Controller
         $emails =  preg_split("/[\s,;:]+/", $request->get('emails'));
 
         foreach ($emails as $email) {
-
             $validator = Validator::make(['mail' => $email], [
                 'mail' => 'required|email'
             ]);
 
             if ($validator->passes()) {
-
                 $data = ['moneybox' => $moneybox];
                 $record = Invitation::create([
                     'email' => trim($email),
@@ -394,7 +390,8 @@ class HomeController extends Controller
 
         return response()->json(['success' => true, 'data' => $emails]);
     }
-        /**
+
+    /**
      * Send mail contact
      *
      * @param Request $request
@@ -428,5 +425,4 @@ class HomeController extends Controller
 
         return response()->json(['success' => true, 'data' => $attends]);
     }
-
 }

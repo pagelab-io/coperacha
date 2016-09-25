@@ -30,6 +30,7 @@ Route::group([
     $router->get('/about', [ 'as' => 'about', 'uses' => 'HomeController@getAboutPage']);
     $router->get('/contact', [ 'as' => 'contact', 'uses' => 'HomeController@getContactPage']);
     $router->get('/faqs', [ 'as' => 'faqs', 'uses' => 'HomeController@getFaqsPage']);
+    $router->get('/pricing', [ 'as' => 'pricing', 'uses' => 'HomeController@getPricingPage']);
     /* Password Reset Routes... */
     $router->get('password/recovery', 'Auth\PasswordController@getEmail');
     $router->get('password/reset/{token?}', 'Auth\PasswordController@getReset');
