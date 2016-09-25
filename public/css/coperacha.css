@@ -147,6 +147,7 @@
 }
 
 @media screen and (max-width: 520px){
+    .alert-modal.small,
     .alert-modal,
     .popup {
         width: 298px;
