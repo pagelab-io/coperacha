@@ -1,5 +1,5 @@
 <tr style="background: #FF5000">
     <td style="padding-top: 30px; padding-bottom: 10px; text-align: center">
-        <a href='href="{{route('pages.index')}}"'><img src={{asset('/images/logo.png')}} alt='logo'/></a>
+        <a href='"{{route('pages.index')}}"'><img src={{asset('/images/logo.png')}} alt='logo'/></a>
     </td>
 </tr>
