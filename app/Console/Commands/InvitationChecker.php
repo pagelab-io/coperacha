@@ -3,14 +3,15 @@
 namespace App\Console\Commands;
 
 use App\Entities\Invitation;
-use App\Entities\User;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
+
 
 class InvitationChecker extends Command
 {
+    const PRODUCTION = true;
+
     /**
      * The name and signature of the console command.
      *
@@ -48,32 +49,41 @@ class InvitationChecker extends Command
     public function handle()
     {
         $this->info("Start Checking...");
-        $invitations = Invitation::where('status', 0)->get();
-
-        if (!$invitations) {
-            throw new EntityNotFoundException('No existe la alcancía');
-        }
+        $invitations = Invitation::where(function ($q) {
+            $q->where('status', '=', 0);
+            $q->where('count', '<=', 3);
+        })->get();
 
         $attends = [];
 
         foreach ($invitations as $invitation) {
-            if (!isset($attends[$invitation->email])) {
 
-                $attends[$invitation->email] = $invitation->id;
-                $data = [
-                    'invitation' => $invitation,
-                    'moneybox' => $invitation->moneybox
-                ];
+            $validator = Validator::make(['mail' => $invitation->email], [
+                'mail' => 'required|email'
+            ]);
 
-                $invitation->count = $invitation->count + 1;
-                $invitation->save();
+            if ($validator->passes()) {
 
-                Mail::send('emails.pendinginvitation', $data, function ($message) use ($invitation) {
-                    $message->from('info@coperacha.com.mx', 'Coperacha');
-                    $message->to($invitation->email, 'Invitado');
-                    $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com']);
-                    $message->subject('Recordatorio de Invitación a ' . $invitation->moneybox->name);
-                });
+                if (!isset($attends[$invitation->email])) {
+
+                    $attends[$invitation->email] = $invitation->id;
+                    $data = [
+                        'invitation' => $invitation,
+                        'moneybox' => $invitation->moneybox
+                    ];
+
+                    $invitation->count = $invitation->count + 1;
+                    $invitation->save();
+
+                    if (true == self::PRODUCTION) {
+                        Mail::send('emails.pendinginvitation', $data, function ($message) use ($invitation) {
+                            $message->from('info@coperacha.com.mx', 'Coperacha');
+                            $message->to($invitation->email, 'Invitado ' . $invitation->email);
+                            $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com']);
+                            $message->subject('Recordatorio para participar en ' . $invitation->moneybox->name);
+                        });
+                    }
+                }
             }
         }
         $this->info("Completed");

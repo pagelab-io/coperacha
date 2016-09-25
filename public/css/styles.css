@@ -186,6 +186,7 @@ hr {
 .logged {
     position: relative;
     top: 0px;
+    margin-right: 10px;
 }
 
 .logged > a {
