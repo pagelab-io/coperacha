@@ -158,34 +158,34 @@
                             <div class="row">
                                 <div class="col-sm-6" v-if="user.has_password">
                                     <div class="form-group">
-                                        <label for="current">Contraseña Actual</label>
+                                        <label for="current">Contraseña actual</label>
                                         <input id="current" class="form-control"
                                                autocomplete="off"
                                                name="current"
                                                placeholder="Contraseña actual"
                                                type="password"
-                                               v-model="passwordData.current" required>
+                                               v-model="passwordData.current">
                                     </div>
                                 </div>
                                 <div v-bind:class="{'col-sm-12':!user.has_password, 'col-sm-6':user.has_password}">
                                     <div class="form-group">
-                                        <label for="password">Nueva Contraseña</label>
+                                        <label for="password">Nueva contraseña</label>
                                         <input id="password" class="form-control"
                                                autocomplete="off"
                                                name="password"
-                                               placeholder="Nueva Contraseña"
+                                               placeholder="Nueva contraseña"
                                                type="password"
-                                               v-model="passwordData.new" required>
+                                               v-model="passwordData.new">
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="confirm">Confirmar Contraseña</label>
+                                        <label for="confirm">Confirmar contraseña</label>
                                         <input id="confirm" class="form-control"
                                                autocomplete="off"
                                                name="confirm"
-                                               placeholder="Confirmar Contraseña"
+                                               placeholder="Confirmar contraseña"
                                                type="password"
-                                               v-model="passwordData.confirm" required>
+                                               v-model="passwordData.confirm">
                                     </div>
                                 </div>
                             </div>

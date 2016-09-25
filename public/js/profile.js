@@ -258,7 +258,9 @@ var vm = new Vue({
          * @param e
          */
         onChangePassword: function (e) {
+            if(!this.validateChangePasswordData()) return;
             this.loading = true;
+            var utils = new Utils();
 
             var _this = this;
             var path = base + '/api/v1/user/changePassword/?api-key='+$api;
@@ -273,36 +275,31 @@ var vm = new Vue({
             this.$http.put(path, data, {
                 method: 'PUT'
             }).then(function (response) {
-                // console.log(response);
+
                 if (response.status === 200) {
                     this.loading = false;
 
                     if (response.data.status == 1) {
 
-                        this.message = {
-                            status: 'success',
-                            text: response.data.description
-                        };
-
-                        setTimeout(function () {
-                            for (var field in _this.passwordData) {
-                                _this.passwordData[field] = '';
-                            }
-                            _this.message = {
-                                status: '',
-                                text: ''
-                            };
-                        }, 3 * 1000);
+                        document.getElementById('small-alert-content').innerHTML="" +
+                        "<p>"+response.data.description+"<p>";
+                        utils.showAlert(true);
+                        this.passwordData.current = '';
+                        this.passwordData.new = '';
+                        this.passwordData.confirm = '';
 
                     } else {
-                        this.message = {
-                            status: 'danger',
-                            text: response.data.description
-                        };
+                        utils.setAlertTitle("Coperacha - Alerta");
+                        document.getElementById('alert-content').innerHTML="" +
+                        "<p>"+response.data.description+"<p>";
+                        utils.showAlert();
                     }
 
                 } else {
-                    console.error(response);
+                    utils.setAlertTitle("Coperacha - Alerta");
+                    document.getElementById('alert-content').innerHTML="" +
+                    "<p>Ocurrio una incidencia al realizar el cambio de contraseña, por favor intentalo más tarde.<p>";
+                    utils.showAlert();
                 }
 
             }, function (error) {
@@ -339,6 +336,33 @@ var vm = new Vue({
                     utils.setValidationError("Ingresa una fecha válida.");
                     return false;
                 }
+            }
+
+            return true;
+        },
+
+        validateChangePasswordData: function()
+        {
+            var utils = new Utils();
+
+            if(document.getElementById('current')) {
+                if (utils.isNullOrEmpty(this.passwordData.current)) {
+                    utils.setValidationError("Ingresa una contraseña.");
+                    return false;
+                }
+            }
+
+            if (utils.isNullOrEmpty(this.passwordData.new)) {
+                utils.setValidationError("Ingresa tu nueva contraseña.");
+                return false;
+            } else if (utils.isNullOrEmpty(this.passwordData.confirm)) {
+                utils.setValidationError("Confirma tu nueva contraseña.");
+                return false;
+            }
+
+            if (this.passwordData.new != this.passwordData.confirm) {
+                utils.setValidationError("Las contraseñas no coinciden.");
+                return false;
             }
 
             return true;

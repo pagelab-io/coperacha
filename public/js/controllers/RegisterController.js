@@ -132,6 +132,12 @@
                                 document.getElementById('alert-content').innerHTML="" +
                                 "<p>El correo ingresado ya existe en el sistema, por favor intenta con otro.<p>";
                                 $scope.utils.showAlert();
+                            } else if(response.status == 23000) {
+                                $scope.utils.hideLoader();
+                                $scope.utils.setAlertTitle("Coperacha - Alerta");
+                                document.getElementById('alert-content').innerHTML="" +
+                                "<p>El correo ingresado ya existe en el sistema, por favor intenta con otro.<p>";
+                                $scope.utils.showAlert();
                             }
 
                         }).error(function(response){

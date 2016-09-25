@@ -46,10 +46,9 @@ var vm = new Vue({
                         }
 
                         _this.loading = false;
-                        utils.setAlertTitle("Coperacha - Alerta");
-                        document.getElementById('alert-content').innerHTML="" +
+                        document.getElementById('small-alert-content').innerHTML="" +
                         "<p>Tu mensaje fue enviado exitosamente, pronto nos pondremos en contacto contigo.<p>";
-                        utils.showAlert();
+                        utils.showAlert(true);
                     }
                 }
 
