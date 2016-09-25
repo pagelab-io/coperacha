@@ -445,6 +445,8 @@
                                     - Completamente gratuito si utilizas la alcancía en uno de nuestros socios o si no 5% de comisiones por transferencia bancaria
                                     </div>
 
+                                    <br>
+                                    <a class="button btn btn-primary small" href="{{url('/pricing')}}">Precios</a>
                                 </div>
                             </div>
                         </div>
