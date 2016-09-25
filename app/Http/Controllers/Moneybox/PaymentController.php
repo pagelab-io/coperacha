@@ -14,7 +14,8 @@ use App\Http\Requests\PLRequest;
 use App\Http\Responses\PLResponse;
 use App\Repositories\PaymentRepository;
 
-class PaymentController extends PLController{
+class PaymentController extends PLController
+{
 
     //region Attributes
 
@@ -51,7 +52,7 @@ class PaymentController extends PLController{
         try {
             $this->setResponse($this->_paymentRepository->payment($request));
             return response()->json($this->getResponse());
-        } catch(\Exception $ex) {
+        } catch (\Exception $ex) {
             $response = new PLResponse();
             $response->status = $ex->getCode();
             $response->description = $ex->getMessage();
@@ -64,16 +65,15 @@ class PaymentController extends PLController{
     {
         try {
             $this->setResponse($this->_paymentRepository->paypalResponse($request));
-            if($this->getResponse()->status == 200)
-            {
-                if(\Session::get('tmp_participant'))
+            if ($this->getResponse()->status == 200) {
+                if (\Session::get('tmp_participant'))
                     \Session::forget('');
                 return redirect('/');
             } else {
                 // TODO - change this for anoter view
                 return response()->json($this->getResponse());
             }
-        } catch(\Exception $ex) {
+        } catch (\Exception $ex) {
             $response = new PLResponse();
             $response->status = $ex->getCode();
             $response->description = $ex->getMessage();
@@ -86,19 +86,28 @@ class PaymentController extends PLController{
     {
         try {
             $this->setResponse($this->_paymentRepository->conektaResponse($request));
-            if($this->getResponse()->status == 200)
-            {
-                if(\Session::get('tmp_participant'))
+            if ($this->getResponse()->status == 200) {
+                if (\Session::get('tmp_participant'))
                     \Session::forget('');
             }
             return response()->json($this->getResponse());
-        } catch(\Exception $ex) {
+        } catch (\Exception $ex) {
             $response = new PLResponse();
             $response->status = $ex->getCode();
             $response->description = $ex->getMessage();
             $response->data = $ex->getTraceAsString();
             return response()->json($response);
         }
+    }
+
+    public function paymentDownload($method, $url, $barcode, $clabe){
+        $pdf = \PDF::loadView("layouts.order", array(
+            'method' => $method,
+            'url' => $url,
+            'barcode' => $barcode,
+            'clabe' => $clabe
+        ));
+        return $pdf->download("test.pdf");
     }
 
     //endregion

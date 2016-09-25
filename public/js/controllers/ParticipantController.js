@@ -208,26 +208,36 @@
                         } else if($scope.paymentMethod == 'O'){
                             $scope.utils.hideLoader();
                             $scope.utils.setAlertTitle("Confirmación de pago por OXXO");
+
+                            var url = response.data.payment_method.barcode_url.split("https://s3.amazonaws.com/cash_payment_barcodes/");
+                            var barcode = response.data.payment_method.barcode;
+
                             document.getElementById('alert-content').innerHTML="" +
                             "<p>Se ha generado un nuevo cargo, puedes ir a tu tienda OXXO mas cercana y hacer tu pago con los siguientes datos:<p>" +
                             "<br>" +
                             "<image src='"+response.data.payment_method.barcode_url+"'>" +
                             "<br>" +
-                            "<span>"+response.data.payment_method.barcode+"</span>" +
+                            "<span>"+barcode+"</span>" +
                             "<br><br>" +
-                            "<span class='info-alert'>Nota: al realizar tu pago, recibirás un correo de confirmación de pago</span>";
+                            "<span class='info-alert'>Nota: al realizar tu pago, recibirás un correo de confirmación de pago</span>" +
+                            "<br>" +
+                            "<span class='info-alert'><a href='/payment/downloadPayment/oxxo/"+url[1]+"/"+barcode+"/0' target='_blank'>Descargar datos de pago</a></span>";
                             $scope.utils.showAlert();
                         } else if($scope.paymentMethod == 'S'){
-                            console.log("== SPEI ==");
-                            console.log(response);
+
                             $scope.utils.hideLoader();
                             $scope.utils.setAlertTitle("Confirmación de pago por SPEI");
+
+                            var clabe = response.data.payment_method.clabe;
+
                             document.getElementById('alert-content').innerHTML="" +
                             "<p>Se ha generado un nuevo cargo, puedes ir a realizar tu pago con los siguientes datos:<p>" +
                             "<br>" +
-                            "<span> No. Clabe: "+response.data.payment_method.clabe+"</span>" +
+                            "<span> No. Clabe: "+clabe+"</span>" +
                             "<br><br>" +
-                            "<span class='info-alert'>Nota: al realizar tu pago, recibirás un correo de confirmación de pago</span>";
+                            "<span class='info-alert'>Nota: al realizar tu pago, recibirás un correo de confirmación de pago</span>" +
+                            "<br><br>" +
+                            "<span class='info-alert'><a href='/payment/downloadPayment/spei/0/0/"+clabe+"' target='_blank'>Descargar datos de pago</a></span>";
                             $scope.utils.showAlert();
                         }
 
