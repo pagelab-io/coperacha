@@ -155,6 +155,11 @@
         margin-left: -150px;
     }
 
+    .alert-modal.small{
+        margin-top: -100px;
+        margin-left: -150px;
+    }
+
     .popup > .popup-body > .email-login > input[type="text"],
     .popup > .popup-body > .email-login > input[type="password"]{
         width: 100%;
