@@ -36,7 +36,7 @@
                                     sirve para hacer regalos o transferencias entre amigos.</div>
                             </div>
                             <a class="button btn btn-primary"
-                               ng-click="showModal('/moneybox/create')">Crear mi Alcancía ..</a>
+                               ng-click="showModal('/moneybox/create')">Crear mi Alcancía</a>
                         </div>
                     </div>
                 </div>
