@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Mockery\CountValidator\Exception;
 
 class HomeController extends Controller
@@ -349,7 +350,8 @@ class HomeController extends Controller
     }
 
     /**
-     * Send mail contact
+     * Send mail of invitation to collaborate to moneybox
+     * Refs http://php.net/manual/es/function.preg-split.php
      *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
@@ -362,22 +364,31 @@ class HomeController extends Controller
             throw new EntityNotFoundException('No existe la alcancía');
         }
 
-        $emails = explode(',', $request->get('emails'));
+        // $emails = explode(',', $request->get('emails'));
+        $emails =  preg_split("/[\s,;:]+/", $request->get('emails'));
 
         foreach ($emails as $email) {
-            $data = [
-                'moneybox' => $moneybox
-            ];
 
-            $record = Invitation::create(['email' => trim($email), 'status' => 0, 'moneybox_id' => $moneybox->id]);
+            $validator = Validator::make(['mail' => $email], [
+                'mail' => 'required|email'
+            ]);
 
-            if ($record) {
-                Mail::send('emails.invitation', $data, function ($message) use ($email) {
-                    $message->from('info@coperacha.com.mx', 'Coperacha');
-                    $message->to($email, 'Invitado');
-                    $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com']);
-                    $message->subject('Mensaje de Invitación');
-                });
+            if ($validator->passes()) {
+
+                $data = ['moneybox' => $moneybox];
+                $record = Invitation::create([
+                    'email' => trim($email),
+                    'status' => 0,
+                    'moneybox_id' => $moneybox->id]);
+
+                if ($record) {
+                    Mail::send('emails.invitation', $data, function ($message) use ($email) {
+                        $message->from('info@coperacha.com.mx', 'Coperacha');
+                        $message->to($email, 'Invitado ' . $email);
+                        $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com']);
+                        $message->subject('Mensaje de Invitación');
+                    });
+                }
             }
         }
 
