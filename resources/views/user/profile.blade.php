@@ -92,7 +92,7 @@
                                         <input id="email"
                                                class="form-control"
                                                name="email"
-                                               placeholder="Correo Electrónico"
+                                               placeholder="Correo electrónico"
                                                type="text" v-model="user.email">
                                     </div>
 
