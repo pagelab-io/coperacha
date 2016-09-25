@@ -72,15 +72,23 @@ function Utils()
         document.body.removeChild(loader);
     };
 
-    this.showAlert = function()
+    this.showAlert = function(small)
     {
-        var alert = document.getElementById('alert-modal-coperacha');
+        var alert = null;
+        if(small)
+            alert = document.getElementById('small-alert-modal-coperacha');
+        else
+            alert = document.getElementById('alert-modal-coperacha');
         alert.style.display = 'block';
     };
 
-    this.hideAlert = function()
+    this.hideAlert = function(small)
     {
-        var alert = document.getElementById('alert-modal-coperacha');
+        var alert = null;
+        if(small)
+            alert = document.getElementById('small-alert-modal-coperacha');
+        else
+            alert = document.getElementById('alert-modal-coperacha');
         alert.style.display = 'none';
     };
 
@@ -98,6 +106,12 @@ function Utils()
         document.getElementById('close-alert-2').addEventListener('click', function(){
             _this.hideAlert();
         });
+        document.getElementById('close-alert-3').addEventListener('click', function(){
+            _this.hideAlert(true);
+        });
+        document.getElementById('close-alert-4').addEventListener('click', function(){
+            _this.hideAlert(true);
+        });
         document.addEventListener('keyup', function(e){
             if (e.keyCode == 27) {
                 if (document.getElementById('alert-modal-coperacha').style.display == 'block' && document.getElementById('login-modal-coperacha').style.display == 'block') {
@@ -113,6 +127,10 @@ function Utils()
                         console.log(3);
                         _this.hideAlert();
                     }
+                }
+
+                if (document.getElementById('small-alert-modal-coperacha').style.display == 'block') {
+                    _this.hideAlert(true);
                 }
             }
         });

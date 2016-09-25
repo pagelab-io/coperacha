@@ -112,6 +112,32 @@
         </div>
         <!-- Alert Dialog -->
 
+        <!-- Small Alert Dialog -->
+        <div class="popup-wrapper" id="small-alert-modal-coperacha">
+            <div class="alert-modal small">
+                <!-- header -->
+                <div class="popup-header">
+                    <span id="small-alert-title"><!--title--></span>
+                </div>
+                <!-- ./header -->
+                <div class="close" id="close-alert-3">x</div>
+
+                <!-- body -->
+                <div class="popup-body">
+
+                    <!-- email login -->
+                    <div class="email-login">
+                        <div id="small-alert-content">
+                            <!--content-->
+                        </div>
+                        <button class="btn-email-login" id="close-alert-4">ACEPTAR</button>
+                    </div>
+                    <!-- email login -->
+                </div>
+            </div>
+        </div>
+        <!-- Small Alert Dialog -->
+
         <!-- Include jQuery-->
 
         <script src="{{asset('/js/vendor/jquery/jquery-3.1.0.js')}}"></script>

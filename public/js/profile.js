@@ -234,11 +234,9 @@ var vm = new Vue({
                     this.loading = false;
                     if (response.data.status == 200) {
                         this.onGetProfile(this.userid);
-
-                        utils.setAlertTitle("Coperacha - Alerta");
-                        document.getElementById('alert-content').innerHTML="" +
+                        document.getElementById('small-alert-content').innerHTML="" +
                         "<p>Usuario actualizado correctamente.<p>";
-                        utils.showAlert();
+                        utils.showAlert(true);
                     } else if(response.data.status == 23000){
                         utils.setAlertTitle("Coperacha - Alerta");
                         document.getElementById('alert-content').innerHTML="" +
