@@ -60,7 +60,7 @@ var Share = (function() {
                     method: 'feed',
                     name: this.config.networks.facebook.title,
                     link: this.config.networks.facebook.url,
-                    picture: this.config.networks.facebook.image,
+                    picture: (this.config.networks.facebook.image != "/images/moneybox-demo.png") ? this.config.networks.facebook.image : "http://www.coperacha.pagelab.io/images/moneybox-demo.png",
                     caption: this.config.networks.facebook.caption,
                     description: this.config.networks.facebook.description
                 });
