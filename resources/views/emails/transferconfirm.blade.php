@@ -8,11 +8,11 @@
 
 @section('body')
     <tr>
-        <td COLSPAN=2 style="font-family: Arial;font-size: 30px;color: #51B7CD;text-align: center;line-height: 30px;padding-top:45px;">Felicidades Firstname</td>
+        <td COLSPAN=2 style="font-family: Arial;font-size: 30px;color: #51B7CD;text-align: center;line-height: 30px;padding-top:35px;">Felicidades Firstname</td>
     </tr>
 
     <tr>
-        <td COLSPAN=2 style="font-family: Arial;font-size: 16px;color: #666666;text-align: justify;line-height: 28px; padding-top:10px;">
+        <td COLSPAN=2 style="font-family: Arial;font-size: 16px;color: #666666;text-align: justify;line-height: 28px; padding-top:20px;">
             <p>
                 Te informamos que el monto total de tu alcancía ha sido transferido a la cuenta que nos indicaste.
             </p>
@@ -23,15 +23,8 @@
                 ¿Tienes sugerencias para mejorar nuestro servicio? Por favor escríbenos a hola@coperacha.com.mx nos encantaría saber tú opinión.
             </p>
             <p>
-                Saludos,
-                <br>
-                Pepe
+                Saludos.
             </p>
-        </td>
-    </tr>
-    <tr>
-        <td COLSPAN=2 style="text-align: center;padding-bottom:20px;">
-            <img width="300" src="/images/emails/logo2.png"/>
         </td>
     </tr>
 @endsection

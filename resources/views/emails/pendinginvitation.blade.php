@@ -13,12 +13,7 @@
             <p>
                 Para poder participar entra al siguiente link:<strong><a href="{{asset('/moneybox/detail/'.$moneybox->url)}}" style='color:#FF5000;text-decoration:none;'>{{$moneybox->name}}</a></strong>
             </p>
-            <p>Saludos,<br>Pepe</p>
-        </td>
-    </tr>
-    <tr>
-        <td COLSPAN=2 style="text-align: center;padding-bottom:20px;">
-            <img width="300" src="{{asset('/images/emails/logo2.png')}}"/>
+            <p>Saludos.</p>
         </td>
     </tr>
 @endsection

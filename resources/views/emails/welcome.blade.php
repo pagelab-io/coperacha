@@ -2,11 +2,11 @@
 
 @section('body')
     <tr>
-        <td COLSPAN=2 style="font-family: Arial;font-size: 30px;color: #51B7CD;text-align: center;line-height: 30px;padding-top:45px;">¡Bienvenido/a a Coperacha, {{$person->name}}!</td>
+        <td COLSPAN=2 style="font-family: Arial;font-size: 30px;color: #51B7CD;text-align: center;line-height: 30px;padding-top:35px;">¡Bienvenido/a a Coperacha, {{$person->name}}!</td>
     </tr>
 
     <tr>
-        <td COLSPAN=2 style="font-family: Arial;font-size: 16px;color: #666666;text-align: justify;line-height: 28px; padding-top:10px;">
+        <td COLSPAN=2 style="font-family: Arial;font-size: 16px;color: #666666;text-align: justify;line-height: 28px; padding-top:20px;">
             <p>
                 Primero que nada, queremos agradecerte por unirte a nuestra comunidad, esperamos acompañarte en muchas aventuras.
             </p>
@@ -20,15 +20,8 @@
                 Por el momento nos despedimos, pero es un gusto tenerte con nosotros.
             </p>
             <p>
-                Saludos,
-                <br>
-                Pepe
+                Saludos.
             </p>
-        </td>
-    </tr>
-    <tr>
-        <td COLSPAN=2 style="text-align: center;padding-bottom:20px;">
-            <img width="300" src="{{asset('/images/emails/logo2.png')}}"/>
         </td>
     </tr>
 @endsection

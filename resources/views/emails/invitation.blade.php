@@ -5,12 +5,12 @@
         <td COLSPAN=2 align="center" height="1" style="font-size:1px; line-height:1px; background: #CCCCCC"></td>
     </tr>
     <tr>
-        <td COLSPAN=2 style="font-family: Arial;font-size: 30px;color: #FF5000;text-align: center;line-height: 30px;padding-top:45px;padding-bottom:15px;">
+        <td COLSPAN=2 style="font-family: Arial;font-size: 30px;color: #FF5000;text-align: center;line-height: 30px;padding-top:35px;padding-bottom:15px;">
             <a href="{{asset('/moneybox/detail/'.$moneybox->url)}}" style='color:#FF5000;text-decoration:none;'>{{$moneybox->name}}</a>
         </td>
     </tr>
     <tr>
-        <td COLSPAN=2 style="font-family: Arial;font-size: 16px;color: #666666;text-align: justify;line-height: 28px; padding-top:10px;">
+        <td COLSPAN=2 style="font-family: Arial;font-size: 16px;color: #666666;text-align: justify;line-height: 28px; padding-top:20px;">
             <p>Coperacha es una plataforma en línea que facilita la recaudación de dinero entre un grupo de personas.</p>
             <p>
                 {{$moneybox->person->name}} te invitó a que te unas a la alcancía <strong>{{$moneybox->name}} </strong>
@@ -23,12 +23,7 @@
                 </strong>
             </p>
 
-            <p>Saludos,<br>Pepe</p>
-        </td>
-    </tr>
-    <tr>
-        <td COLSPAN=2 style="text-align: center;padding-bottom:20px;">
-            <img width="300" src="{{asset('/images/emails/logo2.png')}}"/>
+            <p>Saludos.
         </td>
     </tr>
 @endsection

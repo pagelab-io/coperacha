@@ -1,29 +1,18 @@
 <tr>
-    <td COLSPAN=2 align="center" height="1" style="font-size:1px; line-height:1px; background: #CCCCCC"></td>
-</tr>
-<tr>
-    <td COLSPAN=2 style="padding-top:10px; text-align: center">
-        <img src="{{asset('/images/emails/personaje1.png')}}" width="80" height="80"/>
-    </td>
-</tr>
-<tr>
-    <td COLSPAN=2 style="font-family:Arial; text-align: center; font-size: 18px; color: #666666; line-height: 24px;">
-        <span>Soy Pepe</span>
-    </td>
-</tr>
-<tr>
-    <td COLSPAN=2 style='font-family: Arial; text-align: center; font-size: 14px; color: #889098; line-height: 24px;'>
-        <span>¿Te puedo ayudar en algo?</span>
-    </td>
-</tr>
-<tr>
-    <td COLSPAN=2 style="text-align: center; padding-bottom:25px;">
-        <a href="{{route('pages.contact')}}" style='color:#FF5000;text-decoration:none;'>Clic aquí</a>
-    </td>
-</tr>
-<tr>
-    <td COLSPAN=2 align="center" height="1" style="font-size:1px; line-height:1px; background: #CCCCCC"></td>
-</tr>
-<tr>
-    <td COLSPAN=2 style="padding-bottom:25px;"></td>
+
+    <tr>
+        <td style="padding: 5px; text-align: right;">
+            <a style="display: inline-block" href="https://www.facebook.com/coperachamx">
+                <img width="30" height="30" src="{{asset('/images/emails/fb.png')}}" alt='facebook'/>
+            </a>
+            <a style="display: inline-block" href="https://twitter.com/coperacha_mx">
+                <img width="30" height="30" src="{{asset('/images/emails/twitter.png')}}" alt='twitter'/>
+            </a>
+            <a style="display: inline-block" href="https://www.instagram.com/coperachamx/">
+                <img width="30" height="30" src="{{asset('/images/emails/Instagram.png')}}" alt='instagram'/>
+            </a>
+        </td>
+    </tr>
+    <td COLSPAN=2 align="center" height="10px" style="background: #FF5000"></td>
+
 </tr>

@@ -3,11 +3,11 @@
 
 @section('body')
     <tr>
-        <td COLSPAN=2 style="font-family: Arial;font-size: 30px;color: #51B7CD;text-align: center;line-height: 30px;padding-top:45px;">Solicitud de Retiro</td>
+        <td COLSPAN=2 style="font-family: Arial;font-size: 30px;color: #51B7CD;text-align: center;line-height: 30px;padding-top:35px;">Solicitud de Retiro</td>
     </tr>
 
     <tr>
-        <td COLSPAN=2 style="font-family: Arial;font-size: 16px;color: #666666;text-align: justify;line-height: 28px; padding-top:10px;">
+        <td COLSPAN=2 style="font-family: Arial;font-size: 16px;color: #666666;text-align: justify;line-height: 28px; padding-top:20px;">
             <h3 style="margin-bottom: 1px;">Datos de la alcancía:</h3>
             <table style="width: 100%">
                 <tr>
@@ -49,12 +49,7 @@
             </table>
             <hr>
             <p>Un administrador de coperacha se pondrá en contacto contigo a la brevedad para dar seguimiento a tu retiro.</p>
-            <p>Saludos,<br>Pepe</p>
-        </td>
-    </tr>
-    <tr>
-        <td COLSPAN=2 style="text-align: center;padding-bottom:20px;">
-            <img width="300" src="{{asset('/images/emails/logo2.png')}}"/>
+            <p>Saludos.</p>
         </td>
     </tr>
 @endsection

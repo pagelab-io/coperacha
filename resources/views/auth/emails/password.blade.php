@@ -6,11 +6,11 @@
 
 @section('body')
     <tr>
-        <td COLSPAN=2 style="font-family: Arial;font-size: 30px;color: #51B7CD;text-align: center;line-height: 30px;padding-top:45px;"> Hola {{$user->person->name}} </td>
+        <td COLSPAN=2 style="font-family: Arial;font-size: 30px;color: #51B7CD;text-align: center;line-height: 30px;padding-top:35px;"> Hola {{$user->person->name}} </td>
     </tr>
 
     <tr>
-        <td COLSPAN=2 style="font-family: Arial;font-size: 16px;color: #666666;text-align: justify;line-height: 28px; padding-top:10px;">
+        <td COLSPAN=2 style="font-family: Arial;font-size: 16px;color: #666666;text-align: justify;line-height: 28px; padding-top:20px;">
             <p>
                 ¡Es horrible cuando no recuerdas tu contraseña! No te preocupes, estamos aquí para ayudarte.
             </p>

@@ -257,7 +257,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Send mail contact
+     * Send request email
      *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
@@ -313,7 +313,7 @@ class HomeController extends Controller
             Mail::send('emails.request', $data, function ($message) use ($user, $file) {
                 $pdf = Storage::disk('public')->get($file->name);
                 $message->from($user->email, $user->person->fullName());
-                $message->to('sanchezz985@gmail.com', 'Emmanuel Sánchez');
+                $message->to('coperachamexico@gmail.com', 'Coperacha - team');
                 $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com']);
                 $message->subject('Solicitud de Retiro');
                 $message->attach($pdf, ['display' => $file->name, 'mime' => $file->metadata]);
