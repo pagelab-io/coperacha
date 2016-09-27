@@ -145,13 +145,8 @@ var App = (function($, window){
             var image = $("#moneybox-image").attr('src');
 
 
-            var imgPath = image.split("/moneybox/image");
-            var img = null;
-
-            if(imgPath.length == 2)
-                img = "/moneybox/image"+imgPath[1];
-            else
-                img =imgPath[0];
+            var imgPath = image.split(location.host);
+            var img = img =imgPath[1];
 
             if (id > 0 && image.length > 0) {
 
