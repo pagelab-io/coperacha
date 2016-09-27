@@ -60,7 +60,7 @@ var Share = (function() {
                     method: 'feed',
                     name: this.config.networks.facebook.title,
                     link: this.config.networks.facebook.url,
-                    picture: (this.config.networks.facebook.image != "/images/moneybox-demo.png") ? this.config.networks.facebook.image : "http://www.coperacha.pagelab.io/images/moneybox-demo.png",
+                    picture: location.host+this.config.networks.facebook.image,
                     caption: this.config.networks.facebook.caption,
                     description: this.config.networks.facebook.description
                 });
@@ -136,6 +136,15 @@ var App = (function($, window){
             var desc = $("#moneybox-desc").val();
             var image = $("#moneybox-image").attr('src');
 
+
+            var imgPath = image.split("/moneybox/image");
+            var img = null;
+
+            if(imgPath.length == 2)
+                img = "/moneybox/image"+imgPath[1];
+            else
+                img =imgPath[0];
+
             if (id > 0 && image.length > 0) {
 
                 var share = new Share();
@@ -145,9 +154,9 @@ var App = (function($, window){
                             load_sdk: true,
                             app_id: "1581295808831173",
                             title: title,
-                            image: image,
+                            image: img,
                             description: desc,
-                            url: location.toString(),
+                            url: location.toString() ,
                             caption: caption
                         }
                     }
