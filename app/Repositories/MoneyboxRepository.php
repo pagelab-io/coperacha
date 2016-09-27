@@ -297,6 +297,9 @@ class MoneyboxRepository extends BaseRepository{
                     foreach ($personMoneyboxes as $pm) {
                         $moneybox = $this->byId($pm->moneybox_id);
                         $moneybox->participants;
+                        if (count($moneybox->files) > 0) {
+                            $moneybox->lastfile = $moneybox->files->last();
+                        }
                         array_push($moneyboxes, $moneybox);
                     }
                 }
