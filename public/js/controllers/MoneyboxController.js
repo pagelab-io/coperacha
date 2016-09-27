@@ -224,6 +224,9 @@
             } else if (!utils.isValidNumber($scope.goal_amount)) {
                 utils.setValidationError("El campo cantidad a reunir no es una cantidad valida");
                 return false;
+            } else if ($scope.goal_amount < 50 || $scope.goal_amount > 400000) {
+                utils.setValidationError("La cantidad a reunir debe ser entre $50.00 y $400,000 MXN");
+                return false;
             } else if (utils.isNullOrEmpty($scope.end_date)) {
                 utils.setValidationError("El campo fecha límite es requerido");
                 return false;
