@@ -1121,6 +1121,11 @@ hr {
     margin: 20px 0;
 }
 
+.moneybox-item .title > a {
+    color: rgb(255, 79, 0);
+    text-decoration: none;
+}
+
 .moneybox-item .btn {
     background: #3398CC;
     display: block;

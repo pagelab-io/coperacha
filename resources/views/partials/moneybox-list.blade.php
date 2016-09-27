@@ -13,7 +13,7 @@
                             </picture>
                         </header>
                         <main class="actions">
-                            <h2 class="title">{{$moneybox->name}}</h2>
+                            <h2 class="title"><a href="{{url('/moneybox/detail/'.$moneybox->url)}}">{{$moneybox->name}}</a></h2>
                             <div class="form-group">
                                 @if (Auth::user()->person->id == $moneybox->person_id)
                                     <a class="btn btn-primary"
