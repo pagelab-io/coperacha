@@ -14,11 +14,6 @@
              */
             url: '/api/v1/moneybox',
 
-            /**
-             * Url base for sessions
-             */
-            upload: '/upload',
-
             create: function (request)
             {
                 return $http.post(Moneybox.url, request);

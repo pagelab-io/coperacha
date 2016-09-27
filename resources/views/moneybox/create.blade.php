@@ -58,27 +58,33 @@
                                     <input id="person_id" name="person_id" type="hidden" class="form-control" ng-init="person_id='{{Auth::user()->person->id}}'" ng-model="person_id">
                                 </div>
 
-                                @if ($moneybox)
+
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-xs-2">
                                                 <picture style="margin-right: 15px">
-                                                    <img  id="moneybox-image" class="icon-file"
-                                                         style="height: 50px; width: auto"
-                                                         src="{{$moneybox->image ? url('/moneybox/image/' . $moneybox->image) : '/images/icon-file.png'}}">
+                                                    @if ($moneybox)
+                                                        <img  id="moneybox-image" class="icon-file"
+                                                            style="height: 50px; width: auto"
+                                                            src="{{$moneybox->image ? url('/moneybox/image/' . $moneybox->image) : '/images/icon-file.png'}}">
+                                                    @else
+                                                        <img  id="moneybox-image" class="icon-file"
+                                                            style="height: 50px; width: auto"
+                                                            src="/images/icon-file.png">
+                                                    @endif
                                                 </picture>
                                             </div>
                                             <div class="col-xs-10">
                                                 <input id="file"
-                                                       onchange="angular.element(this).scope().fileChanged(this)"
-                                                       ng-molde="file"
+                                                      onchange="angular.element(this).scope().fileChanged(this)"
+                                                       ng-model="file"
                                                        name="file"
                                                        type="file"
                                                        accept="image/*">
                                             </div>
                                         </div>
                                     </div>
-                                @endif
+
 
                                 <div class="form-group">
                                 @if ($moneybox)

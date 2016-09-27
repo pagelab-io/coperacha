@@ -116,7 +116,20 @@
                 Moneybox.update($scope.request)
                     .success(function(response){
                         if (response.status == 200) {
-                            window.location = '/moneybox/detail/'+response.data.url;
+                            if($scope.fileExist()){
+                                $scope.uploadImage(document.getElementById('file'), false, function(imageResponse){
+
+                                    // si hay error en la subida del archivo dejar pasar de todos modos ya que la alcancia ya se creo.
+                                    if (imageResponse.success) {
+                                        window.location = '/moneybox/detail/'+response.data.url;
+                                    } else {
+                                        window.location = '/moneybox/detail/'+response.data.url;
+                                    }
+
+                                });
+                            } else {
+                                window.location = '/moneybox/detail/'+response.data.url;
+                            }
                         } else {
                             $scope.utils.hideLoader();
                             $scope.utils.setAlertTitle("Coperacha - Alerta");
@@ -135,7 +148,22 @@
                 Moneybox.create($scope.request)
                     .success(function(response){
                         if (response.status == 200) {
-                            window.location = '/moneybox/detail/'+response.data.url;
+
+                            if ($scope.fileExist()) {
+                                $scope.moneybox_id = response.data.id;
+                                $scope.uploadImage(document.getElementById('file'), true, function(imageResponse){
+                                    // si hay error en la subida del archivo dejar pasar de todos modos ya que la alcancia ya se creo.
+                                    if (imageResponse.success) {
+                                        window.location = '/moneybox/detail/'+response.data.url;
+                                    } else {
+                                        window.location = '/moneybox/detail/'+response.data.url;
+                                    }
+
+                                });
+                            } else {
+                                window.location = '/moneybox/detail/'+response.data.url;
+                            }
+
                         } else {
                             $scope.utils.hideLoader();
                             $scope.utils.setAlertTitle("Coperacha - Alerta");
@@ -221,7 +249,7 @@
 
         $scope.changePrivacy = function(){};
 
-        $scope.fileChanged = function (element) {
+        $scope.uploadImage = function (element, creation, callback) {
             if ($scope.moneybox_id && element.files.length > 0) {
                 var file = element.files[0];
                 var imageType = /image.*/;
@@ -236,7 +264,9 @@
                     Moneybox.upload(form).success(function (response) {
 
                         if (response.success) {
-                            $scope.utils.hideLoader();
+                            console.log("exito al cargar la imagen");
+                            callback(response);
+                            /*$scope.utils.hideLoader();
                             var reader = new FileReader();
                             reader.onload = function () {
                                 document.querySelector('#moneybox-image').src = (reader.result);
@@ -245,17 +275,34 @@
                                 "<p>Imágen actualizada correctamente.<p>";
                                 $scope.utils.showAlert();
                             };
-                            reader.readAsDataURL(file);
+                            reader.readAsDataURL(file);*/
                         }
 
                     }).error(function(response){
-                        $('body').html(response);
+                        callback(response);
+                        //$('body').html(response);
                     });
 
                 } else {
                     console.log("File not supported!");
                 }
             }
+        };
+
+        $scope.fileChanged = function(element)
+        {
+            var imageType = /image.*/;
+            var file = element.files[0];
+            if($scope.fileExist()){
+                if(!file.type.match(imageType)){
+                    alert("archivo no soportado");
+                }
+            }
+        };
+
+        $scope.fileExist = function()
+        {
+            return document.getElementById("file").files.length > 0;
         };
 
     }
