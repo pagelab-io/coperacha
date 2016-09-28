@@ -403,7 +403,8 @@ class MoneyboxRepository extends BaseRepository{
             foreach ($participants as $participant) {
                 $payments = Payment::where(array(
                     array("person_id", $participant->person_id),
-                    array("moneybox_id", $participant->moneybox_id)
+                    array("moneybox_id", $participant->moneybox_id),
+                    array("status", PLConstants::PAYMENT_PAYED)
                 ))->get();
                 $settings = MemberSetting::where(array(
                     array("owner_id", $participant->id),
