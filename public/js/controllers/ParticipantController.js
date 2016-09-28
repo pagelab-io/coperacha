@@ -20,6 +20,7 @@
         $scope.settings = '';
         $scope.request = {};
         $scope.paymentMethod = '';
+        $scope.moneybox_id = '';
 
         $scope.goToParticipation = function()
         {
@@ -297,6 +298,60 @@
 
         };
 
+        $scope.participantsByMoneybox = function()
+        {
+            var utils = $scope.utils;
+            $scope.request = {
+                'moneybox_id':$scope.moneybox_id,
+                'api-key' : '$2y$10$ScZUgkFzrMr9NM5qPzKag.4mLTW8ugSG/DtT6nerJb3W1v5sg6UBC'
+            };
+
+            Participant.getMoneyboxParticipants($scope.request)
+                .success(function (response){
+                    console.log(response);
+                    utils.setAlertTitle("Participantes");
+                    if(response.status==200){
+                        var participants = response.data;
+                        var content = "";
+                        for (var i = 0; i < participants.length; i++) {
+                            if (i % 2 == 0)
+                                content += "<div class='row'>";
+
+                            // participant content
+                            var settings = participants[i].settings;
+                            if (settings[0].option_id == 7) { // visible
+                                content += "<div class='col-xs-6'>" +
+                                "<img class='participant-avatar' src='http://www.netjoven.pe/images/avatar.png'>" +
+                                "<p>Nombre: " + participants[i].person.name + "</p>" +
+                                "<p>Monto: $" + participants[i].amount + "</p>" +
+                                "</div>";
+                            } else if (settings[0].option_id == 8) { // just name
+                                content += "<div class='col-xs-6'>" +
+                                "<img class='participant-avatar' src='http://www.netjoven.pe/images/avatar.png'>" +
+                                "<p>Nombre: " + participants[i].person.name + "</p>" +
+                                "</div>";
+                            } else if (settings[0].option_id == 9) { // nothing
+                                content += "<div class='col-xs-6'>" +
+                                "<img class='participant-avatar' src='http://www.netjoven.pe/images/avatar.png'>" +
+                                "<p>Anónimo</p></div>";
+                            }
+
+                            // participant content
+
+                            if (i % 2 != 0)
+                                content += "</hr></div>";
+                        }
+                        document.getElementById('alert-content').innerHTML=content;
+                    } else if (response.status == -1){
+                        document.getElementById('alert-content').innerHTML="" +
+                        "<div class='row'>" +
+                        " Esta alcancía aun no tiene participantes " +
+                        "</div>";
+                    }
+
+                    utils.showAlert();
+                });
+        }
     }
 
 })();

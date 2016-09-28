@@ -23,6 +23,7 @@
     margin-top: -200px;
     margin-left: -250px;
     transition: 300ms all;
+    overflow: scroll;
 }
 
 .alert-modal.small{
@@ -178,4 +179,11 @@
         width: 60%;
         margin: 0 auto;
     }
+}
+
+.participant-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
 }

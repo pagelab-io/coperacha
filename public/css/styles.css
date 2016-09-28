@@ -1299,6 +1299,10 @@ hr {
     color: #4CB7CE;
 }
 
+.moneybox-profile .form.profile label > a {
+    color: #4CB7CE;
+}
+
 .request-view .form .form-group > label {
     font-family: verbmedium;
 }

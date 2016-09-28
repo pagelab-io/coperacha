@@ -142,6 +142,7 @@ $router->group([
     $router->get('/settings',       ['middleware' => 'auth', 'uses' => 'SettingController@getAll']);
     $router->post('/option',        ['middleware' => 'auth', 'uses' => 'SettingController@createOptions']);
     $router->post('/payment',       ['uses' => 'PaymentController@createPayment']);
+    $router->post('/getParticipants', ['uses' => 'MoneyboxController@getParticipants']);
 });
 
 Route::get('/moneybox/image/{filename}', 'Moneybox\MoneyboxController@getMoneyboxImage');

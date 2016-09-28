@@ -155,5 +155,19 @@ class MoneyboxController extends PLController
         return new Response($file, 200);
     }
 
+    public function getParticipants(PLRequest $request)
+    {
+        try {
+            $this->setResponse($this->_moneyboxRepository->getParticipants($request->get('moneybox_id')));
+            return response()->json($this->getResponse());
+        } catch (\Exception $ex) {
+            $response = new PLResponse();
+            $response->status = $ex->getCode();
+            $response->description = $ex->getMessage();
+            $response->data = $ex->getTraceAsString();
+            return response()->json($response);
+        }
+    }
+
     //endregion
 }

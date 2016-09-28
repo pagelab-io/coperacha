@@ -17,8 +17,8 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-5">
-                            <form class="form profile">
-                                <input id="moneybox-id" type="hidden" value="{{$moneybox->id}}">
+                            <form class="form profile" ng-controller="participantController">
+                                <input id="moneybox-id" type="hidden" ng-model="moneybox_id" ng-init="moneybox_id='{{$moneybox->id}}'">
                                 <input id="moneybox-name" type="hidden" value="{{$moneybox->name}}">
                                 <input id="moneybox-desc" type="hidden" value="{{$moneybox->description}}">
 
@@ -32,7 +32,7 @@
                                 <div class="form-group">
                                     <label>
                                         <img src="/images/icon-profile-user.png">
-                                        Participantes: {{$partiticipantsnumber}}
+                                        <a href="javascript:void(0)" ng-click="participantsByMoneybox()">Participantes: {{$partiticipantsnumber}}</a>
                                     </label>
                                 </div>
                                 <div class="form-group">
@@ -56,7 +56,7 @@
                                         Total recaudado: ${{number_format($moneybox->collected_amount, 2)}}
                                     </label>
                                 </div>
-                                <div class="form-group" ng-controller="participantController">
+                                <div class="form-group">
                                     <input type="hidden" ng-init="moneyboxurl='{{$moneybox->url}}'"/>
                                     <button class="btn-primary small" ng-click="goToParticipation()">Participa</button>
                                 </div>

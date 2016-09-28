@@ -30,6 +30,11 @@
             payment: function(request)
             {
                 return $http.post('/api/v1/moneybox/payment', request);
+            },
+
+            getMoneyboxParticipants: function(request)
+            {
+                return $http.post('/api/v1/moneybox/getParticipants', request);
             }
 
         };

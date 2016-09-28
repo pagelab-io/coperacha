@@ -10,6 +10,7 @@ namespace App\Repositories;
 
 use App\Entities\MemberSetting;
 use App\Entities\Participant;
+use App\Entities\Payment;
 use App\Entities\Person;
 use App\Http\Responses\PLResponse;
 use App\Models\Mailer;
@@ -278,7 +279,7 @@ class MoneyboxRepository extends BaseRepository{
 
         return $moneyboxes;
     }
-    
+
     /**
      * Get the moneyboxes where a person has participated
      * @param PLRequest $request
@@ -386,6 +387,46 @@ class MoneyboxRepository extends BaseRepository{
             throw $ex;
         }
         return $result;
+    }
+
+    public function getParticipants($moneybox_id)
+    {
+        \Log::info("=== Getting all participants ===");
+        $moneybox = null;
+        $response = new PLResponse();
+        try {$moneybox = $this->byId($moneybox_id); }
+        catch(\Exception $ex) { throw new \Exception("Moneybox does not exist", -1, $ex); }
+
+        $participants = $moneybox->participants;
+        if(count($participants) > 0 ){
+
+            foreach ($participants as $participant) {
+                $payments = Payment::where(array(
+                    array("person_id", $participant->person_id),
+                    array("moneybox_id", $participant->moneybox_id)
+                ))->get();
+                $settings = MemberSetting::where(array(
+                    array("owner_id", $participant->id),
+                    array("owner", "participant")
+                ))->get();
+                $payment = 0;
+                foreach ($payments as $p) {
+                    $payment += $p->amount;
+                }
+                $participant->settings = $settings;
+                $participant->person;
+                $participant->amount = $payment;
+            }
+
+            $response->data = $participants;
+            $response->description = 'participants obteined successfully';
+        } else {
+            $response->data = [];
+            $response->status = -1;
+            $response->description = 'this moneybox not has participants';
+        }
+
+        return $response;
     }
 
     //endregion
