@@ -8,3 +8,4 @@ Homestead.json
 /node_modules
 /public/git-request.php
 /storage/framework
+/public/cms/wp-config.php

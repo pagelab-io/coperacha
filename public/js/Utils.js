@@ -100,18 +100,28 @@ function Utils()
     this.initAlertEvents = function()
     {
         var _this = this;
-        document.getElementById('close-alert-1').addEventListener('click', function(){
-            _this.hideAlert();
-        });
-        document.getElementById('close-alert-2').addEventListener('click', function(){
-            _this.hideAlert();
-        });
-        document.getElementById('close-alert-3').addEventListener('click', function(){
-            _this.hideAlert(true);
-        });
-        document.getElementById('close-alert-4').addEventListener('click', function(){
-            _this.hideAlert(true);
-        });
+
+        if (document.getElementById('close-alert-1')) {
+            document.getElementById('close-alert-1').addEventListener('click', function () {
+                _this.hideAlert();
+            });
+        }
+        if (document.getElementById('close-alert-2')) {
+            document.getElementById('close-alert-2').addEventListener('click', function () {
+                _this.hideAlert();
+            });
+        }
+        if (document.getElementById('close-alert-3')) {
+            document.getElementById('close-alert-3').addEventListener('click', function () {
+                _this.hideAlert(true);
+            });
+        }
+        if (document.getElementById('close-alert-4')) {
+            document.getElementById('close-alert-4').addEventListener('click', function () {
+                _this.hideAlert(true);
+            });
+        }
+        
         document.addEventListener('keyup', function(e){
             if (e.keyCode == 27) {
                 if (document.getElementById('alert-modal-coperacha').style.display == 'block' && document.getElementById('login-modal-coperacha').style.display == 'block') {
