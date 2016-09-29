@@ -9,6 +9,7 @@
 namespace App\Repositories;
 
 use App\Entities\Moneybox;
+use App\Entities\Participant;
 use App\Entities\Person;
 use App\Http\Requests\PLRequest;
 use App\Http\Responses\PLResponse;
@@ -154,6 +155,17 @@ class PaymentRepository extends BaseRepository
                 $moneybox->collected_amount += $payment->amount;
                 $moneybox->commission_amount = ($payment->amount*PLConstants::PAYMENT_COMMISSION)/100;
                 $moneybox->save();
+
+                //update participant status
+                \Log::info("=== Searching participant ===");
+                $participant = Participant::where(array(
+                    array('moneybox_id', $moneybox->id),
+                    array('person_id', $payment->person_id)
+                ))->firstOrFail();
+                \Log::info("=== Participant: ".$participant." ===");
+                $participant->active = 1;
+                $participant->save();
+
                 \DB::commit();
             } catch(\Exception $ex) {
                 \Log::info("=== Executing rollback ... ===");
@@ -213,6 +225,17 @@ class PaymentRepository extends BaseRepository
                         $moneybox->collected_amount += $payment->amount;
                         $moneybox->commission_amount = ($payment->amount*PLConstants::PAYMENT_COMMISSION)/100;
                         $moneybox->save();
+
+                        //update participant status
+                        \Log::info("=== Searching participant ===");
+                        $participant = Participant::where(array(
+                            array('moneybox_id', $moneybox->id),
+                            array('person_id', $payment->person_id)
+                        ))->firstOrFail();
+                        \Log::info("=== Participant: ".$participant." ===");
+                        $participant->active = 1;
+                        $participant->save();
+
                         \DB::commit();
                     } catch(\Exception $ex) {
                         \Log::info("=== Executing rollback ... ===");
@@ -390,8 +413,9 @@ class PaymentRepository extends BaseRepository
         catch(\Exception $ex){ throw new \Exception("Unable to find moneybox", -1); }
         \Log::info("=== Moneybox : ".$moneybox."===");
 
+        $cancelUrl = env('CANCEL_URL')."/moneybox/summary/".$moneybox->url;
+        $this->_paypal->setCancelUrl($cancelUrl);
         $paypalResponse = $this->_paypal->sendPayment($request);
-        \Log::info($paypalResponse);
         if (is_array($paypalResponse)) {
             if($paypalResponse['success'] == 1) {
                 if($paypalResponse['success'] == 1) {

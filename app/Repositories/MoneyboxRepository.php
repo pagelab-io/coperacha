@@ -293,7 +293,10 @@ class MoneyboxRepository extends BaseRepository{
             $person = $this->_personRepository->byId($request->get('person_id'));
             if ($person instanceof Person) {
 
-                $personMoneyboxes = $person->personMoneyboxes;
+                $personMoneyboxes = Participant::where(array(
+                    array('person_id', $person->id),
+                    array('active', 1)
+                ))->get();
                 if (count($personMoneyboxes) > 0) {
                     foreach ($personMoneyboxes as $pm) {
                         $moneybox = $this->byId($pm->moneybox_id);
@@ -376,7 +379,10 @@ class MoneyboxRepository extends BaseRepository{
             $result = array();
             if ($moneybox) {
                 $person = Person::where("id", $moneybox->person_id)->firstOrFail();
-                $participantsnumber = Participant::where('moneybox_id', $moneybox->id)->count();
+                $participantsnumber = Participant::where(array(
+                    array('moneybox_id', $moneybox->id),
+                    array('active', 1)
+                ))->count();
                 $settings = MemberSetting::where(["owner_id" => $moneybox->id, "owner" => "moneybox"])->get();
             }
             $result['moneybox'] = $moneybox;
@@ -397,7 +403,10 @@ class MoneyboxRepository extends BaseRepository{
         try {$moneybox = $this->byId($moneybox_id); }
         catch(\Exception $ex) { throw new \Exception("Moneybox does not exist", -1, $ex); }
 
-        $participants = $moneybox->participants;
+        $participants = Participant::where(array(
+            array('moneybox_id', $moneybox->id),
+            array('active', 1)
+        ))->get();
         if(count($participants) > 0 ){
 
             foreach ($participants as $participant) {

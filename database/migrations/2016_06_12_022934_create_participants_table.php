@@ -19,6 +19,7 @@ class CreateParticipantsTable extends Migration
                 $table->increments('id');
                 $table->integer('person_id')->unsigned(); //FK
                 $table->integer('moneybox_id')->unsigned(); //FK
+                $table->integer('active')->unsigned();
                 $table->timestamps();
 
                 $table->foreign('person_id')->references('id')->on('persons');

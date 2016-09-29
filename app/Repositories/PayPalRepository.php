@@ -36,6 +36,11 @@ class PayPalRepository implements IPLPayment{
         $this->_moneyboxRepository = $moneyboxRepository;
     }
 
+    public function setCancelUrl($url)
+    {
+        $this->_paypal->setCancelUrl($url);
+    }
+
     /**
      * Method to build the PayPal String
      *

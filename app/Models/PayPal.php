@@ -97,6 +97,11 @@ class PayPal
         $this->settings = env('WEBSTORE_SETTINGS');
     }
 
+    public function setCancelUrl($url)
+    {
+        $this->cancelURL = $url;
+    }
+
     /**
      *
      * @param $methodName

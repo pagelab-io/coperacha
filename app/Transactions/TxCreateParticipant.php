@@ -110,6 +110,7 @@ class TxCreateParticipant extends PLTransaction{
         $participant = new Participant();
         $participant->person_id = $person->id;
         $participant->moneybox_id = $moneybox->id;
+        $participant->active = 0;
         if (!$participant->save()) throw new \Exception("Unable to create Participant", -1);
         \Log::info("=== Participant created successfully : " . $participant. " ===");
         return $participant;

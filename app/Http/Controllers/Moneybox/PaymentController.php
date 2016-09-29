@@ -66,8 +66,9 @@ class PaymentController extends PLController
         try {
             $this->setResponse($this->_paymentRepository->paypalResponse($request));
             if ($this->getResponse()->status == 200) {
+                \Log::info("delete tmp_participant session");
                 if (\Session::get('tmp_participant'))
-                    \Session::forget('');
+                    \Session::forget('tmp_participant');
                 return redirect('/');
             } else {
                 // TODO - change this for anoter view
@@ -88,7 +89,7 @@ class PaymentController extends PLController
             $this->setResponse($this->_paymentRepository->conektaResponse($request));
             if ($this->getResponse()->status == 200) {
                 if (\Session::get('tmp_participant'))
-                    \Session::forget('');
+                    \Session::forget('tmp_participant');
             }
             return response()->json($this->getResponse());
         } catch (\Exception $ex) {
