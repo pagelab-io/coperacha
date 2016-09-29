@@ -22,7 +22,7 @@ define('DB_NAME', 'coperacha');
 define('DB_USER', 'root');
 
 /** Tu contraseña de MySQL */
-define('DB_PASSWORD', '');
+define('DB_PASSWORD', 'd3v3l0p3r');
 
 /** Host de MySQL (es muy probable que no necesites cambiarlo) */
 define('DB_HOST', 'localhost');
