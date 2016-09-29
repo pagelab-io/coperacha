@@ -149,6 +149,35 @@ class MoneyboxRepository extends BaseRepository{
                 $goal_amount += $moneybox->goal_amount;
             }
 
+
+            // today, yesterday and month moneyboxes
+            $todayMoneyboxes = Moneybox::where('created_at', 'like' ,'%'.Carbon::today()->format('Y-m-d').'%')->count();
+            $yesterdayMoneyboxes = Moneybox::where('created_at', 'like' ,'%'.Carbon::yesterday()->format('Y-m-d').'%')->count();
+
+            $month = Carbon::today()->format('m');
+            $monthMoneyboxes = Moneybox::where(array(
+                array('created_at', '>=', Carbon::createFromDate($currentDate->year,$month,01)),
+                array('created_at', '<', Carbon::createFromDate($currentDate->year,$month,01)->addMonth())
+            ))->count();
+
+            // today, yesterday and month payments
+
+            $todayPayments = Payment::where(array(
+                array('created_at', 'like' ,'%'.Carbon::today()->format('Y-m-d').'%'),
+                array('status', 'PAYED')
+            ))->sum('amount');
+
+            $yesterdayPayments = Payment::where(array(
+                array('created_at', 'like' ,'%'.Carbon::yesterday()->format('Y-m-d').'%'),
+                array('status', 'PAYED')
+            ))->sum('amount');
+
+            $monthPayments = Payment::where(array(
+                array('status', 'PAYED'),
+                array('created_at', '>=', Carbon::createFromDate($currentDate->year,$month,01)),
+                array('created_at', '<', Carbon::createFromDate($currentDate->year,$month,01)->addMonth())
+            ))->sum('amount');
+
             return array(
                 'moneyboxes' => array(
                     'Por Día' => count($moneyboxes)/365,
@@ -157,9 +186,14 @@ class MoneyboxRepository extends BaseRepository{
                     'Por Año' => count($moneyboxes)
                 ),
                 'durability' => array(
+                    'Alcancías del día' => $todayMoneyboxes,
+                    'Alcancías de ayer' => $yesterdayMoneyboxes,
+                    'Alcancías en el mes' => $monthMoneyboxes,
                     'Duración promedio (días)' => number_format($durability_sum/count($moneyboxes), 2),
-                    'Monto Recaudado' => "$".number_format($collected_amount/count($moneyboxes), 2),
-                    'Monto a alcanzar' => "$".number_format($goal_amount/count($moneyboxes), 2)
+                    'Monto Recaudado (promedio)' => "$ ".number_format($collected_amount/count($moneyboxes), 2),
+                    'Monto Recaudado del día' => "$ ".number_format($todayPayments, 2),
+                    'Monto Recaudado ayer' => "$ ".number_format($yesterdayPayments, 2),
+                    'Monto Recaudado del mes' => "$ ".number_format($monthPayments, 2)
                 )
             );
 
