@@ -53,7 +53,7 @@
             </div>
         </div>
 
-        <div class="col-xs-12 col-sm-6">
+        <div class="col-xs-12 col-sm-12">
             <div class="panel panel-primary">
                 <!-- header -->
                 <div class="panel-heading">
@@ -69,7 +69,9 @@
                         <thead>
                             <tr>
                                 <th class="widget-th">#</th>
-                                <th class="widget-th">Nombre alcancía</th>
+                                <th class="widget-th">Nombre de la alcancía</th>
+                                <th class="widget-th">Fecha de creación</th>
+                                <th class="widget-th">Fecha en que termina</th>
                                 <th class="widget-th"></th>
                             </tr>
                         </thead>
@@ -78,6 +80,8 @@
                             <tr>
                                 <td>{{$moneybox->id}}</td>
                                 <td>{{$moneybox->name}}</td>
+                                <td>{{$moneybox->created_at->format('Y-m-d')}}</td>
+                                <td>{{$moneybox->end_date}}</td>
                                 <td><a href="{{url('dashboard/moneyboxes/'.$moneybox->url)}}">Ver más</a></td>
                             </tr>
                             @endforeach
@@ -87,7 +91,7 @@
             </div>
         </div>
 
-        <div class="col-xs-12 col-sm-6">
+        <div class="col-xs-12 col-sm-12">
             <div class="panel panel-primary">
                 <!-- header -->
                 <div class="panel-heading">
@@ -103,7 +107,9 @@
                         <thead>
                             <tr>
                                 <th class="widget-th">#</th>
-                                <th class="widget-th">Nombre alcancía</th>
+                                <th class="widget-th">Nombre de la alcancía</th>
+                                <th class="widget-th">Fecha de creación</th>
+                                <th class="widget-th">Fecha en que termina</th>
                                 <th class="widget-th"></th>
                             </tr>
                         </thead>
@@ -112,6 +118,8 @@
                             <tr>
                                 <td>{{$moneybox->id}}</td>
                                 <td>{{$moneybox->name}}</td>
+                                <td>{{$moneybox->created_at->format('Y-m-d')}}</td>
+                                <td>{{$moneybox->end_date}}</td>
                                 <td><a href="{{url('dashboard/moneyboxes/'.$moneybox->url)}}">Ver más</a></td>
                             </tr>
                             @endforeach
@@ -137,14 +145,46 @@
                         <thead>
                             <tr>
                                 <th class="widget-th">Método de pago</th>
-                                <th class="widget-th">% de uso</th>
+                                <th class="widget-th">Porcentaje de uso</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($payments as $payment => $value)
+                            @foreach($payments['paymentsAVG'] as $payment => $value)
                             <tr>
                                 <td>{{\App\Utilities\PLUtils::getPaymentMethodString($payment)}}</td>
                                 <td>{{number_format($value, 2)."%"}}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6">
+            <div class="panel panel-primary">
+                <!-- header -->
+                <div class="panel-heading">
+                    Pagos en general
+                    <br>
+                    <span>Pagos por día, por mes, por año.</span>
+                </div>
+
+                <!-- body -->
+                <div class="panel-body">
+                    <!-- Table -->
+                    <table class="table bordered stripped responsive-table">
+                        <thead>
+                            <tr>
+                                <th class="widget-th"></th>
+                                <th class="widget-th"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($payments['paymentsGeneral'] as $key => $value)
+                            <tr>
+                                <td>{{$key}}</td>
+                                <td>{{$value}}</td>
                             </tr>
                             @endforeach
                         </tbody>

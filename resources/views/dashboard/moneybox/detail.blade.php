@@ -46,7 +46,7 @@
                                 <td>{{$moneybox->category->name}}</td>
                             </tr>
                             <tr>
-                                <td>Propietario</td>
+                                <td>Organizador</td>
                                 <td>{{$moneybox->person->name." ".$moneybox->person->lastname}}</td>
                             </tr>
                             <tr>
@@ -61,6 +61,42 @@
                                 <td>Fecha limite</td>
                                 <td>{{\App\Utilities\PLUtils::getStringDate($moneybox->end_date)}}</td>
                             </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-12">
+            <div class="panel panel-primary">
+                <!-- header -->
+                <div class="panel-heading">
+                    Información de pagos
+                    <br>
+                    <span>Pagos realizados para esta alcancía.</span>
+                </div>
+
+                <!-- body -->
+                <div class="panel-body">
+                    <!-- Table -->
+                    <table class="table bordered stripped responsive-table">
+                        <thead>
+                            <tr>
+                                <th class="widget-th">#</th>
+                                <th class="widget-th">Participante</th>
+                                <th class="widget-th">Monto</th>
+                                <th class="widget-th">Fecha del pago</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($payments['paymentsGeneral'] as $payment)
+                            <tr>
+                                <td>{{$payment->id}}</td>
+                                <td>{{$payment->person->name." ".$payment->person->lastname}}</td>
+                                <td>{{'$ '.number_format($payment->amount, 2)}}</td>
+                                <td>{{$payment->created_at->format('Y-m-d')}}</td>
+                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -121,7 +157,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($payments as $payment => $value)
+                            @foreach($payments['paymentsAVG'] as $payment => $value)
                             <tr>
                                 <td>{{\App\Utilities\PLUtils::getPaymentMethodString($payment)}}</td>
                                 <td>{{number_format($value, 2)."%"}}</td>

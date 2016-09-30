@@ -40,6 +40,6 @@ class PLConstants {
     const PERSON_GENDER_M = "Mujer";
 
     // moneybox constants
-    const MONEYBOX_STATUS_ACTIVE = "Activo";
-    const MONEYBOX_STATUS_INACTIVE = "Inactivo";
+    const MONEYBOX_STATUS_ACTIVE = "Activa";
+    const MONEYBOX_STATUS_INACTIVE = "Completada";
 }

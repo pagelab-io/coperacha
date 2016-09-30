@@ -18,6 +18,7 @@ use App\Models\Mailer;
 use App\Models\PLConektaOxxo;
 use App\Models\PLConektaSpei;
 use App\Utilities\PLConstants;
+use Carbon\Carbon;
 use Mockery\CountValidator\Exception;
 
 class PaymentRepository extends BaseRepository
@@ -295,45 +296,82 @@ class PaymentRepository extends BaseRepository
 
     public function paymentAVGByPerson($person_id)
     {
-        $result = array('P' => 0,'O' => 0,'S' => 0);
+        $paymentsAVG = array('P' => 0,'O' => 0,'S' => 0);
         $payments = Payment::where(array(array('person_id', $person_id), array('status', PLConstants::PAYMENT_PAYED)))->get();
         $sum = 0;
         if(count($payments) > 0){
             foreach($payments as $payment){
                 $sum++;
-                $result[$payment->method] += 1;
+                $paymentsAVG[$payment->method] += 1;
             }
-            foreach($result as $key => $value){
-                $avg = ($result[$key]/$sum)*100;
-                $result[$key] = $avg;
+            foreach($paymentsAVG as $key => $value){
+                $avg = ($paymentsAVG[$key]/$sum)*100;
+                $paymentsAVG[$key] = $avg;
             }
         }
 
-        return $result;
+        // payments general
+        $today = new Carbon();
+        $paymentsToday = Payment::where(array(
+            array('created_at', 'like' ,'%'.Carbon::today()->format('Y-m-d').'%'),
+            array('status', 'PAYED'),
+            array('person_id', $person_id)
+        ))->count();
+        $paymentsInMonth = Payment::where(array(
+            array('status', 'PAYED'),
+            array('created_at', '>=', Carbon::createFromDate($today->year,$today->month,01)),
+            array('created_at', '<', Carbon::createFromDate($today->year,$today->month,01)->addMonth()),
+            array('person_id', $person_id)
+        ))->count();
+        $paymentsInYear = Payment::where(array(
+            array('status', 'PAYED'),
+            array('created_at', '>=', Carbon::createFromDate($today->year,$today->month,01)),
+            array('created_at', '<', Carbon::createFromDate($today->year,$today->month,01)->addYear()),
+            array('person_id', $person_id)
+        ))->count();;
+
+        $paymentsGeneral = array(
+            'Pagos en el día' => $paymentsToday,
+            'Pagos en el mes' => $paymentsInMonth,
+            'Pagos en el año' => $paymentsInYear
+        );
+
+        return array(
+            'paymentsAVG' => $paymentsAVG,
+            'paymentsGeneral' => $paymentsGeneral
+        );
     }
 
     public function paymentAVGByMoneybox($moneybox_id)
     {
         $moneybox = $this->_moneyboxRepository->byId($moneybox_id);
-        $result = array('P' => 0,'O' => 0,'S' => 0);
+        $paymentsAVG = array('P' => 0,'O' => 0,'S' => 0);
         $payments = $moneybox->payments;
         $sum = 0;
         if(count($payments) > 0){
             foreach($payments as $payment){
                 if($payment->status == PLConstants::PAYMENT_PAYED) {
                     $sum++;
-                    $result[$payment->method] += 1;
+                    $paymentsAVG[$payment->method] += 1;
                 }
             }
             if($sum > 0) {
-                foreach($result as $key => $value){
-                    $avg = ($result[$key]/$sum)*100;
-                    $result[$key] = $avg;
+                foreach($paymentsAVG as $key => $value){
+                    $avg = ($paymentsAVG[$key]/$sum)*100;
+                    $paymentsAVG[$key] = $avg;
                 }
             }
         }
 
-        return $result;
+        // general payments
+        $generalPayments = Payment::where(array(
+            array('moneybox_id', $moneybox_id),
+            array('status', PLConstants::PAYMENT_PAYED)
+        ))->get();
+        return array(
+            'paymentsAVG' => $paymentsAVG,
+            'paymentsGeneral' => $generalPayments
+        );
     }
 
     //endregion

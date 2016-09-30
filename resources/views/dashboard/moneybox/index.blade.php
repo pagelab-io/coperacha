@@ -37,9 +37,10 @@
             <tr>
                 <th>#</th>
                 <th>Nombre</th>
-                <th>Propietario</th>
+                <th>Organizador</th>
                 <th>Monto recaudado</th>
-                <th>Comisión</th>
+                <th>Comisión (5%)</th>
+                <th>Fecha vencimiento</th>
                 <th>Status</th>
                 <th></th>
             </tr>
@@ -48,8 +49,9 @@
                     <td>{{$moneybox->id}}</td>
                     <td>{{$moneybox->name}}</td>
                     <td>{{$moneybox->person->name." ".$moneybox->person->lastname}}</td>
-                    <td>{{$moneybox->collected_amount}}</td>
-                    <td>{{$moneybox->commission_amount}}</td>
+                    <td>{{'$ '.number_format($moneybox->collected_amount, 2)}}</td>
+                    <td>{{'$ '.number_format($moneybox->commission_amount, 2)}}</td>
+                    <td>{{$moneybox->end_date}}</td>
                     <td>{{\App\Utilities\PLUtils::getMoneyboxStatusString($moneybox->active)}}</td>
                     <td><a href="{{url('/dashboard/moneyboxes/'.$moneybox->url.'')}}">Ver más</a></td>
                 </tr>
