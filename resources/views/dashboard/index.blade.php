@@ -141,51 +141,6 @@
 
                     <!-- header -->
                     <div class="panel-heading">
-                        Usuarios por género
-                        <br>
-                        <span>Número total de usuarios (inscritos/activos) por genero</span>
-                    </div>
-                    <!-- body -->
-                    <div class="panel-body">
-                        <div class="dashboard-graph" id="genderChart"></div>
-                        <!-- Table -->
-                        <table class="table table-striped table-responsive">
-                            <caption>
-                                <span class="small">Total de Usuarios: {{$statics['totalUsers']}}</span>
-                            </caption>
-                            <thead>
-                                <tr>
-                                    <th class="widget-th">#</th>
-                                    <th class="widget-th">Género</th>
-                                    <th class="widget-th">Porcentaje</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($statics['genderAVG'] as $key => $value)
-                                    <tr>
-                                        <td></td>
-                                        <td>{{\App\Utilities\PLUtils::getStringGender($key)}}</td>
-                                        <td>{{number_format($value, 2)." %"}}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    <!--footer-->
-                    <div class="panel-footer">
-                        <a href="{{url('dashboard/users')}}">Ver más ></a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <div class="dashboard-items">
-
-            <div class="col-xs-12 col-sm-6">
-                <div class="panel panel-primary">
-
-                    <!-- header -->
-                    <div class="panel-heading">
                         Usuarios por tipo de registro
                         <br>
                         <span>Número de usuarios registrados por Facebook y por correo electrónico</span>
@@ -213,6 +168,56 @@
                                        <td>{{number_format($value, 2)." %"}}</td>
                                    </tr>
                                @endforeach
+                               <tr>
+                                  <td></td>
+                                  <td>Usuarios registrados en el día</td>
+                                  <td>{{$statics['todayRegisters']}}</td>
+                              </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--footer-->
+                    <div class="panel-footer">
+                        <a href="{{url('dashboard/users')}}">Ver más ></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="dashboard-items">
+
+            <div class="col-xs-12 col-sm-6">
+                <div class="panel panel-primary">
+
+                    <!-- header -->
+                    <div class="panel-heading">
+                        Usuarios por género
+                        <br>
+                        <span>Número total de usuarios (inscritos/activos) por genero</span>
+                    </div>
+                    <!-- body -->
+                    <div class="panel-body">
+                        <div class="dashboard-graph" id="genderChart"></div>
+                        <!-- Table -->
+                        <table class="table table-striped table-responsive">
+                            <caption>
+                                <span class="small">Total de Usuarios: {{$statics['totalUsers']}}</span>
+                            </caption>
+                            <thead>
+                                <tr>
+                                    <th class="widget-th">#</th>
+                                    <th class="widget-th">Género</th>
+                                    <th class="widget-th">Porcentaje</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($statics['genderAVG'] as $key => $value)
+                                    <tr>
+                                        <td></td>
+                                        <td>{{\App\Utilities\PLUtils::getStringGender($key)}}</td>
+                                        <td>{{number_format($value, 2)." %"}}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
