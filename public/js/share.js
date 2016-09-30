@@ -56,14 +56,7 @@ var Share = (function() {
                 if (!window.FB) {
                     return console.error("The Facebook JS SDK hasn't loaded yet.");
                 }
-                console.log({
-                    method: 'feed',
-                    name: this.config.networks.facebook.title,
-                    link: this.config.networks.facebook.url,
-                    picture: location.host+this.config.networks.facebook.image,
-                    caption: this.config.networks.facebook.caption,
-                    description: this.config.networks.facebook.description
-                });
+
                 return FB.ui({
                     method: 'feed',
                     name: this.config.networks.facebook.title,
@@ -72,6 +65,7 @@ var Share = (function() {
                     caption: this.config.networks.facebook.caption,
                     description: this.config.networks.facebook.description
                 });
+
             } else {
                 return this.popup('https://www.facebook.com/sharer/sharer.php', {
                     u: this.config.networks.facebook.url
@@ -146,12 +140,7 @@ var App = (function($, window){
 
 
             var imgPath = image.split(location.host);
-            var img = null;
-
-            if(imgPath.length == 2)
-                img = "/moneybox/image"+imgPath[1];
-            else
-                img =imgPath[1];
+            var img = imgPath[1];
 
             if (id > 0 && image.length > 0) {
 
@@ -177,7 +166,6 @@ var App = (function($, window){
             }
         }
     };
-
 
     Application.init();
 

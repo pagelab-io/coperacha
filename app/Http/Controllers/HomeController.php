@@ -10,6 +10,7 @@ use App\Http\Requests\PLRequest;
 use App\Repositories\MoneyboxRepository;
 use App\Repositories\SettingRepository;
 use App\Repositories\UserRepository;
+use App\Wordpress\model\Post;
 use Illuminate\Contracts\Queue\EntityNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -98,7 +99,14 @@ class HomeController extends Controller
      */
     public function getFaqsPage()
     {
-        return view('pages.faqs', ['pageTitle' => 'Preguntas Frecuentes']);
+        $post = Post::find(2);
+        $childrens = $post->getChildrens();
+
+        return view('pages.faqs', [
+            'pageTitle' => 'Preguntas Frecuentes',
+            'post'      => $post,
+            'pages'     => $childrens
+        ]);
     }
 
     /**
