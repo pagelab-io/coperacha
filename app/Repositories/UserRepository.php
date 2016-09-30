@@ -9,6 +9,7 @@
 namespace App\Repositories;
 
 use App\Utilities\PLUtils;
+use Carbon\Carbon;
 use Illuminate\Container\Container as App;
 use App\Http\Responses\PLResponse;
 use App\Transactions\TxUpdateUser;
@@ -164,13 +165,17 @@ class UserRepository extends BaseRepository
             }
         }
 
+        // registers by day
+        $todayRegisters = User::where('created_at', 'like' ,'%'.Carbon::today()->format('Y-m-d').'%')->count();
+
         return array(
             'totalUsers' => count($users),
             'genderAVG'  => $genderAVG,
             'cityAVG'    => $cityAVG,
             'countryAVG' => $countryAVG,
             'registerAVG' => $registerTypeAVG,
-            'ageAVG'     => $ageAVG
+            'ageAVG'     => $ageAVG,
+            'todayRegisters' => $todayRegisters
         );
     }
 

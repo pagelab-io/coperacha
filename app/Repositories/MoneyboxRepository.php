@@ -206,9 +206,14 @@ class MoneyboxRepository extends BaseRepository{
                     'Por Año' => 0
                 ),
                 'durability' => array(
-                    'Duración promedio (días)' =>0,
-                    'Monto promedio diario' => 0,
-                    'Coperacha promedio' =>  0
+                    'Alcancías del día' => 0,
+                    'Alcancías de ayer' => 0,
+                    'Alcancías en el mes' => 0,
+                    'Duración promedio (días)' => 0,
+                    'Monto Recaudado (promedio)' => 0,
+                    'Monto Recaudado del día' => 0,
+                    'Monto Recaudado ayer' => 0,
+                    'Monto Recaudado del mes' => 0
                 )
             );
         }
