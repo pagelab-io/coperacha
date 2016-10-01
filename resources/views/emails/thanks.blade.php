@@ -9,7 +9,7 @@
         <td COLSPAN=2 style="font-family: Arial;font-size: 16px;color: #666666;text-align: justify;line-height: 28px; padding-top:10px;">
             <p>
                 Gracias por participar en mi alcancía <strong>{{$moneybox->name}}</strong>,
-                pronto estare en contacto contigo.
+                pronto estaré en contacto contigo.
             </p>
 
             <br>

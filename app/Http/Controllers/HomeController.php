@@ -386,8 +386,8 @@ class HomeController extends Controller
         }
 
         $users = array_values($users);
-
         $senders = [];
+
         // Send users list
         foreach ($users as $user) {
 
@@ -403,7 +403,7 @@ class HomeController extends Controller
                 Mail::send('emails.thanks', $data, function ($message) use ($owner, $user) {
                     $message->from($owner->email, $owner->username);
                     $message->to($user->email, $user->username);
-                    $message->bcc(['perezatanaciod@gmail.com']);
+                    $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com']);
                     $message->subject('Agradecimiento');
                 });
             }

@@ -74,7 +74,7 @@
                             "<p>Los mensajes fueron enviados exitosamente a: " + emails + "<p>";
 
                         utils.showAlert(true);
-                    }, 375);
+                    }, 100);
                 }
 
             }, function () {
