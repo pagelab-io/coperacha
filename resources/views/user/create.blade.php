@@ -117,11 +117,11 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <ul class="reasons">
-                                <li>Accede al mejor servicio online para organizar y financiar tus eventos</li>
-                                <li>Comúnica a tus amigos o familia para garantizar el éxito de tu evento</li>
-                                <li>Colecta dinero de manera segura, rápida y fácil de usar</li>
-                                <li>El servicio es sin compromiso y el almacenamiento de tus datos es confidencial</li>
-                                <li>Tendrás un seguimiento claro y completo de tus eventos</li>
+                                <li>Accede al mejor servicio online para organizar y financiar tus eventos.</li>
+                                <li>Comunica a tus amigos o familia para garantizar el éxito de tu evento.</li>
+                                <li>Reune dinero de manera segura, rápida y fácil de usar.</li>
+                                <li>El almacenamiento de tus datos es confidencial.</li>
+                                <li>Tendrás un seguimiento claro y completo de tus eventos.</li>
                             </ul>
                         </div>
                     </div>
