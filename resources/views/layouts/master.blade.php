@@ -33,7 +33,7 @@
         <meta property="og:title" content="Coperacha">
         <meta property="og:description" content="Recauda dinero entre amigos.">
         <meta property="og:image" content="{{url('/images/cover-laptop.png')}}">
-        <meta property="og:url" content="{{route('/')}}">
+        <meta property="og:url" content="{{url('/')}}">
         <meta property="og:type" content="website">
 
         <!-- Twitter integration -->
