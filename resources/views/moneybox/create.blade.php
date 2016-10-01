@@ -113,7 +113,7 @@
                                     <div class="row">
                                         <div class="col-xs-9">
                                         @if ($moneybox)
-                                            <input id="datepicker" type="text" class="form-control" placeholder="Fecha límite para reunir los fondos" ng-model="end_date" ng-init="end_date='{{$moneybox->end_date}}'" autocomplete="off">
+                                            <input id="datepicker" type="text" class="form-control" placeholder="Fecha límite para reunir los fondos" ng-model="end_date" ng-init="end_date='{{ \App\Utilities\PLUtils::invertirFecha($moneybox->end_date) }}'" autocomplete="off">
                                         @else
                                            <input id="datepicker" type="text" class="form-control" placeholder="Fecha límite para reunir los fondos" ng-model="end_date" autocomplete="off">
                                         @endif

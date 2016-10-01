@@ -75,6 +75,12 @@ class PLUtils {
         return $status == 1 ? PLConstants::MONEYBOX_STATUS_ACTIVE : PLConstants::MONEYBOX_STATUS_INACTIVE;
     }
 
+    public static function invertirFecha($date)
+    {
+        $fecha = explode("-", $date);
+        return $fecha[2]."-".$fecha[1]."-".$fecha[0];
+    }
+
     //region private methods
 
     /**
