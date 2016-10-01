@@ -27,7 +27,9 @@
         $scope.moneybox_id = 0;
         $scope.amount_id = 0;
         $scope.privacy_id = 0;
-        $scope.step2.style.display = "none";
+
+        if($scope.step2)
+            $scope.step2.style.display = "none";
 
         $scope.step1Click = function()
         {
@@ -305,6 +307,35 @@
         $scope.fileExist = function()
         {
             return document.getElementById("file").files.length > 0;
+        };
+
+        $scope.tabMoneyboxes = function()
+        {
+            var myMoneyboxes = document.getElementById('my-moneyboxes');
+            var moneyboxParticipation = document.getElementById('moneybox-participation');
+            var tabMyMoneyboxes = document.getElementById('tabMyMoneyboxes');
+            var tabMoneyboxParticipation = document.getElementById('tabMoneyboxParticipation');
+
+            if(myMoneyboxes.style.display == "none") {
+                moneyboxParticipation.style.display = "none";
+                myMoneyboxes.style.display = "block";
+
+                tabMoneyboxParticipation.classList.remove('selected');
+                tabMyMoneyboxes.classList.add('selected');
+                tabMyMoneyboxes.classList.add('profile');
+
+
+            } else if (moneyboxParticipation.style.display == "none") {
+                myMoneyboxes.style.display = "none";
+                moneyboxParticipation.style.display = "block";
+
+                tabMyMoneyboxes.classList.remove('selected');
+                tabMoneyboxParticipation.classList.add('selected');
+                tabMoneyboxParticipation.classList.add('profile');
+
+            }
+
+
         };
 
     }
