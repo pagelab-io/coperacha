@@ -1,9 +1,5 @@
 @extends('auth.emails.master')
 
-@section('title')
-<title>Recuperación de contraseña</title>
-@endsection
-
 @section('body')
     <tr>
         <td COLSPAN=2 style="font-family: Arial;font-size: 30px;color: #51B7CD;text-align: center;line-height: 30px;padding-top:35px;"> Hola {{$user->person->name}} </td>
