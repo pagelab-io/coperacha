@@ -40,11 +40,9 @@ var vm = new Vue({
                 if (response.status == 200) {
 
                     if (response.data.success == true) {
-
                         for (var i in _this.contact) {
                             _this.contact[i] = '';
                         }
-
                         _this.loading = false;
                         document.getElementById('small-alert-content').innerHTML="" +
                         "<p>Tu mensaje fue enviado exitosamente, pronto nos pondremos en contacto contigo.<p>";

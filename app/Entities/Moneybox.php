@@ -108,10 +108,10 @@ class Moneybox extends Model
      * Scope a query to only include moneybox of a given uid
      *
      * @param $query
-     * @param $uid
+     * @param $url
      */
-    public function scopeByUrl($query, $uid) {
-        return $query->where('url', $uid);
+    public function scopeByUrl($query, $url) {
+        return $query->where('url', $url);
     }
 
     //endregion

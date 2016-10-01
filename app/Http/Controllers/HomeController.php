@@ -355,6 +355,81 @@ class HomeController extends Controller
         return response()->json(['success' => true, 'data' => $data]);
     }
 
+
+    /**
+     * Send mail contact
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function postMailThanks(Request $request) {
+
+        $url = $request->get('url');
+        $moneybox = Moneybox::byUrl($url)->with('participants')->first();
+
+        if (!$moneybox) {
+            throw new EntityNotFoundException('La alcancía no existe.', -1);
+        }
+
+        // Owner of the moneybox
+        $owner = $moneybox->person->user;
+
+        // Get users list
+        $users = [];
+        foreach ($moneybox->participants as $participant) {
+            $person = $participant->person;
+            $user = $person->user;
+
+            if (!isset($users[$user->email])) {
+                $users[$user->email] = $user;
+            }
+        }
+
+        $users = array_values($users);
+
+        $senders = [];
+        // Send users list
+        foreach ($users as $user) {
+
+            if ($user->email) {
+                $senders[] = $user->email;
+
+                $data = [
+                    'owner' => $owner,
+                    'moneybox' => $moneybox,
+                    'user' => $user
+                ];
+
+                Mail::send('emails.thanks', $data, function ($message) use ($owner, $user) {
+                    $message->from($owner->email, $owner->username);
+                    $message->to($user->email, $user->username);
+                    $message->bcc(['perezatanaciod@gmail.com']);
+                    $message->subject('Agradecimiento');
+                });
+            }
+        }
+
+        return response()->json(['success' => true, 'data' => $senders]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function postRemoveMoneybox(Request $request) {
+        $url = $request->get('url');
+        $moneybox = Moneybox::byUrl($url)->first();
+
+        if (!$moneybox) {
+            throw new EntityNotFoundException('La alcancía no existe.', -1);
+        }
+
+        $moneybox->active = 0;
+        $moneybox->save();
+
+        return response()->json(['success' => true, 'data' => $moneybox]);
+    }
+
     /**
      * Send mail of invitation to collaborate to moneybox
      * Refs http://php.net/manual/es/function.preg-split.php

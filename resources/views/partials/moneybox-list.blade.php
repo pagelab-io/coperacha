@@ -1,4 +1,4 @@
-<section class="moneybox-list">
+<section class="moneybox-list" xmlns:v-on="http://www.w3.org/1999/xhtml">
     <h3 class="moneybox-title">{{$title}}</h3>
     <div class="row clearfix">
         @if(count($moneyboxes) > 0)
@@ -13,30 +13,56 @@
                             </picture>
                         </header>
                         <main class="actions">
-                            <h2 class="title"><a href="{{url('/moneybox/detail/'.$moneybox->url)}}">{{$moneybox->name}}</a></h2>
-                            <div class="form-group">
-                                @if (Auth::user()->person->id == $moneybox->person_id)
-                                    <a class="btn btn-primary"
-                                        href={{url('/moneybox/create/'.$moneybox->url)}}>Modificar</a>
+                            <h2 class="title">
+                                <a href="{{url('/moneybox/detail/'.$moneybox->url)}}">{{$moneybox->name}}</a>
+                            </h2>
+                            @if (Auth::user()->person->id == $moneybox->person_id)
+                                @if (Carbon\Carbon::now() <= $moneybox->end_date)
+                                    <div class="form-group">
+                                        <a data-url="{{$moneybox->url}}"
+                                           class="btn btn-primary btn-thanks"
+                                           title = "Enviar correo de agradecimiento.">Agradecimiento</a>
+                                    </div>
                                 @endif
-                            </div>
+                            @endif
+
+                            @if (Auth::user()->person->id == $moneybox->person_id)
+                                <div class="form-group">
+                                    <a class="btn btn-primary"
+                                       title = "Modificar datos de la alcancía"
+                                       href={{url('/moneybox/create/'.$moneybox->url)}}>Modificar</a>
+                                </div>
+                            @endif
+
                             <div class="form-group">
                                 @if (Auth::user()->person->id == $moneybox->person_id)
                                     @if($moneybox->collected_amount > 0)
                                         <a class="btn btn-primary"
-                                           href="{{url('moneybox/request/'.$moneybox->url)}}">Utilizar
-                                            dinero</a>
+                                           title = "Enviar correo para solicitar dinero."
+                                           href="{{url('moneybox/request/'.$moneybox->url)}}">Utilizar dinero</a>
                                     @else
                                         <a class="btn btn-primary disabled"
-                                           href="{{url('moneybox/request/'.$moneybox->url)}}">Utilizar
-                                            dinero</a>
+                                           title = "Enviar correo para solicitar dinero."
+                                           href="{{url('moneybox/request/'.$moneybox->url)}}">Utilizar dinero</a>
                                     @endif
                                 @endif
                             </div>
+
                             <div class="form-group">
                                 <a class="btn btn-primary"
+                                   title = "Enviar correo a conocidos para participar"
                                    href="{{url('/moneybox/detail/'.$moneybox->url)}}">Invitar/Participar</a>
                             </div>
+
+                            @if (Auth::user()->person->id == $moneybox->person_id)
+                                @if ($moneybox->collected_amount == 0)
+                                    <div class="form-group">
+                                        <a data-url="{{$moneybox->url}}"
+                                           class="btn btn-danger btn-remove"
+                                           title = "Eliminar alcancía">Eliminar alcancía</a>
+                                    </div>
+                                @endif
+                            @endif
                         </main>
                         <footer>
                             <?php

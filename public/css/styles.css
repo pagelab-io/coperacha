@@ -1135,7 +1135,21 @@ hr {
     padding: 12px 0;
     text-align: center;
     text-transform: inherit;
+    transition: 250ms all;
     width: 183px;
+}
+
+.moneybox-item .btn.btn-remove {
+    background: #d14836;
+    color: white;
+}
+
+.moneybox-item .btn.btn-remove:hover {
+    background: #d13d19;
+}
+
+.moneybox-item .btn.btn-thanks:hover {
+    background: #ff4f00;
 }
 
 .moneybox-item header {

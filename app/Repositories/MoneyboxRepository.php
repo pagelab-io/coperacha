@@ -301,7 +301,8 @@ class MoneyboxRepository extends BaseRepository{
      */
     public function myMoneyboxes(PLRequest $request)
     {
-        $moneyboxes = Moneybox::with('files')
+        $moneyboxes = Moneybox::where('active', 1)
+            ->with('files')
             ->with('participants')
             ->where("person_id", $request->get('person_id'))->get();
 

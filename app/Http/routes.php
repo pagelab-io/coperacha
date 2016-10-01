@@ -73,9 +73,13 @@ Route::group([
     });
 });
 
+
+// ROUTES FOR MAIL
 Route::post('/sendmail', [ 'as' => 'sendmail', 'uses' => 'HomeController@postMailContact']);
 Route::post('/sendinvitation', [ 'as' => 'sendinvitation', 'uses' => 'HomeController@postMailInvitation']);
 Route::post('/sendrequest', [ 'as' => 'sendmailrequest', 'uses' => 'HomeController@postMailRequest']);
+Route::post('/sendthanks', [ 'as' => 'sendmailthanks', 'uses' => 'HomeController@postMailThanks']);
+Route::post('/sendremove', [ 'as' => 'sendremove', 'uses' => 'HomeController@postRemoveMoneybox']);
 
 
 //endregion

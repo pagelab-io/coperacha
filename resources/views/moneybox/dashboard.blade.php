@@ -1,6 +1,7 @@
 @extends("layouts.content")
 
 @section("page-content")
+    <div id="divLoading" class="loader hidden"></div>
     <section class="block my-moneybox-view">
         <div class="holder">
             <div class="container-fluid">
@@ -19,4 +20,10 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section("js")
+    <script src="{{asset('/js/vendor/vuejs/vue.js')}}"></script>
+    <script src="{{asset('/js/vendor/vuejs/vue-resource.js')}}"></script>
+    <script src="{{asset('/js/moneybox.js')}}"></script>
 @endsection
