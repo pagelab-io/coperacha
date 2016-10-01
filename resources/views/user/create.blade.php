@@ -51,8 +51,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="confirm">Confirmar Contraseña</label>
-                                    <input id="confirm" class="form-control" name="confirm" placeholder="Contraseña" type="password" ng-model="confirmPassword">
+                                    <label for="confirm">Confirmar contraseña</label>
+                                    <input id="confirm" class="form-control" name="confirm" placeholder="Confirmar contraseña" type="password" ng-model="confirmPassword">
                                 </div>
 
                                 <div class="form-group">
