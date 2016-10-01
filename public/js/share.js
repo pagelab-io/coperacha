@@ -57,7 +57,7 @@ var Share = (function() {
                     return console.error("The Facebook JS SDK hasn't loaded yet.");
                 }
 
-                return FB.ui({
+                var data = FB.ui({
                     method: 'feed',
                     name: this.config.networks.facebook.title,
                     link: this.config.networks.facebook.url,
@@ -66,6 +66,10 @@ var Share = (function() {
                     caption: this.config.networks.facebook.caption,
                     description: this.config.networks.facebook.description
                 });
+
+                console.log(data);
+                
+                return data;
 
             } else {
                 return this.popup('https://www.facebook.com/sharer/sharer.php', {
