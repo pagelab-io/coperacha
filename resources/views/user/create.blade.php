@@ -24,7 +24,7 @@
                                 <div class="form-group">
                                     <label for="gender">Sexo</label>
                                     <select name="gender" id="gender" class="form-control" ng-model="gender">
-                                        <option value="">Selecciona una opcion</option>
+                                        <option value="">Selecciona una opción</option>
                                         <option value="M">Femenino</option>
                                         <option value="H">Masculino</option>
                                     </select>
