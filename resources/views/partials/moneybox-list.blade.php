@@ -17,7 +17,7 @@
                                 <a href="{{url('/moneybox/detail/'.$moneybox->url)}}">{{$moneybox->name}}</a>
                             </h2>
                             @if (Auth::user()->person->id == $moneybox->person_id)
-                                @if (true || Carbon\Carbon::now() >= $moneybox->end_date)
+                                @if (Carbon\Carbon::now() >= $moneybox->end_date)
                                     <div class="form-group">
                                         <a data-url="{{$moneybox->url}}"
                                            class="btn btn-primary btn-thanks"
