@@ -28,19 +28,19 @@
         <meta itemprop="url" content="http://coperacha.com.mx">
 
         <!-- Open Graph properties -->
-        <!-- <meta property="fb:app_id" content="app-id"> -->
-        <meta property="og:site_name" content="Coperacha | Recauda Dinero Entre Amigos">
-        <meta property="og:title" content="Coperacha | Recauda Dinero Entre Amigos">
-        <meta property="og:description" content="Servicio online para recaudar dinero entre amigos.">
-        <meta property="og:image" content="image-url">
-        <meta property="og:url" content="http://coperacha.com.mx">
+        <!--<meta property="fb:app_id" content="1581295808831173">-->
+        <meta property="og:site_name" content="Coperacha">
+        <meta property="og:title" content="Coperacha">
+        <meta property="og:description" content="Recauda dinero entre amigos.">
+        <meta property="og:image" content="{{url('/images/cover-laptop.png')}}">
+        <meta property="og:url" content="{{route('/')}}">
         <meta property="og:type" content="website">
 
         <!-- Twitter integration -->
-        <meta name="twitter:title" content="Coperacha | Recauda Dinero Entre Amigos">
+        <!--<meta name="twitter:title" content="Coperacha | Recauda Dinero Entre Amigos">
         <meta name="twitter:url" content="http://coperacha.com.mx">
         <meta name="twitter:image" content="image-url">
-        <meta name="twitter:card" content="summary">
+        <meta name="twitter:card" content="summary">-->
 
         <!-- Bootstrap Styles
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"> -->
