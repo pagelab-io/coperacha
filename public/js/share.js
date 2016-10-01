@@ -61,14 +61,11 @@ var Share = (function() {
                     method: 'feed',
                     name: this.config.networks.facebook.title,
                     link: this.config.networks.facebook.url,
-                    // picture: location.host + this.config.networks.facebook.image,
-                    picture: this.config.networks.facebook.image,
+                    picture: this.config.networks.facebook.image, // picture: location.host + this.config.networks.facebook.image
                     caption: this.config.networks.facebook.caption,
                     description: this.config.networks.facebook.description
                 });
 
-                console.log(data);
-                
                 return data;
 
             } else {
