@@ -27,7 +27,7 @@
                                     <picture style="margin-right: 15px">
                                         <img id="moneybox-image"
                                              class="img-responsive"
-                                             src="{{$moneybox->lastfile ? url('/moneybox/image/' . $moneybox->lastfile->name) : url($moneybox->category->path)}}">
+                                             src="{{$moneybox->lastfile ? asset('/uploads/' . $moneybox->lastfile->name) : url($moneybox->category->path)}}">
                                     </picture>
                                 </div>
                                 <div class="form-group">
