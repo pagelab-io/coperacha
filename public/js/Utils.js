@@ -194,12 +194,17 @@ function Utils()
 
     this.isValidDate = function(value)
     {
-        return /^\d{4}-\d{2}-\d{2}$/.test(value);
+        return /^\d{2}-\d{2}-\d{4}$/.test(value);
     };
 
     this.isValidPhone = function(value)
     {
         return /^\d{10}?$/.test(value)
+    };
+
+    this.invertirFecha = function(fecha) {
+        var x = fecha.split('-');
+        return x[2]+"-"+x[1]+"-"+x[0];
     }
 
 }

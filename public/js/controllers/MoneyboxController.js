@@ -93,7 +93,7 @@
                     'name' : $scope.name,
                     'description' : $scope.description,
                     'goal_amount' : $scope.goal_amount,
-                    'end_date' : $scope.end_date,
+                    'end_date' : $scope.utils.invertirFecha($scope.end_date),
                     'settings' : JSON.stringify($scope.settings),
                     'api-key' : '$2y$10$ScZUgkFzrMr9NM5qPzKag.4mLTW8ugSG/DtT6nerJb3W1v5sg6UBC'
                 };
@@ -102,11 +102,10 @@
                 // build the request to save the moneybox
                 $scope.request = {
                     'description' : $scope.description,
-                    'end_date' : $scope.end_date,
+                    'end_date' : $scope.utils.invertirFecha($scope.end_date),
                     'api-key' : '$2y$10$ScZUgkFzrMr9NM5qPzKag.4mLTW8ugSG/DtT6nerJb3W1v5sg6UBC'
                 };
             }
-
 
             if ($scope.moneybox_id != 0) {
                 // update
@@ -198,7 +197,7 @@
                     utils.setValidationError("El campo fecha límite es requerido");
                     return false;
                 } else if (!utils.isValidDate($scope.end_date)) {
-                    utils.setValidationError("El campo fecha límite no tiene un formato válido yyyy-mm-dd");
+                    utils.setValidationError("El campo fecha límite no tiene un formato válido dd-mm-yyyy");
                     return false;
                 }
             }
@@ -231,7 +230,7 @@
                 utils.setValidationError("El campo fecha límite es requerido");
                 return false;
             } else if (!utils.isValidDate($scope.end_date)) {
-                utils.setValidationError("El campo fecha límite es no tiene un formato válido yyyy-mm-dd");
+                utils.setValidationError("El campo fecha límite es no tiene un formato válido dd-mm-yyyy");
                 return false;
             }
             return true;
@@ -316,7 +315,7 @@
     function initDatePicker(){
         // init date picker
         $( "#datepicker" ).datepicker({
-            dateFormat: 'yy-mm-dd',
+            dateFormat: 'dd-mm-yy',
             dayNames: [ "Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" ],
             dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
             monthNames: [ "Enero", "Febrero", "Marzo", "April", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
