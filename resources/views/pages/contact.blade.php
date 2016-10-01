@@ -43,12 +43,14 @@
                             <div class="col-sm-6">
                                 <input name="name"
                                        v-model="contact.name"
-                                       placeholder="Nombre" type="text">
+                                       placeholder="Nombre" type="text"
+                                       autocomplete="off">
                             </div>
                             <div class="col-sm-6">
                                 <input name="email"
                                        v-model="contact.email"
-                                       placeholder="Correo electrónico" type="text">
+                                       placeholder="Correo electrónico" type="text"
+                                       autocomplete="off">
                             </div>
                         </div>
                         <div class="row">
