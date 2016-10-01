@@ -18,9 +18,10 @@
                     <div class="row">
                         <div class="col-sm-5">
                             <form class="form profile" ng-controller="participantController">
-                                <input id="moneybox-id" type="hidden" ng-model="moneybox_id" ng-init="moneybox_id='{{$moneybox->id}}'">
+                                <input id="moneybox-id" type="hidden" value="{{$moneybox->id}}">
                                 <input id="moneybox-name" type="hidden" value="{{$moneybox->name}}">
                                 <input id="moneybox-desc" type="hidden" value="{{$moneybox->description}}">
+                                <input type="hidden" ng-model="moneybox_id" ng-init="moneybox_id='{{$moneybox->id}}'">
 
                                 <div class="form-group">
                                     <picture style="margin-right: 15px">
