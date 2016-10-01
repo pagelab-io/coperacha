@@ -10,7 +10,6 @@
                      style="height: 50px; width: auto"
                      src="{{$moneybox->lastimage ? url('/moneybox/image/' . $moneybox->lastimage) : url($moneybox->category->path)}}">
             </div>
-            {{dd($moneybox)}}
             <div style="float: left; margin-left: 10px">
                 <h2>{{$moneybox->name}}</h2>
                 <p>Alcancia creada desde {{\App\Utilities\PLUtils::getStringDate($moneybox->created_at)}}</p>
