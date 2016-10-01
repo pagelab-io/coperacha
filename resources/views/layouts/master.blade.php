@@ -13,7 +13,7 @@
         <meta name="robots" content="NOINDEX, NOFOLLOW, NOARCHIVE">
 
         <!-- Href lang -->
-        <link rel="alternate" hreflang="en" href="http://coperacha.com.mx/" />
+        <link rel="alternate" hreflang="en" href="{{url('/')}}" />
 
         <!-- Favicons -->
         <link rel="shortcut icon" href="/images/favicon.png">
@@ -22,17 +22,17 @@
         <link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-touch-icon-114x114.png">
 
         <!-- Schema properties -->
-        <meta itemprop="name" content="Coperacha | Recauda Dinero Entre Amigos">
+        <meta itemprop="name" content="Coperacha">
         <meta itemprop="description" content="Servicio online para recaudar dinero entre amigos.">
-        <meta itemprop="image" content="image-url">
-        <meta itemprop="url" content="http://coperacha.com.mx">
+        <meta itemprop="image" content="{{asset('/images/cover-laptop.png')}}">
+        <meta itemprop="url" content="{{url('/')}}">
 
         <!-- Open Graph properties -->
         <!--<meta property="fb:app_id" content="1581295808831173">-->
         <meta property="og:site_name" content="Coperacha">
         <meta property="og:title" content="Coperacha">
         <meta property="og:description" content="Recauda dinero entre amigos.">
-        <meta property="og:image" content="{{url('/images/cover-laptop.png')}}">
+        <meta property="og:image" content="{{asset('/images/cover-laptop.png')}}">
         <meta property="og:url" content="{{url('/')}}">
         <meta property="og:type" content="website">
 
