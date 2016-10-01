@@ -150,7 +150,7 @@ function Utils()
     {
         this.setAlertTitle("Coperacha - Alerta");
         document.getElementById('alert-content').innerHTML="" +
-        "<p>Uno de los campos es inválido, verifica que la informacion es correcta : <br><b>"+message+"<b><p>";
+        "<p>Uno de los campos es inválido, verifíca que la información es correcta : <br><b>"+message+"<b><p>";
         this.showAlert();
     };
 

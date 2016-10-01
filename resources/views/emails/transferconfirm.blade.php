@@ -1,10 +1,4 @@
 @extends('emails.master')
-@extends('emails.header')
-@extends('emails.footer')
-
-@section('title')
-<title>Confirmación de transferencia</title>
-@endsection
 
 @section('body')
     <tr>

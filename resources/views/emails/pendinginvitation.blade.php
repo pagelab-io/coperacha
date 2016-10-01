@@ -1,5 +1,4 @@
 @extends('emails.master')
-@section('title', 'Recordatorio participación')
 
 @section('body')
     <tr>

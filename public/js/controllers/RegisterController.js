@@ -51,14 +51,14 @@
                         $scope.utils.hideLoader();
                         $scope.utils.setAlertTitle("Coperacha - Alerta");
                         document.getElementById('alert-content').innerHTML="" +
-                        "<p>Se ha generado producido un error al realizar el registro, por favor inténtalo más tarde<p>";
+                        "<p>Ocurrió una incidencia al realizar el registro, por favor inténtalo más tarde<p>";
                         $scope.utils.showAlert();
                     }
                 }).error(function(response){
                     $scope.utils.hideLoader();
                     $scope.utils.setAlertTitle("Coperacha - Alerta");
                     document.getElementById('alert-content').innerHTML="" +
-                    "<p>Se ha generado producido un error al realizar el registro, por favor inténtalo más tarde<p>";
+                    "<p>Ocurrió una incidencia al realizar el registro, por favor inténtalo más tarde<p>";
                     $scope.utils.showAlert();
                 });
             }
@@ -74,19 +74,19 @@
             var utils = $scope.utils;
 
             if (utils.isNullOrEmpty($scope.name)) {
-                utils.setValidationError("El campo Nombre es requerido");
+                utils.setValidationError("El campo nombre es requerido");
                 return false;
             } else if (utils.isNullOrEmpty($scope.lastname)) {
-                utils.setValidationError("El campo Apellido es requerido");
+                utils.setValidationError("El campo apellido es requerido");
                 return false;
             } else if (utils.isNullOrEmpty($scope.email)) {
                 utils.setValidationError("El campo Correo electrónico es requerido");
                 return false;
             } else if (!utils.isValidEmail($scope.email)) {
-                utils.setValidationError("El Correo electrónico ingresado no es válido");
+                utils.setValidationError("El correo electrónico ingresado no es válido");
                 return false;
             } else if (utils.isNullOrEmpty($scope.password)) {
-                utils.setValidationError("El campo Contraseña no es válido");
+                utils.setValidationError("El campo contraseña no es válido");
                 return false;
             } else if (!utils.isNullOrEmpty($scope.confirmPassword)) {
                 if($scope.confirmPassword != $scope.password){
@@ -130,13 +130,13 @@
                                 $scope.utils.hideLoader();
                                 $scope.utils.setAlertTitle("Coperacha - Alerta");
                                 document.getElementById('alert-content').innerHTML="" +
-                                "<p>El correo ingresado ya existe en el sistema, por favor intenta con otro.<p>";
+                                "<p>El correo ingresado ya existe en el sistema, por favor inténta con otro.<p>";
                                 $scope.utils.showAlert();
                             } else if(response.status == 23000) {
                                 $scope.utils.hideLoader();
                                 $scope.utils.setAlertTitle("Coperacha - Alerta");
                                 document.getElementById('alert-content').innerHTML="" +
-                                "<p>El correo ingresado ya existe en el sistema, por favor intenta con otro.<p>";
+                                "<p>El correo ingresado ya existe en el sistema, por favor inténta con otro.<p>";
                                 $scope.utils.showAlert();
                             }
 
@@ -144,7 +144,7 @@
                             $scope.utils.hideLoader();
                             $scope.utils.setAlertTitle("Coperacha - Alerta");
                             document.getElementById('alert-content').innerHTML="" +
-                            "<p>Se ha generado producido un error al realizar el registro, por favor inténtalo más tarde<p>";
+                            "<p>Ocurrió una incidencia al realizar el registro, por favor inténtalo más tarde<p>";
                             $scope.utils.showAlert();
                         });
 
@@ -153,7 +153,7 @@
                 } else {
                     $scope.utils.setAlertTitle("Coperacha - Alerta");
                     document.getElementById('alert-content').innerHTML="" +
-                    "<p>Ocurrio un problema al hacer la conexión con Facebook, por favor intentalo maás tarde<p>";
+                    "<p>Ocurrió una incidencia al hacer la conexión con Facebook, por favor inténtalo más tarde<p>";
                     $scope.utils.showAlert();
                 }
             });

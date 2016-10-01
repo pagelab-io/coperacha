@@ -1,8 +1,5 @@
 @extends('emails.master')
 
-@section('title')
-<title>Nueva coperacha</title>
-@endsection
 
 @section('body')
     <tr>

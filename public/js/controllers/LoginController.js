@@ -46,7 +46,7 @@
                     if ($scope.redirectTo) {
                         window.location.assign($scope.redirectTo);
                     } else {
-                        window.location.assign("/user/profile/" + user.id);
+                        window.location.assign("/moneybox/dashboard");
                     }
                 } else if(response.status == -1) {
                     $scope.utils.hideLoader();
@@ -59,7 +59,7 @@
                 $scope.utils.hideLoader();
                 $scope.utils.setAlertTitle("Coperacha - Alerta");
                 document.getElementById('alert-content').innerHTML="" +
-                "<p>Ocurrio una incidencia al intentar iniciar sesión, por favor intentalo mas tarde.<p>";
+                "<p>Ocurrió una incidencia al intentar iniciar sesión, por favor inténtalo más tarde.<p>";
                 $scope.utils.showAlert();
             });
         };
@@ -94,13 +94,13 @@
                                 if ($scope.redirectTo) {
                                     window.location.assign($scope.redirectTo);
                                 } else {
-                                    window.location.assign("/user/profile/" + user.id);
+                                    window.location.assign("/moneybox/dashboard/");
                                 }
                             } else if(response.status == -1) {
                                 $scope.utils.hideLoader();
                                 $scope.utils.setAlertTitle("Coperacha - Alerta");
                                 document.getElementById('alert-content').innerHTML="" +
-                                "<p>Ocurrio una incidencia al intentar iniciar sesión, por favor intentalo mas tarde.<p>";
+                                "<p>Ocurrió una incidencia al intentar iniciar sesión, por favor inténtalo más tarde.<p>";
                                 $scope.utils.showAlert();
                             }
                         }).error(function(response){
@@ -113,7 +113,7 @@
                 } else {
                     $scope.utils.setAlertTitle("Coperacha - Alerta");
                     document.getElementById('alert-content').innerHTML="" +
-                    "<p>Ocurrio un problema al hacer la conexión con Facebook, por favor intentalo más tarde.<p>";
+                    "<p>Ocurrió una incidencia al hacer la conexión con Facebook, por favor inténtalo más tarde.<p>";
                     $scope.utils.showAlert();
                 }
             });

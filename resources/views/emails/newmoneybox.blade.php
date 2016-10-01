@@ -1,9 +1,5 @@
 @extends('emails.master')
 
-@section('title')
-<title>Nueva alcancía</title>
-@endsection
-
 @section('body')
     <tr>
         <td COLSPAN=2 style="font-family: Arial;font-size: 30px;color: #51B7CD;text-align: center;line-height: 30px;padding-top:35px;">Felicidades {{$person->name}}</td>

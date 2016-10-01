@@ -1,5 +1,4 @@
 @extends('emails.master')
-@section('title', 'Solicitud de Retiro')
 
 @section('body')
     <tr>

@@ -134,7 +134,7 @@
                             $scope.utils.hideLoader();
                             $scope.utils.setAlertTitle("Coperacha - Alerta");
                             document.getElementById('alert-content').innerHTML="" +
-                            "<p>Ocurrio un problema al actualizar la alcancía, intentalo nuevamente por favor<p>";
+                            "<p>Ocurrió una incidencia al actualizar la alcancía, inténtalo nuevamente por favor<p>";
                             $scope.utils.showAlert();
                         }
                     })
@@ -168,7 +168,7 @@
                             $scope.utils.hideLoader();
                             $scope.utils.setAlertTitle("Coperacha - Alerta");
                             document.getElementById('alert-content').innerHTML="" +
-                            "<p>Ocurrio una incidencia al crear la alcancía, intentalo nuevamente por favor<p>";
+                            "<p>Ocurrió una incidencia al crear la alcancía, inténtalo nuevamente por favor<p>";
                             $scope.utils.showAlert();
                         }
                     })
@@ -187,7 +187,7 @@
                     utils.setValidationError("Selecciona un tipo de monto");
                     return false;
                 }else if ($scope.privacy1 == "0|0|N" && $scope.privacy2 == "0|0|N" && $scope.privacy3 == "0|0|N") {
-                    utils.setValidationError("Selecciona una opcion de privacidad");
+                    utils.setValidationError("Selecciona una opción de privacidad");
                     return false;
                 }
             } else {
@@ -198,7 +198,7 @@
                     utils.setValidationError("El campo fecha límite es requerido");
                     return false;
                 } else if (!utils.isValidDate($scope.end_date)) {
-                    utils.setValidationError("El campo fecha límite es no tiene un formato válido yyyy-mm-dd");
+                    utils.setValidationError("El campo fecha límite no tiene un formato válido yyyy-mm-dd");
                     return false;
                 }
             }
@@ -210,10 +210,10 @@
         {
             var utils = $scope.utils;
             if (utils.isNullOrEmpty($scope.category_id)) {
-                utils.setValidationError("El campo Categoría es requerido");
+                utils.setValidationError("El campo categoría es requerido");
                 return false;
             } else if (utils.isNullOrEmpty($scope.name)) {
-                utils.setValidationError("El campo Nombre es requerido");
+                utils.setValidationError("El campo nombre es requerido");
                 return false;
             } else if (utils.isNullOrEmpty($scope.description)) {
                 utils.setValidationError("El campo descripción es requerido");
@@ -287,7 +287,7 @@
                     });
 
                 } else {
-                    console.log("File not supported!");
+                    console.log("Archivo no soportado!");
                 }
             }
         };

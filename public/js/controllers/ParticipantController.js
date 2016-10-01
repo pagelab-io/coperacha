@@ -72,7 +72,7 @@
                                 $scope.utils.hideLoader();
                                 $scope.utils.setAlertTitle("Coperacha - Alerta");
                                 document.getElementById('alert-content').innerHTML="" +
-                                "<p>Ocurrio un error al registrar tus datos, por favor intentalo más tarde<p>";
+                                "<p>Ocurrio una incidencia al registrar tus datos, por favor inténtalo más tarde<p>";
                                 $scope.utils.showAlert();
                             });
                     }
@@ -246,7 +246,7 @@
                         $scope.utils.hideLoader();
                         $scope.utils.setAlertTitle("Coperacha - Alerta");
                         document.getElementById('alert-content').innerHTML="" +
-                        "<p>Ocurrio una incidencia al generarse el pago, por favor intentelo más tarde o elija otro método de pago<p>";
+                        "<p>Ocurrio una incidencia al generarse el pago, por favor inténtelo más tarde o elija otro método de pago<p>";
                         $scope.utils.showAlert();
                     }
                 })
@@ -254,7 +254,7 @@
                     $scope.utils.hideLoader();
                     $scope.utils.setAlertTitle("Coperacha - Alerta");
                     document.getElementById('alert-content').innerHTML="" +
-                    "<p>Ocurrio una incidencia al generarse el pago, por favor intentelo más tarde<p>";
+                    "<p>Ocurrio una incidencia al generarse el pago, por favor inténtelo más tarde<p>";
                     $scope.utils.showAlert();
                 });
         };

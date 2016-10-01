@@ -1,4 +1,4 @@
-<div class="dialog-view popup" ng-controller="loginController" data-redirect-to="/user/profile">
+<div class="dialog-view popup" ng-controller="loginController" data-redirect-to="/moneybox/dashboard/">
     <!-- header -->
     <div class="popup-header">
         <span>Iniciar Sesión</span>
@@ -11,7 +11,7 @@
 
         <!-- email login -->
         <div class="email-login">
-            <input type="text" placeholder="Tu email" ng-model="email"/>
+            <input type="text" placeholder="Tu correo electrónico" ng-model="email"/>
             <input type="password" placeholder="Contraseña" ng-model="password"/>
             <a href="/password/recovery">Olvidé mi contraseña</a>
             <button class="btn-email-login" ng-click="emailLogin()">Entrar</button>

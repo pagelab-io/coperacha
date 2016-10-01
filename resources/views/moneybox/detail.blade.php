@@ -85,7 +85,7 @@
                                     <label>o envía correo a tus amigos para invitarlos a participar.</label>
                                 </div>
                                 <div class="form-group">
-                                    <div class="text-info">Introduce los emails separando cada uno con punto y coma (;)</div>
+                                    <div class="text-info">Introduce los correos separando cada uno con punto y coma (;)</div>
                                     <textarea required
                                               class="form-control"
                                               rows="4"
