@@ -1,7 +1,5 @@
 @extends('emails.master')
 
-@section('title', 'Contacto')
-
 @section('body')
     <tr>
         <td colspan="2"><h3>Mensaje de Contacto</h3></td>

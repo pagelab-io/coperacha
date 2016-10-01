@@ -11,14 +11,14 @@
                                 <div class="form-group">
                                     <label for="name">Nombre(s)</label>
                                     <div class="row">
-                                        <div class="col-sm-5"><input id="name" class="form-control" name="name" placeholder="Nombre(s)" type="text" ng-model="name"></div>
-                                        <div class="col-sm-7"><input id="lastname" class="form-control" name="lastname" placeholder="Apellido(s)" type="text" ng-model="lastname"></div>
+                                        <div class="col-sm-5"><input id="name" class="form-control" name="name" placeholder="Nombre(s)" type="text" ng-model="name" autocomplete="off"></div>
+                                        <div class="col-sm-7"><input id="lastname" class="form-control" name="lastname" placeholder="Apellido(s)" type="text" ng-model="lastname" autocomplete="off"></div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="email">Correo Electrónico</label>
-                                    <input id="email" class="form-control" name="email" placeholder="Correo Electrónico" type="email" ng-model="email">
+                                    <input id="email" class="form-control" name="email" placeholder="Correo Electrónico" type="email" ng-model="email" autocomplete="off">
                                 </div>
                                 
                                 <div class="form-group">
@@ -32,32 +32,40 @@
 
                                 <div class="form-group">
                                     <label for="usuario">Usuario</label>
-                                    <input id="usuario" class="form-control" name="usuario" placeholder="Usuario" type="text" ng-model="username">
+                                    <input id="usuario" class="form-control" name="usuario" placeholder="Usuario" type="text" ng-model="username" autocomplete="off">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="country">País</label>
-                                    <input id="country" class="form-control" name="country" placeholder="País" type="text" ng-model="country">
+                                    <input id="country" class="form-control" name="country" placeholder="País" type="text" ng-model="country" autocomplete="off">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="city">Ciudad</label>
-                                    <input id="city" class="form-control" name="city" placeholder="Ciudad" type="text" ng-model="city">
+                                    <input id="city" class="form-control" name="city" placeholder="Ciudad" type="text" ng-model="city" autocomplete="off">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="password">Contraseña</label>
-                                    <input id="password" class="form-control" name="password" placeholder="Contraseña" type="password" ng-model="password">
+                                    <input id="password" class="form-control" name="password" placeholder="Contraseña" type="password" ng-model="password" autocomplete="off">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="confirm">Confirmar contraseña</label>
-                                    <input id="confirm" class="form-control" name="confirm" placeholder="Confirmar contraseña" type="password" ng-model="confirmPassword">
+                                    <input id="confirm" class="form-control" name="confirm" placeholder="Confirmar contraseña" type="password" ng-model="confirmPassword" autocomplete="off">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="month">Fecha de Nacimiento</label>
                                     <div class="row">
+                                        <div class="col-sm-4">
+                                            <select class="form-control" name="day" id="day" ng-model="birthdayDay">
+                                                <option value="">Día</option>
+                                                @for($i = 1;  $i <= 31; $i++)
+                                                    <option value="{{$i}}">{{$i}}</option>
+                                                @endfor
+                                            </select>
+                                        </div>
                                         <div class="col-sm-4">
                                             <select class="form-control" name="month" id="month" ng-model="birthdayMonth">
                                                 <option value="">Mes</option>
@@ -65,14 +73,6 @@
                                                     <option value="{{$mont}}">{{$mont}}</option>
                                                 @endforeach
 
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <select class="form-control" name="day" id="day" ng-model="birthdayDay">
-                                                <option value="">Día</option>
-                                                @for($i = 1;  $i <= 31; $i++)
-                                                    <option value="{{$i}}">{{$i}}</option>
-                                                @endfor
                                             </select>
                                         </div>
                                         <div class="col-sm-4">

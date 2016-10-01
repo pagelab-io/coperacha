@@ -47,6 +47,7 @@
                                                        name="name"
                                                        placeholder="Nombre(s)"
                                                        type="text"
+                                                       autocomplete="off"
                                                        v-model="person.name">
                                             </div>
                                             <div class="col-sm-7">
@@ -54,6 +55,7 @@
                                                        name="lastname"
                                                        placeholder="Apellido"
                                                        type="text"
+                                                       autocomplete="off"
                                                        v-model="person.lastname">
                                             </div>
                                         </div>
@@ -66,6 +68,7 @@
                                                name="phone"
                                                placeholder="Teléfono"
                                                type="text"
+                                               autocomplete="off"
                                                v-model="person.phone">
                                     </div>
 
@@ -82,6 +85,7 @@
                                         <label for="usuario">Usuario</label>
                                         <input id="usuario" class="form-control" name="usuario" placeholder="Usuario"
                                                type="text"
+                                               autocomplete="off"
                                                v-model="user.username">
                                     </div>
 
@@ -93,12 +97,14 @@
                                                class="form-control"
                                                name="email"
                                                placeholder="Correo electrónico"
+                                               autocomplete="off"
                                                type="text" v-model="user.email">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="country">País</label>
                                         <input id="country" class="form-control" name="country" placeholder="País"
+                                                autocomplete="off"
                                                type="text"
                                                v-model="person.country">
                                     </div>
@@ -106,26 +112,27 @@
                                     <div class="form-group">
                                         <label for="city">Ciudad</label>
                                         <input id="city" class="form-control" name="city" placeholder="Ciudad" type="text"
-                                               v-model="person.city">
+                                            autocomplete="off"
+                                            v-model="person.city">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="month">Fecha de nacimiento</label>
                                         <div class="row">
-                                            <div class="col-sm-5">
-                                                <select class="form-control" name="month" id="month" v-model="birthdayMonth">
-                                                    <option value="">Mes</option>
-                                                    @foreach($months as $mont => $name)
-                                                        <option value="{{$mont}}">{{$name}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
                                             <div class="col-sm-3">
                                                 <select class="form-control" name="day" id="day" v-model="birthdayDay">
                                                     <option value="">Día</option>
                                                     @for($i = 1; $i <= 31; $i++)
                                                         <option value="{{$i}}">{{$i}}</option>
                                                     @endfor
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <select class="form-control" name="month" id="month" v-model="birthdayMonth">
+                                                    <option value="">Mes</option>
+                                                    @foreach($months as $mont => $name)
+                                                        <option value="{{$mont}}">{{$name}}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                             <div class="col-sm-4">
@@ -224,7 +231,7 @@
                         <form class="form register" action="" method="post">
                             <div class="form-group">
                                 <label class="text-info">o envía un correo a tus amigos para invitarlos a participar.</label>
-                                <div class="small">Introduce los emails separando cada uno con punto y coma (;)</div>
+                                <div class="small">Introduce los correos separando cada uno con punto y coma (;)</div>
                                 <textarea required name="email" id="email" class="form-control" rows="3" placeholder="Introduce las direcciones de correo"></textarea>
                             </div>
 

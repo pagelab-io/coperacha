@@ -46,6 +46,7 @@
                                            name="name" type="text"
                                            required
                                            class="form-control"
+                                           autocomplete="off"
                                            placeholder="Nombre del titular de la cuenta">
                                 </div>
 
@@ -88,6 +89,7 @@
                                     <input id="clabe"
                                            name="clabe"
                                            v-model="order.clabe"
+                                           autocomplete="off"
                                            type="text" class="form-control" placeholder="Clabe Interbancaria">
                                 </div>
 
@@ -98,6 +100,7 @@
                                            v-model="order.account"
                                            type="text"
                                            class="form-control"
+                                           autocomplete="off"
                                            placeholder="Número de cuenta">
                                 </div>
 

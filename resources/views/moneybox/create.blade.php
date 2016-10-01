@@ -47,14 +47,14 @@
                                     <input type="hidden" ng-model="amount_id" ng-init="amount_id='{{$amountoption->id}}'">
                                     <input type="hidden" ng-model="privacy_id" ng-init="privacy_id='{{$privacyoption->id}}'">
                                     <input type="hidden" ng-model="moneybox_id" ng-init="moneybox_id='{{$moneybox->id}}'">
-                                    <input readonly type="text" class="form-control" placeholder="Nombre de la alcancía" ng-model="name" ng-init="name='{{$moneybox->name}}'">
+                                    <input readonly type="text" class="form-control" placeholder="Nombre de la alcancía" ng-model="name" ng-init="name='{{$moneybox->name}}'" autocomplete="off">
                                 @else
-                                    <input type="text" class="form-control" placeholder="Nombre de la alcancía" ng-model="name">
+                                    <input type="text" class="form-control" placeholder="Nombre de la alcancía" ng-model="name" autocomplete="off">
                                 @endif
                                 </div>
 
                                 <div class="form-group">
-                                    <input readonly id="person_name" name="person_name" type="text" class="form-control" placeholder="Nombre de quién la organiza" ng-init="person_name='{{Auth::user()->person->name." ".Auth::user()->person->lastname}}'" ng-model="person_name">
+                                    <input readonly id="person_name" name="person_name" type="text" class="form-control" placeholder="Nombre de quién la organiza" ng-init="person_name='{{Auth::user()->person->name." ".Auth::user()->person->lastname}}'" ng-model="person_name" autocomplete="off">
                                     <input id="person_id" name="person_id" type="hidden" class="form-control" ng-init="person_id='{{Auth::user()->person->id}}'" ng-model="person_id">
                                 </div>
 
@@ -99,12 +99,12 @@
                                 @if ($moneybox)
                                 <div class="input-group">
                                     <div class="input-group-addon">$</div>
-                                    <input readonly type="text" class="form-control" placeholder="Cantidad que desea reunir" ng-model="goal_amount" ng-init="goal_amount='{{$moneybox->goal_amount}}'">
+                                    <input readonly type="text" class="form-control" placeholder="Cantidad que desea reunir" ng-model="goal_amount" ng-init="goal_amount='{{$moneybox->goal_amount}}'" autocomplete="off">
                                 </div>
                                 @else
                                 <div class="input-group">
                                     <div class="input-group-addon">$</div>
-                                    <input type="text" class="form-control" placeholder="Cantidad que desea reunir" ng-model="goal_amount">
+                                    <input type="text" class="form-control" placeholder="Cantidad que desea reunir" ng-model="goal_amount" autocomplete="off">
                                 </div>
                                 @endif
                                 </div>
@@ -113,9 +113,9 @@
                                     <div class="row">
                                         <div class="col-xs-9">
                                         @if ($moneybox)
-                                            <input id="datepicker" type="text" class="form-control" placeholder="Fecha límite para reunir los fondos" ng-model="end_date" ng-init="end_date='{{$moneybox->end_date}}'">
+                                            <input id="datepicker" type="text" class="form-control" placeholder="Fecha límite para reunir los fondos" ng-model="end_date" ng-init="end_date='{{$moneybox->end_date}}'" autocomplete="off">
                                         @else
-                                            <input id="datepicker" type="text" class="form-control" placeholder="Fecha límite para reunir los fondos" ng-model="end_date">
+                                           <input id="datepicker" type="text" class="form-control" placeholder="Fecha límite para reunir los fondos" ng-model="end_date" autocomplete="off">
                                         @endif
                                         </div>
                                         <div class="col-xs-3"><span class="icon-calendar"></span></div>
