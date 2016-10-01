@@ -27,7 +27,7 @@
                                     <picture style="margin-right: 15px">
                                         <img id="moneybox-image"
                                              class="img-responsive"
-                                             src="{{$moneybox->lastfile ? asset('/uploads/' . $moneybox->lastfile->name) : url($moneybox->category->path)}}">
+                                             src="{{$moneybox->lastfile ? asset('/uploads/' . $moneybox->lastfile->name) : asset($moneybox->category->path)}}">
                                     </picture>
                                 </div>
                                 <div class="form-group">
@@ -122,8 +122,8 @@
                     var caption = $("#moneybox-caption").text();
                     var desc = $("#moneybox-desc").val();
                     var image = $("#moneybox-image").attr('src');
-                    var imgPath = image.split(location.host);
-                    var img = imgPath[1];
+                    //var imgPath = image.split(location.host);
+                    //var img = imgPath[1];
 
                     if (id > 0 && image.length > 0) {
                         var share = new Share();
@@ -133,7 +133,7 @@
                                     load_sdk: true,
                                     app_id: "1581295808831173",
                                     title: title,
-                                    image: img,
+                                    image: image,
                                     description: desc,
                                     url: location.toString() ,
                                     caption: caption
