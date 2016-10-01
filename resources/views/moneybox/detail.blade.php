@@ -112,4 +112,45 @@
     <script src="{{asset('/js/vendor/vuejs/vue-resource.js')}}"></script>
     <script src="{{asset('/js/invitation.js')}}"></script>
     <script src="{{asset('/js/share.js')}}"></script>
+    <script>
+        (function($){
+            var Application = {
+                init: function () {
+                    var btnShareFb = $('#btnShareFb');
+                    var id = $("#moneybox-id").val();
+                    var title = $("#moneybox-name").val();
+                    var caption = $("#moneybox-caption").text();
+                    var desc = $("#moneybox-desc").val();
+                    var image = $("#moneybox-image").attr('src');
+                    var imgPath = image.split(location.host);
+                    var img = imgPath[1];
+
+                    if (id > 0 && image.length > 0) {
+                        var share = new Share();
+                        share.setup({
+                            networks: {
+                                facebook: {
+                                    load_sdk: true,
+                                    app_id: "1581295808831173",
+                                    title: title,
+                                    image: img,
+                                    description: desc,
+                                    url: location.toString() ,
+                                    caption: caption
+                                }
+                            }
+                        });
+
+                        btnShareFb.on("click", function (evt) {
+                            evt.preventDefault();
+                            share.network_facebook();
+                        });
+                    }
+                }
+            };
+
+            Application.init();
+
+        })(jQuery);
+    </script>
 @endsection

@@ -27,7 +27,7 @@
                                 <iframe class="embed-responsive-item" src="https://player.vimeo.com/video/142285041?title=0&byline=0&portrait=0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
                             </div>
                             <br>
-                            <a class="btn-share-fb" href="javascript:void(0)" onclick="shareHowWorks()">
+                            <a id="btnShareFb" class="btn-share-fb">
                                 <span>Compartir en</span>
                                 <img src="images/facebook-logo.png" alt="">
                             </a>
@@ -38,4 +38,29 @@
         </div>
     </section>
 
+@endsection
+
+@section('js')
+    <script src="{{asset('/js/share.js')}}"></script>
+    <script>
+        var share = new Share();
+        share.setup({
+            networks: {
+                facebook: {
+                    load_sdk: true,
+                    app_id: "1581295808831173",
+                    title: 'Coperacha',
+                    image: $('meta[itemprop="image"]').attr('content'),
+                    description: $('meta[name="description"]').attr('content'),
+                    url: location.toString() ,
+                    caption: 'Coperacha'
+                }
+            }
+        });
+
+        $('#btnShareFb').on("click", function (evt) {
+            evt.preventDefault();
+            share.network_facebook();
+        });
+    </script>
 @endsection
