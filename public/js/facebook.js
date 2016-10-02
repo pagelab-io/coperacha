@@ -85,7 +85,7 @@ function share(){
 function shareHowWorks(){
     FB.ui({
         method: 'share',
-        href: 'http://coperacha.pagelab.io/about'
+        href: 'http://coperacha.com.mx/about'
     }, function(response){
         console.log(response);
     });

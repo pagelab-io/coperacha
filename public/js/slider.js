@@ -287,7 +287,7 @@ var app = app || {};
                 if (this.options.preload === true) {
 
                     this.container.css({
-                        'background': 'url(http://coperacha.pagelab.io/images/loader2.gif) no-repeat center center',
+                        'background': 'url(http://coperacha.com.mx/images/loader2.gif) no-repeat center center',
                         'background-size': '32px 32px'
                     });
 
