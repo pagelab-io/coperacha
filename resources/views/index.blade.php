@@ -254,9 +254,9 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <form class="sign-in">
-                                <input name="name" placeholder="nombre" type="text" ng-model="name">
-                                <input name="lastname" placeholder="apellido" type="text" ng-model="lastname">
-                                <input name="email" placeholder="correo electrónico" type="text" ng-model="email">
+                                <input name="name" placeholder="nombre" type="text" ng-model="name" autocomplete="off">
+                                <input name="lastname" placeholder="apellido" type="text" ng-model="lastname" autocomplete="off">
+                                <input name="email" placeholder="correo electrónico" type="text" ng-model="email" autocomplete="off">
                                 <input name="password" placeholder="contraseña" type="password" ng-model="password">
                                 <input class="btn btn-primary small" type="button" value="Crear mi Alcancía" ng-click="emailRegister()">
                             </form>
