@@ -55,7 +55,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'info@coperacha.com.mx', 'name' => 'Coperacha.com.mx team'],
+    'from' => ['address' => 'hola@coperacha.com.mx', 'name' => 'Coperacha.com.mx team'],
 
     /*
     |--------------------------------------------------------------------------
