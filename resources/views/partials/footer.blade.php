@@ -33,8 +33,8 @@
                                     <li><a href="{{route('pages.about')}}">¿Qué es Coperacha?</a></li>
                                     <li><a href="{{asset('/#como-funciona')}}" class="scroll-to">¿Cómo Funciona?</a></li>
                                     <li><a href="{{asset('/#metodos-de-pago')}}" class="scroll-to">Formas de Pago</a></li>
-                                    <li><a href="{{route('pages.contact')}}">Contaco</a></li>
-                                    <li><a href="{{asset('/#intro')}}" class="scroll-to">Video</a></li>
+                                    <li><a href="{{route('pages.contact')}}">Contacto</a></li>
+                                    <li><a href="{{url('/about')}}">Video</a></li>
                                     <li><a href="{{route('pages.faqs')}}">FAQs</a></li>
                                 </ul>
                             </nav>

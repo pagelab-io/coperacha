@@ -41,6 +41,11 @@ class PayPalRepository implements IPLPayment{
         $this->_paypal->setCancelUrl($url);
     }
 
+    public function setFinalizeUrl($url)
+    {
+        $this->_paypal->setFinalizeUrl($url);
+    }
+
     /**
      * Method to build the PayPal String
      *
@@ -111,6 +116,8 @@ class PayPalRepository implements IPLPayment{
                     '&PAYMENTREQUEST_0_INSURANCEAMT=0'.
                     '&PAYMENTREQUEST_0_AMT='.$options['amount'];
 
+                $finalizeUrl = env('FINALIZE_URL')."/moneybox/detail/".$options['moneyboxurl'];
+                $this->_paypal->setFinalizeUrl($finalizeUrl);
                 $httpParsedResponseAr = $this->_paypal->PPHttpPost($method, $paypal_string);
                 $paypal_response = $this->paypalResponse($httpParsedResponseAr, $method, $token);
                 break;

@@ -15,12 +15,12 @@
                         <a class="stage-item password" v-on:click.prevent="onClickPassword($event)">
                             <div class="stage-item-icon"></div>
                             <div class="stage-item-label">Contraseña</div>
-                            <div class="stage-bar"></div>
+                            <!--<div class="stage-bar"></div>-->
                         </a>
-                        <a class="stage-item share" v-on:click.prevent="onClickShare($event)">
+                        <!--<a class="stage-item share" v-on:click.prevent="onClickShare($event)">
                             <div class="stage-item-icon"></div>
                             <div class="stage-item-label">Contacto</div>
-                        </a>
+                        </a>-->
                     </div>
                 </div>
                 <div class="header-block">

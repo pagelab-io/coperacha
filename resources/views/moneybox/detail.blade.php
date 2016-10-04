@@ -53,8 +53,12 @@
                                 </div>
                                 <div class="form-group">
                                     <label>
-                                        <img src="/images/icon-profile-total.png" alt="">
-                                        Total recaudado: ${{number_format($moneybox->collected_amount, 2)}}
+                                        @foreach($settings as $setting)
+                                            @if($setting->setting_id == 2 && $setting->option_id == 6 && $setting->value == 0)
+                                                <img src="/images/icon-profile-total.png" alt="">
+                                                Total recaudado: ${{number_format($moneybox->collected_amount, 2)}}
+                                            @endif
+                                        @endforeach
                                     </label>
                                 </div>
                                 <div class="form-group">

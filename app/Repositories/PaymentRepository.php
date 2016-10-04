@@ -216,7 +216,7 @@ class PaymentRepository extends BaseRepository
             \Log::info("=== Moneybox: ".$moneybox." ===");
 
             // DoExpressCheckout
-            $doExpress = $this->_paypal->checkOut('DoExpressCheckoutPayment', $request, array('amount' => $payment->amount));
+            $doExpress = $this->_paypal->checkOut('DoExpressCheckoutPayment', $request, array('amount' => $payment->amount, 'moneyboxurl' => $moneybox->url));
             if (is_array($doExpress)) {
                 if ($doExpress['success'] == 1) {
                     try {

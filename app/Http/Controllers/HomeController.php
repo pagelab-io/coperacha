@@ -185,6 +185,7 @@ class HomeController extends Controller
         $variables = $this->_moneyboxRepository->getByURL($url);
         $moneybox = $variables['moneybox'];
         $person = $variables['person'];
+        $settings = $variables["settings"];
         $partiticipantsnumber = $variables['partiticipantsnumber'];
 
         if (count($moneybox->files) > 0) {
@@ -193,6 +194,7 @@ class HomeController extends Controller
 
         return view('moneybox.detail')
             ->with('moneybox', $moneybox)
+            ->with('settings', $settings)
             ->with('person', $person)
             ->with('partiticipantsnumber', $partiticipantsnumber)
             ->with('pageTitle',$moneybox->name);

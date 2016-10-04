@@ -102,6 +102,11 @@ class PayPal
         $this->cancelURL = $url;
     }
 
+    public function setFinalizeUrl($url)
+    {
+        $this->finalizeurl = $url;
+    }
+
     /**
      *
      * @param $methodName

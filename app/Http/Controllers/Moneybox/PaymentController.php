@@ -69,7 +69,7 @@ class PaymentController extends PLController
                 \Log::info("delete tmp_participant session");
                 if (\Session::get('tmp_participant'))
                     \Session::forget('tmp_participant');
-                return redirect('/');
+                return redirect($this->getResponse()->data['url']);
             } else {
                 // TODO - change this for anoter view
                 return response()->json($this->getResponse());

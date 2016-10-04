@@ -61,11 +61,7 @@
             var participationValue = 1;
 
             var privacy1 = $scope.privacy1.split('|');
-            var privacy2 = $scope.privacy2.split('|');
-            var privacy3 = $scope.privacy3.split('|');
             var privacyValue1 = 1;
-            var privacyValue2 = 1;
-            var privacyValue3 = 1;
 
             if (participation[2] == 'Y') {
                 participationValue = document.getElementById('txt-option-'+participation[1]).value;
@@ -83,10 +79,8 @@
                 $scope.settings.push({'setting_id':participation[0],'option_id':participation[1],'value':participationValue});
                 if(privacy1[0] != 0 && privacy1[1] != 0)
                     $scope.settings.push({'setting_id':privacy1[0],'option_id':privacy1[1],'value':privacyValue1});
-                if(privacy2[0] != 0 && privacy2[1] != 0)
-                    $scope.settings.push({'setting_id':privacy2[0],'option_id':privacy2[1],'value':privacyValue2});
-                if(privacy3[0] != 0 && privacy3[1] != 0)
-                    $scope.settings.push({'setting_id':privacy3[0],'option_id':privacy3[1],'value':privacyValue3});
+                else
+                    $scope.settings.push({'setting_id':2,'option_id':6,'value':0});
 
                 // build the request to save the moneybox
                 $scope.request = {
@@ -186,9 +180,6 @@
             if ($scope.moneybox_id == 0) {
                 if (utils.isNullOrEmpty($scope.participation)) {
                     utils.setValidationError("Selecciona un tipo de monto");
-                    return false;
-                }else if ($scope.privacy1 == "0|0|N" && $scope.privacy2 == "0|0|N" && $scope.privacy3 == "0|0|N") {
-                    utils.setValidationError("Selecciona una opción de privacidad");
                     return false;
                 }
             } else {
