@@ -15,6 +15,7 @@
                             </div>
                        </div>
                     </div>
+
                     <div class="row">
                         <div class="col-sm-5">
                             <form class="form profile" ng-controller="participantController">
@@ -22,7 +23,6 @@
                                 <input id="moneybox-name" type="hidden" value="{{$moneybox->name}}">
                                 <input id="moneybox-desc" type="hidden" value="{{$moneybox->description}}">
                                 <input type="hidden" ng-model="moneybox_id" ng-init="moneybox_id='{{$moneybox->id}}'">
-
                                 <div class="form-group">
                                     <picture style="margin-right: 15px">
                                         <img id="moneybox-image"
@@ -30,12 +30,14 @@
                                              src="{{$moneybox->lastfile ? asset('/uploads/' . $moneybox->lastfile->name) : asset($moneybox->category->path)}}">
                                     </picture>
                                 </div>
+
                                 <div class="form-group">
                                     <label>
                                         <img src="/images/icon-profile-user.png">
                                         <a href="javascript:void(0)" ng-click="participantsByMoneybox()">Participantes: {{$partiticipantsnumber}}</a>
                                     </label>
                                 </div>
+
                                 <div class="form-group">
                                     <label>
                                         <img src="/images/icon-profile-calendar.png" alt="">
@@ -53,7 +55,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>
-                                        @foreach($settings as $setting)
+					                    @foreach($settings as $setting)
                                             @if($setting->setting_id == 2 && $setting->option_id == 6 && $setting->value == 0)
                                                 <img src="/images/icon-profile-total.png" alt="">
                                                 Total recaudado: ${{number_format($moneybox->collected_amount, 2)}}
@@ -61,17 +63,20 @@
                                         @endforeach
                                     </label>
                                 </div>
+
                                 <div class="form-group">
                                     <input type="hidden" ng-init="moneyboxurl='{{$moneybox->url}}'"/>
                                     <button class="btn-primary small" ng-click="goToParticipation()">Participa</button>
                                 </div>
                             </form> <!-- ./FormProfile -->
                         </div>
+
                         <div class="col-sm-7">
                             <div class="form share">
                                 <div class="form-group">
                                     <label>Comparte tu alcancía en tus redes sociales</label>
                                 </div>
+
                                 <div class="form-group">
                                     <a id="btnShareFb" class="btn-share-fb">
                                         <span style="color: white;">Compartir en</span>
@@ -80,6 +85,7 @@
                                 </div>
                                 <!-- Your share button code -->
                             </div> <!-- ./FormShare -->
+
                             <form id="FormShare" class="form share"
                                   data-url="{{$moneybox->url}}"
                                   v-on:submit.prevent="onSubmit" role="form">
@@ -88,6 +94,7 @@
                                 <div class="form-group">
                                     <label>o envía correo a tus amigos para invitarlos a participar.</label>
                                 </div>
+
                                 <div class="form-group">
                                     <div class="text-info">Introduce los correos separando cada uno con punto y coma (;)</div>
                                     <textarea required
@@ -110,7 +117,6 @@
         </div>
     </section>
 @endsection
-
 @section('js')
     <script src="{{asset('/js/vendor/vuejs/vue.js')}}"></script>
     <script src="{{asset('/js/vendor/vuejs/vue-resource.js')}}"></script>
@@ -150,9 +156,8 @@
                     }
                 }
             };
-
             Application.init();
-
         })(jQuery);
     </script>
 @endsection
+

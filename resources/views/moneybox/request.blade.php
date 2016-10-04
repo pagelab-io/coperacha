@@ -58,7 +58,7 @@
                                             v-model="order.bank_name"
                                             class="form-control">
                                         <option value="banorte">Banorte</option>
-                                        <option value="bancomer">Bancome</option>
+                                        <option value="bancomer">Bancomer</option>
                                         <option value="hsbs">HSBC</option>
                                         <option value="banamex">Banamex</option>
                                         <option value="santander">Santander</option>
@@ -79,8 +79,7 @@
                                     <input id="file"
                                            name="file[]"
                                            type="file"
-                                           v-on:change="onFileChange"
-                                           required>
+                                           v-on:change="onFileChange">
                                 </div>
                             </div>
                             <div class="col-sm-6">

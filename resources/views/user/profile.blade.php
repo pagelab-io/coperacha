@@ -12,6 +12,7 @@
                             <div class="stage-item-label">Mi perfil</div>
                             <div class="stage-bar"></div>
                         </a>
+
                         <a class="stage-item password" v-on:click.prevent="onClickPassword($event)">
                             <div class="stage-item-icon"></div>
                             <div class="stage-item-label">Contraseña</div>
@@ -71,7 +72,6 @@
                                                autocomplete="off"
                                                v-model="person.phone">
                                     </div>
-
                                     <div class="form-group">
                                         <label for="gender">Sexo</label>
                                         <select name="gender" id="gender" class="form-control"
@@ -79,8 +79,8 @@
                                             <option value="M">Femenino</option>
                                             <option value="H">Masculino</option>
                                         </select>
-                                    </div>
 
+                                    </div>
                                     <div class="form-group">
                                         <label for="usuario">Usuario</label>
                                         <input id="usuario" class="form-control" name="usuario" placeholder="Usuario"
@@ -88,7 +88,6 @@
                                                autocomplete="off"
                                                v-model="user.username">
                                     </div>
-
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
@@ -108,14 +107,12 @@
                                                type="text"
                                                v-model="person.country">
                                     </div>
-
                                     <div class="form-group">
                                         <label for="city">Ciudad</label>
                                         <input id="city" class="form-control" name="city" placeholder="Ciudad" type="text"
                                             autocomplete="off"
                                             v-model="person.city">
                                     </div>
-
                                     <div class="form-group">
                                         <label for="month">Fecha de nacimiento</label>
                                         <div class="row">
@@ -135,6 +132,7 @@
                                                     @endforeach
                                                 </select>
                                             </div>
+
                                             <div class="col-sm-4">
                                                 <select class="form-control" name="year" id="year" v-model="birthdayYear">
                                                     <option value="">Año</option>
@@ -209,11 +207,11 @@
                              transition="expand"
                              v-show="isShare"
                              v-bind:class="{'selected':isShare}">
+
                         <div class="form register">
                             <div class="form-group">
                                 <label class="text-info">Comparte tu alcancía en tus redes sociales</label>
                             </div>
-
                             <div class="form-group">
                                 <a class="btn-share-fb" href="javascript:void(0)">
                                     <span>Compartir en</span>
@@ -227,14 +225,15 @@
                                     <img src="/images/twitter-logo.png" alt="twitter">
                                 </a>
                             </div>
+
                         </div>
+
                         <form class="form register" action="" method="post">
                             <div class="form-group">
                                 <label class="text-info">o envía un correo a tus amigos para invitarlos a participar.</label>
                                 <div class="small">Introduce los correos separando cada uno con punto y coma (;)</div>
                                 <textarea required name="email" id="email" class="form-control" rows="3" placeholder="Introduce las direcciones de correo"></textarea>
                             </div>
-
                             <div class="form-group clearfix">
                                 <div class="pull-right">
                                     <button class="btn btn-primary small">Enviar invitaciones</button>
@@ -250,7 +249,6 @@
                     <a href="{{route('moneybox.create')}}" class="btn btn-primary small">Crear mi Alcancía</a>
                 </div>
             </div> <!-- ./container -->
-
         </div> <!-- ./holder -->
     </div> <!-- ./profile-view -->
 @endsection

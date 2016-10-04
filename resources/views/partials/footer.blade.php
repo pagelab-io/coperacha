@@ -6,8 +6,13 @@
                 <div class="col-sm-4 col-xs-12 align-middle">
                     <div class="rights">
                         <div class="logo">
-                            <a href={{url('/')}}><img class="img-responsive" src={{asset('/images/logo.png')}} alt="Coperacha | Recauda Dinero Entre Amigos"></a>
+                            <a href={{url('/')}} title="Coperacha | Recauda Dinero Entre Amigos">
+                                <img class="img-responsive"
+                                     src={{asset('/images/logo.png')}}>
+                            </a>
+
                         </div>
+
                         <div class="text">
                             <div>Coperacha 2016.</div>
                             <div>Todos los derechos reservados.</div>
@@ -16,9 +21,19 @@
                         <div class="social part">
                             <div class="container-fluid">
                                 <ul class="list">
-                                    <li><a target="_blank" href="https://www.facebook.com/coperachamx/"><i class="icon-facebook"></i></a></li>
-                                    <li><a target="_blank" href="https://twitter.com/coperacha_mx"><i class="icon-twitter"></i></a></li>
-                                    <li><a target="_blank" href="https://www.instagram.com/coperachamx/"><i class="icon-instagram"></i></a></li>
+                                    <li>
+                                        <a target="_blank" href="https://www.facebook.com/coperachamx/"><i
+                                                    class="icon-facebook"></i></a>
+                                    </li>
+                                    <li>
+                                        <a target="_blank" href="https://twitter.com/coperacha_mx"><i
+                                                    class="icon-twitter"></i></a>
+                                    </li>
+                                    <li>
+                                        <a target="_blank" href="https://www.instagram.com/coperachamx/"><i
+                                                    class="icon-instagram"></i></a>
+                                    </li>
+
                                 </ul>
                             </div>
                         </div>
@@ -39,6 +54,7 @@
                                 </ul>
                             </nav>
                         </div>
+
                         <div class="col-sm-6 align-middle">
                             <div class="contact-info">
                                 <h5>CONTACTO</h5>

@@ -49,11 +49,14 @@ class InvitationChecker extends Command
     public function handle()
     {
         $this->info("Start Checking...");
+        \Log::info("Start Checking...");
         $invitations = Invitation::where(function ($q) {
             $q->where('status', '=', 0);
             $q->where('count', '<=', 3);
         })->get();
 
+        \Log::info('invitaciones');
+        \Log::info(count($invitations));
         $attends = [];
 
         foreach ($invitations as $invitation) {
@@ -79,7 +82,7 @@ class InvitationChecker extends Command
                         Mail::send('emails.pendinginvitation', $data, function ($message) use ($invitation) {
                             $message->from('info@coperacha.com.mx', 'Coperacha');
                             $message->to($invitation->email, 'Invitado ' . $invitation->email);
-                            $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com']);
+                            $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com', 'coperachamexico@gmail.com']);
                             $message->subject('Recordatorio para participar en ' . $invitation->moneybox->name);
                         });
                     }
@@ -87,6 +90,7 @@ class InvitationChecker extends Command
             }
         }
         $this->info("Completed");
+        \Log::info("Completed");
         // $message = sprintf("Registros actualizados: %s [%s]", ($i + 1), implode(',', $ids));
 
         // Write info

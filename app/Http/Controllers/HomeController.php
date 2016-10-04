@@ -3,25 +3,39 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Category;
+
 use App\Entities\Invitation;
+
 use App\Entities\Moneybox;
+
 use App\Entities\File;
+
 use App\Http\Requests\PLRequest;
+
 use App\Repositories\MoneyboxRepository;
+
 use App\Repositories\SettingRepository;
+
 use App\Repositories\UserRepository;
+
 use App\Wordpress\model\Post;
+
 use Illuminate\Contracts\Queue\EntityNotFoundException;
+
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Support\Facades\Mail;
+
 use Illuminate\Support\Facades\Storage;
+
 use Illuminate\Support\Facades\Validator;
+
 use Mockery\CountValidator\Exception;
 
 class HomeController extends Controller
 {
-
     /**
      * @var SettingRepository
      */
@@ -36,7 +50,6 @@ class HomeController extends Controller
      * @var UserRepository
      */
     private $_userRepository;
-
 
     /**
      * HomeController constructor.
@@ -64,7 +77,6 @@ class HomeController extends Controller
             ->orWhere('id',4)
             ->orWhere('id',6)
             ->get();
-
         return view('index', [
             'pageTitle' => '',
             'categories' => $categories
@@ -91,7 +103,6 @@ class HomeController extends Controller
         return view('pages.about', ['pageTitle' => '¿Por qué organizar la recaudación con Coperacha?']);
     }
 
-
     /**
      * Faqs View
      *
@@ -115,7 +126,6 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function getPricingPage(){
-
         return view('pages.pricing')
             ->with('pageTitle','Precios');
     }
@@ -127,7 +137,6 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function getCreateMoneyboxPage(Request $request, $url = '') {
-
         $moneybox = null;
         $moneyboxSettings   = null;
         $privacyoption      = 0;
@@ -140,6 +149,7 @@ class HomeController extends Controller
             $amountoption       = $moneyboxSettings[0];
             $privacyoption      = $moneyboxSettings[1];
             $title              = "Modificar alcancía";
+
             if (count($moneybox->files) > 0) {
                 $lastfile = $moneybox->files->last();
                 $moneybox->image = $lastfile->name;
@@ -147,7 +157,6 @@ class HomeController extends Controller
         } else {
             $title = "Crear mi alcancía 1/2";
         }
-
         $categories = Category::all();
         $request->merge(array('path' => '/moneybox'));
         $response = $this->_settingRepository->childsOf($request);
@@ -164,6 +173,7 @@ class HomeController extends Controller
     }
 
     /**
+     *
      * @param PLRequest $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -173,6 +183,7 @@ class HomeController extends Controller
         return view('moneybox.dashboard')
             ->with('moneyboxes', $response->data)
             ->with('pageTitle','Mis Alcancías');
+
     }
 
     /**
@@ -181,11 +192,11 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function getDetailPage($url){
-
         $variables = $this->_moneyboxRepository->getByURL($url);
         $moneybox = $variables['moneybox'];
         $person = $variables['person'];
-        $settings = $variables["settings"];
+	
+	    $settings = $variables["settings"];
         $partiticipantsnumber = $variables['partiticipantsnumber'];
 
         if (count($moneybox->files) > 0) {
@@ -201,6 +212,7 @@ class HomeController extends Controller
     }
 
     /**
+     *
      * @param $moneyboxurl
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * @throws \Exception
@@ -251,7 +263,7 @@ class HomeController extends Controller
         $moneyboxSetttings = $variables['settings'];
         $user       = '';
         $amount     = 0;
-        
+
         if (\Session::has('tmp_participant')){
             $session = \Session::get('tmp_participant');
             $user       = $this->_userRepository->byEmail($session['email']);
@@ -264,6 +276,7 @@ class HomeController extends Controller
             ->with('participant', $user)
             ->with('amount', $amount)
             ->with('pageTitle','Resumen de tu participación antes del pago');
+
     }
 
     /**
@@ -274,15 +287,10 @@ class HomeController extends Controller
      */
     public function postMailRequest(Request $request) {
         $moneybox = Moneybox::find($request->get('moneybox_id'));
-        
+
         if (!$moneybox) {
             throw new EntityNotFoundException('La alcancía no existe.', -1);
         }
-
-        if (!$request->hasFile('file')) {
-            throw new Exception('El campo de archivo es es requerido.');
-        }
-
         /// Vars
         $withMail = true;
         $data = $request->all();
@@ -295,41 +303,41 @@ class HomeController extends Controller
         }
 
         // Extract file info
-        $extension = $request->file('file')->getClientOriginalExtension();
-        $filename = $request->file('file')->getClientOriginalName();
-        $mine = $request->file('file')->getClientMimeType();
-        $size = $request->file('file')->getSize();
-        $name =  uniqid() . '_' . $filename;
+        $file = null;
+        if ($request->hasFile('file')) {
+            $extension = $request->file('file')->getClientOriginalExtension();
+            $filename = $request->file('file')->getClientOriginalName();
+            $mine = $request->file('file')->getClientMimeType();
+            $size = $request->file('file')->getSize();
+            $name = uniqid() . '_' . $filename;
 
-        //$temp = $request->file('file');
-        //if ($stored = Storage::disk('public')->put($name, \File::get($temp))) {
-
-        if ($stored = Storage::disk('public')->put($name, $request->file('file'))) {
-            $file = File::create(['name' => $name, 'size' => $size, 'path' => 'public', 'extension' => $extension]);
-            $file->user_id = Auth::user()->id;
-            $file->metadata = $mine;
-            $file->storable_type = 'App\Entities\Order';
-            $file->storable_id = $order->id;
-            $file->save();
+            if ($stored = Storage::disk('public')->put($name, $request->file('file'))) {
+                $file = File::create(['name' => $name, 'size' => $size, 'path' => 'public', 'extension' => $extension]);
+                $file->user_id = Auth::user()->id;
+                $file->metadata = $mine;
+                $file->storable_type = 'App\Entities\Order';
+                $file->storable_id = $order->id;
+                $file->save();
+            }
         }
-
         $data = [
             'moneybox' => $moneybox,
-            'order' => $order,
-            'file' => $file
+            'order' => $order
         ];
 
         if (true == $withMail) {
             Mail::send('emails.request', $data, function ($message) use ($user, $file) {
-                $pdf = Storage::disk('public')->get($file->name);
                 $message->from($user->email, $user->person->fullName());
                 $message->to('coperachamexico@gmail.com', 'Coperacha - team');
-                $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com']);
+                $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com', 'coperachamexico@gmail.com']);
                 $message->subject('Solicitud de Retiro');
-                $message->attach($pdf, ['display' => $file->name, 'mime' => $file->metadata]);
+
+                if ($file) {
+                    $pdf = Storage::disk('public')->get($file->name);
+                    $message->attach($pdf, ['display' => $file->name, 'mime' => $file->metadata]);
+                }
             });
         }
-
         return response()->json(['success' => true, 'data' => $order]);
     }
 
@@ -340,7 +348,6 @@ class HomeController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function postMailContact(Request $request) {
-
         $data = [
             'name'    => $request->get('name'),
             'email'   => $request->get('email'),
@@ -350,13 +357,12 @@ class HomeController extends Controller
         Mail::send('emails.contact', $data, function ($message) use($request) {
             $message->from($request->get('email'), 'Contacto');
             $message->to('coperachamexico@gmail.com');
-            $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com']);
+            $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com', 'coperachamexico@gmail.com']);
             $message->subject('Mensaje de Contacto');
         });
 
         return response()->json(['success' => true, 'data' => $data]);
     }
-
 
     /**
      * Send mail contact
@@ -365,37 +371,30 @@ class HomeController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function postMailThanks(Request $request) {
-
         $url = $request->get('url');
         $moneybox = Moneybox::byUrl($url)->with('participants')->first();
-
         if (!$moneybox) {
             throw new EntityNotFoundException('La alcancía no existe.', -1);
         }
-
         // Owner of the moneybox
         $owner = $moneybox->person->user;
-
         // Get users list
         $users = [];
+
         foreach ($moneybox->participants as $participant) {
             $person = $participant->person;
             $user = $person->user;
-
             if (!isset($users[$user->email])) {
                 $users[$user->email] = $user;
             }
         }
-
         $users = array_values($users);
         $senders = [];
 
         // Send users list
         foreach ($users as $user) {
-
             if ($user->email) {
                 $senders[] = $user->email;
-
                 $data = [
                     'owner' => $owner,
                     'moneybox' => $moneybox,
@@ -405,12 +404,11 @@ class HomeController extends Controller
                 Mail::send('emails.thanks', $data, function ($message) use ($owner, $user) {
                     $message->from($owner->email, $owner->username);
                     $message->to($user->email, $user->username);
-                    $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com']);
+                    $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com', 'coperachamexico@gmail.com']);
                     $message->subject('Agradecimiento');
                 });
             }
         }
-
         return response()->json(['success' => true, 'data' => $senders]);
     }
 
@@ -421,14 +419,12 @@ class HomeController extends Controller
     public function postRemoveMoneybox(Request $request) {
         $url = $request->get('url');
         $moneybox = Moneybox::byUrl($url)->first();
-
         if (!$moneybox) {
             throw new EntityNotFoundException('La alcancía no existe.', -1);
         }
 
         $moneybox->active = 0;
         $moneybox->save();
-
         return response()->json(['success' => true, 'data' => $moneybox]);
     }
 
@@ -447,9 +443,7 @@ class HomeController extends Controller
             throw new EntityNotFoundException('No existe la alcancía');
         }
 
-        // $emails = explode(',', $request->get('emails'));
         $emails =  preg_split("/[\s,;:]+/", $request->get('emails'));
-
         foreach ($emails as $email) {
             $validator = Validator::make(['mail' => $email], [
                 'mail' => 'required|email'
@@ -463,10 +457,11 @@ class HomeController extends Controller
                     'moneybox_id' => $moneybox->id]);
 
                 if ($record) {
+
                     Mail::send('emails.invitation', $data, function ($message) use ($email) {
-                        $message->from('info@coperacha.com.mx', 'Coperacha');
+                        $message->from('hola@coperacha.com.mx', 'Coperacha team');
                         $message->to($email, 'Invitado ' . $email);
-                        $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com']);
+                        $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com', 'coperachamexico@gmail.com']);
                         $message->subject('Mensaje de Invitación');
                     });
                 }
@@ -492,7 +487,6 @@ class HomeController extends Controller
 
         foreach ($invitations as $invitation) {
             if (!isset($attends[$invitation->email])) {
-
                 $attends[$invitation->email] = $invitation->id;
                 $data = [
                     'invitation' => $invitation,
@@ -500,9 +494,9 @@ class HomeController extends Controller
                 ];
 
                 Mail::send('emails.pendinginvitation', $data, function ($message) use ($invitation) {
-                    $message->from('info@coperacha.com.mx', 'Coperacha');
+                    $message->from('hola@coperacha.com.mx', 'Coperacha team');
                     $message->to($invitation->email, 'Invitado');
-                    $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com']);
+                    $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com', 'coperachamexico@gmail.com']);
                     $message->subject('Mensaje de Recordatorio');
                 });
             }

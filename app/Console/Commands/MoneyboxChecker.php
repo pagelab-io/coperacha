@@ -67,7 +67,7 @@ class MoneyboxChecker extends Command
                 Mail::send('emails.deadline', $data, function ($message) use ($user) {
                     $message->from('info@coperacha.com.mx', 'Coperacha');
                     $message->to($user->email, $user->username);
-                    $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com']);
+                    $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com', 'coperachamexico@gmail.com']);
                     $message->subject('Deadline');
                 });
 

@@ -1,5 +1,4 @@
 @extends("layouts.master")
-
 @section("content")
     <!-- Cover -->
     <div class="block cover">
@@ -12,20 +11,16 @@
                             <div class="money graphic">
                                 <img src="images/cover-money.png" alt="cover money">
                             </div>
-
                             <!-- Laptop -->
                             <div class="laptop graphic">
                                 <img src="images/cover-laptop.png" alt="cover laptop">
                             </div>
-
                             <!-- Wallet -->
                             <div class="wallet graphic">
                                 <img src="images/cover-wallet.png" alt="cover wallet">
                             </div>
-
                         </div>
                     </div>
-
                     <div class="col-xs-12 col-sm-12 col-md-6 align-middle">
                         <div class="header-block">
                             <div>El servicio online para recaudar dinero entre amigos</div>
@@ -43,7 +38,6 @@
             </div>
         </div>
     </div>
-
     <!-- Section How it Works -->
     <section class="block how-it-works" id="como-funciona">
         <div class="holder">
@@ -64,7 +58,6 @@
                                 <div class="desc">Es gratis y te llevará un minuto crearla.</div>
                             </div>
                         </div>
-
                         <div class="col-sm-3 col-xs-6 align-top">
                             <div class="card">
                                 <div class="image">
@@ -74,7 +67,6 @@
                                 <div class="desc">Cuéntale a tus amigos por mail  o Facebook.</div>
                             </div>
                         </div>
-
                         <div class="col-sm-3 col-xs-6 align-top">
                             <div class="card">
                                 <div class="image">
@@ -90,6 +82,7 @@
                                 <div class="image">
                                     <img class="img-responsive center-block" src="images/how-it-works-card-4.png" alt="">
                                 </div>
+
                                 <div class="name"><span>4. Gasta</span></div>
                                 <div class="desc">Compra en nuestras tiendas asociadas o ingresa el dinero a tu cuenta. </div>
                             </div>
@@ -99,7 +92,6 @@
             </div>
         </div>
     </section>
-
     <!-- Section Intro -->
     <section class="block intro" id="intro">
         <div class="holder">
@@ -117,13 +109,11 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="col-sm-6">
                         <div class="video">
                             <div class="embed-responsive embed-responsive-16by9">
                                 <iframe class="embed-responsive-item" src="https://player.vimeo.com/video/142285041?title=0&byline=0&portrait=0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
                             </div>
-
                             <a id="btnShareFb" class="btn-share-fb">
                                 <span>Compartir en</span>
                                 <img src="images/facebook-logo.png" alt="">
@@ -134,7 +124,6 @@
             </div>
         </div>
     </section>
-
     <!-- Section Advantages -->
     <section class="block advantages" id="ventajas">
         <div class="holder">
@@ -155,7 +144,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-sm-4 col-xs-6 align-top">
                             <div class="advantage">
                                 <div class="image">
@@ -167,7 +155,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-sm-4 col-xs-6 align-top">
                             <div class="advantage">
                                 <div class="image">
@@ -179,7 +166,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-sm-4 col-xs-6 align-top">
                             <div class="advantage">
                                 <div class="image">
@@ -202,7 +188,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-sm-4 col-xs-6 align-top">
                             <div class="advantage">
                                 <div class="image">
@@ -219,7 +204,6 @@
             </div>
         </div>
     </section>
-
     <!-- Section Payment Methods -->
     <section class="block payment-methods" id="metodos-de-pago">
         <div class="holder">
@@ -241,7 +225,6 @@
             </div>
         </div>
     </section>
-
     <!-- Section Create Moneybox -->
     <section class="block create-moneybox" id="crea-tu-alcancia">
         <div class="holder">
@@ -261,7 +244,6 @@
                                 <input class="btn btn-primary small" type="button" value="Crear mi Alcancía" ng-click="emailRegister()">
                             </form>
                         </div>
-
                         <div class="col-sm-6">
                             <div class="sign-in-wrap">
                                 <a class="sign-in-fb" href="#" ng-click="facebookRegister()">
@@ -276,7 +258,6 @@
         </div>
     </section>
 @endsection
-
 @section('js')
     <script src="{{asset('/js/share.js')}}"></script>
     <script src="{{asset('/js/slider.js')}}"></script>
@@ -288,7 +269,6 @@
             withPagination: false,
             withNavigation: false
         });
-
         var share = new Share();
         share.setup({
             networks: {
