@@ -18,8 +18,8 @@
 |
 */
 
-//require __DIR__.'/../bootstrap/autoload.php';
-require __DIR__.'/../coperacha_v2/bootstrap/autoload.php';
+require __DIR__.'/../bootstrap/autoload.php';
+//require __DIR__.'/../coperacha_v2/bootstrap/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -33,8 +33,8 @@ require __DIR__.'/../coperacha_v2/bootstrap/autoload.php';
 |
 */
 
-//$app = require_once __DIR__.'/../bootstrap/app.php';
-$app = require_once __DIR__.'/../coperacha_v2/bootstrap/app.php';
+//$app = require_once __DIR__.'/../coperacha_v2/bootstrap/app.php';
+$app = require_once __DIR__.'/../bootstrap/app.php';
 $app->alias('request', 'App\Http\Requests\PLRequest');
 
 /*

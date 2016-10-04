@@ -7,5 +7,6 @@ Homestead.json
 /storage/logs
 /node_modules
 /public/git-request.php
-/storage/framework
+/public/index.php
 /public/cms/wp-config.php
+/storage/framework
