@@ -1,17 +1,16 @@
 @extends("layouts.master")
 
+@section('css')
+    <link rel="stylesheet" href="{{asset("/js/vendor/bootstrap-select-1.11.2/bootstrap-select.css")}}">
+@endsection
+
 @section("content")
-
     @include('partials.header')
-
     <section class="block request-view">
         <div class="holder">
             <div class="container-fluid">
-
                 <div class="header-block">
-                    <div class="title">
-
-                    </div>
+                    <div class="title"></div>
                 </div>
 
                 <div class="content-block">
@@ -53,14 +52,58 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="mobile">Celular</label>
-                                    @if(Auth::user())
-                                        <input type="text" class="form-control" placeholder="Celular" ng-model="phone" ng-init="phone='{{Auth::user()->person->phone}}'">
+                                    @if (Auth::user())
+                                        <div class="input-group">
+                                            <div class="input-group-addon" style="padding: 0;">
+                                                <select class="selectpicker"
+                                                        ng-model="areacode"
+                                                        ng-init="areacode='{{Auth::user()->person->areacode}}'"
+                                                        data-width="160px"
+                                                        data-live-search="true">
+                                                    <option value="">Código de area</option>
+                                                    @foreach($codes as $code)
+                                                        <option value="{{$code['code']}}">{!! $code['name'] .' - <strong>('. $code['code'] . ')</strong>' !!}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <input type="text" class="form-control"
+                                                   placeholder="Celular"
+                                                   ng-model="phone" ng-init="phone='{{Auth::user()->person->phone}}'">
+                                        </div>
                                     @else
                                         @if(Session::has('tmp_participant'))
-                                            <input type="text" class="form-control" placeholder="Celular" ng-model="phone" ng-init="phone='{{Session::get('tmp_participant')["phone"]}}'">
+                                            <div class="input-group">
+                                                <div class="input-group-addon" style="padding: 0;">
+                                                    <select class="selectpicker"
+                                                            ng-model="areacode"
+                                                            ng-init="areacode='{{Session::get('tmp_participant')["areacode"]}}'"
+                                                            data-width="160px"
+                                                            data-live-search="true">
+                                                        <option value="">Código de area</option>
+                                                        @foreach($codes as $code)
+                                                            <option value="{{$code['code']}}">{!! $code['name'] .' - <strong>('. $code['code'] . ')</strong>' !!}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <input type="text" class="form-control" placeholder="Celular" ng-model="phone" ng-init="phone='{{Session::get('tmp_participant')["phone"]}}'">
+                                            </div>
                                         @else
-                                            <input type="text" class="form-control" placeholder="Celular" ng-model="phone">
+                                            <div class="input-group">
+                                                <div class="input-group-addon" style="padding: 0;">
+                                                    <select class="selectpicker"
+                                                            ng-model="areacode"
+                                                            data-width="160px"
+                                                            data-live-search="true">
+                                                        <option value="">Código de area</option>
+                                                        @foreach($codes as $code)
+                                                            <option value="{{$code['code']}}">{!! $code['name'] .' - <strong>('. $code['code'] . ')</strong>' !!}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <input type="text" class="form-control" placeholder="Celular" ng-model="phone">
+                                            </div>
                                         @endif
+
                                     @endif
                                 </div>
                                 <div class="form-group">
@@ -125,4 +168,11 @@
 @endsection
 
 @section('js')
+    <script src="{{asset("/js/vendor/bootstrap-3.3.7/js/bootstrap.js")}}"></script>
+    <script src="{{asset("/js/vendor/bootstrap-select-1.11.2/bootstrap-select.js")}}"></script>
+    <script>
+        $(document).ready(function () {
+            $('.selectpicker').selectpicker({ liveSearch: true });
+        });
+    </script>
 @endsection

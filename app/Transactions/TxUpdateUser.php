@@ -50,6 +50,7 @@ class TxUpdateUser {
             if ($request->exists('name')) $person->name = $request->get('name');
             if ($request->exists('lastname')) $person->lastname = $request->get('lastname');
             if ($request->exists('birthday')) $person->birthday = $request->get('birthday');
+            if ($request->exists('areacode')) $person->areacode = $request->get('areacode');
             if ($request->exists('phone')) $person->phone = $request->get('phone');
             if ($request->exists('gender')) $person->gender = $request->get('gender');
             if ($request->exists('city')) $person->city = $request->get('city');

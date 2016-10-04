@@ -23,6 +23,7 @@ var vm = new Vue({
             lastname: '',
             birthday: '',
             gender: '',
+            areacode: '',
             phone: '',
             city: '',
             country: ''
@@ -184,11 +185,16 @@ var vm = new Vue({
                     this.person = body.data.person;
                     this.fbuser = body.data.fbuser;
                     var date = null;
-                    if(this.person.birthday != '0000-00-00') {
+
+                    if (this.person.birthday != '0000-00-00') {
                         date = new Date(this.person.birthday);
                         this.birthdayMonth = date.getMonth() + 1;
                         this.birthdayDay = date.getDate() + 1;
                         this.birthdayYear = date.getFullYear();
+                    }
+
+                    if (this.person.areacode) {
+                        $('.selectpicker').selectpicker('val', this.person.areacode);
                     }
 
                     window.user = this.user;
@@ -205,11 +211,11 @@ var vm = new Vue({
          * Handler the submit form data of the user
          */
         onUpdateData: function () {
-            if(!this.validateProfileData()) return;
-            var utils = new Utils();
+            if (!this.validateProfileData()) return;
+
             this.loading = true;
 
-            var _this = this;
+            var utils = new Utils();
             var path = base + '/api/v1/user/profile/?api-key='+$api;
             var data = {
                 user_id: this.user.id,
@@ -224,7 +230,7 @@ var vm = new Vue({
                     data[field] = this.person[field];
                 }
             }
-            
+
             this.$http.put(path, data, {
                 method: 'PUT'
             }).then(function (response) {
@@ -234,11 +240,10 @@ var vm = new Vue({
                     this.loading = false;
                     if (response.data.status == 200) {
                         this.onGetProfile(this.userid);
-                        document.getElementById('small-alert-content').innerHTML="" +
-                        "<p>Usuario actualizado correctamente.<p>";
+                        document.getElementById('small-alert-content').innerHTML= "<p>Usuario actualizado correctamente.<p>";
                         utils.showAlert(true);
                     } else if(response.data.status == 23000){
-                        utils.setAlertTitle("Coperacha - Alerta");
+                        utils.setAlertTitle("Coperacha");
                         document.getElementById('alert-content').innerHTML="" +
                         "<p>El correo electrónico o usuario que intentas actualizar ya existe, intenta con otro.<p>";
                         utils.showAlert();

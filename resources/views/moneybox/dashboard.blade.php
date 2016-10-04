@@ -38,6 +38,8 @@
 @endsection
 
 @section("js")
+    <script src="{{asset("/js/vendor/bootstrap-3.3.7/js/bootstrap.js")}}"></script>
+    <script src="{{asset("/js/vendor/bootbox/bootbox.min.js")}}"></script>
     <script src="{{asset('/js/vendor/vuejs/vue.js')}}"></script>
     <script src="{{asset('/js/vendor/vuejs/vue-resource.js')}}"></script>
     <script src="{{asset('/js/moneybox.js')}}"></script>

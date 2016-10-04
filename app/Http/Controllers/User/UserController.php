@@ -7,6 +7,7 @@
  */
 namespace App\Http\Controllers\User;
 
+use App\Entities\CountryCode;
 use \App\Http\Controllers\PLController;
 use App\Http\Requests\PLRequest;
 use App\Http\Responses\PLResponse;
@@ -78,7 +79,10 @@ class UserController extends PLController {
             , '11' => 'Noviembre'
             , '12' => 'Diciembre'];
 
+        $codes = CountryCode::getCodes();
+
         return view('user.profile')
+            ->with('codes', $codes)
             ->with('months', $months)
             ->with('user', Auth::user())
             ->with('pageTitle','Mi cuenta');
@@ -134,7 +138,6 @@ class UserController extends PLController {
 
             $this->setResponse($response);
         }
-
 
         return response()->json($this->getResponse());
     }

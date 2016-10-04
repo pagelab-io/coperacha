@@ -3,35 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Category;
-
+use App\Entities\CountryCode;
 use App\Entities\Invitation;
-
 use App\Entities\Moneybox;
-
 use App\Entities\File;
-
 use App\Http\Requests\PLRequest;
-
 use App\Repositories\MoneyboxRepository;
-
 use App\Repositories\SettingRepository;
-
 use App\Repositories\UserRepository;
-
 use App\Wordpress\model\Post;
-
 use Illuminate\Contracts\Queue\EntityNotFoundException;
-
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Support\Facades\Mail;
-
 use Illuminate\Support\Facades\Storage;
-
 use Illuminate\Support\Facades\Validator;
-
 use Mockery\CountValidator\Exception;
 
 class HomeController extends Controller
@@ -244,10 +230,13 @@ class HomeController extends Controller
         $request->merge(array('path' => '/participant'));
         $settings = $this->_settingRepository->childsOf($request);
 
+        $codes = CountryCode::getCodes();
+
         return view('moneybox.join')
             ->with('moneybox', $moneybox)
             ->with('moneyboxSettings', $moneyboxSettings)
             ->with('settings', $settings->data)
+            ->with('codes', $codes)
             ->with('pageTitle','Participa');
     }
 

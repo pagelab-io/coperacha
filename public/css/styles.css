@@ -1641,3 +1641,16 @@ section.block.reset-password {
     margin-bottom: 25px;
     font-size: 23px;
 }
+
+.modal-backdrop {
+    background: white !important;
+}
+
+.modal-footer .btn + .btn {
+    border-radius: 3px;
+    font-size: 15px;
+    font-family:inherit;
+    font-weight: 300;
+    padding: 6px 12px;
+    text-transform: none;
+}

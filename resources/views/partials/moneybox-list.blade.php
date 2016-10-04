@@ -58,6 +58,7 @@
                                 @if ($moneybox->collected_amount == 0)
                                     <div class="form-group">
                                         <a data-url="{{$moneybox->url}}"
+                                           data-name="{{$moneybox->name}}"
                                            class="btn btn-danger btn-remove"
                                            title = "Eliminar alcancía">Eliminar alcancía</a>
                                     </div>

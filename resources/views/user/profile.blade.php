@@ -1,5 +1,9 @@
 @extends("layouts.content")
 
+@section('css')
+    <link rel="stylesheet" href="{{asset("/js/vendor/bootstrap-select-1.11.2/bootstrap-select.css")}}">
+@endsection
+
 @section("page-content")
     <div id="ProfileView" class="block profile-view" data-userid="{{$user->id}}"
          xmlns:v-on="http://www.w3.org/1999/xhtml">
@@ -64,13 +68,27 @@
 
                                     <div class="form-group">
                                         <label for="email">Teléfono</label>
-                                        <input id="phone"
-                                               class="form-control"
-                                               name="phone"
-                                               placeholder="Teléfono"
-                                               type="text"
-                                               autocomplete="off"
-                                               v-model="person.phone">
+                                        <div class="input-group">
+                                            <div class="input-group-addon" style="padding: 0;">
+                                                <select id="areacode" name="areacode"
+                                                        class="selectpicker"
+                                                        v-model="person.areacode"
+                                                        data-width="160px"
+                                                        data-live-search="true">
+                                                    <option value="">Código de area</option>
+                                                    @foreach($codes as $code)
+                                                        <option value="{{$code['code']}}">{!! $code['name'] .' - <strong>('. $code['code'] . ')</strong>' !!}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <input id="phone"
+                                                   class="form-control"
+                                                   name="phone"
+                                                   placeholder="Teléfono"
+                                                   type="text"
+                                                   autocomplete="off"
+                                                   v-model="person.phone">
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="gender">Sexo</label>
@@ -254,7 +272,17 @@
 @endsection
 
 @section('js')
+    <script src="{{asset("/js/vendor/bootstrap-3.3.7/js/bootstrap.js")}}"></script>
+    <script src="{{asset("/js/vendor/bootstrap-select-1.11.2/bootstrap-select.js")}}"></script>
+
     <script src="{{asset('/js/vendor/vuejs/vue.js')}}"></script>
     <script src="{{asset('/js/vendor/vuejs/vue-resource.js')}}"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.selectpicker').selectpicker({liveSearch: true });
+        });
+    </script>
+
     <script src="{{asset('/js/profile.js')}}"></script>
 @endsection
