@@ -326,7 +326,7 @@ var app = app || {};
                                         _this.loaded = true;
                                         // Update pagination
                                         if (_this.options.withPagination) {
-                                          _this.updatePagination(_this.current);
+                                            _this.updatePagination(_this.current);
                                         }
                                         // console.log('completed');
                                     }

@@ -1,6 +1,4 @@
-
 var Share = (function() {
-
     String.prototype.to_rfc3986 = function () {
         var tmp;
         tmp = encodeURIComponent(this);
@@ -8,15 +6,14 @@ var Share = (function() {
             return "%" + c.charCodeAt(0).toString(16);
         });
     };
-
     var Share = (function () {
-
         function Share(element1, options) {
             this.element = element1;
             this.el = {
                 head: document.getElementsByTagName('head')[0],
                 body: document.getElementsByTagName('body')[0]
             };
+
             this.config = {
                 enabled_networks: 0,
                 protocol: ['http', 'https'].indexOf(window.location.href.split(':')[0]) === -1 ? 'https://' : '//',
@@ -31,6 +28,7 @@ var Share = (function() {
                         url: null,
                         description: null
                     },
+
                     facebook: {
                         enabled: true,
                         load_sdk: true,
@@ -56,18 +54,16 @@ var Share = (function() {
                 if (!window.FB) {
                     return console.error("The Facebook JS SDK hasn't loaded yet.");
                 }
-
                 var data = FB.ui({
                     method: 'feed',
                     name: this.config.networks.facebook.title,
                     link: this.config.networks.facebook.url,
-                    picture: this.config.networks.facebook.image, // picture: location.host + this.config.networks.facebook.image
+                    picture: this.config.networks.facebook.image,
                     caption: this.config.networks.facebook.caption,
                     description: this.config.networks.facebook.description
                 });
 
                 return data;
-
             } else {
                 return this.popup('https://www.facebook.com/sharer/sharer.php', {
                     u: this.config.networks.facebook.url
@@ -102,6 +98,7 @@ var Share = (function() {
                 }
                 return results;
             }).call(this)).join('&');
+
             if (qs) {
                 qs = "?" + qs;
             }
@@ -121,8 +118,6 @@ var Share = (function() {
             }
         };
         return Share;
-
     })();
-
     return Share;
 })();

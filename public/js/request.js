@@ -73,7 +73,10 @@ var vm = new Vue({
             var path = base + '/sendrequest';
             var form = new FormData();
 
-            form.append('file', this.file);
+            if (this.file) {
+                form.append('file', this.file);
+            }
+
             for (var field in this.order) {
                 form.append(field, this.order[field]);
             }
