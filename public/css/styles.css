@@ -1646,3 +1646,13 @@ section.block.reset-password {
 .modal-footer {
     border-top: 0;
 }
+
+.modal-backdrop.in {
+    opacity: 0.9;
+}
+
+.modal-content {
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    border-color: transparent;
+    border-radius: 0;
+}
