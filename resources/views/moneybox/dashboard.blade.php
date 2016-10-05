@@ -14,7 +14,7 @@
                         </a>
                         <a class="stage-item" ng-click="tabMoneyboxes()" id="tabMoneyboxParticipation">
                             <div class="stage-item-icon"></div>
-                            <div class="stage-item-label">Participación</div>
+                            <div class="stage-item-label">Coperachas</div>
                         </a>
                     </div>
                 </div>
