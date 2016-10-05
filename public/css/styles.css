@@ -1656,3 +1656,12 @@ section.block.reset-password {
     border-color: transparent;
     border-radius: 0;
 }
+
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus {
+    color: #fff;
+    text-decoration: none;
+    background-color: #ff5000;
+    outline: 0;
+}
