@@ -157,15 +157,21 @@ hr {
     margin-bottom: 0;
 }
 
-
 .btn-primary {
     background: #FF4E00;
     border: #FF4E00;
     border-radius: 7px;
     font-family: brandon_grotesquebold;
-    font-size: 18px;
-    padding: 20.50px 46px;
+    font-size: 14px;
+    padding: 10.50px 25px;
     text-transform: uppercase;
+}
+
+@media all and (min-width: 769px) {
+    .btn-primary {
+        font-size: 18px;
+        padding: 20.50px 46px;
+    }
 }
 
 .btn-primary:active:hover,
@@ -1052,26 +1058,12 @@ hr {
     max-width: 540px;
 }
 
-#moneybox-step2.step-2 input[type=number].form-control {
-    height: 30px;
-}
-
 #moneybox-step2.step-2 label.flex-element {
     display: flex;
     align-items: center;
+    width: 90%;
 }
 
-#moneybox-step2.step-2 label.flex-element > span {
-    width: 60px;
-}
-
-#moneybox-step2.step-2 label.flex-element input[type=radio] {
-    top: 5px;
-}
-
-#moneybox-step2.step-2 label.flex-element > * {
-    margin-right: 5px;
-}
 
 #moneybox-step2.step-2 .form-control {
     color: #31313F;
@@ -1212,14 +1204,6 @@ hr {
 @media screen and (max-width: 520px){
     .col-xs-6 {
         width: 100%;
-    }
-
-    #moneybox-step2.step-2 label.flex-element > * {
-        margin-right: 25px;
-    }
-
-    #moneybox-step2.step-2 .form-control {
-        width: 120px;
     }
 }
 
@@ -1653,4 +1637,12 @@ section.block.reset-password {
     font-weight: 300;
     padding: 6px 12px;
     text-transform: none;
+}
+
+.modal-header {
+    border-bottom:0;
+}
+
+.modal-footer {
+    border-top: 0;
 }

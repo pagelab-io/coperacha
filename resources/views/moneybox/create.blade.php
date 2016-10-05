@@ -5,7 +5,6 @@
         <div class="holder" ng-controller="moneyboxController">
 
             <div class="container-fluid" id="moneybox-step1">
-
                 <div class="header-block">
                     <div class="stage-item">
                         <div class="stage-item-title">Información</div>
@@ -147,45 +146,41 @@
                     </div>
                 </div>
                 <div class="content-block">
-                    <form class="form register moneybox">
-                        <div class="form-group">
-                            <div class="row">
+                    <form class="form-horizontal form register moneybox">
+                        @foreach($settings as $setting)
+                            <div class="form-group">
                                 <div class="col-sm-12">
-                                @foreach($settings as $setting)
-                                    <div class="form-group">
-                                        <label>{{utf8_decode($setting->name)}}</label>
-                                        @foreach($setting->options as $i => $option)
+                                    <label>{{utf8_decode($setting->name)}}</label>
+                                    @foreach($setting->options as $i => $option)
                                         <div class="radio">
-                                            @if($option->subtype=='text')
-                                            <label for="{{$option->name}}" class="flex-element">
-                                                <input class="radio-option" type="radio" value="{{$setting->id}}|{{$option->id}}|Y" ng-model="participation" ng-change="changeParticipation()">
-                                                <span>{{$option->name}}</span>
-                                                <div class="input-group">
-                                                    <div class="input-group-addon">$</div>
-                                                    <input class="form-control" type="number" value="50" id="txt-option-{{$option->id}}">
-                                                    <strong> MXN</strong>
-                                                </div>
-                                            </label>
+                                            @if ($option->subtype=='text')
+                                                <label for="{{$option->name}}" class="flex-element">
+                                                    <input id="{{$option->name}}" style="margin-top: -2px;" class="radio-option" type="radio" value="{{$setting->id}}|{{$option->id}}|Y" ng-model="participation" ng-change="changeParticipation()">
+                                                    <span style="margin-right: 15px;">{{$option->name}}</span>
+                                                    <div class="input-group" style="max-width: 250px; width: 100%;">
+                                                        <div class="input-group-addon">$</div>
+                                                        <input class="form-control" type="number" value="50" id="txt-option-{{$option->id}}">
+                                                        <strong style="margin-left:7px; margin-top: 7px; display: inline-block"> MXN</strong>
+                                                    </div>
+                                                </label>
                                             @else
-                                            <label for="{{$option->name}}">
-                                                @if($setting->id==1)
-                                                    <input type="radio" class="radio-option" value="{{$setting->id}}|{{$option->id}}|N" ng-model="participation" ng-change="changeParticipation()"> {{$option->name}}
-                                                @else
-                                                    <input type="checkbox" ng-false-value="'0|0|N'" ng-true-value="'{{$setting->id}}|{{$option->id}}|N'" ng-model="privacy{{$i+1}}" ng-change="changePrivacy()"> {{$option->name}}
-                                                @endif
-                                            </label>
+                                                <label for="{{$option->name}}">
+                                                    @if ($setting->id == 1)
+                                                        <input id="{{$option->name}}" type="radio" class="radio-option" value="{{$setting->id}}|{{$option->id}}|N" ng-model="participation" ng-change="changeParticipation()"> {{$option->name}}
+                                                    @else
+                                                        <input id="{{$option->name}}" type="checkbox" ng-false-value="'0|0|N'" ng-true-value="'{{$setting->id}}|{{$option->id}}|N'" ng-model="privacy{{$i+1}}" ng-change="changePrivacy()"> {{$option->name}}
+                                                    @endif
+                                                </label>
                                             @endif
-                                        </div>
-                                        @endforeach
-                                    </div>
-                                @endforeach
-                                </div><!-- ./col-sm-12 -->
-                            </div>
-                        </div>
-                        <div class="form-group clearfix">
-                            <div class="pull-right">
-                                <a href="#" class="btn-link" ng-click="step2Click()">< Volver </a>
-                                <button class="btn btn-primary" ng-click="createMoneybox()">Siguiente ></button>
+                                        </div> <!-- ./radio -->
+                                    @endforeach
+                                </div>
+                            </div> <!-- ./form-group -->
+                        @endforeach
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <button class="btn btn-primary pull-right" ng-click="createMoneybox()">Siguiente ></button>
+                                <a href="#" class="btn-link pull-right" ng-click="step2Click()">< Volver </a>
                             </div>
                         </div>
                     </form>
