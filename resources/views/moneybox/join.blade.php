@@ -127,7 +127,16 @@
                                         @if(Session::has('tmp_participant'))
                                             <input type="text" class="form-control" placeholder="Monto" ng-model="amount" ng-init="amount='{{Session::get('tmp_participant')["amount"]}}'">
                                         @else
-                                            <input type="text" class="form-control" placeholder="Monto" ng-model="amount">
+                                            @foreach($moneyboxSettings as $setting)
+                                                @if($setting->setting_id == 1)
+                                                    @if($setting->option_id == 2 || $setting->option_id == 3)
+                                                        <input type="text" class="form-control" placeholder="Monto" ng-model="amount" ng-init="amount='{{$setting->value}}'">
+                                                    @else
+                                                        <input type="text" class="form-control" placeholder="Monto" ng-model="amount">
+                                                    @endif
+                                                @endif
+                                            @endforeach
+
                                         @endif
                                     </div>
                                 </div>

@@ -194,6 +194,8 @@ class TxCreateParticipant extends PLTransaction{
                 $person->name       = $request->get('name');
                 $person->lastname   = $request->get('lastname');
                 $person->phone      = $request->get('phone');
+                $person->areacode   = $request->get('areacode');
+                \Log::info("update person data");
                 if (!$person->save()) throw new \Exception("Unable to update person", -1);
 
             } else {
@@ -214,6 +216,7 @@ class TxCreateParticipant extends PLTransaction{
                     if (!$invitation->save()) throw new \Exception("Unable to update invitation", -1);
                 }
 
+                \DB::commit();
                 $response['user']   = $user;
                 $response['person'] = $person;
                 return $response;

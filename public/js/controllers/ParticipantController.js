@@ -21,6 +21,7 @@
         $scope.request = {};
         $scope.paymentMethod = '';
         $scope.moneybox_id = '';
+        $scope.areacode = '';
 
         $scope.goToParticipation = function()
         {
@@ -46,6 +47,7 @@
                     'lastname': $scope.lastname,
                     'email' : $scope.email,
                     'phone' : $scope.phone,
+                    'areacode': $scope.areacode,
                     'settings' : JSON.stringify(participantSettings),
                     'method' : 'createParticipant',
                     'api-key' : '$2y$10$ScZUgkFzrMr9NM5qPzKag.4mLTW8ugSG/DtT6nerJb3W1v5sg6UBC'
@@ -154,6 +156,7 @@
                 'phone' : $scope.phone,
                 'email' : $scope.email,
                 'option_id' : tmp[1],
+                'areacode': $scope.areacode,
                 'api-key' : '$2y$10$ScZUgkFzrMr9NM5qPzKag.4mLTW8ugSG/DtT6nerJb3W1v5sg6UBC'
             };
 
