@@ -218,7 +218,7 @@ class PaymentController extends PLController
 
         ));
 
-        return $pdf->download("test.pdf");
+        return $pdf->download("Coperacha.pdf");
 
     }
 
