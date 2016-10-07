@@ -426,7 +426,7 @@
 
             } else if (!utils.isValidNumber($scope.goal_amount)) {
 
-                utils.setValidationError("El campo cantidad a reunir no es una cantidad valida");
+                utils.setValidationError("El campo cantidad a reunir no es una cantidad válida");
 
                 return false;
 
