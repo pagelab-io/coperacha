@@ -92,17 +92,17 @@
                                 <div v-if="loading" class="loader"></div>
                                 <div v-if="message.text!=''" class="alert alert-success" role="alert">@{{message.text}}</div>
                                 <div class="form-group">
-                                    <label>o envía correo a tus amigos para invitarlos a participar.</label>
+                                    <label>o envía un correo electrónico a tus amigos para invitarlos a participar.</label>
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="text-info">Introduce los correos separando cada uno con punto y coma (;)</div>
+                                    <div class="text-info">Introduce los correos electrónicos separando cada uno con punto y coma (;)</div>
                                     <textarea required
                                               class="form-control"
                                               rows="4"
                                               name="emails"
                                               v-model="emails"
-                                              placeholder="Introduce las direcciones de correo"></textarea>
+                                              placeholder="Ejemplo: participante1@coperacha.com.mx;participante2@coperacha.com.mx"></textarea>
                                 </div>
                                 <div class="form-group clearfix">
                                     <div class="pull-right">

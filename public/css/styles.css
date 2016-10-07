@@ -1284,6 +1284,7 @@ hr {
 .moneybox-profile .form.share textarea {
     border: none;
     background: #ECECFB;
+    font-size: 11px;
 }
 
 .moneybox-profile .form.share label {
