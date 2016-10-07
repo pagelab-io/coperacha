@@ -237,11 +237,11 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <form class="sign-in">
-                                <input name="name" placeholder="nombre" type="text" ng-model="name" autocomplete="off">
-                                <input name="lastname" placeholder="apellido" type="text" ng-model="lastname" autocomplete="off">
-                                <input name="email" placeholder="correo electrónico" type="text" ng-model="email" autocomplete="off">
-                                <input name="password" placeholder="contraseña" type="password" ng-model="password">
-                                <input class="btn btn-primary small" type="button" value="Crear mi Alcancía" ng-click="emailRegister()">
+                                <input name="name" placeholder="Nombre" type="text" ng-model="name" autocomplete="off">
+                                <input name="lastname" placeholder="Apellido" type="text" ng-model="lastname" autocomplete="off">
+                                <input name="email" placeholder="Correo electrónico" type="text" ng-model="email" autocomplete="off">
+                                <input name="password" placeholder="Contraseña" type="password" ng-model="password">
+                                <input class="btn btn-primary small" type="button" value="Crear mi alcancía" ng-click="emailRegister()">
                             </form>
                         </div>
                         <div class="col-sm-6">

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Coperacha | Recauda Dinero Entre Amigos</title>
 
-    <meta name="description" content="Servicio online para recaudar dinero entre amigos.">
+    <meta name="description" content="El servicio online para recaudar dinero entre amigos.">
     <meta name="keywords" content="page-keywords">
     <meta name="author" content="PageLab">
     <!--<meta name="robots" content="INDEX, FOLLOW, ARCHIVE">-->
@@ -23,7 +23,7 @@
 
     <!-- Schema properties -->
     <meta itemprop="name" content="Coperacha">
-    <meta itemprop="description" content="Servicio online para recaudar dinero entre amigos.">
+    <meta itemprop="description" content="El servicio online para recaudar dinero entre amigos.">
     <meta itemprop="image" content="{{asset('/images/cover-laptop.png')}}">
     <meta itemprop="url" content="{{url('/')}}">
 
@@ -31,7 +31,7 @@
     <!--<meta property="fb:app_id" content="1581295808831173">-->
     <meta property="og:site_name" content="Coperacha">
     <meta property="og:title" content="Coperacha">
-    <meta property="og:description" content="Recauda dinero entre amigos.">
+    <meta property="og:description" content="El servicio online para recaudar dinero entre amigos.">
     <meta property="og:image" content="{{asset('/images/cover-laptop.png')}}">
     <meta property="og:url" content="{{url('/')}}">
     <meta property="og:type" content="website">
