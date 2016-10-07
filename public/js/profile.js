@@ -236,13 +236,13 @@ var vm = new Vue({
             }).then(function (response) {
 
                 if (response.status === 200) {
-
-                    this.loading = false;
                     if (response.data.status == 200) {
-                        this.onGetProfile(this.userid);
-                        document.getElementById('small-alert-content').innerHTML= "<p>Usuario actualizado correctamente.<p>";
-                        utils.showAlert(true);
+                        //this.onGetProfile(this.userid);
+                        //document.getElementById('small-alert-content').innerHTML= "<p>Usuario actualizado correctamente.<p>";
+                        //utils.showAlert(true);
+                        window.location.assign("/moneybox/dashboard");
                     } else if(response.data.status == 23000){
+                        this.loading = false;
                         utils.setAlertTitle("Coperacha");
                         document.getElementById('alert-content').innerHTML="" +
                         "<p>El correo electrónico o usuario que intentas actualizar ya existe, intenta con otro.<p>";
@@ -250,7 +250,11 @@ var vm = new Vue({
                     }
                     
                 } else {
-                    console.error(response);
+                    this.loading = false;
+                    utils.setAlertTitle("Coperacha");
+                    document.getElementById('alert-content').innerHTML="" +
+                    "<p>Ocurrio una incidencia al cambiar los datos, por favor intentalo más tarde.<p>";
+                    utils.showAlert();
                 }
 
             }, function (error) {
@@ -286,6 +290,7 @@ var vm = new Vue({
 
                     if (response.data.status == 1) {
 
+                        //window.location.assign("/moneybox/dashboard");
                         document.getElementById('small-alert-content').innerHTML="" +
                         "<p>"+response.data.description+"<p>";
                         utils.showAlert(true);
