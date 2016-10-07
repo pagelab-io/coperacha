@@ -12,7 +12,7 @@
                 Tenemos muy buenas noticias para ti:
             </p>
             <p>
-                <b>¡tu alcancía tiene una nueva coperacha!</b>
+                ¡tu alcancía tiene una nueva coperacha!
             </p>
             <p>
                 Lo que significa que ya están más cerca de la meta, muchas felicidades.
