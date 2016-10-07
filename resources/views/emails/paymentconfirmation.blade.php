@@ -8,8 +8,8 @@
     <tr>
         <td COLSPAN=2 style="font-family: Arial;font-size: 16px;color: #666666;text-align: justify;line-height: 28px; padding-top:20px;">
             <p>
-                <b>¡Tu pago está confirmado!</b> Muchas gracias por haber participado en esta <a style="color:#FF5000;text-decoration:none;font-weight: bold" href={{url('/moneybox/detail/'.$moneybox->url)}}>coperacha</a>. El pago que hiciste, ahora ya está en la alcancía.
-                Si quieres ir de nuevo a la alcancía <a style='color:#FF5000;text-decoration:none;font-weight: bold' href={{url('/moneybox/detail/'.$moneybox->url)}}>haz click aquí</a>.
+                ¡Tu pago está confirmado! Muchas gracias por haber participado en esta <a style="color:#FF5000;text-decoration:none;font-weight: bold" href={{url('/moneybox/detail/'.$moneybox->url)}}>coperacha</a>. El pago que hiciste, ahora ya está en la alcancía.
+                Si quieres ir de nuevo a la alcancía <a style='color:#FF5000;text-decoration:none;font-weight: bold' href={{url('/moneybox/detail/'.$moneybox->url)}}>haz clic aquí</a>.
             </p>
             <p>
                 Saludos.
