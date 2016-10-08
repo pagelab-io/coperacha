@@ -189,12 +189,17 @@ class HomeController extends Controller
             $moneybox->lastfile = $moneybox->files->last();
         }
 
-        return view('moneybox.detail')
-            ->with('moneybox', $moneybox)
-            ->with('settings', $settings)
-            ->with('person', $person)
-            ->with('partiticipantsnumber', $partiticipantsnumber)
-            ->with('pageTitle',$moneybox->name);
+        if ($moneybox->active == 1) {
+            return view('moneybox.detail')
+                ->with('moneybox', $moneybox)
+                ->with('settings', $settings)
+                ->with('person', $person)
+                ->with('partiticipantsnumber', $partiticipantsnumber)
+                ->with('pageTitle',$moneybox->name);
+        } else {
+            return redirect('/');
+        }
+
     }
 
     /**
