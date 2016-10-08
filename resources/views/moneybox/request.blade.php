@@ -44,7 +44,6 @@
                                     <input id="name"
                                            v-model="order.name"
                                            name="name" type="text"
-                                           required
                                            class="form-control"
                                            autocomplete="off"
                                            placeholder="Nombre del titular de la cuenta">
@@ -54,9 +53,9 @@
                                     <label for="name">Selecciona tu banco</label>
                                     <select id="bank"
                                             name="bank"
-                                            required
                                             v-model="order.bank_name"
                                             class="form-control">
+                                        <option value="">--Selecciona una opción--</option>
                                         <option value="banorte">Banorte</option>
                                         <option value="bancomer">Bancomer</option>
                                         <option value="hsbs">HSBC</option>
@@ -66,30 +65,37 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="comments">Comentarios</label>
+                                    <textarea id="comments"
+                                              name="comments"
+                                              v-model="order.comments"
+                                              class="form-control" rows="3" placeholder="Comentarios"></textarea>
+                                </div>
+                                <!--<div class="form-group">
                                     <label for="address">Dirección del banco</label>
                                     <textarea id="address"
                                               name="address"
                                               v-model="order.bank_address"
                                               required
                                               class="form-control" rows="3" placeholder="Dirección del banco"></textarea>
-                                </div>
+                                </div>-->
 
-                                <div class="form-group">
+                                <!--<div class="form-group">
                                     <span for="file">Adjuntar copia de su información bancaria para confirmar los datos</span>
                                     <input id="file"
                                            name="file[]"
                                            type="file"
                                            v-on:change="onFileChange">
-                                </div>
+                                </div>-->
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="clabe">Clabe Interbancaria</label>
+                                    <label for="clabe">Clabe interbancaria</label>
                                     <input id="clabe"
                                            name="clabe"
                                            v-model="order.clabe"
                                            autocomplete="off"
-                                           type="text" class="form-control" placeholder="Clabe Interbancaria">
+                                           type="text" class="form-control" placeholder="Clabe interbancaria">
                                 </div>
 
                                 <div class="form-group">
@@ -103,13 +109,13 @@
                                            placeholder="Número de cuenta">
                                 </div>
 
-                                <div class="form-group">
+                                <!--<div class="form-group">
                                     <label for="comments">Comentarios</label>
                                     <textarea id="comments"
                                               name="comments"
                                               v-model="order.comments"
                                               class="form-control" rows="3" placeholder="Comentarios"></textarea>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
 

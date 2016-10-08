@@ -67,6 +67,8 @@ var vm = new Vue({
          * @param id
          */
         onSubmit: function () {
+            if(!this.validateRequestForm()) return;
+            var utils = new Utils();
             this.order.moneybox_id = this.$el.dataset.moneybox_id;
 
             var _this = this;
@@ -85,19 +87,20 @@ var vm = new Vue({
 
             this.$http.post(path, form).then(function (response) {
                 if (response.status == 200) {
-                    console.log(response);
                     if (response.data.success == true) {
-                        _this.message.text = 'Información enviada correctamente, ¡Gracias!';
+                        //_this.message.text = 'Información enviada correctamente, ¡Gracias!';
                         _this.loading = false;
-
+                        document.getElementById('small-alert-content').innerHTML= "" +
+                        "<p>Información enviada correctamente, <br>" +
+                        "un administrador de coperacha se pondrá en contacto contigo a la brevedad para dar seguimiento a tu retiro.<p>";
+                        utils.showAlert(true);
                         for (var field in _this.order) {
                             _this.order[field] = '';
                         }
-
-                        setTimeout(function () {
+                        /*setTimeout(function () {
                             $('#file').val('');
                             _this.message.text = '';
-                        }, 3 * 1000);
+                        }, 3 * 1000);*/
                     }
                 } else {
                     console.log(response);
@@ -105,6 +108,32 @@ var vm = new Vue({
             }, function (error) {
                 $('body').html(error.body);
             });
+        },
+
+        validateRequestForm: function(){
+            var utils = new Utils();
+
+            if (utils.isNullOrEmpty(this.order.name)) {
+                utils.setValidationError("Ingresa el nombre del titular de la cuenta.");
+                return false;
+            } else if (utils.isNullOrEmpty(this.order.bank_name)) {
+                utils.setValidationError("Selecciona tu banco.");
+                return false;
+            } else if (utils.isNullOrEmpty(this.order.clabe) && utils.isNullOrEmpty(this.order.account)) {
+                utils.setValidationError("Ingresa tu número de cuenta o clabe interbancaria.");
+                return false;
+            } else if (!utils.isNullOrEmpty(this.order.clabe) || !utils.isNullOrEmpty(this.order.account)) {
+
+                if(!utils.isNullOrEmpty(this.order.clabe) && !utils.isValidNumber(this.order.clabe)) {
+                    utils.setValidationError("El número de clabe interbancaria debe ser numérico.");
+                    return false;
+                }
+                if(!utils.isNullOrEmpty(this.order.account) && !utils.isValidNumber(this.order.account)) {
+                    utils.setValidationError("El número de cuenta debe ser numérico .");
+                    return false;
+                }
+            }
+            return true;
         }
     }
 });

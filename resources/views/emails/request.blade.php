@@ -37,17 +37,16 @@
                     <td style="width: 200px"><strong>Número de cuenta</strong></td>
                     <td>{{$order->account}}</td>
                 </tr>
-                <tr>
+                <!--<tr>
                     <td style="width: 200px"><strong>Dirección del Banco</strong></td>
                     <td>{{$order->bank_address}}</td>
-                </tr>
+                </tr>-->
                 <tr>
                     <td style="width: 200px"><strong>Comentarios</strong></td>
                     <td>{{$order->comments}}</td>
                 </tr>
             </table>
             <hr>
-            <p>Un administrador de coperacha se pondrá en contacto contigo a la brevedad para dar seguimiento a tu retiro.</p>
             <p>Saludos.</p>
         </td>
     </tr>
