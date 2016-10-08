@@ -20,6 +20,36 @@ var vm = new Vue({
 
     methods: {
         onSubmit: function (e) {
+
+            var utils = new Utils();
+            var validation = true;
+
+            if (utils.isNullOrEmpty(this.emails)) {
+                utils.setValidationError("Debes ingresar al menos un correo electrónico.");
+                validation = false;
+            }
+
+            if (!utils.isNullOrEmpty(this.emails)) {
+                var emails = this.emails.split(';');
+                var count  = 0;
+                for (var i = 0; i < emails.length; i++ ) {
+                    if (emails[i] == "") continue;
+
+                    if(!utils.isValidEmail(emails[i])) {
+                        utils.setValidationError("Uno de los correos electrónicos no tiene el formato correcto.");
+                        validation = false;
+                    } else {
+                        count++;
+                    }
+                }
+                if(count <= 0) {
+                    utils.setValidationError("El formato de los correos es incorrecto");
+                    validation = false;
+                }
+            }
+
+            if(!validation) return;
+
             this.loading = true;
             this.$http.post('/sendinvitation', {
                 url: this.url,
@@ -27,7 +57,14 @@ var vm = new Vue({
             }).then(function(response, status, request) {
                 if (response.status == 200) {
                     if (response.data.success == true) {
-                        this.message.text = 'Mensaje enviado correctamente';
+                        this.message.text = 'Mensajes enviados correctamente';
+                        this.emails = '';
+                        this.loading = false;
+                        setTimeout(function () {
+                            this.message.text = '';
+                        }.bind(this), 3000);
+                    } else {
+                        this.message.text = 'Ocurrio una incidencia al entregar los mensajes, por favor intentalo más tarde';
                         this.emails = '';
                         this.loading = false;
                         setTimeout(function () {

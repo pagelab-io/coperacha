@@ -434,7 +434,7 @@ class HomeController extends Controller
         $moneybox = Moneybox::byUrl($request->get('url'))->first();
 
         if (!$moneybox) {
-            throw new EntityNotFoundException('No existe la alcancía');
+            throw new EntityNotFoundException('No existe la alcancía', -1);
         }
 
         $emails =  preg_split("/[\s,;:]+/", $request->get('emails'));
@@ -459,6 +459,8 @@ class HomeController extends Controller
                         $message->subject('Mensaje de Invitación');
                     });
                 }
+            } else {
+                return response()->json(['success' => false, 'data' => $emails]);
             }
         }
 

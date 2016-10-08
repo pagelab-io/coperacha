@@ -97,8 +97,7 @@
 
                                 <div class="form-group">
                                     <div class="text-info">Introduce los correos electrónicos separando cada uno con punto y coma (;)</div>
-                                    <textarea required
-                                              class="form-control"
+                                    <textarea class="form-control"
                                               rows="4"
                                               name="emails"
                                               v-model="emails"
