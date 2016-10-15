@@ -365,7 +365,6 @@ hr {
 
 .block.how-it-works .card .name .button,
 .block.how-it-works .card .name span {
-    cursor: pointer;
     display: block;
     padding: 12px 5px;
 }
@@ -375,6 +374,7 @@ hr {
     border-radius: 5px;
     color: #fff;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .block.how-it-works .card .desc {
@@ -1665,4 +1665,18 @@ section.block.reset-password {
     text-decoration: none;
     background-color: #ff5000;
     outline: 0;
+}
+
+.holder>img.google-play-button{
+    position: absolute;
+    right: 15px;
+    width: 175px;
+    height: 65px;
+}
+
+@media screen and (max-width: 520px){
+    .holder>img.google-play-button{
+        width: 125px;
+        height: 40px;
+    }
 }

@@ -2,7 +2,7 @@
 @section("content")
     <!-- Cover -->
     <div class="block cover">
-        <div class="holder">
+        <div class="holder row">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-6 align-middle">
@@ -36,6 +36,7 @@
                     </div>
                 </div>
             </div>
+            <img src={{asset("/images/google_play.png")}} class="google-play-button"/>
         </div>
     </div>
     <!-- Section How it Works -->
