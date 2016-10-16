@@ -215,7 +215,7 @@
                 <div class="content-block">
                     <div class="row">
                         <div id="SliderTestimonials" class="slider">
-                            @foreach ($testimonial->getChildrens() as $item)
+                            @foreach ($testimonials as $item)
                                 <article class="testimonial item">
                                     <div class="body">{!!$item->post_content!!}</div>
                                     <div class="title">-{{$item->post_title}}</div>

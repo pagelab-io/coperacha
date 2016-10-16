@@ -15,6 +15,7 @@ use App\Wordpress\model\Post;
 use Illuminate\Contracts\Queue\EntityNotFoundException;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -65,12 +66,27 @@ class HomeController extends Controller
             ->orWhere('id',6)
             ->get();
 
+        // Poner el id del post correspondiente a (testimonios)
         $testimonial = Post::find(62);
+
+        if ($testimonial) {
+            $testimonials = $testimonial->getChildrens();
+        } else {
+
+            $testimonials = new Collection();
+
+            for ($i = 0; $i < 12; $i++) {
+                $post = new Post();
+                $post->post_title = "Testimonio " . ($i + 1);
+                $post->post_content = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias at commodi dolor ea, fuga hic ipsum laboriosam.";
+                $testimonials->push($post);
+            }
+        }
 
         return view('index', [
             'pageTitle' => '',
             'categories' => $categories,
-            'testimonial' => $testimonial
+            'testimonials' => $testimonials
         ]);
     }
 

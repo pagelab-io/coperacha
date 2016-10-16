@@ -167,6 +167,10 @@ var app = app || {};
                 if (this.options.qty && this.options.qty > 0) {
                     this.qty = this.options.qty;
 
+                    if (window.innerWidth < 420) {
+                        this.qty = 1;
+                    }
+
                 } else {
 
                     this.qty = 4;
