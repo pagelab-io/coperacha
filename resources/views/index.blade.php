@@ -205,6 +205,28 @@
             </div>
         </div>
     </section>
+    <!-- Section Testimonials -->
+    <section class="block testimonials" id="testimonials">
+        <div class="holder">
+            <div class="container-fluid">
+                <div class="header-block">
+                    <h2 class="title">Testimonios</h2>
+                </div>
+                <div class="content-block">
+                    <div class="row">
+                        <div id="SliderTestimonials" class="slider">
+                            @foreach ($testimonials as $item)
+                                <article class="testimonial item">
+                                    <div class="body">{!!$item->post_content!!}</div>
+                                    <div class="title">-{{$item->post_title}}</div>
+                                </article>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- Section Payment Methods -->
     <section class="block payment-methods" id="metodos-de-pago">
         <div class="holder">
@@ -214,7 +236,7 @@
                 </div>
                 <div class="content-block">
                     <div class="row">
-                        <div class="slider methods">
+                        <div id="SliderMethods" class="slider methods">
                             <img class="item" src="images/master-card-logo.png" alt="Master Card">
                             <img class="item" src="images/american-express-logo.png" alt="American Express">
                             <img class="item" src="images/visa-logo.png" alt="Visa">
@@ -262,32 +284,5 @@
 @section('js')
     <script src="{{asset('/js/share.js')}}"></script>
     <script src="{{asset('/js/slider.js')}}"></script>
-    <script>
-        $('.slider').slider({
-            slideSpeed: 500,
-            play: 5000,
-            preload: true,
-            withPagination: false,
-            withNavigation: false
-        });
-        var share = new Share();
-        share.setup({
-            networks: {
-                facebook: {
-                    load_sdk: true,
-                    app_id: "1581295808831173",
-                    title: 'Coperacha',
-                    image: $('meta[itemprop="image"]').attr('content'),
-                    description: $('meta[name="description"]').attr('content'),
-                    url: location.toString() ,
-                    caption: 'Coperacha'
-                }
-            }
-        });
-
-        $('#btnShareFb').on("click", function (evt) {
-            evt.preventDefault();
-            share.network_facebook();
-        });
-    </script>
+    <script src="{{asset('/js/index.js')}}"></script>
 @endsection
