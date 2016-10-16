@@ -131,6 +131,7 @@ var app = app || {};
                 preload: true,
                 pause: 1 * 500,
                 play: 0,
+                qty: 0,
                 withPagination: false,
                 withNavigation: true,
                 classNavigation: ''
@@ -163,12 +164,18 @@ var app = app || {};
                 this.next = 0;
                 this.total = this.items.length;
 
-                this.qty = 4;
+                if (this.options.qty && this.options.qty > 0) {
+                    this.qty = this.options.qty;
 
-                if (window.innerWidth < 420) {
-                    this.qty = 2;
-                } else if (window.innerWidth > 420 && window.innerWidth < 769) {
-                    this.qty = 3;
+                } else {
+
+                    this.qty = 4;
+
+                    if (window.innerWidth < 420) {
+                        this.qty = 2;
+                    } else if (window.innerWidth > 420 && window.innerWidth < 769) {
+                        this.qty = 3;
+                    }
                 }
 
                 // Sizing
@@ -586,9 +593,7 @@ var app = app || {};
     }());
 
     app.Slider = Slider;
-
 })(app);
-
 
 (function($, window, undefined){
 

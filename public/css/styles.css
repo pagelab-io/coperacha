@@ -542,23 +542,6 @@ hr {
     padding: 11px;
     width: 100%;
 }
-/*
-.block.create-moneybox .sign-in input[type=button] {
-    background-color: #FF4F00;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    cursor: pointer;
-    display: block;
-    font-family: 'brandon_grotesquebold';
-    font-size: 18px;
-    margin-left: auto;
-    max-width: 225px;
-    padding: 20px 10px;
-    text-align: center;
-    text-transform: uppercase;
-    width: 100%;
-}*/
 
 .block .sign-in-wrap {
     margin-top: 60px;
@@ -587,6 +570,38 @@ hr {
     line-height: normal;
     margin-right: 5px;
     margin-top: 5px;
+}
+
+/* Block Testimonials */
+.block.testimonials {
+    background: #ff5000 url(../../images/create-moneybox-bg.png) center center;
+    color: white;
+    padding: 70px 0 85px;
+}
+
+.block.testimonials .header-block .title {
+    color: white;
+}
+
+.block.testimonials .slider {
+    font-style: normal;
+}
+
+.block.testimonials .slider .slide {
+    background: transparent;
+}
+
+
+.testimonial.item {
+
+}
+
+.testimonial.item .body {
+    margin-bottom: 10px;
+}
+
+.testimonial.item .title {
+    font-weight: bold;
 }
 
 /* Footer */

@@ -9,15 +9,15 @@
                 <div class="content">
                     <!-- Faqs -->
                     <div class="faqs">
-                        @foreach($pages as $page)
+                        @foreach($childrens as $faq)
                             <div class="faq">
                                 <div class="question clearfix">
-                                    <span class="text">{{$page->post_title}}</span>
+                                    <span class="text">{{$faq->post_title}}</span>
                                     <span class="icon"></span>
                                 </div>
                                 <div class="answer">
                                     <div class="inner">
-                                        {!! $page->post_content !!}
+                                        {!! $faq->post_content !!}
                                     </div>
                                 </div>
                             </div>

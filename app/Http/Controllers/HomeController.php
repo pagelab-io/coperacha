@@ -13,6 +13,7 @@ use App\Repositories\SettingRepository;
 use App\Repositories\UserRepository;
 use App\Wordpress\model\Post;
 use Illuminate\Contracts\Queue\EntityNotFoundException;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -53,7 +54,7 @@ class HomeController extends Controller
     /**
      * Home View
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|\Illuminate\View\View
      */
     public function getHomePage()
     {
@@ -63,16 +64,20 @@ class HomeController extends Controller
             ->orWhere('id',4)
             ->orWhere('id',6)
             ->get();
+
+        $testimonial = Post::find(62);
+
         return view('index', [
             'pageTitle' => '',
-            'categories' => $categories
+            'categories' => $categories,
+            'testimonial' => $testimonial
         ]);
     }
 
     /**
      * Contact View
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|\Illuminate\View\View
      */
     public function getContactPage()
     {
@@ -82,7 +87,7 @@ class HomeController extends Controller
     /**
      * About View
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|\Illuminate\View\View
      */
     public function getAboutPage()
     {
@@ -92,24 +97,24 @@ class HomeController extends Controller
     /**
      * Faqs View
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|\Illuminate\View\View
      */
     public function getFaqsPage()
     {
-        $post = Post::find(2);
-        $childrens = $post->getChildrens();
+        $faq = Post::find(2);
+        $childrens = $faq->getChildrens();
 
         return view('pages.faqs', [
             'pageTitle' => 'Preguntas Frecuentes',
-            'post'      => $post,
-            'pages'     => $childrens
+            'faq'       => $faq,
+            'childrens' => $childrens
         ]);
     }
 
     /**
      * Pricing View
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|\Illuminate\View\View
      */
     public function getPricingPage(){
         return view('pages.pricing')
@@ -120,7 +125,7 @@ class HomeController extends Controller
      * @param Request $request
      * @param $url
      * @throws \Exception
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|\Illuminate\View\View
      */
     public function getCreateMoneyboxPage(Request $request, $url = '') {
         $moneybox = null;
@@ -161,7 +166,7 @@ class HomeController extends Controller
     /**
      *
      * @param PLRequest $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|\Illuminate\View\View
      */
     public function getDashboardPage(PLRequest $request){
         $request->merge(array('person_id' => \Auth::user()->person->id));
@@ -175,7 +180,7 @@ class HomeController extends Controller
     /**
      * @param $url
      * @internal param Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|\Illuminate\View\View
      */
     public function getDetailPage($url){
         $variables = $this->_moneyboxRepository->getByURL($url);
@@ -205,7 +210,7 @@ class HomeController extends Controller
     /**
      *
      * @param $moneyboxurl
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|\Illuminate\View\View
      * @throws \Exception
      * @internal param Request $request
      */
@@ -222,7 +227,7 @@ class HomeController extends Controller
     /**
      * @param $moneyboxurl
      * @internal param Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|\Illuminate\View\View
      */
     public function getJoinPage($moneyboxurl){
         // get moneybox with it's settings
@@ -248,7 +253,7 @@ class HomeController extends Controller
     /**
      * @param $url
      * @throws \Exception
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|\Illuminate\View\View
      */
     public function getSummaryPage($url) {
         // get moneybox with it's settings

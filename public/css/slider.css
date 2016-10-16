@@ -19,6 +19,7 @@
     justify-content: center;
 }
 
+.slider article,
 .slider img {
     display: none;
     height: auto;
@@ -68,7 +69,6 @@
 .slider-summary .slide {
     background: #EEEEEE;
 }
-
 
 .slider .pagination {
     margin: 0 auto;
@@ -128,5 +128,15 @@
 
 .slider .next {
     background-position: -20px -30px;
+    right: -30px
+}
+
+.slider .prev.inverse {
+    background-position: 0 0px;
+    left: -30px
+}
+
+.slider .next.inverse {
+    background-position: -20px 0px;
     right: -30px
 }
