@@ -214,9 +214,11 @@ class HomeController extends Controller
         // get moneybox with it's settings
         $variables = $this->_moneyboxRepository->getByURL($moneyboxurl);
         $moneybox = $variables['moneybox'];
+        $codes = CountryCode::getCodes();
         return view('moneybox.request')
             ->with('pageTitle','Solicitud de Dinero')
-            ->with('moneybox',$moneybox);
+            ->with('moneybox',$moneybox)
+            ->with('codes',$codes);
     }
 
     /**
@@ -291,45 +293,22 @@ class HomeController extends Controller
         $order = $moneybox->order();
         $order = $order->create($data);
         $user = $moneybox->person->user;
-
         if (!$order) {
             throw new Exception('No se pudo crear la orden de retiro');
         }
 
         // Extract file info
-        $file = null;
-        if ($request->hasFile('file')) {
-            $extension = $request->file('file')->getClientOriginalExtension();
-            $filename = $request->file('file')->getClientOriginalName();
-            $mine = $request->file('file')->getClientMimeType();
-            $size = $request->file('file')->getSize();
-            $name = uniqid() . '_' . $filename;
-
-            if ($stored = Storage::disk('public')->put($name, $request->file('file'))) {
-                $file = File::create(['name' => $name, 'size' => $size, 'path' => 'public', 'extension' => $extension]);
-                $file->user_id = Auth::user()->id;
-                $file->metadata = $mine;
-                $file->storable_type = 'App\Entities\Order';
-                $file->storable_id = $order->id;
-                $file->save();
-            }
-        }
         $data = [
             'moneybox' => $moneybox,
             'order' => $order
         ];
 
         if (true == $withMail) {
-            Mail::send('emails.request', $data, function ($message) use ($user, $file) {
+            Mail::send('emails.request', $data, function ($message) use ($user) {
                 $message->from($user->email, $user->person->fullName());
                 $message->to('coperachamexico@gmail.com', 'Coperacha.com.mx');
                 $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com']);
                 $message->subject('Solicitud de Retiro');
-
-                if ($file) {
-                    $pdf = Storage::disk('public')->get($file->name);
-                    $message->attach($pdf, ['display' => $file->name, 'mime' => $file->metadata]);
-                }
             });
         }
         return response()->json(['success' => true, 'data' => $order]);

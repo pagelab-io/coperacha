@@ -23,6 +23,9 @@ class CreateOrdersTable extends Migration
             $table->string('bank_address', 128);
             $table->string('comments', 256);
             $table->string('path', 256);
+            $table->string('areacode', 128);
+            $table->string('cellphone', 128);
+            $table->integer('accountType');
             $table->integer('moneybox_id')->unsigned();
             $table->timestamps();
 

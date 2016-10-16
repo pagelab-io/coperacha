@@ -11,13 +11,16 @@ var vm = new Vue({
     data: {
         loading: false,
         order: {
+            accountType:    '',
             moneybox_id:    0,
             name:           '',
             bank_name:      '',
             bank_address:   '',
             clabe:          '',
             account:        '',
-            comments:       ''
+            comments:       '',
+            cellphone:      '',
+            areacode:       '52'
         },
         file: '',
         message: {
@@ -88,7 +91,6 @@ var vm = new Vue({
             this.$http.post(path, form).then(function (response) {
                 if (response.status == 200) {
                     if (response.data.success == true) {
-                        //_this.message.text = 'Información enviada correctamente, ¡Gracias!';
                         _this.loading = false;
                         document.getElementById('small-alert-content').innerHTML= "" +
                         "<p>Información enviada correctamente, <br>" +
@@ -97,10 +99,9 @@ var vm = new Vue({
                         for (var field in _this.order) {
                             _this.order[field] = '';
                         }
-                        /*setTimeout(function () {
-                            $('#file').val('');
-                            _this.message.text = '';
-                        }, 3 * 1000);*/
+                        // default values
+                        _this.onAccountTypeChange();
+                        _this.order.areacode = '52'
                     }
                 } else {
                     console.log(response);
@@ -110,30 +111,99 @@ var vm = new Vue({
             });
         },
 
-        validateRequestForm: function(){
+        validateRequestForm: function()
+        {
             var utils = new Utils();
 
-            if (utils.isNullOrEmpty(this.order.name)) {
-                utils.setValidationError("Ingresa el nombre del titular de la cuenta.");
+            if (utils.isNullOrEmpty(this.order.accountType)) {
+                utils.setValidationError("Selecciona un tipo de cuenta.");
+                return false;
+            } else if (utils.isNullOrEmpty(this.order.name)) {
+                utils.setValidationError("Ingresa el nombre del beneficiario.");
                 return false;
             } else if (utils.isNullOrEmpty(this.order.bank_name)) {
-                utils.setValidationError("Selecciona tu banco.");
+                utils.setValidationError("Selecciona un banco.");
                 return false;
-            } else if (utils.isNullOrEmpty(this.order.clabe) && utils.isNullOrEmpty(this.order.account)) {
-                utils.setValidationError("Ingresa tu número de cuenta o clabe interbancaria.");
+            } else if (utils.isNullOrEmpty(this.order.email)) {
+                utils.setValidationError("Ingresa un correo electrónico.");
                 return false;
-            } else if (!utils.isNullOrEmpty(this.order.clabe) || !utils.isNullOrEmpty(this.order.account)) {
+            } else if (!utils.isValidEmail(this.order.email)) {
+                utils.setValidationError("El correo electrónico ingresado no tiene un formato válido.");
+                return false;
+            } else if (!utils.isNullOrEmpty(this.order.accountType)) {
+                switch(this.order.accountType) {
+                    case "1":
+                        if (utils.isNullOrEmpty(this.order.account)) {
+                            utils.setValidationError("Ingresa el número de tu tarjeta destino.");
+                            return false;
+                        } else if (!utils.isValidNumber(this.order.account)) {
+                            utils.setValidationError("El número de tu tarjeta debe ser númerico.");
+                            return false;
+                        }
+                        break;
+                    case "2":
+                        if (utils.isNullOrEmpty(this.order.clabe)) {
+                            utils.setValidationError("Ingresa tu número clabe.");
+                            return false;
+                        } else if (!utils.isValidNumber(this.order.clabe)) {
+                            utils.setValidationError("El número clabe debe ser númerico.");
+                            return false;
+                        }
+                        break;
+                    case "3":
+                        if (utils.isNullOrEmpty(this.order.cellphone)) {
+                            utils.setValidationError("Ingresa tu número de celular.");
+                            return false;
+                        } else if (!utils.isValidNumber(this.order.cellphone)) {
+                            utils.setValidationError("El número de celular debe ser numérico.");
+                            return false;
+                        } else if (!utils.validLength(this.order.cellphone, 10)) {
+                            utils.setValidationError("El número de celular debe tener 10 digitos.");
+                            return false;
+                        }
+                        break;
+                    default: console.log("..."); break;
 
-                if(!utils.isNullOrEmpty(this.order.clabe) && !utils.isValidNumber(this.order.clabe)) {
-                    utils.setValidationError("El número de clabe interbancaria debe ser numérico.");
-                    return false;
-                }
-                if(!utils.isNullOrEmpty(this.order.account) && !utils.isValidNumber(this.order.account)) {
-                    utils.setValidationError("El número de cuenta debe ser numérico .");
-                    return false;
                 }
             }
             return true;
+        },
+
+        /**
+         * accountType catalog:
+         * 1 - tarjeta destino
+         * 2 - clabe interbancaria
+         * 3 - celular
+         */
+        onAccountTypeChange: function()
+        {
+            var type1 = document.getElementById("type1");
+            var type2 = document.getElementById("type2");
+            var type3 = document.getElementById("type3");
+
+            switch(this.order.accountType) {
+                case "1":
+                    console.log(this.order.accountType);
+                    type1.style.display="block";
+                    type2.style.display="none";
+                    type3.style.display="none";
+                    break;
+                case "2":
+                    type1.style.display="none";
+                    type2.style.display="block";
+                    type3.style.display="none";
+                    break;
+                case "3":
+                    type1.style.display="none";
+                    type2.style.display="none";
+                    type3.style.display="block";
+                    break;
+                default:
+                    type1.style.display="none";
+                    type2.style.display="none";
+                    type3.style.display="none";
+                    break;
+            }
         }
     }
 });

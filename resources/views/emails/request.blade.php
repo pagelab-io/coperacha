@@ -22,29 +22,35 @@
             <h3 style="margin-bottom: 1px;">Datos del usuario:</h3>
             <table style="width: 100%">
                 <tr>
-                    <td style="width: 200px"><strong>Nombre del titular</strong></td>
+                    <td style="width: 200px"><strong>Nombre del beneficiario</strong></td>
                     <td>{{$order->name}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 200px"><strong>Correo electrónico</strong></td>
+                    <td>{{$order->email}}</td>
                 </tr>
                 <tr>
                     <td style="width: 200px"><strong>Banco</strong></td>
                     <td>{{$order->bank_name}}</td>
                 </tr>
-                <tr>
-                    <td style="width: 200px"><strong>Clabe Interbancaria</strong></td>
-                    <td>{{$order->clabe}}</td>
-                </tr>
-                <tr>
-                    <td style="width: 200px"><strong>Número de cuenta</strong></td>
-                    <td>{{$order->account}}</td>
-                </tr>
-                <!--<tr>
-                    <td style="width: 200px"><strong>Dirección del Banco</strong></td>
-                    <td>{{$order->bank_address}}</td>
-                </tr>-->
-                <tr>
-                    <td style="width: 200px"><strong>Comentarios</strong></td>
-                    <td>{{$order->comments}}</td>
-                </tr>
+                @if($order->account!="")
+                    <tr>
+                        <td style="width: 200px"><strong>Tarjeta destino</strong></td>
+                        <td>{{$order->account}}</td>
+                    </tr>
+                @endif
+                @if($order->clabe!="")
+                    <tr>
+                        <td style="width: 200px"><strong>Clabe interbancaria</strong></td>
+                        <td>{{$order->clabe}}</td>
+                    </tr>
+                @endif
+                @if($order->cellphone!="")
+                    <tr>
+                        <td style="width: 200px"><strong>Número celular</strong></td>
+                        <td>{{"+(".$order->areacode.") ".$order->cellphone}}</td>
+                    </tr>
+                @endif
             </table>
             <hr>
             <p>Saludos.</p>

@@ -18,7 +18,7 @@ class Order extends Model
      *
      * @var string[]
      */
-    protected $fillable = ['name', 'clabe', 'account', 'bank_name', 'bank_address', 'comments', 'moneybox_id'];
+    protected $fillable = ['name', 'clabe', 'account', 'bank_name', 'bank_address', 'comments', 'moneybox_id', 'email', 'areacode', 'cellphone', 'accountType'];
 
     /**
      * Gets the moneybox that owns of the order

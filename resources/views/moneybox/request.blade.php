@@ -1,5 +1,9 @@
 @extends("layouts.master")
 
+@section('css')
+    <link rel="stylesheet" href="{{asset("/js/vendor/bootstrap-select-1.11.2/bootstrap-select.css")}}">
+@endsection
+
 @section("content")
     @include('partials.header')
     <section id="RequestMoneyView" class="block request-view"
@@ -39,14 +43,19 @@
 
                         <div class="row">
                             <div class="col-sm-6">
+
                                 <div class="form-group">
-                                    <label for="name">Nombre del titular de la cuenta</label>
-                                    <input id="name"
-                                           v-model="order.name"
-                                           name="name" type="text"
-                                           class="form-control"
-                                           autocomplete="off"
-                                           placeholder="Nombre del titular de la cuenta">
+                                    <label for="accountType">Tipo de cuenta</label>
+                                    <select
+                                           name="name"
+                                           v-model="order.accountType"
+                                           v-on:change="onAccountTypeChange"
+                                           class="form-control">
+                                           <option value="">--Selecciona una opción--</option>
+                                           <option value="1">Tarjeta destino</option>
+                                           <option value="2">Clabe interbancaria</option>
+                                           <option value="3">Celular</option>
+                                    </select>
                                 </div>
 
                                 <div class="form-group">
@@ -56,180 +65,186 @@
                                             v-model="order.bank_name"
                                             class="form-control">
                                         <option value="">--Selecciona una opción--</option>
-                                        <option value="abc_capital">ABC CAPITAL</option>
-                                        <option value="accival_cb">ACCIVAL CB</option>
-                                        <option value="actinver">ACTINVER</option>
-                                        <option value="actinver_cb">ACTINVER CB</option>
-                                        <option value="actinver_socied">ACTINVER SOCIED</option>
-                                        <option value="akala_sa">AKALA, S.A.</option>
-                                        <option value="american_expres">AMERICAN EXPRES</option>
-                                        <option value="asea">ASEA</option>
-                                        <option value="asp_integra_opc">ASP INTEGRA OPC</option>
-                                        <option value="axxa">AXXA</option>
-                                        <option value="azteca">AZTECA</option>
-                                        <option value="b_b">B&B</option>
-                                        <option value="bajio">BAJIO</option>
-                                        <option value="bamsa">BAMSA</option>
-                                        <option value="banamex">BANAMEX</option>
-                                        <option value="bancen">BANCEN</option>
-                                        <option value="banco_autofin">BANCO AUTOFIN</option>
-                                        <option value="banco_compartam">BANCO COMPARTAM</option>
-                                        <option value="banco_facil">BANCO FACIL</option>
-                                        <option value="banco_famsa">BANCO FAMSA</option>
-                                        <option value="banco_finterra">BANCO FINTERRA</option>
-                                        <option value="banco_monex">BANCO MONEX</option>
-                                        <option value="banco_bancomext">BANCOMEXT</option>
-                                        <option value="bancoppel">BANCOPPEL</option>
-                                        <option value="bancrea">BANCREA</option>
-                                        <option value="banjercito">BANJERCITO</option>
-                                        <option value="bankaool">BANKAOOL</option>
-                                        <option value="banobras">BANOBRAS</option>
-                                        <option value="banorte_ixe">BANORTE/IXE</option>
-                                        <option value="banregio">BANREGIO</option>
-                                        <option value="bansefi">BANSEFI</option>
-                                        <option value="bansi">BANSI</option>
-                                        <option value="banxico">BANXICO</option>
-                                        <option value="barclays">BARCLAYS</option>
-                                        <option value="base">BASE</option>
-                                        <option value="bbva_bancomer">BBVA BANCOMER</option>
-                                        <option value="btg_pactual">BTG PACTUAL</option>
-                                        <option value="c_bolsa_banort">C. BOLSA BANORT</option>
-                                        <option value="baja_pop_mexica">CAJA POP MEXICA</option>
-                                        <option value="caja_telefonist">CAJA TELEFONIST</option>
-                                        <option value="cb_bulltick">CB BULLTICK</option>
-                                        <option value="chicago">CHICAGO</option>
-                                        <option value="cibano">CIBANCO</option>
-                                        <option value="cls_bank">CLS BANK</option>
-                                        <option value="consubanco">CONSUBANCO</option>
-                                        <option value="consultoria_int">CONSULTORIA INT</option>
-                                        <option value="credit_suisse">CREDIT SUISSE</option>
-                                        <option value="cristobal_colon">CRISTOBAL COLON</option>
-                                        <option value="deustche">DEUSTCHE</option>
-                                        <option value="deustche_securi">DEUSTCHE SECURI</option>
-                                        <option value="donde">DONDÉ</option>
-                                        <option value="estructuradores">ESTRUCTURADORES</option>
-                                        <option value="eurofimex_casa">EUROFIMEX CASA</option>
-                                        <option value="evercore">EVERCORE</option>
-                                        <option value="finamex">FINAMEX</option>
-                                        <option value="fincomun">FINCOMUN</option>
-                                        <option value="find">FIND</option>
-                                        <option value="fomped">FOMPED</option>
-                                        <option value="fondo_fira">FONDO (FIRA)</option>
-                                        <option value="forjadores">FORJADORES</option>
-                                        <option value="gbm">GBM</option>
-                                        <option value="ge_money_bank">GE MONEY BANK</option>
-                                        <option value="gnp">GNP</option>
-                                        <option value="hdi_seguros">HDI SEGUROS</option>
-                                        <option value="hsbc">HSBC</option>
-                                        <option value="huastecas">HUASTECAS</option>
-                                        <option value="icbc">ICBC</option>
-                                        <option value="inbursa">INBURSA</option>
-                                        <option value="indeval">INDEVAL</option>
-                                        <option value="infonavit">INFONAVIT</option>
-                                        <option value="ing_bank">ING BANK</option>
-                                        <option value="inmobiliario">INMOBILIARIO</option>
-                                        <option value="interacciones">INTERACCIONES</option>
-                                        <option value="intercam">INTERCAM</option>
-                                        <option value="intercam_banco">INTERCAM BANCO</option>
-                                        <option value="invercap">INVERCAP</option>
-                                        <option value="investa_bank">INVESTA BANK</option>
-                                        <option value="invex">INVEX</option>
-                                        <option value="jp_morgan_casa">JP MORGAN CASA</option>
-                                        <option value="jpmorgan">JPMORGAN</option>
-                                        <option value="kuspit">KUSPIT</option>
-                                        <option value="libertad">LIBERTAD</option>
-                                        <option value="mapfre_tepeyac">MAPFRE TEPEYAC</option>
-                                        <option value="masari">MASARI</option>
-                                        <option value="merril_lynch_cb">MERRIL LYNCH CB</option>
-                                        <option value="mifel">MIFEL</option>
-                                        <option value="monexcb">MONEXCB</option>
-                                        <option value="multiva_banco">MULTIVA BANCO</option>
-                                        <option value="multiva_cbolsa">MULTIVA CBOLSA</option>
-                                        <option value="nafin">NAFIN</option>
-                                        <option value="order">ORDER</option>
-                                        <option value="oskandia">OSKNDIA</option>
-                                        <option value="pagatodo">PAGATODO</option>
-                                        <option value="perseverancia">PERSEVERANCIA</option>
-                                        <option value="principal">PRINCIPAL</option>
-                                        <option value="profundo_gnp">PROFUTURO GNP</option>
-                                        <option value="recursos_reform">RECURSOS REFORM</option>
-                                        <option value="republicny">REPUBLICNY</option>
-                                        <option value="sabadell">SABADELL</option>
-                                        <option value="santander">SANTANDER</option>
-                                        <option value="scotiabank">SCOTIABANK</option>
-                                        <option value="seguros_mty">SEGUROS MTY.</option>
-                                        <option value="skandia_vida">SKANDIA VIDA</option>
-                                        <option value="soc_hipotecaria">SOC HIPOTECARIA</option>
-                                        <option value="sofiexpress">SOFIEXPRESS</option>
-                                        <option value="stp">STP</option>
-                                        <option value="sura">SURA</option>
-                                        <option value="tamibe">TAMIBE</option>
-                                        <option value="tokio">TOKIO</option>
-                                        <option value="usb_bank_mexico">USB BANK MEXICO</option>
-                                        <option value="unagra">UNAGRA</option>
-                                        <option value="valores_mexican">VALORES MEXICAN</option>
-                                        <option value="value">VALUE</option>
-                                        <option value="vanguardia">VANGUARDIA</option>
-                                        <option value="ve_por_mas">VE POR MAS</option>
-                                        <option value="vector_cb">VECTOR CB</option>
-                                        <option value="volkswagen_bank">VOLKSWAGEN BANK</option>
-                                        <option value="zurich">ZURICH</option>
-                                        <option value="zurich_vida">ZURICH VIDA</option>
+                                        <option value="ABC CAPITAL">ABC CAPITAL</option>
+                                        <option value="ACCIVAL CB">ACCIVAL CB</option>
+                                        <option value="ACTINVER">ACTINVER</option>
+                                        <option value="ACTINVER CB">ACTINVER CB</option>
+                                        <option value="ACTINVER SOCIED">ACTINVER SOCIED</option>
+                                        <option value="AKALA, S.A.">AKALA, S.A.</option>
+                                        <option value="AMERICAN EXPRES">AMERICAN EXPRES</option>
+                                        <option value="ASEA">ASEA</option>
+                                        <option value="ASP INTEGRA OPC">ASP INTEGRA OPC</option>
+                                        <option value="AXXA">AXXA</option>
+                                        <option value="AZTECA">AZTECA</option>
+                                        <option value="B&B">B&B</option>
+                                        <option value="BAJIO">BAJIO</option>
+                                        <option value="BAMSA">BAMSA</option>
+                                        <option value="BANAMEX">BANAMEX</option>
+                                        <option value="BANCEN">BANCEN</option>
+                                        <option value="BANCO AUTOFIN">BANCO AUTOFIN</option>
+                                        <option value="BANCO COMPARTAM">BANCO COMPARTAM</option>
+                                        <option value="BANCO FACIL">BANCO FACIL</option>
+                                        <option value="BANCO FAMSA">BANCO FAMSA</option>
+                                        <option value="BANCO FINTERRA">BANCO FINTERRA</option>
+                                        <option value="BANCO MONEX">BANCO MONEX</option>
+                                        <option value="BANCOMEXT">BANCOMEXT</option>
+                                        <option value="BANCOPPEL">BANCOPPEL</option>
+                                        <option value="BANCREA">BANCREA</option>
+                                        <option value="BANJERCITO">BANJERCITO</option>
+                                        <option value="BANKAOOL">BANKAOOL</option>
+                                        <option value="BANOBRAS">BANOBRAS</option>
+                                        <option value="BANORTE/IXE">BANORTE/IXE</option>
+                                        <option value="BANREGIO">BANREGIO</option>
+                                        <option value="BANSEFI">BANSEFI</option>
+                                        <option value="BANSI">BANSI</option>
+                                        <option value="BANXICO">BANXICO</option>
+                                        <option value="BARCLAYS">BARCLAYS</option>
+                                        <option value="BASE">BASE</option>
+                                        <option value="BBVA BANCOMER">BBVA BANCOMER</option>
+                                        <option value="BTG PACTUAL">BTG PACTUAL</option>
+                                        <option value="C. BOLSA BANORT">C. BOLSA BANORT</option>
+                                        <option value="CAJA POP MEXICA">CAJA POP MEXICA</option>
+                                        <option value="CAJA TELEFONIST">CAJA TELEFONIST</option>
+                                        <option value="CB BULLTICK">CB BULLTICK</option>
+                                        <option value="CHICAGO">CHICAGO</option>
+                                        <option value="CIBANCO">CIBANCO</option>
+                                        <option value="CLS BANK">CLS BANK</option>
+                                        <option value="CONSUBANCO">CONSUBANCO</option>
+                                        <option value="CONSULTORIA INT">CONSULTORIA INT</option>
+                                        <option value="CREDIT SUISSE">CREDIT SUISSE</option>
+                                        <option value="CRISTOBAL COLON">CRISTOBAL COLON</option>
+                                        <option value="DEUSTCHE">DEUSTCHE</option>
+                                        <option value="DEUSTCHE SECURI">DEUSTCHE SECURI</option>
+                                        <option value="DONDE">DONDÉ</option>
+                                        <option value="ESTRUCTURADORES">ESTRUCTURADORES</option>
+                                        <option value="EUROFIMEX CASA">EUROFIMEX CASA</option>
+                                        <option value="EVERCORE">EVERCORE</option>
+                                        <option value="FINAMEX">FINAMEX</option>
+                                        <option value="FINCOMUN">FINCOMUN</option>
+                                        <option value="FIND">FIND</option>
+                                        <option value="FOMPED">FOMPED</option>
+                                        <option value="FONDO (FIRA)">FONDO (FIRA)</option>
+                                        <option value="FORJADORES">FORJADORES</option>
+                                        <option value="GBM">GBM</option>
+                                        <option value="GE MONEY BANK">GE MONEY BANK</option>
+                                        <option value="GNP">GNP</option>
+                                        <option value="HDI SEGUROS">HDI SEGUROS</option>
+                                        <option value="HSBC">HSBC</option>
+                                        <option value="HUASTECAS">HUASTECAS</option>
+                                        <option value="ICBC">ICBC</option>
+                                        <option value="INBURSA">INBURSA</option>
+                                        <option value="INDEVAL">INDEVAL</option>
+                                        <option value="INFONAVIT">INFONAVIT</option>
+                                        <option value="ING BANK">ING BANK</option>
+                                        <option value="INMOBILIARIO">INMOBILIARIO</option>
+                                        <option value="INTERACCIONES">INTERACCIONES</option>
+                                        <option value="INTERCAM">INTERCAM</option>
+                                        <option value="INTERCAM BANCO">INTERCAM BANCO</option>
+                                        <option value="INVERCAP">INVERCAP</option>
+                                        <option value="INVESTA BANK">INVESTA BANK</option>
+                                        <option value="INVEX">INVEX</option>
+                                        <option value="JP MORGAN CASA">JP MORGAN CASA</option>
+                                        <option value="JPMORGAN">JPMORGAN</option>
+                                        <option value="KUSPIT">KUSPIT</option>
+                                        <option value="LIBERTAD">LIBERTAD</option>
+                                        <option value="MAPFRE TEPEYAC">MAPFRE TEPEYAC</option>
+                                        <option value="MASARI">MASARI</option>
+                                        <option value="MERRIL LYNCH CB">MERRIL LYNCH CB</option>
+                                        <option value="MIFEL">MIFEL</option>
+                                        <option value="MONEXCB">MONEXCB</option>
+                                        <option value="MULTIVA BANCO">MULTIVA BANCO</option>
+                                        <option value="MULTIVA CBOLSA">MULTIVA CBOLSA</option>
+                                        <option value="NAFIN">NAFIN</option>
+                                        <option value="ORDER">ORDER</option>
+                                        <option value="OSKNDIA">OSKNDIA</option>
+                                        <option value="PAGATODO">PAGATODO</option>
+                                        <option value="PERSEVERANCIA">PERSEVERANCIA</option>
+                                        <option value="PRINCIPAL">PRINCIPAL</option>
+                                        <option value="PROFUTURO GNP">PROFUTURO GNP</option>
+                                        <option value="RECURSOS REFORM">RECURSOS REFORM</option>
+                                        <option value="REPUBLICNY">REPUBLICNY</option>
+                                        <option value="SABADELL">SABADELL</option>
+                                        <option value="SANTANDER">SANTANDER</option>
+                                        <option value="SCOTIABANK">SCOTIABANK</option>
+                                        <option value="SEGUROS MTY.">SEGUROS MTY.</option>
+                                        <option value="SKANDIA VIDA">SKANDIA VIDA</option>
+                                        <option value="SOC HIPOTECARIA">SOC HIPOTECARIA</option>
+                                        <option value="SOFIEXPRESS">SOFIEXPRESS</option>
+                                        <option value="STP">STP</option>
+                                        <option value="SURA">SURA</option>
+                                        <option value="TAMIBE">TAMIBE</option>
+                                        <option value="TOKIO">TOKIO</option>
+                                        <option value="USB BANK MEXICO">USB BANK MEXICO</option>
+                                        <option value="UNAGRA">UNAGRA</option>
+                                        <option value="VALORES MEXICAN">VALORES MEXICAN</option>
+                                        <option value="VALUE">VALUE</option>
+                                        <option value="VANGUARDIA">VANGUARDIA</option>
+                                        <option value="VE POR MAS">VE POR MAS</option>
+                                        <option value="VECTOR CB">VECTOR CB</option>
+                                        <option value="VOLKSWAGEN BANK">VOLKSWAGEN BANK</option>
+                                        <option value="ZURICH">ZURICH</option>
+                                        <option value="ZURICH VIDA">ZURICH VIDA</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="comments">Comentarios</label>
-                                    <textarea id="comments"
-                                              name="comments"
-                                              v-model="order.comments"
-                                              class="form-control" rows="3" placeholder="Comentarios"></textarea>
+                                    <label for="email">Correo electrónico</label>
+                                    <input id="email"
+                                           name="email"
+                                           v-model="order.email"
+                                           type="text"
+                                           class="form-control"
+                                           autocomplete="off"
+                                           placeholder="Correo electrónico">
                                 </div>
-                                <!--<div class="form-group">
-                                    <label for="address">Dirección del banco</label>
-                                    <textarea id="address"
-                                              name="address"
-                                              v-model="order.bank_address"
-                                              required
-                                              class="form-control" rows="3" placeholder="Dirección del banco"></textarea>
-                                </div>-->
-
-                                <!--<div class="form-group">
-                                    <span for="file">Adjuntar copia de su información bancaria para confirmar los datos</span>
-                                    <input id="file"
-                                           name="file[]"
-                                           type="file"
-                                           v-on:change="onFileChange">
-                                </div>-->
                             </div>
                             <div class="col-sm-6">
+
                                 <div class="form-group">
-                                    <label for="clabe">Clabe interbancaria</label>
+                                    <label for="name">Nombre del beneficiario</label>
+                                    <input id="name"
+                                           v-model="order.name"
+                                           name="name" type="text"
+                                           class="form-control"
+                                           autocomplete="off"
+                                           placeholder="Nombre del beneficiario">
+                                </div>
+
+                                <div class="form-group request-account-type" id="type1">
+                                    <label for="cardNumber">Número de tarjeta destino</label>
+                                    <input id="account"
+                                           name="account"
+                                           v-model="order.account"
+                                           autocomplete="off"
+                                           type="text" class="form-control" placeholder="Número de tarjeta destino">
+                                </div>
+
+                                <div class="form-group request-account-type" id="type2">
+                                    <label for="clabe">Número de clabe</label>
                                     <input id="clabe"
                                            name="clabe"
                                            v-model="order.clabe"
                                            autocomplete="off"
-                                           type="text" class="form-control" placeholder="Clabe interbancaria">
+                                           type="text" class="form-control" placeholder="Número de clabe">
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="account">Número de cuenta</label>
-                                    <input id="account"
-                                           name="account"
-                                           v-model="order.account"
-                                           type="text"
-                                           class="form-control"
-                                           autocomplete="off"
-                                           placeholder="Número de cuenta">
+                                <div class="form-group request-account-type" id="type3">
+                                    <label for="mobile">Número celular</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon" style="padding: 0;">
+                                            <select class="selectpicker"
+                                                    data-width="160px"
+                                                    v-model="order.areacode"
+                                                    data-live-search="true">
+                                                <option value="">Código de area</option>
+                                                @foreach($codes as $code)
+                                                    <option value="{{$code['code']}}">{!! $code['name'] .' - <strong>('. $code['code'] . ')</strong>' !!}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <input type="text" class="form-control" v-model="order.cellphone" placeholder="Número celular">
+                                    </div>
                                 </div>
-
-                                <!--<div class="form-group">
-                                    <label for="comments">Comentarios</label>
-                                    <textarea id="comments"
-                                              name="comments"
-                                              v-model="order.comments"
-                                              class="form-control" rows="3" placeholder="Comentarios"></textarea>
-                                </div>-->
                             </div>
                         </div>
 
@@ -249,4 +264,11 @@
     <script src="{{asset('/js/vendor/vuejs/vue.js')}}"></script>
     <script src="{{asset('/js/vendor/vuejs/vue-resource.js')}}"></script>
     <script src="{{asset('/js/request.js')}}"></script>
+    <script src="{{asset("/js/vendor/bootstrap-3.3.7/js/bootstrap.js")}}"></script>
+    <script src="{{asset("/js/vendor/bootstrap-select-1.11.2/bootstrap-select.js")}}"></script>
+    <script>
+        $(document).ready(function () {
+            $('.selectpicker').selectpicker({ liveSearch: true });
+        });
+    </script>
 @endsection
