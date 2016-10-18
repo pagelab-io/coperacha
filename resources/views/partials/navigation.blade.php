@@ -11,6 +11,7 @@
             @if (Auth::guest())
                 <li><a class="{{Route::current()->getName() == 'pages.about' ? 'active' : ''}}" href="{{route('pages.about')}}">¿Qué es Coperacha?</a></li>
                 <li><a class="{{Route::current()->getName() == 'pages.faqs' ? 'active' : ''}}" href="{{route('pages.faqs')}}">FAQS</a></li>
+                <li><a href="#testimonials" class="scroll-to">Testimonios</a></li>
                 <li><a class="{{Route::current()->getName() == 'pages.contact' ? 'active' : ''}}" href="{{route('pages.contact')}}">Contacto</a></li>
                 <li><a class="button create-new {{Route::current()->getName() == 'user.create' ? 'active' : ''}}" href="{{route('user.create')}}">Registro</a></li>
                 <li><a href="#" ng-click="showModal()">Entrar</a></li>

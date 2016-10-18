@@ -72,60 +72,11 @@ class HomeController extends Controller
         if ($testimonial) {
             $testimonials = $testimonial->getChildrens();
         } else {
-
             $testimonials = new Collection();
-
-            $post1 = new Post();
-            $post1->post_title = "Miguel, 24, Veracruz.";
-            $post1->post_content = "\"Acabo de participar en una alcancía para el regalo de un amigo. Fácil y simple de utilizar y muy práctico.\"";
-
-            $post2 = new Post();
-            $post2->post_title = "Juan, 22, Mazatlán.";
-            $post2->post_content = "\"Creo que está nueva forma de \"Coperacha online\" es una manera práctica de recaudar dinero entre amigos, sobre todo si estos se encuentran dispersos en varios lugares.\"";
-
-            $post3 = new Post();
-            $post3->post_title = "Ricardo, 33, Cancún.";
-            $post3->post_content = "\"¡Lo recomiendo! Muy práctico para manejar tus gastos en grupo. Totalmente fiable y bastante sencillo.\"";
-
-            $post4 = new Post();
-            $post4->post_title = "María, 25, Querétaro.";
-            $post4->post_content = "\"¡Al 100! Rápido, eficaz, seguro! Perfecto como servicio.\"";
-
-            $post5 = new Post();
-            $post5->post_title = "Sofía, 29, Ciudad de México.";
-            $post5->post_content = "\"Organizé el baby shower de mi mejor amiga recaudando el dinero entre nuestras amigas de todas partes del mundo. Increíble.\"";
-
-            $post6 = new Post();
-            $post6->post_title = "Heber, 28, Veracruz.";
-            $post6->post_content = "\"Pude ahorrar el dinero que me faltaba para mi viaje a Italia sin estarle quitando a mis ahorros que tenía en la casa.\"";
-
-            $post7 = new Post();
-            $post7->post_title = "Humberto, 30, Tijuana.";
-            $post7->post_content = "\"Nunca nos habíamos organizado todos así de fácil. Hice una alcancía con mis amigos de la prepa y nos fuimos de vacaciones todos juntos, estuvo padrísimo!.\"";
-
-            $post8 = new Post();
-            $post8->post_title = "Andrea, 24, Puebla.";
-            $post8->post_content = "\"Me encantó que no te quita nada de tiempo. Entre mis hermanos y yo, hicimos una alcancía en coperacha para el regalo de cumpleaños de mamá.\"";
-
-            $post9 = new Post();
-            $post9->post_title = "Tania, 28, León.";
-            $post9->post_content = "\"¡Lo recomiendo! Muy práctico para manejar tus gastos en grupo. Totalmente fiable y bastante sencillo.\"";
-
-            $post10 = new Post();
-            $post10->post_title = "Caro, 24, Guadalajara.";
-            $post10->post_content = "\"Está súper fácil pagar para juntar el dinero y así. Junté con mis amigas para nuestro viaje de graduación.\"";
-
-            $testimonials->push($post1);
-            $testimonials->push($post2);
-            $testimonials->push($post3);
-            $testimonials->push($post4);
-            $testimonials->push($post5);
-            $testimonials->push($post6);
-            $testimonials->push($post7);
-            $testimonials->push($post8);
-            $testimonials->push($post9);
-            $testimonials->push($post10);
-
+            $post = new Post();
+            $post->post_title = "Demo 1";
+            $post->post_content = "Text demo";
+            $testimonials->push($post);
         }
 
         return view('index', [

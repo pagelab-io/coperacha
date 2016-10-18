@@ -217,8 +217,10 @@
                         <div id="SliderTestimonials" class="slider">
                             @foreach ($testimonials as $item)
                                 <article class="testimonial item">
-                                    <div class="body">{!!$item->post_content!!}</div>
-                                    <div class="title">-{{$item->post_title}}</div>
+                                    <div class="testimonial-inner">
+                                        <div class="body">{!!$item->post_content!!}</div>
+                                        <div class="title">-{{$item->post_title}}</div>
+                                    </div>
                                 </article>
                             @endforeach
                         </div>

@@ -10,9 +10,7 @@
                                 <img class="img-responsive"
                                      src={{asset('/images/logo.png')}}>
                             </a>
-
                         </div>
-
                         <div class="text">
                             <div>Coperacha 2016.</div>
                             <div>Todos los derechos reservados.</div>

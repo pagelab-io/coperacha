@@ -372,6 +372,8 @@ var app = app || {};
                 $(window).on("resize", function () {
                     // return _this.update();
                 });
+
+                // console.log(this.current); -> 0
             },
 
             /**
@@ -389,20 +391,20 @@ var app = app || {};
 
                     switch (direction) {
                         case 'prev':
-                            this.prev = this.current;
-                            this.next = this.current - 1;
-                            this.next = this.next === -1 ? this.total - 1 : this.next;
+                            this.prev = this.current - 1;
+                            this.prev = this.prev === -1 ? this.total - 1 : this.prev;
                             this.position = 0;
                             this.direction = 0;
-                            this.current = this.next;
+                            this.next = this.current;
+                            this.current = this.prev;
                             break;
 
                         case 'next':
-                            this.prev = this.current;
                             this.next = this.current + 1;
                             this.next = (this.total) === this.next ? 0 : this.next;
                             this.position = this.width * 2; // 200 * 3 = 600
                             this.direction = -(this.width * 2);
+                            this.prev = this.current;
                             this.current = this.next;
                             break;
 
@@ -430,12 +432,15 @@ var app = app || {};
 
                     // Update view control
                     var pos = this.getNextPositions();
+                    console.log(pos);
+
                     for (var i = 0; i < pos.length; i++) {
                         this.control.children(':eq(' + pos[i] + ')').css({
                             left: this.position + (this.width * i),
                             display: 'flex'
                         });
                     }
+
                     // Animate Slide Control
                     this.control.animate({
                         left: this.direction
@@ -453,12 +458,11 @@ var app = app || {};
                             });
                         }
 
-                        _this.control.children(':eq(' + _this.prev + ')').css({
-                            left: _this.width,
+                        _this.control.children(':eq(' + (_this.prev) + ')').css({
                             display: 'none',
+                            left: _this.width,
                             zIndex: 0
                         });
-
 
                         // Unblock effects
                         _this.running = false;
@@ -466,6 +470,10 @@ var app = app || {};
                 }
             },
 
+            /**
+             *
+             * @returns {Array}
+             */
             getNextPositions: function() {
                 var size = this.qty;
                 var pos = [];
@@ -558,7 +566,6 @@ var app = app || {};
             _onPrev: function () {
                 // Cancel Events
                 if (this.total < 2) { return false; }
-
                 if (this.options.play) { this.pause(); }
 
                 this.animate('prev', 0);
@@ -573,7 +580,6 @@ var app = app || {};
             _onNext: function () {
                 // Cancel Events
                 if (this.total < 2) { return false; }
-
                 if (this.options.play) { this.pause(); }
 
                 this.animate('next', 0);

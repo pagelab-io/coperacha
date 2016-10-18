@@ -3,7 +3,7 @@
     // Init sliders
     $('#SliderMethods').slider({
         slideSpeed: 500,
-        play: 5000,
+        play: 000,
         preload: true,
         withPagination: false,
         withNavigation: false
@@ -11,7 +11,7 @@
 
     $('#SliderTestimonials').slider({
         slideSpeed: 500,
-        play: 6000,
+        play: 10000,
         preload: true,
         classNavigation: 'inverse',
         qty: 3
