@@ -28,14 +28,14 @@
 
 .slider,
 .slider > .wrapper {
-    height: 90px;
+    height: 150px;
     width: 300px;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
     .slider,
     .slider > .wrapper {
-        height: 90px;
+        height: 150px;
         width: 600px;
     }
 }
@@ -43,7 +43,7 @@
 @media screen and (min-width: 1025px) {
     .slider,
     .slider > .wrapper {
-        height: 90px;
+        height: 150px;
         width: 800px;
     }
 }
