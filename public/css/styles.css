@@ -574,7 +574,8 @@ hr {
 
 /* Block Testimonials */
 .block.testimonials {
-    background: #ff5000 url(../../images/create-moneybox-bg.png) center center;
+    /*background: #ff5000 url(../../images/create-moneybox-bg.png) center center;*/
+    background: #ec6c32;
     color: white;
     padding: 70px 0 85px;
 }

@@ -121,6 +121,8 @@ var app = app || {};
              */
             pauseTimeout: null,
 
+            zIndex: 1000,
+
             /**
              *
              * @type {number}
@@ -433,11 +435,14 @@ var app = app || {};
                     // Update view control
                     var pos = this.getNextPositions();
                     console.log(pos);
+                    this.zIndex += 1;
 
                     for (var i = 0; i < pos.length; i++) {
+                        var color = '#ec6c32';
                         this.control.children(':eq(' + pos[i] + ')').css({
                             left: this.position + (this.width * i),
-                            display: 'flex'
+                            display: 'flex',
+                            background:color
                         });
                     }
 
@@ -454,7 +459,7 @@ var app = app || {};
                             var p = pos[i - 1];
                             _this.control.children(':eq(' + p + ')').css({
                                 left: _this.width * i,
-                                zIndex: 2000
+                                zIndex: _this.zIndex
                             });
                         }
 
