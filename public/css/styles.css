@@ -599,7 +599,7 @@ hr {
 
 .testimonial-inner {
     display: flex;
-    height: 160px;
+    height: 150px;
     flex-direction: column;
     justify-content: space-between;
 }
