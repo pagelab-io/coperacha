@@ -434,7 +434,7 @@ var app = app || {};
 
                     // Update view control
                     var pos = this.getNextPositions();
-                    console.log(pos);
+
                     this.zIndex += 1;
 
                     for (var i = 0; i < pos.length; i++) {
@@ -442,7 +442,7 @@ var app = app || {};
                         this.control.children(':eq(' + pos[i] + ')').css({
                             left: this.position + (this.width * i),
                             display: 'flex',
-                            background:color
+                            background: color
                         });
                     }
 
