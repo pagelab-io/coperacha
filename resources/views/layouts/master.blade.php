@@ -10,8 +10,8 @@
     <meta name="description" content="El servicio online para recaudar dinero entre amigos.">
     <meta name="keywords" content="page-keywords">
     <meta name="author" content="PageLab">
-    <!--<meta name="robots" content="INDEX, FOLLOW, ARCHIVE">-->
-    <meta name="robots" content="NOINDEX, NOFOLLOW, NOARCHIVE">
+    <meta name="robots" content="INDEX, FOLLOW, ARCHIVE">
+    <!--<meta name="robots" content="NOINDEX, NOFOLLOW, NOARCHIVE">-->
 
     <!-- Href lang -->
     <link rel="alternate" hreflang="en" href="{{url('/')}}"/>
