@@ -57,7 +57,7 @@ Route::group([
 ], function($router){
     // register
     $router->get('/dashboard', ['middleware' => 'auth', 'as' => 'dashboard', 'uses' => 'HomeController@getDashboardPage']);
-    $router->get('/detail/{url}', ['as' => 'detail', 'uses' => 'HomeController@getDetailPage']);
+    $router->get('/detail/{url}/{created?}', ['as' => 'detail', 'uses' => 'HomeController@getDetailPage']);
     $router->get('/create/{url?}',  ['middleware' => 'auth', 'as' => 'create', 'uses' => 'HomeController@getCreateMoneyboxPage']);
     //$router->get('/step-2',  ['middleware' => 'auth', 'as' => 'step-2', 'uses' => 'HomeController@getCreateMoneyboxPage2']);
     $router->get('/request/{moneyboxurl}', ['as' => 'request', 'uses' => 'HomeController@getRequestPage']);
@@ -114,6 +114,10 @@ $router->group([
     $router->post('/login', [
         'middleware' => 'rest',
         'uses' => 'AuthController@login'
+    ]);
+    $router->put('/tracking', [
+        'middleware' => 'rest',
+        'uses' => 'AuthController@changeTracking'
     ]);
     $router->get('/logout', [
         'middleware' => 'auth',

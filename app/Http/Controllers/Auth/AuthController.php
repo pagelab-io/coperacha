@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Entities\User;
 use App\Http\Controllers\PLController;
 use App\Http\Requests\PLRequest;
 use App\Http\Responses\PLResponse;
@@ -85,6 +86,28 @@ class AuthController extends PLController
         }*/
     }
 
+    /**
+     * Update tracking
+     * @param PLRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function changeTracking(PLRequest $request)
+    {
+        $response = new PLResponse();
+        try {
+            $user = $this->_userRepository->byUsername($request->get('user')['username']);
+            $this->_userRepository->updateTracking($user, $request->get('tracking'));
+            $response->description = "tracking updated successfully";
+            $this->setResponse($response);
+            return response()->json($this->getResponse());
+
+        } catch(\Exception $ex) {
+            $response->status = $ex->getCode();
+            $response->description = $ex->getMessage();
+            $response->data = $ex->getTraceAsString();
+            return response()->json($response);
+        }
+    }
 
     //endregion
 

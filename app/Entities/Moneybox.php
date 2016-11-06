@@ -17,7 +17,7 @@ class Moneybox extends Model
      * These are the mass-assignable keys
      * @var array
      */
-    protected $fillable = ['category_id', 'person_id', 'name'];
+    protected $fillable = ['category_id', 'person_id', 'name', 'collected_amount', 'commission_amount'];
 
     /**
      * Default values for Moneybox

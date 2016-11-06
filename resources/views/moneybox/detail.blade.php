@@ -108,6 +108,7 @@
                                         <button id="btnSendInvitation" class="btn btn-primary small">Enviar invitaciones</button>
                                     </div>
                                 </div>
+                                <input id="created" type="hidden" value="{{$created}}"/>
                             </form> <!-- ./FormShare -->
                         </div>
                     </div>
@@ -131,6 +132,14 @@
                     var caption = $("#moneybox-caption").text();
                     var desc = $("#moneybox-desc").val();
                     var image = $("#moneybox-image").attr('src');
+                    var created = $("#created").val();
+
+                    if (created == 1) {
+                        var utils = new Utils();
+                        document.getElementById('small-alert-content').innerHTML="" +
+                        "<p>Te invitamos a ser el primero en participar en esta alcancía, esto ayudará a motivar a tus amigos.<p>";
+                        utils.showAlert(true);
+                    }
 
                     if (id > 0 && image.length > 0) {
                         var share = new Share();
@@ -142,7 +151,7 @@
                                     title: title,
                                     image: image,
                                     description: desc,
-                                    url: location.toString() ,
+                                    url: location.toString().split('/1')[0],
                                     caption: caption
                                 }
                             }

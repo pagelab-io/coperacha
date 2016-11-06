@@ -67,7 +67,7 @@ class TxCreateMoneybox extends PLTransaction{
         try {
             \DB::beginTransaction();
             \Log::info("=== Creating moneybox ===");
-            
+
             $moneybox = new Moneybox();
             $moneybox->category_id  = $request->get('category_id');
             $moneybox->name         = $request->get('name');
@@ -76,6 +76,8 @@ class TxCreateMoneybox extends PLTransaction{
             $moneybox->end_date     = $request->get('end_date');
             $moneybox->description  = ($request->exists('description')) ? $request->get('description') : '';
             $moneybox->url          = $this->generateURL($request->get('name'));
+            $moneybox->collected_amount  = $params['firstMoneybox'] ? 50 : 0;
+            $moneybox->commission_amount = $params['firstMoneybox'] ? 2.5 : 0;
             if (!$moneybox->save()) throw new \Exception("Unable to create Moneybox", -1);
             \Log::info("=== Moneybox created successfully : === \n".$moneybox);
             

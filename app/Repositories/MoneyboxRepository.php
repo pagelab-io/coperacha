@@ -247,8 +247,12 @@ class MoneyboxRepository extends BaseRepository{
         }catch(\Exception $ex){ throw new \Exception("Person does not exist", -1, $ex);}
         \Log::info("Person : ".$person);
 
+        $firstMoneybox = $this->firstMoneybox($request, $person);
+        \Log::info("is first moneybox ? : ");
+        \Log::info($firstMoneybox ? "true":"false");
+
         \Log::info("Executing transaction : TxCreateMoneybox");
-        $this->_moneybox = $this->_txCreateMoneybox->executeTx($request);
+        $this->_moneybox = $this->_txCreateMoneybox->executeTx($request, array('firstMoneybox' =>  $firstMoneybox));
         \Log::info("End transaction : TxCreateMoneybox");
 
         // response
@@ -477,6 +481,16 @@ class MoneyboxRepository extends BaseRepository{
         }
 
         return $response;
+    }
+
+    /**
+     * Check if a person not has moneyboxes
+     * @param PLRequest $request
+     * @return bool
+     */
+    private function firstMoneybox(PLRequest $request)
+    {
+        return count($this->myMoneyboxes($request)) == 0 ? true : false;
     }
 
     //endregion

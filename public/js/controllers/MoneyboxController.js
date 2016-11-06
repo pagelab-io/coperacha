@@ -291,26 +291,17 @@
                                 $scope.moneybox_id = response.data.id;
 
                                 $scope.uploadImage(document.getElementById('file'), true, function(imageResponse){
-
                                     // si hay error en la subida del archivo dejar pasar de todos modos ya que la alcancia ya se creo.
-
                                     if (imageResponse.success) {
-
-                                        window.location = '/moneybox/detail/'+response.data.url;
-
+                                        window.location = '/moneybox/detail/'+response.data.url+"/1";
                                     } else {
-
                                         window.location = '/moneybox/detail/'+response.data.url;
-
                                     }
-
-
-
                                 });
 
                             } else {
 
-                                window.location = '/moneybox/detail/'+response.data.url;
+                                window.location = '/moneybox/detail/'+response.data.url+"/1";
 
                             }
 

@@ -194,7 +194,7 @@ class HomeController extends Controller
      * @internal param Request $request
      * @return Factory|\Illuminate\View\View
      */
-    public function getDetailPage($url){
+    public function getDetailPage($url, $created = ''){
         $variables = $this->_moneyboxRepository->getByURL($url);
         $moneybox = $variables['moneybox'];
         $person = $variables['person'];
@@ -206,13 +206,16 @@ class HomeController extends Controller
             $moneybox->lastfile = $moneybox->files->last();
         }
 
+        $creatednow = ($created == 1) ? 1 : 0;
+
         if ($moneybox->active == 1) {
             return view('moneybox.detail')
                 ->with('moneybox', $moneybox)
                 ->with('settings', $settings)
                 ->with('person', $person)
                 ->with('partiticipantsnumber', $partiticipantsnumber)
-                ->with('pageTitle',$moneybox->name);
+                ->with('pageTitle',$moneybox->name)
+                ->with('created', $creatednow);
         } else {
             return redirect('/');
         }

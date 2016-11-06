@@ -197,6 +197,9 @@ var vm = new Vue({
                         $('.selectpicker').selectpicker('val', this.person.areacode);
                     }
 
+                    // if first access, show popup
+                    if(this.user.tracking == 0) this.firstAccess(this.user);
+
                     window.user = this.user;
                 }
 
@@ -205,6 +208,30 @@ var vm = new Vue({
             }, function (error) {
                 console.error(error);
             });
+        },
+
+        firstAccess: function(user){
+            var utils = new Utils();
+            document.getElementById('small-alert-content').innerHTML="" +
+            "<p>¡Hola "+user.person.name+"! bienvenido/a a Coperacha, te informamos que en la creación de tu primer alcancía recibiras $50.00<p>";
+            utils.showAlert(true);
+
+            this.$http.put("/api/v1/auth/tracking", {'user': user, 'tracking': 1, 'api-key': $api}, {
+                method: 'PUT'
+            }).then(function (response) {
+                if (response.status === 200) {
+                    if (response.data.status == 200) {
+                        console.log("tracking changed");
+                    } else {
+                        console.log("error in service");
+                    }
+                } else {
+                    console.log("error in service");
+                }
+            }, function (error) {
+                console.error(error);
+            });
+
         },
 
         /**
