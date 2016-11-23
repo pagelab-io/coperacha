@@ -284,6 +284,8 @@ class HomeController extends Controller
             $session = \Session::get('tmp_participant');
             $user       = $this->_userRepository->byEmail($session['email']);
             $amount     = $session['amount'];
+        } else {
+            return redirect("/");
         }
 
         return view('moneybox.summary')
