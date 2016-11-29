@@ -58,12 +58,10 @@ Route::group([
     // register
     $router->get('/dashboard', ['middleware' => 'auth', 'as' => 'dashboard', 'uses' => 'HomeController@getDashboardPage']);
     $router->get('/detail/{url}/{created?}', ['as' => 'detail', 'uses' => 'HomeController@getDetailPage']);
-    $router->get('/create/{url?}',  ['middleware' => 'auth', 'as' => 'create', 'uses' => 'HomeController@getCreateMoneyboxPage']);
-    //$router->get('/step-2',  ['middleware' => 'auth', 'as' => 'step-2', 'uses' => 'HomeController@getCreateMoneyboxPage2']);
     $router->get('/request/{moneyboxurl}', ['as' => 'request', 'uses' => 'HomeController@getRequestPage']);
     $router->get('/join/{moneyboxurl}',    ['as' => 'join', 'uses' => 'HomeController@getJoinPage']);//->where('moneyboxurl','[moneyboxurl]+');
     $router->get('/summary/{url}', ['as' => 'summary', 'uses' => 'HomeController@getSummaryPage']);
-
+    $router->get('/create/{url?}/{moneybox_name?}/{moneybox_creator?}/{moneybox_category?}',  ['middleware' => 'auth', 'as' => 'create', 'uses' => 'HomeController@getCreateMoneyboxPage']);
     $router->group([
         'namespace' => 'Moneybox',
         'middleware' => 'auth'

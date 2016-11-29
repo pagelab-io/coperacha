@@ -52,7 +52,8 @@ hr {
 
 /* Navigation */
 .navigation {
-    background-color: #FF5000;
+    /*background-color: #FF5000;*/
+    background-color: transparent;
     height: 60px;
     overflow: hidden;
     padding: 1px 0;
@@ -265,7 +266,7 @@ hr {
 
 /* Outer wrapper */
 .outer-wrapper {
-    margin-top: 60px;
+    /*margin-top: 60px;*/
     position: relative;
 }
 
@@ -283,11 +284,12 @@ hr {
 
 /* Block Cover */
 .block.cover {
-    background-color: #51B7CD;
+    background: url(/images/fondo_2.png) 0 -290px no-repeat;
+    background-size: cover;
     color: #fff;
     padding: 105px 0 100px;
-
     overflow: hidden;
+    min-height: 610px;
 }
 
 .block.cover .align-middle { margin-left: -4px; }
@@ -327,6 +329,7 @@ hr {
     line-height: 35px;
     margin-bottom: 5px;
     text-transform: uppercase;
+    text-shadow: black 1px 1px;
 }
 
 .block.cover .content-block {
@@ -1703,4 +1706,65 @@ section.block.reset-password {
         width: 125px;
         height: 40px;
     }
+}
+
+.moneybox-form {
+    background-color: rgba(255, 255, 255, 0.92);
+    width: 389px;
+    height: 417px;
+    border-radius: 5px;
+    margin-left: 160px;
+}
+
+.moneybox-form-title{
+    color: #4CB7CF;
+    font-size: 19px;
+    text-align: center;
+    padding-top: 35px;
+    padding-bottom: 15px;
+    font-weight: bold;
+}
+
+.moneybox-form > form{
+    color: #31313F;
+}
+
+.moneybox-form > form > .button-moneybox-create{
+    width: 301px;
+    height: 5px;
+    border-radius: 0;
+    font-size: 17px;
+    margin: 25px auto !important;
+    padding-bottom: 30px;
+    display: block;
+}
+
+.element-moneybox {
+    display:block;
+    width: 301px;
+    margin: 0 auto;
+}
+
+select.element-moneybox,
+input.element-moneybox,
+select.element-moneybox > option{
+    height: 37px;
+    border: 1px solid #DBDBEA;
+    color: #B9B9C8;
+    padding: 10px;
+    font-size: 14px;
+}
+
+label.element-moneybox{
+    margin-top: 25px;
+    font-size: 15px;
+}
+
+.esl{
+    outline: 1px solid red;
+}
+
+.moneybox-mobile{
+    text-align: center;
+    margin-top: 150px;;
 }

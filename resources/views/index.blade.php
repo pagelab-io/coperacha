@@ -1,42 +1,59 @@
 @extends("layouts.master")
 @section("content")
     <!-- Cover -->
-    <div class="block cover">
+    <div class="block cover img-category">
         <div class="holder row">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-6 align-middle">
-                        <div class="graphics">
-                            <!-- Money -->
-                            <div class="money graphic">
-                                <img src="images/cover-money.png" alt="cover money">
-                            </div>
-                            <!-- Laptop -->
-                            <div class="laptop graphic">
-                                <img src="images/cover-laptop.png" alt="cover laptop">
-                            </div>
-                            <!-- Wallet -->
-                            <div class="wallet graphic">
-                                <img src="images/cover-wallet.png" alt="cover wallet">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-6 align-middle">
+                    <div class="hidden-xs col-sm-6 col-md-6 align-middle">
                         <div class="header-block">
-                            <div>El servicio online para recaudar dinero entre amigos</div>
+                            <div>LA SOLUCIÓN MÁS SENCILLA PARA ORGANIZAR TU FIESTA</div>
                         </div>
                         <div class="content-block">
                             <div class="html">
-                                <div>Coperacha es un servicio de gestión de dinero comunitario que
-                                    sirve para hacer regalos o transferencias entre amigos.</div>
+                                <div>Coperacha es un servicio de gestión de dinero que sirve para hacer regalos o transferencias entre amigos.</div>
                             </div>
-                            <a class="button btn btn-primary"
-                               ng-click="showModal('/moneybox/create')">Crear mi Alcancía</a>
                         </div>
+                    </div>
+                    <div class="hidden-xs col-sm-6 col-md-6 align-middle">
+                        <div class="moneybox-form">
+                            <div class="moneybox-form-title">
+                                MOTIVO DE LA ALCANCÍA
+                            </div>
+                            <form>
+                                <select name="categories" id="moneybox-categories" class="element-moneybox">
+                                    <option value="2" selected>Fiesta</option>
+                                    <option value="1">Cumpleaños</option>
+                                    <option value="4">Boda</option>
+                                    <option value="8">Despedida de solter@</option>
+                                    <option value="3">Viaje de fin de semana</option>
+                                    <option value="9">Proyecto</option>
+                                    <option value="6">Solidaridad</option>
+                                    <option value="10">Asociación</option>
+                                    <option value="11">Funeral</option>
+                                    <option value="5">Recien Nacido</option>
+                                    <option value="12">Compañeros de piso</option>
+                                    <option value="13">Café</option>
+                                    <option value="7">Otro</option>
+                                </select>
+                                <label for="beneficiario" class="element-moneybox">Nombre del creador</label>
+                                <input id="nombre_creador" name="beneficiario" class="element-moneybox"type="text" placeholder="Ejemplo: Martín"/>
+                                <label for="alcancia" class="element-moneybox">Nombre de la alcancía</label>
+                                <input id="nombre_alcancia" name="alcancia" class="element-moneybox" type="text" placeholder="Ejemplo: Fiesta despedida Martín"/>
+                                <a class="button btn btn-primary button-moneybox-create"
+                                                               ng-click="showModal('/moneybox/create')" id="btn-moneybox-form">Crear mi Alcancía</a>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 hidden-sm hidden-md hidden-lg align-middle moneybox-mobile">
+                        <div class="header-block">
+                            <div>EL SERVICIO ONLINE PARA RECAUDAR DINERO ENTRE AMIGOS</div>
+                        </div>
+                        <a class="button btn btn-primary button-moneybox-create" ng-click="showModal('/moneybox/create')">Crear mi Alcancía</a>
                     </div>
                 </div>
             </div>
-            <img src={{asset("/images/google_play.png")}} class="google-play-button"/>
+            <!--<img src={{asset("/images/google_play.png")}} class="google-play-button"/>-->
         </div>
     </div>
     <!-- Section How it Works -->
@@ -287,4 +304,35 @@
     <script src="{{asset('/js/share.js')}}"></script>
     <script src="{{asset('/js/slider.js')}}"></script>
     <script src="{{asset('/js/index.js')}}"></script>
+    <script>
+        var categories = $('#moneybox-categories');
+        var img_category = $('.img-category');
+        categories.change(function(){
+            var url = '';
+            switch(categories.val()){
+                case "1": url='url(/images/fondo_1.jpg) 0 -290px no-repeat'; break;
+                case "2": url='url(/images/fondo_2.png) 0 -290px no-repeat'; break;
+                case "3": url='url(/images/fondo_3.jpg) 0 -290px no-repeat'; break;
+                case "4": url='url(/images/fondo_4.jpg) 0 -290px no-repeat'; break;
+                case "5": url='url(/images/fondo_5.jpg) 0 -290px no-repeat'; break;
+                case "6": url='url(/images/fondo_6.jpg) 0 -290px no-repeat'; break;
+                case "8": url='url(/images/fondo_8.jpg) 0 -290px no-repeat'; break;
+                case "9": url='url(/images/fondo_9.jpg) 0 -290px no-repeat'; break;
+                default: url='url(/images/fondo_1.png) 0 -290px no-repeat'; break;
+            }
+            img_category.css({
+                'background': url,
+                'background-size': 'cover'
+            });
+        });
+        var button_create = $('#btn-moneybox-form');
+        button_create.click(function(){
+            var nombre_creador = $('#nombre_creador').val();
+            var nombre_alcancia = $('#nombre_alcancia').val();
+            var login_modal = $("#login-modal");
+            setTimeout(function(){
+                login_modal.attr("data-redirect-to","/moneybox/create/create/"+nombre_alcancia+"/"+nombre_creador+"/"+categories.val());
+            }, 500);
+        });
+    </script>
 @endsection

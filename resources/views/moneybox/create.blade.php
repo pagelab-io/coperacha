@@ -48,7 +48,11 @@
                                     <input type="hidden" ng-model="moneybox_id" ng-init="moneybox_id='{{$moneybox->id}}'">
                                     <input readonly type="text" class="form-control" placeholder="Nombre de la alcancía" ng-model="name" ng-init="name='{{$moneybox->name}}'" autocomplete="off">
                                 @else
-                                    <input type="text" class="form-control" placeholder="Nombre de la alcancía" ng-model="name" autocomplete="off">
+                                    @if($name != "")
+                                        <input type="text" class="form-control" placeholder="Nombre de la alcancía" ng-model="name" autocomplete="off" ng-init="name='{{$name}}'">
+                                    @else
+                                        <input type="text" class="form-control" placeholder="Nombre de la alcancía" ng-model="name" autocomplete="off">
+                                    @endif
                                 @endif
                                 </div>
 

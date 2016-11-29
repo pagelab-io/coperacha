@@ -135,17 +135,20 @@ class HomeController extends Controller
 
     /**
      * @param Request $request
-     * @param $url
+     * @param string $url
+     * @param string $moneybox_name
+     * @param string $moneybox_creator
+     * @param string $moneybox_category
      * @throws \Exception
      * @return Factory|\Illuminate\View\View
      */
-    public function getCreateMoneyboxPage(Request $request, $url = '') {
+    public function getCreateMoneyboxPage(Request $request, $url = '', $moneybox_name = '', $moneybox_creator = '', $moneybox_category = '') {
         $moneybox = null;
         $moneyboxSettings   = null;
         $privacyoption      = 0;
         $amountoption       = 0;
         $title              = "";
-        if ($url != "") {
+        if ($url != "" && $url != 'create') {
             $variables          = $this->_moneyboxRepository->getByURL($url);
             $moneybox           = $variables['moneybox'];
             $moneyboxSettings   = $variables['settings'];
@@ -172,7 +175,10 @@ class HomeController extends Controller
             ->with('moneyboxSettings', $moneyboxSettings)
             ->with('privacyoption', $privacyoption)
             ->with('amountoption', $amountoption)
-            ->with('pageTitle',$title);
+            ->with('pageTitle',$title)
+            ->with('name', $moneybox_name)
+            ->with('creator', $moneybox_creator)
+            ->with('category', $moneybox_category);
     }
 
     /**
