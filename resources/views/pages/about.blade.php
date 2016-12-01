@@ -1,5 +1,7 @@
 @extends("layouts.content")
-
+@section("navigation")
+    @include("partials.navigation")
+@endsection
 @section("page-content")
     <section class="block intro2" id="intro">
         <div class="holder">

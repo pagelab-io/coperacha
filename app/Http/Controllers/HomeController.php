@@ -163,13 +163,25 @@ class HomeController extends Controller
         } else {
             $title = "Crear mi alcancía 1/2";
         }
-        $categories = Category::all();
         $request->merge(array('path' => '/moneybox'));
         $response = $this->_settingRepository->childsOf($request);
+        $categories = Category::all();
+        $categories1 = [];
+        $categories2 = [];
+        foreach($categories as $i => $category){
+            array_push($categories1, $category);
+            if ($i == 6) break;
+        }
+
+        foreach($categories as $i => $category){
+            if ($i > 6)
+                array_push($categories2, $category);
+        }
         \Log::info($response->data);
 
         return view('moneybox.create')
-            ->with('categories', $categories)
+            ->with('categories1', $categories1)
+            ->with('categories2', $categories2)
             ->with('settings', $response->data)
             ->with('moneybox', $moneybox)
             ->with('moneyboxSettings', $moneyboxSettings)
@@ -178,7 +190,7 @@ class HomeController extends Controller
             ->with('pageTitle',$title)
             ->with('name', $moneybox_name)
             ->with('creator', $moneybox_creator)
-            ->with('category', $moneybox_category);
+            ->with('categorySelected', $moneybox_category);
     }
 
     /**

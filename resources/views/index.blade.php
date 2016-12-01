@@ -1,4 +1,7 @@
 @extends("layouts.master")
+@section("navigation")
+    @include("partials.navigation2")
+@endsection
 @section("content")
     <!-- Cover -->
     <div class="block cover img-category">
@@ -40,8 +43,12 @@
                                 <input id="nombre_creador" name="beneficiario" class="element-moneybox"type="text" placeholder="Ejemplo: Martín"/>
                                 <label for="alcancia" class="element-moneybox">Nombre de la alcancía</label>
                                 <input id="nombre_alcancia" name="alcancia" class="element-moneybox" type="text" placeholder="Ejemplo: Fiesta despedida Martín"/>
-                                <a class="button btn btn-primary button-moneybox-create"
+                                @if(Auth::guest())
+                                    <a class="button btn btn-primary button-moneybox-create"
                                                                ng-click="showModal('/moneybox/create')" id="btn-moneybox-form">Crear mi Alcancía</a>
+                                @else
+                                    <a class="button btn btn-primary button-moneybox-create" id="btn-moneybox2-form">Crear mi Alcancía</a>
+                                @endif
                             </form>
                         </div>
                     </div>
@@ -326,6 +333,7 @@
             });
         });
         var button_create = $('#btn-moneybox-form');
+        var button_create2 = $('#btn-moneybox2-form'); // when logged
         button_create.click(function(){
             var nombre_creador = $('#nombre_creador').val();
             var nombre_alcancia = $('#nombre_alcancia').val();
@@ -333,6 +341,11 @@
             setTimeout(function(){
                 login_modal.attr("data-redirect-to","/moneybox/create/create/"+nombre_alcancia+"/"+nombre_creador+"/"+categories.val());
             }, 500);
+        });
+        button_create2.click(function(){
+            var nombre_creador = $('#nombre_creador').val();
+            var nombre_alcancia = $('#nombre_alcancia').val();
+            window.location = "/moneybox/create/create/"+nombre_alcancia+"/"+nombre_creador+"/"+categories.val();
         });
     </script>
 @endsection

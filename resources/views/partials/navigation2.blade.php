@@ -1,9 +1,9 @@
 <!-- Main navigation -->
-<nav class="navigation">
+<nav class="navigation2">
     <div class="container-fluid">
         <!-- Logo -->
         <a class="logo" href="{{ route('pages.index') }}">
-            <img class="img-responsive" src="/images/logo.png" alt="Coperacha | Recauda Dinero Entre Amigos">
+            <img class="img-responsive" src="/images/logo_transparente.png" alt="Coperacha | Recauda Dinero Entre Amigos">
         </a>
 
         <!-- List -->
@@ -15,6 +15,10 @@
                 <li><a class="button create-new {{Route::current()->getName() == 'user.create' ? 'active' : ''}}" href="{{route('user.create')}}">Registro</a></li>
                 <li><a href="#" ng-click="showModal()">Entrar</a></li>
             @else
+                <li>
+                    <a class="{{Route::current()->getName() == 'pages.contact' ? 'active' : ''}}"
+                       href="{{route('pages.contact')}}">Contacto</a>
+                </li>
                 <li>
                     <a class="{{Route::current()->getName() == 'moneybox.dashboard' ? 'active' : ''}}"
                        href="{{route('moneybox.dashboard')}}">Mis Alcancías</a>

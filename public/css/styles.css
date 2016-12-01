@@ -51,9 +51,9 @@ hr {
 }
 
 /* Navigation */
-.navigation {
-    /*background-color: #FF5000;*/
-    background-color: transparent;
+.navigation,
+.navigation2{
+    background-color: #FF5000;
     height: 60px;
     overflow: hidden;
     padding: 1px 0;
@@ -64,33 +64,43 @@ hr {
     z-index: 1;
 }
 
+.navigation2{
+    background-color: transparent;
+}
+
 /* Navigation - Logo */
+.navigation2 .logo,
 .navigation .logo {
     display: block;
     float: left;
     margin-left: 10px;
 }
 
-.navigation .logo img {
+.navigation2 .logo img
+.navigation .logo img{
     max-height: 60px;
 }
 
 /* Navigation - List */
-.navigation .list {
+.navigation .list,
+.navigation2 .list{
     list-style: none;
     margin: 0px 0 0;
     padding: 0;
     text-align: right;
 }
 
+.navigation2 .list li,
 .navigation .list li {
     display: inline-block;
     margin: 0px -3px 0px 0px;
     vertical-align: middle;
 }
 
+.navigation2 .list li:last-child,
 .navigation .list li:last-child { margin-right: 0; }
 
+.navigation2 .list li a,
 .navigation .list li a {
     color: #FFFFFF;
     display: block;
@@ -108,15 +118,18 @@ hr {
     background: #f35106;
 }
 
+.navigation2 .list li .logged .logged-user,
 .navigation .list li .logged .logged-user {
     line-height: 14px;
     margin-bottom: 5px;
 }
 
+.navigation2 .list li .logged a:hover,
 .navigation .list li .logged a:hover {
     background: transparent;
 }
 
+.navigation2 .list li a.button,
 .navigation .list li a.button {
     background-color: #26C5E5;
     border-radius: 5px;
@@ -125,10 +138,13 @@ hr {
     padding: 13px 22px;
 }
 
+.navigation2 .list li a.button.create-new,
 .navigation .list li a.button.create-new {
     font-family: verbsemibold;
 }
 
+.navigation2 .list li a.button.create-new.active,
+.navigation2 .list li a.button.create-new:hover,
 .navigation .list li a.button.create-new:hover,
 .navigation .list li a.button.create-new.active {
     color: white;
@@ -136,6 +152,7 @@ hr {
 }
 
 /* Navigation - Toggle Button */
+.navigation2 .navigation-toggle,
 .navigation .navigation-toggle{
     background-color: transparent;
     border: none;
@@ -145,6 +162,7 @@ hr {
     width: 50px;
 }
 
+.navigation2 .navigation-toggle .bar,
 .navigation .navigation-toggle .bar{
     background-color: #fff;
     border-radius: 5px;
@@ -154,6 +172,7 @@ hr {
     width: 100%;
 }
 
+.navigation2 .navigation-toggle .bar:last-child,
 .navigation .navigation-toggle .bar:last-child{
     margin-bottom: 0;
 }
@@ -666,6 +685,7 @@ hr {
 .content-header {
     background-color: #51B7CD;
     padding: 19px 0;
+    margin-top: 60px;
 }
 
 .content-header h1 {

@@ -1,5 +1,7 @@
 @extends("layouts.content")
-
+@section("navigation")
+    @include("partials.navigation")
+@endsection
 @section("page-content")
     <section class="block moneybox-view">
         <div class="holder" ng-controller="moneyboxController">
@@ -20,23 +22,47 @@
                             <p class="text-info">Llena por favor los siguientes datos:</p>
                         </div>
                         <div class="form-group categories">
-                            <label>Selecciona la categoría para la alcancía:</label>
+                           <label>Selecciona la categoría para la alcancía:</label>
                            <div class="category-items">
-                                @foreach($categories as $category)
-                                    <label for="chk-{{$category->id}}" class="category-item">
-                                        <img src="{{$category->path}}" alt="{{$category->name}}">
-                                        @if ($moneybox && $moneybox->category_id == $category->id)
-                                            <div class="label"><input disabled id="chk-{{$category->id}}" type="radio" name="category" ng-model="category_id" ng-init="category_id={{$category->id}}" value="{{$category->id}}"> {{$category->name}}</div>
-                                        @else
-                                            @if($moneybox)
-                                                <div class="label"><input disabled id="chk-{{$category->id}}" type="radio" name="category" ng-model="category_id" value="{{$category->id}}"> {{$category->name}}</div>
-                                            @else
-                                                <div class="label"><input id="chk-{{$category->id}}"type="radio" name="category" ng-model="category_id" value="{{$category->id}}"> {{$category->name}}</div>
-                                            @endif
-                                        @endif
-                                    </label>
-                                @endforeach
-                            </div>
+                               @foreach($categories1 as $i => $category)
+                                   <label for="chk-{{$category->id}}" class="category-item">
+                                       <img src="{{$category->path}}" alt="{{$category->name}}">
+                                       @if ($moneybox && $moneybox->category_id == $category->id)
+                                           <div class="label"><input disabled id="chk-{{$category->id}}" type="radio" name="category" ng-model="category_id" ng-init="category_id={{$category->id}}" value="{{$category->id}}"> {{$category->name}}</div>
+                                       @else
+                                           @if($moneybox)
+                                               <div class="label"><input disabled id="chk-{{$category->id}}" type="radio" name="category" ng-model="category_id" value="{{$category->id}}"> {{$category->name}}</div>
+                                           @else
+                                               @if($categorySelected != '' && $categorySelected == $category->id)
+                                                    <div class="label"><input id="chk-{{$category->id}}"type="radio" name="category" ng-model="category_id" ng-init="category_id={{$category->id}}" value="{{$category->id}}"> {{$category->name}}</div>
+                                               @else
+                                                    <div class="label"><input id="chk-{{$category->id}}"type="radio" name="category" ng-model="category_id" value="{{$category->id}}"> {{$category->name}}</div>
+                                               @endif
+                                           @endif
+                                       @endif
+                                   </label>
+                               @endforeach
+                           </div>
+                           <div class="category-items">
+                                @foreach($categories2 as $i => $category)
+                                   <label for="chk-{{$category->id}}" class="category-item">
+                                       <img src="{{$category->path}}" alt="{{$category->name}}">
+                                       @if ($moneybox && $moneybox->category_id == $category->id)
+                                           <div class="label"><input disabled id="chk-{{$category->id}}" type="radio" name="category" ng-model="category_id" ng-init="category_id={{$category->id}}" value="{{$category->id}}"> {{$category->name}}</div>
+                                       @else
+                                           @if($moneybox)
+                                               <div class="label"><input disabled id="chk-{{$category->id}}" type="radio" name="category" ng-model="category_id" value="{{$category->id}}"> {{$category->name}}</div>
+                                           @else
+                                               @if($categorySelected != '' && $categorySelected == $category->id)
+                                                    <div class="label"><input id="chk-{{$category->id}}"type="radio" name="category" ng-model="category_id" ng-init="category_id={{$category->id}}" value="{{$category->id}}"> {{$category->name}}</div>
+                                               @else
+                                                    <div class="label"><input id="chk-{{$category->id}}"type="radio" name="category" ng-model="category_id" value="{{$category->id}}"> {{$category->name}}</div>
+                                               @endif
+                                           @endif
+                                       @endif
+                                   </label>
+                               @endforeach
+                           </div>
                         </div>
 
                         <div class="row">

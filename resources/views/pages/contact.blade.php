@@ -1,5 +1,7 @@
 @extends("layouts.content")
-
+@section("navigation")
+    @include("partials.navigation")
+@endsection
 @section("page-content")
 
     <!-- Contact Layout -->

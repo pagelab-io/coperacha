@@ -1,5 +1,7 @@
 @extends("layouts.content")
-
+@section("navigation")
+    @include("partials.navigation")
+@endsection
 @section("page-content")
     <section class="block register" id="register" ng-controller="registerController">
         <div class="holder">
