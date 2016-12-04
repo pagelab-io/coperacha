@@ -50,7 +50,17 @@ var general = {
      * Fires on scrolling.
      * @private
      */
-    _onScroll: function() {  },
+    _onScroll: function() {
+        var sTop  = general.$window.scrollTop(),
+            limit = 50;
+
+        if (sTop > limit) {
+            general.Navigation.toggleMiniClass(true);
+        } else {
+            general.Navigation.toggleMiniClass(false);
+        }
+
+    },
 
     /**
      * Verify ir URL has a hashtag.
@@ -169,12 +179,12 @@ var general = {
          * Initialize page part.
          */
         init: function() {
-            this.elem = $('.navigation');
 
-            if(this.elem.length) {
+            this.elem = $('.navigation2');
+
+            if (this.elem.length) {
                 var _this = this;
                 this.navigationToggleBtn = this.elem.find('.navigation-toggle');
-
                 this.navigationToggleBtn.on('click', function() { _this.openMobileNavigation(); });
             }
         },
@@ -196,6 +206,18 @@ var general = {
 
                 this.navigationToggleBtn.addClass('mobile-navigation-open');
 
+            }
+        },
+
+        /**
+         * Add or remove mini class.
+         * @param {boolean} band
+         */
+        toggleMiniClass: function(band) {
+            if (band) {
+                this.elem.addClass('mini');
+            } else {
+                this.elem.removeClass('mini');
             }
         }
     },

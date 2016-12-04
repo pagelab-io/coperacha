@@ -62,10 +62,15 @@ hr {
     top: 0;
     width: 100%;
     z-index: 1;
+    transition: background-color 420ms;
 }
 
 .navigation2{
     background-color: transparent;
+}
+
+.navigation2.mini {
+    background-color: #FF5000;
 }
 
 /* Navigation - Logo */
