@@ -23,8 +23,9 @@
                             <div class="moneybox-form-title">
                                 MOTIVO DE LA ALCANCÍA
                             </div>
-                            <form>
-                                <select name="categories" id="moneybox-categories" class="element-moneybox">
+                            <form class="form-create-moneybox" data-mode="{{Auth::guest() ? 'guest' : 'logged'}}">
+                                <div class="form-group">
+                                    <select name="categories" id="moneybox-categories" class="element-moneybox">
                                     <option value="2" selected>Fiesta</option>
                                     <option value="1">Cumpleaños</option>
                                     <option value="4">Boda</option>
@@ -39,16 +40,29 @@
                                     <option value="13">Café</option>
                                     <option value="7">Otro</option>
                                 </select>
-                                <label for="beneficiario" class="element-moneybox">Nombre del creador</label>
-                                <input id="nombre_creador" name="beneficiario" class="element-moneybox"type="text" placeholder="Ejemplo: Martín"/>
-                                <label for="alcancia" class="element-moneybox">Nombre de la alcancía</label>
-                                <input id="nombre_alcancia" name="alcancia" class="element-moneybox" type="text" placeholder="Ejemplo: Fiesta despedida Martín"/>
-                                @if(Auth::guest())
-                                    <a class="button btn btn-primary button-moneybox-create"
-                                                               ng-click="showModal('/moneybox/create')" id="btn-moneybox-form">Crear mi Alcancía</a>
-                                @else
-                                    <a class="button btn btn-primary button-moneybox-create" id="btn-moneybox2-form">Crear mi Alcancía</a>
-                                @endif
+                                </div>
+                                <div class="form-group">
+                                    <label for="beneficiario" class="element-moneybox">Nombre del creador</label>
+                                    <input id="nombre_creador"
+                                           name="beneficiario"
+                                           class="element-moneybox"
+                                           type="text"
+                                           data-clue="Requerido"
+                                           placeholder="Ejemplo: Martín"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="alcancia" class="element-moneybox">Nombre de la alcancía</label>
+                                    <input id="nombre_alcancia"
+                                           name="alcancia"
+                                           class="element-moneybox"
+                                           data-clue="Requerido"
+                                           type="text"
+                                           placeholder="Ejemplo: Fiesta despedida Martín"/>
+                                </div>
+                                <button id="btn-moneybox-form"
+                                        class="button btn btn-primary button-moneybox-create">
+                                    Crear mi alcancía
+                                </button>
                             </form>
                         </div>
                     </div>
@@ -311,41 +325,5 @@
     <script src="{{asset('/js/share.js')}}"></script>
     <script src="{{asset('/js/slider.js')}}"></script>
     <script src="{{asset('/js/index.js')}}"></script>
-    <script>
-        var categories = $('#moneybox-categories');
-        var img_category = $('.img-category');
-        categories.change(function(){
-            var url = '';
-            switch(categories.val()){
-                case "1": url='url(/images/fondo_1.jpg) 0 -290px no-repeat'; break;
-                case "2": url='url(/images/fondo_2.png) 0 -290px no-repeat'; break;
-                case "3": url='url(/images/fondo_3.jpg) 0 -290px no-repeat'; break;
-                case "4": url='url(/images/fondo_4.jpg) 0 -290px no-repeat'; break;
-                case "5": url='url(/images/fondo_5.jpg) 0 -290px no-repeat'; break;
-                case "6": url='url(/images/fondo_6.jpg) 0 -290px no-repeat'; break;
-                case "8": url='url(/images/fondo_8.jpg) 0 -290px no-repeat'; break;
-                case "9": url='url(/images/fondo_9.jpg) 0 -290px no-repeat'; break;
-                default: url='url(/images/fondo_1.png) 0 -290px no-repeat'; break;
-            }
-            img_category.css({
-                'background': url,
-                'background-size': 'cover'
-            });
-        });
-        var button_create = $('#btn-moneybox-form');
-        var button_create2 = $('#btn-moneybox2-form'); // when logged
-        button_create.click(function(){
-            var nombre_creador = $('#nombre_creador').val();
-            var nombre_alcancia = $('#nombre_alcancia').val();
-            var login_modal = $("#login-modal");
-            setTimeout(function(){
-                login_modal.attr("data-redirect-to","/moneybox/create/create/"+nombre_alcancia+"/"+nombre_creador+"/"+categories.val());
-            }, 500);
-        });
-        button_create2.click(function(){
-            var nombre_creador = $('#nombre_creador').val();
-            var nombre_alcancia = $('#nombre_alcancia').val();
-            window.location = "/moneybox/create/create/"+nombre_alcancia+"/"+nombre_creador+"/"+categories.val();
-        });
-    </script>
+    <script src="{{asset('/js/validate.js')}}"></script>
 @endsection

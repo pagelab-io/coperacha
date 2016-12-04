@@ -1755,13 +1755,12 @@ section.block.reset-password {
 }
 
 .moneybox-form > form > .button-moneybox-create{
-    width: 301px;
-    height: 5px;
+    display: block;
     border-radius: 0;
     font-size: 17px;
-    margin: 25px auto !important;
-    padding-bottom: 30px;
-    display: block;
+    margin: 0px auto;
+    padding: 15px 0;
+    width: 301px;
 }
 
 .element-moneybox {
@@ -1789,7 +1788,21 @@ label.element-moneybox{
     outline: 1px solid red;
 }
 
-.moneybox-mobile{
+.moneybox-mobile {
     text-align: center;
     margin-top: 150px;;
+}
+
+.form-create-moneybox {
+
+}
+
+.form-create-moneybox .form-group {
+    position: relative;
+}
+
+.form-create-moneybox .error-message {
+    position: absolute;
+    top: 0px;
+    right: 45px;
 }
