@@ -35,11 +35,9 @@
     /* Block Cover */
     .block.cover {
         background: url(/images/fondo_2.png) no-repeat;
-        padding: 65px 0 65px;
+        padding-top: 65px;
         min-height: 450px;
         background-size: cover !important;
-        background-position-x : 0 !important;
-        background-position-y : -100px !important;
     }
 
     .block.cover .graphics {

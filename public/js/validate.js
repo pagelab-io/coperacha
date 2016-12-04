@@ -24,17 +24,17 @@ var ValidateMForm = {
         $('#moneybox-categories').change(function(){
             var url = '';
             switch ($(this).val()) {
-                case "1": url='url(/images/fondo_1.jpg) 0 -290px no-repeat'; break;
-                case "2": url='url(/images/fondo_2.png) 0 -290px no-repeat'; break;
-                case "3": url='url(/images/fondo_3.jpg) 0 -290px no-repeat'; break;
-                case "4": url='url(/images/fondo_4.jpg) 0 -290px no-repeat'; break;
-                case "5": url='url(/images/fondo_5.jpg) 0 -290px no-repeat'; break;
-                case "6": url='url(/images/fondo_6.jpg) 0 -290px no-repeat'; break;
-                case "8": url='url(/images/fondo_8.jpg) 0 -290px no-repeat'; break;
-                case "9": url='url(/images/fondo_9.jpg) 0 -290px no-repeat'; break;
-                default: url='url(/images/fondo_1.png) 0 -290px no-repeat'; break;
+                case "1": url='url(/images/fondo_1.jpg) 0 -255px no-repeat'; break;
+                case "2": url='url(/images/fondo_2.png) 0 -255px no-repeat'; break;
+                case "3": url='url(/images/fondo_3.jpg) 0 -255px no-repeat'; break;
+                case "4": url='url(/images/fondo_4.jpg) 0 -255px no-repeat'; break;
+                case "5": url='url(/images/fondo_5.jpg) 0 -255px no-repeat'; break;
+                case "6": url='url(/images/fondo_6.jpg) 0 -255px no-repeat'; break;
+                case "8": url='url(/images/fondo_8.jpg) 0 -255px no-repeat'; break;
+                case "9": url='url(/images/fondo_9.jpg) 0 -255px no-repeat'; break;
+                default: url='url(/images/fondo_2.png) 0 -255px no-repeat'; break;
             }
-
+            console.log(url);
             $('.img-category').css({
                 'background': url,
                 'background-size': 'cover'

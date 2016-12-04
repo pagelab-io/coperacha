@@ -71,6 +71,7 @@ hr {
 
 .navigation2.mini {
     background-color: #FF5000;
+    z-index: 100;
 }
 
 /* Navigation - Logo */
@@ -305,13 +306,16 @@ hr {
     text-align: center;
 }
 
+.block .header-block .title.white{
+    color: white;
+}
 
 /* Block Cover */
 .block.cover {
-    background: url(/images/fondo_2.png) 0 -290px no-repeat;
+    background: url(/images/fondo_2.png) 0 -255px no-repeat;
     background-size: cover;
     color: #fff;
-    padding: 105px 0 100px;
+    padding: 100px 0 100px;
     overflow: hidden;
     min-height: 610px;
 }
@@ -512,6 +516,22 @@ hr {
 /* Block Payment Methods */
 .block.payment-methods {
     padding: 60px 0 75px;
+}
+
+.block.steps {
+    height: 70px;
+    padding-top: 25px;
+}
+
+.steps-text {
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.steps-text > span {
+    position: absolute;
+    left: 0;
 }
 
 .block.payment-methods.inverse {
@@ -1812,7 +1832,49 @@ label.element-moneybox{
 }
 
 .g-icon-party {
+    background: url("../images/category/celebrations.png");
+    background-size: 18px;
+    height: 18px;
+    width: 18px;
+}
+
+.g-icon-baby {
     background: url("../images/category/baby-shawer.png");
+    background-size: 18px;
+    height: 18px;
+    width: 18px;
+}
+
+.g-icon-birthday {
+    background: url("../images/category/birthday.png");
+    background-size: 18px;
+    height: 18px;
+    width: 18px;
+}
+
+.g-icon-emergencies {
+    background: url("../images/category/emergencies.png");
+    background-size: 18px;
+    height: 18px;
+    width: 18px;
+}
+
+.g-icon-others {
+    background: url("../images/category/others.png");
+    background-size: 18px;
+    height: 18px;
+    width: 18px;
+}
+
+.g-icon-travels {
+    background: url("../images/category/travels.png");
+    background-size: 18px;
+    height: 18px;
+    width: 18px;
+}
+
+.g-icon-wedding {
+    background: url("../images/category/wedding.png");
     background-size: 18px;
     height: 18px;
     width: 18px;

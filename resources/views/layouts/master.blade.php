@@ -41,10 +41,10 @@
     <meta name="twitter:url" content="http://coperacha.com.mx">
     <meta name="twitter:image" content="image-url">
     <meta name="twitter:card" content="summary">-->
-    <!-- Bootstrap Styles
+    <!-- Bootstrap Styles -->
 
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"> -->
-    <link href="{{asset('/css/bootstrap.css')}}" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
 
     <!-- Page Styles -->
     {{--<link href="{{ elixir('build/css/styles.min.css') }}" rel="stylesheet">--}}

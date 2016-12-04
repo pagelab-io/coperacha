@@ -38,18 +38,18 @@
                                     <option data-icon="g-icon-party" value="2" selected>
                                         Fiesta
                                     </option>
-                                    <option data-icon="g-icon-party" value="1">Cumpleaños</option>
-                                    <option data-icon="g-icon-party" value="4">Boda</option>
+                                    <option data-icon="g-icon-birthday" value="1">Cumpleaños</option>
+                                    <option data-icon="g-icon-wedding" value="4">Boda</option>
                                     <option data-icon="g-icon-party" value="8">Despedida de solter@</option>
-                                    <option value="3">Viaje de fin de semana</option>
-                                    <option value="9">Proyecto</option>
-                                    <option value="6">Solidaridad</option>
-                                    <option value="10">Asociación</option>
-                                    <option value="11">Funeral</option>
-                                    <option value="5">Recien Nacido</option>
-                                    <option value="12">Compañeros de piso</option>
-                                    <option value="13">Café</option>
-                                    <option value="7">Otro</option>
+                                    <option data-icon="g-icon-travels" value="3">Viaje de fin de semana</option>
+                                    <option data-icon="g-icon-others" value="9">Proyecto</option>
+                                    <option data-icon="g-icon-emergencies" value="6">Solidaridad</option>
+                                    <option data-icon="g-icon-others" value="10">Asociación</option>
+                                    <option data-icon="g-icon-others" value="11">Funeral</option>
+                                    <option data-icon="g-icon-baby" value="5">Recien Nacido</option>
+                                    <option data-icon="g-icon-party" value="12">Compañeros de piso</option>
+                                    <option data-icon="g-icon-others" value="13">Café</option>
+                                    <option data-icon="g-icon-others" value="7">Otro</option>
                                 </select>
                                 </div>
                                 <div class="form-group">
@@ -88,54 +88,22 @@
             <!--<img src={{asset("/images/google_play.png")}} class="google-play-button"/>-->
         </div>
     </div>
-    <!-- Section How it Works -->
-    <section class="block how-it-works" id="como-funciona">
+    <!-- Section Payment Methods -->
+    <section class="block steps">
         <div class="holder">
             <div class="container-fluid">
-                <div class="header-block">
-                    <h2 class="title">¿Cómo funciona?</h2>
-                </div>
                 <div class="content-block">
                     <div class="row">
-                        <div class="col-sm-3 col-xs-6 align-top">
-                            <div class="card">
-                                <div class="image">
-                                    <img class="img-responsive center-block" src="/images/how-it-works-card-1.png" alt="">
-                                </div>
-                                <div class="name">
-                                    <a class="button" ng-click="showModal('/moneybox/create')">1. Crea tu Alcancía</a>
-                                </div>
-                                <div class="desc">Es gratis y te llevará un minuto crearla.</div>
+                        <div class="col-xs-4 steps-text">
+                            CREA
                             </div>
+                        <div class="col-xs-4 steps-text">
+                        <span class="glyphicon glyphicon-play"></span>
+                        RECAUDA
                         </div>
-                        <div class="col-sm-3 col-xs-6 align-top">
-                            <div class="card">
-                                <div class="image">
-                                    <img class="img-responsive center-block" src="images/how-it-works-card-2.png" alt="">
-                                </div>
-                                <div class="name"><span>2. Invita a participar</span></div>
-                                <div class="desc">Cuéntale a tus amigos por mail  o Facebook.</div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3 col-xs-6 align-top">
-                            <div class="card">
-                                <div class="image">
-                                    <img class="img-responsive center-block" src="images/how-it-works-card-3.png" alt="">
-                                </div>
-                                <div class="name"><span>3. Participa</span></div>
-                                <div class="desc">Paga de forma segura y reúne  el dinero de tus amigos.</div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-3 col-xs-6 align-top">
-                            <div class="card">
-                                <div class="image">
-                                    <img class="img-responsive center-block" src="images/how-it-works-card-4.png" alt="">
-                                </div>
-
-                                <div class="name"><span>4. Gasta</span></div>
-                                <div class="desc">Compra en nuestras tiendas asociadas o ingresa el dinero a tu cuenta. </div>
-                            </div>
+                        <div class="col-xs-4 steps-text">
+                        <span class="glyphicon glyphicon-play"></span>
+                            UTILIZA
                         </div>
                     </div>
                 </div>
@@ -146,6 +114,9 @@
     <section class="block intro" id="intro">
         <div class="holder">
             <div class="container-fluid">
+                <div class="header-block">
+                    <h2 class="title white">Alcancías para cualquier ocasión</h2>
+                </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="">
@@ -174,86 +145,60 @@
             </div>
         </div>
     </section>
-    <!-- Section Advantages -->
-    <section class="block advantages" id="ventajas">
-        <div class="holder">
-            <div class="container-fluid">
-                <div class="header-block">
-                    <h2 class="title">Ventajas de Coperacha</h2>
-                </div>
-                <div class="content-block">
-                    <div class="row">
-                        <div class="col-sm-4 col-xs-6 align-top">
-                            <div class="advantage">
-                                <div class="image">
-                                    <img src="images/advantage-1.png" alt="Fácil de Usar">
-                                </div>
-                                <div class="info">
-                                    <h4 class="name">Fácil de Usar</h4>
-                                    <div class="desc">Te permite recaudar el dinero entre varias personas en una sola alcancía.</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4 col-xs-6 align-top">
-                            <div class="advantage">
-                                <div class="image">
-                                    <img src="images/advantage-2.png" alt="Gratuito">
-                                </div>
-                                <div class="info">
-                                    <h4 class="name">Gratuito</h4>
-                                    <div class="desc">Utiliza la alcancía de manera gratuita en cualquier tienda de nuestros socios comerciales.</div>
+    <!-- Section How it Works -->
+        <section class="block how-it-works" id="como-funciona">
+            <div class="holder">
+                <div class="container-fluid">
+                    <div class="header-block">
+                        <h2 class="title">¿Cómo funciona?</h2>
+                    </div>
+                    <div class="content-block">
+                        <div class="row">
+                            <div class="col-sm-3 col-xs-6 align-top">
+                                <div class="card">
+                                    <div class="image">
+                                        <img class="img-responsive center-block" src="/images/how-it-works-card-1.png" alt="">
+                                    </div>
+                                    <div class="name">
+                                        <a class="button" ng-click="showModal('/moneybox/create')">1. Crea tu Alcancía</a>
+                                    </div>
+                                    <div class="desc">Es gratis y te llevará un minuto crearla.</div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-4 col-xs-6 align-top">
-                            <div class="advantage">
-                                <div class="image">
-                                    <img src="images/advantage-3.png" alt="Seguro">
-                                </div>
-                                <div class="info">
-                                    <h4 class="name">Seguro</h4>
-                                    <div class="desc">Nuestro sistema de pago es seguro para la aportación y transferencia de dinero. </div>
+                            <div class="col-sm-3 col-xs-6 align-top">
+                                <div class="card">
+                                    <div class="image">
+                                        <img class="img-responsive center-block" src="images/how-it-works-card-2.png" alt="">
+                                    </div>
+                                    <div class="name"><span>2. Invita a participar</span></div>
+                                    <div class="desc">Cuéntale a tus amigos por mail  o Facebook.</div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-4 col-xs-6 align-top">
-                            <div class="advantage">
-                                <div class="image">
-                                    <img src="images/advantage-4.png" alt="Personal">
-                                </div>
-                                <div class="info">
-                                    <h4 class="name">Personal</h4>
-                                    <div class="desc">Crea una descripción del objetivo de la alcancía y personalizala con una foto.</div>
+                            <div class="col-sm-3 col-xs-6 align-top">
+                                <div class="card">
+                                    <div class="image">
+                                        <img class="img-responsive center-block" src="images/how-it-works-card-3.png" alt="">
+                                    </div>
+                                    <div class="name"><span>3. Participa</span></div>
+                                    <div class="desc">Paga de forma segura y reúne  el dinero de tus amigos.</div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-4 col-xs-6 align-top">
-                            <div class="advantage">
-                                <div class="image">
-                                    <img src="images/advantage-5.png" alt="Social">
-                                </div>
-                                <div class="info">
-                                    <h4 class="name">Social</h4>
-                                    <div class="desc">Comparte en redes sociales o invita a tus amigos a participar por medio de su correo.</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4 col-xs-6 align-top">
-                            <div class="advantage">
-                                <div class="image">
-                                    <img src="images/advantage-6.png" alt="Flexible">
-                                </div>
-                                <div class="info">
-                                    <h4 class="name">Flexible</h4>
-                                    <div class="desc">Recupera el dinero como quieras: transferencia bancaria, compra un regalo o entrega el dinero al beneficiario.</div>
+
+                            <div class="col-sm-3 col-xs-6 align-top">
+                                <div class="card">
+                                    <div class="image">
+                                        <img class="img-responsive center-block" src="images/how-it-works-card-4.png" alt="">
+                                    </div>
+
+                                    <div class="name"><span>4. Gasta</span></div>
+                                    <div class="desc">Compra en nuestras tiendas asociadas o ingresa el dinero a tu cuenta. </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
     <!-- Section Testimonials -->
     <section class="block testimonials" id="testimonials">
         <div class="holder">
@@ -278,6 +223,86 @@
             </div>
         </div>
     </section>
+    <!-- Section Advantages -->
+        <section class="block advantages" id="ventajas">
+            <div class="holder">
+                <div class="container-fluid">
+                    <div class="header-block">
+                        <h2 class="title">Ventajas de Coperacha</h2>
+                    </div>
+                    <div class="content-block">
+                        <div class="row">
+                            <div class="col-sm-4 col-xs-6 align-top">
+                                <div class="advantage">
+                                    <div class="image">
+                                        <img src="images/advantage-1.png" alt="Fácil de Usar">
+                                    </div>
+                                    <div class="info">
+                                        <h4 class="name">Fácil de Usar</h4>
+                                        <div class="desc">Te permite recaudar el dinero entre varias personas en una sola alcancía.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-xs-6 align-top">
+                                <div class="advantage">
+                                    <div class="image">
+                                        <img src="images/advantage-2.png" alt="Gratuito">
+                                    </div>
+                                    <div class="info">
+                                        <h4 class="name">Gratuito</h4>
+                                        <div class="desc">Utiliza la alcancía de manera gratuita en cualquier tienda de nuestros socios comerciales.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-xs-6 align-top">
+                                <div class="advantage">
+                                    <div class="image">
+                                        <img src="images/advantage-3.png" alt="Seguro">
+                                    </div>
+                                    <div class="info">
+                                        <h4 class="name">Seguro</h4>
+                                        <div class="desc">Nuestro sistema de pago es seguro para la aportación y transferencia de dinero. </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-xs-6 align-top">
+                                <div class="advantage">
+                                    <div class="image">
+                                        <img src="images/advantage-4.png" alt="Personal">
+                                    </div>
+                                    <div class="info">
+                                        <h4 class="name">Personal</h4>
+                                        <div class="desc">Crea una descripción del objetivo de la alcancía y personalizala con una foto.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-xs-6 align-top">
+                                <div class="advantage">
+                                    <div class="image">
+                                        <img src="images/advantage-5.png" alt="Social">
+                                    </div>
+                                    <div class="info">
+                                        <h4 class="name">Social</h4>
+                                        <div class="desc">Comparte en redes sociales o invita a tus amigos a participar por medio de su correo.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-xs-6 align-top">
+                                <div class="advantage">
+                                    <div class="image">
+                                        <img src="images/advantage-6.png" alt="Flexible">
+                                    </div>
+                                    <div class="info">
+                                        <h4 class="name">Flexible</h4>
+                                        <div class="desc">Recupera el dinero como quieras: transferencia bancaria, compra un regalo o entrega el dinero al beneficiario.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     <!-- Section Payment Methods -->
     <section class="block payment-methods" id="metodos-de-pago">
         <div class="holder">
