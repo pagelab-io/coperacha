@@ -190,7 +190,7 @@ var ValidateMForm = {
 
         // If no valid show alert with error.
         if (!valid) {
-            alert('Hay campos inválidos, por favor revisa las indicaciones en rojo.');
+            console.log('Hay campos inválidos, por favor revisa las indicaciones en rojo.');
         } else {
 
             var nombre_creador = $('#nombre_creador').val();

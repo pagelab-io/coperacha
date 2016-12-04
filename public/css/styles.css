@@ -1764,9 +1764,9 @@ section.block.reset-password {
 }
 
 .element-moneybox {
-    display:block;
+    display:block !important;
     width: 301px;
-    margin: 0 auto;
+    margin: 0 auto !important;
 }
 
 select.element-moneybox,
@@ -1777,6 +1777,10 @@ select.element-moneybox > option{
     color: #B9B9C8;
     padding: 10px;
     font-size: 14px;
+}
+
+.bootstrap-select > .dropdown-toggle {
+    border: solid 1px #dbdbea !important;
 }
 
 label.element-moneybox{
@@ -1805,4 +1809,11 @@ label.element-moneybox{
     position: absolute;
     top: 0px;
     right: 45px;
+}
+
+.g-icon-party {
+    background: url("../images/category/baby-shawer.png");
+    background-size: 18px;
+    height: 18px;
+    width: 18px;
 }

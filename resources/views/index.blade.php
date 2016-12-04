@@ -1,7 +1,13 @@
 @extends("layouts.master")
+
+@section('css')
+    <link rel="stylesheet" href="{{asset("/js/vendor/bootstrap-select-1.11.2/bootstrap-select.css")}}">
+@endsection
+
 @section("navigation")
     @include("partials.navigation2")
 @endsection
+
 @section("content")
     <!-- Cover -->
     <div class="block cover img-category">
@@ -24,12 +30,17 @@
                                 MOTIVO DE LA ALCANCÍA
                             </div>
                             <form class="form-create-moneybox" data-mode="{{Auth::guest() ? 'guest' : 'logged'}}">
-                                <div class="form-group">
-                                    <select name="categories" id="moneybox-categories" class="element-moneybox">
-                                    <option value="2" selected>Fiesta</option>
-                                    <option value="1">Cumpleaños</option>
-                                    <option value="4">Boda</option>
-                                    <option value="8">Despedida de solter@</option>
+                                <div class="form-group clearfix">
+                                    <select name="categories"
+                                            id="moneybox-categories"
+                                            data-width="301px"
+                                            class="element-moneybox">
+                                    <option data-icon="g-icon-party" value="2" selected>
+                                        Fiesta
+                                    </option>
+                                    <option data-icon="g-icon-party" value="1">Cumpleaños</option>
+                                    <option data-icon="g-icon-party" value="4">Boda</option>
+                                    <option data-icon="g-icon-party" value="8">Despedida de solter@</option>
                                     <option value="3">Viaje de fin de semana</option>
                                     <option value="9">Proyecto</option>
                                     <option value="6">Solidaridad</option>
@@ -326,4 +337,11 @@
     <script src="{{asset('/js/slider.js')}}"></script>
     <script src="{{asset('/js/index.js')}}"></script>
     <script src="{{asset('/js/validate.js')}}"></script>
+    <script src="{{asset("/js/vendor/bootstrap-3.3.7/js/bootstrap.js")}}"></script>
+    <script src="{{asset("/js/vendor/bootstrap-select-1.11.2/bootstrap-select.js")}}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#moneybox-categories').selectpicker();
+        });
+    </script>
 @endsection
