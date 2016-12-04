@@ -203,7 +203,8 @@ var ValidateMForm = {
                     var path = "/moneybox/create/create/" + nombre_alcancia + "/" + nombre_creador + "/" + category;
                     login_modal.attr('data-redirect-to', path);
 
-                    // TODO Checar si funciona de esta manera porque no supe como ejecutar
+                    // TODO
+                    // Checar si funciona de esta manera porque no supe como ejecutar
                     // la directiva desde código
 
                     $('#login-modal-coperacha').fadeIn();
