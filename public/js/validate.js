@@ -34,7 +34,6 @@ var ValidateMForm = {
                 case "9": url='url(/images/fondo_9.jpg) 0 -255px no-repeat'; break;
                 default: url='url(/images/fondo_2.png) 0 -255px no-repeat'; break;
             }
-            console.log(url);
             $('.img-category').css({
                 'background': url,
                 'background-size': 'cover'
@@ -207,7 +206,7 @@ var ValidateMForm = {
                     // Checar si funciona de esta manera porque no supe como ejecutar
                     // la directiva desde código
 
-                    $('#login-modal-coperacha').fadeIn();
+                    $('#login-modal-coperacha').show();
                 }, 500);
             } else {
                 window.location = "/moneybox/create/create/" + nombre_alcancia + "/" + nombre_creador + "/" + category;
