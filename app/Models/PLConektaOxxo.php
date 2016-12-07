@@ -57,7 +57,7 @@ class PLConektaOxxo extends PLConekta implements IPLPayment{
             $this->charge = \Conekta_Charge::create(array(
                 'description'=> 'Nueva Coperacha',
                 'reference_id'=> $this->generate_uid(),
-                'amount'=> $this->toCents($request->get('amount')+$request->get('commission')),
+                'amount'=> $this->toCents($request->get('amount')),
                 'currency'=>'MXN', // MAYBE CHANGE IN FUTURE
                 'cash'=> array(
                     'type'=>'oxxo'
@@ -70,7 +70,7 @@ class PLConektaOxxo extends PLConekta implements IPLPayment{
                         array(
                             'name'=> 'Participación en alcancía - '.$moneybox->name,
                             'description'=> 'Participacion en alcancía',
-                            'unit_price'=> $this->toCents($request->get('amount')+$request->get('commission')),
+                            'unit_price'=> $this->toCents($request->get('amount')),
                             'quantity'=> 1
                         )
                     )

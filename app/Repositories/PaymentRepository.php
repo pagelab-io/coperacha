@@ -312,7 +312,7 @@ class PaymentRepository extends BaseRepository
 
                 $moneybox->collected_amount += $payment->amount;
 
-                $moneybox->commission_amount = ($payment->amount*PLConstants::PAYMENT_COMMISSION)/100;
+                $moneybox->commission_amount = ($moneybox->commission_amount*PLConstants::PAYMENT_COMMISSION)/100;
 
                 $moneybox->save();
 
@@ -452,7 +452,7 @@ class PaymentRepository extends BaseRepository
 
                         $moneybox->collected_amount += $payment->amount;
 
-                        $moneybox->commission_amount = ($payment->amount*PLConstants::PAYMENT_COMMISSION)/100;
+                        $moneybox->commission_amount = ($moneybox->collected_amount*PLConstants::PAYMENT_COMMISSION)/100;
 
                         $moneybox->save();
 
