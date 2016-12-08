@@ -125,11 +125,13 @@
                         </thead>
                         <tbody>
                             @foreach($moneybox->participants as $participant)
-                            <tr>
-                                <td>{{$participant->id}}</td>
-                                <td>{{$participant->person->name." ".$participant->person->lastname}}</td>
-                                <td><a href="{{url('/dashboard/users/'.$participant->person->user->username.'')}}">Ver más</a></td>
-                            </tr>
+                                @if($participant->active == 1)
+                                    <tr>
+                                        <td>{{$participant->id}}</td>
+                                        <td>{{$participant->person->name." ".$participant->person->lastname}}</td>
+                                        <td><a href="{{url('/dashboard/users/'.$participant->person->user->username.'')}}">Ver más</a></td>
+                                    </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>
