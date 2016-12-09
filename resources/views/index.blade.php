@@ -42,13 +42,13 @@
                                     <option data-icon="g-icon-wedding" value="4">Boda</option>
                                     <option data-icon="g-icon-party" value="8">Despedida de solter@</option>
                                     <option data-icon="g-icon-travels" value="3">Viaje de fin de semana</option>
-                                    <option data-icon="g-icon-others" value="9">Proyecto</option>
+                                    <option data-icon="g-icon-proyecto" value="9">Proyecto</option>
                                     <option data-icon="g-icon-emergencies" value="6">Solidaridad</option>
-                                    <option data-icon="g-icon-others" value="10">Asociación</option>
-                                    <option data-icon="g-icon-others" value="11">Funeral</option>
+                                    <option data-icon="g-icon-asociacion" value="10">Asociación</option>
+                                    <option data-icon="g-icon-funeral" value="11">Funeral</option>
                                     <option data-icon="g-icon-baby" value="5">Recien Nacido</option>
                                     <option data-icon="g-icon-party" value="12">Compañeros de piso</option>
-                                    <option data-icon="g-icon-others" value="13">Café</option>
+                                    <option data-icon="g-icon-cafe" value="13">Café</option>
                                     <option data-icon="g-icon-others" value="7">Otro</option>
                                 </select>
                                 </div>

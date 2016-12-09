@@ -1879,3 +1879,31 @@ label.element-moneybox{
     height: 18px;
     width: 18px;
 }
+
+.g-icon-funeral {
+    background: url("../images/category/funeral.png");
+    background-size: 18px;
+    height: 18px;
+    width: 18px;
+}
+
+.g-icon-asociacion {
+    background: url("../images/category/asociacion.png");
+    background-size: 18px;
+    height: 18px;
+    width: 18px;
+}
+
+.g-icon-cafe {
+    background: url("../images/category/cafe.png");
+    background-size: 18px;
+    height: 18px;
+    width: 18px;
+}
+
+.g-icon-proyecto {
+    background: url("../images/category/proyecto.png");
+    background-size: 18px;
+    height: 18px;
+    width: 18px;
+}

@@ -32,6 +32,10 @@ var ValidateMForm = {
                 case "6": url='url(/images/fondo_6.jpg) 0 -255px no-repeat'; break;
                 case "8": url='url(/images/fondo_8.jpg) 0 -255px no-repeat'; break;
                 case "9": url='url(/images/fondo_9.jpg) 0 -255px no-repeat'; break;
+                case "10": url='url(/images/fondo_10.jpg) 0 -120px no-repeat'; break;
+                case "11": url='url(/images/fondo_11.jpg) 0 -255px no-repeat'; break;
+                case "12": url='url(/images/fondo_12.jpg) 0 0 no-repeat'; break;
+                case "13": url='url(/images/fondo_13.jpg) 0 -200px no-repeat'; break;
                 default: url='url(/images/fondo_2.png) 0 -255px no-repeat'; break;
             }
             $('.img-category').css({
