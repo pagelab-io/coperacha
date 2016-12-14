@@ -65,9 +65,9 @@ hr {
     transition: background-color 420ms;
 }
 
-.navigation2{
+/*.navigation2{
     background-color: transparent;
-}
+}*/
 
 .navigation2.mini {
     background-color: #FF5000;
