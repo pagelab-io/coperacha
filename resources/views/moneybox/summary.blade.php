@@ -108,7 +108,7 @@
     <script src="{{asset('/js/slider.js')}}"></script>
     <script>
         $('.slider').slider({
-            slideSpeed: 5000,
+            slideSpeed: 500,
             play: 5000,
             preload: true,
             withPagination: false,
