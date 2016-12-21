@@ -63,11 +63,16 @@
                                     <img src="/images/icon-spei.png">
                                 </label>
                             </div>
+                            <div class="radio">
+                                <label for="payment-card"><input id="payment-card" ng-model="paymentMethod" type="radio" value="T">
+                                    <img src="/images/card_payment.png" width="60" height="32">
+                                </label>
+                            </div>
                         </div>
 
                         <div class="form-group clearfix">
                             <div class="clearfix">
-                                <button class="pull-right btn btn-primary small" ng-click="doPayment()">Realizar Pago</button>
+                                <button class="pull-right btn btn-primary small" ng-click="validatePaymentMethod()">Realizar Pago</button>
                             </div>
                             <div class="small-text">*Al proceder al pago aceptas nuestros términos y condiciones de uso</div>
                         </div>
@@ -103,11 +108,12 @@
     <script src="{{asset('/js/slider.js')}}"></script>
     <script>
         $('.slider').slider({
-            slideSpeed: 500,
+            slideSpeed: 5000,
             play: 5000,
             preload: true,
             withPagination: false,
             withNavigation: false
         });
     </script>
+    <script type="text/javascript" src="https://conektaapi.s3.amazonaws.com/v0.3.2/js/conekta.js"></script>
 @endsection

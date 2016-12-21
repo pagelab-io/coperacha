@@ -12,6 +12,7 @@ class PLConstants {
     const PAYMENT_OXXO = 'O';
     const PAYMENT_SPEI = 'S';
     const PAYMENT_PAYPAL = 'P';
+    const PAYMENT_CARD = 'T';
     const PAYMENT_PENDING = 'PENDING';
     const PAYMENT_CANCELED = 'CANCELED';
     const PAYMENT_PAYED = 'PAYED';

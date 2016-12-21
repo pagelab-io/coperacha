@@ -121,7 +121,7 @@ function Utils()
                 _this.hideAlert(true);
             });
         }
-        
+
         document.addEventListener('keyup', function(e){
             if (e.keyCode == 27) {
                 if (document.getElementById('alert-modal-coperacha').style.display == 'block' && document.getElementById('login-modal-coperacha').style.display == 'block') {
@@ -152,6 +152,43 @@ function Utils()
         document.getElementById('alert-content').innerHTML="" +
         "<p>Uno de los campos es inválido, verifica que la información es correcta : <br><b>"+message+"<b><p>";
         this.showAlert();
+    };
+
+    this.setPaymentCardForm = function()
+    {
+        this.setAlertTitle("Datos de tarjeta");
+        document.getElementById('alert-content').innerHTML = ''+
+            '<form id="card-form">'+
+                '<span class="card-errors"></span>'+
+                '<div class="form-row">'+
+                    '<label>'+
+                        '<span class="col-xs-12 col-sm-6">Nombre del tarjetahabiente</span>'+
+                        '<input class="col-xs-12 col-sm-6" type="text" data-conekta="card[name]" placeholder="Ejemplo: Martín Hernandez" ng-model="card_name"/>'+
+                    '</label>'+
+                '</div>'+
+                '<div class="form-row">'+
+                    '<label>'+
+                        '<span class="col-xs-12 col-sm-6">Número de tarjeta de crédito/débito</span>'+
+                        '<input class="col-xs-12 col-sm-6" type="number" data-conekta="card[number]" placeholder="No. de la tarjeta (16 digitos)"/>'+
+                    '</label>'+
+                '</div>'+
+                '<div class="form-row">'+
+                    '<label>'+
+                        '<span class="col-xs-12 col-sm-6" >CVC</span>'+
+                        '<input class="col-xs-12 col-sm-6" type="number" size="4" data-conekta="card[cvc]" placeholder="No. CVC (3 digitos)"/>'+
+                    '</label>'+
+                    '</div>'+
+                    '<div class="form-row">'+
+                    '<label>'+
+                        '<span  class="col-xs-12 col-sm-6">Fecha de expiración (MM/AAAA)</span>'+
+                        '<input class="col-xs-5 col-sm-2" type="number" data-conekta="card[exp_month]" placeholder="01"/>'+
+                        '<span  class="col-xs-1 col-sm-1">/</span>'+
+                        '<input class="col-xs-5 col-sm-3" type="number"  data-conekta="card[exp_year]" placeholder="2020"/>'+
+                    '</label>'+
+                '</div>'+
+            '</form>';
+        this.showAlert();
+        Conekta.setPublishableKey('key_H1uvmkmUNYtHN915aFyf4dg');
     };
 
     this.isNullOrEmpty = function(value){

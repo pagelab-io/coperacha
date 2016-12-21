@@ -1907,3 +1907,8 @@ label.element-moneybox{
     height: 18px;
     width: 18px;
 }
+
+/*conekta card payment*/
+.form-row > label {
+    width:  100%;
+}
