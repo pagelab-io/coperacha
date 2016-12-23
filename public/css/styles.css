@@ -82,9 +82,10 @@ hr {
     margin-left: 10px;
 }
 
-.navigation2 .logo img
+.navigation2 .logo img,
 .navigation .logo img{
-    max-height: 60px;
+    max-height: 64px;
+    height: 100%;
 }
 
 /* Navigation - List */
@@ -112,7 +113,8 @@ hr {
     display: block;
     font-family: 'verbmedium';
     font-size: 13px;
-    padding: 21px 20px;
+    padding: 23px 20px;
+    margin: 0 2px;
     text-decoration: none;
     text-transform: uppercase;
 }
@@ -730,7 +732,9 @@ hr {
 
 
 /* Faqs Layout */
-.faqs-layout { }
+.faqs-layout {
+
+}
 
 .faqs-layout .faqs {
     margin: 0 auto;
@@ -743,6 +747,7 @@ hr {
 
 .faqs-layout .faq .question {
     cursor: pointer;
+    font-style: normal;
     padding: 15px 10px;
 }
 
@@ -780,6 +785,19 @@ hr {
     padding: 0 10px 30px;
 }
 
+.faqs-layout .faq .answer em {
+    font-style: normal;
+}
+
+.faqs-layout .faq .answer .inner ul {
+    margin: 0;
+    list-style: none;
+    padding: 0;
+}
+
+.faqs-layout .faq .answer .inner ul li{
+    margin-bottom: 10px;
+}
 
 /*-----------------------------------------------------------------------------
 | Contact Form Section
