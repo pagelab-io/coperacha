@@ -144,6 +144,7 @@
                         utils.showAlert(true);
                     }
 
+
                     if (id > 0 && image.length > 0) {
                         var share = new Share();
                         share.setup({

@@ -9,7 +9,6 @@ https://gateway.godaddy.com/?regionsite=mx&pl_id=1&marketid=es-MX&isc=gt13mx81
 https://a2plcpnl0450.prod.iad2.secureserver.net:2083/cpsess5061607255/frontend/gl_paper_lantern/index.html?login=1&post_login=23739241147894
 https://a2plcpnl0450.prod.iad2.secureserver.net:2083/cpsess5061607255/frontend/gl_paper_lantern/sql/PhpMyAdmin.html
 
-
 CMS
 User: copercha
 Pass: coperacha.2016
