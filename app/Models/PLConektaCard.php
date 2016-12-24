@@ -58,11 +58,12 @@ class PLConektaCard extends PLConekta implements IPLPayment{
 
         try {
 
-            \Log::info("=== creating charge by $ ".$request->get('amount')." ===");
+            $total_amount = $request->get('amount')+$request->get('commission');
+            \Log::info("=== creating charge by $ ".$total_amount." ===");
             $this->charge = \Conekta_Charge::create(array(
                 'description'=> 'Nueva Coperacha',
                 'reference_id'=> $this->generate_uid(),
-                'amount'=> $this->toCents($request->get('amount')),
+                'amount'=> $this->toCents($total_amount),
                 'currency'=>'MXN',
                 'card' => $request->get('token'),
                 'details'=> array(
@@ -73,7 +74,7 @@ class PLConektaCard extends PLConekta implements IPLPayment{
                         array(
                             'name'=> 'Participación en alcancía - '.$moneybox->name,
                             'description'=> 'Participacion en alcancía',
-                            'unit_price'=> $this->toCents($request->get('amount')),
+                            'unit_price'=> $this->toCents($total_amount),
                             'quantity'=> 1,
                         )
                     ),
