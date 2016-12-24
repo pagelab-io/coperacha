@@ -37,6 +37,12 @@
                             <input type="hidden" ng-init="amount='{{$amount}}'" ng-model="amount">
                         </div>
 
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-4"><label for="comission">Comisión: </label></div>
+                            <div class="col-xs-12 col-sm-8"><input id="comission"  readonly type="text" value="${{number_format(\App\Utilities\PLUtils::getCommission($amount), 2)}} MXN"></div>
+                            <input type="hidden" ng-init="commission='{{\App\Utilities\PLUtils::getCommission($amount)}}'" ng-model="commission">
+                        </div>
+
                         <div class="form-group">
                             <a class="btn-link btn-edit" href="{{url('moneybox/join/'.$moneybox->url)}}">
                                 <span class="icon-edit"></span>

@@ -103,7 +103,7 @@
                                               rows="4"
                                               name="emails"
                                               v-model="emails"
-                                              placeholder="Ejemplo: participante1@coperacha.com.mx;participante2@coperacha.com.mx"></textarea>
+                                              placeholder="Ej: participante1@coperacha.com.mx; participante2@coperacha.com.mx"></textarea>
                                 </div>
                                 <div class="form-group clearfix">
                                     <div class="pull-right">

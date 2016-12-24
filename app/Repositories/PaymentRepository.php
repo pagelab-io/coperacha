@@ -159,7 +159,7 @@ class PaymentRepository extends BaseRepository
                 $payment->status = PLConstants::PAYMENT_PAYED;
                 $payment->save();
                 $moneybox->collected_amount += $payment->amount;
-                $moneybox->commission_amount = ($moneybox->commission_amount*PLConstants::PAYMENT_COMMISSION)/100;
+                $moneybox->commission_amount = $payment->commission;
                 $moneybox->save();
 
                 //update participant status
@@ -213,7 +213,7 @@ class PaymentRepository extends BaseRepository
             catch(\Exception $ex) { throw new \Exception('Unable to find moneybox', -1, $ex); }
             \Log::info("=== Moneybox: ".$moneybox." ===");
             // DoExpressCheckout
-            $doExpress = $this->_paypal->checkOut('DoExpressCheckoutPayment', $request, array('amount' => $payment->amount, 'moneyboxurl' => $moneybox->url));
+            $doExpress = $this->_paypal->checkOut('DoExpressCheckoutPayment', $request, array('amount' => $payment->amount, 'moneyboxurl' => $moneybox->url, 'commission' => $payment->commission));
             if (is_array($doExpress)) {
                 if ($doExpress['success'] == 1) {
                     try {
@@ -221,7 +221,7 @@ class PaymentRepository extends BaseRepository
                         $payment->status = PLConstants::PAYMENT_PAYED;
                         $payment->save();
                         $moneybox->collected_amount += $payment->amount;
-                        $moneybox->commission_amount = ($moneybox->collected_amount*PLConstants::PAYMENT_COMMISSION)/100;
+                        $moneybox->commission_amount += $payment->commission;
                         $moneybox->save();
                         //update participant status
                         \Log::info("=== Searching participant ===");
@@ -385,6 +385,7 @@ class PaymentRepository extends BaseRepository
             $payment->person_id     = $request->get('person_id');
             $payment->moneybox_id   = $request->get('moneybox_id');
             $payment->amount        = $request->get('amount');
+            $payment->commission    = $request->get('commission');
             $payment->method        = PLConstants::PAYMENT_OXXO;
             $payment->uid           = $oxxoResponse['reference_id'];
             $payment->status        = PLConstants::PAYMENT_PENDING;
@@ -409,6 +410,7 @@ class PaymentRepository extends BaseRepository
             $payment->person_id     = $request->get('person_id');
             $payment->moneybox_id   = $request->get('moneybox_id');
             $payment->amount        = $request->get('amount');
+            $payment->commission    = $request->get('commission');
             $payment->method        = PLConstants::PAYMENT_SPEI;
             $payment->uid           = $speiResponse['reference_id'];
             $payment->status        = PLConstants::PAYMENT_PENDING;
@@ -430,12 +432,13 @@ class PaymentRepository extends BaseRepository
         $cardResponse = $this->_card->sendPayment($request);
         if (is_array($cardResponse)) {
             $payment = new Payment();
-            $payment->person_id       = $request->get('person_id');
-            $payment->moneybox_id   = $request->get('moneybox_id');
-            $payment->amount         = $request->get('amount');
-            $payment->method         = PLConstants::PAYMENT_CARD;
-            $payment->uid              = $cardResponse['reference_id'];
-            $payment->status           = PLConstants::PAYMENT_PENDING;
+            $payment->person_id         = $request->get('person_id');
+            $payment->moneybox_id       = $request->get('moneybox_id');
+            $payment->amount            = $request->get('amount');
+            $payment->amount            = $request->get('commission');
+            $payment->method            = PLConstants::PAYMENT_CARD;
+            $payment->uid               = $cardResponse['reference_id'];
+            $payment->status            = PLConstants::PAYMENT_PENDING;
             if (!$payment->save()) throw new Exception("Unable to create payment", -1);
         }
         $response = new PLResponse();
@@ -469,10 +472,12 @@ class PaymentRepository extends BaseRepository
         if (is_array($paypalResponse)) {
             if($paypalResponse['success'] == 1) {
                 if($paypalResponse['success'] == 1) {
+                    \Log::info("=== Creating payment===");
                     $payment = new Payment();
                     $payment->person_id     = $request->get('person_id');
                     $payment->moneybox_id   = $request->get('moneybox_id');
                     $payment->amount        = $request->get('amount');
+                    $payment->commission    = $request->get('commission');
                     $payment->method        = PLConstants::PAYMENT_PAYPAL;
                     $payment->uid           = urldecode($paypalResponse['data']['TOKEN']);
                     $payment->status        = PLConstants::PAYMENT_PENDING;
