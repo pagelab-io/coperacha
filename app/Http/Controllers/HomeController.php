@@ -456,9 +456,11 @@ class HomeController extends Controller
             throw new EntityNotFoundException('No existe la alcancía', -1);
         }
 
-        $emails =  preg_split("/[\s,;:]+/", $request->get('emails'));
+        $emailsS = preg_replace('/\s+/', '', $request->get('emails'));
+        $emails = preg_split("/[\s,;:]+/", $emailsS);
+        
         foreach ($emails as $email) {
-            $validator = Validator::make(['mail' => $email], [
+            $validator = Validator::make(['mail' => trim($email)], [
                 'mail' => 'required|email'
             ]);
 
