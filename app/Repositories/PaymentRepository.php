@@ -181,7 +181,7 @@ class PaymentRepository extends BaseRepository
             // send email
             $payer   = $this->getPayerOrCreator($payment->person_id);
             $creator = $this->getPayerOrCreator($moneybox->person_id);
-            $this->sendPaymentEmails($payer, $creator, $moneybox, $this->amountComplete($moneybox));
+            $this->sendPaymentEmails($payer, $creator, $moneybox, $payment, $this->amountComplete($moneybox));
         } else {
             \Log::info("Waiting for charge ...");
             $response->description = 'Waiting for charge ...';
@@ -243,7 +243,7 @@ class PaymentRepository extends BaseRepository
                     // send email
                     $payer   = $this->getPayerOrCreator($payment->person_id);
                     $creator = $this->getPayerOrCreator($moneybox->person_id);
-                    $this->sendPaymentEmails($payer, $creator, $moneybox, $this->amountComplete($moneybox));
+                    $this->sendPaymentEmails($payer, $creator, $moneybox, $payment, $this->amountComplete($moneybox));
                 } else {
                     $response->status = -301;
                     $response->data = $doExpress;
@@ -518,13 +518,15 @@ class PaymentRepository extends BaseRepository
      * @param Moneybox $moneybox
      * @param bool $goal_finished
      */
-    private function sendPaymentEmails(Person $payer, Person $creator, Moneybox $moneybox, $goal_finished = false)
+    private function sendPaymentEmails(Person $payer, Person $creator, Moneybox $moneybox, $payment, $goal_finished = false)
     {
         \Log::info("sending payment confirmation email ...");
         // ====== Send email for payer ========
         $data = array(
             'payer' => $payer,
-            'moneybox' => $moneybox
+            'moneybox' => $moneybox,
+            'creator' => $creator,
+            'payment' => $payment
         );
         $payerUser = $payer->user;
         \Log::info($payerUser->email);
@@ -534,11 +536,14 @@ class PaymentRepository extends BaseRepository
             'title' => 'Confirmación de pago'
         );
         $this->_mailer->send(PLConstants::EMAIL_PAYMENT_CONFIRMATION, $data, $options);
+
         \Log::info("sending new coperacha email ...");
         // ====== Send email for moneybox creator ========
         $data = array(
             'creator' => $creator,
-            'moneybox' => $moneybox
+            'moneybox' => $moneybox,
+            'payer' => $payer,
+            'payment' => $payment
         );
         $creatorUser = $creator->user;
         $options = array(
@@ -547,12 +552,15 @@ class PaymentRepository extends BaseRepository
             'title' => '¡Nueva coperacha!'
         );
         $this->_mailer->send(PLConstants::EMAIL_NEW_COPERACHA, $data, $options);
+
         if ($goal_finished) {
             \Log::info("sending goal complete email ...");
             // ====== Send email for moneybox creator ========
             $data = array(
                 'creator' => $creator,
-                'moneybox' => $moneybox
+                'moneybox' => $moneybox,
+                'creator' => $creator,
+                'payment' => $payment
             );
             $creatorUser = $creator->user;
             $options = array(
