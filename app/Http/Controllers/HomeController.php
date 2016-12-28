@@ -201,6 +201,24 @@ class HomeController extends Controller
     public function getDashboardPage(PLRequest $request){
         $request->merge(array('person_id' => \Auth::user()->person->id));
         $response = $this->_moneyboxRepository->getAll($request);
+        $my_moneyboxes = $response->data['my_moneyboxes'];
+        $moneyboxes_participation = $response->data['moneyboxes_participation'];
+        foreach($my_moneyboxes as $moneybox){
+            $participants = $moneybox->participants;
+            $moneybox->participant_number = 0;
+            foreach ($participants as $participant){
+                if ($participant->active == 1)
+                    $moneybox->participant_number++;
+            }
+        }
+        foreach($moneyboxes_participation as $moneybox){
+            $participants = $moneybox->participants;
+            $moneybox->participant_number = 0;
+            foreach ($participants as $participant){
+                if ($participant->active == 1)
+                    $moneybox->participant_number++;
+            }
+        }
         return view('moneybox.dashboard')
             ->with('moneyboxes', $response->data)
             ->with('pageTitle','Mis Alcancías');

@@ -46,7 +46,7 @@
                                     <option data-icon="g-icon-emergencies" value="6">Solidaridad</option>
                                     <option data-icon="g-icon-baby" value="5">Baby Shower</option>
                                     <option data-icon="g-icon-party" value="12">Roomates</option>
-                                    <option data-icon="g-icon-cafe" value="13">Café</option>
+                                    <option data-icon="g-icon-cafe" value="13">Grandes ideas</option>
                                     <option data-icon="g-icon-others" value="7">Otro</option>
                                 </select>
                                 </div>

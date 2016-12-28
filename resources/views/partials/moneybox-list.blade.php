@@ -72,7 +72,7 @@
                             ?>
                             <div>Faltan: <span>{{$current_date->diffInDays($end_date)}} días</span>
                             </div>
-                            <div>Participantes: <span>{{count($moneybox->participants)}}</span>
+                            <div>Participantes: <span>{{$moneybox->participant_number}}</span>
                             </div>
                             <div>Recolectado:
                                 <span>$ {{number_format($moneybox->collected_amount,2)}}</span>
