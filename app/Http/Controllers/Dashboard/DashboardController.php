@@ -52,6 +52,7 @@ class DashboardController extends Controller
     public function index()
     {
         $statics = $this->_userRepository->getUsersStatics();
+        
         return view('dashboard.index', [
             'users' => $this->getUsersByGender(),
             'moneyboxes' => $this->_moneyboxRepository->moneyboxStadistics(),
@@ -73,7 +74,7 @@ class DashboardController extends Controller
 
     public function getUserByUsername($email){
         $user = $this->_userRepository->byUsername($email);
-        $request = new Requests\PLRequest();
+        $request = new PLRequest();
         $request->merge(array('person_id' => $user->person->id));
         $moneyboxes = $this->_moneyboxRepository->getAll($request);
         $payments = $this->_paymentRepository->paymentAVGByPerson($user->person->id);

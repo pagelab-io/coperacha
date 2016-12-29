@@ -104,18 +104,19 @@ class UserRepository extends BaseRepository
         $ageAVG     = array('No definido' => 0);
         $registerTypeAVG = array('Correo' => 0, 'Facebook' => 0);
 
-        if(count($users) > 0){
+        if (count($users) > 0) {
 
-            foreach($users as $user){
+            foreach ($users as $user) {
                 $cityAVG[$user->person->city] = 0;
                 $countryAVG[$user->person->country] = 0;
             }
 
-            for($i=1;$i<=100;$i++)
-                $ageAVG[$i.""] = 0;
+            for ($i = 1; $i <= 100; $i++) {
+                $ageAVG[$i . ""] = 0;
+            }
 
             // set totals
-            foreach($users as $user){
+            foreach ($users as $user) {
                 $genderAVG[$user->person->gender] += 1;
                 $cityAVG[($user->person->city == '') ? 'No definido' : $user->person->city] += 1;
                 $countryAVG[($user->person->country == '') ? 'No definido' : $user->person->country] += 1;
@@ -130,16 +131,18 @@ class UserRepository extends BaseRepository
 
             if ($ageAVG["No definido"] == 0)
                 unset($ageAVG["No definido"]);
-            for($i=1;$i<=100;$i++) {
+
+            for ($i= 1; $i <= 100; $i++) {
                 if ($ageAVG[$i.""] == 0)
                     unset($ageAVG[$i.""]);
             }
 
             // gender percentage
-            foreach($genderAVG as $key => $value){
+            foreach ($genderAVG as $key => $value) {
                 $avg = ($genderAVG[$key]/count($users)) * 100;
                 $genderAVG[$key] = $avg;
             }
+
             // city percentage
             foreach($cityAVG as $key => $value){
                 $avg = ($cityAVG[$key]/count($users)) * 100;
@@ -166,7 +169,7 @@ class UserRepository extends BaseRepository
         }
 
         // registers by day
-        $todayRegisters = User::where('created_at', 'like' ,'%'.Carbon::today()->format('Y-m-d').'%')->count();
+        $todayRegisters = User::where('created_at', 'like' ,'%'. Carbon::today()->format('Y-m-d').'%')->count();
 
         return array(
             'totalUsers' => count($users),

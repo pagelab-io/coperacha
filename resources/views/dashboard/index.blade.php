@@ -228,8 +228,7 @@
 
                         <!-- header -->
                         <div class="panel-heading">
-                            Usuarios por ciudad
-                            <br>
+                            <div>Usuarios por ciudad</div>
                             <span>Número total de usuarios (inscritos/activos) por Ciudad</span>
                         </div>
                         <!-- body -->
