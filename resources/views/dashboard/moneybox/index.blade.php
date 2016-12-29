@@ -23,6 +23,7 @@
                                 <input id="search_name" type="text" class="validate" name="name">
                                 <label for="search_name">Nombre</label>
                             </div>
+
                             <div class="input-field col-sm-3">
                                 <select id="search_status" name="status">
                                     <option value="">Status</option>
@@ -30,6 +31,7 @@
                                     <option value="2">Completada</option>
                                 </select>
                             </div>
+
                             <div class="input-field col-sm-3">
                                 <button class="btn waves-effect waves-light" type="submit">
                                     Filtrar

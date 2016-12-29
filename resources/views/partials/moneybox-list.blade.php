@@ -9,7 +9,7 @@
                     $current_date = \Carbon\Carbon::now();
                 ?>
                 <div class="col-xs-6 col-sm-4">
-                    <article class="moneybox-item">
+                    <article class="moneybox-item" title="{{$moneybox->id}}">
                         <header>
                             <picture>
                                 <img class="img-responsive"
