@@ -20,7 +20,7 @@ use App\Validations\SettingValidation;
 use App\Validations\UserValidation;
 use Illuminate\Http\Request;
 
-class PLRequest extends Request{
+class PLRequest extends Request {
 
     //region Attributes
     //endregion

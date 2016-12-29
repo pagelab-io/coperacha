@@ -117,5 +117,14 @@ class Moneybox extends Model
     //endregion
 
     //region Private Methods
+    public function getStatusAsString() {
+        $r = '';
+        switch ($this->active) {
+            case 0: $r = 'Pendiente'; break;
+            case 1: $r = 'Completado'; break;
+        }
+
+        return $r;
+    }
     //endregion
 }
