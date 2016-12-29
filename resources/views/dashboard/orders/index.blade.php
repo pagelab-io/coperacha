@@ -42,14 +42,16 @@
                                 <div>{{$order->moneybox->collected_amount}}</div>
                             </td>
                             <td>
-                                @if($order->moneybox->active == 1)
-                                    <a title="Cambiar a Pendiente" href="{{url('/dashboard/orders/toggle', $order->moneybox->id)}}" class="btn btn-sm btn-success">
-                                        Pendiente
+                                @if($order->moneybox->active == 2)
+                                    <a title="Cambiar a Activa" href="{{url('/dashboard/orders/toggle', [
+                                        'id' => $order->moneybox->id, 'status' => 1])}}" class="btn btn-sm btn-success">
+                                        Activa
                                         <i class="material-icons right">send</i>
                                     </a>
                                 @else
-                                    <a title="Cambiar a Completado" href="{{url('/dashboard/orders/toggle', $order->moneybox->id)}} " class="btn btn-sm btn-default">
-                                        Completado
+                                    <a title="Cambiar a Completada" href="{{url('/dashboard/orders/toggle', [
+                                    'id' => $order->moneybox->id, 'status' => 2])}} " class="btn btn-sm btn-default">
+                                        Completada
                                         <i class="material-icons right">send</i>
                                     </a>
                                 @endif

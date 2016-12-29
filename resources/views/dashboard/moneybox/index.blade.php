@@ -26,8 +26,8 @@
                             <div class="input-field col-sm-3">
                                 <select id="search_status" name="status">
                                     <option value="">Status</option>
-                                    <option value="1">Activo</option>
-                                    <option value="0">Inactivo</option>
+                                    <option value="1">Activa</option>
+                                    <option value="2">Completada</option>
                                 </select>
                             </div>
                             <div class="input-field col-sm-3">
@@ -71,7 +71,7 @@
                     </tr>
                 @endforeach
             </table>
-            <ul class="pagination">
+            <ul class="pagination hidden">
                 <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
                 <li class="active"><a href="#!">1</a></li>
                 <li class="waves-effect"><a href="#!">2</a></li>

@@ -270,13 +270,14 @@ class DashboardController extends Controller
      *
      * @param PLRequest $request
      * @param int $id
+     * @param int $status | 1-> Active -> Completed
      * @return Moneybox
      */
-    public function toggleStatusOfMoneybox(PLRequest $request, $id) {
+    public function toggleStatusOfMoneybox(PLRequest $request, $id, $status) {
         $mb = Moneybox::find($id);
 
         if ($mb) {
-            $mb->active = !$mb->active;
+            $mb->active = $status;
             $mb->save();
 
             $user = \Auth::user()->id;

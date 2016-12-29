@@ -265,7 +265,7 @@ Route::group([
         'as' => 'orders.'
     ], function ($router){
         $router->get('/', ['as' => 'index','uses' => 'DashboardController@getOrders']);
-        $router->get('/toggle/{id}', 'DashboardController@toggleStatusOfMoneybox');
+        $router->get('/toggle/{id}/{status}', 'DashboardController@toggleStatusOfMoneybox');
     });
 });
 //endregion
