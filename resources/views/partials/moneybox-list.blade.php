@@ -3,6 +3,11 @@
     <div class="row clearfix">
         @if(count($moneyboxes) > 0)
             @foreach($moneyboxes as $i => $moneybox)
+                <?php
+                    // Data transforms
+                    $end_date = \App\Utilities\PLDateTime::toCarbon($moneybox->end_date);
+                    $current_date = \Carbon\Carbon::now();
+                ?>
                 <div class="col-xs-6 col-sm-4">
                     <article class="moneybox-item">
                         <header>
@@ -49,9 +54,11 @@
                             </div>
 
                             <div class="form-group">
-                                <a class="btn btn-primary"
-                                   title = "Enviar correo a conocidos para participar"
-                                   href="{{url('/moneybox/detail/'.$moneybox->url)}}">Invitar/Participar</a>
+                                @if ($current_date <= $end_date)
+                                    <a class="btn btn-primary"
+                                       title = "Enviar correo a conocidos para participar"
+                                       href="{{url('/moneybox/detail/'.$moneybox->url)}}">Invitar/Participar</a>
+                                @endif
                             </div>
 
                             @if (Auth::user()->person->id == $moneybox->person_id)
@@ -66,15 +73,29 @@
                             @endif
                         </main>
                         <footer>
-                            <?php
-                            $end_date = \App\Utilities\PLDateTime::toCarbon($moneybox->end_date);
-                            $current_date = \Carbon\Carbon::now();
-                            ?>
-                            <div>Faltan: <span>{{$current_date->diffInDays($end_date)}} días</span>
+                            @if($current_date <= $end_date)
+                                <div>
+                                    Faltan: <span>{{$current_date->diffInDays($end_date)}} días</span>
+                                </div>
+                            @else
+                                <div>
+                                    Status:
+                                    <span>
+                                        <strong> Completado </strong>
+                                            <a class="link"
+                                               title = "Enviar correo para solicitar dinero."
+                                               href="{{url('moneybox/request/'.$moneybox->url)}}">
+                                                Puedes solicitar tu dinero.
+                                            </a>
+                                    </span>
+                                </div>
+                            @endif
+
+                            <div>
+                                Participantes: <span>{{$moneybox->participant_number}}</span>
                             </div>
-                            <div>Participantes: <span>{{$moneybox->participant_number}}</span>
-                            </div>
-                            <div>Recolectado:
+                            <div>
+                                Recolectado:
                                 <span>$ {{number_format($moneybox->collected_amount,2)}}</span>
                             </div>
                         </footer>
