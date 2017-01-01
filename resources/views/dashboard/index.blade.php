@@ -394,14 +394,14 @@
             ]);
 
             var moneyboxesData = google.visualization.arrayToDataTable([
-                ['Alcancías', '2016'],
+                ['Alcancías', '2017'],
                     @foreach($moneyboxes['moneyboxes'] as $key => $value)
                 ['{{$key}}', {{$value}}],
                 @endforeach
             ]);
 
             var paymentData = google.visualization.arrayToDataTable([
-                ['Método de pago', '2016'],
+                ['Método de pago', '2017'],
                     @foreach($payments as $payment => $value)
                 ['{{$payment}}', {{$value}}],
                 @endforeach
