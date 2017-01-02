@@ -344,6 +344,8 @@ class MoneyboxRepository extends BaseRepository{
                 if (count($personMoneyboxes) > 0) {
                     foreach ($personMoneyboxes as $pm) {
                         $moneybox = $this->byId($pm->moneybox_id);
+                        if ($moneybox->active != 1)
+                            continue;
                         $moneybox->participants;
                         if (count($moneybox->files) > 0) {
                             $moneybox->lastfile = $moneybox->files->last();
