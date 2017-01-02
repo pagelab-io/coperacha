@@ -1,6 +1,11 @@
 <html>
     <head>
         <link href="{{asset('/css/coperacha.css')}}" rel="stylesheet">
+        <style>
+            body {
+                font-family: Helvetica;
+            }
+        </style>
     </head>
     <body>
         <div class="popup-wrapper" id="alert-modal-coperacha" style="display: block;">

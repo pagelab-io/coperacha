@@ -23,7 +23,7 @@
 
                         <!-- header -->
                         <div class="panel-heading">
-                            Creación de alcancias
+                            Creación de alcancías
                             <br>
                             <span>Cuantas alcancías se crean diario, mensual, anual</span>
                         </div>

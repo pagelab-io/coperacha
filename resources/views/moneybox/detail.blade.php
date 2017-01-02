@@ -140,7 +140,7 @@
                     if (created == 1) {
                         var utils = new Utils();
                         document.getElementById('small-alert-content').innerHTML = "" +
-                        "<h3>¡Gracias por crear tu alcancía!<h3>";
+                        "<p>¡Gracias por crear tu alcancía!<p>"+
                         "<p>Te invitamos a ser el primero en participar ya que esto ayudará a motivar a tus amigos.<p>";
                         utils.showAlert(true);
                     }

@@ -245,7 +245,7 @@
                             var barcode = response.data.payment_method.barcode;
 
                             document.getElementById('alert-content').innerHTML="" +
-                            "<p>Se ha generado un nuevo cargo, puedes ir a tu tienda OXXO mas cercana y hacer tu pago con los siguientes datos:<p>" +
+                            "<p>Se ha generado un nuevo cargo, puedes ir a tu tienda OXXO más cercana y hacer tu pago con los siguientes datos:<p>" +
                             "<br>" +
                             "<image src='"+response.data.payment_method.barcode_url+"'>" +
                             "<br>" +
@@ -286,7 +286,7 @@
                         $scope.utils.hideLoader();
                         $scope.utils.setAlertTitle("Coperacha - Alerta");
                         document.getElementById('alert-content').innerHTML="" +
-                        "<p>Ocurrio una incidencia al generarse el pago, por favor inténtelo más tarde o elija otro método de pago<p>";
+                        "<p>Ocurrió una incidencia al generarse el pago, por favor inténtelo más tarde o elija otro método de pago<p>";
                         $scope.utils.showAlert();
                     }
                 })

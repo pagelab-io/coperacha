@@ -169,13 +169,13 @@ function Utils()
                 '<div class="form-row">'+
                     '<label>'+
                         '<span class="col-xs-12 col-sm-6">Número de tarjeta de crédito/débito</span>'+
-                        '<input class="col-xs-12 col-sm-6" type="number" data-conekta="card[number]" placeholder="No. de la tarjeta (16 digitos)"/>'+
+                        '<input class="col-xs-12 col-sm-6" type="number" data-conekta="card[number]" placeholder="No. de la tarjeta (16 dígitos)"/>'+
                     '</label>'+
                 '</div>'+
                 '<div class="form-row">'+
                     '<label>'+
                         '<span class="col-xs-12 col-sm-6" >CVC</span>'+
-                        '<input class="col-xs-12 col-sm-6" type="number" size="4" data-conekta="card[cvc]" placeholder="No. CVC (3 digitos)"/>'+
+                        '<input class="col-xs-12 col-sm-6" type="number" size="4" data-conekta="card[cvc]" placeholder="No. CVC (3 dígitos)"/>'+
                     '</label>'+
                     '</div>'+
                     '<div class="form-row">'+
@@ -188,7 +188,8 @@ function Utils()
                 '</div>'+
             '</form>';
         this.showAlert();
-        Conekta.setPublishableKey('key_H1uvmkmUNYtHN915aFyf4dg');
+        Conekta.setPublishableKey('key_H1uvmkmUNYtHN915aFyf4dg'); // dev
+        //Conekta.setPublishableKey('key_S9e4ohwobhaSA9cyqzy3YfA'); // prod
     };
 
     this.isNullOrEmpty = function(value){
