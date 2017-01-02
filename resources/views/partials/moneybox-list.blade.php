@@ -79,18 +79,9 @@
                                 </div>
                             @else
                                 <div>
-                                    Status:
-                                    <span>
-                                        <strong> Completado </strong>
-                                            <a class="link"
-                                               title = "Enviar correo para solicitar dinero."
-                                               href="{{url('moneybox/request/'.$moneybox->url)}}">
-                                                Puedes solicitar tu dinero.
-                                            </a>
-                                    </span>
+                                    Status:<span><strong> Fecha finalizada </strong></span>
                                 </div>
                             @endif
-
                             <div>
                                 Participantes: <span>{{$moneybox->participant_number}}</span>
                             </div>

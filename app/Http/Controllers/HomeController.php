@@ -402,7 +402,9 @@ class HomeController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function postMailThanks(Request $request) {
+        \Log::info("Llegando a envío de agradecimientos ...");
         $url = $request->get('url');
+        \Log::info($url);
         $moneybox = Moneybox::byUrl($url)->with('participants')->first();
         if (!$moneybox) {
             throw new EntityNotFoundException('La alcancía no existe.', -1);
@@ -413,6 +415,8 @@ class HomeController extends Controller
         $users = [];
 
         foreach ($moneybox->participants as $participant) {
+            if ($participant->active == 0)
+                continue;
             $person = $participant->person;
             $user = $person->user;
             if (!isset($users[$user->email])) {
