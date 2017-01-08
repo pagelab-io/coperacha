@@ -22,6 +22,7 @@ class PaymentValidation {
             'person_id' => 'required|numeric',
             'moneybox_id'  => 'required|numeric',
             'amount'  => 'required',
+            'commission' => 'required',
             'payment_method'  => 'required|string',
         ];
     }

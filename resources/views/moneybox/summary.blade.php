@@ -37,6 +37,12 @@
                             <input type="hidden" ng-init="amount='{{$amount}}'" ng-model="amount">
                         </div>
 
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-4"><label for="comission">Comisión: </label></div>
+                            <div class="col-xs-12 col-sm-8"><input id="comission"  readonly type="text" value="${{number_format(\App\Utilities\PLUtils::getCommission($amount), 2)}} MXN"></div>
+                            <input type="hidden" ng-init="commission='{{\App\Utilities\PLUtils::getCommission($amount)}}'" ng-model="commission">
+                        </div>
+
                         <div class="form-group">
                             <a class="btn-link btn-edit" href="{{url('moneybox/join/'.$moneybox->url)}}">
                                 <span class="icon-edit"></span>
@@ -63,11 +69,16 @@
                                     <img src="/images/icon-spei.png">
                                 </label>
                             </div>
+                            <div class="radio">
+                                <label for="payment-card"><input id="payment-card" ng-model="paymentMethod" type="radio" value="T">
+                                    <img src="/images/card_payment.png" width="60" height="32">
+                                </label>
+                            </div>
                         </div>
 
                         <div class="form-group clearfix">
                             <div class="clearfix">
-                                <button class="pull-right btn btn-primary small" ng-click="doPayment()">Realizar Pago</button>
+                                <button class="pull-right btn btn-primary small" ng-click="validatePaymentMethod()">Realizar Pago</button>
                             </div>
                             <div class="small-text">*Al proceder al pago aceptas nuestros términos y condiciones de uso</div>
                         </div>
@@ -110,4 +121,5 @@
             withNavigation: false
         });
     </script>
+    <script type="text/javascript" src="https://conektaapi.s3.amazonaws.com/v0.3.2/js/conekta.js"></script>
 @endsection

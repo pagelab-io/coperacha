@@ -258,5 +258,14 @@ Route::group([
         $router->get('/{url}','DashboardController@getMoneyboxesByUrl');
         $router->get('/{name?}/{status?}',['as' => 'index','uses' => 'DashboardController@getMoneyboxes']);
     });
+
+    // dashboard orders
+    $router->group([
+        'prefix' => 'orders',
+        'as' => 'orders.'
+    ], function ($router){
+        $router->get('/', ['as' => 'index','uses' => 'DashboardController@getOrders']);
+        $router->get('/toggle/{id}/{status}', 'DashboardController@toggleStatusOfMoneybox');
+    });
 });
 //endregion

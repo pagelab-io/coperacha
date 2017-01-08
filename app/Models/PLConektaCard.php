@@ -12,7 +12,7 @@ use App\Http\Requests\PLRequest;
 use App\Repositories\MoneyboxRepository;
 use App\Repositories\PersonRepository;
 
-class PLConektaSpei extends PLConekta implements IPLPayment{
+class PLConektaCard extends PLConekta implements IPLPayment{
 
     /**
      * @var PersonRepository
@@ -28,11 +28,11 @@ class PLConektaSpei extends PLConekta implements IPLPayment{
     {
         $this->_personRepository = $personRepository;
         $this->_moneyboxRepository = $moneyboxRepository;
-        $this->api_key = (env('APP_ENV') == 'local') ? env('LOCAL.CONECKTA_API_KEY') : env('PRODUCTION.CONECKTA_API_KEY');
+        $this->api_key = env('LOCAL.CONECKTA_API_KEY');
     }
 
     /**
-     * Return a new charge for OXXO payment
+     * Return a new charge for CARD payment
      *
      * @param PLRequest $request
      * @return mixed
@@ -45,8 +45,7 @@ class PLConektaSpei extends PLConekta implements IPLPayment{
         $person = null;
         $charge = null;
 
-        \Log::info("=== Creating spei charge ===");
-
+        \Log::info("=== Creating card charge ===");
         \Log::info("=== Searching person ===");
         try{$person = $this->_personRepository->byId($request->get('person_id')); }
         catch(\Exception $ex){ throw new \Exception("Unable to find person", -1); }
@@ -58,17 +57,15 @@ class PLConektaSpei extends PLConekta implements IPLPayment{
         \Log::info("=== Moneybox : ".$moneybox."===");
 
         try {
+
             $total_amount = $request->get('amount')+$request->get('commission');
             \Log::info("=== creating charge by $ ".$total_amount." ===");
-
             $this->charge = \Conekta_Charge::create(array(
                 'description'=> 'Nueva Coperacha',
                 'reference_id'=> $this->generate_uid(),
                 'amount'=> $this->toCents($total_amount),
                 'currency'=>'MXN',
-                'bank'=> array(
-                    'type'=> 'spei'
-                ),
+                'card' => $request->get('token'),
                 'details'=> array(
                     'name'=> $person->name." ".$person->lastname,
                     'phone'=> $person->phone,

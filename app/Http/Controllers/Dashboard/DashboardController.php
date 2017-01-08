@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Entities\Order;
 use App\Entities\Payment;
 use App\Http\Requests\PLRequest;
+use App\Http\Requests\Request;
 use App\Entities\Category;
 use App\Entities\Moneybox;
 use App\Http\Controllers\Controller;
-use App\Http\Requests;
 use App\Repositories\MoneyboxRepository;
 use App\Repositories\PaymentRepository;
 use App\Repositories\UserRepository;
 use App\Utilities\PLConstants;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class DashboardController extends Controller
 {
@@ -50,6 +52,7 @@ class DashboardController extends Controller
     public function index()
     {
         $statics = $this->_userRepository->getUsersStatics();
+        
         return view('dashboard.index', [
             'users' => $this->getUsersByGender(),
             'moneyboxes' => $this->_moneyboxRepository->moneyboxStadistics(),
@@ -71,7 +74,7 @@ class DashboardController extends Controller
 
     public function getUserByUsername($email){
         $user = $this->_userRepository->byUsername($email);
-        $request = new Requests\PLRequest();
+        $request = new PLRequest();
         $request->merge(array('person_id' => $user->person->id));
         $moneyboxes = $this->_moneyboxRepository->getAll($request);
         $payments = $this->_paymentRepository->paymentAVGByPerson($user->person->id);
@@ -250,5 +253,38 @@ class DashboardController extends Controller
 
 
         return $resultRaw;
+    }
+
+    /**
+     * @param PLRequest $request
+     * @return Array
+     */
+    public function getOrders(PLRequest $request) {
+        $orders = Order::all();
+        return view('dashboard.orders.index', [
+            'orders' => $orders
+        ]);
+    }
+
+    /**
+     * Toggle the status of the moneybox
+     *
+     * @param PLRequest $request
+     * @param int $id
+     * @param int $status | 1-> Active -> Completed
+     * @return Moneybox
+     */
+    public function toggleStatusOfMoneybox(PLRequest $request, $id, $status) {
+        $mb = Moneybox::find($id);
+
+        if ($mb) {
+            $mb->active = $status;
+            $mb->save();
+
+            $user = \Auth::user()->id;
+            \Log::info("=== The moneybox $mb->id was changed successfully by the user $user ===");
+        }
+
+        return Redirect::route('dashboard.orders.index');
     }
 }

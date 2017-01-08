@@ -137,48 +137,33 @@ header, main, footer {
     transition: 0.3s
 }
 
-.sidenav a:hover, .offcanvas a:focus{
+.sidenav a:hover,
+.offcanvas a:focus{
     color: white;
     text-decoration: underline;
 }
 
 
-.dashboard-titles {
-    margin-bottom: 0px;
+.dashboard-header {
+    margin-bottom: 15px;
 }
 
-.dashboard-titles h2 {
+.dashboard-header h2 {
     font-size:24px;
     margin: 0;
     color: #FF6516;
 }
 
-.dashboard-titles p {
+.dashboard-header p {
     color: #00bcd4;
     font-size: 13px;
     margin: 0;
 }
 
-.dashboard-items {
-    width: 90%;
-    margin: 0 auto;
-    min-height: 250px;
-    display: inline-table;
-}
-
-form.search {
+.search {
     width: 100%;
 }
 
-.dashboard.general-info,
-.dashboard.more-info{
-    margin-top: 35px;
-}
-
-.dashboard-filters {
-    width: 100%;
-}
-
-.dashboard-graph{
-    margin: 20px auto;
+.dashboard-body .small {
+    font-size: 13px;
 }

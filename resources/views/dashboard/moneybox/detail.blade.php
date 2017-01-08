@@ -12,7 +12,7 @@
             </div>
             <div style="float: left; margin-left: 10px">
                 <h2>{{$moneybox->name}}</h2>
-                <p>Alcancia creada desde {{\App\Utilities\PLUtils::getStringDate($moneybox->created_at)}}</p>
+                <p>Alcancía creada desde {{\App\Utilities\PLUtils::getStringDate($moneybox->created_at)}}</p>
             </div>
         </div>
     </div>

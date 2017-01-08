@@ -50,6 +50,16 @@ class PLUtils {
     }
 
     /**
+     * Gets the commission
+     * @param $amount
+     * @return float|int
+     */
+    public static function getCommission($amount)
+    {
+        return ($amount*PLConstants::PAYMENT_COMMISSION) / 100;
+    }
+
+    /**
      * Gets a payment method letter and return the string for that method
      *
      * @param $method - P

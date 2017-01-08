@@ -18,6 +18,7 @@
         $scope.amount = 50;
         $scope.commission = '';
         $scope.settings = '';
+        $scope.token = '';
         $scope.request = {};
         $scope.paymentMethod = '';
         $scope.moneybox_id = '';
@@ -190,6 +191,31 @@
                 });
         };
 
+        $scope.validatePaymentMethod = function()
+        {
+            var utils = $scope.utils;
+            if ($scope.paymentMethod == 'P' || $scope.paymentMethod == 'O' || $scope.paymentMethod == 'S')
+                $scope.doPayment();
+            else if ($scope.paymentMethod == 'T') {
+                utils.setPaymentCardForm();
+                $("#close-alert-2").on('click', function(event) {
+                    $("#close-alert-2").unbind("click");
+                    utils.showLoader();
+                    var $form = $("#card-form");
+                    Conekta.token.create($form, function(response){
+                        utils.hideLoader();
+                        $scope.token = response.id; // conekta token
+                        $scope.doPayment();
+                    }, function(error_response) {
+                        console.log(error_response);
+                        utils.hideLoader();
+                        utils.setValidationError(error_response.message_to_purchaser);
+                    });
+                });
+            }
+
+        };
+
         $scope.doPayment = function()
         {
             var moneybox = JSON.parse($scope.moneybox);
@@ -197,10 +223,12 @@
                 'person_id' : $scope.person_id,
                 'moneybox_id'  : moneybox.id,
                 'amount'  : $scope.amount,
+                'commission' : $scope.commission,
                 'payment_method'  : $scope.paymentMethod,
                 'method' : 'createPayment',
                 'api-key' : '$2y$10$ScZUgkFzrMr9NM5qPzKag.4mLTW8ugSG/DtT6nerJb3W1v5sg6UBC'
             };
+            if ($scope.paymentMethod == 'T')  $scope.request['token'] = $scope.token; // if card payment
 
             $scope.utils.showLoader();
             Participant.payment($scope.request)
@@ -209,7 +237,7 @@
 
                         if ($scope.paymentMethod == 'P') {
                             window.location = response.data.url;
-                        } else if($scope.paymentMethod == 'O'){
+                        } else if($scope.paymentMethod == 'O') {
                             $scope.utils.hideLoader();
                             $scope.utils.setAlertTitle("Confirmación de pago por OXXO");
 
@@ -217,7 +245,7 @@
                             var barcode = response.data.payment_method.barcode;
 
                             document.getElementById('alert-content').innerHTML="" +
-                            "<p>Se ha generado un nuevo cargo, puedes ir a tu tienda OXXO mas cercana y hacer tu pago con los siguientes datos:<p>" +
+                            "<p>Se ha generado un nuevo cargo, puedes ir a tu tienda OXXO más cercana y hacer tu pago con los siguientes datos:<p>" +
                             "<br>" +
                             "<image src='"+response.data.payment_method.barcode_url+"'>" +
                             "<br>" +
@@ -227,7 +255,7 @@
                             "<br>" +
                             "<span class='info-alert'><a href='/payment/downloadPayment/oxxo/"+url[1]+"/"+barcode+"/0' target='_blank'>Descargar datos de pago</a></span>";
                             $scope.utils.showAlert();
-                        } else if($scope.paymentMethod == 'S'){
+                        } else if($scope.paymentMethod == 'S') {
 
                             $scope.utils.hideLoader();
                             $scope.utils.setAlertTitle("Confirmación de pago por SPEI");
@@ -243,13 +271,22 @@
                             "<br><br>" +
                             "<span class='info-alert'><a href='/payment/downloadPayment/spei/0/0/"+clabe+"' target='_blank'>Descargar datos de pago</a></span>";
                             $scope.utils.showAlert();
+                        } else if($scope.paymentMethod == 'T') {
+                            $scope.utils.hideLoader();
+                            $scope.utils.setAlertTitle("Confirmación de pago por Tarjeta de crédito/débito");
+                            document.getElementById('alert-content').innerHTML="" +
+                                "<p>Tu pago se ha procesado correctamente, en un momento se verá reflejada tu aportación a la alcancía.<p>" +
+                                "<br>" +
+                                "<span class='info-alert'>Nota: al realizar tu pago, recibirás un correo de confirmación de pago</span>" +
+                                "<br>" ;
+                            $scope.utils.showAlert();
                         }
 
                     } else {
                         $scope.utils.hideLoader();
                         $scope.utils.setAlertTitle("Coperacha - Alerta");
                         document.getElementById('alert-content').innerHTML="" +
-                        "<p>Ocurrio una incidencia al generarse el pago, por favor inténtelo más tarde o elija otro método de pago<p>";
+                        "<p>Ocurrió una incidencia al generarse el pago, por favor inténtelo más tarde o elija otro método de pago<p>";
                         $scope.utils.showAlert();
                     }
                 })
@@ -268,7 +305,6 @@
          */
         $scope.validate = function()
         {
-
             var utils = $scope.utils;
 
             if (utils.isNullOrEmpty($scope.name)) {

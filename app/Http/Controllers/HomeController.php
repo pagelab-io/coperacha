@@ -201,6 +201,24 @@ class HomeController extends Controller
     public function getDashboardPage(PLRequest $request){
         $request->merge(array('person_id' => \Auth::user()->person->id));
         $response = $this->_moneyboxRepository->getAll($request);
+        $my_moneyboxes = $response->data['my_moneyboxes'];
+        $moneyboxes_participation = $response->data['moneyboxes_participation'];
+        foreach($my_moneyboxes as $moneybox){
+            $participants = $moneybox->participants;
+            $moneybox->participant_number = 0;
+            foreach ($participants as $participant){
+                if ($participant->active == 1)
+                    $moneybox->participant_number++;
+            }
+        }
+        foreach($moneyboxes_participation as $moneybox){
+            $participants = $moneybox->participants;
+            $moneybox->participant_number = 0;
+            foreach ($participants as $participant){
+                if ($participant->active == 1)
+                    $moneybox->participant_number++;
+            }
+        }
         return view('moneybox.dashboard')
             ->with('moneyboxes', $response->data)
             ->with('pageTitle','Mis Alcancías');
@@ -384,7 +402,9 @@ class HomeController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function postMailThanks(Request $request) {
+        \Log::info("Llegando a envío de agradecimientos ...");
         $url = $request->get('url');
+        \Log::info($url);
         $moneybox = Moneybox::byUrl($url)->with('participants')->first();
         if (!$moneybox) {
             throw new EntityNotFoundException('La alcancía no existe.', -1);
@@ -395,6 +415,8 @@ class HomeController extends Controller
         $users = [];
 
         foreach ($moneybox->participants as $participant) {
+            if ($participant->active == 0)
+                continue;
             $person = $participant->person;
             $user = $person->user;
             if (!isset($users[$user->email])) {
@@ -456,9 +478,11 @@ class HomeController extends Controller
             throw new EntityNotFoundException('No existe la alcancía', -1);
         }
 
-        $emails =  preg_split("/[\s,;:]+/", $request->get('emails'));
+        $emailsS = preg_replace('/\s+/', '', $request->get('emails'));
+        $emails = preg_split("/[\s,;:]+/", $emailsS);
+        
         foreach ($emails as $email) {
-            $validator = Validator::make(['mail' => $email], [
+            $validator = Validator::make(['mail' => trim($email)], [
                 'mail' => 'required|email'
             ]);
 

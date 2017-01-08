@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\PLController;
 use App\Http\Requests\PLRequest;
 use App\Http\Responses\PLResponse;
 use App\Repositories\UserRepository;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 
-class PasswordController extends Controller
+class PasswordController extends PLController
 {
     use ResetsPasswords;
 

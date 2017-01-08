@@ -78,22 +78,21 @@
             this.divLoading.removeClass('hidden');
             var _this = this;
 
-            var onTanks = function () {
-
+            var onTanks = function (url) {
                 $.post('/sendthanks', {
-                    url: this.url
+                    url: url
                 }).then(function (response) {
 
-                    var emails = response.data.join(',');
                     var utils = new Utils();
-
                     _this.divLoading.addClass('hidden');
-
                     if (response.data.length > 0) {
                         setTimeout(function () {
+                            var emails = "";
+                            for(var i = 0; i < response.data.length; i++) {
+                                emails += "<p>"+response.data[i]+"</p>";
+                            }
                             document.getElementById('small-alert-content').innerHTML = "" +
-                                "<p>Los mensajes fueron enviados exitosamente a: " + emails + "<p>";
-
+                                "<p>Los mensajes fueron enviados exitosamente a: <p>"+emails;
                             utils.showAlert(true);
                         }, 100);
                     }
@@ -104,7 +103,7 @@
             };
 
             // Do thanks
-            onTanks();
+            onTanks(this.url);
         }
     };
 

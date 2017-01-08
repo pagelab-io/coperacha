@@ -48,6 +48,7 @@
                                             $end_date = \App\Utilities\PLDateTime::toCarbon($moneybox->end_date);
                                             $current_date = \Carbon\Carbon::now();
                                         ?>
+
                                         @if($current_date->diffInDays($end_date) > 1 || $current_date->diffInDays($end_date) == 0)
                                             {{$current_date->diffInDays($end_date)}} días
                                         @else
@@ -70,7 +71,7 @@
                                     <input type="hidden" ng-init="moneyboxurl='{{$moneybox->url}}'"/>
                                     <button class="btn-primary small" ng-click="goToParticipation()">Participa</button>
                                 </div>
-                            </form> <!-- ./FormProfile -->
+                            </form> <!-- /.FormProfile -->
                         </div>
 
                         <div class="col-sm-7">
@@ -103,7 +104,7 @@
                                               rows="4"
                                               name="emails"
                                               v-model="emails"
-                                              placeholder="Ejemplo: participante1@coperacha.com.mx;participante2@coperacha.com.mx"></textarea>
+                                              placeholder="Ej: participante1@coperacha.com.mx;participante2@coperacha.com.mx"></textarea>
                                 </div>
                                 <div class="form-group clearfix">
                                     <div class="pull-right">
@@ -138,10 +139,12 @@
 
                     if (created == 1) {
                         var utils = new Utils();
-                        document.getElementById('small-alert-content').innerHTML="" +
-                        "<p>Te invitamos a ser el primero en participar en esta alcancía, esto ayudará a motivar a tus amigos.<p>";
+                        document.getElementById('small-alert-content').innerHTML = "" +
+                        "<p>¡Gracias por crear tu alcancía!<p>"+
+                        "<p>Te invitamos a ser el primero en participar ya que esto ayudará a motivar a tus amigos.<p>";
                         utils.showAlert(true);
                     }
+
 
                     if (id > 0 && image.length > 0) {
                         var share = new Share();
