@@ -143,7 +143,7 @@ $router->group([
     $router->put('/',   ['middleware' => 'auth', 'uses' => 'MoneyboxController@updateMoneybox']);
     $router->get('/',   ['middleware' => 'auth', 'uses' => 'MoneyboxController@getAll']);
     $router->post('/categories',    ['middleware' => 'auth', 'uses' => 'CategoryController@createCategory']);
-    $router->get('/categories',     ['middleware' => 'auth', 'uses' => 'CategoryController@getAll']);
+    $router->get('/categories',     ['uses' => 'CategoryController@getAll']);
     $router->post('/settings',      ['middleware' => 'auth', 'uses' => 'SettingController@createSetting']);
     $router->get('/settings',       ['middleware' => 'auth', 'uses' => 'SettingController@getAll']);
     $router->post('/option',        ['middleware' => 'auth', 'uses' => 'SettingController@createOptions']);
