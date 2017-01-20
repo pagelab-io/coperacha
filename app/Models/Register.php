@@ -35,42 +35,45 @@ class Register {
     //region Methods
 
     /**
+     * User Register
      * @param PLRequest $request
      * @throws \Exception
      * @return PLResponse
      */
     public function userRegister(PLRequest $request)
     {
-        $txRegister = $this->_txRegister->executeTx($request);
+        \Log::info("=== Entrando a registro ===");
         $response = new PLResponse();
-
-        if (is_array($txRegister)) {
+        $txResponse = $this->_txRegister->executeTx($request);
+        if (is_array($txResponse)) {
             \Log::info("Usuario registrado correctamente, comenzando autenticación");
-            \Auth::login($txRegister['User']);
+            \Auth::login($txResponse['User']);
             $response->description = 'User registered successfully';
-            $response->data = $txRegister;
-
-            // send email
-            $data = array(
-                'person' => $txRegister['Person']
-            );
-            $user = $txRegister['User'];
-            $options = array(
-                'to' => $user->email,
-                'bcc' => explode(',', PLConstants::EMAIL_BCC),
-                'title' => '¡Bienvenida/o!'
-            );
-            $this->_mailer->send(PLConstants::EMAIL_REGISTER, $data, $options);
-
+            $response->data = $txResponse;
+            $this->sendRegisterEmail($txResponse);
         }
-
         return $response;
-
     }
 
     //endregion
 
-    //private Methods
+    //region Private Methods
+
+    /**
+     * Send the register email
+     * @param $txResponse
+     */
+    private function sendRegisterEmail($txResponse)
+    {
+        $user    = $txResponse['User'];
+        $data    =  array('person' => $txResponse['Person']);
+        $options = array(
+            'to' => $user->email,
+            'bcc' => explode(',', PLConstants::EMAIL_BCC),
+            'title' => '¡Bienvenida/o!'
+        );
+        $this->_mailer->send(PLConstants::EMAIL_REGISTER, $data, $options);
+    }
     //endregion
 
 } 

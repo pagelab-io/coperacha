@@ -7,6 +7,10 @@ use \App\Http\Requests\PLRequest;
 use App\Http\Responses\PLResponse;
 use App\Models\Register;
 
+/**
+ * Class RegisterController
+ * @package App\Http\Controllers\Register
+ */
 class RegisterController extends PLController{
 
     //region attributes
@@ -35,15 +39,12 @@ class RegisterController extends PLController{
      */
     public function register(PLRequest $request)
     {
-
-        // validate the request
-        $this->validate($request,$request->rules(),$request->messages());
-
-        // execute register
-        try{
+        // request validation
+        $this->validate($request,$request->rules(), $request->messages());
+       try{
             $this->setResponse($this->_register->userRegister($request));
             return response()->json($this->getResponse());
-        }catch (\Exception $ex){
+       }catch (\Exception $ex){
             $response = new PLResponse();
             $response->status = $ex->getCode();
             $response->description = $ex->getMessage();

@@ -8,7 +8,12 @@ use App\Entities\User;
 use App\Http\Requests\PLRequest;
 use App\Repositories\UserRepository;
 
-class TxRegister extends PLTransaction{
+/**
+ * Register's transaction
+ * Class TxRegister
+ * @package App\Transactions
+ */
+class TxRegister extends PLTransaction {
 
     //region attributes
 
@@ -28,9 +33,6 @@ class TxRegister extends PLTransaction{
         $this->_userRepository = $userRepository;
     }
 
-    //region Private methods
-    //endregion
-
     //region methods
 
     /**
@@ -47,47 +49,20 @@ class TxRegister extends PLTransaction{
         $fbUser     = null;
         $user       = null;
 
-        if ($this->_userRepository->userExist($request->get('email'))){
+        if ($this->_userRepository->userExist($request->get('email'))) {
             $user = $this->_userRepository->byEmail($request->get('email'));
 
             // if user is visitant but he has tracking 0 or 1 (first access or user active)
             if ($user->tracking == 0 || $user->tracking == 1) throw new \Exception ("User already exist", -2);
-
             if ($user->tracking == -1) { // just update data becasuse he should be visitant
 
                 try {
 
                     \DB::beginTransaction();
-
-                    \Log::info("=== Updating person ... ===");
-                    $person             = $user->person;
-                    $person->name       = $request->get('name');
-                    $person->lastname   = $request->get('lastname');
-                    if($request->exists('birthday')) $person->birthday = $request->get('birthday');
-                    if($request->exists('gender')) $person->gender = $request->get('gender');
-                    if($request->exists('phone')) $person->phone = $request->get('phone');
-                    if($request->exists('city')) $person->city = $request->get('city');
-                    if($request->exists('country')) $person->country = $request->get('country');
-
-                    if (!$person->save()) throw new \Exception("Unable to update Person", -1);
-                    \Log::info("=== Person created successfully : " . $person . " ===");
-
-                    \Log::info("=== Updating user ... ===");
-                    $user->tracking  = 0;
-                    if ($request->get('isFB') == 0) {
-                        $user->password  = bcrypt($request->get('password'));
-                    }
-                    if (!$user->save()) throw new \Exception("Unable to update User", -1);
-                    \Log::info("=== User updated successfully : ".$user." ===");
-
-                    if ($request->get('isFB') == 1) {
-                        \Log::info("=== Creating FBUser ... ===");
-                        $fbUser = new FbUser();
-                        $fbUser->user_id = $user->id;
-                        $fbUser->fb_uid = $request->get('facebook_uid');
-                        if (!$fbUser->save()) throw new \Exception("Unable to create FBUser", -1);
-                        \Log::info("=== FBUser created successfully : ".$fbUser." ===");
-                    }
+                    $person = $this->updatePerson($request, $user);
+                    $user    = $this->updateUser($request, $user);
+                    if ($request->get('isFB') == 1)
+                        $fbUser = $this->createFacebookUser($request, $user);
                     \DB::commit();
 
                     $response['Person'] = $person;
@@ -106,42 +81,11 @@ class TxRegister extends PLTransaction{
             try {
 
                 \DB::beginTransaction();
-
-                \Log::info("=== Creating person ... ===");
-                $person             = new Person();
-                $person->name       = $request->get('name');
-                $person->lastname   = $request->get('lastname');
-                if($request->exists('birthday')) $person->birthday = $request->get('birthday');
-                if($request->exists('gender')) $person->gender = $request->get('gender');
-                if($request->exists('phone')) $person->phone = $request->get('phone');
-                if($request->exists('city')) $person->city = $request->get('city');
-                if($request->exists('country')) $person->country = $request->get('country');
-                if (!$person->save()) throw new \Exception("Unable to create Person", -1);
-                \Log::info("=== Person created successfully : " . $person . " ===");
-
-
-                \Log::info("=== Creating user ... ===");
-                $user            = new User();
-                $user->person_id = $person->id;
-                $user->email     = $request->get('email');
-                $user->password  = ($request->exists('facebook_uid')) ? '' : bcrypt($request->get('password'));
-                $user->username  = ($request->exists('username')) ? $request->get('username') : $request->get('email');
-                if (!$user->save()) throw new \Exception("Unable to create User", -1);
-                \Log::info("=== User created successfully : ".$user." ===");
-
-                if ($request->get('isFB') == 1) {
-
-                    \Log::info("=== Creating FBUser ... ===");
-                    $fbUser = new FbUser();
-                    $fbUser->user_id = $user->id;
-                    $fbUser->fb_uid = $request->get('facebook_uid');
-                    if (!$fbUser->save()) throw new \Exception("Unable to create FBUser", -1);
-                    \Log::info("=== FBUser created successfully : ".$fbUser." ===");
-
-                }
-
+                $person = $this->createPerson($request);
+                $user = $this->createUser($request, $person);
+                if ($request->get('isFB') == 1)
+                    $this->createFacebookUser($request, $user);
                 \DB::commit();
-
                 $response['Person'] = $person;
                 $response['User']   = $user;
                 $response['FbUser'] = $fbUser;
@@ -154,9 +98,116 @@ class TxRegister extends PLTransaction{
         }
 
         return $response;
-
     }
 
     //endregion
+
+    //region Private methods
+
+    /**
+     * Create a new Person
+     * @param PLRequest $request
+     * @throws \Exception
+     * @return Person
+     */
+    private function createPerson(PLRequest $request)
+    {
+        \Log::info("=== Creating person ... ===");
+        $person                 = new Person();
+        $person->name        = $request->get('name');
+        $person->lastname    = $request->get('lastname');
+        if($request->exists('birthday')) $person->birthday = $request->get('birthday');
+        if($request->exists('gender')) $person->gender = $request->get('gender');
+        if($request->exists('phone')) $person->phone = $request->get('phone');
+        if($request->exists('city')) $person->city = $request->get('city');
+        if($request->exists('country')) $person->country = $request->get('country');
+        if (!$person->save()) throw new \Exception("Unable to create Person", -1);
+        \Log::info("=== Person created successfully : " . $person . " ===");
+        return $person;
+    }
+
+    /**
+     * Create a new User
+     * @param PLRequest $request
+     * @param Person $person
+     * @throws \Exception
+     * @return User
+     */
+    private function createUser(PLRequest $request, Person $person)
+    {
+        \Log::info("=== Creating user ... ===");
+        $user            = new User();
+        $user->person_id = $person->id;
+        $user->email     = $request->get('email');
+        $user->password  = ($request->exists('facebook_uid')) ? '' : bcrypt($request->get('password'));
+        $user->username  = ($request->exists('username')) ? $request->get('username') : $request->get('email');
+        if (!$user->save()) throw new \Exception("Unable to create User", -1);
+        \Log::info("=== User created successfully : ".$user." ===");
+        return $user;
+    }
+
+    /**
+     * Create a new Facebook User
+     * @param PLRequest $request
+     * @param User $user
+     * @return FbUser
+     * @throws \Exception
+     */
+    private function createFacebookUser(PLRequest $request, User $user)
+    {
+        \Log::info("=== Creating FBUser ... ===");
+        $fbUser = new FbUser();
+        $fbUser->user_id = $user->id;
+        $fbUser->fb_uid = $request->get('facebook_uid');
+        if (!$fbUser->save()) throw new \Exception("Unable to create FBUser", -1);
+        \Log::info("=== FBUser created successfully : ".$fbUser." ===");
+        return $fbUser;
+    }
+
+    /**
+     * Update person
+     * @param PLRequest $request
+     * @param User $user
+     * @throws \Exception
+     * @return Person
+     */
+    private function updatePerson(PLRequest $request, User $user)
+    {
+        \Log::info("=== Updating person ===");
+        $person                = $user->person;
+        $person->name       = $request->get('name');
+        $person->lastname   = $request->get('lastname');
+        if($request->exists('birthday')) $person->birthday = $request->get('birthday');
+        if($request->exists('gender')) $person->gender = $request->get('gender');
+        if($request->exists('phone')) $person->phone = $request->get('phone');
+        if($request->exists('city')) $person->city = $request->get('city');
+        if($request->exists('country')) $person->country = $request->get('country');
+
+        if (!$person->save()) throw new \Exception("Unable to update Person", -1);
+        \Log::info("=== Person created successfully : " . $person . " ===");
+        return $person;
+    }
+
+    /**
+     * Update user
+     * @param PLRequest $request
+     * @param User $user
+     * @return User
+     * @throws \Exception
+     */
+    private function updateUser(PLRequest $request, User $user)
+    {
+        \Log::info("=== Updating user ... ===");
+        $user->tracking  = 0;
+        if ($request->get('isFB') == 0)
+            $user->password  = bcrypt($request->get('password'));
+        if (!$user->save())
+            throw new \Exception("Unable to update User", -1);
+        \Log::info("=== User updated successfully : ".$user." ===");
+        return $user;
+    }
+
+    //endregion
+
 
 }
