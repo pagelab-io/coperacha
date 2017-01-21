@@ -8,6 +8,7 @@
 
 namespace App\Repositories;
 
+use App\Entities\Invitation;
 use App\Entities\MemberSetting;
 use App\Entities\Participant;
 use App\Entities\Payment;
@@ -24,7 +25,9 @@ use App\Entities\Moneybox;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Validator;
 use Mockery\CountValidator\Exception;
+use Illuminate\Support\Facades\Mail;
 
 class MoneyboxRepository extends BaseRepository{
 
@@ -495,8 +498,68 @@ class MoneyboxRepository extends BaseRepository{
         return count($this->myMoneyboxes($request)) == 0 ? true : false;
     }
 
+    /**
+     * Send the invitation emails
+     * @param PLRequest $request
+     * @return PLResponse
+     */
+    public function sendInvitations(PLRequest $request)
+    {
+        $response = new PLResponse();
+        $moneybox_data = $this->getByURL($request->get('url'));
+        $moneybox = $moneybox_data['moneybox'];
+        $emailsS = preg_replace('/\s+/', '', $request->get('emails'));
+        $emails = preg_split("/[\s,;:]+/", $emailsS);
+
+        if ($this->validateInvitations($emails)) {
+            \Log::info("=== Creando invitaciones ===");
+            foreach ($emails as $email) {
+                $data = ['moneybox' => $moneybox];
+                $record = Invitation::create([
+                    'email' => trim($email),
+                    'status' => 0,
+                    'moneybox_id' => $moneybox->id]);
+                if ($record) {
+                    Mail::send('emails.invitation', $data, function ($message) use ($email) {
+                        $message->from('hola@coperacha.com.mx', 'Coperacha.com.mx');
+                        $message->to($email, 'Invitado ' . $email);
+                        $message->bcc(['sanchezz985@gmail.com']);
+                        $message->subject('Mensaje de Invitación');
+                    });
+                }
+            }
+            $response->data = [];
+            $response->description = 'emails sent successfully';
+            return $response;
+        } else {
+            $response->data = [];
+            $response->status = -1;
+            $response->description = 'one or more emails not have the correct format';
+            return $response;
+        }
+    }
+
     //endregion
 
     //region Private Methods
+
+    /**
+     * Validate Invitations emails
+     * @param $emails
+     * @return bool
+     */
+    private function validateInvitations($emails)
+    {
+        \Log::info("=== Validando los correos electronicos ===");
+        $valid = true;
+        foreach ($emails as $email) {
+            $validator = Validator::make(['mail' => trim($email)], ['mail' => 'email' ]);
+            if (!$validator->passes()) {
+                $valid = false;
+                break;
+            }
+        }
+        return $valid;
+    }
     //endregion
 }

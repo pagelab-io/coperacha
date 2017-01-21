@@ -48,7 +48,6 @@ class MoneyboxValidation {
 
     /**
      * Validation rules for moneybox update
-     *
      * @return array
      */
     static function update_moneybox()
@@ -56,6 +55,18 @@ class MoneyboxValidation {
         return [
             'moneybox_id' => 'required|numeric',
             'method' => 'required|string'
+        ];
+    }
+
+    /**
+     * Validation rules for moneybox invitations
+     * @return array
+     */
+    static function send_invitations()
+    {
+        return [
+            'url' => 'required|string',
+            'emails' => 'required|string'
         ];
     }
 

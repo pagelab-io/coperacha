@@ -10,7 +10,7 @@ namespace App\Http\Controllers\Moneybox;
 
 use App\Entities\File;
 use App\Http\Controllers\PLController;
-use App\Http\Requests\PLRequest;;
+use App\Http\Requests\PLRequest;
 use Illuminate\Http\Request;
 use App\Http\Responses\PLResponse;
 use App\Repositories\MoneyboxRepository;
@@ -144,7 +144,6 @@ class MoneyboxController extends PLController
         return response()->json(['success' => true, 'data' => $file]);
     }
 
-
     /**
      * @param $filename
      * @return Response
@@ -161,6 +160,27 @@ class MoneyboxController extends PLController
             $this->setResponse($this->_moneyboxRepository->getParticipants($request->get('moneybox_id')));
             return response()->json($this->getResponse());
         } catch (\Exception $ex) {
+            $response = new PLResponse();
+            $response->status = $ex->getCode();
+            $response->description = $ex->getMessage();
+            $response->data = $ex->getTraceAsString();
+            return response()->json($response);
+        }
+    }
+
+    /**
+     * Send the invitation emails
+     * @param PLRequest $request
+     * @return mixed
+     */
+    public function postMailInvitation(PLRequest $request)
+    {
+        \Log::info("=== Enviando invitaciones ===");
+        try {
+            $this->validate($request, $request->rules(), $request->messages());
+            $this->setResponse($this->_moneyboxRepository->sendInvitations($request));
+            return response()->json($this->getResponse());
+        } catch(\Exception $ex) {
             $response = new PLResponse();
             $response->status = $ex->getCode();
             $response->description = $ex->getMessage();

@@ -149,6 +149,7 @@ $router->group([
     $router->post('/option',        ['middleware' => 'auth', 'uses' => 'SettingController@createOptions']);
     $router->post('/payment',       ['uses' => 'PaymentController@createPayment']);
     $router->post('/getParticipants', ['uses' => 'MoneyboxController@getParticipants']);
+    $router->post('/sendInvitation', ['middleware' => 'auth', 'uses' => 'MoneyboxController@postMailInvitation']);
 });
 
 Route::get('/moneybox/image/{filename}', 'Moneybox\MoneyboxController@getMoneyboxImage');
