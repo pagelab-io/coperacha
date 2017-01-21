@@ -523,7 +523,7 @@ class MoneyboxRepository extends BaseRepository{
                     Mail::send('emails.invitation', $data, function ($message) use ($email) {
                         $message->from('hola@coperacha.com.mx', 'Coperacha.com.mx');
                         $message->to($email, 'Invitado ' . $email);
-                        $message->bcc(['sanchezz985@gmail.com']);
+                        $message->bcc(['sanchezz985@gmail.com,francisco.javier.p.ramos@gmail.com']);
                         $message->subject('Mensaje de Invitación');
                     });
                 }
