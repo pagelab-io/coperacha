@@ -69,6 +69,7 @@ class TxUpdateMoneybox extends PLTransaction{
             if ($request->exists('goal_amount')) $moneybox->goal_amount = $request->get('goal_amount');
             if ($request->exists('end_date')) $moneybox->end_date = $request->get('end_date');
             if ($request->exists('description')) $moneybox->description = $request->get('description');
+            if ($request->exists('active')) $moneybox->active = $request->get('active');
             if ($category instanceof Category)
                 if ($request->exists('category_id'))
                     $moneybox->category_id = $category->id;
