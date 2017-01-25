@@ -539,6 +539,99 @@ class MoneyboxRepository extends BaseRepository{
         }
     }
 
+    /**
+     * Generate a money request
+     * @param PLRequest $request
+     * @return PLResponse
+     * @throws \Exception
+     */
+    public function generateMoneyRequest(PLRequest $request)
+    {
+        $moneybox = $this->byId($request->get('moneybox_id'));
+        if (!$moneybox)
+            throw new \Exception('Moneybox does not exist', -1);
+
+        $withMail = true;
+        $data = $request->all();
+        $order = $moneybox->order();
+        $order = $order->create($data);
+        $user = $moneybox->person->user;
+        if (!$order) {
+            throw new Exception('Order cannot be created', -1);
+        }
+
+        // Extract file info
+        $data = [
+            'moneybox' => $moneybox,
+            'order' => $order
+        ];
+
+        if (true == $withMail) {
+            Mail::send('emails.request', $data, function ($message) use ($user) {
+                $message->from($user->email, $user->person->fullName());
+                $message->to('coperachamexico@gmail.com', 'Coperacha.com.mx');
+                $message->bcc(['sanchezz985@gmail.com', 'francisco.javier.p.ramos@gmail.com']);
+                $message->subject('Solicitud de Retiro');
+            });
+        }
+
+        $response = new PLResponse();
+        $response->data = $order;
+        $response->description = 'Order created successfully';
+        return $response;
+    }
+
+    public function sendThanksEmail(PLRequest $request)
+    {
+        \Log::info("Llegando a envío de agradecimientos ...");
+        $url = $request->get('url');
+        \Log::info($url);
+        $moneybox_data = $this->getByURL($url);
+        $moneybox = $moneybox_data['moneybox'];
+        if (!$moneybox) {
+            throw new \Exception('Moneybox does not exist.', -1);
+        }
+        // Owner of the moneybox
+        $owner = $moneybox->person->user;
+        // Get users list
+        $users = [];
+
+        foreach ($moneybox->participants as $participant) {
+            if ($participant->active == 0)
+                continue;
+            $person = $participant->person;
+            $user = $person->user;
+            if (!isset($users[$user->email])) {
+                $users[$user->email] = $user;
+            }
+        }
+        $users = array_values($users);
+        $senders = [];
+
+        // Send users list
+        foreach ($users as $user) {
+            if ($user->email) {
+                $senders[] = $user->email;
+                $data = [
+                    'owner' => $owner,
+                    'moneybox' => $moneybox,
+                    'user' => $user
+                ];
+
+                Mail::send('emails.thanks', $data, function ($message) use ($owner, $user) {
+                    $message->from($owner->email, $owner->username);
+                    $message->to($user->email, $user->username);
+                    //$message->bcc(['sanchezz985@gmail.com', 'francisco.javier.p.ramos@gmail.com']);
+                    $message->bcc(['sanchezz985@gmail.com']);
+                    $message->subject('Agradecimiento');
+                });
+            }
+        }
+        $response = new PLResponse();
+        $response->data = $senders;
+        $response->description = 'Emails sent successfully';
+        return $response;
+    }
     //endregion
 
     //region Private Methods

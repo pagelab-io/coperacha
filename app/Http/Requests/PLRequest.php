@@ -59,6 +59,8 @@ class PLRequest extends Request {
                 case "createParticipant": return ParticipantValidation::rules();
                 case "createPayment": return PaymentValidation::rules();
                 case "sendInvitation": return MoneyboxValidation::send_invitations();
+                case "sendRequest": return MoneyboxValidation::send_request();
+                case "sendThanks": return MoneyboxValidation::send_thanks();
                 default: return [];
             }
         }
@@ -88,6 +90,8 @@ class PLRequest extends Request {
             case "createParticipant": return ParticipantValidation::messages();
             case "createPayment": return PaymentValidation::messages();
             case "sendInvitation": return MoneyboxValidation::messages();
+            case "sendRequest": return MoneyboxValidation::messages();
+            case "sendThanks": return MoneyboxValidation::messages();
             default: return [];
         }
 

@@ -71,6 +71,35 @@ class MoneyboxValidation {
     }
 
     /**
+     * Validation rules for moneybox request
+     * @return array
+     */
+    static function send_request()
+    {
+        return [
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'bank_name' => 'required|string',
+            'moneybox_id' => 'required|numeric',
+            'accountType' => 'required|numeric', // 1 - account number , 2 - clabe number, 3 - cellphone
+            'account' => 'required_if:accountType,1',
+            'clabe' => 'required_if:accountType,2',
+            'cellphone' => 'required_if:accountType,3'
+        ];
+    }
+
+    /**
+     * Validation rules for thanks emails
+     * @return array
+     */
+    static function send_thanks()
+    {
+        return [
+            'url' => 'required|string'
+        ];
+    }
+
+    /**
      * Messages for register validations
      * @return array
      */

@@ -189,5 +189,47 @@ class MoneyboxController extends PLController
         }
     }
 
+    /**
+     * Create a new moneybox order
+     * @param PLRequest $request
+     * @return mixed
+     */
+    public function postMailRequest(PLRequest $request)
+    {
+        \Log::info("=== Solicitando dinero ===");
+        try {
+            $this->validate($request, $request->rules(), $request->messages());
+            $this->setResponse($this->_moneyboxRepository->generateMoneyRequest($request));
+            return response()->json($this->getResponse());
+        } catch(\Exception $ex) {
+            $response = new PLResponse();
+            $response->status = $ex->getCode();
+            $response->description = $ex->getMessage();
+            $response->data = $ex->getTraceAsString();
+            return response()->json($response);
+        }
+    }
+
+    /**
+     * Send the thanks email
+     * @param PLRequest $request
+     * @return mixed
+     */
+    public function postMailThanks(PLRequest $request)
+    {
+        \Log::info("=== Sending thanks email ===");
+        try {
+            $this->validate($request, $request->rules(), $request->messages());
+            $this->setResponse($this->_moneyboxRepository->sendThanksEmail($request));
+            return response()->json($this->getResponse());
+        } catch(\Exception $ex) {
+            $response = new PLResponse();
+            $response->status = $ex->getCode();
+            $response->description = $ex->getMessage();
+            $response->data = $ex->getTraceAsString();
+            return response()->json($response);
+        }
+    }
+
     //endregion
 }
