@@ -8,9 +8,11 @@ use App\Entities\Invitation;
 use App\Entities\Moneybox;
 use App\Entities\File;
 use App\Http\Requests\PLRequest;
+use App\Models\Mailer;
 use App\Repositories\MoneyboxRepository;
 use App\Repositories\SettingRepository;
 use App\Repositories\UserRepository;
+use App\Utilities\PLConstants;
 use App\Wordpress\model\Post;
 use Illuminate\Contracts\Queue\EntityNotFoundException;
 use Illuminate\Contracts\View\Factory;
@@ -40,16 +42,27 @@ class HomeController extends Controller
     private $_userRepository;
 
     /**
+     * @var Mailer
+     */
+    private $_mailer;
+
+    /**
      * HomeController constructor.
      * @param SettingRepository $settingRepository
      * @param MoneyboxRepository $moneyboxRepository
      * @param UserRepository $userRepository
+     * @param Mailer $mailer
      */
-    public function __construct(SettingRepository $settingRepository, MoneyboxRepository $moneyboxRepository, UserRepository $userRepository)
+    public function __construct(
+        SettingRepository $settingRepository,
+        MoneyboxRepository $moneyboxRepository,
+        UserRepository $userRepository,
+        Mailer $mailer)
     {
         $this->_settingRepository = $settingRepository;
         $this->_moneyboxRepository = $moneyboxRepository;
         $this->_userRepository = $userRepository;
+        $this->_mailer = $mailer;
     }
 
     /**
@@ -362,12 +375,13 @@ class HomeController extends Controller
         ];
 
         if (true == $withMail) {
-            Mail::send('emails.request', $data, function ($message) use ($user) {
-                $message->from($user->email, $user->person->fullName());
-                $message->to('coperachamexico@gmail.com', 'Coperacha.com.mx');
-                $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com']);
-                $message->subject('Solicitud de Retiro');
-            });
+            $options = array(
+                'from' => [$user->email => $user->person->fullName()],
+                'to' => ['coperachamexico@gmail.com' => 'Coperacha.com.mx'],
+                'bcc' => explode(',', PLConstants::EMAIL_BCC),
+                'title' => 'Solicitud de Retiro'
+            );
+            $this->_mailer->send(PLConstants::EMAIL_REQUEST, $data, $options);
         }
         return response()->json(['success' => true, 'data' => $order]);
     }
@@ -384,14 +398,13 @@ class HomeController extends Controller
             'email'   => $request->get('email'),
             'content' => $request->get('content'),
         ];
-
-        Mail::send('emails.contact', $data, function ($message) use($request) {
-            $message->from($request->get('email'), 'Contacto');
-            $message->to('coperachamexico@gmail.com');
-            $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com']);
-            $message->subject('Mensaje de Contacto');
-        });
-
+        $options = array(
+            'from' => [$request->get('email') => 'Contacto'],
+            'to' => ['coperachamexico@gmail.com' => 'Coperacha.com.mx'],
+            'bcc' => explode(',', PLConstants::EMAIL_BCC),
+            'title' => 'Mensaje de Contacto'
+        );
+        $this->_mailer->send(PLConstants::EMAIL_CONTACT, $data, $options);
         return response()->json(['success' => true, 'data' => $data]);
     }
 
@@ -435,13 +448,13 @@ class HomeController extends Controller
                     'moneybox' => $moneybox,
                     'user' => $user
                 ];
-
-                Mail::send('emails.thanks', $data, function ($message) use ($owner, $user) {
-                    $message->from($owner->email, $owner->username);
-                    $message->to($user->email, $user->username);
-                    $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com', 'coperachamexico@gmail.com']);
-                    $message->subject('Agradecimiento');
-                });
+                $options = array(
+                    'from' => [$owner->email => $owner->username],
+                    'to' => [$user->email => $user->username],
+                    'bcc' => explode(',', PLConstants::EMAIL_BCC),
+                    'title' => 'Agradecimiento'
+                );
+                $this->_mailer->send(PLConstants::EMAIL_THANKS, $data, $options);
             }
         }
         return response()->json(['success' => true, 'data' => $senders]);
@@ -494,13 +507,13 @@ class HomeController extends Controller
                     'moneybox_id' => $moneybox->id]);
 
                 if ($record) {
-
-                    Mail::send('emails.invitation', $data, function ($message) use ($email) {
-                        $message->from('hola@coperacha.com.mx', 'Coperacha.com.mx');
-                        $message->to($email, 'Invitado ' . $email);
-                        $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com', 'coperachamexico@gmail.com']);
-                        $message->subject('Mensaje de Invitación');
-                    });
+                    $options = array(
+                        'from' => ['hola@coperacha.com.mx' => 'Coperacha.com.mx'],
+                        'to' => [$email => 'Invitado ' . $email],
+                        'bcc' => explode(',', PLConstants::EMAIL_BCC),
+                        'title' => 'Mensaje de Invitación'
+                    );
+                    $this->_mailer->send(PLConstants::EMAIL_MONEYBOX_INVITATION, $data, $options);
                 }
             } else {
                 return response()->json(['success' => false, 'data' => $emails]);
@@ -531,13 +544,13 @@ class HomeController extends Controller
                     'invitation' => $invitation,
                     'moneybox' => $invitation->moneybox
                 ];
-
-                Mail::send('emails.pendinginvitation', $data, function ($message) use ($invitation) {
-                    $message->from('hola@coperacha.com.mx', 'Coperacha.com.mx');
-                    $message->to($invitation->email, 'Invitado');
-                    $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com', 'coperachamexico@gmail.com']);
-                    $message->subject('Mensaje de Recordatorio');
-                });
+                $options = array(
+                    'from' => ['hola@coperacha.com.mx' => 'Coperacha.com.mx'],
+                    'to' => [$invitation->email => 'Invitado'],
+                    'bcc' => explode(',', PLConstants::EMAIL_BCC),
+                    'title' => 'Mensaje de Recordatorio'
+                );
+                $this->_mailer->send(PLConstants::EMAIL_PENDING_INVITATION, $data, $options);
             }
         }
 

@@ -3,10 +3,10 @@
 namespace App\Console\Commands;
 
 use App\Entities\User;
+use App\Models\Mailer;
+use App\Utilities\PLConstants;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 
 class MoneyboxChecker extends Command
 {
@@ -25,12 +25,18 @@ class MoneyboxChecker extends Command
     protected $description = 'Checks the moneybox deadline';
 
     /**
+     * @var Mailer
+     */
+    private $_mailer;
+
+    /**
      * Create a new command instance.
      *
      */
-    public function __construct()
+    public function __construct(Mailer $mailer)
     {
         parent::__construct();
+        $this->_mailer = $mailer;
     }
 
     /**
@@ -46,39 +52,40 @@ class MoneyboxChecker extends Command
      */
     public function handle()
     {
-        $this->info("Start Checking...");
+        \Log::info("Start Checking Moneyboxes ...");
         $mb = DB::select("
                 SELECT *
                   FROM moneyboxes
                 WHERE DATE(DATE_ADD(now(), INTERVAL 3 DAY))=DATE(end_date)");
 
-        $ids = [];
+        \Log::info(count($mb)." moneyboxes ...");
+        \Log::info("Sending deadline emails ...");
         foreach ($mb as $i => $m) {
             $user = User::byPerson($m->person_id)->first();
-
-            if ($user instanceof User) {
-                $person = $user->person;
-                $data = [
-                    'name' => $person->name,
-                    'link' => "/moneybox/detail/" . $m->url,
-                    'moneybox' => $m->name
-                ];
-
-                Mail::send('emails.deadline', $data, function ($message) use ($user) {
-                    $message->from('info@coperacha.com.mx', 'Coperacha');
-                    $message->to($user->email, $user->username);
-                    $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com', 'coperachamexico@gmail.com']);
-                    $message->subject('Deadline');
-                });
-
-                $ids[] = sprintf("(%s:%s)", $user->id, $m->id);
-            }
+            if ($user instanceof User)
+                $this->sendDeadlineEmail($user, $m);
         }
+        \Log::info("Completed");
+    }
 
-        $this->info("Completed");
-        // $message = sprintf("Registros actualizados: %s [%s]", ($i + 1), implode(',', $ids));
-
-        // Write info
-        //Log::info($message);
+    /**
+     * Send the deadline emails
+     * @param User $user
+     * @param $moneybox
+     */
+    private function sendDeadlineEmail(User $user, $moneybox)
+    {
+        $person = $user->person;
+        $data = [
+            'name' => $person->name,
+            'link' => "/moneybox/detail/" . $moneybox->url,
+            'moneybox' => $moneybox->name
+        ];
+        $options = array(
+            'to' => [$user->email => $user->username],
+            'bcc' => explode(',', PLConstants::EMAIL_BCC),
+            'title' => 'Deadline'
+        );
+        $this->_mailer->send(PLConstants::EMAIL_DEADLINE, $data, $options);
     }
 }

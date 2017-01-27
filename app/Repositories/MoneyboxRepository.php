@@ -520,12 +520,12 @@ class MoneyboxRepository extends BaseRepository{
                     'status' => 0,
                     'moneybox_id' => $moneybox->id]);
                 if ($record) {
-                    Mail::send('emails.invitation', $data, function ($message) use ($email) {
-                        $message->from('hola@coperacha.com.mx', 'Coperacha.com.mx');
-                        $message->to($email, 'Invitado ' . $email);
-                        $message->bcc(['sanchezz985@gmail.com,francisco.javier.p.ramos@gmail.com']);
-                        $message->subject('Mensaje de Invitación');
-                    });
+                    $options = array(
+                        'to' => [$email => 'Invitado ' . $email],
+                        'bcc' => explode(',', PLConstants::EMAIL_BCC),
+                        'title' => 'Mensaje de Invitación'
+                    );
+                    $this->_mailer->send(PLConstants::EMAIL_MONEYBOX_INVITATION, $data, $options);
                 }
             }
             $response->data = [];
@@ -567,12 +567,13 @@ class MoneyboxRepository extends BaseRepository{
         ];
 
         if (true == $withMail) {
-            Mail::send('emails.request', $data, function ($message) use ($user) {
-                $message->from($user->email, $user->person->fullName());
-                $message->to('coperachamexico@gmail.com', 'Coperacha.com.mx');
-                $message->bcc(['sanchezz985@gmail.com', 'francisco.javier.p.ramos@gmail.com']);
-                $message->subject('Solicitud de Retiro');
-            });
+            $options = array(
+                'from' => [$user->email => $user->person->fullName()],
+                'to' => ['coperachamexico@gmail.com' => 'Coperacha.com.mx'],
+                'bcc' => explode(',', PLConstants::EMAIL_BCC),
+                'title' => 'Solicitud de Retiro'
+            );
+            $this->_mailer->send(PLConstants::EMAIL_REQUEST, $data, $options);
         }
 
         $response = new PLResponse();
@@ -617,14 +618,13 @@ class MoneyboxRepository extends BaseRepository{
                     'moneybox' => $moneybox,
                     'user' => $user
                 ];
-
-                Mail::send('emails.thanks', $data, function ($message) use ($owner, $user) {
-                    $message->from($owner->email, $owner->username);
-                    $message->to($user->email, $user->username);
-                    //$message->bcc(['sanchezz985@gmail.com', 'francisco.javier.p.ramos@gmail.com']);
-                    $message->bcc(['sanchezz985@gmail.com']);
-                    $message->subject('Agradecimiento');
-                });
+                $options = array(
+                    'from' => [$owner->email => $owner->username],
+                    'to' => [$user->email =>  $user->username],
+                    'bcc' => explode(',', PLConstants::EMAIL_BCC),
+                    'title' => 'Agradecimiento'
+                );
+                $this->_mailer->send(PLConstants::EMAIL_THANKS, $data, $options);
             }
         }
         $response = new PLResponse();

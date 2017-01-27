@@ -25,6 +25,7 @@ class Mailer {
     {
         \Log::info("sending email ...");
         Mail::send($key, $data, function ($message) use ($options){
+            $message->from( isset($options['from']) ? $options['from'] : 'hola@coperacha.com.mx' , 'Coperacha.com.mx');
             $message->to($options['to']);
             $message->bcc($options['bcc']);
             $message->subject($options['title']);

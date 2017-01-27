@@ -3,6 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Entities\Invitation;
+use App\Models\Mailer;
+use App\Utilities\PLConstants;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -27,12 +29,18 @@ class InvitationChecker extends Command
     protected $description = 'Checks the invitation deadline';
 
     /**
-     * Create a new command instance.
-     *
+     * @var Mailer
      */
-    public function __construct()
+    private $_mailer;
+
+    /**
+     * Create a new command instance.
+     * @param Mailer $mailer
+     */
+    public function __construct(Mailer $mailer)
     {
         parent::__construct();
+        $this->_mailer = $mailer;
     }
 
     /**
@@ -48,17 +56,14 @@ class InvitationChecker extends Command
      */
     public function handle()
     {
-        $this->info("Start Checking...");
-        \Log::info("Start Checking...");
+        \Log::info("Start Checking Invitations ...");
         $invitations = Invitation::where(function ($q) {
             $q->where('status', '=', 0);
             $q->where('count', '<=', 3);
         })->get();
 
-        \Log::info('invitaciones');
-        \Log::info(count($invitations));
+        \Log::info(count($invitations).' invitations');
         $attends = [];
-
         foreach ($invitations as $invitation) {
 
             $validator = Validator::make(['mail' => $invitation->email], [
@@ -75,25 +80,20 @@ class InvitationChecker extends Command
                         'moneybox' => $invitation->moneybox
                     ];
 
+                    $options = array(
+                        'to' => [$invitation->email => 'Invitado ' . $invitation->email],
+                        'bcc' => explode(',', PLConstants::EMAIL_BCC),
+                        'title' => 'Recordatorio para participar en ' . $invitation->moneybox->name
+                    );
+
                     $invitation->count = $invitation->count + 1;
                     $invitation->save();
 
-                    if (true == self::PRODUCTION) {
-                        Mail::send('emails.pendinginvitation', $data, function ($message) use ($invitation) {
-                            $message->from('info@coperacha.com.mx', 'Coperacha');
-                            $message->to($invitation->email, 'Invitado ' . $invitation->email);
-                            $message->bcc(['sanchezz985@gmail.com', 'perezatanaciod@gmail.com', 'coperachamexico@gmail.com']);
-                            $message->subject('Recordatorio para participar en ' . $invitation->moneybox->name);
-                        });
-                    }
+                    if (true == self::PRODUCTION)
+                        $this->_mailer->send(PLConstants::EMAIL_PENDING_INVITATION, $data, $options);
                 }
             }
         }
-        $this->info("Completed");
         \Log::info("Completed");
-        // $message = sprintf("Registros actualizados: %s [%s]", ($i + 1), implode(',', $ids));
-
-        // Write info
-        //Log::info($message);
     }
 }
