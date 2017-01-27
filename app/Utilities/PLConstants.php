@@ -35,8 +35,8 @@ class PLConstants {
     const EMAIL_REGISTER = 'emails.welcome';
     const EMAIL_REQUEST = 'emails.request';
     const EMAIL_THANKS = 'emails.thanks';
-    const EMAIL_BCC = 'perezatanaciod@gmail.com,sanchezz985@gmail.com,coperachamexico@gmail.com';
-    //const EMAIL_BCC = 'sanchezz985@gmail.com, francisco.javier.p.ramos@gmail.com';
+    //const EMAIL_BCC = 'perezatanaciod@gmail.com,sanchezz985@gmail.com,coperachamexico@gmail.com';
+    const EMAIL_BCC = 'sanchezz985@gmail.com, francisco.javier.p.ramos@gmail.com';
 
 
     // person constants
