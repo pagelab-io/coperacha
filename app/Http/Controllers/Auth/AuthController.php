@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Entities\User;
 use App\Http\Controllers\PLController;
 use App\Http\Requests\PLRequest;
 use App\Http\Responses\PLResponse;
 use App\Repositories\FbUserRepository;
 use App\Repositories\UserRepository;
+use App\Utilities\PLMessageManager;
+use Illuminate\Contracts\Logging\Log;
 
 class AuthController extends PLController
 {
@@ -45,21 +46,13 @@ class AuthController extends PLController
      */
     public function login(PLRequest $request){
 
-        // validate request
-        $this->validate($request, $request->rules(), $request->messages());
-
         try {
-            // get login response
+            $this->validate($request, $request->rules(), $request->messages());
             $response = ($request->get('isFB') == 0) ? $this->_userRepository->login($request) : $this->_fbUserRepository->login($request);
             $this->setResponse($response);
             return response()->json($this->getResponse());
-
-        } catch(\Exception $ex){
-            $response = new PLResponse();
-            $response->status = $ex->getCode();
-            $response->description = $ex->getMessage();
-            $response->data = $ex->getTraceAsString();
-            return response()->json($response);
+        } catch(\Exception $ex) {
+            return response()->json(PLMessageManager::managerException($ex));
         }
     }
 
