@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Log;
 /**
  * Class for logging with the className or file where log is used.
  * Class PLCustomLog
- * @package App\Utilities
  */
 class PLCustomLog
 {
