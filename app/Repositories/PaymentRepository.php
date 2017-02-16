@@ -268,7 +268,7 @@ class PaymentRepository extends BaseRepository
     }
 
     public function paymentAVGB(){
-        $result = array('P' => 0,'O' => 0,'S' => 0);
+        $result = array('P' => 0,'O' => 0,'S' => 0, 'T' => 0);
         $payments = Payment::where('status', PLConstants::PAYMENT_PAYED)->get();
         $sum = 0;
         if(count($payments) > 0){
@@ -286,7 +286,7 @@ class PaymentRepository extends BaseRepository
 
     public function paymentAVGByPerson($person_id)
     {
-        $paymentsAVG = array('P' => 0,'O' => 0,'S' => 0);
+        $paymentsAVG = array('P' => 0,'O' => 0,'S' => 0, 'T' => 0);
         $payments = Payment::where(array(array('person_id', $person_id), array('status', PLConstants::PAYMENT_PAYED)))->get();
         $sum = 0;
         if(count($payments) > 0){
@@ -338,7 +338,7 @@ class PaymentRepository extends BaseRepository
     public function paymentAVGByMoneybox($moneybox_id)
     {
         $moneybox = $this->_moneyboxRepository->byId($moneybox_id);
-        $paymentsAVG = array('P' => 0,'O' => 0,'S' => 0);
+        $paymentsAVG = array('P' => 0,'O' => 0,'S' => 0, 'T' => 0);
         $payments = $moneybox->payments;
         $sum = 0;
         if(count($payments) > 0){
