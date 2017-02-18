@@ -68,7 +68,7 @@ class PLConektaCard extends PLConekta implements IPLPayment{
                 'card' => $request->get('token'),
                 'details'=> array(
                     'name'=> $person->name." ".$person->lastname,
-                    'phone'=> $person->phone,
+                    'phone'=> ($person->phone != "") ? $person->phone : "525555555555", // todo : quit hardcode
                     'email'=> $person->user->email,
                     'line_items'=> array(
                         array(
