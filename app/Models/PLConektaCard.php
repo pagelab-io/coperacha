@@ -28,7 +28,7 @@ class PLConektaCard extends PLConekta implements IPLPayment{
     {
         $this->_personRepository = $personRepository;
         $this->_moneyboxRepository = $moneyboxRepository;
-        $this->api_key = env('LOCAL.CONECKTA_API_KEY');
+        $this->api_key = (env('APP_ENV') == 'local') ? env('LOCAL.CONECKTA_API_KEY') : env('PRODUCTION.CONECKTA_API_KEY');
     }
 
     /**
