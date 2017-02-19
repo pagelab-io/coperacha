@@ -193,7 +193,7 @@ class TxCreateParticipant extends PLTransaction{
                 // update person before save participation
                 $person->name       = $request->get('name');
                 $person->lastname   = $request->get('lastname');
-                $person->phone      = $request->get('phone');
+                $person->phone      = ($request->get('phone') != null || $request->get('phone') != "") ? $request->get('phone') : "5555555555";
                 $person->areacode   = $request->get('areacode');
                 \Log::info("update person data");
                 if (!$person->save()) throw new \Exception("Unable to update person", -1);
