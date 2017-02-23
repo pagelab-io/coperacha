@@ -311,7 +311,7 @@ class MoneyboxRepository extends BaseRepository{
         $moneyboxes = Moneybox::where('active', 1)
             ->with('files')
             ->with('participants')
-            ->where("person_id", $request->get('person_id'))->get();
+            ->where("person_id", $request->get('person_id'))->orderBy('created_at','desc')->get();
 
         if (count($moneyboxes) > 0) {
             foreach ($moneyboxes as $m) {
@@ -343,7 +343,7 @@ class MoneyboxRepository extends BaseRepository{
                 $personMoneyboxes = Participant::where(array(
                     array('person_id', $person->id),
                     array('active', 1)
-                ))->get();
+                ))->orderBy('created_at','desc')->get();
                 if (count($personMoneyboxes) > 0) {
                     foreach ($personMoneyboxes as $pm) {
                         $moneybox = $this->byId($pm->moneybox_id);
