@@ -432,13 +432,13 @@ class PaymentRepository extends BaseRepository
         $cardResponse = $this->_card->sendPayment($request);
         if (is_array($cardResponse)) {
             $payment = new Payment();
-            $payment->person_id         = $request->get('person_id');
-            $payment->moneybox_id       = $request->get('moneybox_id');
-            $payment->amount            = $request->get('amount');
-            $payment->amount            = $request->get('commission');
-            $payment->method            = PLConstants::PAYMENT_CARD;
-            $payment->uid               = $cardResponse['reference_id'];
-            $payment->status            = PLConstants::PAYMENT_PENDING;
+            $payment->person_id     = $request->get('person_id');
+            $payment->moneybox_id = $request->get('moneybox_id');
+            $payment->amount       = $request->get('amount');
+            $payment->commission   = $request->get('commission');
+            $payment->method       = PLConstants::PAYMENT_CARD;
+            $payment->uid            = $cardResponse['reference_id'];
+            $payment->status         = PLConstants::PAYMENT_PENDING;
             if (!$payment->save()) throw new Exception("Unable to create payment", -1);
         }
         $response = new PLResponse();
