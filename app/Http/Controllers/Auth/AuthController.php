@@ -1,4 +1,8 @@
 <?php
+/**
+ * Created by Emmanuel Sánchez Luna.
+ * Github user: sanchezz985
+ */
 
 namespace App\Http\Controllers\Auth;
 
@@ -7,8 +11,8 @@ use App\Http\Requests\PLRequest;
 use App\Http\Responses\PLResponse;
 use App\Repositories\FbUserRepository;
 use App\Repositories\UserRepository;
+use App\Utilities\PLCustomLog;
 use App\Utilities\PLMessageManager;
-use Illuminate\Contracts\Logging\Log;
 
 class AuthController extends PLController
 {
@@ -25,6 +29,11 @@ class AuthController extends PLController
      */
     private $_fbUserRepository;
 
+    /**
+     * @var PLCustomLog
+     */
+    public $log;
+
     //endregion
 
     //region Static methods
@@ -34,6 +43,7 @@ class AuthController extends PLController
     {
         $this->_userRepository = $userRepository;
         $this->_fbUserRepository = $fbUserRepository;
+        $this->log = new PLCustomLog("AuthController");
     }
 
     //region Methods
@@ -45,7 +55,7 @@ class AuthController extends PLController
      * @return \Illuminate\Http\JsonResponse
      */
     public function login(PLRequest $request){
-
+        $this->log->info("arriving in AuthController");
         try {
             $this->validate($request, $request->rules(), $request->messages());
             $response = ($request->get('isFB') == 0) ? $this->_userRepository->login($request) : $this->_fbUserRepository->login($request);

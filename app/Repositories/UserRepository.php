@@ -8,6 +8,7 @@
 
 namespace App\Repositories;
 
+use App\Utilities\PLCustomLog;
 use App\Utilities\PLUtils;
 use Carbon\Carbon;
 use Illuminate\Container\Container as App;
@@ -25,6 +26,8 @@ class UserRepository extends BaseRepository
 {
 
     //region attributes
+
+    public $log;
 
     /**
      *
@@ -53,6 +56,7 @@ class UserRepository extends BaseRepository
         $this->_user = $user;
         $this->_personRepository = $personRepository;
         $this->_txUpdateUser = $txUpdateUser;
+        $this->log = new PLCustomLog("UserRepository");
     }
 
     //region Methods
@@ -365,23 +369,22 @@ class UserRepository extends BaseRepository
     }
 
     /**
-     * email login
-     *
+     * Login by email
      * @param PLRequest $request
      * @return PLResponse
      */
     public function login(PLRequest $request)
     {
-        \Log::info("=== llegando a login, intentanto validar credenciales ===");
-        $auth       = \Auth::attempt(['email' => trim($request->get('email')), 'password' => trim($request->get('password'))]);
+        $this->log->info("login by email");
         $response   = new PLResponse();
-        $user       = null;
-
+        $user        = null;
+        $auth       = \Auth::attempt(['email' => trim($request->get('email')), 'password' => trim($request->get('password'))]);
 
         if ($auth) {
-            $user = $this->byEmail($request->get('email'));
-            \Log::info("=== Auteticación exitosa ===");
+            $this->log->info("correct credentials");
+            $user = $this->byEmail(trim($request->get('email')));
             if ($user->tracking == 0) {
+                $this->log->info("first access");
                 $this->updateTracking($user, 1);
                 $user->first_access = 1;
             } else {
@@ -390,12 +393,11 @@ class UserRepository extends BaseRepository
             $response->description = 'Login successfully';
             $response->data = $user;
         } else {
-            \Log::info("=== Credenciales inválidas ===");
+            $this->log->info("invalid credentials");
             $response->status = -1;
-            $response->description = 'Invalid Credentials';
+            $response->description = 'Invalid credentials';
             $response->data = null;
         }
-
         return $response;
     }
 
@@ -406,7 +408,7 @@ class UserRepository extends BaseRepository
      */
     public function updateTracking(User $user, $tracking)
     {
-        \Log::info("Updatint tracking ...");
+        $this->log->info("Updating tracking to ".$tracking." ...");
         $user->tracking = $tracking;
         if (!$user->save()) throw new Exception("Unable to update user", -1);
         return $user;

@@ -28,7 +28,6 @@ class PLMessageManager
     {
         $response = new PLResponse();
 
-        \LOG::info($ex);
         if ($ex instanceof ValidationException) {
             $response->status = $ex->getCode();
             $response->description = $ex->getResponse();
