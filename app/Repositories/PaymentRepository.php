@@ -159,7 +159,7 @@ class PaymentRepository extends BaseRepository
                 $payment->status = PLConstants::PAYMENT_PAYED;
                 $payment->save();
                 $moneybox->collected_amount += $payment->amount;
-                $moneybox->commission_amount = $payment->commission;
+                $moneybox->commission_amount += $payment->commission;
                 $moneybox->save();
 
                 //update participant status
