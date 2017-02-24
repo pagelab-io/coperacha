@@ -10,6 +10,7 @@ namespace App\Repositories;
 
 use App\Entities\Invitation;
 use App\Entities\MemberSetting;
+use App\Entities\Order;
 use App\Entities\Participant;
 use App\Entities\Payment;
 use App\Entities\Person;
@@ -319,7 +320,7 @@ class MoneyboxRepository extends BaseRepository{
                 if (count($m->files) > 0) {
                     $m->lastfile = $m->files->last();
                 }
-
+                $m->orders = $this->hasOrders($m->id);
                 $m->settings = $this->_memberSettingRepository->getSettings('moneybox', $m->id);
             }
         }
@@ -353,6 +354,7 @@ class MoneyboxRepository extends BaseRepository{
                         if (count($moneybox->files) > 0) {
                             $moneybox->lastfile = $moneybox->files->last();
                         }
+                        $moneybox->orders = $this->hasOrders($moneybox->id);
                         array_push($moneyboxes, $moneybox);
                     }
                 }
@@ -654,5 +656,12 @@ class MoneyboxRepository extends BaseRepository{
         }
         return $valid;
     }
+
+    private function hasOrders($moneybox_id)
+    {
+        $orders = Order::where("moneybox_id", $moneybox_id)->get();
+        return count($orders);
+    }
+
     //endregion
 }

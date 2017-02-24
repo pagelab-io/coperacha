@@ -33,7 +33,7 @@
 
                             @if (Auth::user()->person->id == $moneybox->person_id)
                                 <div class="form-group">
-                                    <a class="btn btn-primary"
+                                    <a class="btn btn-primary {{($moneybox->orders > 0) ? 'disabled' : 'enabled'}}"
                                        title = "Modificar datos de la alcancía"
                                        href={{url('/moneybox/create/'.$moneybox->url)}}>Modificar</a>
                                 </div>
@@ -41,21 +41,15 @@
 
                             <div class="form-group">
                                 @if (Auth::user()->person->id == $moneybox->person_id)
-                                    @if($moneybox->collected_amount > 0)
-                                        <a class="btn btn-primary"
-                                           title = "Enviar correo para solicitar dinero."
-                                           href="{{url('moneybox/request/'.$moneybox->url)}}">Utilizar dinero</a>
-                                    @else
-                                        <a class="btn btn-primary disabled"
-                                           title = "Enviar correo para solicitar dinero."
-                                           href="{{url('moneybox/request/'.$moneybox->url)}}">Utilizar dinero</a>
-                                    @endif
+                                    <a class="btn btn-primary {{$moneybox->collected_amount > 0 ? 'enabled' : 'disabled'}} {{($moneybox->orders > 0) ? 'disabled' : 'enabled'}}""
+                                       title = "Enviar correo para solicitar dinero."
+                                       href="{{url('moneybox/request/'.$moneybox->url)}}">Utilizar dinero</a>
                                 @endif
                             </div>
 
                             <div class="form-group">
                                 @if ($current_date <= $end_date)
-                                    <a class="btn btn-primary"
+                                    <a class="btn btn-primary {{($moneybox->orders > 0) ? 'disabled' : 'enabled'}}"
                                        title = "Enviar correo a conocidos para participar"
                                        href="{{url('/moneybox/detail/'.$moneybox->url)}}">Invitar/Participar</a>
                                 @endif
