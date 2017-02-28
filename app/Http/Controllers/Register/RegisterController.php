@@ -6,6 +6,7 @@ use App\Http\Controllers\PLController;
 use \App\Http\Requests\PLRequest;
 use App\Http\Responses\PLResponse;
 use App\Models\Register;
+use App\Utilities\PLCustomLog;
 
 /**
  * Class RegisterController
@@ -14,6 +15,11 @@ use App\Models\Register;
 class RegisterController extends PLController{
 
     //region attributes
+
+    /**
+     * @var PLCustomLog
+     */
+    public $log;
 
     /**
      * @var Register
@@ -27,6 +33,7 @@ class RegisterController extends PLController{
 
     public function __construct(Register $register){
         $this->_register = $register;
+        $this->log = new PLCustomLog("RegisterController");
     }
 
     //region Methods
@@ -42,6 +49,7 @@ class RegisterController extends PLController{
         // request validation
         $this->validate($request,$request->rules(), $request->messages());
        try{
+           $this->log->info("Arriving in RegisterController");
             $this->setResponse($this->_register->userRegister($request));
             return response()->json($this->getResponse());
        }catch (\Exception $ex){

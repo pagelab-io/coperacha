@@ -18,7 +18,6 @@ use App\Http\Requests\PLRequest;
 use App\Entities\Person;
 use App\Entities\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
 use Mockery\CountValidator\Exception;
 
@@ -27,6 +26,9 @@ class UserRepository extends BaseRepository
 
     //region attributes
 
+    /**
+     * @var PLCustomLog
+     */
     public $log;
 
     /**
@@ -350,6 +352,7 @@ class UserRepository extends BaseRepository
      */
     public function userExist($email = "" , $username = "")
     {
+        $this->log->info("Check for user existence");
         $count = 0;
         try {
 

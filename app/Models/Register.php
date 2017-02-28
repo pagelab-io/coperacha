@@ -6,10 +6,16 @@ use App\Http\Requests\PLRequest;
 use App\Http\Responses\PLResponse;
 use App\Transactions\TxRegister;
 use App\Utilities\PLConstants;
+use App\Utilities\PLCustomLog;
 
 class Register {
 
     //region attributes
+
+    /**
+     * @var PLCustomLog
+     */
+    public $log;
 
     /**
      * @var TxRegister
@@ -30,6 +36,7 @@ class Register {
     {
         $this->_txRegister = $txRegister;
         $this->_mailer = $mailer;
+        $this->log = new PLCustomLog("Register");
     }
 
     //region Methods
@@ -42,11 +49,11 @@ class Register {
      */
     public function userRegister(PLRequest $request)
     {
-        \Log::info("=== Entrando a registro ===");
+        $this->log->info("Registering new user");
         $response = new PLResponse();
         $txResponse = $this->_txRegister->executeTx($request);
         if (is_array($txResponse)) {
-            \Log::info("Usuario registrado correctamente, comenzando autenticación");
+            $this->log->info("User registered successfully, begin authentication");
             \Auth::login($txResponse['User']);
             $response->description = 'User registered successfully';
             $response->data = $txResponse;

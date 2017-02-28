@@ -7,6 +7,7 @@ use App\Entities\Person;
 use App\Entities\User;
 use App\Http\Requests\PLRequest;
 use App\Repositories\UserRepository;
+use App\Utilities\PLCustomLog;
 
 /**
  * Register's transaction
@@ -16,6 +17,11 @@ use App\Repositories\UserRepository;
 class TxRegister extends PLTransaction {
 
     //region attributes
+
+    /**
+     * @var PLCustomLog;
+     */
+    public $log;
 
     /**
      * @var UserRepository
@@ -31,6 +37,7 @@ class TxRegister extends PLTransaction {
     public function __construct(UserRepository $userRepository)
     {
         $this->_userRepository = $userRepository;
+        $this->log = new PLCustomLog("TxRegister");
     }
 
     //region methods
@@ -48,7 +55,7 @@ class TxRegister extends PLTransaction {
         $response   = array();
         $fbUser     = null;
         $user       = null;
-
+        $this->log->info("Executing register transaction");
         if ($this->_userRepository->userExist($request->get('email'))) {
             $user = $this->_userRepository->byEmail($request->get('email'));
 
@@ -70,7 +77,7 @@ class TxRegister extends PLTransaction {
                     $response['FbUser'] = $fbUser;
 
                 } catch(\Exception $ex) {
-                    \Log::info("=== Executing rollback ... ===");
+                    $this->log->info("Executing rollback");
                     \DB::rollback();
                     throw $ex;
                 }
@@ -91,7 +98,7 @@ class TxRegister extends PLTransaction {
                 $response['FbUser'] = $fbUser;
 
             } catch(\Exception $ex) {
-                \Log::info("=== Executing rollback ... ===");
+                $this->log->info("Executing rollback");
                 \DB::rollback();
                 throw $ex;
             }
@@ -112,7 +119,7 @@ class TxRegister extends PLTransaction {
      */
     private function createPerson(PLRequest $request)
     {
-        \Log::info("=== Creating person ... ===");
+        $this->log->info("Creating person");
         $person                 = new Person();
         $person->name        = $request->get('name');
         $person->lastname    = $request->get('lastname');
@@ -122,7 +129,7 @@ class TxRegister extends PLTransaction {
         if($request->exists('city')) $person->city = $request->get('city');
         if($request->exists('country')) $person->country = $request->get('country');
         if (!$person->save()) throw new \Exception("Unable to create Person", -1);
-        \Log::info("=== Person created successfully : " . $person . " ===");
+        $this->log->info("Person created successfully : ". $person);
         return $person;
     }
 
@@ -135,14 +142,14 @@ class TxRegister extends PLTransaction {
      */
     private function createUser(PLRequest $request, Person $person)
     {
-        \Log::info("=== Creating user ... ===");
+        $this->log->info("Creating user");
         $user            = new User();
         $user->person_id = $person->id;
         $user->email     = $request->get('email');
         $user->password  = ($request->exists('facebook_uid')) ? '' : bcrypt($request->get('password'));
         $user->username  = ($request->exists('username')) ? $request->get('username') : $request->get('email');
         if (!$user->save()) throw new \Exception("Unable to create User", -1);
-        \Log::info("=== User created successfully : ".$user." ===");
+        $this->log->info("User created successfully : ".$user);
         return $user;
     }
 
@@ -155,12 +162,12 @@ class TxRegister extends PLTransaction {
      */
     private function createFacebookUser(PLRequest $request, User $user)
     {
-        \Log::info("=== Creating FBUser ... ===");
+        $this->log->info("Creating FBUser");
         $fbUser = new FbUser();
         $fbUser->user_id = $user->id;
         $fbUser->fb_uid = $request->get('facebook_uid');
         if (!$fbUser->save()) throw new \Exception("Unable to create FBUser", -1);
-        \Log::info("=== FBUser created successfully : ".$fbUser." ===");
+        $this->log->info("FBUser created successfully : ".$fbUser);
         return $fbUser;
     }
 
@@ -173,7 +180,7 @@ class TxRegister extends PLTransaction {
      */
     private function updatePerson(PLRequest $request, User $user)
     {
-        \Log::info("=== Updating person ===");
+        $this->log->info("Updating person");
         $person                = $user->person;
         $person->name       = $request->get('name');
         $person->lastname   = $request->get('lastname');
@@ -182,9 +189,8 @@ class TxRegister extends PLTransaction {
         if($request->exists('phone')) $person->phone = $request->get('phone');
         if($request->exists('city')) $person->city = $request->get('city');
         if($request->exists('country')) $person->country = $request->get('country');
-
         if (!$person->save()) throw new \Exception("Unable to update Person", -1);
-        \Log::info("=== Person created successfully : " . $person . " ===");
+        $this->log->info("Person updated successfully : ".$person);
         return $person;
     }
 
@@ -197,13 +203,13 @@ class TxRegister extends PLTransaction {
      */
     private function updateUser(PLRequest $request, User $user)
     {
-        \Log::info("=== Updating user ... ===");
+        $this->log->info("Updating user");
         $user->tracking  = 0;
         if ($request->get('isFB') == 0)
             $user->password  = bcrypt($request->get('password'));
         if (!$user->save())
             throw new \Exception("Unable to update User", -1);
-        \Log::info("=== User updated successfully : ".$user." ===");
+        $this->log->info("User updated successfully : ".$user);
         return $user;
     }
 

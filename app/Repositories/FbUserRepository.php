@@ -12,10 +12,16 @@ namespace App\Repositories;
 use App\Http\Requests\PLRequest;
 use App\Entities\FbUser;
 use App\Http\Responses\PLResponse;
+use App\Utilities\PLCustomLog;
 
 class FbUserRepository extends BaseRepository{
 
     //region attributes
+
+    /**
+     * @var PLCustomLog
+     */
+    public $log;
 
     /**
      * @var FbUser
@@ -34,6 +40,7 @@ class FbUserRepository extends BaseRepository{
     public function __construct(FbUser $fbUser, UserRepository $userRepository){
         $this->_fbUser = $fbUser;
         $this->_userRepository = $userRepository;
+        $this->log = new PLCustomLog("FbUserRepository");
     }
 
     //region Methods
@@ -56,7 +63,7 @@ class FbUserRepository extends BaseRepository{
      */
     public function login(PLRequest $request)
     {
-        \Log::info("=== llegando a Facebook Login, intentanto validar credenciales ===");
+        $this->log->info("login by Facebook");
         $count      = \DB::table('users')
                         ->join('fbusers', 'users.id', '=', 'fbusers.user_id')
                         ->select('*')
@@ -74,7 +81,7 @@ class FbUserRepository extends BaseRepository{
 
             $user = $this->_userRepository->byEmail($request->get('email'));
             \Auth::login($user);
-            \Log::info("=== Auteticación exitosa ===");
+            $this->log->info("correct credentials");
             $fbUser = $this->byUID($request->get('facebook_uid'));
 
             if ($user->tracking == 0) {
@@ -89,7 +96,7 @@ class FbUserRepository extends BaseRepository{
             $response->data = $user;
 
         } else {
-            \Log::info("=== Credenciales inválidas ===");
+            $this->log->info("invalid credentials");
             $response->status = -1;
             $response->description = 'Invalid Credentials';
             $response->data = null;
