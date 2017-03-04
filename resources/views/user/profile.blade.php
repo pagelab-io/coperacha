@@ -3,9 +3,6 @@
 @section('css')
     <link rel="stylesheet" href="{{asset("/js/vendor/bootstrap-select-1.11.2/bootstrap-select.css")}}">
 @endsection
-@section("navigation")
-    @include("partials.navigation")
-@endsection
 @section("page-content")
     <div id="ProfileView" class="block profile-view" data-userid="{{$user->id}}"
          xmlns:v-on="http://www.w3.org/1999/xhtml">

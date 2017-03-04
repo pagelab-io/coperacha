@@ -1,7 +1,4 @@
 @extends("layouts.master")
-@section("navigation")
-    @include("partials.navigation")
-@endsection
 @section("content")
     @include('partials.header')
 

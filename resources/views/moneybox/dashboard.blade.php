@@ -1,9 +1,4 @@
 @extends("layouts.content")
-
-@section("navigation")
-    @include("partials.navigation")
-@endsection
-
 @section("page-content")
     <div id="divLoading" class="loader hidden"></div>
     <section class="block my-moneybox-view">

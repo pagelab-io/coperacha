@@ -1,7 +1,4 @@
 @extends("layouts.master")
-@section("navigation")
-    @include("partials.navigation")
-@endsection
 @section("content")
     @include('partials.header')
     <section class="block moneybox-profile" xmlns:v-on="http://www.w3.org/1999/xhtml">
