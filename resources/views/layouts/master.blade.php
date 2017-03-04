@@ -89,13 +89,12 @@
 <body ng-app="coperachaApp">
 
 @include("partials.mobile-navigation")
-@yield("navigation")
+@include("partials.navigation")
 
 <!-- Outer wrapper -->
 <div class="outer-wrapper">
     @yield("content")
     @include("partials.footer")
-
 </div>
 
 <!-- LoginDialogView -->

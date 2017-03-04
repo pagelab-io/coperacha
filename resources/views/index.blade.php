@@ -4,10 +4,6 @@
     <link rel="stylesheet" href="{{asset("/js/vendor/bootstrap-select-1.11.2/bootstrap-select.css")}}">
 @endsection
 
-@section("navigation")
-    @include("partials.navigation2")
-@endsection
-
 @section("content")
     <!-- Cover -->
     <div class="block cover img-category">

@@ -1,7 +1,4 @@
 @extends("layouts.content")
-@section("navigation")
-    @include("partials.navigation")
-@endsection
 @section("page-content")
     <section class="block" id="pricing">
         <div class="holder">

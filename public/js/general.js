@@ -154,10 +154,7 @@ var general = {
          */
         init: function() {
             this.elem = $('.mobile-navigation');
-
-            if(this.elem.length) {
-
-            }
+            if(this.elem.length) {}
         }
     },
 
@@ -179,9 +176,7 @@ var general = {
          * Initialize page part.
          */
         init: function() {
-
-            this.elem = $('.navigation2');
-
+            this.elem = $('.navigation');
             if (this.elem.length) {
                 var _this = this;
                 this.navigationToggleBtn = this.elem.find('.navigation-toggle');
