@@ -17,7 +17,7 @@
                             <div class="col-xs-12 col-sm-8"> <input id="moneybox" readonly type="text" value="{{$moneybox->name}}"> </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-12 col-sm-4"><label for="name">Tu Nombre: </label></div>
+                            <div class="col-xs-12 col-sm-4"><label for="name">Tu nombre: </label></div>
                             <div class="col-xs-12 col-sm-8"><input id="name" readonly type="text" value="{{$participant->person->name." ".$participant->person->lastname}}"></div>
                         </div>
                         <div class="row">

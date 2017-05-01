@@ -86,6 +86,14 @@
                                 <!-- Your share button code -->
                             </div> <!-- ./FormShare -->
 
+                            <div class="form share">
+                                <div class="form-group">
+                                    <label>Comparte este enlace con tus amigos</label>
+                                    <br>
+                                    <a href="#" target="_blank" id="moneybox-location">http://coperacha.com.mx/moneybox/detail/{{$moneybox->url}}</a>
+                                </div>
+                            </div>
+
                             <form id="FormShare" class="form share"
                                   data-url="{{$moneybox->url}}"
                                   v-on:submit.prevent="onSubmit" role="form">
@@ -126,6 +134,7 @@
         (function($){
             var Application = {
                 init: function () {
+                    var utils = new Utils();
                     var btnShareFb = $('#btnShareFb');
                     var id = $("#moneybox-id").val();
                     var title = $("#moneybox-name").val();
@@ -133,9 +142,10 @@
                     var desc = $("#moneybox-desc").val();
                     var image = $("#moneybox-image").attr('src');
                     var created = $("#created").val();
+                    var moneyboxLocation = $("#moneybox-location");
+                    moneyboxLocation.attr("href", utils.getLocation());
 
                     if (created == 1) {
-                        var utils = new Utils();
                         document.getElementById('small-alert-content').innerHTML = "" +
                         "<p>¡Gracias por crear tu alcancía!<p>"+
                         "<p>Te invitamos a ser el primero en participar ya que esto ayudará a motivar a tus amigos.<p>";

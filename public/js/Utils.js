@@ -169,21 +169,21 @@ function Utils()
                 '<div class="form-row">'+
                     '<label>'+
                         '<span class="col-xs-12 col-sm-6">Número de tarjeta de crédito/débito</span>'+
-                        '<input class="col-xs-12 col-sm-6" type="number" data-conekta="card[number]" placeholder="No. de la tarjeta (16 dígitos)"/>'+
+                        '<input class="col-xs-12 col-sm-6" type="text" data-conekta="card[number]" placeholder="No. de la tarjeta (16 dígitos)"/>'+
                     '</label>'+
                 '</div>'+
                 '<div class="form-row">'+
                     '<label>'+
                         '<span class="col-xs-12 col-sm-6" >CVC</span>'+
-                        '<input class="col-xs-12 col-sm-6" type="number" size="4" data-conekta="card[cvc]" placeholder="No. CVC (3 dígitos)"/>'+
+                        '<input class="col-xs-12 col-sm-6" type="text" size="4" data-conekta="card[cvc]" placeholder="No. CVC (3 dígitos)"/>'+
                     '</label>'+
                     '</div>'+
                     '<div class="form-row">'+
                     '<label>'+
                         '<span  class="col-xs-12 col-sm-6">Fecha de expiración (MM/AAAA)</span>'+
-                        '<input class="col-xs-5 col-sm-2" type="number" data-conekta="card[exp_month]" placeholder="01"/>'+
+                        '<input class="col-xs-5 col-sm-2" type="text" data-conekta="card[exp_month]" placeholder="01"/>'+
                         '<span  class="col-xs-1 col-sm-1">/</span>'+
-                        '<input class="col-xs-5 col-sm-3" type="number"  data-conekta="card[exp_year]" placeholder="2020"/>'+
+                        '<input class="col-xs-5 col-sm-3" type="text"  data-conekta="card[exp_year]" placeholder="2020"/>'+
                     '</label>'+
                 '</div>'+
             '</form>';
@@ -240,9 +240,15 @@ function Utils()
         return /^\d{10}?$/.test(value)
     };
 
-    this.invertirFecha = function(fecha) {
+    this.invertirFecha = function(fecha)
+    {
         var x = fecha.split('-');
         return x[2]+"-"+x[1]+"-"+x[0];
+    };
+
+    this.getLocation()
+    {
+        return window.location;
     }
 
 }
