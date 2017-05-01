@@ -213,7 +213,7 @@ var vm = new Vue({
         firstAccess: function(user){
             var utils = new Utils();
             document.getElementById('small-alert-content').innerHTML="" +
-            "<p>¡Hola "+user.person.name+"! bienvenido/a a Coperacha, te informamos que en la creación de tu primer alcancía recibiras $50.00<p>";
+            "<p>¡Hola "+user.person.name+"! bienvenido/a a Coperacha, te informamos que en la creación de tu primer alcancía recibirás $50.00<p>";
             utils.showAlert(true);
 
             this.$http.put("/api/v1/auth/tracking", {'user': user, 'tracking': 1, 'api-key': $api}, {

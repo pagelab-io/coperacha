@@ -183,11 +183,11 @@ class HomeController extends Controller
         $categories2 = [];
         foreach($categories as $i => $category){
             array_push($categories1, $category);
-            if ($i == 6) break;
+            if ($i == 4) break;
         }
 
         foreach($categories as $i => $category){
-            if ($i > 6)
+            if ($i > 4)
                 array_push($categories2, $category);
         }
         \Log::info($response->data);

@@ -52,7 +52,7 @@
                     $scope.utils.hideLoader();
                     $scope.utils.setAlertTitle("Coperacha - Alerta");
                     document.getElementById('alert-content').innerHTML="" +
-                    "<p>Correo y/o contraseña inválidos.<p>";
+                    "<p>Correo y/o contraseña inválidos<p>";
                     $scope.utils.showAlert();
                 }
             }).error(function(response){

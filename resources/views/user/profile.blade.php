@@ -74,7 +74,7 @@
                                                         v-model="person.areacode"
                                                         data-width="160px"
                                                         data-live-search="true">
-                                                    <option value="">Código de area</option>
+                                                    <option value="">Código de área</option>
                                                     @foreach($codes as $code)
                                                         <option value="{{$code['code']}}">{!! $code['name'] .' - <strong>('. $code['code'] . ')</strong>' !!}</option>
                                                     @endforeach
