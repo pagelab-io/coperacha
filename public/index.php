@@ -36,6 +36,9 @@ require __DIR__.'/../bootstrap/autoload.php';
 //$app = require_once __DIR__.'/../coperacha_v2/bootstrap/app.php';
 $app = require_once __DIR__.'/../bootstrap/app.php';
 $app->alias('request', 'App\Http\Requests\PLRequest');
+/*$app->bind('path.public', function() {
+    return __DIR__;
+});*/
 
 /*
 |--------------------------------------------------------------------------
