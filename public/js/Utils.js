@@ -246,7 +246,7 @@ function Utils()
         return x[2]+"-"+x[1]+"-"+x[0];
     };
 
-    this.getLocation()
+    this.getLocation = function()
     {
         return window.location;
     }
