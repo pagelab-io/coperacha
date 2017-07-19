@@ -34,7 +34,7 @@
 
     /* Block Cover */
     .block.cover {
-        background: url(/images/fondo_2.png) no-repeat;
+        background: url(/images/fondo_1.jpg) no-repeat;
         padding-top: 65px;
         min-height: 450px;
         background-size: cover !important;
