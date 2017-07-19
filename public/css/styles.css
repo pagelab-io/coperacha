@@ -289,7 +289,7 @@ hr {
 
 /* Block Cover */
 .block.cover {
-    background: url(/images/fondo_2.png) 0 -255px no-repeat;
+    background: url(/images/fondo_1.jpg) 0 -255px no-repeat;
     background-size: cover;
     color: #fff;
     padding: 100px 0 100px;

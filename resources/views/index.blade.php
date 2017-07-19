@@ -31,17 +31,15 @@
                                             id="moneybox-categories"
                                             data-width="301px"
                                             class="element-moneybox">
-                                    <option data-icon="g-icon-party" value="2" selected>
-                                        Fiesta
-                                    </option>
-                                    <option data-icon="g-icon-birthday" value="1">Cumpleaños</option>
-                                    <option data-icon="g-icon-wedding" value="4">Boda</option>
-                                    <option data-icon="g-icon-party" value="8">Despedida de solter@</option>
-                                    <option data-icon="g-icon-travels" value="3">Viaje</option>
-                                    <option data-icon="g-icon-proyecto" value="9">Proyecto</option>
-                                    <option data-icon="g-icon-emergencies" value="6">Solidaridad</option>
-                                    <option data-icon="g-icon-baby" value="5">Baby Shower</option>
-                                    <option data-icon="g-icon-others" value="7">Otro</option>
+                                        <option data-icon="g-icon-birthday" value="1" selected>Cumpleaños</option>
+                                        <option data-icon="g-icon-party" value="2" > Fiesta </option>
+                                        <option data-icon="g-icon-wedding" value="4">Boda</option>
+                                        <option data-icon="g-icon-party" value="8">Despedida de solter@</option>
+                                        <option data-icon="g-icon-travels" value="3">Viaje</option>
+                                        <option data-icon="g-icon-proyecto" value="9">Proyecto</option>
+                                        <option data-icon="g-icon-emergencies" value="6">Solidaridad</option>
+                                        <option data-icon="g-icon-baby" value="5">Baby Shower</option>
+                                        <option data-icon="g-icon-others" value="7">Otro</option>
                                 </select>
                                 </div>
                                 <div class="form-group">
