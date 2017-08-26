@@ -516,6 +516,10 @@ class MoneyboxRepository extends BaseRepository{
         if ($this->validateInvitations($emails)) {
             \Log::info("=== Creando invitaciones ===");
             foreach ($emails as $email) {
+
+                if(trim($email) == "") continue;
+                \Log::info("invitacion para : ".trim($email));
+
                 $data = ['moneybox' => $moneybox];
                 $record = Invitation::create([
                     'email' => trim($email),

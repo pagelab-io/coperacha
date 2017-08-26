@@ -6,7 +6,7 @@ var vm = new Vue({
     el: '#FormShare',
     data: {
         url: '',
-        emails: '', //daniel_pro4@hotmail.com;sanchezz985@gmail.com
+        emails: '',
         loading: false,
         message: {
             status: 'success',
@@ -64,24 +64,21 @@ var vm = new Vue({
                 url: this.url,
                 emails: this.emails
             }).then(function(response, status, request) {
+                console.log(response);
                 if (response.status == 200) {
-                    if (response.data.success == true) {
-                        this.message.text = 'Mensajes enviados correctamente';
-                        this.emails = '';
-                        this.loading = false;
-                        setTimeout(function () {
-                            this.message.text = '';
-                        }.bind(this), 3000);
-                    } else {
-                        this.message.text = 'Ocurrio una problema al entregar los mensajes, por favor inténtelo más tarde';
-                        this.emails = '';
-                        this.loading = false;
-                        setTimeout(function () {
-                            this.message.text = '';
-                        }.bind(this), 3000);
-                    }
+                    this.message.text = 'Mensajes enviados correctamente';
+                    this.emails = '';
+                    this.loading = false;
+                    setTimeout(function () {
+                        this.message.text = '';
+                    }.bind(this), 3000);
                 } else {
-                    console.log(response);
+                    this.message.text = 'Ocurrio una problema al entregar los mensajes, por favor inténtelo más tarde';
+                    this.emails = '';
+                    this.loading = false;
+                    setTimeout(function () {
+                        this.message.text = '';
+                    }.bind(this), 3000);
                 }
             }, function() {
                 this.message.text = 'El Mensaje no se pudo enviar, inténtelo más tarde.';
